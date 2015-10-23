@@ -15,14 +15,16 @@ class Nav extends React.Component {
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <a href="/" className='navbar-brand'>Monster</a>
+                        <a href="/" className='navbar-brand'>
+                            <span className='icon-name'>Monster</span>
+                        </a>
                     </div>
                     <div className='collapse navbar-collapse' id='my-nav'>
                         <ul className='nav navbar-nav'>
-                            <li><a href="/monster1">首页</a></li>
-                            <li><a href="/monster2">动漫</a></li>
-                            <li><a href="/monster3">音乐</a></li>
-                            <li><a href="/monster4">文章</a></li>
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/anime">动漫</a></li>
+                            <li><a href="/music">音乐</a></li>
+                            <li><a href="/article">文章</a></li>
                         </ul>
                         <form className='navbar-form navbar-right' role='search'>
                             <div className='form-group'>

@@ -28,6 +28,10 @@ var _Nav = require('./Nav');
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
+var _Footer = require('./Footer');
+
+var _Footer2 = _interopRequireDefault(_Footer);
+
 var App = (function (_React$Component) {
     _inherits(App, _React$Component);
 
@@ -44,7 +48,8 @@ var App = (function (_React$Component) {
                 'div',
                 null,
                 _react2['default'].createElement(_Nav2['default'], null),
-                _react2['default'].createElement(_reactRouter.RouteHandler, null)
+                _react2['default'].createElement(_reactRouter.RouteHandler, null),
+                _react2['default'].createElement(_Footer2['default'], null)
             );
         }
     }]);
@@ -55,7 +60,137 @@ var App = (function (_React$Component) {
 exports['default'] = App;
 module.exports = exports['default'];
 
-},{"./Nav":3,"react":"react","react-router":"react-router"}],2:[function(require,module,exports){
+},{"./Footer":2,"./Nav":4,"react":"react","react-router":"react-router"}],2:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-23.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var Footer = (function (_React$Component) {
+    _inherits(Footer, _React$Component);
+
+    function Footer() {
+        _classCallCheck(this, Footer);
+
+        _get(Object.getPrototypeOf(Footer.prototype), 'constructor', this).apply(this, arguments);
+    }
+
+    _createClass(Footer, [{
+        key: 'render',
+        value: function render() {
+            return _react2['default'].createElement(
+                'footer',
+                { className: 'mon-footer' },
+                _react2['default'].createElement(
+                    'div',
+                    { className: 'container' },
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'col-md-4 col-sm-4' },
+                        _react2['default'].createElement(
+                            'p',
+                            null,
+                            '友情链接'
+                        ),
+                        _react2['default'].createElement(
+                            'a',
+                            { href: 'http://www.bilibili.com/' },
+                            '哔哩哔哩'
+                        ),
+                        _react2['default'].createElement(
+                            'a',
+                            { href: 'http://www.acfun.tv/' },
+                            'acfun'
+                        ),
+                        _react2['default'].createElement(
+                            'a',
+                            { href: 'http://music.163.com/' },
+                            '网易云音乐'
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'col-md-4 col-sm-4' },
+                        _react2['default'].createElement(
+                            'p',
+                            null,
+                            '技术栈'
+                        ),
+                        _react2['default'].createElement(
+                            'a',
+                            { href: 'http://www.gulpjs.com.cn/' },
+                            _react2['default'].createElement('img', { src: '/img/gulp.svg', width: '40', alt: 'loading' })
+                        ),
+                        _react2['default'].createElement(
+                            'a',
+                            { href: 'https://nodejs.org/en/' },
+                            _react2['default'].createElement('img', { src: '/img/node.svg', width: '50', alt: 'loading' })
+                        ),
+                        _react2['default'].createElement(
+                            'a',
+                            { href: 'http://www.bootcss.com/' },
+                            'bootstrap'
+                        ),
+                        _react2['default'].createElement(
+                            'a',
+                            { href: 'http://facebook.github.io/react/' },
+                            'react'
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'col-md-4 col-sm-4' },
+                        _react2['default'].createElement(
+                            'p',
+                            null,
+                            '关注我的账号'
+                        ),
+                        _react2['default'].createElement(
+                            'a',
+                            { href: 'http://weibo.com/u/1894138207/' },
+                            _react2['default'].createElement('span', { className: 'fa fa-weibo' })
+                        ),
+                        _react2['default'].createElement(
+                            'a',
+                            { href: 'https://github.com/Toreant/' },
+                            _react2['default'].createElement('span', { className: 'fa fa-github' })
+                        ),
+                        _react2['default'].createElement(
+                            'a',
+                            { href: 'http://music.163.com/#/user/home?id=38777415' },
+                            '网易云音乐'
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Footer;
+})(_react2['default'].Component);
+
+exports['default'] = Footer;
+module.exports = exports['default'];
+
+},{"react":"react"}],3:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -94,7 +229,16 @@ var Home = (function (_React$Component) {
             return _react2['default'].createElement(
                 'div',
                 { className: 'container' },
-                'hehe'
+                _react2['default'].createElement(
+                    'div',
+                    { className: 'row' },
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'col-md-8 col-sm-8 animated' },
+                        'hehei'
+                    ),
+                    _react2['default'].createElement('div', { className: 'col-md-4 col-sm-4' })
+                )
             );
         }
     }]);
@@ -105,7 +249,7 @@ var Home = (function (_React$Component) {
 exports['default'] = Home;
 module.exports = exports['default'];
 
-},{"react":"react"}],3:[function(require,module,exports){
+},{"react":"react"}],4:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -165,7 +309,11 @@ var Nav = (function (_React$Component) {
                         _react2['default'].createElement(
                             'a',
                             { href: '/', className: 'navbar-brand' },
-                            'Monster'
+                            _react2['default'].createElement(
+                                'span',
+                                { className: 'icon-name' },
+                                'Monster'
+                            )
                         )
                     ),
                     _react2['default'].createElement(
@@ -179,7 +327,7 @@ var Nav = (function (_React$Component) {
                                 null,
                                 _react2['default'].createElement(
                                     'a',
-                                    { href: '/monster1' },
+                                    { href: '/' },
                                     '首页'
                                 )
                             ),
@@ -188,7 +336,7 @@ var Nav = (function (_React$Component) {
                                 null,
                                 _react2['default'].createElement(
                                     'a',
-                                    { href: '/monster2' },
+                                    { href: '/anime' },
                                     '动漫'
                                 )
                             ),
@@ -197,7 +345,7 @@ var Nav = (function (_React$Component) {
                                 null,
                                 _react2['default'].createElement(
                                     'a',
-                                    { href: '/monster3' },
+                                    { href: '/music' },
                                     '音乐'
                                 )
                             ),
@@ -206,7 +354,7 @@ var Nav = (function (_React$Component) {
                                 null,
                                 _react2['default'].createElement(
                                     'a',
-                                    { href: '/monster4' },
+                                    { href: '/article' },
                                     '文章'
                                 )
                             )
@@ -237,7 +385,7 @@ var Nav = (function (_React$Component) {
 exports['default'] = Nav;
 module.exports = exports['default'];
 
-},{"react":"react"}],4:[function(require,module,exports){
+},{"react":"react"}],5:[function(require,module,exports){
 /**
  * Created by apache on 15-10-22.
  */
@@ -261,7 +409,7 @@ _reactRouter2['default'].run(_routes2['default'], _reactRouter2['default'].Histo
   _react2['default'].render(_react2['default'].createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./routes":5,"react":"react","react-router":"react-router"}],5:[function(require,module,exports){
+},{"./routes":6,"react":"react","react-router":"react-router"}],6:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -294,4 +442,4 @@ exports['default'] = _react2['default'].createElement(
 );
 module.exports = exports['default'];
 
-},{"./components/App":1,"./components/Home":2,"react":"react","react-router":"react-router"}]},{},[4]);
+},{"./components/App":1,"./components/Home":3,"react":"react","react-router":"react-router"}]},{},[5]);
