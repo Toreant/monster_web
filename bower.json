@@ -1,0 +1,23 @@
+{
+  "name": "monster_web",
+  "description": "This is a monster webApp.",
+  "main": "server.js",
+  "authors": [
+    "yuhuajie"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Toreant/monster_web",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4"
+  }
+}
