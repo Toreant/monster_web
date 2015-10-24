@@ -2,6 +2,10 @@
   background-color: rgba(250,250,250,0.6) !important;
 }
 
+.mon-home *{
+  text-align: center;
+}
+
 .icon-name {
   font-size: 30px;
   color: #EE3B3B;
@@ -32,6 +36,9 @@
   }
 }
 
+/**
+ * 页脚
+ */
 .mon-footer {
   display: block;
   background-color: #515151;
@@ -39,6 +46,7 @@
   overflow: hidden;
   padding: 20px;
   color: #ddd;
+  margin-top: 50px;
 }
 
 .mon-footer p {
@@ -47,10 +55,58 @@
 
 .mon-footer a {
   color: #fff;
-  margin-right: 20px;
+  margin: 10px 20px 0 0;
 }
 
-.mon-footer a:hover {
+.mon-footer a:hover,
+.mon-footer a:focus {
   color: #5e5e5e;
   text-decoration: none;
+}
+
+/**
+ * 登陆，注册
+ */
+.mon-other-login {
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.mon-other-login>a {
+  color: #999;
+  margin-left: 20px;
+}
+
+.mon-other-login>a:hover {
+  color: #111;
+  text-decoration: none;
+}
+
+.mon-other-login span {
+  font-size: 30px;
+}
+
+.form-legend {
+  margin-bottom: 5px;
+}
+
+.form-legend>span,
+.form-change>a
+{
+  font-size: 25px;
+}
+
+.form-change {
+  float: right;
+  color: #999;
+}
+
+.form-change:hover {
+  transition: all 0.3s linear;
+  transform: translateX(10px);
+  text-decoration: none;
+}
+
+.sign-form {
+  display: none;
 }

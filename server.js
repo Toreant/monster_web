@@ -9,13 +9,16 @@ import Router from 'react-router';
 import routes from './app/routes';
 import path from 'path';
 import colors from 'colors';
+import apiRouter from './router';
+import mongoose from 'mongoose';
 
 var app = new express();
 
 app.set('port',process.env.PORT || 3000);
-app.set('');
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/',apiRouter);
 
 app.use((req,res) => {
     Router.run(routes,req.path,(Handler) => {
@@ -28,5 +31,6 @@ app.use((req,res) => {
 app.listen(app.get('port'),()=>{
     console.log(colors.grey("server listen "+app.get('port')));
 });
+
 
 export default app;

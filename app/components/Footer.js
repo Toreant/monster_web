@@ -24,6 +24,12 @@ class Footer extends React.Component {
                         </a>
                         <a href="http://www.bootcss.com/">bootstrap</a>
                         <a href="http://facebook.github.io/react/">react</a>
+                        <a href="https://www.mongodb.org">
+                            <img src="/img/mongo.png" width="50" alt="loading"/>
+                        </a>
+                        <a href="http://www.bootcss.com/p/lesscss/">
+                            <img src="/img/less.png" width="50" alt="loading"/>
+                        </a>
                     </div>
                     <div className='col-md-4 col-sm-4'>
                         <p>关注我的账号</p>
