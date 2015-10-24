@@ -10,7 +10,7 @@ class LoginCtrl {
         let result = {
             meta : '登陆成功',
             code : 200,
-            err : false
+            err : true
         };
         res.json(result);
     }

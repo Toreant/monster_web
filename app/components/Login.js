@@ -46,16 +46,18 @@ class Login extends React.Component {
 
     changeForm(form) {
         let $preForm,$newForm;
+        let $signForm = $('.sign-form'),$loginForm = $('.login-form');
+        let location = window.location;
         switch (form) {
             case 0 :
-                $preForm = $('.sign-form');
-                $newForm = $('.login-form');
-                window.location.hash = 'login';
+                $preForm = $signForm;
+                $newForm = $loginForm;
+                location.hash = 'login';
                 break;
             case 1:
-                $preForm = $('.login-form');
-                $newForm = $('.sign-form');
-                window.location.hash = 'sign';
+                $preForm = $loginForm;
+                $newForm = $signForm;
+                location.hash = 'sign';
                 break;
         }
 
@@ -77,7 +79,7 @@ class Login extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label for="login-email">邮箱</label>
-                                <input id='login-email' className='form-control' type="email" required placeholder='邮箱'/>
+                                <input id='login-email' className='form-control' type="email" required autoFocus placeholder='邮箱'/>
                             </div>
                             <div className='form-group'>
                                 <label for="login-pwd">密码</label>

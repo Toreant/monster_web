@@ -79,13 +79,12 @@ var LoginActions = (function () {
         value: function login(email, password) {
             var _this = this;
 
-            console.log(this.actions);
             $.post('/api/login', {
                 email: email,
                 password: password
             }, function (data) {
                 if (data.err) {
-                    _this.actions.loginFail;
+                    _this.actions.loginFail();
                 } else {
                     _this.actions.loginSuccess(data);
                 }
@@ -526,16 +525,19 @@ var Login = (function (_React$Component) {
         value: function changeForm(form) {
             var $preForm = undefined,
                 $newForm = undefined;
+            var $signForm = $('.sign-form'),
+                $loginForm = $('.login-form');
+            var location = window.location;
             switch (form) {
                 case 0:
-                    $preForm = $('.sign-form');
-                    $newForm = $('.login-form');
-                    window.location.hash = 'login';
+                    $preForm = $signForm;
+                    $newForm = $loginForm;
+                    location.hash = 'login';
                     break;
                 case 1:
-                    $preForm = $('.login-form');
-                    $newForm = $('.sign-form');
-                    window.location.hash = 'sign';
+                    $preForm = $loginForm;
+                    $newForm = $signForm;
+                    location.hash = 'sign';
                     break;
             }
 
@@ -581,7 +583,7 @@ var Login = (function (_React$Component) {
                                     { 'for': 'login-email' },
                                     '邮箱'
                                 ),
-                                _react2['default'].createElement('input', { id: 'login-email', className: 'form-control', type: 'email', required: true, placeholder: '邮箱' })
+                                _react2['default'].createElement('input', { id: 'login-email', className: 'form-control', type: 'email', required: true, autoFocus: true, placeholder: '邮箱' })
                             ),
                             _react2['default'].createElement(
                                 'div',
@@ -1000,9 +1002,9 @@ var LoginStore = (function () {
     }, {
         key: 'onLoginFail',
         value: function onLoginFail() {
-            this.stateInfote = '邮箱未注册，或密码不正确';
+            this.stateInfor = '邮箱未注册，或密码不正确';
             this.err = true;
-            toastr.warning(this.stateInfo);
+            toastr.error(this.stateInfor);
         }
 
         /**

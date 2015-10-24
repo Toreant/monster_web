@@ -36,9 +36,9 @@ class LoginStore {
      * @param data
      */
     onLoginFail() {
-        this.stateInfote = '邮箱未注册，或密码不正确';
+        this.stateInfor = '邮箱未注册，或密码不正确';
         this.err = true;
-        toastr.warning(this.stateInfo);
+        toastr.error(this.stateInfor);
     }
 
     /**

@@ -21,7 +21,6 @@ class LoginActions {
      * @param prePwd
      */
     login(email,password) {
-        console.log(this.actions);
         $.post(
             '/api/login',
             {
@@ -30,7 +29,7 @@ class LoginActions {
             },
             (data) =>{
                 if(data.err) {
-                    this.actions.loginFail;
+                    this.actions.loginFail();
                 } else {
                     this.actions.loginSuccess(data);
                 }
