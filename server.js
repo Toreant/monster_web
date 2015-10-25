@@ -16,6 +16,7 @@ import mongo from './models';
 import bodyParser from 'body-parser';
 import passport from 'passport';
 import Github from 'passport-github';
+import Facebook from 'passport-facebook';
 import session from 'express-session';
 import redis from 'redis';
 
@@ -38,14 +39,27 @@ app.use(passport.session());
 
 //auth
 var GithubStrategy = Github.Strategy;
+var FaceboolStrategy = Facebook.Strategy;
 
-passport.use(new GithubStrategy(config.auth,(accessToken, refreshToken, profile, done) => {
+passport.use(new GithubStrategy(config.github_auth,(accessToken, refreshToken, profile, done) => {
     done(null, profile);
+}));
+
+passport.use(new FaceboolStrategy(config.facebook_auth,(accessToken,refreshToken,profile,done) => {
+    done(null,profile);
 }));
 
 app.get("/auth/github", passport.authenticate("github",{ scope : "email"}));
 app.get("/auth/github/callback",
     passport.authenticate("github",{
+        successRedirect: '/',
+        failureRedirect: '/login'
+    })
+);
+
+app.get('/auth/facebook',passport.authenticate('facebook',{ scope : 'email'}));
+app.get("/auth/facabook/callback",
+    passport.authenticate("facebook",{
         successRedirect: '/',
         failureRedirect: '/login'
     })

@@ -119,7 +119,7 @@ class Login extends React.Component {
                                 <a href="">
                                     <span className='fa fa-weibo'></span>
                                 </a>
-                                <a href="">
+                                <a href="/auth/facebook">
                                     <span className='fa fa-facebook-square'></span>
                                 </a>
                             </div>

@@ -657,7 +657,7 @@ var Login = (function (_React$Component) {
                                 ),
                                 _react2['default'].createElement(
                                     'a',
-                                    { href: '' },
+                                    { href: '/auth/facebook' },
                                     _react2['default'].createElement('span', { className: 'fa fa-facebook-square' })
                                 )
                             )
