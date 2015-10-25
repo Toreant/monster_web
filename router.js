@@ -3,10 +3,12 @@
  */
 import express from 'express';
 let router = express.Router();
-import LoginCtrl from './controllers/login';
+import UserCtrl from './controllers/User';
 
-router.post('/api/login',LoginCtrl.getLogin);
+router.post('/api/login',UserCtrl.getLogin);
 
-router.post('/api/sign',LoginCtrl.getSign);
+router.post('/api/user',UserCtrl.getSign);
+
+router.put('/api/user',UserCtrl.getUpdate);
 
 export default router;

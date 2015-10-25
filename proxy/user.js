@@ -22,7 +22,23 @@ class md {
             if (err) {
                 return callback(err);
             } else {
-                return callback(numAffected);
+                return callback(numAffected,product);
+            }
+        });
+    }
+
+    /**
+     * 更新用户资料
+     * @param where
+     * @param params
+     * @param callback
+     */
+    updateUser(where,params,callback) {
+        User.update({email : where},params,(err,raw,docs) => {
+            if(err) {
+                callback(err);
+            } else {
+                callback(raw,docs);
             }
         });
     }

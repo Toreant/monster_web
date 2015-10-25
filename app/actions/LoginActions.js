@@ -50,7 +50,7 @@ class LoginActions {
             this.actions.doPasswordFail();
         } else {
             $.ajax({
-                url : '/api/sign',
+                url : '/api/user',
                 dataType : 'json',
                 type : 'post',
                 cache : false,

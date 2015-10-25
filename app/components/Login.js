@@ -113,7 +113,7 @@ class Login extends React.Component {
                             <a href='javascript:;' onClick={this.handleClick.bind(this,0)} className='btn btn-primary btn-block'>登陆</a>
                             <div className='mon-other-login'>
                                 <p>其他账户登陆</p>
-                                <a href="http://www.baidu.com">
+                                <a href="/auth/github">
                                     <span className='fa fa-github'></span>
                                 </a>
                                 <a href="">

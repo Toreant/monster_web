@@ -111,7 +111,7 @@ var LoginActions = (function () {
                 this.actions.doPasswordFail();
             } else {
                 $.ajax({
-                    url: '/api/sign',
+                    url: '/api/user',
                     dataType: 'json',
                     type: 'post',
                     cache: false,
@@ -647,7 +647,7 @@ var Login = (function (_React$Component) {
                                 ),
                                 _react2['default'].createElement(
                                     'a',
-                                    { href: 'http://www.baidu.com' },
+                                    { href: '/auth/github' },
                                     _react2['default'].createElement('span', { className: 'fa fa-github' })
                                 ),
                                 _react2['default'].createElement(
