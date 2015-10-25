@@ -51,7 +51,10 @@ class LoginStore {
     onDoSignSuccess(data) {
         console.log(data);
         if(data.code === 200) {
-            toastr.success("注册成功");
+            toastr.success("注册成功,3秒后将跳转到首页");
+            setTimeout(function(){
+                window.location = '/';
+            },3000);
         } else if(data.code === 400) {
             toastr.warning("邮箱或用户名已经被注册");
         }

@@ -70,7 +70,7 @@ passport.serializeUser( (user, done) => {//保存user对象
 });
 
 passport.deserializeUser( (user, done)=> {//删除user对象
-    done(null, user);//可以通过数据库方式操作
+    done(null, user.id);//可以通过数据库方式操作
 });
 
 app.use(apiRouter);

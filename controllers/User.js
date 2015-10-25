@@ -4,6 +4,7 @@
 import mongoose from 'mongoose';
 import User from '../proxy/user';
 import crypto from 'crypto';
+import _ from 'underscore';
 
 class UserCtrl {
     /**
@@ -15,13 +16,14 @@ class UserCtrl {
     getSign(req,res,next) {
         let email = req.body.email,
             password = req.body.password,
-            name = req.body.name;
+            name = req.body.name,
+            auth_id = _.random(10000000,99999999);
 
         let sha = crypto.createHash("sha1");
         sha.update(password);
         password = sha.digest('hex');
 
-        User.saveUser(email,password,name,(data,product) => {
+        User.saveUser(email,password,name,auth_id,auth_id.toString(),(data,product) => {
             let result = {
                 meta : "",
                 code : 0,

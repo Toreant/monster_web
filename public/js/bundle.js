@@ -538,22 +538,29 @@ var Login = (function (_React$Component) {
                 password = this.state.password,
                 prePassword = this.state.prePassword,
                 name = this.state.name;
+            var reg = /^[a-z]([a-z0-9]*[-_]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{2})?$/i;
             if (option === 0) {
-                if (email === '') {
+                if (email === '' || !reg.test(email)) {
                     this.refs.loginEmail.getDOMNode().focus();
+                    toastr.warning("邮箱不可为空或则邮箱不符合规则");
                 }
                 if (password === '') {
                     this.refs.loginPwd.getDOMNode().focus();
+                    toastr.warning("密码不可为空");
                 } else if (email !== '' && password !== '') _actionsLoginActions2['default'].login(email, password);
             } else if (option === 1) {
-                if (email === '') {
+                if (email === '' || !reg.test(email)) {
                     this.refs.email.getDOMNode().focus();
+                    toastr.error("邮箱不可为空或邮箱不符合规则");
                 } else if (password === '') {
                     this.refs.password.getDOMNode().focus();
+                    toastr.error("密码不可为空");
                 } else if (prePassword === '') {
                     this.refs.prePassword.getDOMNode().focus();
+                    toastr.warning("请确认密码");
                 } else if (name === '') {
-                    this.refs.name.getDOMNode().focus();
+                    this.refs.user.getDOMNode().focus();
+                    toastr.error("用户名不可为空");
                 } else _actionsLoginActions2['default'].sign(email, password, prePassword, name);
             }
         }
@@ -698,7 +705,7 @@ var Login = (function (_React$Component) {
                                     { 'for': 'sign-name' },
                                     '用户名'
                                 ),
-                                _react2['default'].createElement('input', { id: 'sign-name', className: 'form-control', ref: 'name', onChange: _actionsLoginActions2['default'].changeName, type: 'text', placeholder: '用户名' })
+                                _react2['default'].createElement('input', { id: 'sign-name', className: 'form-control', ref: 'user', onChange: _actionsLoginActions2['default'].changeName, type: 'text', placeholder: '用户名' })
                             ),
                             _react2['default'].createElement(
                                 'div',
@@ -708,7 +715,7 @@ var Login = (function (_React$Component) {
                                     { 'for': 'sign-pwd' },
                                     '密码'
                                 ),
-                                _react2['default'].createElement('input', { id: 'sign-pwd', className: 'form-control', ref: 'password', onChange: _actionsLoginActions2['default'].changePassword, type: 'password', placeholder: '密码' })
+                                _react2['default'].createElement('input', { id: 'sign-pwd', className: 'form-control', max: '8', ref: 'password', onChange: _actionsLoginActions2['default'].changePassword, type: 'password', placeholder: '密码' })
                             ),
                             _react2['default'].createElement(
                                 'div',
@@ -718,7 +725,7 @@ var Login = (function (_React$Component) {
                                     { 'for': 'sign-pwd' },
                                     '确认密码'
                                 ),
-                                _react2['default'].createElement('input', { id: 'sign-pwd', className: 'form-control', ref: 'prePassword', onChange: _actionsLoginActions2['default'].changePrePassword, type: 'password', placeholder: '密码' })
+                                _react2['default'].createElement('input', { id: 'sign-pwd', className: 'form-control', max: '8', ref: 'prePassword', onChange: _actionsLoginActions2['default'].changePrePassword, type: 'password', placeholder: '密码' })
                             ),
                             _react2['default'].createElement(
                                 'a',
@@ -1066,7 +1073,10 @@ var LoginStore = (function () {
         value: function onDoSignSuccess(data) {
             console.log(data);
             if (data.code === 200) {
-                toastr.success("注册成功");
+                toastr.success("注册成功,3秒后将跳转到首页");
+                setTimeout(function () {
+                    window.location = '/';
+                }, 3000);
             } else if (data.code === 400) {
                 toastr.warning("邮箱或用户名已经被注册");
             }

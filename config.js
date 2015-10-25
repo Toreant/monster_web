@@ -11,7 +11,7 @@ var config = {
     facebook_auth : {
         clientID : "1162206170473800",
         clientSecret : "ff9015b5677a09b1380fabb4dccacf21",
-        callbackURL : 'http://localhost:3000/auth/facebook/callback'
+        callbackURL : 'http://localhost:3000/'
     }
 };
 
