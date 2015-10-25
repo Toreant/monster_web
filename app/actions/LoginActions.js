@@ -12,7 +12,9 @@ class LoginActions {
             'doSignSuccess',
             'doSignFail',
             'changeEmail',
-            'changePassword'
+            'changePassword',
+            'changeName',
+            'changePrePassword'
         );
     }
 
@@ -42,24 +44,26 @@ class LoginActions {
      * @param password
      * @param prePwd
      */
-    sign(email,password,prePwd) {
+    sign(email,password,prePwd,userName) {
+        console.log(email+" "+password+" "+prePwd+" "+userName);
         if(password !== prePwd) {
             this.actions.doPasswordFail();
         } else {
-            $.post(
-                '/api/sign',
-                {
-                    eamil : email,
-                    password : password
-                },
-                function(data) {
-                    if(data.err) {
-                        this.actions.doSignFail(data);
-                    } else {
-                        this.actions.doSignSuccess();
-                    }
+            $.ajax({
+                url : '/api/sign',
+                dataType : 'json',
+                type : 'post',
+                cache : false,
+                data : {
+                    email : email,
+                    password : password,
+                    name : userName
                 }
-            );
+            }).done((data) => {
+                this.actions.doSignSuccess(data);
+            }).fail((data) => {
+                this.actions.doSignFail(data);
+            });
         }
     }
 }

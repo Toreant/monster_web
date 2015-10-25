@@ -7,11 +7,15 @@ import LoginActions from '../actions/LoginActions';
 class LoginStore {
     constructor() {
         this.bindActions(LoginActions);
+        //登陆信息
         this.email = '';
-        this.authId = '';
         this.password = '';
-        this.stateInfo = ''; // 登陆状态信息
-        this.err = false;
+        //注册信息
+        this.name = '';
+        this.prePassword = '';
+        // 状态信息
+        this.stateInfo = '';
+        this.err = '';
     }
 
     /**
@@ -20,6 +24,7 @@ class LoginStore {
     onDoPasswordFail() {
         this.stateInfo = '两次密码不一样';
         this.err = true;
+        toastr.warning(this.stateInfo);
     }
 
     /**
@@ -35,7 +40,7 @@ class LoginStore {
      * @param data
      */
     onLoginFail() {
-        this.stateInfor = '邮箱未注册，或密码不正确';
+        this.stateInfor = '服务器错误';
         this.err = true;
         toastr.error(this.stateInfor);
     }
@@ -43,25 +48,21 @@ class LoginStore {
     /**
      * 注册成功
      */
-    onDoSignSuccess() {
-
+    onDoSignSuccess(data) {
+        console.log(data);
+        if(data.code === 200) {
+            toastr.success("注册成功");
+        } else if(data.code === 400) {
+            toastr.warning("邮箱或用户名已经被注册");
+        }
     }
 
     /**
      * 注册失败
      */
     onSignFail(data) {
-        this.err = true;
-        if(!data.error) {
-            switch(data.failId) {
-                case 1: this.stateInfo = '邮箱已经被注册了';break;
-                case 2: this.stateInfo = '邮箱不支持';break;
-            }
-            return toastr.warning(this.stateInfo);
-        } else {
-            this.stateInfo = '服务器错误';
-            return toastr.error(this.stateInfo);
-        }
+        this.stateInfo = '服务器错误';
+        toastr.warning(this.stateInfo);
     }
 
     onChangeEmail(event) {
@@ -70,6 +71,14 @@ class LoginStore {
 
     onChangePassword(event) {
         this.password = event.target.value;
+    }
+
+    onChangeName(event) {
+        this.name = event.target.value;
+    }
+
+    onChangePrePassword(event) {
+        this.prePassword = event.target.value;
     }
 }
 

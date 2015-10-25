@@ -7,8 +7,6 @@ import LoginCtrl from './controllers/login';
 
 router.post('/api/login',LoginCtrl.getLogin);
 
-router.post('/api/app/:id',function(req,res,next) {
-    res.json({id : req.params.id});
-});
+router.post('/api/sign',LoginCtrl.getSign);
 
 export default router;

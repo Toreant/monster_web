@@ -11,5 +11,7 @@ var UserSchema = new Schema({
     name : {type : String},
     img : {type : String}
 });
+UserSchema.index({email: 1}, {unique: true});
+UserSchema.index({name : 1}, {unique : true});
 
 export default mongoose.model('User',UserSchema);

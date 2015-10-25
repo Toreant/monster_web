@@ -64,7 +64,7 @@ var LoginActions = (function () {
     function LoginActions() {
         _classCallCheck(this, LoginActions);
 
-        this.generateActions('doPasswordFail', 'loginSuccess', 'loginFail', 'doSignSuccess', 'doSignFail', 'changeEmail', 'changePassword');
+        this.generateActions('doPasswordFail', 'loginSuccess', 'loginFail', 'doSignSuccess', 'doSignFail', 'changeEmail', 'changePassword', 'changeName', 'changePrePassword');
     }
 
     /**
@@ -103,19 +103,27 @@ var LoginActions = (function () {
          */
     }, {
         key: 'sign',
-        value: function sign(email, password, prePwd) {
+        value: function sign(email, password, prePwd, userName) {
+            var _this2 = this;
+
+            console.log(email + " " + password + " " + prePwd + " " + userName);
             if (password !== prePwd) {
                 this.actions.doPasswordFail();
             } else {
-                $.post('/api/sign', {
-                    eamil: email,
-                    password: password
-                }, function (data) {
-                    if (data.err) {
-                        this.actions.doSignFail(data);
-                    } else {
-                        this.actions.doSignSuccess();
+                $.ajax({
+                    url: '/api/sign',
+                    dataType: 'json',
+                    type: 'post',
+                    cache: false,
+                    data: {
+                        email: email,
+                        password: password,
+                        name: userName
                     }
+                }).done(function (data) {
+                    _this2.actions.doSignSuccess(data);
+                }).fail(function (data) {
+                    _this2.actions.doSignFail(data);
                 });
             }
         }
@@ -518,11 +526,36 @@ var Login = (function (_React$Component) {
         value: function onChange(state) {
             this.setState(state);
         }
+
+        /**
+         * 处理登陆，注册的按钮事件
+         * @param option 0————login 1————sign
+         */
     }, {
         key: 'handleClick',
-        value: function handleClick() {
-            console.log("login");
-            _actionsLoginActions2['default'].login(this.state.email, this.state.password);
+        value: function handleClick(option) {
+            var email = this.state.email,
+                password = this.state.password,
+                prePassword = this.state.prePassword,
+                name = this.state.name;
+            if (option === 0) {
+                if (email === '') {
+                    this.refs.loginEmail.getDOMNode().focus();
+                }
+                if (password === '') {
+                    this.refs.loginPwd.getDOMNode().focus();
+                } else if (email !== '' && password !== '') _actionsLoginActions2['default'].login(email, password);
+            } else if (option === 1) {
+                if (email === '') {
+                    this.refs.email.getDOMNode().focus();
+                } else if (password === '') {
+                    this.refs.password.getDOMNode().focus();
+                } else if (prePassword === '') {
+                    this.refs.prePassword.getDOMNode().focus();
+                } else if (name === '') {
+                    this.refs.name.getDOMNode().focus();
+                } else _actionsLoginActions2['default'].sign(email, password, prePassword, name);
+            }
         }
     }, {
         key: 'changeForm',
@@ -587,7 +620,7 @@ var Login = (function (_React$Component) {
                                     { 'for': 'login-email' },
                                     '邮箱'
                                 ),
-                                _react2['default'].createElement('input', { id: 'login-email', className: 'form-control', onChange: _actionsLoginActions2['default'].changeEmail, type: 'email', required: true, autoFocus: true, placeholder: '邮箱' })
+                                _react2['default'].createElement('input', { id: 'login-email', className: 'form-control ', ref: 'loginEmail', onChange: _actionsLoginActions2['default'].changeEmail, type: 'email', autoFocus: true, placeholder: '邮箱' })
                             ),
                             _react2['default'].createElement(
                                 'div',
@@ -597,11 +630,11 @@ var Login = (function (_React$Component) {
                                     { 'for': 'login-pwd' },
                                     '密码'
                                 ),
-                                _react2['default'].createElement('input', { id: 'login-pwd', className: 'form-control', onChange: _actionsLoginActions2['default'].changePassword, type: 'password', required: true, placeholder: '密码' })
+                                _react2['default'].createElement('input', { id: 'login-pwd', className: 'form-control ', ref: 'loginPwd', onChange: _actionsLoginActions2['default'].changePassword, type: 'password', placeholder: '密码' })
                             ),
                             _react2['default'].createElement(
                                 'a',
-                                { href: 'javascript:;', onClick: this.handleClick.bind(this), className: 'btn btn-primary btn-block' },
+                                { href: 'javascript:;', onClick: this.handleClick.bind(this, 0), className: 'btn btn-primary btn-block' },
                                 '登陆'
                             ),
                             _react2['default'].createElement(
@@ -652,34 +685,44 @@ var Login = (function (_React$Component) {
                                 { className: 'form-group' },
                                 _react2['default'].createElement(
                                     'label',
-                                    { 'for': 'login-email' },
+                                    { 'for': 'sign-email' },
                                     '邮箱'
                                 ),
-                                _react2['default'].createElement('input', { id: 'login-email', className: 'form-control', type: 'email', required: true, placeholder: '邮箱' })
+                                _react2['default'].createElement('input', { id: 'sign-email', className: 'form-control', ref: 'email', onChange: _actionsLoginActions2['default'].changeEmail, type: 'email', placeholder: '邮箱' })
                             ),
                             _react2['default'].createElement(
                                 'div',
                                 { className: 'form-group' },
                                 _react2['default'].createElement(
                                     'label',
-                                    { 'for': 'login-pwd' },
+                                    { 'for': 'sign-name' },
+                                    '用户名'
+                                ),
+                                _react2['default'].createElement('input', { id: 'sign-name', className: 'form-control', ref: 'name', onChange: _actionsLoginActions2['default'].changeName, type: 'text', placeholder: '用户名' })
+                            ),
+                            _react2['default'].createElement(
+                                'div',
+                                { className: 'form-group' },
+                                _react2['default'].createElement(
+                                    'label',
+                                    { 'for': 'sign-pwd' },
                                     '密码'
                                 ),
-                                _react2['default'].createElement('input', { id: 'login-pwd', className: 'form-control', type: 'password', required: true, placeholder: '密码' })
+                                _react2['default'].createElement('input', { id: 'sign-pwd', className: 'form-control', ref: 'password', onChange: _actionsLoginActions2['default'].changePassword, type: 'password', placeholder: '密码' })
                             ),
                             _react2['default'].createElement(
                                 'div',
                                 { className: 'form-group' },
                                 _react2['default'].createElement(
                                     'label',
-                                    { 'for': 'login-pwd' },
+                                    { 'for': 'sign-pwd' },
                                     '确认密码'
                                 ),
-                                _react2['default'].createElement('input', { id: 'login-pwd', className: 'form-control', type: 'password', required: true, placeholder: '密码' })
+                                _react2['default'].createElement('input', { id: 'sign-pwd', className: 'form-control', ref: 'prePassword', onChange: _actionsLoginActions2['default'].changePrePassword, type: 'password', placeholder: '密码' })
                             ),
                             _react2['default'].createElement(
                                 'a',
-                                { href: 'javascript:;', onclick: 'handleclick', className: 'btn btn-primary btn-block' },
+                                { href: 'javascript:;', onClick: this.handleClick.bind(this, 1), className: 'btn btn-primary btn-block' },
                                 '登陆'
                             )
                         )
@@ -970,11 +1013,15 @@ var LoginStore = (function () {
         _classCallCheck(this, LoginStore);
 
         this.bindActions(_actionsLoginActions2['default']);
+        //登陆信息
         this.email = '';
-        this.authId = '';
         this.password = '';
-        this.stateInfo = ''; // 登陆状态信息
-        this.err = false;
+        //注册信息
+        this.name = '';
+        this.prePassword = '';
+        // 状态信息
+        this.stateInfo = '';
+        this.err = '';
     }
 
     /**
@@ -986,6 +1033,7 @@ var LoginStore = (function () {
         value: function onDoPasswordFail() {
             this.stateInfo = '两次密码不一样';
             this.err = true;
+            toastr.warning(this.stateInfo);
         }
 
         /**
@@ -1005,7 +1053,7 @@ var LoginStore = (function () {
     }, {
         key: 'onLoginFail',
         value: function onLoginFail() {
-            this.stateInfor = '邮箱未注册，或密码不正确';
+            this.stateInfor = '服务器错误';
             this.err = true;
             toastr.error(this.stateInfor);
         }
@@ -1015,7 +1063,14 @@ var LoginStore = (function () {
          */
     }, {
         key: 'onDoSignSuccess',
-        value: function onDoSignSuccess() {}
+        value: function onDoSignSuccess(data) {
+            console.log(data);
+            if (data.code === 200) {
+                toastr.success("注册成功");
+            } else if (data.code === 400) {
+                toastr.warning("邮箱或用户名已经被注册");
+            }
+        }
 
         /**
          * 注册失败
@@ -1023,19 +1078,8 @@ var LoginStore = (function () {
     }, {
         key: 'onSignFail',
         value: function onSignFail(data) {
-            this.err = true;
-            if (!data.error) {
-                switch (data.failId) {
-                    case 1:
-                        this.stateInfo = '邮箱已经被注册了';break;
-                    case 2:
-                        this.stateInfo = '邮箱不支持';break;
-                }
-                return toastr.warning(this.stateInfo);
-            } else {
-                this.stateInfo = '服务器错误';
-                return toastr.error(this.stateInfo);
-            }
+            this.stateInfo = '服务器错误';
+            toastr.warning(this.stateInfo);
         }
     }, {
         key: 'onChangeEmail',
@@ -1046,6 +1090,16 @@ var LoginStore = (function () {
         key: 'onChangePassword',
         value: function onChangePassword(event) {
             this.password = event.target.value;
+        }
+    }, {
+        key: 'onChangeName',
+        value: function onChangeName(event) {
+            this.name = event.target.value;
+        }
+    }, {
+        key: 'onChangePrePassword',
+        value: function onChangePrePassword(event) {
+            this.prePassword = event.target.value;
         }
     }]);
 
