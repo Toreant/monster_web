@@ -11,12 +11,15 @@ import path from 'path';
 import colors from 'colors';
 import apiRouter from './router';
 import mongoose from 'mongoose';
-
+import mongo from './models';
+import bodyParser from 'body-parser';
 var app = new express();
 
 app.set('port',process.env.PORT || 3000);
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/',apiRouter);
 

@@ -41,7 +41,7 @@ class Login extends React.Component {
 
     handleClick() {
         console.log("login");
-        LoginActions.login("123","123");
+        LoginActions.login(this.state.email,this.state.password);
     }
 
     changeForm(form) {
@@ -79,11 +79,11 @@ class Login extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label for="login-email">邮箱</label>
-                                <input id='login-email' className='form-control' type="email" required autoFocus placeholder='邮箱'/>
+                                <input id='login-email' className='form-control' onChange={LoginActions.changeEmail} type="email" required autoFocus placeholder='邮箱'/>
                             </div>
                             <div className='form-group'>
                                 <label for="login-pwd">密码</label>
-                                <input id='login-pwd' className='form-control' type="password" required placeholder='密码'/>
+                                <input id='login-pwd' className='form-control' onChange={LoginActions.changePassword} type="password" required placeholder='密码'/>
                             </div>
                             <a href='javascript:;' onClick={this.handleClick.bind(this)} className='btn btn-primary btn-block'>登陆</a>
                             <div className='mon-other-login'>

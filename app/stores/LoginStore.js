@@ -28,7 +28,6 @@ class LoginStore {
      */
     onLoginSuccess(data) {
         console.log(data);
-        window.location = '/';
     }
 
     /**
@@ -63,7 +62,14 @@ class LoginStore {
             this.stateInfo = '服务器错误';
             return toastr.error(this.stateInfo);
         }
+    }
 
+    onChangeEmail(event) {
+        this.email = event.target.value;
+    }
+
+    onChangePassword(event) {
+        this.password = event.target.value;
     }
 }
 

@@ -64,7 +64,7 @@ var LoginActions = (function () {
     function LoginActions() {
         _classCallCheck(this, LoginActions);
 
-        this.generateActions('doPasswordFail', 'loginSuccess', 'loginFail', 'doSignSuccess', 'doSignFail');
+        this.generateActions('doPasswordFail', 'loginSuccess', 'loginFail', 'doSignSuccess', 'doSignFail', 'changeEmail', 'changePassword');
     }
 
     /**
@@ -79,15 +79,19 @@ var LoginActions = (function () {
         value: function login(email, password) {
             var _this = this;
 
-            $.post('/api/login', {
-                email: email,
-                password: password
-            }, function (data) {
-                if (data.err) {
-                    _this.actions.loginFail();
-                } else {
-                    _this.actions.loginSuccess(data);
+            $.ajax({
+                type: 'POST',
+                url: '/api/login',
+                cache: false,
+                dataType: 'json',
+                data: {
+                    email: email,
+                    password: password
                 }
+            }).done(function (data) {
+                _this.actions.loginSuccess(data);
+            }).fail(function (data) {
+                _this.actions.loginFail;
             });
         }
 
@@ -518,7 +522,7 @@ var Login = (function (_React$Component) {
         key: 'handleClick',
         value: function handleClick() {
             console.log("login");
-            _actionsLoginActions2['default'].login("123", "123");
+            _actionsLoginActions2['default'].login(this.state.email, this.state.password);
         }
     }, {
         key: 'changeForm',
@@ -583,7 +587,7 @@ var Login = (function (_React$Component) {
                                     { 'for': 'login-email' },
                                     '邮箱'
                                 ),
-                                _react2['default'].createElement('input', { id: 'login-email', className: 'form-control', type: 'email', required: true, autoFocus: true, placeholder: '邮箱' })
+                                _react2['default'].createElement('input', { id: 'login-email', className: 'form-control', onChange: _actionsLoginActions2['default'].changeEmail, type: 'email', required: true, autoFocus: true, placeholder: '邮箱' })
                             ),
                             _react2['default'].createElement(
                                 'div',
@@ -593,7 +597,7 @@ var Login = (function (_React$Component) {
                                     { 'for': 'login-pwd' },
                                     '密码'
                                 ),
-                                _react2['default'].createElement('input', { id: 'login-pwd', className: 'form-control', type: 'password', required: true, placeholder: '密码' })
+                                _react2['default'].createElement('input', { id: 'login-pwd', className: 'form-control', onChange: _actionsLoginActions2['default'].changePassword, type: 'password', required: true, placeholder: '密码' })
                             ),
                             _react2['default'].createElement(
                                 'a',
@@ -992,7 +996,6 @@ var LoginStore = (function () {
         key: 'onLoginSuccess',
         value: function onLoginSuccess(data) {
             console.log(data);
-            window.location = '/';
         }
 
         /**
@@ -1033,6 +1036,16 @@ var LoginStore = (function () {
                 this.stateInfo = '服务器错误';
                 return toastr.error(this.stateInfo);
             }
+        }
+    }, {
+        key: 'onChangeEmail',
+        value: function onChangeEmail(event) {
+            this.email = event.target.value;
+        }
+    }, {
+        key: 'onChangePassword',
+        value: function onChangePassword(event) {
+            this.password = event.target.value;
         }
     }]);
 

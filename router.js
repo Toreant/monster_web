@@ -3,7 +3,7 @@
  */
 import express from 'express';
 let router = express.Router();
-import LoginCtrl from './controler/login';
+import LoginCtrl from './controllers/login';
 
 router.post('/api/login',LoginCtrl.getLogin);
 

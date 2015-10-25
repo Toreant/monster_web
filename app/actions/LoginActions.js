@@ -10,7 +10,9 @@ class LoginActions {
             'loginSuccess',
             'loginFail',
             'doSignSuccess',
-            'doSignFail'
+            'doSignFail',
+            'changeEmail',
+            'changePassword'
         );
     }
 
@@ -21,20 +23,17 @@ class LoginActions {
      * @param prePwd
      */
     login(email,password) {
-        $.post(
-            '/api/login',
-            {
+        $.ajax({
+            type : 'POST',
+            url : '/api/login',
+            cache: false,
+            dataType : 'json',
+            data : {
                 email : email,
                 password : password
-            },
-            (data) =>{
-                if(data.err) {
-                    this.actions.loginFail();
-                } else {
-                    this.actions.loginSuccess(data);
-                }
             }
-        );
+        }).done((data) => {this.actions.loginSuccess(data)})
+        .fail((data) => {this.actions.loginFail});
     }
 
     /**

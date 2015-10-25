@@ -18,7 +18,10 @@
   "homepage": "https://github.com/Toreant/monster_web#readme",
   "dependencies": {
     "alt": "^0.17.6",
+    "body-parser": "^1.14.1",
     "colors": "^1.1.2",
+    "crypto": "0.0.3",
+    "eventproxy": "^0.3.4",
     "express": "^4.13.3",
     "less": "^2.5.3",
     "mongoose": "^4.1.12",
