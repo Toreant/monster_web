@@ -159,7 +159,7 @@ var NavActions = (function () {
     function NavActions() {
         _classCallCheck(this, NavActions);
 
-        this.generateActions('changeState', 'checkLoginSuccess', 'checkLoginFail');
+        this.generateActions('changeState', 'checkLoginSuccess', 'checkLoginFail', 'signOutSuccess', 'signOutFail');
     }
 
     _createClass(NavActions, [{
@@ -176,6 +176,22 @@ var NavActions = (function () {
                 _this.actions.checkLoginSuccess(data);
             }).fail(function (data) {
                 _this.actions.checkLoginFail();
+            });
+        }
+    }, {
+        key: 'signOut',
+        value: function signOut() {
+            var _this2 = this;
+
+            $.ajax({
+                url: '/api/signout',
+                type: 'post',
+                cache: false,
+                dataType: 'json'
+            }).done(function (data) {
+                _this2.actions.signOutSuccess(data);
+            }).fail(function (data) {
+                _this2.actions.signOutFail();
             });
         }
     }]);
@@ -866,6 +882,12 @@ var Nav = (function (_React$Component) {
             this.setState(state);
         }
     }, {
+        key: 'signOut',
+        value: function signOut() {
+            console.log("sign out");
+            _actionsNavActions2['default'].signOut();
+        }
+    }, {
         key: 'render',
         value: function render() {
             var SUBNAV = undefined;
@@ -928,7 +950,7 @@ var Nav = (function (_React$Component) {
                                 null,
                                 _react2['default'].createElement(
                                     'a',
-                                    { href: '#' },
+                                    { href: 'javascript:;', onClick: this.signOut.bind(this) },
                                     '退出'
                                 )
                             )
@@ -1351,7 +1373,21 @@ var NavStore = (function () {
     }, {
         key: 'onCheckLoginFail',
         value: function onCheckLoginFail() {
-            //toastr.error("服务器错误");
+            toastr.error("服务器错误");
+        }
+    }, {
+        key: 'onSignOutSuccess',
+        value: function onSignOutSuccess(data) {
+            if (data.code === 200) {
+                window.location = '/';
+            } else if (data.code === 400) {
+                toastr.error('退出不成功');
+            }
+        }
+    }, {
+        key: 'onSignOutFail',
+        value: function onSignOutFail() {
+            toastr.error("服务器错误");
         }
     }]);
 

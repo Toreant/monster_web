@@ -21,4 +21,12 @@ router.post('/api/session',function(req,res,next){
     }
 });
 
+router.post('/api/signout',function(req,res,next){
+    if(req.session.destroy()) {
+        res.json({meta : '退出登陆成功',code : 200});
+    } else {
+        res.json({meta : '退出不登陆不成功',code : 400});
+    }
+});
+
 export default router;

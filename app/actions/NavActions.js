@@ -8,7 +8,9 @@ class NavActions {
         this.generateActions(
             'changeState',
             'checkLoginSuccess',
-            'checkLoginFail'
+            'checkLoginFail',
+            'signOutSuccess',
+            'signOutFail'
         );
     }
 
@@ -18,8 +20,18 @@ class NavActions {
             cache : false,
             type : 'post',
             dataType : 'json'
-        }).done((data) => {this.actions.checkLoginSuccess(data)})
-        .fail((data) => {this.actions.checkLoginFail()});
+        }).done((data) => {this.actions.checkLoginSuccess(data);})
+        .fail((data) => {this.actions.checkLoginFail();});
+    }
+
+    signOut() {
+        $.ajax({
+            url : '/api/signout',
+            type : 'post',
+            cache : false,
+            dataType : 'json'
+        }).done((data) => {this.actions.signOutSuccess(data);})
+        .fail((data) => {this.actions.signOutFail();});
     }
 }
 

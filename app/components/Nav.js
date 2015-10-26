@@ -35,6 +35,11 @@ class Nav extends React.Component {
         this.setState(state);
     }
 
+    signOut() {
+        console.log("sign out");
+        NavAction.signOut();
+    }
+
     render() {
         let SUBNAV ;
         if(this.state.loginState) {
@@ -54,7 +59,7 @@ class Nav extends React.Component {
                             <li><a href="#">设置</a></li>
                             <li><a href="#">通知</a></li>
                             <li role="separator" className="divider"></li>
-                            <li><a href="#">退出</a></li>
+                            <li><a href="javascript:;" onClick={this.signOut.bind(this)}>退出</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -27,7 +27,19 @@ class NavStore {
     }
 
     onCheckLoginFail() {
-        //toastr.error("服务器错误");
+        toastr.error("服务器错误");
+    }
+
+    onSignOutSuccess(data) {
+        if(data.code === 200) {
+            window.location = '/';
+        } else if(data.code === 400) {
+            toastr.error('退出不成功');
+        }
+    }
+
+    onSignOutFail() {
+        toastr.error("服务器错误");
     }
 }
 
