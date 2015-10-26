@@ -8,13 +8,13 @@ var UserSchema = new Schema({
     id : {type : Number},
     email : {type : String},
     password : {type : String},
-    name : {type : String},
-    img : {type : String},
+    username : {type : String},
+    avatar_url : {type : String,default : '/img/default.png'},
     auth_id : {type : Number},
     domain : {type : String}
 });
 UserSchema.index({email: 1}, {unique: true});
-UserSchema.index({name : 1}, {unique : true});
+UserSchema.index({username : 1}, {unique : true});
 UserSchema.index({auth_id : 1},{unique : true});
 UserSchema.index({domain : 1},{unique : true});
 

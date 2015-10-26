@@ -11,7 +11,7 @@ class LoginStore {
         this.email = '';
         this.password = '';
         //注册信息
-        this.name = '';
+        this.username = '';
         this.prePassword = '';
         // 状态信息
         this.stateInfo = '';
@@ -32,7 +32,11 @@ class LoginStore {
      * @param passwod 登陆密码
      */
     onLoginSuccess(data) {
-        console.log(data);
+        if(data.code === 200) {
+            window.location = '/';
+        } else if(data.code === 400) {
+            toastr.error('登陆失败');
+        }
     }
 
     /**
@@ -77,7 +81,7 @@ class LoginStore {
     }
 
     onChangeName(event) {
-        this.name = event.target.value;
+        this.username = event.target.value;
     }
 
     onChangePrePassword(event) {

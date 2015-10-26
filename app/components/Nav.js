@@ -20,15 +20,6 @@ class Nav extends React.Component {
 
     componentWillUnMount() {
         NavStore.unlisten(this.onChange);
-        console.log('nav will un mount');
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-        console.log('nav will update');
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        console.log('nav did update');
     }
 
     onChange(state) {
@@ -36,7 +27,6 @@ class Nav extends React.Component {
     }
 
     signOut() {
-        console.log("sign out");
         NavAction.signOut();
     }
 

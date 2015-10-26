@@ -17,7 +17,7 @@ class md {
         let user = new User({
             email: email,
             password: password,
-            name: name,
+            username: name,
             auth_id : auth_id,
             domain : domain
         });

@@ -23,6 +23,8 @@ class UserCtrl {
         sha.update(password);
         password = sha.digest('hex');
 
+        console.log(email+' '+password+" "+name+' '+auth_id);
+
         User.saveUser(email,password,name,auth_id,auth_id.toString(),(data,product) => {
             let result = {
                 meta : "",
@@ -67,8 +69,8 @@ class UserCtrl {
             if(data.length >0) {
                 result.meta = "登陆成功";
                 result.code = 200;
-                result.data = data[0];
-                req.session.user = data[0].name;
+                result.raw = data[0];
+                req.session.user = data[0];
             } else {
                 result.meta = "登陆不成功";
                 result.code = 400;

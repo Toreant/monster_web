@@ -603,8 +603,8 @@ var Login = (function (_React$Component) {
             var email = this.state.email,
                 password = this.state.password,
                 prePassword = this.state.prePassword,
-                name = this.state.name;
-            var reg = /^[a-z]([a-z0-9]*[-_]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{2})?$/i;
+                name = this.state.username;
+            var reg = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/;
             if (option === 0) {
                 if (email === '' || !reg.test(email)) {
                     this.refs.loginEmail.getDOMNode().focus();
@@ -864,17 +864,6 @@ var Nav = (function (_React$Component) {
         key: 'componentWillUnMount',
         value: function componentWillUnMount() {
             _storesNavStore2['default'].unlisten(this.onChange);
-            console.log('nav will un mount');
-        }
-    }, {
-        key: 'componentWillUpdate',
-        value: function componentWillUpdate(nextProps, nextState) {
-            console.log('nav will update');
-        }
-    }, {
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate(prevProps, prevState) {
-            console.log('nav did update');
         }
     }, {
         key: 'onChange',
@@ -884,7 +873,6 @@ var Nav = (function (_React$Component) {
     }, {
         key: 'signOut',
         value: function signOut() {
-            console.log("sign out");
             _actionsNavActions2['default'].signOut();
         }
     }, {
@@ -1225,7 +1213,7 @@ var LoginStore = (function () {
         this.email = '';
         this.password = '';
         //注册信息
-        this.name = '';
+        this.username = '';
         this.prePassword = '';
         // 状态信息
         this.stateInfo = '';
@@ -1251,7 +1239,11 @@ var LoginStore = (function () {
     }, {
         key: 'onLoginSuccess',
         value: function onLoginSuccess(data) {
-            console.log(data);
+            if (data.code === 200) {
+                window.location = '/';
+            } else if (data.code === 400) {
+                toastr.error('登陆失败');
+            }
         }
 
         /**
@@ -1305,7 +1297,7 @@ var LoginStore = (function () {
     }, {
         key: 'onChangeName',
         value: function onChangeName(event) {
-            this.name = event.target.value;
+            this.username = event.target.value;
         }
     }, {
         key: 'onChangePrePassword',
@@ -1359,13 +1351,12 @@ var NavStore = (function () {
         value: function onChangeState(data) {
             this.loginState = true;
             this.userName = data.username;
-            this.avatar = data._json.avatar_url;
+            this.avatar = data._json === undefined ? data.avatar_url : data._json.avatar_url;
         }
     }, {
         key: 'onCheckLoginSuccess',
         value: function onCheckLoginSuccess(data) {
             if (data.code === 200) {
-                console.log(data.raw);
                 this.onChangeState(data.raw);
                 toastr.success("恭喜你登陆了");
             }

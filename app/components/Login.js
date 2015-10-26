@@ -47,8 +47,8 @@ class Login extends React.Component {
         var email = this.state.email,
             password = this.state.password,
             prePassword = this.state.prePassword,
-            name = this.state.name;
-        var reg = /^[a-z]([a-z0-9]*[-_]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{2})?$/i;
+            name = this.state.username;
+        var reg = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/;
         if(option === 0) {
             if(email === '' || !reg.test(email)) {
                 this.refs.loginEmail.getDOMNode().focus();
