@@ -15,7 +15,6 @@ class Home extends React.Component {
 
     componentDidMount() {
         HomeStore.listen(this.onChange);
-        HomeActions.getData();
     }
 
     componentDidUpdate(nextProps,preProps) {

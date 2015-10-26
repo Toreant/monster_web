@@ -40,7 +40,7 @@ var HomeActions = (function () {
 exports['default'] = _alt2['default'].createActions(HomeActions);
 module.exports = exports['default'];
 
-},{"../alt":3}],2:[function(require,module,exports){
+},{"../alt":4}],2:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -135,7 +135,58 @@ var LoginActions = (function () {
 exports['default'] = _alt2['default'].createActions(LoginActions);
 module.exports = exports['default'];
 
-},{"../alt":3}],3:[function(require,module,exports){
+},{"../alt":4}],3:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-25.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var NavActions = (function () {
+    function NavActions() {
+        _classCallCheck(this, NavActions);
+
+        this.generateActions('changeState', 'checkLoginSuccess', 'checkLoginFail');
+    }
+
+    _createClass(NavActions, [{
+        key: 'checkLogin',
+        value: function checkLogin() {
+            var _this = this;
+
+            $.ajax({
+                url: '/api/session',
+                cache: false,
+                type: 'post',
+                dataType: 'json'
+            }).done(function (data) {
+                _this.actions.checkLoginSuccess(data);
+            }).fail(function (data) {
+                _this.actions.checkLoginFail();
+            });
+        }
+    }]);
+
+    return NavActions;
+})();
+
+exports['default'] = _alt2['default'].createActions(NavActions);
+module.exports = exports['default'];
+
+},{"../alt":4}],4:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -154,7 +205,7 @@ var _alt2 = _interopRequireDefault(_alt);
 exports['default'] = new _alt2['default']();
 module.exports = exports['default'];
 
-},{"alt":"alt"}],4:[function(require,module,exports){
+},{"alt":"alt"}],5:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -216,7 +267,7 @@ var App = (function (_React$Component) {
 exports['default'] = App;
 module.exports = exports['default'];
 
-},{"./Footer":5,"./Nav":8,"react":"react","react-router":"react-router"}],5:[function(require,module,exports){
+},{"./Footer":6,"./Nav":9,"react":"react","react-router":"react-router"}],6:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -356,7 +407,7 @@ var Footer = (function (_React$Component) {
 exports['default'] = Footer;
 module.exports = exports['default'];
 
-},{"react":"react"}],6:[function(require,module,exports){
+},{"react":"react"}],7:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -403,7 +454,6 @@ var Home = (function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             _storesHomeStore2['default'].listen(this.onChange);
-            _actionsHomeActions2['default'].getData();
         }
     }, {
         key: 'componentDidUpdate',
@@ -453,7 +503,7 @@ var Home = (function (_React$Component) {
 exports['default'] = Home;
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":1,"../stores/HomeStore":11,"react":"react"}],7:[function(require,module,exports){
+},{"../actions/HomeActions":1,"../stores/HomeStore":12,"react":"react"}],8:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -745,7 +795,7 @@ var Login = (function (_React$Component) {
 exports['default'] = Login;
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":2,"../stores/LoginStore":12,"react":"react"}],8:[function(require,module,exports){
+},{"../actions/LoginActions":2,"../stores/LoginStore":13,"react":"react"}],9:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -769,18 +819,146 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _storesNavStore = require('../stores/NavStore');
+
+var _storesNavStore2 = _interopRequireDefault(_storesNavStore);
+
+var _actionsNavActions = require('../actions/NavActions');
+
+var _actionsNavActions2 = _interopRequireDefault(_actionsNavActions);
+
 var Nav = (function (_React$Component) {
     _inherits(Nav, _React$Component);
 
-    function Nav() {
+    function Nav(props) {
         _classCallCheck(this, Nav);
 
-        _get(Object.getPrototypeOf(Nav.prototype), 'constructor', this).apply(this, arguments);
+        _get(Object.getPrototypeOf(Nav.prototype), 'constructor', this).call(this, props);
+        this.state = _storesNavStore2['default'].getState();
+        this.onChange = this.onChange.bind(this);
     }
 
     _createClass(Nav, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            _storesNavStore2['default'].listen(this.onChange);
+            _actionsNavActions2['default'].checkLogin();
+        }
+    }, {
+        key: 'componentWillUnMount',
+        value: function componentWillUnMount() {
+            _storesNavStore2['default'].unlisten(this.onChange);
+            console.log('nav will un mount');
+        }
+    }, {
+        key: 'componentWillUpdate',
+        value: function componentWillUpdate(nextProps, nextState) {
+            console.log('nav will update');
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps, prevState) {
+            console.log('nav did update');
+        }
+    }, {
+        key: 'onChange',
+        value: function onChange(state) {
+            this.setState(state);
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var SUBNAV = undefined;
+            if (this.state.loginState) {
+                SUBNAV = _react2['default'].createElement(
+                    'ul',
+                    { className: 'nav navbar-nav navbar-right mon-subnav' },
+                    _react2['default'].createElement(
+                        'li',
+                        { className: 'dropdown' },
+                        _react2['default'].createElement(
+                            'a',
+                            { href: '#', className: 'dropdown-toggle', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
+                            _react2['default'].createElement('img', { src: this.state.avatar, width: '30', alt: 'loading' }),
+                            ' ',
+                            _react2['default'].createElement('span', { className: 'caret' })
+                        ),
+                        _react2['default'].createElement(
+                            'ul',
+                            { className: 'dropdown-menu' },
+                            _react2['default'].createElement(
+                                'li',
+                                null,
+                                _react2['default'].createElement(
+                                    'a',
+                                    { href: '#', className: 'mon-user' },
+                                    _react2['default'].createElement(
+                                        'span',
+                                        null,
+                                        'Signed as '
+                                    ),
+                                    _react2['default'].createElement(
+                                        'span',
+                                        null,
+                                        this.state.userName
+                                    )
+                                )
+                            ),
+                            _react2['default'].createElement(
+                                'li',
+                                null,
+                                _react2['default'].createElement(
+                                    'a',
+                                    { href: '#' },
+                                    '设置'
+                                )
+                            ),
+                            _react2['default'].createElement(
+                                'li',
+                                null,
+                                _react2['default'].createElement(
+                                    'a',
+                                    { href: '#' },
+                                    '通知'
+                                )
+                            ),
+                            _react2['default'].createElement('li', { role: 'separator', className: 'divider' }),
+                            _react2['default'].createElement(
+                                'li',
+                                null,
+                                _react2['default'].createElement(
+                                    'a',
+                                    { href: '#' },
+                                    '退出'
+                                )
+                            )
+                        )
+                    )
+                );
+            } else {
+                SUBNAV = _react2['default'].createElement(
+                    'ul',
+                    { className: 'nav navbar-nav navbar-right' },
+                    _react2['default'].createElement(
+                        'li',
+                        null,
+                        _react2['default'].createElement(
+                            'a',
+                            { href: '/login#login' },
+                            '登陆'
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'li',
+                        null,
+                        _react2['default'].createElement(
+                            'a',
+                            { href: '/login#sign' },
+                            '注册'
+                        )
+                    )
+                );
+            }
             return _react2['default'].createElement(
                 'nav',
                 { className: 'navbar navbar-default mon-nav', id: 'mon-fixed-nav' },
@@ -857,7 +1035,7 @@ var Nav = (function (_React$Component) {
                         ),
                         _react2['default'].createElement(
                             'form',
-                            { className: 'navbar-form navbar-right', role: 'search' },
+                            { className: 'navbar-form navbar-left', role: 'search' },
                             _react2['default'].createElement(
                                 'div',
                                 { className: 'form-group' },
@@ -868,7 +1046,8 @@ var Nav = (function (_React$Component) {
                                 { type: 'submit', className: 'btn btn-default search-btn' },
                                 'Submit'
                             )
-                        )
+                        ),
+                        SUBNAV
                     )
                 )
             );
@@ -881,7 +1060,7 @@ var Nav = (function (_React$Component) {
 exports['default'] = Nav;
 module.exports = exports['default'];
 
-},{"react":"react"}],9:[function(require,module,exports){
+},{"../actions/NavActions":3,"../stores/NavStore":14,"react":"react"}],10:[function(require,module,exports){
 /**
  * Created by apache on 15-10-22.
  */
@@ -905,7 +1084,7 @@ _reactRouter2['default'].run(_routes2['default'], _reactRouter2['default'].Histo
   _react2['default'].render(_react2['default'].createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./routes":10,"react":"react","react-router":"react-router"}],10:[function(require,module,exports){
+},{"./routes":11,"react":"react","react-router":"react-router"}],11:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -943,7 +1122,7 @@ exports['default'] = _react2['default'].createElement(
 );
 module.exports = exports['default'];
 
-},{"./components/App":4,"./components/Home":6,"./components/Login":7,"react":"react","react-router":"react-router"}],11:[function(require,module,exports){
+},{"./components/App":5,"./components/Home":7,"./components/Login":8,"react":"react","react-router":"react-router"}],12:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -991,7 +1170,7 @@ var HomeStore = (function () {
 exports['default'] = _alt2['default'].createStore(HomeStore);
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":1,"../alt":3}],12:[function(require,module,exports){
+},{"../actions/HomeActions":1,"../alt":4}],13:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -1119,4 +1298,67 @@ var LoginStore = (function () {
 exports['default'] = _alt2['default'].createStore(LoginStore);
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":2,"../alt":3}]},{},[9]);
+},{"../actions/LoginActions":2,"../alt":4}],14:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-25.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _actionsNavActions = require('../actions/NavActions');
+
+var _actionsNavActions2 = _interopRequireDefault(_actionsNavActions);
+
+var NavStore = (function () {
+    function NavStore() {
+        _classCallCheck(this, NavStore);
+
+        this.bindActions(_actionsNavActions2['default']);
+        this.loginState = false;
+        this.userName = '';
+        this.avatar = '';
+    }
+
+    _createClass(NavStore, [{
+        key: 'onChangeState',
+        value: function onChangeState(data) {
+            this.loginState = true;
+            this.userName = data.username;
+            this.avatar = data._json.avatar_url;
+        }
+    }, {
+        key: 'onCheckLoginSuccess',
+        value: function onCheckLoginSuccess(data) {
+            if (data.code === 200) {
+                console.log(data.raw);
+                this.onChangeState(data.raw);
+                toastr.success("恭喜你登陆了");
+            }
+        }
+    }, {
+        key: 'onCheckLoginFail',
+        value: function onCheckLoginFail() {
+            //toastr.error("服务器错误");
+        }
+    }]);
+
+    return NavStore;
+})();
+
+exports['default'] = _alt2['default'].createStore(NavStore);
+module.exports = exports['default'];
+
+},{"../actions/NavActions":3,"../alt":4}]},{},[10]);

@@ -2,9 +2,71 @@
  * Created by apache on 15-10-23.
  */
 import React from 'react';
+import NavStore from '../stores/NavStore';
+import NavAction from '../actions/NavActions';
 
 class Nav extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = NavStore.getState();
+        this.onChange = this.onChange.bind(this);
+    }
+
+    componentDidMount() {
+        NavStore.listen(this.onChange);
+        NavAction.checkLogin();
+    }
+
+    componentWillUnMount() {
+        NavStore.unlisten(this.onChange);
+        console.log('nav will un mount');
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        console.log('nav will update');
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        console.log('nav did update');
+    }
+
+    onChange(state) {
+        this.setState(state);
+    }
+
     render() {
+        let SUBNAV ;
+        if(this.state.loginState) {
+            SUBNAV = (
+                <ul className="nav navbar-nav navbar-right mon-subnav">
+                    <li className="dropdown">
+                        <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <img src={this.state.avatar} width='30' alt="loading"/> <span className="caret"></span>
+                        </a>
+                        <ul className="dropdown-menu">
+                            <li>
+                                <a href="#" className='mon-user'>
+                                    <span>Signed as </span>
+                                    <span>{this.state.userName}</span>
+                                </a>
+                            </li>
+                            <li><a href="#">设置</a></li>
+                            <li><a href="#">通知</a></li>
+                            <li role="separator" className="divider"></li>
+                            <li><a href="#">退出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            );
+        } else {
+            SUBNAV = (
+                <ul className='nav navbar-nav navbar-right'>
+                    <li><a href="/login#login">登陆</a></li>
+                    <li><a href="/login#sign">注册</a></li>
+                </ul>
+            );
+        }
         return (
             <nav className='navbar navbar-default mon-nav' id='mon-fixed-nav'>
                 <div className='container'>
@@ -26,12 +88,13 @@ class Nav extends React.Component {
                             <li><a href="/music">音乐</a></li>
                             <li><a href="/article">文章</a></li>
                         </ul>
-                        <form className='navbar-form navbar-right' role='search'>
+                        <form className='navbar-form navbar-left' role='search'>
                             <div className='form-group'>
                                 <input type="text" className='form-control' placeholder='输入搜索'/>
                             </div>
                             <button type='submit' className='btn btn-default search-btn'>Submit</button>
                         </form>
+                        {SUBNAV}
                     </div>
                 </div>
             </nav>
