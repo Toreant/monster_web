@@ -109,6 +109,62 @@ class UserCtrl {
             res.json(result);
         });
     }
+
+    /**
+     * 获取用户资料
+     * @param req
+     * @param res
+     * @param next
+     */
+    getUserById(req,res,next) {
+        let user_id = req.body.user_id;
+
+        let result = {
+            meta : '',
+            code : 0,
+            data : null
+        };
+
+        User.getUserById(id,function(docs){
+            if(docs.length >=1) {
+                result.meta = '获取用户资料成功';
+                result.code = 200;
+                result.raw = docs;
+            } else {
+                result.meta = '获取用户资料不成功';
+                result.code = 400;
+            }
+            res.json(result);
+        });
+    }
+
+    /**
+     * 通过个性域名查找用户
+     * @param req
+     * @param res
+     * @param next
+     */
+    getUserByDomain(req,res,next) {
+        let domain = req.body.domain;
+
+        let result = {
+            meta : '',
+            code : 0,
+            data : null
+        };
+
+        User.getUserByDomain(domain,function(docs){
+            if(docs.length >=1) {
+                result.meta = '获取用户资料成功';
+                result.code = 200;
+                result.raw = docs;
+            } else {
+                result.meta = '获取用户资料不成功';
+                result.code = 400;
+            }
+            res.json(result);
+        })
+    }
 }
 
 export default new UserCtrl();

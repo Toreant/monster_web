@@ -131,3 +131,11 @@
 .sign-form {
   display: none;
 }
+/**
+ * user
+ */
+.mon-user-name {
+  font-size: 25px;
+  font-weight: 800;
+  color: #5e5e5e;
+}

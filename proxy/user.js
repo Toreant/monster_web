@@ -84,6 +84,31 @@ class md {
             }
         });
     }
+
+    /**
+     * 通过账号id获取用户
+     * @param id
+     * @param callback
+     */
+    getUserById(id,callback) {
+        User.find({auth_id : id},(err,docs) => {
+            if(err) {
+                callback(err);
+            } else {
+                callback(docs);
+            }
+        });
+    }
+
+    getUserByDomain(domain,callback) {
+        User.find({domain : domain},(err,docs) => {
+            if(err) {
+                callback(err);
+            } else {
+                callback(docs);
+            }
+        });
+    }
 }
 
 export default new md();

@@ -40,7 +40,7 @@ var HomeActions = (function () {
 exports['default'] = _alt2['default'].createActions(HomeActions);
 module.exports = exports['default'];
 
-},{"../alt":4}],2:[function(require,module,exports){
+},{"../alt":5}],2:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -135,7 +135,7 @@ var LoginActions = (function () {
 exports['default'] = _alt2['default'].createActions(LoginActions);
 module.exports = exports['default'];
 
-},{"../alt":4}],3:[function(require,module,exports){
+},{"../alt":5}],3:[function(require,module,exports){
 /**
  * Created by apache on 15-10-25.
  */
@@ -202,7 +202,58 @@ var NavActions = (function () {
 exports['default'] = _alt2['default'].createActions(NavActions);
 module.exports = exports['default'];
 
-},{"../alt":4}],4:[function(require,module,exports){
+},{"../alt":5}],4:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-27.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var UserActions = (function () {
+    function UserActions() {
+        _classCallCheck(this, UserActions);
+
+        this.generateActions('getUserSuccess', 'getUserFail');
+    }
+
+    _createClass(UserActions, [{
+        key: 'getUser',
+        value: function getUser(domain) {
+            var _this = this;
+
+            $.ajax({
+                url: '/api/getUser',
+                data: { domain: domain },
+                cache: false,
+                type: 'post'
+            }).done(function (data) {
+                _this.actions.getUserSuccess(data);
+            }).fail(function () {
+                _this.actions.getUserFail();
+            });
+        }
+    }]);
+
+    return UserActions;
+})();
+
+exports['default'] = _alt2['default'].createActions(UserActions);
+module.exports = exports['default'];
+
+},{"../alt":5}],5:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -221,7 +272,7 @@ var _alt2 = _interopRequireDefault(_alt);
 exports['default'] = new _alt2['default']();
 module.exports = exports['default'];
 
-},{"alt":"alt"}],5:[function(require,module,exports){
+},{"alt":"alt"}],6:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -283,7 +334,7 @@ var App = (function (_React$Component) {
 exports['default'] = App;
 module.exports = exports['default'];
 
-},{"./Footer":6,"./Nav":9,"react":"react","react-router":"react-router"}],6:[function(require,module,exports){
+},{"./Footer":7,"./Nav":10,"react":"react","react-router":"react-router"}],7:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -423,7 +474,7 @@ var Footer = (function (_React$Component) {
 exports['default'] = Footer;
 module.exports = exports['default'];
 
-},{"react":"react"}],7:[function(require,module,exports){
+},{"react":"react"}],8:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -519,7 +570,7 @@ var Home = (function (_React$Component) {
 exports['default'] = Home;
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":1,"../stores/HomeStore":12,"react":"react"}],8:[function(require,module,exports){
+},{"../actions/HomeActions":1,"../stores/HomeStore":15,"react":"react"}],9:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -811,7 +862,7 @@ var Login = (function (_React$Component) {
 exports['default'] = Login;
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":2,"../stores/LoginStore":13,"react":"react"}],9:[function(require,module,exports){
+},{"../actions/LoginActions":2,"../stores/LoginStore":16,"react":"react"}],10:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -1070,7 +1121,192 @@ var Nav = (function (_React$Component) {
 exports['default'] = Nav;
 module.exports = exports['default'];
 
-},{"../actions/NavActions":3,"../stores/NavStore":14,"react":"react"}],10:[function(require,module,exports){
+},{"../actions/NavActions":3,"../stores/NavStore":17,"react":"react"}],11:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-27.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var NotFound = (function (_React$Component) {
+    _inherits(NotFound, _React$Component);
+
+    function NotFound() {
+        _classCallCheck(this, NotFound);
+
+        _get(Object.getPrototypeOf(NotFound.prototype), 'constructor', this).apply(this, arguments);
+    }
+
+    _createClass(NotFound, [{
+        key: 'render',
+        value: function render() {
+            return _react2['default'].createElement(
+                'div',
+                { className: 'container' },
+                _react2['default'].createElement(
+                    'div',
+                    { className: 'row' },
+                    '404 Not Found'
+                )
+            );
+        }
+    }]);
+
+    return NotFound;
+})(_react2['default'].Component);
+
+exports['default'] = NotFound;
+module.exports = exports['default'];
+
+},{"react":"react"}],12:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-27.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _actionsUserActions = require('../actions/UserActions');
+
+var _actionsUserActions2 = _interopRequireDefault(_actionsUserActions);
+
+var _storesUserStore = require('../stores/UserStore');
+
+var _storesUserStore2 = _interopRequireDefault(_storesUserStore);
+
+var User = (function (_React$Component) {
+    _inherits(User, _React$Component);
+
+    function User(props) {
+        _classCallCheck(this, User);
+
+        _get(Object.getPrototypeOf(User.prototype), 'constructor', this).call(this, props);
+        console.log(props);
+        this.state = _storesUserStore2['default'].getState();
+        this.onChange = this.onChange.bind(this);
+    }
+
+    _createClass(User, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            _storesUserStore2['default'].listen(this.onChange);
+            _actionsUserActions2['default'].getUser("56115067");
+            console.log(this.props.params);
+        }
+    }, {
+        key: 'componentWillUnMount',
+        value: function componentWillUnMount() {
+            _storesUserStore2['default'].unlisten(this.onChange);
+            console.log(this.props);
+        }
+    }, {
+        key: 'onChange',
+        value: function onChange(state) {
+            this.setState(state);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2['default'].createElement(
+                'div',
+                { className: 'container' },
+                _react2['default'].createElement(
+                    'div',
+                    { className: 'row' },
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'col-md-4 col-sm-4' },
+                        _react2['default'].createElement('img', { src: this.state.avatar_url, width: '200', alt: 'loading' }),
+                        _react2['default'].createElement(
+                            'p',
+                            { className: 'mon-user-name' },
+                            this.state.username
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            null,
+                            _react2['default'].createElement(
+                                'span',
+                                null,
+                                _react2['default'].createElement(
+                                    'b',
+                                    null,
+                                    this.state.followers
+                                ),
+                                'Followers'
+                            ),
+                            _react2['default'].createElement(
+                                'span',
+                                null,
+                                _react2['default'].createElement(
+                                    'b',
+                                    null,
+                                    this.state.contribute
+                                ),
+                                'Contribute'
+                            ),
+                            _react2['default'].createElement(
+                                'span',
+                                null,
+                                _react2['default'].createElement(
+                                    'b',
+                                    null,
+                                    this.state.following
+                                ),
+                                'Following'
+                            )
+                        )
+                    ),
+                    _react2['default'].createElement('div', { className: 'col-md-8 col-sm-8' })
+                )
+            );
+        }
+    }]);
+
+    return User;
+})(_react2['default'].Component);
+
+User.contextTypes = {
+    router: _react2['default'].PropTypes.func.isRequired
+};
+
+exports['default'] = User;
+module.exports = exports['default'];
+
+},{"../actions/UserActions":4,"../stores/UserStore":18,"react":"react"}],13:[function(require,module,exports){
 /**
  * Created by apache on 15-10-22.
  */
@@ -1094,7 +1330,7 @@ _reactRouter2['default'].run(_routes2['default'], _reactRouter2['default'].Histo
   _react2['default'].render(_react2['default'].createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./routes":11,"react":"react","react-router":"react-router"}],11:[function(require,module,exports){
+},{"./routes":14,"react":"react","react-router":"react-router"}],14:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -1124,15 +1360,31 @@ var _componentsLogin = require('./components/Login');
 
 var _componentsLogin2 = _interopRequireDefault(_componentsLogin);
 
+var _componentsUser = require('./components/User');
+
+var _componentsUser2 = _interopRequireDefault(_componentsUser);
+
+var _componentsNotFound = require('./components/NotFound');
+
+var _componentsNotFound2 = _interopRequireDefault(_componentsNotFound);
+
 exports['default'] = _react2['default'].createElement(
     _reactRouter.Route,
-    { handler: _componentsApp2['default'] },
+    { path: '/', handler: _componentsApp2['default'] },
     _react2['default'].createElement(_reactRouter.Route, { path: '/', handler: _componentsHome2['default'] }),
-    _react2['default'].createElement(_reactRouter.Route, { path: '/login', handler: _componentsLogin2['default'] })
+    _react2['default'].createElement(_reactRouter.Route, { path: 'login', handler: _componentsLogin2['default'] }),
+    _react2['default'].createElement(
+        _reactRouter.Route,
+        { path: 'user', handler: _componentsUser2['default'] },
+        _react2['default'].createElement(_reactRouter.Route, { path: '/setting', handler: _componentsUser2['default'] }),
+        _react2['default'].createElement(_reactRouter.Route, { path: '/toastr', handler: _componentsUser2['default'] }),
+        _react2['default'].createElement(_reactRouter.Route, { path: ':domain', handler: _componentsUser2['default'] })
+    ),
+    _react2['default'].createElement(_reactRouter.Route, { path: '*', handler: _componentsNotFound2['default'] })
 );
 module.exports = exports['default'];
 
-},{"./components/App":5,"./components/Home":7,"./components/Login":8,"react":"react","react-router":"react-router"}],12:[function(require,module,exports){
+},{"./components/App":6,"./components/Home":8,"./components/Login":9,"./components/NotFound":11,"./components/User":12,"react":"react","react-router":"react-router"}],15:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -1180,7 +1432,7 @@ var HomeStore = (function () {
 exports['default'] = _alt2['default'].createStore(HomeStore);
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":1,"../alt":4}],13:[function(require,module,exports){
+},{"../actions/HomeActions":1,"../alt":5}],16:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -1312,7 +1564,7 @@ var LoginStore = (function () {
 exports['default'] = _alt2['default'].createStore(LoginStore);
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":2,"../alt":4}],14:[function(require,module,exports){
+},{"../actions/LoginActions":2,"../alt":5}],17:[function(require,module,exports){
 /**
  * Created by apache on 15-10-25.
  */
@@ -1388,4 +1640,69 @@ var NavStore = (function () {
 exports['default'] = _alt2['default'].createStore(NavStore);
 module.exports = exports['default'];
 
-},{"../actions/NavActions":3,"../alt":4}]},{},[10]);
+},{"../actions/NavActions":3,"../alt":5}],18:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-27.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _actionsUserActionsJs = require('../actions/UserActions.js');
+
+var _actionsUserActionsJs2 = _interopRequireDefault(_actionsUserActionsJs);
+
+var UserStore = (function () {
+    function UserStore() {
+        _classCallCheck(this, UserStore);
+
+        this.bindActions(_actionsUserActionsJs2['default']);
+        this.username = '';
+        this.avatar_url = '';
+        this.star = 0;
+        this.followers = 0;
+        this.contribute = 0;
+        this.following = 0;
+    }
+
+    _createClass(UserStore, [{
+        key: 'onGetUserSuccess',
+        value: function onGetUserSuccess(data) {
+            console.log(data);
+            if (data.code === 200) {
+                this.username = data.raw[0].username;
+                this.avatar_url = data.raw[0].avatar_url;
+                this.followers = data.raw[0].followers.length;
+                this.following = data.raw[0].following.length;
+                this.contribute = data.raw[0].contribute.length;
+                this.star = data.raw[0].star.length;
+            } else {
+                toastr.error('获取联系人失败');
+            }
+        }
+    }, {
+        key: 'onGetUserFail',
+        value: function onGetUserFail() {
+            toastr.error('服务器错误');
+        }
+    }]);
+
+    return UserStore;
+})();
+
+exports['default'] = _alt2['default'].createStore(UserStore);
+module.exports = exports['default'];
+
+},{"../actions/UserActions.js":4,"../alt":5}]},{},[13]);

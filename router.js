@@ -11,6 +11,8 @@ router.post('/api/user',UserCtrl.getSign);
 
 router.put('/api/user',UserCtrl.getUpdate);
 
+router.post('/api/getUser',UserCtrl.getUserByDomain);
+
 router.post('/api/session',function(req,res,next){
     console.log(req.session);
     if((req.session.passport !== undefined || req.session.user !== undefined)) {
