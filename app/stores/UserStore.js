@@ -13,6 +13,7 @@ class UserStore {
         this.followers = 0;
         this.contribute = 0;
         this.following = 0;
+        this.domain = '';
     }
 
     onGetUserSuccess(data) {
@@ -24,6 +25,7 @@ class UserStore {
             this.following = data.raw[0].following.length;
             this.contribute = data.raw[0].contribute.length;
             this.star = data.raw[0].star.length;
+            this.doamin = data.raw[0].domain;
         } else {
             toastr.error('获取联系人失败');
         }

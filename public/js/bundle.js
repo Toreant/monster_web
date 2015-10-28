@@ -1199,6 +1199,8 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouter = require('react-router');
+
 var _actionsUserActions = require('../actions/UserActions');
 
 var _actionsUserActions2 = _interopRequireDefault(_actionsUserActions);
@@ -1222,7 +1224,6 @@ var User = (function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             _storesUserStore2['default'].listen(this.onChange);
-            console.log(this.props.params);
             _actionsUserActions2['default'].getUser(this.props.params.domain);
         }
     }, {
@@ -1237,7 +1238,6 @@ var User = (function (_React$Component) {
         key: 'componentWillUnMount',
         value: function componentWillUnMount() {
             _storesUserStore2['default'].unlisten(this.onChange);
-            console.log(this.props);
         }
     }, {
         key: 'onChange',
@@ -1247,7 +1247,6 @@ var User = (function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            console.log(this.props.params);
             return _react2['default'].createElement(
                 'div',
                 { className: 'container' },
@@ -1256,49 +1255,159 @@ var User = (function (_React$Component) {
                     { className: 'row' },
                     _react2['default'].createElement(
                         'div',
-                        { className: 'col-md-4 col-sm-4' },
-                        _react2['default'].createElement('img', { src: this.state.avatar_url, width: '200', alt: 'loading' }),
+                        { className: 'col-md-3 col-sm-3' },
                         _react2['default'].createElement(
-                            'p',
+                            'div',
+                            { className: 'mon-center' },
+                            _react2['default'].createElement('img', { src: this.state.avatar_url, width: '200', alt: 'loading' })
+                        ),
+                        _react2['default'].createElement(
+                            'div',
                             { className: 'mon-user-name' },
                             this.state.username
                         ),
                         _react2['default'].createElement(
                             'div',
-                            null,
+                            { className: 'mon-vcard-stats' },
                             _react2['default'].createElement(
-                                'span',
-                                null,
+                                _reactRouter.Link,
+                                { to: '/u/' + this.state.doamin + '/followers' },
                                 _react2['default'].createElement(
-                                    'b',
-                                    null,
-                                    this.state.followers
-                                ),
-                                'Followers'
+                                    'a',
+                                    { className: 'mon-link' },
+                                    _react2['default'].createElement(
+                                        'span',
+                                        null,
+                                        this.state.followers
+                                    ),
+                                    _react2['default'].createElement(
+                                        'b',
+                                        null,
+                                        'Followers'
+                                    )
+                                )
                             ),
                             _react2['default'].createElement(
-                                'span',
-                                null,
+                                _reactRouter.Link,
+                                { to: '/u/' + this.state.doamin + '/following' },
                                 _react2['default'].createElement(
-                                    'b',
-                                    null,
-                                    this.state.contribute
-                                ),
-                                'Contribute'
+                                    'a',
+                                    { className: 'mon-link' },
+                                    _react2['default'].createElement(
+                                        'span',
+                                        null,
+                                        this.state.followers
+                                    ),
+                                    _react2['default'].createElement(
+                                        'b',
+                                        null,
+                                        'Following'
+                                    )
+                                )
                             ),
                             _react2['default'].createElement(
-                                'span',
+                                _reactRouter.Link,
+                                { to: '/u/' + this.state.doamin + '/contribute' },
+                                _react2['default'].createElement(
+                                    'a',
+                                    { className: 'mon-link' },
+                                    _react2['default'].createElement(
+                                        'span',
+                                        null,
+                                        this.state.contribute
+                                    ),
+                                    _react2['default'].createElement(
+                                        'b',
+                                        null,
+                                        'Contribute'
+                                    )
+                                )
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'ul',
+                            { className: 'nav mon-ability-list' },
+                            _react2['default'].createElement(
+                                'li',
                                 null,
                                 _react2['default'].createElement(
-                                    'b',
-                                    null,
-                                    this.state.following
+                                    'a',
+                                    { href: '' },
+                                    _react2['default'].createElement('span', { className: 'fa fa-cog' }),
+                                    '设置'
+                                )
+                            ),
+                            _react2['default'].createElement(
+                                'li',
+                                null,
+                                _react2['default'].createElement(
+                                    'a',
+                                    { href: '' },
+                                    _react2['default'].createElement('span', { className: 'fa fa-user' }),
+                                    '中心'
+                                )
+                            ),
+                            _react2['default'].createElement(
+                                'li',
+                                null,
+                                _react2['default'].createElement(
+                                    'a',
+                                    { href: '' },
+                                    _react2['default'].createElement('span', { className: 'fa fa-star' }),
+                                    '关注'
+                                )
+                            ),
+                            _react2['default'].createElement(
+                                'li',
+                                null,
+                                _react2['default'].createElement(
+                                    'a',
+                                    { href: 'javascript:;', 'data-toggle': 'collapse', 'data-target': '#my-contribute' },
+                                    _react2['default'].createElement('span', { className: 'fa fa-pencil-square' }),
+                                    '投稿'
                                 ),
-                                'Following'
+                                _react2['default'].createElement(
+                                    'ul',
+                                    { className: 'nav collapse mon-contribute', id: 'my-contribute' },
+                                    _react2['default'].createElement(
+                                        'li',
+                                        null,
+                                        _react2['default'].createElement(
+                                            'a',
+                                            { href: '' },
+                                            _react2['default'].createElement('span', { className: 'fa fa-video-camera' }),
+                                            '动漫'
+                                        )
+                                    ),
+                                    _react2['default'].createElement(
+                                        'li',
+                                        null,
+                                        _react2['default'].createElement(
+                                            'a',
+                                            { href: '' },
+                                            _react2['default'].createElement('span', { className: 'fa fa-music' }),
+                                            '音乐'
+                                        )
+                                    ),
+                                    _react2['default'].createElement(
+                                        'li',
+                                        null,
+                                        _react2['default'].createElement(
+                                            'a',
+                                            { href: '' },
+                                            _react2['default'].createElement('span', { className: 'fa fa-file' }),
+                                            '文章'
+                                        )
+                                    )
+                                )
                             )
                         )
                     ),
-                    _react2['default'].createElement('div', { className: 'col-md-8 col-sm-8' })
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'col-md-9 col-sm-9' },
+                        _react2['default'].createElement(_reactRouter.RouteHandler, null)
+                    )
                 )
             );
         }
@@ -1314,7 +1423,7 @@ User.contextTypes = {
 exports['default'] = User;
 module.exports = exports['default'];
 
-},{"../actions/UserActions":4,"../stores/UserStore":18,"react":"react"}],13:[function(require,module,exports){
+},{"../actions/UserActions":4,"../stores/UserStore":18,"react":"react","react-router":"react-router"}],13:[function(require,module,exports){
 /**
  * Created by apache on 15-10-22.
  */
@@ -1381,22 +1490,18 @@ exports['default'] = _react2['default'].createElement(
     { handler: _componentsApp2['default'] },
     _react2['default'].createElement(_reactRouter.Route, { path: '/', handler: _componentsHome2['default'] }),
     _react2['default'].createElement(_reactRouter.Route, { path: '/login', handler: _componentsLogin2['default'] }),
-    '/**',
     _react2['default'].createElement(
         _reactRouter.Route,
         { path: 'u', handler: _componentsUser2['default'] },
         _react2['default'].createElement(
             _reactRouter.Route,
-            { path: ':domain', handler: _componentsUser2['default'] },
-            _react2['default'].createElement(_reactRouter.Route, { path: 'setting', handler: _componentsUser2['default'] }),
+            { path: ':domain' },
+            _react2['default'].createElement(_reactRouter.Route, { path: 'setting', handler: _componentsNotFound2['default'] }),
             _react2['default'].createElement(_reactRouter.Route, { path: 'follower', handler: _componentsUser2['default'] }),
             _react2['default'].createElement(_reactRouter.Route, { path: 'following', handler: _componentsUser2['default'] }),
             _react2['default'].createElement(_reactRouter.Route, { path: 'contribute', handler: _componentsUser2['default'] })
         )
     ),
-    '*/',
-    _react2['default'].createElement(_reactRouter.Route, { path: '/u/:id', handler: _componentsUser2['default'] }),
-    _react2['default'].createElement(_reactRouter.Route, { path: '/setting', handler: _componentsUser2['default'] }),
     _react2['default'].createElement(_reactRouter.Route, { path: '*', handler: _componentsNotFound2['default'] })
 );
 module.exports = exports['default'];
@@ -1693,6 +1798,7 @@ var UserStore = (function () {
         this.followers = 0;
         this.contribute = 0;
         this.following = 0;
+        this.domain = '';
     }
 
     _createClass(UserStore, [{
@@ -1706,6 +1812,7 @@ var UserStore = (function () {
                 this.following = data.raw[0].following.length;
                 this.contribute = data.raw[0].contribute.length;
                 this.star = data.raw[0].star.length;
+                this.doamin = data.raw[0].domain;
             } else {
                 toastr.error('获取联系人失败');
             }

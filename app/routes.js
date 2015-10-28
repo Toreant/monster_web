@@ -13,18 +13,14 @@ export default (
     <Route handler={App}>
         <Route path='/' handler={Home} />
         <Route path='/login' handler={Login} />
-        /**
         <Route path='u' handler={User}>
-            <Route path=':domain' handler={User}>
-                <Route path='setting' handler={User} />
+            <Route path=':domain'>
+                <Route path='setting' handler={NotFound} />
                 <Route path='follower' handler={User} />
                 <Route path='following' handler={User} />
                 <Route path='contribute' handler={User} />
             </Route>
         </Route>
-        */
-        <Route path='/u/:id' handler={User} />
-        <Route path='/setting' handler={User} />
         <Route path='*' handler={NotFound} />
     </Route>
 );

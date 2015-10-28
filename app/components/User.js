@@ -2,6 +2,7 @@
  * Created by apache on 15-10-27.
  */
 import React from 'react';
+import {RouteHandler,Link} from 'react-router';
 import UserActions from '../actions/UserActions';
 import UserStore from '../stores/UserStore';
 
@@ -13,7 +14,6 @@ class User extends React.Component {
     }
     componentDidMount() {
         UserStore.listen(this.onChange);
-        console.log(this.props.params);
         UserActions.getUser(this.props.params.domain);
     }
 
@@ -24,10 +24,8 @@ class User extends React.Component {
         }
     }
 
-
     componentWillUnMount() {
         UserStore.unlisten(this.onChange);
-        console.log(this.props);
     }
 
     onChange(state) {
@@ -35,29 +33,53 @@ class User extends React.Component {
     }
 
     render() {
-        console.log(this.props.params);
         return (
             <div className='container'>
                 <div className='row'>
-                    <div className='col-md-4 col-sm-4'>
-                        <img src={this.state.avatar_url} width='200' alt="loading"/>
-                        <p className='mon-user-name'>{this.state.username}</p>
-                        <div>
-                            <span>
-                                <b>{this.state.followers}</b>
-                                Followers
-                            </span>
-                            <span>
-                                <b>{this.state.contribute}</b>
-                                Contribute
-                            </span>
-                            <span>
-                                <b>{this.state.following}</b>
-                                Following
-                            </span>
+                    <div className='col-md-3 col-sm-3'>
+                        <div className='mon-center'>
+                            <img src={this.state.avatar_url} width='200' alt="loading"/>
                         </div>
+                        <div className='mon-user-name'>{this.state.username}</div>
+                        <div className='mon-vcard-stats'>
+                            <Link to={'/u/'+this.state.doamin+'/followers'}>
+                                <a className='mon-link'>
+                                    <span>{this.state.followers}</span>
+                                    <b>Followers</b>
+                                </a>
+                            </Link>
+                            <Link to={'/u/'+this.state.doamin+'/following'}>
+                                <a className='mon-link'>
+                                    <span>{this.state.followers}</span>
+                                    <b>Following</b>
+                                </a>
+                            </Link>
+                            <Link to={'/u/'+this.state.doamin+'/contribute'}>
+                                <a className='mon-link'>
+                                    <span>{this.state.contribute}</span>
+                                    <b>Contribute</b>
+                                </a>
+                            </Link>
+                        </div>
+                        <ul className='nav mon-ability-list'>
+                            <li><a href=""><span className='fa fa-cog'></span>设置</a></li>
+                            <li><a href=""><span className='fa fa-user'></span>中心</a></li>
+                            <li><a href=""><span className='fa fa-star'></span>关注</a></li>
+                            <li>
+                                <a href="javascript:;" data-toggle='collapse' data-target='#my-contribute'>
+                                    <span className='fa fa-pencil-square'></span>投稿
+                                </a>
+                                <ul className='nav collapse mon-contribute' id='my-contribute'>
+                                    <li><a href=""><span className='fa fa-video-camera'></span>动漫</a></li>
+                                    <li><a href=""><span className='fa fa-music'></span>音乐</a></li>
+                                    <li><a href=""><span className='fa fa-file'></span>文章</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
-                    <div className='col-md-8 col-sm-8'></div>
+                    <div className='col-md-9 col-sm-9'>
+                        <RouteHandler />
+                    </div>
                 </div>
             </div>
         );
