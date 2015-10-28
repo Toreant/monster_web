@@ -952,7 +952,7 @@ var Nav = (function (_React$Component) {
                                 null,
                                 _react2['default'].createElement(
                                     'a',
-                                    { href: '#', className: 'mon-user' },
+                                    { href: '/u/' + this.state.domain, className: 'mon-user' },
                                     _react2['default'].createElement(
                                         'span',
                                         null,
@@ -970,7 +970,7 @@ var Nav = (function (_React$Component) {
                                 null,
                                 _react2['default'].createElement(
                                     'a',
-                                    { href: '#' },
+                                    { href: '/u/' + this.state.domain + '/setting' },
                                     '设置'
                                 )
                             ),
@@ -979,7 +979,7 @@ var Nav = (function (_React$Component) {
                                 null,
                                 _react2['default'].createElement(
                                     'a',
-                                    { href: '#' },
+                                    { href: '/u/' + this.state.doamin + '/toastr' },
                                     '通知'
                                 )
                             ),
@@ -1400,6 +1400,16 @@ var User = (function (_React$Component) {
                                         )
                                     )
                                 )
+                            ),
+                            _react2['default'].createElement(
+                                'li',
+                                null,
+                                _react2['default'].createElement(
+                                    'a',
+                                    { href: '' },
+                                    _react2['default'].createElement('span', { className: 'fa fa-bell' }),
+                                    '通知'
+                                )
                             )
                         )
                     ),
@@ -1719,6 +1729,7 @@ var NavStore = (function () {
         this.loginState = false;
         this.userName = '';
         this.avatar = '';
+        this.doamin = '';
     }
 
     _createClass(NavStore, [{
@@ -1727,13 +1738,13 @@ var NavStore = (function () {
             this.loginState = true;
             this.userName = data.username;
             this.avatar = data._json === undefined ? data.avatar_url : data._json.avatar_url;
+            this.domain = data._json === undefined ? data.domain : data._json.username;
         }
     }, {
         key: 'onCheckLoginSuccess',
         value: function onCheckLoginSuccess(data) {
             if (data.code === 200) {
                 this.onChangeState(data.raw);
-                toastr.success("恭喜你登陆了");
             }
         }
     }, {

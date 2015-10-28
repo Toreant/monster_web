@@ -75,6 +75,7 @@ class User extends React.Component {
                                     <li><a href=""><span className='fa fa-file'></span>文章</a></li>
                                 </ul>
                             </li>
+                            <li><a href=""><span className='fa fa-bell'></span>通知</a></li>
                         </ul>
                     </div>
                     <div className='col-md-9 col-sm-9'>

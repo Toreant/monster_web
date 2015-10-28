@@ -10,18 +10,19 @@ class NavStore {
         this.loginState = false;
         this.userName = '';
         this.avatar = '';
+        this.doamin = '';
     }
 
     onChangeState(data) {
         this.loginState = true;
         this.userName = data.username ;
         this.avatar = data._json === undefined ? data.avatar_url : data._json.avatar_url;
+        this.domain = data._json === undefined ? data.domain : data._json.username;
     }
 
     onCheckLoginSuccess(data) {
         if (data.code === 200) {
             this.onChangeState(data.raw);
-            toastr.success("恭喜你登陆了");
         }
     }
 
