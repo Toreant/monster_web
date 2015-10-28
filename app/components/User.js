@@ -8,16 +8,22 @@ import UserStore from '../stores/UserStore';
 class User extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = UserStore.getState();
         this.onChange = this.onChange.bind(this);
     }
-
     componentDidMount() {
         UserStore.listen(this.onChange);
-        UserActions.getUser("56115067");
         console.log(this.props.params);
+        UserActions.getUser(this.props.params.domain);
     }
+
+    componentDidUpdate(prevProps) {
+        // Fetch new charachter data when URL path changes
+        if (prevProps.params.id !== this.props.params.id) {
+            UserActions.getUser(this.props.params.id);
+        }
+    }
+
 
     componentWillUnMount() {
         UserStore.unlisten(this.onChange);
@@ -29,6 +35,7 @@ class User extends React.Component {
     }
 
     render() {
+        console.log(this.props.params);
         return (
             <div className='container'>
                 <div className='row'>

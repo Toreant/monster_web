@@ -3,8 +3,8 @@
  */
 import React from 'react';
 import Router from 'react-router';
-import Route from './routes';
+import routes from './routes';
 
-Router.run(Route,Router.HistoryLocation,(Handler) =>{
+Router.run(routes,Router.HistoryLocation,(Handler) =>{
     React.render(<Handler />,document.getElementById('app'));
 });

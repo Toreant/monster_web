@@ -1214,7 +1214,6 @@ var User = (function (_React$Component) {
         _classCallCheck(this, User);
 
         _get(Object.getPrototypeOf(User.prototype), 'constructor', this).call(this, props);
-        console.log(props);
         this.state = _storesUserStore2['default'].getState();
         this.onChange = this.onChange.bind(this);
     }
@@ -1223,8 +1222,16 @@ var User = (function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             _storesUserStore2['default'].listen(this.onChange);
-            _actionsUserActions2['default'].getUser("56115067");
             console.log(this.props.params);
+            _actionsUserActions2['default'].getUser(this.props.params.domain);
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps) {
+            // Fetch new charachter data when URL path changes
+            if (prevProps.params.id !== this.props.params.id) {
+                _actionsUserActions2['default'].getUser(this.props.params.id);
+            }
         }
     }, {
         key: 'componentWillUnMount',
@@ -1240,6 +1247,7 @@ var User = (function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            console.log(this.props.params);
             return _react2['default'].createElement(
                 'div',
                 { className: 'container' },
@@ -1370,16 +1378,25 @@ var _componentsNotFound2 = _interopRequireDefault(_componentsNotFound);
 
 exports['default'] = _react2['default'].createElement(
     _reactRouter.Route,
-    { path: '/', handler: _componentsApp2['default'] },
+    { handler: _componentsApp2['default'] },
     _react2['default'].createElement(_reactRouter.Route, { path: '/', handler: _componentsHome2['default'] }),
-    _react2['default'].createElement(_reactRouter.Route, { path: 'login', handler: _componentsLogin2['default'] }),
+    _react2['default'].createElement(_reactRouter.Route, { path: '/login', handler: _componentsLogin2['default'] }),
+    '/**',
     _react2['default'].createElement(
         _reactRouter.Route,
-        { path: 'user', handler: _componentsUser2['default'] },
-        _react2['default'].createElement(_reactRouter.Route, { path: '/setting', handler: _componentsUser2['default'] }),
-        _react2['default'].createElement(_reactRouter.Route, { path: '/toastr', handler: _componentsUser2['default'] }),
-        _react2['default'].createElement(_reactRouter.Route, { path: ':domain', handler: _componentsUser2['default'] })
+        { path: 'u', handler: _componentsUser2['default'] },
+        _react2['default'].createElement(
+            _reactRouter.Route,
+            { path: ':domain', handler: _componentsUser2['default'] },
+            _react2['default'].createElement(_reactRouter.Route, { path: 'setting', handler: _componentsUser2['default'] }),
+            _react2['default'].createElement(_reactRouter.Route, { path: 'follower', handler: _componentsUser2['default'] }),
+            _react2['default'].createElement(_reactRouter.Route, { path: 'following', handler: _componentsUser2['default'] }),
+            _react2['default'].createElement(_reactRouter.Route, { path: 'contribute', handler: _componentsUser2['default'] })
+        )
     ),
+    '*/',
+    _react2['default'].createElement(_reactRouter.Route, { path: '/u/:id', handler: _componentsUser2['default'] }),
+    _react2['default'].createElement(_reactRouter.Route, { path: '/setting', handler: _componentsUser2['default'] }),
     _react2['default'].createElement(_reactRouter.Route, { path: '*', handler: _componentsNotFound2['default'] })
 );
 module.exports = exports['default'];
@@ -1413,6 +1430,7 @@ var HomeStore = (function () {
         _classCallCheck(this, HomeStore);
 
         this.bindActions(_actionsHomeActions2['default']);
+        this.userId = '';
     }
 
     //HomeActions 中的方法

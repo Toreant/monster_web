@@ -7,6 +7,7 @@ import HomeActions from '../actions/HomeActions';
 class HomeStore {
     constructor() {
         this.bindActions(HomeActions);
+        this.userId = '';
     }
 
     //HomeActions 中的方法

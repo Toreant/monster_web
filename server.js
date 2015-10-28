@@ -75,7 +75,7 @@ passport.deserializeUser( (user, done)=> {//删除user对象
 
 app.use(apiRouter);
 
-app.use((req,res) => {
+app.use(function(req,res) {
     Router.run(routes,req.path,(Handler) => {
         let html = React.renderToString(React.createElement(Handler));
         let page = swig.renderFile('./views/index.html',{html : html});

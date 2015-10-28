@@ -146,6 +146,7 @@ class UserCtrl {
      */
     getUserByDomain(req,res,next) {
         let domain = req.body.domain;
+        console.log('domain = '+domain);
 
         let result = {
             meta : '',
