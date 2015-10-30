@@ -40,7 +40,7 @@ var HomeActions = (function () {
 exports['default'] = _alt2['default'].createActions(HomeActions);
 module.exports = exports['default'];
 
-},{"../alt":5}],2:[function(require,module,exports){
+},{"../alt":9}],2:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -135,7 +135,7 @@ var LoginActions = (function () {
 exports['default'] = _alt2['default'].createActions(LoginActions);
 module.exports = exports['default'];
 
-},{"../alt":5}],3:[function(require,module,exports){
+},{"../alt":9}],3:[function(require,module,exports){
 /**
  * Created by apache on 15-10-25.
  */
@@ -202,7 +202,180 @@ var NavActions = (function () {
 exports['default'] = _alt2['default'].createActions(NavActions);
 module.exports = exports['default'];
 
-},{"../alt":5}],4:[function(require,module,exports){
+},{"../alt":9}],4:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-30.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var NoticeActions = (function () {
+    function NoticeActions() {
+        _classCallCheck(this, NoticeActions);
+
+        this.generateActions('getToastrSuccess');
+    }
+
+    _createClass(NoticeActions, [{
+        key: 'getToastr',
+        value: function getToastr() {
+            this.actions.getToastrSuccess();
+        }
+    }]);
+
+    return NoticeActions;
+})();
+
+exports['default'] = _alt2['default'].createActions(NoticeActions);
+module.exports = exports['default'];
+
+},{"../alt":9}],5:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-30.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var PostAnimateActions = (function () {
+    function PostAnimateActions() {
+        _classCallCheck(this, PostAnimateActions);
+
+        this.generateActions('postAnimateSuccess');
+    }
+
+    _createClass(PostAnimateActions, [{
+        key: 'postAnimate',
+        value: function postAnimate() {
+            this.actions.postAnimateSuccess();
+        }
+    }]);
+
+    return PostAnimateActions;
+})();
+
+exports['default'] = _alt2['default'].createActions(PostAnimateActions);
+module.exports = exports['default'];
+
+},{"../alt":9}],6:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-30.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var SetActions = (function () {
+    function SetActions() {
+        _classCallCheck(this, SetActions);
+
+        this.generateActions('changeProfileSuccess', 'changeProfileFail', 'getProfileSuccess', 'profileFail', 'changeDomain', 'changeEmail', 'changeUserName');
+    }
+
+    _createClass(SetActions, [{
+        key: 'changeProfile',
+        value: function changeProfile(domain, username, email) {
+            var _this = this;
+
+            $.ajax({
+                url: '/api/user',
+                type: 'put',
+                cahce: 'false',
+                dataType: 'json',
+                data: {
+                    where: { auth_id: '48561079' },
+                    params: {
+                        email: email,
+                        username: username,
+                        domain: domain
+                    }
+                }
+            }).done(function (data) {
+                _this.actions.changeProfileSuccess(data);
+            }).fail(function (data) {
+                _this.actions.changeProfileFail();
+            });
+        }
+    }, {
+        key: 'getProfile',
+        value: function getProfile() {
+            var localStorage = window.localStorage;
+            var userProfile = localStorage.getItem('user');
+            userProfile = JSON.parse(userProfile);
+        }
+    }]);
+
+    return SetActions;
+})();
+
+exports['default'] = _alt2['default'].createActions(SetActions);
+module.exports = exports['default'];
+
+},{"../alt":9}],7:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-30.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var StarActions = function StarActions() {
+    _classCallCheck(this, StarActions);
+
+    this.generateActions('getStarSuccess');
+};
+
+exports['default'] = _alt2['default'].createActions(StarActions);
+module.exports = exports['default'];
+
+},{"../alt":9}],8:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -252,7 +425,7 @@ var UserActions = (function () {
 exports['default'] = _alt2['default'].createActions(UserActions);
 module.exports = exports['default'];
 
-},{"../alt":5}],5:[function(require,module,exports){
+},{"../alt":9}],9:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -271,7 +444,7 @@ var _alt2 = _interopRequireDefault(_alt);
 exports['default'] = new _alt2['default']();
 module.exports = exports['default'];
 
-},{"alt":"alt"}],6:[function(require,module,exports){
+},{"alt":"alt"}],10:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -333,7 +506,7 @@ var App = (function (_React$Component) {
 exports['default'] = App;
 module.exports = exports['default'];
 
-},{"./Footer":7,"./Nav":10,"react":"react","react-router":"react-router"}],7:[function(require,module,exports){
+},{"./Footer":11,"./Nav":14,"react":"react","react-router":"react-router"}],11:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -473,7 +646,7 @@ var Footer = (function (_React$Component) {
 exports['default'] = Footer;
 module.exports = exports['default'];
 
-},{"react":"react"}],8:[function(require,module,exports){
+},{"react":"react"}],12:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -569,7 +742,7 @@ var Home = (function (_React$Component) {
 exports['default'] = Home;
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":1,"../stores/HomeStore":16,"react":"react"}],9:[function(require,module,exports){
+},{"../actions/HomeActions":1,"../stores/HomeStore":23,"react":"react"}],13:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -740,20 +913,20 @@ var Login = (function (_React$Component) {
                                 { className: 'form-group' },
                                 _react2['default'].createElement(
                                     'label',
-                                    { 'for': 'login-email' },
+                                    { htmlFor: 'login_email' },
                                     '邮箱'
                                 ),
-                                _react2['default'].createElement('input', { id: 'login-email', className: 'form-control ', ref: 'loginEmail', onChange: _actionsLoginActions2['default'].changeEmail, type: 'email', autoFocus: true, placeholder: '邮箱' })
+                                _react2['default'].createElement('input', { id: 'login_email', className: 'form-control ', ref: 'loginEmail', onChange: _actionsLoginActions2['default'].changeEmail, type: 'email', placeholder: '邮箱' })
                             ),
                             _react2['default'].createElement(
                                 'div',
                                 { className: 'form-group' },
                                 _react2['default'].createElement(
                                     'label',
-                                    { 'for': 'login-pwd' },
+                                    { htmlFor: 'login_pwd' },
                                     '密码'
                                 ),
-                                _react2['default'].createElement('input', { id: 'login-pwd', className: 'form-control ', ref: 'loginPwd', onChange: _actionsLoginActions2['default'].changePassword, type: 'password', placeholder: '密码' })
+                                _react2['default'].createElement('input', { id: 'login_pwd', className: 'form-control ', ref: 'loginPwd', onChange: _actionsLoginActions2['default'].changePassword, type: 'password', placeholder: '密码' })
                             ),
                             _react2['default'].createElement(
                                 'a',
@@ -808,40 +981,40 @@ var Login = (function (_React$Component) {
                                 { className: 'form-group' },
                                 _react2['default'].createElement(
                                     'label',
-                                    { 'for': 'sign-email' },
+                                    { htmlFor: 'sign_email' },
                                     '邮箱'
                                 ),
-                                _react2['default'].createElement('input', { id: 'sign-email', className: 'form-control', ref: 'email', onChange: _actionsLoginActions2['default'].changeEmail, type: 'email', placeholder: '邮箱' })
+                                _react2['default'].createElement('input', { id: 'sign_email', className: 'form-control', ref: 'email', onChange: _actionsLoginActions2['default'].changeEmail, type: 'email', placeholder: '邮箱' })
                             ),
                             _react2['default'].createElement(
                                 'div',
                                 { className: 'form-group' },
                                 _react2['default'].createElement(
                                     'label',
-                                    { 'for': 'sign-name' },
+                                    { htmlFor: 'sign_name' },
                                     '用户名'
                                 ),
-                                _react2['default'].createElement('input', { id: 'sign-name', className: 'form-control', ref: 'user', onChange: _actionsLoginActions2['default'].changeName, type: 'text', placeholder: '用户名' })
+                                _react2['default'].createElement('input', { id: 'sign_name', className: 'form-control', ref: 'user', onChange: _actionsLoginActions2['default'].changeName, type: 'text', placeholder: '用户名' })
                             ),
                             _react2['default'].createElement(
                                 'div',
                                 { className: 'form-group' },
                                 _react2['default'].createElement(
                                     'label',
-                                    { 'for': 'sign-pwd' },
+                                    { htmlFor: 'sign_pwd' },
                                     '密码'
                                 ),
-                                _react2['default'].createElement('input', { id: 'sign-pwd', className: 'form-control', max: '8', ref: 'password', onChange: _actionsLoginActions2['default'].changePassword, type: 'password', placeholder: '密码' })
+                                _react2['default'].createElement('input', { id: 'sign_pwd', className: 'form-control', max: '8', ref: 'password', onChange: _actionsLoginActions2['default'].changePassword, type: 'password', placeholder: '密码' })
                             ),
                             _react2['default'].createElement(
                                 'div',
                                 { className: 'form-group' },
                                 _react2['default'].createElement(
                                     'label',
-                                    { 'for': 'sign-pwd' },
+                                    { htmlFor: 'sign_pre_pwd' },
                                     '确认密码'
                                 ),
-                                _react2['default'].createElement('input', { id: 'sign-pwd', className: 'form-control', max: '8', ref: 'prePassword', onChange: _actionsLoginActions2['default'].changePrePassword, type: 'password', placeholder: '密码' })
+                                _react2['default'].createElement('input', { id: 'sign_pre_pwd', className: 'form-control', max: '8', ref: 'prePassword', onChange: _actionsLoginActions2['default'].changePrePassword, type: 'password', placeholder: '密码' })
                             ),
                             _react2['default'].createElement(
                                 'a',
@@ -861,7 +1034,7 @@ var Login = (function (_React$Component) {
 exports['default'] = Login;
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":2,"../stores/LoginStore":17,"react":"react"}],10:[function(require,module,exports){
+},{"../actions/LoginActions":2,"../stores/LoginStore":24,"react":"react"}],14:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -978,7 +1151,7 @@ var Nav = (function (_React$Component) {
                                 null,
                                 _react2['default'].createElement(
                                     'a',
-                                    { href: '/profile/toastr' },
+                                    { href: '/profile/notice' },
                                     '通知'
                                 )
                             ),
@@ -1120,7 +1293,7 @@ var Nav = (function (_React$Component) {
 exports['default'] = Nav;
 module.exports = exports['default'];
 
-},{"../actions/NavActions":3,"../stores/NavStore":18,"react":"react"}],11:[function(require,module,exports){
+},{"../actions/NavActions":3,"../stores/NavStore":25,"react":"react"}],15:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -1174,7 +1347,425 @@ var NotFound = (function (_React$Component) {
 exports['default'] = NotFound;
 module.exports = exports['default'];
 
-},{"react":"react"}],12:[function(require,module,exports){
+},{"react":"react"}],16:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-30.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _actionsNoticeActions = require('../actions/NoticeActions');
+
+var _actionsNoticeActions2 = _interopRequireDefault(_actionsNoticeActions);
+
+var _storesNoticeStore = require('../stores/NoticeStore');
+
+var _storesNoticeStore2 = _interopRequireDefault(_storesNoticeStore);
+
+var Notice = (function (_React$Component) {
+    _inherits(Notice, _React$Component);
+
+    function Notice(props) {
+        _classCallCheck(this, Notice);
+
+        _get(Object.getPrototypeOf(Notice.prototype), 'constructor', this).call(this, props);
+        this.state = _storesNoticeStore2['default'].getState();
+        this.onChange = this.onChange.bind(this);
+    }
+
+    _createClass(Notice, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            _storesNoticeStore2['default'].listen(this.onChange);
+        }
+    }, {
+        key: 'componentWillUnMount',
+        value: function componentWillUnMount() {
+            _storesNoticeStore2['default'].unlisten(this.onChange);
+        }
+    }, {
+        key: 'onChange',
+        value: function onChange(state) {
+            this.setState(state);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2['default'].createElement(
+                'div',
+                null,
+                'Toastr'
+            );
+        }
+    }]);
+
+    return Notice;
+})(_react2['default'].Component);
+
+exports['default'] = Notice;
+module.exports = exports['default'];
+
+},{"../actions/NoticeActions":4,"../stores/NoticeStore":26,"react":"react"}],17:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-30.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _actionsPostAnimateActions = require('../actions/PostAnimateActions');
+
+var _actionsPostAnimateActions2 = _interopRequireDefault(_actionsPostAnimateActions);
+
+var _storesPostAnimateStore = require('../stores/PostAnimateStore');
+
+var _storesPostAnimateStore2 = _interopRequireDefault(_storesPostAnimateStore);
+
+var PostAnimate = (function (_React$Component) {
+    _inherits(PostAnimate, _React$Component);
+
+    function PostAnimate(props) {
+        _classCallCheck(this, PostAnimate);
+
+        _get(Object.getPrototypeOf(PostAnimate.prototype), 'constructor', this).call(this, props);
+        this.state = _storesPostAnimateStore2['default'].getState();
+        this.onChange = this.onChange.bind(this);
+    }
+
+    _createClass(PostAnimate, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            _storesPostAnimateStore2['default'].listen(this.onChange);
+            _actionsPostAnimateActions2['default'].postAnimate();
+            console.log('did mount');
+        }
+    }, {
+        key: 'componentWillUpdate',
+        value: function componentWillUpdate(nextProps, nextState) {
+            console.log('will update animate');
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(preProps, prevState) {
+            console.log('did update animate');
+        }
+    }, {
+        key: 'componentWillUnMount',
+        value: function componentWillUnMount() {
+            _storesPostAnimateStore2['default'].unlisten(this.onChange);
+        }
+    }, {
+        key: 'onChange',
+        value: function onChange(state) {
+            this.setState(state);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2['default'].createElement(
+                'div',
+                null,
+                '动漫投稿'
+            );
+        }
+    }]);
+
+    return PostAnimate;
+})(_react2['default'].Component);
+
+exports['default'] = PostAnimate;
+module.exports = exports['default'];
+
+},{"../actions/PostAnimateActions":5,"../stores/PostAnimateStore":27,"react":"react"}],18:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-30.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _actionsSetActions = require('../actions/SetActions');
+
+var _actionsSetActions2 = _interopRequireDefault(_actionsSetActions);
+
+var _storesSetStore = require('../stores/SetStore');
+
+var _storesSetStore2 = _interopRequireDefault(_storesSetStore);
+
+var Set = (function (_React$Component) {
+    _inherits(Set, _React$Component);
+
+    function Set(props) {
+        _classCallCheck(this, Set);
+
+        _get(Object.getPrototypeOf(Set.prototype), 'constructor', this).call(this, props);
+        this.state = _storesSetStore2['default'].getState();
+        this.onChange = this.onChange.bind(this);
+    }
+
+    _createClass(Set, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            _storesSetStore2['default'].listen(this.onChange);
+        }
+    }, {
+        key: 'componentWillUnMount',
+        value: function componentWillUnMount() {
+            _storesSetStore2['default'].unlisten(this.onChange);
+        }
+    }, {
+        key: 'onChange',
+        value: function onChange(state) {
+            this.setState(state);
+        }
+    }, {
+        key: 'handleClick',
+        value: function handleClick() {
+            var domain = this.state.domain,
+                email = this.state.email,
+                username = this.state.username;
+            console.log(domain + " " + email + " " + username);
+            //SetActions.changeProfile();
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2['default'].createElement(
+                'div',
+                null,
+                _react2['default'].createElement(
+                    'legend',
+                    null,
+                    '设置'
+                ),
+                _react2['default'].createElement(
+                    'form',
+                    { className: 'form-horizontal', role: 'form' },
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2['default'].createElement(
+                            'label',
+                            { htmlFor: 'individuality_domain', className: 'col-sm-2 control-label' },
+                            '个性域名'
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-sm-10' },
+                            _react2['default'].createElement('input', { type: 'text', id: 'individuality_domain', className: 'form-control', onChange: _actionsSetActions2['default'].changeDomain, placeholder: '数字，英文，破折线' })
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2['default'].createElement(
+                            'label',
+                            { htmlFor: 'individuality_username', className: 'col-sm-2 control-label' },
+                            '用户名'
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-sm-10' },
+                            _react2['default'].createElement('input', { type: 'text', id: 'individuality_username', className: 'form-control', onChange: _actionsSetActions2['default'].changeUserName, placeholder: '长度不超过10', max: '10' })
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2['default'].createElement(
+                            'label',
+                            { htmlFor: 'individuality_email', className: 'col-sm-2 control-label' },
+                            '邮箱'
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-sm-10' },
+                            _react2['default'].createElement('input', { type: 'email', id: 'individuality_email', className: 'form-control', onChange: _actionsSetActions2['default'].changeEmail, placeholder: 'example@example.com' })
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'fomr-group' },
+                        _react2['default'].createElement(
+                            'label',
+                            { htmlFor: 'individuality_account', className: 'col-sm-2 control-label' },
+                            '绑定社交账号'
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-sm-10 mon-account' },
+                            _react2['default'].createElement(
+                                'a',
+                                { href: '/auth/github' },
+                                _react2['default'].createElement('span', { className: 'fa fa-github' })
+                            ),
+                            _react2['default'].createElement(
+                                'a',
+                                { href: '/auth/facebook' },
+                                _react2['default'].createElement('span', { className: 'fa fa-facebook' })
+                            ),
+                            _react2['default'].createElement(
+                                'a',
+                                { href: '/auth/weibo' },
+                                _react2['default'].createElement('span', { className: 'fa fa-weibo' })
+                            )
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'a',
+                        { href: 'javascript:;', className: 'btn btn-primary', onClick: this.handleClick.bind(this) },
+                        '保存设置'
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Set;
+})(_react2['default'].Component);
+
+exports['default'] = Set;
+module.exports = exports['default'];
+
+},{"../actions/SetActions":6,"../stores/SetStore":28,"react":"react"}],19:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-30.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _actionsStarActions = require('../actions/StarActions');
+
+var _actionsStarActions2 = _interopRequireDefault(_actionsStarActions);
+
+var _storesStarStore = require('../stores/StarStore');
+
+var _storesStarStore2 = _interopRequireDefault(_storesStarStore);
+
+var Star = (function (_React$Component) {
+    _inherits(Star, _React$Component);
+
+    function Star(props) {
+        _classCallCheck(this, Star);
+
+        _get(Object.getPrototypeOf(Star.prototype), 'constructor', this).call(this, props);
+        this.state = _storesStarStore2['default'].getState();
+        this.onChange = this.onChange.bind(this);
+    }
+
+    _createClass(Star, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            _storesStarStore2['default'].listen(this.onChange);
+        }
+    }, {
+        key: 'componentWillUnMount',
+        value: function componentWillUnMount() {
+            _storesStarStore2['default'].unlisten(this.onChange);
+        }
+    }, {
+        key: 'onChange',
+        value: function onChange(state) {
+            this.setState(state);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2['default'].createElement(
+                'div',
+                { className: 'jumbotron mon-home' },
+                _react2['default'].createElement(
+                    'p',
+                    null,
+                    'Monster 分享你的乐趣'
+                ),
+                _react2['default'].createElement(
+                    'p',
+                    null,
+                    '独乐乐，不如猪乐乐'
+                ),
+                _react2['default'].createElement(
+                    'a',
+                    { href: '/login', className: 'btn btn-primary' },
+                    '登陆'
+                )
+            );
+        }
+    }]);
+
+    return Star;
+})(_react2['default'].Component);
+
+exports['default'] = Star;
+module.exports = exports['default'];
+
+},{"../actions/StarActions":7,"../stores/StarStore":29,"react":"react"}],20:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -1207,10 +1798,6 @@ var _actionsUserActions2 = _interopRequireDefault(_actionsUserActions);
 var _storesUserStore = require('../stores/UserStore');
 
 var _storesUserStore2 = _interopRequireDefault(_storesUserStore);
-
-var _servicesAuth = require('../services/auth');
-
-var _servicesAuth2 = _interopRequireDefault(_servicesAuth);
 
 var User = (function (_React$Component) {
     _inherits(User, _React$Component);
@@ -1333,30 +1920,42 @@ var User = (function (_React$Component) {
                                 'li',
                                 null,
                                 _react2['default'].createElement(
-                                    'a',
-                                    { href: '' },
-                                    _react2['default'].createElement('span', { className: 'fa fa-cog' }),
-                                    '设置'
+                                    _reactRouter.Link,
+                                    { to: '/profile/setting' },
+                                    _react2['default'].createElement(
+                                        'a',
+                                        { href: 'javascript:;' },
+                                        _react2['default'].createElement('span', { className: 'fa fa-cog' }),
+                                        '设置'
+                                    )
                                 )
                             ),
                             _react2['default'].createElement(
                                 'li',
                                 null,
                                 _react2['default'].createElement(
-                                    'a',
-                                    { href: '' },
-                                    _react2['default'].createElement('span', { className: 'fa fa-user' }),
-                                    '中心'
+                                    _reactRouter.Link,
+                                    { to: '/profile/center' },
+                                    _react2['default'].createElement(
+                                        'a',
+                                        { href: 'javascript:;' },
+                                        _react2['default'].createElement('span', { className: 'fa fa-user' }),
+                                        '中心'
+                                    )
                                 )
                             ),
                             _react2['default'].createElement(
                                 'li',
                                 null,
                                 _react2['default'].createElement(
-                                    'a',
-                                    { href: '' },
-                                    _react2['default'].createElement('span', { className: 'fa fa-star' }),
-                                    '关注'
+                                    _reactRouter.Link,
+                                    { to: '/profile/star' },
+                                    _react2['default'].createElement(
+                                        'a',
+                                        { href: 'javascript:;' },
+                                        _react2['default'].createElement('span', { className: 'fa fa-star' }),
+                                        '关注'
+                                    )
                                 )
                             ),
                             _react2['default'].createElement(
@@ -1375,30 +1974,42 @@ var User = (function (_React$Component) {
                                         'li',
                                         null,
                                         _react2['default'].createElement(
-                                            'a',
-                                            { href: '' },
-                                            _react2['default'].createElement('span', { className: 'fa fa-video-camera' }),
-                                            '动漫'
+                                            _reactRouter.Link,
+                                            { to: '/post/animate' },
+                                            _react2['default'].createElement(
+                                                'a',
+                                                { href: 'javascipt:;' },
+                                                _react2['default'].createElement('span', { className: 'fa fa-video-camera' }),
+                                                '动漫'
+                                            )
                                         )
                                     ),
                                     _react2['default'].createElement(
                                         'li',
                                         null,
                                         _react2['default'].createElement(
-                                            'a',
-                                            { href: '' },
-                                            _react2['default'].createElement('span', { className: 'fa fa-music' }),
-                                            '音乐'
+                                            _reactRouter.Link,
+                                            { to: '/post/music' },
+                                            _react2['default'].createElement(
+                                                'a',
+                                                { href: 'javascript:;' },
+                                                _react2['default'].createElement('span', { className: 'fa fa-music' }),
+                                                '音乐'
+                                            )
                                         )
                                     ),
                                     _react2['default'].createElement(
                                         'li',
                                         null,
                                         _react2['default'].createElement(
-                                            'a',
-                                            { href: '' },
-                                            _react2['default'].createElement('span', { className: 'fa fa-file' }),
-                                            '文章'
+                                            _reactRouter.Link,
+                                            { to: '/post/article' },
+                                            _react2['default'].createElement(
+                                                'a',
+                                                { href: 'javascript:;' },
+                                                _react2['default'].createElement('span', { className: 'fa fa-file' }),
+                                                '文章'
+                                            )
                                         )
                                     )
                                 )
@@ -1407,10 +2018,14 @@ var User = (function (_React$Component) {
                                 'li',
                                 null,
                                 _react2['default'].createElement(
-                                    'a',
-                                    { href: '' },
-                                    _react2['default'].createElement('span', { className: 'fa fa-bell' }),
-                                    '通知'
+                                    _reactRouter.Link,
+                                    { to: '/profile/notice' },
+                                    _react2['default'].createElement(
+                                        'a',
+                                        { href: 'javascript:;' },
+                                        _react2['default'].createElement('span', { className: 'fa fa-bell' }),
+                                        '通知'
+                                    )
                                 )
                             )
                         )
@@ -1443,7 +2058,7 @@ User.contextTypes = {
 exports['default'] = User;
 module.exports = exports['default'];
 
-},{"../actions/UserActions":4,"../services/auth":15,"../stores/UserStore":19,"react":"react","react-router":"react-router"}],13:[function(require,module,exports){
+},{"../actions/UserActions":8,"../stores/UserStore":30,"react":"react","react-router":"react-router"}],21:[function(require,module,exports){
 /**
  * Created by apache on 15-10-22.
  */
@@ -1467,7 +2082,7 @@ _reactRouter2['default'].run(_routes2['default'], _reactRouter2['default'].Histo
   _react2['default'].render(_react2['default'].createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./routes":14,"react":"react","react-router":"react-router"}],14:[function(require,module,exports){
+},{"./routes":22,"react":"react","react-router":"react-router"}],22:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -1501,9 +2116,25 @@ var _componentsUser = require('./components/User');
 
 var _componentsUser2 = _interopRequireDefault(_componentsUser);
 
+var _componentsSet = require('./components/Set');
+
+var _componentsSet2 = _interopRequireDefault(_componentsSet);
+
+var _componentsNotice = require('./components/Notice');
+
+var _componentsNotice2 = _interopRequireDefault(_componentsNotice);
+
+var _componentsStar = require('./components/Star');
+
+var _componentsStar2 = _interopRequireDefault(_componentsStar);
+
 var _componentsNotFound = require('./components/NotFound');
 
 var _componentsNotFound2 = _interopRequireDefault(_componentsNotFound);
+
+var _componentsPostAnimate = require('./components/PostAnimate');
+
+var _componentsPostAnimate2 = _interopRequireDefault(_componentsPostAnimate);
 
 exports['default'] = _react2['default'].createElement(
     _reactRouter.Route,
@@ -1513,61 +2144,25 @@ exports['default'] = _react2['default'].createElement(
     _react2['default'].createElement(
         _reactRouter.Route,
         { path: 'profile', handler: _componentsUser2['default'] },
-        _react2['default'].createElement(_reactRouter.Route, { path: 'setting', handler: _componentsNotFound2['default'] }),
+        _react2['default'].createElement(_reactRouter.Route, { path: 'setting', handler: _componentsSet2['default'] }),
         _react2['default'].createElement(_reactRouter.Route, { path: 'follower', handler: _componentsUser2['default'] }),
         _react2['default'].createElement(_reactRouter.Route, { path: 'following', handler: _componentsUser2['default'] }),
-        _react2['default'].createElement(_reactRouter.Route, { path: 'contribute', handler: _componentsUser2['default'] })
+        _react2['default'].createElement(_reactRouter.Route, { path: 'contribute', handler: _componentsUser2['default'] }),
+        _react2['default'].createElement(_reactRouter.Route, { path: 'notice', handler: _componentsNotice2['default'] }),
+        _react2['default'].createElement(_reactRouter.Route, { path: 'star', handler: _componentsStar2['default'] }),
+        _react2['default'].createElement(
+            _reactRouter.Route,
+            { path: '/post' },
+            _react2['default'].createElement(_reactRouter.Route, { path: 'animate', handler: _componentsPostAnimate2['default'] }),
+            _react2['default'].createElement(_reactRouter.Route, { path: 'music' }),
+            _react2['default'].createElement(_reactRouter.Route, { path: 'article' })
+        )
     ),
     _react2['default'].createElement(_reactRouter.Route, { path: '*', handler: _componentsNotFound2['default'] })
 );
 module.exports = exports['default'];
 
-},{"./components/App":6,"./components/Home":8,"./components/Login":9,"./components/NotFound":11,"./components/User":12,"react":"react","react-router":"react-router"}],15:[function(require,module,exports){
-/**
- * Created by apache on 15-10-30.
- */
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-    value: true
-});
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-var Auth = (function () {
-    function Auth() {
-        _classCallCheck(this, Auth);
-
-        this.auth_in = false;
-        this.user = {};
-    }
-
-    _createClass(Auth, [{
-        key: 'checkUserLoggedIn',
-        value: function checkUserLoggedIn() {
-            var _this = this;
-
-            $.ajax({
-                url: 'api/session',
-                type: 'post',
-                cache: false
-            }).done(function (data) {
-                if (data.code === 200) {
-                    _this.auth_in = true;
-                }
-            });
-        }
-    }]);
-
-    return Auth;
-})();
-
-exports['default'] = new Auth();
-module.exports = exports['default'];
-
-},{}],16:[function(require,module,exports){
+},{"./components/App":10,"./components/Home":12,"./components/Login":13,"./components/NotFound":15,"./components/Notice":16,"./components/PostAnimate":17,"./components/Set":18,"./components/Star":19,"./components/User":20,"react":"react","react-router":"react-router"}],23:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -1616,7 +2211,7 @@ var HomeStore = (function () {
 exports['default'] = _alt2['default'].createStore(HomeStore);
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":1,"../alt":5}],17:[function(require,module,exports){
+},{"../actions/HomeActions":1,"../alt":9}],24:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -1750,7 +2345,7 @@ var LoginStore = (function () {
 exports['default'] = _alt2['default'].createStore(LoginStore);
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":2,"../alt":5}],18:[function(require,module,exports){
+},{"../actions/LoginActions":2,"../alt":9}],25:[function(require,module,exports){
 /**
  * Created by apache on 15-10-25.
  */
@@ -1828,7 +2423,224 @@ var NavStore = (function () {
 exports['default'] = _alt2['default'].createStore(NavStore);
 module.exports = exports['default'];
 
-},{"../actions/NavActions":3,"../alt":5}],19:[function(require,module,exports){
+},{"../actions/NavActions":3,"../alt":9}],26:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-30.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _actionsNoticeActions = require('../actions/NoticeActions');
+
+var _actionsNoticeActions2 = _interopRequireDefault(_actionsNoticeActions);
+
+var NoticeStore = (function () {
+    function NoticeStore() {
+        _classCallCheck(this, NoticeStore);
+
+        this.bindActions(_actionsNoticeActions2['default']);
+    }
+
+    _createClass(NoticeStore, [{
+        key: 'onGetToastrSuccess',
+        value: function onGetToastrSuccess() {
+            toastr.success('hehe');
+        }
+    }]);
+
+    return NoticeStore;
+})();
+
+exports['default'] = _alt2['default'].createStore(NoticeStore);
+module.exports = exports['default'];
+
+},{"../actions/NoticeActions":4,"../alt":9}],27:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-30.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _actionsPostAnimateActions = require('../actions/PostAnimateActions');
+
+var _actionsPostAnimateActions2 = _interopRequireDefault(_actionsPostAnimateActions);
+
+var PostAnimateStore = (function () {
+    function PostAnimateStore() {
+        _classCallCheck(this, PostAnimateStore);
+
+        this.bindActions(_actionsPostAnimateActions2['default']);
+    }
+
+    _createClass(PostAnimateStore, [{
+        key: 'onPostAnimateSuccess',
+        value: function onPostAnimateSuccess() {
+            console.log('post animate success');
+        }
+    }]);
+
+    return PostAnimateStore;
+})();
+
+exports['default'] = _alt2['default'].createStore(PostAnimateStore);
+module.exports = exports['default'];
+
+},{"../actions/PostAnimateActions":5,"../alt":9}],28:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-30.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _actionsSetActions = require('../actions/SetActions');
+
+var _actionsSetActions2 = _interopRequireDefault(_actionsSetActions);
+
+var SetStore = (function () {
+    function SetStore() {
+        _classCallCheck(this, SetStore);
+
+        this.bindActions(_actionsSetActions2['default']);
+        this.username = '';
+        this.domain = '';
+        this.email = '';
+        this.account = '';
+    }
+
+    _createClass(SetStore, [{
+        key: 'onChangeProfileSuccess',
+        value: function onChangeProfileSuccess(data) {
+            if (data.code === 200) {
+                toastr.success('修改用户资料成功');
+            } else if (data.code === 400) {
+                toastr.warning('修改用户资料不成功');
+            }
+        }
+    }, {
+        key: 'onChangeProfileFail',
+        value: function onChangeProfileFail() {
+            toastr.error('服务器错误');
+        }
+    }, {
+        key: 'onGetProfileSuccess',
+        value: function onGetProfileSuccess(userProfile) {
+
+            if (userProfile !== undefined) {
+                this.username = userProfile.raw.username;
+                this.domain = userProfile.raw.domain;
+                this.email = userProfile.raw.email;
+            } else {
+                $.ajax({
+                    url: '/api/session',
+                    type: 'post',
+                    cache: false
+                }).done(function (data) {
+                    localStorage.setItem('user', JSON.stringify(data));
+                }).fail(function (data) {
+                    toastr.error('获取用户资料失败');
+                });
+            }
+        }
+    }, {
+        key: 'onProfileFail',
+        value: function onProfileFail() {
+            toastr.error('hehe');
+        }
+    }, {
+        key: 'onChangeDomain',
+        value: function onChangeDomain(event) {
+            console.log('heh');
+            this.domain = event.target.value;
+        }
+    }, {
+        key: 'onChangeEmail',
+        value: function onChangeEmail(event) {
+            this.email = event.target.value;
+        }
+    }, {
+        key: 'onChangeUserName',
+        value: function onChangeUserName(event) {
+            this.username = event.target.value;
+        }
+    }]);
+
+    return SetStore;
+})();
+
+exports['default'] = _alt2['default'].createStore(SetStore);
+module.exports = exports['default'];
+
+},{"../actions/SetActions":6,"../alt":9}],29:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-30.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _actionsStarActions = require('../actions/StarActions');
+
+var _actionsStarActions2 = _interopRequireDefault(_actionsStarActions);
+
+var StarStore = function StarStore() {
+    _classCallCheck(this, StarStore);
+
+    this.bindActions(_actionsStarActions2['default']);
+};
+
+exports['default'] = _alt2['default'].createStore(StarStore);
+module.exports = exports['default'];
+
+},{"../actions/StarActions":7,"../alt":9}],30:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -1896,4 +2708,4 @@ var UserStore = (function () {
 exports['default'] = _alt2['default'].createStore(UserStore);
 module.exports = exports['default'];
 
-},{"../actions/UserActions.js":4,"../alt":5}]},{},[13]);
+},{"../actions/UserActions.js":8,"../alt":9}]},{},[21]);

@@ -33,6 +33,7 @@ class NavActions {
         }).done((data) => {this.actions.signOutSuccess(data);})
         .fail((data) => {this.actions.signOutFail();});
     }
+
 }
 
 export default alt.createActions(NavActions);

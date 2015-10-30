@@ -47,7 +47,7 @@ class Nav extends React.Component {
                                 </a>
                             </li>
                             <li><a href='/profile/setting'>设置</a></li>
-                            <li><a href='/profile/toastr'>通知</a></li>
+                            <li><a href='/profile/notice'>通知</a></li>
                             <li role="separator" className="divider"></li>
                             <li><a href="javascript:;" onClick={this.signOut.bind(this)}>退出</a></li>
                         </ul>

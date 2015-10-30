@@ -194,3 +194,8 @@
 .mon-contribute a {
   padding-left: 30px !important;
 }
+/* 设置*/
+.mon-account a {
+  font-size: 25px;
+  margin-right: 20px;
+}

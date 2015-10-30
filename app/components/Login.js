@@ -110,12 +110,12 @@ class Login extends React.Component {
                                 <a href="javascript:;" onClick={this.changeForm.bind(this,1)} className='form-change'><span className='fa fa-arrow-circle-o-right'></span>注册</a>
                             </div>
                             <div className='form-group'>
-                                <label for="login-email">邮箱</label>
-                                <input id='login-email' className='form-control ' ref='loginEmail' onChange={LoginActions.changeEmail} type="email"  autoFocus placeholder='邮箱'/>
+                                <label htmlFor="login_email">邮箱</label>
+                                <input id='login_email' className='form-control ' ref='loginEmail' onChange={LoginActions.changeEmail} type="email" placeholder='邮箱'/>
                             </div>
                             <div className='form-group'>
-                                <label for="login-pwd">密码</label>
-                                <input id='login-pwd' className='form-control ' ref='loginPwd' onChange={LoginActions.changePassword} type="password"  placeholder='密码'/>
+                                <label htmlFor="login_pwd">密码</label>
+                                <input id='login_pwd' className='form-control ' ref='loginPwd' onChange={LoginActions.changePassword} type="password"  placeholder='密码'/>
                             </div>
                             <a href='javascript:;' onClick={this.handleClick.bind(this,0)} className='btn btn-primary btn-block'>登陆</a>
                             <div className='mon-other-login'>
@@ -138,20 +138,20 @@ class Login extends React.Component {
                                 <a href="javascript:;" onClick={this.changeForm.bind(this,0)} className='form-change'><span className='fa fa-arrow-circle-o-right'></span>登陆</a>
                             </div>
                             <div className='form-group'>
-                                <label for="sign-email">邮箱</label>
-                                <input id='sign-email' className='form-control' ref='email' onChange={LoginActions.changeEmail} type="email"  placeholder='邮箱'/>
+                                <label htmlFor="sign_email">邮箱</label>
+                                <input id='sign_email' className='form-control' ref='email' onChange={LoginActions.changeEmail} type="email"  placeholder='邮箱'/>
                             </div>
                             <div className='form-group'>
-                                <label for="sign-name">用户名</label>
-                                <input id="sign-name" className='form-control' ref='user' onChange={LoginActions.changeName}  type="text" placeholder="用户名"/>
+                                <label htmlFor="sign_name">用户名</label>
+                                <input id="sign_name" className='form-control' ref='user' onChange={LoginActions.changeName}  type="text" placeholder="用户名"/>
                             </div>
                             <div className='form-group'>
-                                <label for="sign-pwd">密码</label>
-                                <input id='sign-pwd' className='form-control' max='8' ref='password' onChange={LoginActions.changePassword} type="password"  placeholder='密码'/>
+                                <label htmlFor="sign_pwd">密码</label>
+                                <input id='sign_pwd' className='form-control' max='8' ref='password' onChange={LoginActions.changePassword} type="password"  placeholder='密码'/>
                             </div>
                             <div className='form-group'>
-                                <label for="sign-pwd">确认密码</label>
-                                <input id='sign-pwd' className='form-control' max='8' ref='prePassword' onChange={LoginActions.changePrePassword} type="password"  placeholder='密码'/>
+                                <label htmlFor="sign_pre_pwd">确认密码</label>
+                                <input id='sign_pre_pwd' className='form-control' max='8' ref='prePassword' onChange={LoginActions.changePrePassword} type="password"  placeholder='密码'/>
                             </div>
                             <a href='javascript:;' onClick={this.handleClick.bind(this,1)} className='btn btn-primary btn-block'>登陆</a>
                         </form>

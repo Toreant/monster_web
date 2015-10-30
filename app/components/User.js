@@ -5,7 +5,6 @@ import React from 'react';
 import {Router,RouteHandler,Link} from 'react-router';
 import UserActions from '../actions/UserActions';
 import UserStore from '../stores/UserStore';
-import Auth from '../services/auth';
 
 class User extends React.Component {
     constructor(props) {
@@ -65,20 +64,20 @@ class User extends React.Component {
                             </Link>
                         </div>
                         <ul className='nav mon-ability-list'>
-                            <li><a href=""><span className='fa fa-cog'></span>设置</a></li>
-                            <li><a href=""><span className='fa fa-user'></span>中心</a></li>
-                            <li><a href=""><span className='fa fa-star'></span>关注</a></li>
+                            <li><Link to='/profile/setting'><a href="javascript:;"><span className='fa fa-cog'></span>设置</a></Link></li>
+                            <li><Link to='/profile/center'><a href="javascript:;"><span className='fa fa-user'></span>中心</a></Link></li>
+                            <li><Link to='/profile/star'><a href="javascript:;"><span className='fa fa-star'></span>关注</a></Link></li>
                             <li>
                                 <a href="javascript:;" data-toggle='collapse' data-target='#my-contribute'>
                                     <span className='fa fa-pencil-square'></span>投稿
                                 </a>
                                 <ul className='nav collapse mon-contribute' id='my-contribute'>
-                                    <li><a href=""><span className='fa fa-video-camera'></span>动漫</a></li>
-                                    <li><a href=""><span className='fa fa-music'></span>音乐</a></li>
-                                    <li><a href=""><span className='fa fa-file'></span>文章</a></li>
+                                    <li><Link to='/post/animate'><a href="javascipt:;"><span className='fa fa-video-camera'></span>动漫</a></Link></li>
+                                    <li><Link to='/post/music'><a href="javascript:;"><span className='fa fa-music'></span>音乐</a></Link></li>
+                                    <li><Link to='/post/article'><a href="javascript:;"><span className='fa fa-file'></span>文章</a></Link></li>
                                 </ul>
                             </li>
-                            <li><a href=""><span className='fa fa-bell'></span>通知</a></li>
+                            <li><Link to='/profile/notice'><a href="javascript:;"><span className='fa fa-bell'></span>通知</a></Link></li>
                         </ul>
                     </div>
                     <div className='col-md-9 col-sm-9'>

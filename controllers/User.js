@@ -87,8 +87,11 @@ class UserCtrl {
      * @param next
      */
     getUpdate(req,res,next) {
+        console.log('update');
         let where = req.body.where,
             params = req.body.params;
+
+        console.log(req.body);
 
         let result = {
             meta : '',
