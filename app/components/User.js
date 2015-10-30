@@ -2,9 +2,10 @@
  * Created by apache on 15-10-27.
  */
 import React from 'react';
-import {RouteHandler,Link} from 'react-router';
+import {Router,RouteHandler,Link} from 'react-router';
 import UserActions from '../actions/UserActions';
 import UserStore from '../stores/UserStore';
+import Auth from '../services/auth';
 
 class User extends React.Component {
     constructor(props) {
@@ -12,9 +13,10 @@ class User extends React.Component {
         this.state = UserStore.getState();
         this.onChange = this.onChange.bind(this);
     }
+
     componentDidMount() {
         UserStore.listen(this.onChange);
-        UserActions.getUser(this.props.params.domain);
+        UserActions.getUser();
     }
 
     componentDidUpdate(prevProps) {
@@ -33,9 +35,10 @@ class User extends React.Component {
     }
 
     render() {
-        return (
-            <div className='container'>
-                <div className='row'>
+        let content;
+        if(this.state.auth) {
+            content = (
+                <div className="row">
                     <div className='col-md-3 col-sm-3'>
                         <div className='mon-center'>
                             <img src={this.state.avatar_url} width='200' alt="loading"/>
@@ -81,7 +84,18 @@ class User extends React.Component {
                     <div className='col-md-9 col-sm-9'>
                         <RouteHandler />
                     </div>
+                </div>);
+        } else {
+            content = (
+                <div>
+
                 </div>
+            );
+        }
+
+        return (
+            <div className='container'>
+                {content}
             </div>
         );
     }

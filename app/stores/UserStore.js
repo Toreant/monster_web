@@ -14,20 +14,21 @@ class UserStore {
         this.contribute = 0;
         this.following = 0;
         this.domain = '';
+        this.auth = false;
     }
 
     onGetUserSuccess(data) {
-        console.log(data);
         if(data.code === 200) {
-            this.username = data.raw[0].username;
-            this.avatar_url = data.raw[0].avatar_url;
-            this.followers = data.raw[0].followers.length;
-            this.following = data.raw[0].following.length;
-            this.contribute = data.raw[0].contribute.length;
-            this.star = data.raw[0].star.length;
-            this.doamin = data.raw[0].domain;
+            this.auth = true;
+            this.username = data.raw.username;
+            this.avatar_url = data.raw.avatar_url;
+            this.followers = data.raw.followers.length;
+            this.following = data.raw.following.length;
+            this.contribute = data.raw.contribute.length;
+            this.star = data.raw.star.length;
+            this.doamin = data.raw.domain;
         } else {
-            toastr.error('获取联系人失败');
+            window.location = '/login';
         }
     };
 

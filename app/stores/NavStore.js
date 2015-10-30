@@ -10,7 +10,6 @@ class NavStore {
         this.loginState = false;
         this.userName = '';
         this.avatar = '';
-        this.doamin = '';
     }
 
     onChangeState(data) {
@@ -32,6 +31,8 @@ class NavStore {
 
     onSignOutSuccess(data) {
         if(data.code === 200) {
+            let localStorage = window.localStorage;
+            localStorage.setItem('user','');
             window.location = '/';
         } else if(data.code === 400) {
             toastr.error('退出不成功');

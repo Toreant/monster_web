@@ -11,10 +11,9 @@ class UserActions {
         );
     }
 
-    getUser(domain) {
+    getUser() {
         $.ajax({
-            url : '/api/getUser',
-            data : {domain : domain},
+            url : '/api/session',
             cache : false,
             type : 'post'
         }).done((data) => {

@@ -231,12 +231,11 @@ var UserActions = (function () {
 
     _createClass(UserActions, [{
         key: 'getUser',
-        value: function getUser(domain) {
+        value: function getUser() {
             var _this = this;
 
             $.ajax({
-                url: '/api/getUser',
-                data: { domain: domain },
+                url: '/api/session',
                 cache: false,
                 type: 'post'
             }).done(function (data) {
@@ -570,7 +569,7 @@ var Home = (function (_React$Component) {
 exports['default'] = Home;
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":1,"../stores/HomeStore":15,"react":"react"}],9:[function(require,module,exports){
+},{"../actions/HomeActions":1,"../stores/HomeStore":16,"react":"react"}],9:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -862,7 +861,7 @@ var Login = (function (_React$Component) {
 exports['default'] = Login;
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":2,"../stores/LoginStore":16,"react":"react"}],10:[function(require,module,exports){
+},{"../actions/LoginActions":2,"../stores/LoginStore":17,"react":"react"}],10:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -952,7 +951,7 @@ var Nav = (function (_React$Component) {
                                 null,
                                 _react2['default'].createElement(
                                     'a',
-                                    { href: '/u/' + this.state.domain, className: 'mon-user' },
+                                    { href: '/profile', className: 'mon-user' },
                                     _react2['default'].createElement(
                                         'span',
                                         null,
@@ -970,7 +969,7 @@ var Nav = (function (_React$Component) {
                                 null,
                                 _react2['default'].createElement(
                                     'a',
-                                    { href: '/u/' + this.state.domain + '/setting' },
+                                    { href: '/profile/setting' },
                                     '设置'
                                 )
                             ),
@@ -979,7 +978,7 @@ var Nav = (function (_React$Component) {
                                 null,
                                 _react2['default'].createElement(
                                     'a',
-                                    { href: '/u/' + this.state.doamin + '/toastr' },
+                                    { href: '/profile/toastr' },
                                     '通知'
                                 )
                             ),
@@ -1121,7 +1120,7 @@ var Nav = (function (_React$Component) {
 exports['default'] = Nav;
 module.exports = exports['default'];
 
-},{"../actions/NavActions":3,"../stores/NavStore":17,"react":"react"}],11:[function(require,module,exports){
+},{"../actions/NavActions":3,"../stores/NavStore":18,"react":"react"}],11:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -1209,6 +1208,10 @@ var _storesUserStore = require('../stores/UserStore');
 
 var _storesUserStore2 = _interopRequireDefault(_storesUserStore);
 
+var _servicesAuth = require('../services/auth');
+
+var _servicesAuth2 = _interopRequireDefault(_servicesAuth);
+
 var User = (function (_React$Component) {
     _inherits(User, _React$Component);
 
@@ -1224,7 +1227,7 @@ var User = (function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             _storesUserStore2['default'].listen(this.onChange);
-            _actionsUserActions2['default'].getUser(this.props.params.domain);
+            _actionsUserActions2['default'].getUser();
         }
     }, {
         key: 'componentDidUpdate',
@@ -1247,10 +1250,9 @@ var User = (function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            return _react2['default'].createElement(
-                'div',
-                { className: 'container' },
-                _react2['default'].createElement(
+            var content = undefined;
+            if (this.state.auth) {
+                content = _react2['default'].createElement(
                     'div',
                     { className: 'row' },
                     _react2['default'].createElement(
@@ -1418,7 +1420,15 @@ var User = (function (_React$Component) {
                         { className: 'col-md-9 col-sm-9' },
                         _react2['default'].createElement(_reactRouter.RouteHandler, null)
                     )
-                )
+                );
+            } else {
+                content = _react2['default'].createElement('div', null);
+            }
+
+            return _react2['default'].createElement(
+                'div',
+                { className: 'container' },
+                content
             );
         }
     }]);
@@ -1433,7 +1443,7 @@ User.contextTypes = {
 exports['default'] = User;
 module.exports = exports['default'];
 
-},{"../actions/UserActions":4,"../stores/UserStore":18,"react":"react","react-router":"react-router"}],13:[function(require,module,exports){
+},{"../actions/UserActions":4,"../services/auth":15,"../stores/UserStore":19,"react":"react","react-router":"react-router"}],13:[function(require,module,exports){
 /**
  * Created by apache on 15-10-22.
  */
@@ -1502,21 +1512,62 @@ exports['default'] = _react2['default'].createElement(
     _react2['default'].createElement(_reactRouter.Route, { path: '/login', handler: _componentsLogin2['default'] }),
     _react2['default'].createElement(
         _reactRouter.Route,
-        { path: 'u', handler: _componentsUser2['default'] },
-        _react2['default'].createElement(
-            _reactRouter.Route,
-            { path: ':domain' },
-            _react2['default'].createElement(_reactRouter.Route, { path: 'setting', handler: _componentsNotFound2['default'] }),
-            _react2['default'].createElement(_reactRouter.Route, { path: 'follower', handler: _componentsUser2['default'] }),
-            _react2['default'].createElement(_reactRouter.Route, { path: 'following', handler: _componentsUser2['default'] }),
-            _react2['default'].createElement(_reactRouter.Route, { path: 'contribute', handler: _componentsUser2['default'] })
-        )
+        { path: 'profile', handler: _componentsUser2['default'] },
+        _react2['default'].createElement(_reactRouter.Route, { path: 'setting', handler: _componentsNotFound2['default'] }),
+        _react2['default'].createElement(_reactRouter.Route, { path: 'follower', handler: _componentsUser2['default'] }),
+        _react2['default'].createElement(_reactRouter.Route, { path: 'following', handler: _componentsUser2['default'] }),
+        _react2['default'].createElement(_reactRouter.Route, { path: 'contribute', handler: _componentsUser2['default'] })
     ),
     _react2['default'].createElement(_reactRouter.Route, { path: '*', handler: _componentsNotFound2['default'] })
 );
 module.exports = exports['default'];
 
 },{"./components/App":6,"./components/Home":8,"./components/Login":9,"./components/NotFound":11,"./components/User":12,"react":"react","react-router":"react-router"}],15:[function(require,module,exports){
+/**
+ * Created by apache on 15-10-30.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var Auth = (function () {
+    function Auth() {
+        _classCallCheck(this, Auth);
+
+        this.auth_in = false;
+        this.user = {};
+    }
+
+    _createClass(Auth, [{
+        key: 'checkUserLoggedIn',
+        value: function checkUserLoggedIn() {
+            var _this = this;
+
+            $.ajax({
+                url: 'api/session',
+                type: 'post',
+                cache: false
+            }).done(function (data) {
+                if (data.code === 200) {
+                    _this.auth_in = true;
+                }
+            });
+        }
+    }]);
+
+    return Auth;
+})();
+
+exports['default'] = new Auth();
+module.exports = exports['default'];
+
+},{}],16:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -1565,7 +1616,7 @@ var HomeStore = (function () {
 exports['default'] = _alt2['default'].createStore(HomeStore);
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":1,"../alt":5}],16:[function(require,module,exports){
+},{"../actions/HomeActions":1,"../alt":5}],17:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -1625,6 +1676,8 @@ var LoginStore = (function () {
         key: 'onLoginSuccess',
         value: function onLoginSuccess(data) {
             if (data.code === 200) {
+                var _localStorage = window.localStorage;
+                _localStorage.setItem('user', JSON.stringify(data));
                 window.location = '/';
             } else if (data.code === 400) {
                 toastr.error('登陆失败');
@@ -1697,7 +1750,7 @@ var LoginStore = (function () {
 exports['default'] = _alt2['default'].createStore(LoginStore);
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":2,"../alt":5}],17:[function(require,module,exports){
+},{"../actions/LoginActions":2,"../alt":5}],18:[function(require,module,exports){
 /**
  * Created by apache on 15-10-25.
  */
@@ -1729,7 +1782,6 @@ var NavStore = (function () {
         this.loginState = false;
         this.userName = '';
         this.avatar = '';
-        this.doamin = '';
     }
 
     _createClass(NavStore, [{
@@ -1756,6 +1808,8 @@ var NavStore = (function () {
         key: 'onSignOutSuccess',
         value: function onSignOutSuccess(data) {
             if (data.code === 200) {
+                var _localStorage = window.localStorage;
+                _localStorage.setItem('user', '');
                 window.location = '/';
             } else if (data.code === 400) {
                 toastr.error('退出不成功');
@@ -1774,7 +1828,7 @@ var NavStore = (function () {
 exports['default'] = _alt2['default'].createStore(NavStore);
 module.exports = exports['default'];
 
-},{"../actions/NavActions":3,"../alt":5}],18:[function(require,module,exports){
+},{"../actions/NavActions":3,"../alt":5}],19:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -1810,22 +1864,23 @@ var UserStore = (function () {
         this.contribute = 0;
         this.following = 0;
         this.domain = '';
+        this.auth = false;
     }
 
     _createClass(UserStore, [{
         key: 'onGetUserSuccess',
         value: function onGetUserSuccess(data) {
-            console.log(data);
             if (data.code === 200) {
-                this.username = data.raw[0].username;
-                this.avatar_url = data.raw[0].avatar_url;
-                this.followers = data.raw[0].followers.length;
-                this.following = data.raw[0].following.length;
-                this.contribute = data.raw[0].contribute.length;
-                this.star = data.raw[0].star.length;
-                this.doamin = data.raw[0].domain;
+                this.auth = true;
+                this.username = data.raw.username;
+                this.avatar_url = data.raw.avatar_url;
+                this.followers = data.raw.followers.length;
+                this.following = data.raw.following.length;
+                this.contribute = data.raw.contribute.length;
+                this.star = data.raw.star.length;
+                this.doamin = data.raw.domain;
             } else {
-                toastr.error('获取联系人失败');
+                window.location = '/login';
             }
         }
     }, {
