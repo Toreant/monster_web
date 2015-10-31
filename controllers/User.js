@@ -100,7 +100,7 @@ class UserCtrl {
         };
 
         User.updateUser(where,params,(data,docs) => {
-            if(data >= 1) {
+            if(data.ok === 1) {
                 result.meta = '修改成功';
                 result.code = 200;
                 result.data = docs;
@@ -108,6 +108,7 @@ class UserCtrl {
                 result.meta = '修改不成功';
                 result.code = 400;
                 result.data = null;
+                result.err = data;
             }
             res.json(result);
         });

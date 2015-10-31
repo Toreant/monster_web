@@ -20,8 +20,11 @@ class SetActions {
     }
 
     changeProfile(domain,username,email) {
+        let localStorage = window.localStorage;
+        let userProfile = localStorage.getItem('user');
+        userProfile = JSON.parse(userProfile);
         let params = {
-            where : {auth_id : 56115067},
+            where : {auth_id : userProfile.raw.auth_id},
             params : {
                 email : email,
                 domain : domain,

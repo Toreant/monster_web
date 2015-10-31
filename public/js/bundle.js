@@ -314,8 +314,11 @@ var SetActions = (function () {
         value: function changeProfile(domain, username, email) {
             var _this = this;
 
+            var localStorage = window.localStorage;
+            var userProfile = localStorage.getItem('user');
+            userProfile = JSON.parse(userProfile);
             var params = {
-                where: { auth_id: 56115067 },
+                where: { auth_id: userProfile.raw.auth_id },
                 params: {
                     email: email,
                     domain: domain,
@@ -2605,6 +2608,7 @@ var SetStore = (function () {
                 toastr.success('修改用户资料成功');
             } else if (data.code === 400) {
                 toastr.warning('修改用户资料不成功');
+                console.log(data);
             }
         }
     }, {

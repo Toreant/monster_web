@@ -21,6 +21,7 @@ class SetStore {
             toastr.success('修改用户资料成功');
         } else if(data.code === 400) {
             toastr.warning('修改用户资料不成功');
+            console.log(data);
         }
     }
 
