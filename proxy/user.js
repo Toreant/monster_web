@@ -37,7 +37,8 @@ class md {
      * @param callback
      */
     updateUser(where,params,callback) {
-        User.update({email : where},params,(err,raw,docs) => {
+        console.log(where);
+        User.update(where,params,{upsert : true},(err,raw,docs) => {
             if(err) {
                 callback(err);
             } else {
@@ -63,8 +64,8 @@ class md {
      * @param name
      * @param callback
      */
-    getUserByName(name, callback) {
-        User.find({name: name}, (err, docs) => {
+    getUser(where, callback) {
+        User.find(where, (err, docs) => {
             if (err) callback(err);
             else callback(docs);
         });

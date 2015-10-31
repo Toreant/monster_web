@@ -14,6 +14,7 @@ class Set extends React.Component {
 
     componentDidMount() {
         SetStore.listen(this.onChange);
+        SetActions.getProfile();
     }
 
     componentWillUnMount() {
@@ -28,8 +29,33 @@ class Set extends React.Component {
         let domain = this.state.domain,
             email = this.state.email,
             username = this.state.username;
-        console.log(domain+" "+email+" "+username);
-        //SetActions.changeProfile();
+        let error = false;
+
+        let regEmail = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/,
+            regDomain = /^[0-9a-zA-Z-]{1,20}$/;
+
+        if(!regEmail.test(email)) {
+            SetActions.emailValidateFail(1);
+            error = true;
+        } else {
+            SetActions.emailValidateFail(0);
+        }
+        if(username.length > 15 || username === '') {
+            SetActions.nameValidateFail(1);
+            error = true;
+        } else {
+            SetActions.nameValidateFail(0);
+        }
+        if(!regDomain.test(domain)) {
+            SetActions.domainValidateFail(1);
+            error = true;
+        } else {
+            SetActions.domainValidateFail(0);
+        }
+
+        if(!error) {
+            SetActions.changeProfile(domain,username,email);
+        }
     }
 
     render() {
@@ -37,22 +63,25 @@ class Set extends React.Component {
             <div>
                 <legend>设置</legend>
                 <form className='form-horizontal' role='form'>
-                    <div className='form-group'>
+                    <div className={'form-group '+this.state.domainValidate}>
                         <label htmlFor="individuality_domain" className='col-sm-2 control-label'>个性域名</label>
                         <div className='col-sm-10'>
-                            <input type="text" id='individuality_domain' className='form-control' onChange={SetActions.changeDomain} placeholder='数字，英文，破折线'/>
+                            <input type="text" id='individuality_domain' className='form-control' onChange={SetActions.changeDomain} placeholder='数字，英文，破折线' value={this.state.domain}/>
+                            <span className={this.state.domainValidate === ''?'hide':'text-danger'}>*个性域名格式错误或太长</span>
                         </div>
                     </div>
-                    <div className='form-group'>
+                    <div className={'form-group '+this.state.nameValidate}>
                         <label htmlFor="individuality_username"className='col-sm-2 control-label'>用户名</label>
                         <div className='col-sm-10'>
-                            <input type="text" id='individuality_username' className='form-control' onChange={SetActions.changeUserName} placeholder='长度不超过10' max='10'/>
+                            <input type="text" id='individuality_username' className='form-control' onChange={SetActions.changeUserName} placeholder='长度不超过10' value={this.state.username} max='15'/>
+                            <span className={this.state.nameValidate === ''?'hide':'text-danger'}>*用户名不能为空或是超过15个字</span>
                         </div>
                     </div>
-                    <div className='form-group'>
+                    <div className={'form-group '+this.state.emailValidate}>
                         <label htmlFor="individuality_email"className='col-sm-2 control-label'>邮箱</label>
                         <div className='col-sm-10'>
-                            <input type="email" id='individuality_email' className='form-control' onChange={SetActions.changeEmail} placeholder='example@example.com'/>
+                            <input type="email" id='individuality_email' className='form-control' onChange={SetActions.changeEmail} placeholder='example@example.com' value={this.state.email}/>
+                            <span className={this.state.emailValidate === ''?'hide':'text-danger'}>*邮箱格式错误</span>
                         </div>
                     </div>
                     <div className='fomr-group'>
@@ -63,7 +92,7 @@ class Set extends React.Component {
                             <a href="/auth/weibo"><span className='fa fa-weibo'></span></a>
                         </div>
                     </div>
-                    <a href="javascript:;" className='btn btn-primary' onClick={this.handleClick.bind(this)}>保存设置</a>
+                    <a href="javascript:;" className='btn btn-primary pull-right' onClick={this.handleClick.bind(this)}>保存设置</a>
                 </form>
             </div>
         );

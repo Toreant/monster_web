@@ -10,7 +10,10 @@ class SetStore {
         this.username = '';
         this.domain = '';
         this.email = '';
-        this.account = '';
+        /* 输入检测时输出状态 */
+        this.domainValidate = '';
+        this.nameValidate = '';
+        this.emailValidate = '';
     }
 
     onChangeProfileSuccess(data) {
@@ -25,23 +28,19 @@ class SetStore {
         toastr.error('服务器错误');
     }
 
-    onGetProfileSuccess(userProfile) {
+    onGetProfileSuccess(data) {
 
-        if(userProfile !== undefined) {
-            this.username = userProfile.raw.username;
-            this.domain = userProfile.raw.domain;
-            this.email = userProfile.raw.email;
-        } else {
-            $.ajax({
-                url : '/api/session',
-                type : 'post',
-                cache : false
-            }).done((data) => {
-                localStorage.setItem('user',JSON.stringify(data));
-            }).fail((data) => {
-                toastr.error('获取用户资料失败');
-            });
+        if(data !== undefined && data.code === 200) {
+            this.username = data.raw.username;
+            this.domain = data.raw.domain;
+            this.email = data.raw.email;
         }
+    }
+
+    onGetProfileLocal(data) {
+        this.username = data.raw.username;
+        this.domain = data.raw.domain;
+        this.email = data.raw.email;
     }
 
     onProfileFail() {
@@ -59,6 +58,33 @@ class SetStore {
 
     onChangeUserName(event) {
         this.username = event.target.value;
+    }
+
+    /**
+     * @param option 1--error 0--not error
+     */
+    onDomainValidateFail(option) {
+        if(option === 1) {
+            this.domainValidate = 'has-error';
+        } else if(option === 0) {
+            this.domainValidate = '';
+        }
+    }
+
+    onNameValidateFail(option) {
+        if(option === 1) {
+            this.nameValidate = 'has-error';
+        } else if(option === 0) {
+            this.nameValidate = '';
+        }
+    }
+
+    onEmailValidateFail(option) {
+        if(option === 1) {
+            this.emailValidate = 'has-error';
+        } else if(option === 0) {
+            this.emailValidate = '';
+        }
     }
 }
 

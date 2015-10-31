@@ -88,10 +88,10 @@ class UserCtrl {
      */
     getUpdate(req,res,next) {
         console.log('update');
+        console.log(req.body);
         let where = req.body.where,
             params = req.body.params;
-
-        console.log(req.body);
+        console.log(where);
 
         let result = {
             meta : '',
@@ -100,7 +100,7 @@ class UserCtrl {
         };
 
         User.updateUser(where,params,(data,docs) => {
-            if(data >=1) {
+            if(data >= 1) {
                 result.meta = '修改成功';
                 result.code = 200;
                 result.data = docs;

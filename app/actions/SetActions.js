@@ -9,27 +9,32 @@ class SetActions {
             'changeProfileSuccess',
             'changeProfileFail',
             'getProfileSuccess',
-            'profileFail',
+            'getProfileLocal',
             'changeDomain',
             'changeEmail',
-            'changeUserName'
+            'changeUserName',
+            'domainValidateFail',
+            'nameValidateFail',
+            'emailValidateFail'
         );
     }
 
     changeProfile(domain,username,email) {
+        let params = {
+            where : {auth_id : 56115067},
+            params : {
+                email : email,
+                domain : domain,
+                username : username
+            }
+        };
         $.ajax({
             url : '/api/user',
             type : 'put',
             cahce : 'false',
             dataType : 'json',
-            data : {
-                where : {auth_id : '48561079'},
-                params : {
-                    email : email,
-                    username : username,
-                    domain : domain
-                }
-            }
+            contentType: 'application/json;charset=utf-8',
+            data : JSON.stringify(params)
         }).done((data) => {
             this.actions.changeProfileSuccess(data);
         }).fail((data) => {
@@ -38,9 +43,15 @@ class SetActions {
     }
 
     getProfile() {
-        let localStorage = window.localStorage;
-        let userProfile = localStorage.getItem('user');
-        userProfile = JSON.parse(userProfile);
+        $.ajax({
+            url: '/api/session',
+            type: 'post',
+            cache: false
+        }).done((data) => {
+            this.actions.getProfileSuccess(data);
+        }).fail(() => {
+        });
+
     }
 }
 

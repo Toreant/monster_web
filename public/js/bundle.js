@@ -306,7 +306,7 @@ var SetActions = (function () {
     function SetActions() {
         _classCallCheck(this, SetActions);
 
-        this.generateActions('changeProfileSuccess', 'changeProfileFail', 'getProfileSuccess', 'profileFail', 'changeDomain', 'changeEmail', 'changeUserName');
+        this.generateActions('changeProfileSuccess', 'changeProfileFail', 'getProfileSuccess', 'getProfileLocal', 'changeDomain', 'changeEmail', 'changeUserName', 'domainValidateFail', 'nameValidateFail', 'emailValidateFail');
     }
 
     _createClass(SetActions, [{
@@ -314,19 +314,21 @@ var SetActions = (function () {
         value: function changeProfile(domain, username, email) {
             var _this = this;
 
+            var params = {
+                where: { auth_id: 56115067 },
+                params: {
+                    email: email,
+                    domain: domain,
+                    username: username
+                }
+            };
             $.ajax({
                 url: '/api/user',
                 type: 'put',
                 cahce: 'false',
                 dataType: 'json',
-                data: {
-                    where: { auth_id: '48561079' },
-                    params: {
-                        email: email,
-                        username: username,
-                        domain: domain
-                    }
-                }
+                contentType: 'application/json;charset=utf-8',
+                data: JSON.stringify(params)
             }).done(function (data) {
                 _this.actions.changeProfileSuccess(data);
             }).fail(function (data) {
@@ -336,9 +338,15 @@ var SetActions = (function () {
     }, {
         key: 'getProfile',
         value: function getProfile() {
-            var localStorage = window.localStorage;
-            var userProfile = localStorage.getItem('user');
-            userProfile = JSON.parse(userProfile);
+            var _this2 = this;
+
+            $.ajax({
+                url: '/api/session',
+                type: 'post',
+                cache: false
+            }).done(function (data) {
+                _this2.actions.getProfileSuccess(data);
+            }).fail(function () {});
         }
     }]);
 
@@ -1556,6 +1564,7 @@ var Set = (function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             _storesSetStore2['default'].listen(this.onChange);
+            _actionsSetActions2['default'].getProfile();
         }
     }, {
         key: 'componentWillUnMount',
@@ -1573,8 +1582,33 @@ var Set = (function (_React$Component) {
             var domain = this.state.domain,
                 email = this.state.email,
                 username = this.state.username;
-            console.log(domain + " " + email + " " + username);
-            //SetActions.changeProfile();
+            var error = false;
+
+            var regEmail = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/,
+                regDomain = /^[0-9a-zA-Z-]{1,20}$/;
+
+            if (!regEmail.test(email)) {
+                _actionsSetActions2['default'].emailValidateFail(1);
+                error = true;
+            } else {
+                _actionsSetActions2['default'].emailValidateFail(0);
+            }
+            if (username.length > 15 || username === '') {
+                _actionsSetActions2['default'].nameValidateFail(1);
+                error = true;
+            } else {
+                _actionsSetActions2['default'].nameValidateFail(0);
+            }
+            if (!regDomain.test(domain)) {
+                _actionsSetActions2['default'].domainValidateFail(1);
+                error = true;
+            } else {
+                _actionsSetActions2['default'].domainValidateFail(0);
+            }
+
+            if (!error) {
+                _actionsSetActions2['default'].changeProfile(domain, username, email);
+            }
         }
     }, {
         key: 'render',
@@ -1592,7 +1626,7 @@ var Set = (function (_React$Component) {
                     { className: 'form-horizontal', role: 'form' },
                     _react2['default'].createElement(
                         'div',
-                        { className: 'form-group' },
+                        { className: 'form-group ' + this.state.domainValidate },
                         _react2['default'].createElement(
                             'label',
                             { htmlFor: 'individuality_domain', className: 'col-sm-2 control-label' },
@@ -1601,12 +1635,17 @@ var Set = (function (_React$Component) {
                         _react2['default'].createElement(
                             'div',
                             { className: 'col-sm-10' },
-                            _react2['default'].createElement('input', { type: 'text', id: 'individuality_domain', className: 'form-control', onChange: _actionsSetActions2['default'].changeDomain, placeholder: '数字，英文，破折线' })
+                            _react2['default'].createElement('input', { type: 'text', id: 'individuality_domain', className: 'form-control', onChange: _actionsSetActions2['default'].changeDomain, placeholder: '数字，英文，破折线', value: this.state.domain }),
+                            _react2['default'].createElement(
+                                'span',
+                                { className: this.state.domainValidate === '' ? 'hide' : 'text-danger' },
+                                '*个性域名格式错误或太长'
+                            )
                         )
                     ),
                     _react2['default'].createElement(
                         'div',
-                        { className: 'form-group' },
+                        { className: 'form-group ' + this.state.nameValidate },
                         _react2['default'].createElement(
                             'label',
                             { htmlFor: 'individuality_username', className: 'col-sm-2 control-label' },
@@ -1615,12 +1654,17 @@ var Set = (function (_React$Component) {
                         _react2['default'].createElement(
                             'div',
                             { className: 'col-sm-10' },
-                            _react2['default'].createElement('input', { type: 'text', id: 'individuality_username', className: 'form-control', onChange: _actionsSetActions2['default'].changeUserName, placeholder: '长度不超过10', max: '10' })
+                            _react2['default'].createElement('input', { type: 'text', id: 'individuality_username', className: 'form-control', onChange: _actionsSetActions2['default'].changeUserName, placeholder: '长度不超过10', value: this.state.username, max: '15' }),
+                            _react2['default'].createElement(
+                                'span',
+                                { className: this.state.nameValidate === '' ? 'hide' : 'text-danger' },
+                                '*用户名不能为空或是超过15个字'
+                            )
                         )
                     ),
                     _react2['default'].createElement(
                         'div',
-                        { className: 'form-group' },
+                        { className: 'form-group ' + this.state.emailValidate },
                         _react2['default'].createElement(
                             'label',
                             { htmlFor: 'individuality_email', className: 'col-sm-2 control-label' },
@@ -1629,7 +1673,12 @@ var Set = (function (_React$Component) {
                         _react2['default'].createElement(
                             'div',
                             { className: 'col-sm-10' },
-                            _react2['default'].createElement('input', { type: 'email', id: 'individuality_email', className: 'form-control', onChange: _actionsSetActions2['default'].changeEmail, placeholder: 'example@example.com' })
+                            _react2['default'].createElement('input', { type: 'email', id: 'individuality_email', className: 'form-control', onChange: _actionsSetActions2['default'].changeEmail, placeholder: 'example@example.com', value: this.state.email }),
+                            _react2['default'].createElement(
+                                'span',
+                                { className: this.state.emailValidate === '' ? 'hide' : 'text-danger' },
+                                '*邮箱格式错误'
+                            )
                         )
                     ),
                     _react2['default'].createElement(
@@ -1662,7 +1711,7 @@ var Set = (function (_React$Component) {
                     ),
                     _react2['default'].createElement(
                         'a',
-                        { href: 'javascript:;', className: 'btn btn-primary', onClick: this.handleClick.bind(this) },
+                        { href: 'javascript:;', className: 'btn btn-primary pull-right', onClick: this.handleClick.bind(this) },
                         '保存设置'
                     )
                 )
@@ -2543,7 +2592,10 @@ var SetStore = (function () {
         this.username = '';
         this.domain = '';
         this.email = '';
-        this.account = '';
+        /* 输入检测时输出状态 */
+        this.domainValidate = '';
+        this.nameValidate = '';
+        this.emailValidate = '';
     }
 
     _createClass(SetStore, [{
@@ -2562,23 +2614,20 @@ var SetStore = (function () {
         }
     }, {
         key: 'onGetProfileSuccess',
-        value: function onGetProfileSuccess(userProfile) {
+        value: function onGetProfileSuccess(data) {
 
-            if (userProfile !== undefined) {
-                this.username = userProfile.raw.username;
-                this.domain = userProfile.raw.domain;
-                this.email = userProfile.raw.email;
-            } else {
-                $.ajax({
-                    url: '/api/session',
-                    type: 'post',
-                    cache: false
-                }).done(function (data) {
-                    localStorage.setItem('user', JSON.stringify(data));
-                }).fail(function (data) {
-                    toastr.error('获取用户资料失败');
-                });
+            if (data !== undefined && data.code === 200) {
+                this.username = data.raw.username;
+                this.domain = data.raw.domain;
+                this.email = data.raw.email;
             }
+        }
+    }, {
+        key: 'onGetProfileLocal',
+        value: function onGetProfileLocal(data) {
+            this.username = data.raw.username;
+            this.domain = data.raw.domain;
+            this.email = data.raw.email;
         }
     }, {
         key: 'onProfileFail',
@@ -2600,6 +2649,37 @@ var SetStore = (function () {
         key: 'onChangeUserName',
         value: function onChangeUserName(event) {
             this.username = event.target.value;
+        }
+
+        /**
+         * @param option 1--error 0--not error
+         */
+    }, {
+        key: 'onDomainValidateFail',
+        value: function onDomainValidateFail(option) {
+            if (option === 1) {
+                this.domainValidate = 'has-error';
+            } else if (option === 0) {
+                this.domainValidate = '';
+            }
+        }
+    }, {
+        key: 'onNameValidateFail',
+        value: function onNameValidateFail(option) {
+            if (option === 1) {
+                this.nameValidate = 'has-error';
+            } else if (option === 0) {
+                this.nameValidate = '';
+            }
+        }
+    }, {
+        key: 'onEmailValidateFail',
+        value: function onEmailValidateFail(option) {
+            if (option === 1) {
+                this.emailValidate = 'has-error';
+            } else if (option === 0) {
+                this.emailValidate = '';
+            }
         }
     }]);
 
