@@ -3,6 +3,7 @@
  */
 import eventproxy from 'eventproxy';
 import User from '../models/user';
+import _ from 'underscore';
 
 class md {
     /**
@@ -91,7 +92,7 @@ class md {
      * @param callback
      */
     getUserById(arrayId,callback) {
-        User.find({auth_id : {$in : arrayId}},(err,docs) => {
+        User.find({auth_id : {$in : arrayId}},'username introduce avatar_url auth_id',(err,docs) => {
             if(err) {
                 callback(err);
             } else {
@@ -111,6 +112,30 @@ class md {
                 callback(err);
             } else {
                 callback(docs);
+            }
+        });
+    }
+
+    /**
+     * 添加关注
+     * @param where
+     * @param auth_id
+     * @param callback
+     */
+    addFollow(where,auth_id,callback) {
+        User.findOne(where,function(err,user){
+            if(user === null) {
+                callback(0);
+            } else {
+                let following = user.following;
+                if(_.indexOf(following,auth_id) !== -1) {
+                    callback(null);
+                } else {
+                    user.following.push(auth_id);
+                    user.save(function(err,docs){
+                        callback(1);
+                    });
+                }
             }
         });
     }

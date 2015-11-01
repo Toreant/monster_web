@@ -15,8 +15,9 @@ router.post('/api/getUser',UserCtrl.getUserByDomain);
 
 router.post('/api/users',UserCtrl.getUserById);
 
+router.post('/api/follow',UserCtrl.addFollow);
+
 router.post('/api/session',function(req,res,next){
-    console.log(req.session);
     if((req.session.passport !== undefined || req.session.user !== undefined)) {
         let data = req.session.passport === undefined? req.session.user:req.session.passport.user;
         res.json({meta : '账户已经登陆',code : 200,raw : data});
@@ -31,10 +32,6 @@ router.post('/api/signout',function(req,res,next){
     } else {
         res.json({meta : '退出不登陆不成功',code : 400});
     }
-});
-
-router.get('/api/session',function(req,res,next){
-    console.log("session"+req.session.user);
 });
 
 export default router;

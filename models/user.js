@@ -17,7 +17,8 @@ var UserSchema = new Schema({
     followers :[Number],
     following : [Number],
     star : [Number],
-    contribute : [Number]
+    contribute : [Number],
+    date : {type : Date}
 });
 
 UserSchema.index({email: 1}, {unique: true});

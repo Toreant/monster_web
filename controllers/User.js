@@ -23,8 +23,6 @@ class UserCtrl {
         sha.update(password);
         password = sha.digest('hex');
 
-        console.log(email+' '+password+" "+name+' '+auth_id);
-
         User.saveUser(email,password,name,auth_id,auth_id.toString(),(data,product) => {
             let result = {
                 meta : "",
@@ -87,8 +85,6 @@ class UserCtrl {
      * @param next
      */
     getUpdate(req,res,next) {
-        console.log('update');
-        console.log(req.body);
         let where = req.body.where,
             params = req.body.params;
         console.log(where);
@@ -122,7 +118,6 @@ class UserCtrl {
      */
     getUserByDomain(req,res,next) {
         let domain = req.body.domain;
-        console.log('domain = '+domain);
 
         let result = {
             meta : '',
@@ -154,16 +149,44 @@ class UserCtrl {
         let result = {
             meta : '',
             code : 0,
-            data : null
+            raw : null
         };
 
         User.getUserById(arrayId,(docs) => {
-            if(docs.length > 1) {
+            if(docs.length >= 1) {
                 result.meta = '查找成功';
                 result.code = 200;
-                result.data = docs;
+                result.raw = docs;
             } else {
                 result.meta = '查找不成功';
+                result.code = 400;
+            }
+            res.json(result);
+        });
+    }
+
+    /**
+     * 关注
+     * @param req
+     * @param res
+     * @param next
+     */
+    addFollow(req,res,next) {
+        let auth_id = req.body.auth_id,
+            where = req.body.where;
+        let result = {
+            meta : '',
+            code : 0
+        };
+        User.addFollow(where,auth_id,(data) => {
+            if(data === 1) {
+                result.meta = '关注成功';
+                result.code = 200;
+            } else if(data === null) {
+                result.meta = '关注不成功';
+                result.code = 304;
+            } else {
+                result.meta = '这个用户不存在';
                 result.code = 400;
             }
             res.json(result);

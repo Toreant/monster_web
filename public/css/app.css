@@ -201,3 +201,49 @@
   font-size: 25px;
   margin-right: 20px;
 }
+/* followers*/
+.listgroup {
+  padding: 5px 10px;
+  background-color: #EEEED1;
+  margin-bottom: 10px;
+  position: relative;
+}
+.position {
+  line-height: 80px;
+  height: 80px;
+  font-size: 50px;
+  color: #5e5e5e;
+}
+.followers-name > a {
+  font-size: 30px !important;
+  color: #5e5e5e;
+}
+.followers-name > a:hover {
+  text-decoration: none;
+}
+.followers-intro {
+  font-size: 16px;
+  line-height: 25px;
+}
+.listgroup .follow {
+  position: absolute;
+  top: 10px;
+  right: 30px;
+}
+.follow > span {
+  margin-right: 10px;
+}
+.follow > a {
+  display: inline-block;
+  height: 20px;
+  width: 40px;
+  line-height: 20px;
+  text-align: center;
+  color: #fff;
+  background-color: #EE5C42;
+}
+.follow > a:hover {
+  text-decoration: none;
+  color: #d4d4d4;
+  opacity: 0.7;
+}

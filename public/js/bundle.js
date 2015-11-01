@@ -8,6 +8,8 @@ Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -16,11 +18,59 @@ var _alt = require('../alt');
 
 var _alt2 = _interopRequireDefault(_alt);
 
-var FollowersActions = function FollowersActions() {
-    _classCallCheck(this, FollowersActions);
+var FollowersActions = (function () {
+    function FollowersActions() {
+        _classCallCheck(this, FollowersActions);
 
-    this.generateActions();
-};
+        this.generateActions('getFollowersSuccess', 'changeFollowId', 'addFollowSuccess');
+    }
+
+    _createClass(FollowersActions, [{
+        key: 'getFollowers',
+        value: function getFollowers() {
+            var _this = this;
+
+            var params = {
+                arrayId: [48561100, 56115067]
+            };
+            $.ajax({
+                url: '/api/users',
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json;charset=utf-8',
+                data: JSON.stringify(params)
+            }).done(function (data) {
+                _this.actions.getFollowersSuccess(data);
+            }).fail(function () {
+                toastr.warning('获取关注者失败');
+            });
+        }
+    }, {
+        key: 'addFollow',
+        value: function addFollow(auth_id) {
+            var _this2 = this;
+
+            var params = {
+                where: { auth_id: 48561100 },
+                auth_id: auth_id
+            };
+
+            $.ajax({
+                url: '/api/follow',
+                dataType: 'json',
+                type: 'post',
+                contentType: 'application/json;charset=utf-8',
+                data: JSON.stringify(params)
+            }).done(function (data) {
+                _this2.actions.addFollowSuccess(data);
+            }).fail(function () {
+                toastr.error('关注不成功');
+            });
+        }
+    }]);
+
+    return FollowersActions;
+})();
 
 exports['default'] = _alt2['default'].createActions(FollowersActions);
 module.exports = exports['default'];
@@ -626,6 +676,8 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouter = require('react-router');
+
 var _actionsFollowersActions = require('../actions/FollowersActions');
 
 var _actionsFollowersActions2 = _interopRequireDefault(_actionsFollowersActions);
@@ -649,6 +701,8 @@ var Followers = (function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             _storesFollowersStore2['default'].listen(this.onChange);
+            _actionsFollowersActions2['default'].getFollowers();
+            console.log("hehe");
         }
     }, {
         key: 'componentWillUnMount',
@@ -661,9 +715,73 @@ var Followers = (function (_React$Component) {
             this.setState(state);
         }
     }, {
+        key: 'handleClick',
+        value: function handleClick(auth_id) {
+            console.log(auth_id);
+            _actionsFollowersActions2['default'].addFollow(auth_id);
+        }
+    }, {
         key: 'render',
         value: function render() {
-            return _react2['default'].createElement('div', { className: 'col-md-9 col-sm-9' });
+            var _this = this;
+
+            var followers = this.state.followers.map(function (data, index) {
+                return _react2['default'].createElement(
+                    'div',
+                    { key: data.auth_id, className: 'listgroup' },
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'media' },
+                        _react2['default'].createElement(
+                            'span',
+                            { className: 'position pull-left' },
+                            index + 1
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'pull-left thumb-lg' },
+                            _react2['default'].createElement(
+                                _reactRouter.Link,
+                                { to: '/characters/' + data.auth_id },
+                                _react2['default'].createElement('img', { className: 'media-object', src: data.avatar_url })
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'media-body' },
+                            _react2['default'].createElement(
+                                'h4',
+                                { className: 'media-heading followers-name' },
+                                _react2['default'].createElement(
+                                    _reactRouter.Link,
+                                    { to: '/characters/' + data.auth_id },
+                                    data.username
+                                )
+                            ),
+                            _react2['default'].createElement(
+                                'p',
+                                { className: 'followers-intro' },
+                                data.introduce
+                            ),
+                            _react2['default'].createElement(
+                                'div',
+                                { className: 'follow' },
+                                _react2['default'].createElement('span', { className: 'fa fa-star-o' }),
+                                _react2['default'].createElement(
+                                    'a',
+                                    { href: 'javascript:;', onClick: _this.handleClick.bind(_this, data.auth_id) },
+                                    '关注'
+                                )
+                            )
+                        )
+                    )
+                );
+            });
+            return _react2['default'].createElement(
+                'div',
+                { className: 'col-md-9 col-sm-9' },
+                followers
+            );
         }
     }]);
 
@@ -673,7 +791,7 @@ var Followers = (function (_React$Component) {
 exports['default'] = Followers;
 module.exports = exports['default'];
 
-},{"../actions/FollowersActions":1,"../stores/FollowersStore":27,"react":"react"}],14:[function(require,module,exports){
+},{"../actions/FollowersActions":1,"../stores/FollowersStore":27,"react":"react","react-router":"react-router"}],14:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -2200,7 +2318,7 @@ var User = (function (_React$Component) {
                                     _react2['default'].createElement(
                                         'span',
                                         null,
-                                        this.state.followers
+                                        this.state.following
                                     ),
                                     _react2['default'].createElement(
                                         'b',
@@ -2464,6 +2582,8 @@ Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -2476,11 +2596,46 @@ var _actionsFollowersActions = require('../actions/FollowersActions');
 
 var _actionsFollowersActions2 = _interopRequireDefault(_actionsFollowersActions);
 
-var FollowersStore = function FollowersStore() {
-    _classCallCheck(this, FollowersStore);
+var FollowersStore = (function () {
+    function FollowersStore() {
+        _classCallCheck(this, FollowersStore);
 
-    this.bindActions(_actionsFollowersActions2['default']);
-};
+        this.bindActions(_actionsFollowersActions2['default']);
+        this.followers = [];
+    }
+
+    _createClass(FollowersStore, [{
+        key: 'onGetFollowersSuccess',
+        value: function onGetFollowersSuccess(data) {
+            var _this = this;
+
+            console.log(data);
+            if (data.code === 200) {
+                data.raw.map(function (obj) {
+                    _this.followers.push(obj);
+                });
+            }
+        }
+    }, {
+        key: 'onChangeFollowId',
+        value: function onChangeFollowId(event) {
+            this.followId = event.target.value;
+        }
+    }, {
+        key: 'onAddFollowSuccess',
+        value: function onAddFollowSuccess(data) {
+            if (data.code === 200) {
+                toastr.success('关注 成功');
+            } else if (data.code === 400) {
+                toastr.warning('本地用户不存在');
+            } else if (data.code === 304) {
+                toastr.warning('这个用户已经关注过');
+            }
+        }
+    }]);
+
+    return FollowersStore;
+})();
 
 exports['default'] = _alt2['default'].createStore(FollowersStore);
 module.exports = exports['default'];
