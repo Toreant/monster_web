@@ -13,6 +13,7 @@ var UserSchema = new Schema({
     auth_id : {type : Number,default : 0},
     account : {type : Number},
     domain : {type : String},
+    introduce : {type : String,default : '这家伙很懒，什么也没留下'},
     followers :[Number],
     following : [Number],
     star : [Number],

@@ -28,8 +28,11 @@ class Set extends React.Component {
     handleClick() {
         let domain = this.state.domain,
             email = this.state.email,
-            username = this.state.username;
+            username = this.state.username,
+            intro = this.state.intro;
         let error = false;
+
+        console.log(intro);
 
         let regEmail = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/,
             regDomain = /^[0-9a-zA-Z-]{1,20}$/;
@@ -54,7 +57,7 @@ class Set extends React.Component {
         }
 
         if(!error) {
-            SetActions.changeProfile(domain,username,email);
+            SetActions.changeProfile(domain,username,email,intro);
         }
     }
 
@@ -111,6 +114,13 @@ class Set extends React.Component {
                         <div className='col-sm-10'>
                             <input type="email" id='individuality_email' className='form-control' onChange={SetActions.changeEmail} placeholder='example@example.com' value={this.state.email}/>
                             <span className={this.state.emailValidate === ''?'hide':'text-danger'}>*邮箱格式错误</span>
+                        </div>
+                    </div>
+                    <div className={'form-group '+this.state.introValidate}>
+                        <label htmlFor="individuality_intro"className='col-sm-2 control-label'>个人简介</label>
+                        <div className='col-sm-10'>
+                            <textarea type="email" id='individuality_intro' className='form-control' onChange={SetActions.changeIntro} placeholder='留下你的宝贝简介吧' rows='3' value={this.state.intro}></textarea>
+                            <span className={this.state.introValidate === ''?'hide':'text-danger'}>*简介字数超出50</span>
                         </div>
                     </div>
                     <div className='fomr-group'>

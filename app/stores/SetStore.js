@@ -11,10 +11,12 @@ class SetStore {
         this.domain = '';
         this.email = '';
         this.account;
+        this.intro = '';
         /* 输入检测时输出状态 */
         this.domainValidate = '';
         this.nameValidate = '';
         this.emailValidate = '';
+        this.introValidate = '';
     }
 
     onChangeProfileSuccess(data) {
@@ -37,6 +39,7 @@ class SetStore {
             this.domain = data.raw.domain;
             this.email = data.raw.email;
             this.account = data.raw.account;
+            this.intro = data.raw.introduce;
         }
     }
 
@@ -44,6 +47,8 @@ class SetStore {
         this.username = data.raw.username;
         this.domain = data.raw.domain;
         this.email = data.raw.email;
+        this.account = data.raw.account;
+        this.intro = data.raw.introduce;
     }
 
     onProfileFail() {
@@ -61,6 +66,10 @@ class SetStore {
 
     onChangeUserName(event) {
         this.username = event.target.value;
+    }
+
+    onChangeIntro(event) {
+        this.intro = event.target.value;
     }
 
     /**
@@ -87,6 +96,14 @@ class SetStore {
             this.emailValidate = 'has-error';
         } else if(option === 0) {
             this.emailValidate = '';
+        }
+    }
+
+    onIntroValidateFail(option) {
+        if(option === 1) {
+            this.introValidate = 'has-error';
+        } else if(option === 0) {
+            this.introValidate = '';
         }
     }
 }

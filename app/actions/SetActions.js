@@ -13,13 +13,15 @@ class SetActions {
             'changeDomain',
             'changeEmail',
             'changeUserName',
+            'changeIntro',
             'domainValidateFail',
             'nameValidateFail',
-            'emailValidateFail'
+            'emailValidateFail',
+            'introValidateFail'
         );
     }
 
-    changeProfile(domain,username,email) {
+    changeProfile(domain,username,email,intro) {
         let localStorage = window.localStorage;
         let userProfile = localStorage.getItem('user');
         userProfile = JSON.parse(userProfile);
@@ -28,7 +30,8 @@ class SetActions {
             params : {
                 email : email,
                 domain : domain,
-                username : username
+                username : username,
+                introduce : intro
             }
         };
         $.ajax({
