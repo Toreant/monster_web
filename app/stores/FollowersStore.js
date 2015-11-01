@@ -11,7 +11,6 @@ class FollowersStore {
     }
 
     onGetFollowersSuccess(data) {
-        console.log(data);
         if(data.code === 200) {
             data.raw.map((obj) => {
                 this.followers.push(obj);
@@ -23,12 +22,17 @@ class FollowersStore {
         this.followId = event.target.value;
     }
 
+    /**
+     * 添加关注
+     * @param data {type : [$self,data]}
+     */
     onAddFollowSuccess(data) {
-        if(data.code === 200) {
+        if(data[1].code === 200) {
             toastr.success('关注 成功');
-        } else if(data.code === 400) {
+            data[0].text('取消关注');
+        } else if(data[1].code === 400) {
             toastr.warning('本地用户不存在');
-        } else if(data.code === 304) {
+        } else if(data[1].code === 304) {
             toastr.warning('这个用户已经关注过');
         }
     }

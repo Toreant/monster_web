@@ -47,7 +47,7 @@ var FollowersActions = (function () {
         }
     }, {
         key: 'addFollow',
-        value: function addFollow(auth_id) {
+        value: function addFollow($self, auth_id) {
             var _this2 = this;
 
             var params = {
@@ -62,7 +62,7 @@ var FollowersActions = (function () {
                 contentType: 'application/json;charset=utf-8',
                 data: JSON.stringify(params)
             }).done(function (data) {
-                _this2.actions.addFollowSuccess(data);
+                _this2.actions.addFollowSuccess([$self, data]);
             }).fail(function () {
                 toastr.error('关注不成功');
             });
@@ -717,8 +717,8 @@ var Followers = (function (_React$Component) {
     }, {
         key: 'handleClick',
         value: function handleClick(auth_id) {
-            console.log(auth_id);
-            _actionsFollowersActions2['default'].addFollow(auth_id);
+            var $self = $("[data-self=" + auth_id + "]");
+            _actionsFollowersActions2['default'].addFollow($self, auth_id);
         }
     }, {
         key: 'render',
@@ -769,7 +769,7 @@ var Followers = (function (_React$Component) {
                                 _react2['default'].createElement('span', { className: 'fa fa-star-o' }),
                                 _react2['default'].createElement(
                                     'a',
-                                    { href: 'javascript:;', onClick: _this.handleClick.bind(_this, data.auth_id) },
+                                    { href: 'javascript:;', 'data-self': data.auth_id.toString(), onClick: _this.handleClick.bind(_this, data.auth_id) },
                                     '关注'
                                 )
                             )
@@ -2609,7 +2609,6 @@ var FollowersStore = (function () {
         value: function onGetFollowersSuccess(data) {
             var _this = this;
 
-            console.log(data);
             if (data.code === 200) {
                 data.raw.map(function (obj) {
                     _this.followers.push(obj);
@@ -2621,14 +2620,20 @@ var FollowersStore = (function () {
         value: function onChangeFollowId(event) {
             this.followId = event.target.value;
         }
+
+        /**
+         * 添加关注
+         * @param data {type : [$self,data]}
+         */
     }, {
         key: 'onAddFollowSuccess',
         value: function onAddFollowSuccess(data) {
-            if (data.code === 200) {
+            if (data[1].code === 200) {
                 toastr.success('关注 成功');
-            } else if (data.code === 400) {
+                data[0].text('取消关注');
+            } else if (data[1].code === 400) {
                 toastr.warning('本地用户不存在');
-            } else if (data.code === 304) {
+            } else if (data[1].code === 304) {
                 toastr.warning('这个用户已经关注过');
             }
         }

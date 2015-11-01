@@ -28,7 +28,7 @@ class FollowersActions {
         });
     }
 
-    addFollow(auth_id) {
+    addFollow($self,auth_id) {
         let params = {
             where : {auth_id : 48561100},
             auth_id : auth_id
@@ -41,7 +41,7 @@ class FollowersActions {
             contentType: 'application/json;charset=utf-8',
             data : JSON.stringify(params)
         }).done((data) => {
-            this.actions.addFollowSuccess(data);
+            this.actions.addFollowSuccess([$self,data]);
         }).fail(() => {
             toastr.error('关注不成功');
         });

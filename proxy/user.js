@@ -139,6 +139,24 @@ class md {
             }
         });
     }
+
+    unFollow(where,auth_id,callback) {
+        User.findOne(where,function(err,user){
+           if(user === null) {
+               callback(0);
+           }  else {
+               let following = user.following;
+               if(_.indexOf(following,auth_id) !== -1) {
+                   user.following = _.without(following,auth_id);
+                   user.save(function(err){
+                       callback(1);
+                   });
+               } else {
+                   callback(null);
+               }
+           }
+        });
+    }
 }
 
 export default new md();

@@ -192,6 +192,34 @@ class UserCtrl {
             res.json(result);
         });
     }
+
+    /**
+     * 取消关注
+     * @param req
+     * @param res
+     * @param next
+     */
+    unFollowing(req,res,next) {
+        let auth_id = req.body.auth_id,
+            where = req.body.where;
+        let result = {
+            meta : '',
+            code : 0
+        };
+        User.unFollow(where,auth_id,(data) => {
+            if(data === 0) {
+                result.meta = '本地用户不存在';
+                result.code = 400;
+            } else if(data === null) {
+                result.meta = '你还没关注这个用户';
+                result.code = 404;
+            } else if(data === 1) {
+                result.meta = '取消关注成功';
+                result.code = 200;
+            }
+            res.json(result);
+        });
+    }
 }
 
 export default new UserCtrl();

@@ -28,8 +28,8 @@ class Followers extends React.Component {
     }
 
     handleClick(auth_id) {
-        console.log(auth_id);
-        FollowersActions.addFollow(auth_id);
+        let $self = $("[data-self="+ auth_id +"]");
+        FollowersActions.addFollow($self,auth_id);
     }
 
     render() {
@@ -50,7 +50,7 @@ class Followers extends React.Component {
                             <p className='followers-intro'>{data.introduce}</p>
                             <div className='follow'>
                                 <span className='fa fa-star-o'></span>
-                                <a href="javascript:;" onClick={this.handleClick.bind(this,data.auth_id)}>关注</a>
+                                <a href="javascript:;" data-self={data.auth_id.toString()} onClick={this.handleClick.bind(this,data.auth_id)}>关注</a>
                             </div>
                         </div>
                     </div>
