@@ -90,8 +90,8 @@ class md {
      * @param id
      * @param callback
      */
-    getUserById(id,callback) {
-        User.find({auth_id : id},(err,docs) => {
+    getUserById(arrayId,callback) {
+        User.find({auth_id : {$in : arrayId}},(err,docs) => {
             if(err) {
                 callback(err);
             } else {
@@ -100,6 +100,11 @@ class md {
         });
     }
 
+    /**
+     * 通过个性域名查找
+     * @param domain
+     * @param callback
+     */
     getUserByDomain(domain,callback) {
         User.find({domain : domain},(err,docs) => {
             if(err) {

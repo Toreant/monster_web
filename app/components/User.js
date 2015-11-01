@@ -64,25 +64,23 @@ class User extends React.Component {
                             </Link>
                         </div>
                         <ul className='nav mon-ability-list'>
-                            <li><Link to='/profile/setting'><a href="javascript:;"><span className='fa fa-cog'></span>设置</a></Link></li>
-                            <li><Link to='/profile/center'><a href="javascript:;"><span className='fa fa-user'></span>中心</a></Link></li>
-                            <li><Link to='/profile/star'><a href="javascript:;"><span className='fa fa-star'></span>关注</a></Link></li>
+                            <li><Link to='/profile/setting'><span className='fa fa-cog'></span>设置</Link></li>
+                            <li><Link to='/profile/center'><span className='fa fa-user'></span>中心</Link></li>
+                            <li><Link to='/profile/star'><span className='fa fa-star'></span>关注</Link></li>
                             <li>
                                 <a href="javascript:;" data-toggle='collapse' data-target='#my-contribute'>
                                     <span className='fa fa-pencil-square'></span>投稿
                                 </a>
                                 <ul className='nav collapse mon-contribute' id='my-contribute'>
-                                    <li><Link to='/post/animate'><a href="javascipt:;"><span className='fa fa-video-camera'></span>动漫</a></Link></li>
-                                    <li><Link to='/post/music'><a href="javascript:;"><span className='fa fa-music'></span>音乐</a></Link></li>
-                                    <li><Link to='/post/article'><a href="javascript:;"><span className='fa fa-file'></span>文章</a></Link></li>
+                                    <li><Link to='/post/animate'><span className='fa fa-video-camera'></span>动漫</Link></li>
+                                    <li><Link to='/post/music'><span className='fa fa-music'></span>音乐</Link></li>
+                                    <li><Link to='/post/article'><span className='fa fa-file'></span>文章</Link></li>
                                 </ul>
                             </li>
-                            <li><Link to='/profile/notice'><a href="javascript:;"><span className='fa fa-bell'></span>通知</a></Link></li>
+                            <li><Link to='/profile/notice'><span className='fa fa-bell'></span>通知</Link></li>
                         </ul>
                     </div>
-                    <div className='col-md-9 col-sm-9'>
-                        <RouteHandler />
-                    </div>
+                    <RouteHandler />
                 </div>);
         } else {
             content = (

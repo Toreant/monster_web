@@ -35,7 +35,7 @@ class PostAnimate extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className='col-md-9 col-sm-9'>
                 动漫投稿
             </div>
         );

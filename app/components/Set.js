@@ -59,8 +59,37 @@ class Set extends React.Component {
     }
 
     render() {
+        let account;
+        switch(this.state.account) {
+            case 1: account = (
+                <div className='col-sm-10 mon-account'>
+                    <span className='fa fa-github'></span>
+                </div>
+            );
+                break;
+            case 2: account = (
+                <div className='col-sm-10 mon-account'>
+                    <span className='fa fa-facebook'></span>
+                </div>
+            );
+                break;
+            case 3: account = (
+                <div className='col-sm-10 mon-account'>
+                    <span className='fa fa-weibo'></span>
+                </div>
+            );
+                break;
+            default : account = (
+                <div className='col-sm-10 mon-account'>
+                    <a href="/auth/github"><span className='fa fa-github'></span></a>
+                    <a href="/auth/facebook"><span className='fa fa-facebook'></span></a>
+                    <a href="/auth/weibo"><span className='fa fa-weibo'></span></a>
+                </div>
+            );
+
+        }
         return (
-            <div>
+            <div className='col-md-9 col-sm-9'>
                 <legend>设置</legend>
                 <form className='form-horizontal' role='form'>
                     <div className={'form-group '+this.state.domainValidate}>
@@ -85,12 +114,10 @@ class Set extends React.Component {
                         </div>
                     </div>
                     <div className='fomr-group'>
-                        <label htmlFor="individuality_account"className='col-sm-2 control-label'>绑定社交账号</label>
-                        <div className='col-sm-10 mon-account'>
-                            <a href="/auth/github"><span className='fa fa-github'></span></a>
-                            <a href="/auth/facebook"><span className='fa fa-facebook'></span></a>
-                            <a href="/auth/weibo"><span className='fa fa-weibo'></span></a>
-                        </div>
+                        <label htmlFor="individuality_account"className='col-sm-2 control-label'>
+                            {this.state.account ===0?"绑定社交账号":"已绑定的账号"}
+                        </label>
+                        {account}
                     </div>
                     <a href="javascript:;" className='btn btn-primary pull-right' onClick={this.handleClick.bind(this)}>保存设置</a>
                 </form>

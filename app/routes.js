@@ -12,6 +12,7 @@ import Notice from './components/Notice';
 import Star from './components/Star';
 import NotFound from './components/NotFound';
 import PostAnimate from './components/PostAnimate';
+import ProfileCenter from './components/ProfileCenter';
 
 export default (
     <Route handler={App}>
@@ -19,6 +20,7 @@ export default (
         <Route path='/login' handler={Login} />
         <Route path='profile' handler={User}>
             <Route path='setting' handler={Set} />
+            <Route path='center' handler={ProfileCenter} />
             <Route path='follower' handler={User} />
             <Route path='following' handler={User} />
             <Route path='contribute' handler={User} />
@@ -30,6 +32,7 @@ export default (
                 <Route path='article' />
             </Route>
         </Route>
+        <Route path=':username' handler={Followers} />
         <Route path='*' handler={NotFound} />
     </Route>
 );

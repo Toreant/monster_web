@@ -26,7 +26,7 @@ class Notice extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className='col-md-9 col-sm-9'>
                 Toastr
             </div>
         );

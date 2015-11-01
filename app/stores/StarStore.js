@@ -8,6 +8,10 @@ class StarStore {
     constructor() {
         this.bindActions(StarActions);
     }
+
+    onGetStarSuccess(data) {
+        console.log(data);
+    }
 }
 
 export default alt.createStore(StarStore);

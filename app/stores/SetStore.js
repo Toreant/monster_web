@@ -10,6 +10,7 @@ class SetStore {
         this.username = '';
         this.domain = '';
         this.email = '';
+        this.account;
         /* 输入检测时输出状态 */
         this.domainValidate = '';
         this.nameValidate = '';
@@ -35,6 +36,7 @@ class SetStore {
             this.username = data.raw.username;
             this.domain = data.raw.domain;
             this.email = data.raw.email;
+            this.account = data.raw.account;
         }
     }
 
