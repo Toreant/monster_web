@@ -27,13 +27,13 @@ class FollowersStore {
      * @param data {type : [$self,data]}
      */
     onAddFollowSuccess(data) {
-        console.log(data[1]);
         switch (data[1].code) {
             case 400 :
                 toastr.error('本地用户不存在');
                 break;
             case 200 :
                 toastr.success('关注成功');
+                data[0].text('取消关注');
                 break;
             case 304 :
                 toastr.warning('你已经关注过这个用户');

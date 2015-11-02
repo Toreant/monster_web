@@ -87,7 +87,6 @@ class UserCtrl {
     getUpdate(req,res,next) {
         let where = req.body.where,
             params = req.body.params;
-        console.log(where);
 
         let result = {
             meta : '',
@@ -145,14 +144,15 @@ class UserCtrl {
      * @param next
      */
     getUserById(req,res,next) {
-        let arrayId = req.body.arrayId;
+        let arrayId = req.body.arrayId,
+            option = req.body.option;
         let result = {
             meta : '',
             code : 0,
             raw : null
         };
 
-        User.getUserById(arrayId,(docs) => {
+        User.getUserById(arrayId,option,(docs) => {
             if(docs.length >= 1) {
                 result.meta = '查找成功';
                 result.code = 200;

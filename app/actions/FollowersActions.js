@@ -11,9 +11,10 @@ class FollowersActions {
         );
     }
 
-    getFollowers() {
+    getFollowers(page) {
         let params = {
-          arrayId : [48561100,56115067]
+          arrayId : [48561100,56115067],
+            option : {skip : (page-1)*10,limit : 10}
         };
         $.ajax({
             url : '/api/users',

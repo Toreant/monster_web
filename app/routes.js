@@ -22,7 +22,9 @@ export default (
         <Route path='profile' handler={User}>
             <Route path='setting' handler={Set} />
             <Route path='center' handler={ProfileCenter} />
-            <Route path='followers' handler={Followers} />
+            <Route path='followers' handler={Followers}>
+                <Route path=':page' handler={Followers}/>
+            </Route>
             <Route path='following' handler={User} />
             <Route path='contribute' handler={User} />
             <Route path='notice' handler={Notice} />

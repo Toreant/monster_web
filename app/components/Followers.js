@@ -3,8 +3,10 @@
  */
 import React from 'react';
 import {Link} from 'react-router';
+import {isEqual} from 'underscore';
 import FollowersActions from '../actions/FollowersActions';
 import FollowersStore from '../stores/FollowersStore';
+import Pagination from './Pagination';
 
 class Followers extends React.Component {
     constructor(props) {
@@ -15,8 +17,20 @@ class Followers extends React.Component {
 
     componentDidMount() {
         FollowersStore.listen(this.onChange);
-        FollowersActions.getFollowers();
-        console.log("hehe");
+        let page = this.props.params.page;
+        if(page === undefined) {
+            page = 1;
+        }
+        FollowersActions.getFollowers(page);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (!isEqual(prevProps.params, this.props.params)) {
+            FollowersActions.getFollowers(this.params.page);
+            console.log('hehe');
+        } else {
+            console.log('aha');
+        }
     }
 
     componentWillUnMount() {
@@ -60,6 +74,7 @@ class Followers extends React.Component {
         return(
             <div className='col-md-9 col-sm-9'>
                 {followers}
+                <Pagination />
             </div>
         );
     }

@@ -91,8 +91,8 @@ class md {
      * @param id
      * @param callback
      */
-    getUserById(arrayId,callback) {
-        User.find({auth_id : {$in : arrayId}},'username introduce avatar_url auth_id',(err,docs) => {
+    getUserById(arrayId,option,callback) {
+        User.find({auth_id : {$in : arrayId}},'username introduce avatar_url auth_id',option,(err,docs) => {
             if(err) {
                 callback(err);
             } else {
