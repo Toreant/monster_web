@@ -7,13 +7,14 @@ import FollowingActions from '../actions/FollowingActions';
 class FollowingStore {
     constructor() {
         this.bindActions(FollowingActions);
-        this.followers = [];
+        this.following = [];
     }
 
-    onGetFollowersSuccess(data) {
+    onGetFollowingSuccess(data) {
+        console.log(data);
         if(data.code === 200) {
             data.raw.map((obj) => {
-                this.followers.push(obj);
+                this.following.push(obj);
             });
         }
     }

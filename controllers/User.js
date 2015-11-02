@@ -166,6 +166,36 @@ class UserCtrl {
     }
 
     /**
+     * 获取关注的用户
+     * @param req
+     * @param res
+     * @param next
+     */
+    getFollowing(req,res,next) {
+        let where = req.body.where,
+            option = req.body.option;
+        let result = {
+            meta : '',
+            code : 0,
+            raw  : null
+        };
+        User.getFollowing(where,option,(docs) => {
+            if(docs === null) {
+                result.meta = '你还没有关注过人';
+                result.code = 400;
+            } else if(docs === 0) {
+                result.meta = '本地用户不存在';
+                result.code = 404;
+            } else {
+                result.meta = '获取关注者成功';
+                result.code = 200;
+                result.raw  = docs;
+            }
+            res.json(result);
+        });
+    }
+
+    /**
      * 关注
      * @param req
      * @param res

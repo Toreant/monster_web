@@ -17,6 +17,8 @@ router.post('/api/users',UserCtrl.getUserById);
 
 router.post('/api/follow',UserCtrl.addFollow);
 
+router.post('/api/following',UserCtrl.getFollowing);
+
 router.post('/api/unFollow',UserCtrl.unFollowing);
 
 router.post('/api/session',function(req,res,next){

@@ -21,12 +21,12 @@ class Following extends React.Component {
         if(page === undefined) {
             page = 1;
         }
-        FollowingActions.getFollowers(page);
+        FollowingActions.getFollowing(page);
     }
 
     componentDidUpdate(prevProps) {
         if (!isEqual(prevProps.params, this.props.params)) {
-            FollowingActions.getFollowers(this.params.page);
+            FollowingActions.getFollowing(this.params.page);
         }
     }
 
@@ -38,13 +38,13 @@ class Following extends React.Component {
         this.setState(state);
     }
 
-    handleClick(auth_id) {
-        let $self = $("[data-self="+ auth_id +"]");
-        FollowingActions.unFollow($self,auth_id);
+    handleClick(_id) {
+        let $self = $("[data-self="+ _id +"]");
+        FollowingActions.unFollow($self,_id);
     }
 
     render() {
-        let followers = this.state.followers.map((data,index) => {
+        let followers = this.state.following.map((data,index) => {
             return (
                 <div key={data.auth_id} className='listgroup'>
                     <div className='media'>
@@ -61,7 +61,7 @@ class Following extends React.Component {
                             <p className='followers-intro'>{data.introduce}</p>
                             <div className='follow'>
                                 <span className='fa fa-star-o'></span>
-                                <a href="javascript:;" data-self={data.auth_id.toString()} onClick={this.handleClick.bind(this,data.auth_id)}>取消关注</a>
+                                <a href="javascript:;" data-self={data._id} onClick={this.handleClick.bind(this,data._id)}>取消关注</a>
                             </div>
                         </div>
                     </div>

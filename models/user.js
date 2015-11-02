@@ -15,7 +15,7 @@ var UserSchema = new Schema({
     domain : {type : String},
     introduce : {type : String,default : '这家伙很懒，什么也没留下'},
     followers :[Number],
-    following : [Number],
+    following : [String],
     star : [Number],
     contribute : [Number]
 });

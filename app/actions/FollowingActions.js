@@ -5,33 +5,38 @@ import alt from '../alt';
 class FollowingActions {
     constructor() {
         this.generateActions(
-            'getFollowersSuccess',
+            'getFollowingSuccess',
             'changeFollowId',
             'unFollowSuccess'
         );
     }
 
-    getFollowers(page) {
+    getFollowing(page) {
+        let localStorage = window.localStorage,
+            userProfile = JSON.parse(localStorage.getItem('user'));
+
         let params = {
-            arrayId : [48561100,56115067],
+            where : {_id : userProfile.raw._id},
             option : {skip : (page-1)*10,limit : 10}
         };
         $.ajax({
-            url : '/api/users',
+            url : '/api/following',
             type : 'post',
             dataType : 'json',
             contentType: 'application/json;charset=utf-8',
             data : JSON.stringify(params)
         }).done((data) => {
-            this.actions.getFollowersSuccess(data);
+            this.actions.getFollowingSuccess(data);
         }).fail(() => {
             toastr.warning('获取关注者失败');
         });
     }
 
     unFollow($self,auth_id) {
+        let localStorage = window.localStorage,
+            userProfile = JSON.parse(localStorage.getItem('user'));
         let params = {
-            where : {auth_id : 48561100},
+            where : {_id : userProfile.raw._id},
             auth_id : auth_id
         };
 

@@ -100,26 +100,29 @@ var FollowingActions = (function () {
     function FollowingActions() {
         _classCallCheck(this, FollowingActions);
 
-        this.generateActions('getFollowersSuccess', 'changeFollowId', 'unFollowSuccess');
+        this.generateActions('getFollowingSuccess', 'changeFollowId', 'unFollowSuccess');
     }
 
     _createClass(FollowingActions, [{
-        key: 'getFollowers',
-        value: function getFollowers(page) {
+        key: 'getFollowing',
+        value: function getFollowing(page) {
             var _this = this;
 
+            var localStorage = window.localStorage,
+                userProfile = JSON.parse(localStorage.getItem('user'));
+
             var params = {
-                arrayId: [48561100, 56115067],
+                where: { _id: userProfile.raw._id },
                 option: { skip: (page - 1) * 10, limit: 10 }
             };
             $.ajax({
-                url: '/api/users',
+                url: '/api/following',
                 type: 'post',
                 dataType: 'json',
                 contentType: 'application/json;charset=utf-8',
                 data: JSON.stringify(params)
             }).done(function (data) {
-                _this.actions.getFollowersSuccess(data);
+                _this.actions.getFollowingSuccess(data);
             }).fail(function () {
                 toastr.warning('获取关注者失败');
             });
@@ -129,8 +132,10 @@ var FollowingActions = (function () {
         value: function unFollow($self, auth_id) {
             var _this2 = this;
 
+            var localStorage = window.localStorage,
+                userProfile = JSON.parse(localStorage.getItem('user'));
             var params = {
-                where: { auth_id: 48561100 },
+                where: { _id: userProfile.raw._id },
                 auth_id: auth_id
             };
 
@@ -973,13 +978,13 @@ var Following = (function (_React$Component) {
             if (page === undefined) {
                 page = 1;
             }
-            _actionsFollowingActions2['default'].getFollowers(page);
+            _actionsFollowingActions2['default'].getFollowing(page);
         }
     }, {
         key: 'componentDidUpdate',
         value: function componentDidUpdate(prevProps) {
             if (!(0, _underscore.isEqual)(prevProps.params, this.props.params)) {
-                _actionsFollowingActions2['default'].getFollowers(this.params.page);
+                _actionsFollowingActions2['default'].getFollowing(this.params.page);
             }
         }
     }, {
@@ -994,16 +999,16 @@ var Following = (function (_React$Component) {
         }
     }, {
         key: 'handleClick',
-        value: function handleClick(auth_id) {
-            var $self = $("[data-self=" + auth_id + "]");
-            _actionsFollowingActions2['default'].unFollow($self, auth_id);
+        value: function handleClick(_id) {
+            var $self = $("[data-self=" + _id + "]");
+            _actionsFollowingActions2['default'].unFollow($self, _id);
         }
     }, {
         key: 'render',
         value: function render() {
             var _this = this;
 
-            var followers = this.state.followers.map(function (data, index) {
+            var followers = this.state.following.map(function (data, index) {
                 return _react2['default'].createElement(
                     'div',
                     { key: data.auth_id, className: 'listgroup' },
@@ -1047,7 +1052,7 @@ var Following = (function (_React$Component) {
                                 _react2['default'].createElement('span', { className: 'fa fa-star-o' }),
                                 _react2['default'].createElement(
                                     'a',
-                                    { href: 'javascript:;', 'data-self': data.auth_id.toString(), onClick: _this.handleClick.bind(_this, data.auth_id) },
+                                    { href: 'javascript:;', 'data-self': data._id, onClick: _this.handleClick.bind(_this, data._id) },
                                     '取消关注'
                                 )
                             )
@@ -3126,17 +3131,18 @@ var FollowingStore = (function () {
         _classCallCheck(this, FollowingStore);
 
         this.bindActions(_actionsFollowingActions2['default']);
-        this.followers = [];
+        this.following = [];
     }
 
     _createClass(FollowingStore, [{
-        key: 'onGetFollowersSuccess',
-        value: function onGetFollowersSuccess(data) {
+        key: 'onGetFollowingSuccess',
+        value: function onGetFollowingSuccess(data) {
             var _this = this;
 
+            console.log(data);
             if (data.code === 200) {
                 data.raw.map(function (obj) {
-                    _this.followers.push(obj);
+                    _this.following.push(obj);
                 });
             }
         }

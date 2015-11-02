@@ -117,6 +117,36 @@ class md {
     }
 
     /**
+     * 获取关注的用户
+     * @param where
+     * @param callback
+     */
+    getFollowing(where,option,callback) {
+        async.waterfall([
+            //查找本地用户
+            function(_callback) {
+                User.findOne(where,(err,user) => {
+                    _callback(null,user);
+                });
+            },
+            //查找本地用户中的关注数组
+            function(user,_callback) {
+                if(user === null) {
+                    _callback(null,0);
+                } else {
+                    let following = user.following;
+                    User.find({_id : {$in : following}},'username avatar_url introduce',option,(err,docs) => {
+                        console.log(docs);
+                        _callback(null,docs);
+                    });
+                }
+            }
+        ],function(err,result){
+            callback(result);
+        });
+    }
+
+    /**
      * 添加关注，取消关注
      * @param where
      * @param auth_id
