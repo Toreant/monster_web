@@ -1,37 +1,37 @@
 /**
- * Created by apache on 15-11-1.
+ * Created by apache on 15-11-2.
  */
 import React from 'react';
 import {Link} from 'react-router';
 import {isEqual} from 'underscore';
-import FollowersActions from '../actions/FollowersActions';
-import FollowersStore from '../stores/FollowersStore';
+import FollowingActions from '../actions/FollowingActions';
+import FollowingStore from '../stores/FollowingStore';
 import Pagination from './Pagination';
 
-class Followers extends React.Component {
+class Following extends React.Component {
     constructor(props) {
         super(props);
-        this.state = FollowersStore.getState();
+        this.state = FollowingStore.getState();
         this.onChange = this.onChange.bind(this);
     }
 
     componentDidMount() {
-        FollowersStore.listen(this.onChange);
+        FollowingStore.listen(this.onChange);
         let page = this.props.params.page;
         if(page === undefined) {
             page = 1;
         }
-        FollowersActions.getFollowers(page);
+        FollowingActions.getFollowers(page);
     }
 
     componentDidUpdate(prevProps) {
         if (!isEqual(prevProps.params, this.props.params)) {
-            FollowersActions.getFollowers(this.params.page);
+            FollowingActions.getFollowers(this.params.page);
         }
     }
 
     componentWillUnMount() {
-        FollowersStore.unlisten(this.onChange);
+        FollowingStore.unlisten(this.onChange);
     }
 
     onChange(state) {
@@ -40,7 +40,7 @@ class Followers extends React.Component {
 
     handleClick(auth_id) {
         let $self = $("[data-self="+ auth_id +"]");
-        FollowersActions.addFollow($self,auth_id);
+        FollowingActions.unFollow($self,auth_id);
     }
 
     render() {
@@ -61,7 +61,7 @@ class Followers extends React.Component {
                             <p className='followers-intro'>{data.introduce}</p>
                             <div className='follow'>
                                 <span className='fa fa-star-o'></span>
-                                <a href="javascript:;" data-self={data.auth_id.toString()} onClick={this.handleClick.bind(this,data.auth_id)}>关注</a>
+                                <a href="javascript:;" data-self={data.auth_id.toString()} onClick={this.handleClick.bind(this,data.auth_id)}>取消关注</a>
                             </div>
                         </div>
                     </div>
@@ -77,4 +77,4 @@ class Followers extends React.Component {
     }
 }
 
-export default Followers;
+export default Following;

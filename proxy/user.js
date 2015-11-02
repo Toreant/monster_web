@@ -168,7 +168,7 @@ class md {
                         if(_.indexOf(following,auth_id) === -1) {
                             _callback(null,2);
                         } else {
-                            _.without(user.following,auth_id);
+                            user.following = _.without(user.following,auth_id);
                             user.save((err) => {
                                 _callback(null,1);
                             });

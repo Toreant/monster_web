@@ -76,7 +76,85 @@ var FollowersActions = (function () {
 exports['default'] = _alt2['default'].createActions(FollowersActions);
 module.exports = exports['default'];
 
-},{"../alt":12}],2:[function(require,module,exports){
+},{"../alt":13}],2:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-2.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var FollowingActions = (function () {
+    function FollowingActions() {
+        _classCallCheck(this, FollowingActions);
+
+        this.generateActions('getFollowersSuccess', 'changeFollowId', 'unFollowSuccess');
+    }
+
+    _createClass(FollowingActions, [{
+        key: 'getFollowers',
+        value: function getFollowers(page) {
+            var _this = this;
+
+            var params = {
+                arrayId: [48561100, 56115067],
+                option: { skip: (page - 1) * 10, limit: 10 }
+            };
+            $.ajax({
+                url: '/api/users',
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json;charset=utf-8',
+                data: JSON.stringify(params)
+            }).done(function (data) {
+                _this.actions.getFollowersSuccess(data);
+            }).fail(function () {
+                toastr.warning('获取关注者失败');
+            });
+        }
+    }, {
+        key: 'unFollow',
+        value: function unFollow($self, auth_id) {
+            var _this2 = this;
+
+            var params = {
+                where: { auth_id: 48561100 },
+                auth_id: auth_id
+            };
+
+            $.ajax({
+                url: '/api/unFollow',
+                dataType: 'json',
+                type: 'post',
+                contentType: 'application/json;charset=utf-8',
+                data: JSON.stringify(params)
+            }).done(function (data) {
+                _this2.actions.unFollowSuccess([$self, data]);
+            }).fail(function () {
+                toastr.error('关注不成功');
+            });
+        }
+    }]);
+
+    return FollowingActions;
+})();
+
+exports['default'] = _alt2['default'].createActions(FollowingActions);
+module.exports = exports['default'];
+
+},{"../alt":13}],3:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -118,7 +196,7 @@ var HomeActions = (function () {
 exports['default'] = _alt2['default'].createActions(HomeActions);
 module.exports = exports['default'];
 
-},{"../alt":12}],3:[function(require,module,exports){
+},{"../alt":13}],4:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -213,7 +291,7 @@ var LoginActions = (function () {
 exports['default'] = _alt2['default'].createActions(LoginActions);
 module.exports = exports['default'];
 
-},{"../alt":12}],4:[function(require,module,exports){
+},{"../alt":13}],5:[function(require,module,exports){
 /**
  * Created by apache on 15-10-25.
  */
@@ -280,7 +358,7 @@ var NavActions = (function () {
 exports['default'] = _alt2['default'].createActions(NavActions);
 module.exports = exports['default'];
 
-},{"../alt":12}],5:[function(require,module,exports){
+},{"../alt":13}],6:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -320,7 +398,7 @@ var NoticeActions = (function () {
 exports['default'] = _alt2['default'].createActions(NoticeActions);
 module.exports = exports['default'];
 
-},{"../alt":12}],6:[function(require,module,exports){
+},{"../alt":13}],7:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -347,7 +425,7 @@ var PaginationActions = function PaginationActions() {
 exports['default'] = _alt2['default'].createActions(PaginationActions);
 module.exports = exports['default'];
 
-},{"../alt":12}],7:[function(require,module,exports){
+},{"../alt":13}],8:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -387,7 +465,7 @@ var PostAnimateActions = (function () {
 exports['default'] = _alt2['default'].createActions(PostAnimateActions);
 module.exports = exports['default'];
 
-},{"../alt":12}],8:[function(require,module,exports){
+},{"../alt":13}],9:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -414,7 +492,7 @@ var ProfileCenterActions = function ProfileCenterActions() {
 exports['default'] = _alt2['default'].createActions(ProfileCenterActions);
 module.exports = exports['default'];
 
-},{"../alt":12}],9:[function(require,module,exports){
+},{"../alt":13}],10:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -492,7 +570,7 @@ var SetActions = (function () {
 exports['default'] = _alt2['default'].createActions(SetActions);
 module.exports = exports['default'];
 
-},{"../alt":12}],10:[function(require,module,exports){
+},{"../alt":13}],11:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -549,7 +627,7 @@ var StarActions = (function () {
 exports['default'] = _alt2['default'].createActions(StarActions);
 module.exports = exports['default'];
 
-},{"../alt":12}],11:[function(require,module,exports){
+},{"../alt":13}],12:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -599,7 +677,7 @@ var UserActions = (function () {
 exports['default'] = _alt2['default'].createActions(UserActions);
 module.exports = exports['default'];
 
-},{"../alt":12}],12:[function(require,module,exports){
+},{"../alt":13}],13:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -618,7 +696,7 @@ var _alt2 = _interopRequireDefault(_alt);
 exports['default'] = new _alt2['default']();
 module.exports = exports['default'];
 
-},{"alt":"alt"}],13:[function(require,module,exports){
+},{"alt":"alt"}],14:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -680,7 +758,7 @@ var App = (function (_React$Component) {
 exports['default'] = App;
 module.exports = exports['default'];
 
-},{"./Footer":15,"./Nav":18,"react":"react","react-router":"react-router"}],14:[function(require,module,exports){
+},{"./Footer":17,"./Nav":20,"react":"react","react-router":"react-router"}],15:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -746,9 +824,6 @@ var Followers = (function (_React$Component) {
         value: function componentDidUpdate(prevProps) {
             if (!(0, _underscore.isEqual)(prevProps.params, this.props.params)) {
                 _actionsFollowersActions2['default'].getFollowers(this.params.page);
-                console.log('hehe');
-            } else {
-                console.log('aha');
             }
         }
     }, {
@@ -839,7 +914,163 @@ var Followers = (function (_React$Component) {
 exports['default'] = Followers;
 module.exports = exports['default'];
 
-},{"../actions/FollowersActions":1,"../stores/FollowersStore":29,"./Pagination":21,"react":"react","react-router":"react-router","underscore":"underscore"}],15:[function(require,module,exports){
+},{"../actions/FollowersActions":1,"../stores/FollowersStore":31,"./Pagination":23,"react":"react","react-router":"react-router","underscore":"underscore"}],16:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-2.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = require('react-router');
+
+var _underscore = require('underscore');
+
+var _actionsFollowingActions = require('../actions/FollowingActions');
+
+var _actionsFollowingActions2 = _interopRequireDefault(_actionsFollowingActions);
+
+var _storesFollowingStore = require('../stores/FollowingStore');
+
+var _storesFollowingStore2 = _interopRequireDefault(_storesFollowingStore);
+
+var _Pagination = require('./Pagination');
+
+var _Pagination2 = _interopRequireDefault(_Pagination);
+
+var Following = (function (_React$Component) {
+    _inherits(Following, _React$Component);
+
+    function Following(props) {
+        _classCallCheck(this, Following);
+
+        _get(Object.getPrototypeOf(Following.prototype), 'constructor', this).call(this, props);
+        this.state = _storesFollowingStore2['default'].getState();
+        this.onChange = this.onChange.bind(this);
+    }
+
+    _createClass(Following, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            _storesFollowingStore2['default'].listen(this.onChange);
+            var page = this.props.params.page;
+            if (page === undefined) {
+                page = 1;
+            }
+            _actionsFollowingActions2['default'].getFollowers(page);
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps) {
+            if (!(0, _underscore.isEqual)(prevProps.params, this.props.params)) {
+                _actionsFollowingActions2['default'].getFollowers(this.params.page);
+            }
+        }
+    }, {
+        key: 'componentWillUnMount',
+        value: function componentWillUnMount() {
+            _storesFollowingStore2['default'].unlisten(this.onChange);
+        }
+    }, {
+        key: 'onChange',
+        value: function onChange(state) {
+            this.setState(state);
+        }
+    }, {
+        key: 'handleClick',
+        value: function handleClick(auth_id) {
+            var $self = $("[data-self=" + auth_id + "]");
+            _actionsFollowingActions2['default'].unFollow($self, auth_id);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this = this;
+
+            var followers = this.state.followers.map(function (data, index) {
+                return _react2['default'].createElement(
+                    'div',
+                    { key: data.auth_id, className: 'listgroup' },
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'media' },
+                        _react2['default'].createElement(
+                            'span',
+                            { className: 'position pull-left' },
+                            index + 1
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'pull-left thumb-lg' },
+                            _react2['default'].createElement(
+                                _reactRouter.Link,
+                                { to: '/characters/' + data.auth_id },
+                                _react2['default'].createElement('img', { className: 'media-object', src: data.avatar_url })
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'media-body' },
+                            _react2['default'].createElement(
+                                'h4',
+                                { className: 'media-heading followers-name' },
+                                _react2['default'].createElement(
+                                    _reactRouter.Link,
+                                    { to: '/characters/' + data.auth_id },
+                                    data.username
+                                )
+                            ),
+                            _react2['default'].createElement(
+                                'p',
+                                { className: 'followers-intro' },
+                                data.introduce
+                            ),
+                            _react2['default'].createElement(
+                                'div',
+                                { className: 'follow' },
+                                _react2['default'].createElement('span', { className: 'fa fa-star-o' }),
+                                _react2['default'].createElement(
+                                    'a',
+                                    { href: 'javascript:;', 'data-self': data.auth_id.toString(), onClick: _this.handleClick.bind(_this, data.auth_id) },
+                                    '取消关注'
+                                )
+                            )
+                        )
+                    )
+                );
+            });
+            return _react2['default'].createElement(
+                'div',
+                { className: 'col-md-9 col-sm-9' },
+                followers,
+                _react2['default'].createElement(_Pagination2['default'], null)
+            );
+        }
+    }]);
+
+    return Following;
+})(_react2['default'].Component);
+
+exports['default'] = Following;
+module.exports = exports['default'];
+
+},{"../actions/FollowingActions":2,"../stores/FollowingStore":32,"./Pagination":23,"react":"react","react-router":"react-router","underscore":"underscore"}],17:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -979,7 +1210,7 @@ var Footer = (function (_React$Component) {
 exports['default'] = Footer;
 module.exports = exports['default'];
 
-},{"react":"react"}],16:[function(require,module,exports){
+},{"react":"react"}],18:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -1075,7 +1306,7 @@ var Home = (function (_React$Component) {
 exports['default'] = Home;
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":2,"../stores/HomeStore":30,"react":"react"}],17:[function(require,module,exports){
+},{"../actions/HomeActions":3,"../stores/HomeStore":33,"react":"react"}],19:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -1367,7 +1598,7 @@ var Login = (function (_React$Component) {
 exports['default'] = Login;
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":3,"../stores/LoginStore":31,"react":"react"}],18:[function(require,module,exports){
+},{"../actions/LoginActions":4,"../stores/LoginStore":34,"react":"react"}],20:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -1626,7 +1857,7 @@ var Nav = (function (_React$Component) {
 exports['default'] = Nav;
 module.exports = exports['default'];
 
-},{"../actions/NavActions":4,"../stores/NavStore":32,"react":"react"}],19:[function(require,module,exports){
+},{"../actions/NavActions":5,"../stores/NavStore":35,"react":"react"}],21:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -1680,7 +1911,7 @@ var NotFound = (function (_React$Component) {
 exports['default'] = NotFound;
 module.exports = exports['default'];
 
-},{"react":"react"}],20:[function(require,module,exports){
+},{"react":"react"}],22:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -1755,7 +1986,7 @@ var Notice = (function (_React$Component) {
 exports['default'] = Notice;
 module.exports = exports['default'];
 
-},{"../actions/NoticeActions":5,"../stores/NoticeStore":33,"react":"react"}],21:[function(require,module,exports){
+},{"../actions/NoticeActions":6,"../stores/NoticeStore":36,"react":"react"}],23:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -1909,7 +2140,7 @@ var Pagination = (function (_React$Component) {
 exports['default'] = Pagination;
 module.exports = exports['default'];
 
-},{"../actions/PaginationActions":6,"../stores/PaginationStore":34,"react":"react"}],22:[function(require,module,exports){
+},{"../actions/PaginationActions":7,"../stores/PaginationStore":37,"react":"react"}],24:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -1996,7 +2227,7 @@ var PostAnimate = (function (_React$Component) {
 exports['default'] = PostAnimate;
 module.exports = exports['default'];
 
-},{"../actions/PostAnimateActions":7,"../stores/PostAnimateStore":35,"react":"react"}],23:[function(require,module,exports){
+},{"../actions/PostAnimateActions":8,"../stores/PostAnimateStore":38,"react":"react"}],25:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -2071,7 +2302,7 @@ var ProfileCenter = (function (_React$Component) {
 exports['default'] = ProfileCenter;
 module.exports = exports['default'];
 
-},{"../actions/ProfileCenterActions":8,"../stores/ProfileCenterStore":36,"react":"react"}],24:[function(require,module,exports){
+},{"../actions/ProfileCenterActions":9,"../stores/ProfileCenterStore":39,"react":"react"}],26:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -2328,7 +2559,7 @@ var Set = (function (_React$Component) {
 exports['default'] = Set;
 module.exports = exports['default'];
 
-},{"../actions/SetActions":9,"../stores/SetStore":37,"react":"react"}],25:[function(require,module,exports){
+},{"../actions/SetActions":10,"../stores/SetStore":40,"react":"react"}],27:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -2400,7 +2631,7 @@ var Star = (function (_React$Component) {
 exports['default'] = Star;
 module.exports = exports['default'];
 
-},{"../actions/StarActions":10,"../stores/StarStore":38,"react":"react"}],26:[function(require,module,exports){
+},{"../actions/StarActions":11,"../stores/StarStore":41,"react":"react"}],28:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -2661,7 +2892,7 @@ User.contextTypes = {
 exports['default'] = User;
 module.exports = exports['default'];
 
-},{"../actions/UserActions":11,"../stores/UserStore":39,"react":"react","react-router":"react-router"}],27:[function(require,module,exports){
+},{"../actions/UserActions":12,"../stores/UserStore":42,"react":"react","react-router":"react-router"}],29:[function(require,module,exports){
 /**
  * Created by apache on 15-10-22.
  */
@@ -2685,7 +2916,7 @@ _reactRouter2['default'].run(_routes2['default'], _reactRouter2['default'].Histo
   _react2['default'].render(_react2['default'].createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./routes":28,"react":"react","react-router":"react-router"}],28:[function(require,module,exports){
+},{"./routes":30,"react":"react","react-router":"react-router"}],30:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -2747,6 +2978,10 @@ var _componentsFollowers = require('./components/Followers');
 
 var _componentsFollowers2 = _interopRequireDefault(_componentsFollowers);
 
+var _componentsFollowing = require('./components/Following');
+
+var _componentsFollowing2 = _interopRequireDefault(_componentsFollowing);
+
 exports['default'] = _react2['default'].createElement(
     _reactRouter.Route,
     { handler: _componentsApp2['default'] },
@@ -2762,7 +2997,11 @@ exports['default'] = _react2['default'].createElement(
             { path: 'followers', handler: _componentsFollowers2['default'] },
             _react2['default'].createElement(_reactRouter.Route, { path: ':page', handler: _componentsFollowers2['default'] })
         ),
-        _react2['default'].createElement(_reactRouter.Route, { path: 'following', handler: _componentsUser2['default'] }),
+        _react2['default'].createElement(
+            _reactRouter.Route,
+            { path: 'following', handler: _componentsFollowing2['default'] },
+            _react2['default'].createElement(_reactRouter.Route, { path: ':page', handler: _componentsFollowing2['default'] })
+        ),
         _react2['default'].createElement(_reactRouter.Route, { path: 'contribute', handler: _componentsUser2['default'] }),
         _react2['default'].createElement(_reactRouter.Route, { path: 'notice', handler: _componentsNotice2['default'] }),
         _react2['default'].createElement(_reactRouter.Route, { path: 'star', handler: _componentsStar2['default'] }),
@@ -2778,7 +3017,7 @@ exports['default'] = _react2['default'].createElement(
 );
 module.exports = exports['default'];
 
-},{"./components/App":13,"./components/Followers":14,"./components/Home":16,"./components/Login":17,"./components/NotFound":19,"./components/Notice":20,"./components/PostAnimate":22,"./components/ProfileCenter":23,"./components/Set":24,"./components/Star":25,"./components/User":26,"react":"react","react-router":"react-router"}],29:[function(require,module,exports){
+},{"./components/App":14,"./components/Followers":15,"./components/Following":16,"./components/Home":18,"./components/Login":19,"./components/NotFound":21,"./components/Notice":22,"./components/PostAnimate":24,"./components/ProfileCenter":25,"./components/Set":26,"./components/Star":27,"./components/User":28,"react":"react","react-router":"react-router"}],31:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -2858,7 +3097,87 @@ var FollowersStore = (function () {
 exports['default'] = _alt2['default'].createStore(FollowersStore);
 module.exports = exports['default'];
 
-},{"../actions/FollowersActions":1,"../alt":12}],30:[function(require,module,exports){
+},{"../actions/FollowersActions":1,"../alt":13}],32:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-2.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _actionsFollowingActions = require('../actions/FollowingActions');
+
+var _actionsFollowingActions2 = _interopRequireDefault(_actionsFollowingActions);
+
+var FollowingStore = (function () {
+    function FollowingStore() {
+        _classCallCheck(this, FollowingStore);
+
+        this.bindActions(_actionsFollowingActions2['default']);
+        this.followers = [];
+    }
+
+    _createClass(FollowingStore, [{
+        key: 'onGetFollowersSuccess',
+        value: function onGetFollowersSuccess(data) {
+            var _this = this;
+
+            if (data.code === 200) {
+                data.raw.map(function (obj) {
+                    _this.followers.push(obj);
+                });
+            }
+        }
+    }, {
+        key: 'onChangeFollowId',
+        value: function onChangeFollowId(event) {
+            this.followId = event.target.value;
+        }
+
+        /**
+         * 添加关注
+         * @param data {type : [$self,data]}
+         */
+    }, {
+        key: 'onUnFollowSuccess',
+        value: function onUnFollowSuccess(data) {
+            switch (data[1].code) {
+                case 400:
+                    toastr.error('本地用户不存在');
+                    break;
+                case 200:
+                    toastr.success('取消关注成功');
+                    data[0].text('关注');
+                    break;
+                case 304:
+                    toastr.warning('你还没有关注过这个用户');
+                    break;
+                case 404:
+                    toastr.error('关注的用户不存在');
+                    break;
+            }
+        }
+    }]);
+
+    return FollowingStore;
+})();
+
+exports['default'] = _alt2['default'].createStore(FollowingStore);
+module.exports = exports['default'];
+
+},{"../actions/FollowingActions":2,"../alt":13}],33:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -2907,7 +3226,7 @@ var HomeStore = (function () {
 exports['default'] = _alt2['default'].createStore(HomeStore);
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":2,"../alt":12}],31:[function(require,module,exports){
+},{"../actions/HomeActions":3,"../alt":13}],34:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -3041,7 +3360,7 @@ var LoginStore = (function () {
 exports['default'] = _alt2['default'].createStore(LoginStore);
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":3,"../alt":12}],32:[function(require,module,exports){
+},{"../actions/LoginActions":4,"../alt":13}],35:[function(require,module,exports){
 /**
  * Created by apache on 15-10-25.
  */
@@ -3119,7 +3438,7 @@ var NavStore = (function () {
 exports['default'] = _alt2['default'].createStore(NavStore);
 module.exports = exports['default'];
 
-},{"../actions/NavActions":4,"../alt":12}],33:[function(require,module,exports){
+},{"../actions/NavActions":5,"../alt":13}],36:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -3163,7 +3482,7 @@ var NoticeStore = (function () {
 exports['default'] = _alt2['default'].createStore(NoticeStore);
 module.exports = exports['default'];
 
-},{"../actions/NoticeActions":5,"../alt":12}],34:[function(require,module,exports){
+},{"../actions/NoticeActions":6,"../alt":13}],37:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -3194,7 +3513,7 @@ var PaginationStore = function PaginationStore() {
 exports['default'] = _alt2['default'].createStore(PaginationStore);
 module.exports = exports['default'];
 
-},{"../actions/PaginationActions":6,"../alt":12}],35:[function(require,module,exports){
+},{"../actions/PaginationActions":7,"../alt":13}],38:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -3238,7 +3557,7 @@ var PostAnimateStore = (function () {
 exports['default'] = _alt2['default'].createStore(PostAnimateStore);
 module.exports = exports['default'];
 
-},{"../actions/PostAnimateActions":7,"../alt":12}],36:[function(require,module,exports){
+},{"../actions/PostAnimateActions":8,"../alt":13}],39:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -3269,7 +3588,7 @@ var ProfileCenterStore = function ProfileCenterStore() {
 exports['default'] = _alt2['default'].createStore(ProfileCenterStore);
 module.exports = exports['default'];
 
-},{"../actions/ProfileCenterActions":8,"../alt":12}],37:[function(require,module,exports){
+},{"../actions/ProfileCenterActions":9,"../alt":13}],40:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -3420,7 +3739,7 @@ var SetStore = (function () {
 exports['default'] = _alt2['default'].createStore(SetStore);
 module.exports = exports['default'];
 
-},{"../actions/SetActions":9,"../alt":12}],38:[function(require,module,exports){
+},{"../actions/SetActions":10,"../alt":13}],41:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -3464,7 +3783,7 @@ var StarStore = (function () {
 exports['default'] = _alt2['default'].createStore(StarStore);
 module.exports = exports['default'];
 
-},{"../actions/StarActions":10,"../alt":12}],39:[function(require,module,exports){
+},{"../actions/StarActions":11,"../alt":13}],42:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -3532,4 +3851,4 @@ var UserStore = (function () {
 exports['default'] = _alt2['default'].createStore(UserStore);
 module.exports = exports['default'];
 
-},{"../actions/UserActions.js":11,"../alt":12}]},{},[27]);
+},{"../actions/UserActions.js":12,"../alt":13}]},{},[29]);

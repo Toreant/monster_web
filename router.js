@@ -17,6 +17,8 @@ router.post('/api/users',UserCtrl.getUserById);
 
 router.post('/api/follow',UserCtrl.addFollow);
 
+router.post('/api/unFollow',UserCtrl.unFollowing);
+
 router.post('/api/session',function(req,res,next){
     if((req.session.passport !== undefined || req.session.user !== undefined)) {
         let data = req.session.passport === undefined? req.session.user:req.session.passport.user;
