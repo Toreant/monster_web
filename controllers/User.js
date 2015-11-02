@@ -178,16 +178,19 @@ class UserCtrl {
             meta : '',
             code : 0
         };
-        User.addFollow(where,auth_id,(data) => {
-            if(data === 1) {
+        User.follow(where,auth_id,0,(data) => {
+            if(data === 0) {
+                result.meta = '本地用户不存在';
+                result.code = 400;
+            } else if(data === 1) {
                 result.meta = '关注成功';
                 result.code = 200;
-            } else if(data === null) {
-                result.meta = '关注不成功';
+            } else if(data === 2) {
+                result.meta = '你已经关注过这歌用户';
                 result.code = 304;
             } else {
-                result.meta = '这个用户不存在';
-                result.code = 400;
+                result.meta = '关注的用户不存在';
+                result.code = 404;
             }
             res.json(result);
         });
@@ -206,16 +209,19 @@ class UserCtrl {
             meta : '',
             code : 0
         };
-        User.unFollow(where,auth_id,(data) => {
+        User.follow(where,auth_id,1,(data) => {
             if(data === 0) {
                 result.meta = '本地用户不存在';
                 result.code = 400;
-            } else if(data === null) {
-                result.meta = '你还没关注这个用户';
-                result.code = 404;
             } else if(data === 1) {
                 result.meta = '取消关注成功';
                 result.code = 200;
+            } else if(data === 2) {
+                result.meta = '这个用户不在关注列表中';
+                result.code = 304;
+            } else {
+                result.meta = '这个用户不存在';
+                result.code = 404;
             }
             res.json(result);
         });

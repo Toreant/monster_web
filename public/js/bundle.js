@@ -2628,13 +2628,20 @@ var FollowersStore = (function () {
     }, {
         key: 'onAddFollowSuccess',
         value: function onAddFollowSuccess(data) {
-            if (data[1].code === 200) {
-                toastr.success('关注 成功');
-                data[0].text('取消关注');
-            } else if (data[1].code === 400) {
-                toastr.warning('本地用户不存在');
-            } else if (data[1].code === 304) {
-                toastr.warning('这个用户已经关注过');
+            console.log(data[1]);
+            switch (data[1].code) {
+                case 400:
+                    toastr.error('本地用户不存在');
+                    break;
+                case 200:
+                    toastr.success('关注成功');
+                    break;
+                case 304:
+                    toastr.warning('你已经关注过这个用户');
+                    break;
+                case 404:
+                    toastr.error('关注的用户不存在');
+                    break;
             }
         }
     }]);
