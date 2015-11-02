@@ -21,7 +21,6 @@ var UserSchema = new Schema({
 });
 
 UserSchema.index({email: 1}, {unique: true});
-UserSchema.index({username : 1}, {unique : true});
 UserSchema.index({auth_id : 1},{unique : true});
 UserSchema.index({domain : 1},{unique : true});
 

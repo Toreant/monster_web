@@ -28,7 +28,7 @@ class FollowingActions {
         }).done((data) => {
             this.actions.getFollowingSuccess(data);
         }).fail(() => {
-            toastr.warning('获取关注者失败');
+            toastr.warning('取消关注者失败');
         });
     }
 

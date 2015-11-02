@@ -15,6 +15,7 @@ import PostAnimate from './components/PostAnimate';
 import ProfileCenter from './components/ProfileCenter';
 import Followers from './components/Followers';
 import Following from './components/Following';
+import Contribute from './components/Contribute';
 
 export default (
     <Route handler={App}>
@@ -29,7 +30,7 @@ export default (
             <Route path='following' handler={Following}>
                 <Route path=':page' handler={Following}/>
             </Route>
-            <Route path='contribute' handler={User} />
+            <Route path='contribute' handler={Contribute} />
             <Route path='notice' handler={Notice} />
             <Route path='star' handler={Star} />
             <Route path='/post'>
