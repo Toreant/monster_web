@@ -852,63 +852,79 @@ var Followers = (function (_React$Component) {
         value: function render() {
             var _this = this;
 
-            var followers = this.state.followers.map(function (data, index) {
-                return _react2['default'].createElement(
-                    'div',
-                    { key: data.auth_id, className: 'listgroup' },
-                    _react2['default'].createElement(
+            var followers = undefined;
+            if (this.state.followers.length === 0) {
+                followers = _react2['default'].createElement(
+                    'p',
+                    { className: 'bg-danger mon-padding' },
+                    '还没有人关注我'
+                );
+            } else {
+                followers = this.state.followers.map(function (data, index) {
+                    return _react2['default'].createElement(
                         'div',
-                        { className: 'media' },
-                        _react2['default'].createElement(
-                            'span',
-                            { className: 'position pull-left' },
-                            index + 1
-                        ),
+                        { key: data.auth_id, className: 'listgroup' },
                         _react2['default'].createElement(
                             'div',
-                            { className: 'pull-left thumb-lg' },
+                            { className: 'media' },
                             _react2['default'].createElement(
-                                _reactRouter.Link,
-                                { to: '/characters/' + data.auth_id },
-                                _react2['default'].createElement('img', { className: 'media-object', src: data.avatar_url })
-                            )
-                        ),
-                        _react2['default'].createElement(
-                            'div',
-                            { className: 'media-body' },
-                            _react2['default'].createElement(
-                                'h4',
-                                { className: 'media-heading followers-name' },
-                                _react2['default'].createElement(
-                                    _reactRouter.Link,
-                                    { to: '/characters/' + data.auth_id },
-                                    data.username
-                                )
-                            ),
-                            _react2['default'].createElement(
-                                'p',
-                                { className: 'followers-intro' },
-                                data.introduce
+                                'span',
+                                { className: 'position pull-left' },
+                                index + 1
                             ),
                             _react2['default'].createElement(
                                 'div',
-                                { className: 'follow' },
-                                _react2['default'].createElement('span', { className: 'fa fa-star-o' }),
+                                { className: 'pull-left thumb-lg' },
                                 _react2['default'].createElement(
-                                    'a',
-                                    { href: 'javascript:;', 'data-self': data.auth_id.toString(), onClick: _this.handleClick.bind(_this, data.auth_id) },
-                                    '关注'
+                                    _reactRouter.Link,
+                                    { to: '/characters/' + data.auth_id },
+                                    _react2['default'].createElement('img', { className: 'media-object', src: data.avatar_url })
+                                )
+                            ),
+                            _react2['default'].createElement(
+                                'div',
+                                { className: 'media-body' },
+                                _react2['default'].createElement(
+                                    'h4',
+                                    { className: 'media-heading followers-name' },
+                                    _react2['default'].createElement(
+                                        _reactRouter.Link,
+                                        { to: '/characters/' + data.auth_id },
+                                        data.username
+                                    )
+                                ),
+                                _react2['default'].createElement(
+                                    'p',
+                                    { className: 'followers-intro' },
+                                    data.introduce
+                                ),
+                                _react2['default'].createElement(
+                                    'div',
+                                    { className: 'follow' },
+                                    _react2['default'].createElement('span', { className: 'fa fa-star-o' }),
+                                    _react2['default'].createElement(
+                                        'a',
+                                        { href: 'javascript:;', 'data-self': data.auth_id.toString(), onClick: _this.handleClick.bind(_this, data.auth_id) },
+                                        '关注'
+                                    )
                                 )
                             )
                         )
-                    )
-                );
-            });
+                    );
+                });
+            }
+
+            var pagination = this.state.followers.length !== 0 ? _react2['default'].createElement(_Pagination2['default'], null) : null;
             return _react2['default'].createElement(
                 'div',
-                { className: 'col-md-9 col-sm-9' },
+                { className: 'col-md-9 col-sm-9 animated fadeInUp' },
+                _react2['default'].createElement(
+                    'p',
+                    { className: 'bg-success mon-padding mon-bg-title' },
+                    '关注我的'
+                ),
                 followers,
-                _react2['default'].createElement(_Pagination2['default'], null)
+                pagination
             );
         }
     }]);
@@ -1008,63 +1024,80 @@ var Following = (function (_React$Component) {
         value: function render() {
             var _this = this;
 
-            var followers = this.state.following.map(function (data, index) {
-                return _react2['default'].createElement(
-                    'div',
-                    { key: data.auth_id, className: 'listgroup' },
-                    _react2['default'].createElement(
+            var following = undefined;
+            if (this.state.following.length === 0) {
+                following = _react2['default'].createElement(
+                    'p',
+                    { className: 'bg-danger mon-padding' },
+                    '这家伙还没有关注任何人'
+                );
+            } else {
+                following = this.state.following.map(function (data, index) {
+                    return _react2['default'].createElement(
                         'div',
-                        { className: 'media' },
-                        _react2['default'].createElement(
-                            'span',
-                            { className: 'position pull-left' },
-                            index + 1
-                        ),
+                        { key: data._id, className: 'listgroup' },
                         _react2['default'].createElement(
                             'div',
-                            { className: 'pull-left thumb-lg' },
+                            { className: 'media' },
                             _react2['default'].createElement(
-                                _reactRouter.Link,
-                                { to: '/characters/' + data.auth_id },
-                                _react2['default'].createElement('img', { className: 'media-object', src: data.avatar_url })
-                            )
-                        ),
-                        _react2['default'].createElement(
-                            'div',
-                            { className: 'media-body' },
-                            _react2['default'].createElement(
-                                'h4',
-                                { className: 'media-heading followers-name' },
-                                _react2['default'].createElement(
-                                    _reactRouter.Link,
-                                    { to: '/characters/' + data.auth_id },
-                                    data.username
-                                )
-                            ),
-                            _react2['default'].createElement(
-                                'p',
-                                { className: 'followers-intro' },
-                                data.introduce
+                                'span',
+                                { className: 'position pull-left' },
+                                index + 1
                             ),
                             _react2['default'].createElement(
                                 'div',
-                                { className: 'follow' },
-                                _react2['default'].createElement('span', { className: 'fa fa-star-o' }),
+                                { className: 'pull-left thumb-lg' },
                                 _react2['default'].createElement(
-                                    'a',
-                                    { href: 'javascript:;', 'data-self': data._id, onClick: _this.handleClick.bind(_this, data._id) },
-                                    '取消关注'
+                                    _reactRouter.Link,
+                                    { to: '/characters/' + data.auth_id },
+                                    _react2['default'].createElement('img', { className: 'media-object', src: data.avatar_url })
+                                )
+                            ),
+                            _react2['default'].createElement(
+                                'div',
+                                { className: 'media-body' },
+                                _react2['default'].createElement(
+                                    'h4',
+                                    { className: 'media-heading followers-name' },
+                                    _react2['default'].createElement(
+                                        _reactRouter.Link,
+                                        { to: '/characters/' + data.auth_id },
+                                        data.username
+                                    )
+                                ),
+                                _react2['default'].createElement(
+                                    'p',
+                                    { className: 'followers-intro' },
+                                    data.introduce
+                                ),
+                                _react2['default'].createElement(
+                                    'div',
+                                    { className: 'follow' },
+                                    _react2['default'].createElement('span', { className: 'fa fa-star-o' }),
+                                    _react2['default'].createElement(
+                                        'a',
+                                        { href: 'javascript:;', 'data-self': data._id, onClick: _this.handleClick.bind(_this, data._id) },
+                                        '取消关注'
+                                    )
                                 )
                             )
                         )
-                    )
-                );
-            });
+                    );
+                });
+            }
+
+            var pagination = this.state.following.length !== 0 ? _react2['default'].createElement(_Pagination2['default'], null) : null;
+
             return _react2['default'].createElement(
                 'div',
-                { className: 'col-md-9 col-sm-9' },
-                followers,
-                _react2['default'].createElement(_Pagination2['default'], null)
+                { className: 'col-md-9 col-sm-9 animated fadeInUp' },
+                _react2['default'].createElement(
+                    'p',
+                    { className: 'bg-success mon-padding mon-bg-title' },
+                    '我关注的'
+                ),
+                following,
+                pagination
             );
         }
     }]);
@@ -2073,7 +2106,7 @@ var Pagination = (function (_React$Component) {
                     ),
                     _react2['default'].createElement(
                         'li',
-                        { 'class': 'active' },
+                        { className: 'active' },
                         _react2['default'].createElement(
                             'a',
                             { href: '1' },
@@ -2453,7 +2486,7 @@ var Set = (function (_React$Component) {
             }
             return _react2['default'].createElement(
                 'div',
-                { className: 'col-md-9 col-sm-9' },
+                { className: 'col-md-9 col-sm-9 animated fadeInUp' },
                 _react2['default'].createElement(
                     'legend',
                     null,
@@ -3139,7 +3172,6 @@ var FollowingStore = (function () {
         value: function onGetFollowingSuccess(data) {
             var _this = this;
 
-            console.log(data);
             if (data.code === 200) {
                 data.raw.map(function (obj) {
                     _this.following.push(obj);

@@ -136,7 +136,6 @@ class md {
                 } else {
                     let following = user.following;
                     User.find({_id : {$in : following}},'username avatar_url introduce',option,(err,docs) => {
-                        console.log(docs);
                         _callback(null,docs);
                     });
                 }

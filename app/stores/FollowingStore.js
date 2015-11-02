@@ -11,7 +11,6 @@ class FollowingStore {
     }
 
     onGetFollowingSuccess(data) {
-        console.log(data);
         if(data.code === 200) {
             data.raw.map((obj) => {
                 this.following.push(obj);

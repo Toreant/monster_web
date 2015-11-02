@@ -44,34 +44,45 @@ class Following extends React.Component {
     }
 
     render() {
-        let followers = this.state.following.map((data,index) => {
-            return (
-                <div key={data.auth_id} className='listgroup'>
-                    <div className='media'>
-                        <span className='position pull-left'>{index + 1}</span>
-                        <div className='pull-left thumb-lg'>
-                            <Link to={'/characters/' + data.auth_id}>
-                                <img className='media-object' src={data.avatar_url} />
-                            </Link>
-                        </div>
-                        <div className='media-body'>
-                            <h4 className='media-heading followers-name'>
-                                <Link to={'/characters/' + data.auth_id}>{data.username}</Link>
-                            </h4>
-                            <p className='followers-intro'>{data.introduce}</p>
-                            <div className='follow'>
-                                <span className='fa fa-star-o'></span>
-                                <a href="javascript:;" data-self={data._id} onClick={this.handleClick.bind(this,data._id)}>取消关注</a>
+        let following;
+        if(this.state.following.length === 0) {
+            following = (
+                <p className='bg-danger mon-padding'>这家伙还没有关注任何人</p>
+            );
+        } else {
+            following = this.state.following.map((data,index) => {
+                return (
+                    <div key={data._id} className='listgroup'>
+                        <div className='media'>
+                            <span className='position pull-left'>{index + 1}</span>
+                            <div className='pull-left thumb-lg'>
+                                <Link to={'/characters/' + data.auth_id}>
+                                    <img className='media-object' src={data.avatar_url} />
+                                </Link>
+                            </div>
+                            <div className='media-body'>
+                                <h4 className='media-heading followers-name'>
+                                    <Link to={'/characters/' + data.auth_id}>{data.username}</Link>
+                                </h4>
+                                <p className='followers-intro'>{data.introduce}</p>
+                                <div className='follow'>
+                                    <span className='fa fa-star-o'></span>
+                                    <a href="javascript:;" data-self={data._id} onClick={this.handleClick.bind(this,data._id)}>取消关注</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            );
-        });
+                );
+            });
+        }
+
+        let pagination = this.state.following.length !== 0?(<Pagination />):null;
+
         return(
-            <div className='col-md-9 col-sm-9'>
-                {followers}
-                <Pagination />
+            <div className='col-md-9 col-sm-9 animated fadeInUp'>
+                <p className='bg-success mon-padding mon-bg-title'>我关注的</p>
+                {following}
+                {pagination}
             </div>
         );
     }

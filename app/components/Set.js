@@ -92,7 +92,7 @@ class Set extends React.Component {
 
         }
         return (
-            <div className='col-md-9 col-sm-9'>
+            <div className='col-md-9 col-sm-9 animated fadeInUp'>
                 <legend>设置</legend>
                 <form className='form-horizontal' role='form'>
                     <div className={'form-group '+this.state.domainValidate}>
