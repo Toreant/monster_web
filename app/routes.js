@@ -16,6 +16,7 @@ import ProfileCenter from './components/ProfileCenter';
 import Followers from './components/Followers';
 import Following from './components/Following';
 import Contribute from './components/Contribute';
+import PostArticle from './components/PostArticle';
 
 export default (
     <Route handler={App}>
@@ -36,7 +37,7 @@ export default (
             <Route path='/post'>
                 <Route path='animate' handler={PostAnimate}/>
                 <Route path='music' />
-                <Route path='article' />
+                <Route path='article' handler={PostArticle}/>
             </Route>
         </Route>
         <Route path='*' handler={NotFound} />
