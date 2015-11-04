@@ -4,6 +4,7 @@
 import React from 'react';
 import PostArticleActions from '../actions/PostArticleActions';
 import PostArticleStore from '../stores/PostArticleStore';
+import md from 'markdown';
 class PostArticle extends React.Component {
     constructor(props) {
         super(props);
@@ -14,7 +15,29 @@ class PostArticle extends React.Component {
     componentDidMount() {
         PostArticleStore.listen(this.onChange);
         this.refs.title.getDOMNode().focus();
-        $("#some-textarea").markdown({autofocus:false,savable:false,language : 'zh-en'});
+        let localStorage = window.localStorage;
+        let postArticle = localStorage.getItem('postArticle');
+        postArticle = JSON.parse(postArticle);
+        if(postArticle.post !== undefined && postArticle.post === false) {
+            toastr.warning('是否加载保存的稿件');
+        }
+        let markdown = md.markdown;
+        $("#some-textarea").markdown({
+            autofocus:false,
+            savable:false,
+            onPreview: function(e) {
+                var previewContent;
+
+                if (e.isDirty()) {
+                    var originalContent = e.getContent();
+
+                    previewContent = markdown.toHTML(originalContent);
+                } else {
+                    previewContent = "写下你的大作吧！！！"
+                }
+                return previewContent;
+            }
+        });
     }
 
     componentWillUnMount() {
@@ -26,7 +49,23 @@ class PostArticle extends React.Component {
     }
 
     handleClick() {
-        PostArticleActions.postArticle(this.state.title,this.state.summary,this.state.tag,'',this.state.content);
+        console.log(this.state.summary);
+        console.log(this.state.content);
+        PostArticleActions.postArticle(this.state.title,this.state.summary,this.state.tag,this.state.abbreviations,this.state.content);
+    }
+
+    saveArticle() {
+        let localStorage = window.localStorage;
+        let article = {
+            title : this.state.title,
+            summary : this.state.summary,
+            tags : this.state.tag,
+            content : this.state.content,
+            abbreviations : this.state.abbreviations,
+            post : false
+        };
+        localStorage.setItem('postArticle',JSON.stringify(article));
+        toastr.success('保存稿件成功');
     }
 
     render() {
@@ -75,6 +114,10 @@ class PostArticle extends React.Component {
                         </div>
                     </div>
                     <textarea id='some-textarea' name="content" data-provide="markdown" rows="15" onChange={PostArticleActions.changeContent}></textarea>
+                    <a href="javascript:;" className='btn btn-info mon-post-btn' onClick={this.saveArticle.bind(this)}>
+                        <span className='fa fa-clock-o'></span>
+                        保存
+                    </a>
                     <a href="javascript:;" className='btn btn-success pull-right mon-post-btn' onClick={this.handleClick.bind(this)}>
                         <span className='fa fa-check-circle-o'></span>
                         提交稿件

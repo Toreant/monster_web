@@ -14,6 +14,7 @@ var ArticleSchema = new Schema({
     browser_count : {type : Number,default :0},
     create_user_id : {type : String},
     create_user_name : {type : String},
+    create_time : {type : Number},
     comment : [Number]
 });
 

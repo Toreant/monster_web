@@ -9,7 +9,8 @@ class PostArticleActions {
             'changeAbbreviations',
             'changeTag',
             'changeContent',
-            'changeSummary'
+            'changeSummary',
+            'postArticleSuccess'
         );
     }
 
@@ -25,7 +26,8 @@ class PostArticleActions {
                 abbreviations : abbreviations,
                 content : content,
                 create_user_id : userProfile.raw._id,
-                create_user_name : userProfile.raw.username
+                create_user_name : userProfile.raw.username,
+                create_time : Date.parse(new Date())
             }
         };
 
@@ -36,8 +38,8 @@ class PostArticleActions {
             cache : false,
             contentType: 'application/json;charset=utf-8',
             data : JSON.stringify(params)
-        }).done((data) => {console.log(data);})
-        .fail(() => {toastr.warning('发表文章不成功');});
+        }).done((data) => {this.actions.postArticleSuccess(data);})
+        .fail(() => {toastr.error('发表文章不成功');});
     }
 }
 export default alt.createActions(PostArticleActions);

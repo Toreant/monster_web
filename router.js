@@ -24,6 +24,8 @@ router.post('/api/unFollow',UserCtrl.unFollowing);
 
 router.post('/api/article',ArticleCtrl.getSaveArticle);
 
+router.post('/api/getArticle',ArticleCtrl.getArticle);
+
 router.post('/api/session',function(req,res,next){
     if((req.session.passport !== undefined || req.session.user !== undefined)) {
         let data = req.session.passport === undefined? req.session.user:req.session.passport.user;

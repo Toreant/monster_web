@@ -476,3 +476,6 @@
 .mon-post-btn {
   margin-top: 20px;
 }
+.mon-post-btn .fa {
+  margin-right: 5px;
+}

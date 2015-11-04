@@ -3,6 +3,7 @@
  */
 import article from '../proxy/article';
 import user from '../proxy/user';
+import md from 'markdown';
 import _ from 'underscore';
 
 class ArticleCtrl {
@@ -29,6 +30,29 @@ class ArticleCtrl {
                 result.meta = '保存文章成功';
                 result.code = 200;
             }
+            res.json(result);
+        });
+    }
+
+    /**
+     * 获取文章
+     * @param req
+     * @param res
+     * @param next
+     */
+    getArticle(req,res,next) {
+        let id = req.body.id;
+        let result = {
+            meta : '',
+            code : 0,
+            raw : null
+        };
+        let markdown = md.markdown;
+        article.getArticleById(id,(data) => {
+            console.log('data : '+data);
+            result.meta = '获取文章成功';
+            result.code = 200;
+            result.raw = data;
             res.json(result);
         });
     }

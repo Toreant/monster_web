@@ -17,11 +17,15 @@ import Followers from './components/Followers';
 import Following from './components/Following';
 import Contribute from './components/Contribute';
 import PostArticle from './components/PostArticle';
+import Article from './components/Article';
 
 export default (
     <Route handler={App}>
         <Route path='/' handler={Home} />
         <Route path='/login' handler={Login} />
+        <Route path='/article' handler={Article}>
+            <Route path=':id' handler={Article} />
+        </Route>
         <Route path='profile' handler={User}>
             <Route path='setting' handler={Set} />
             <Route path='center' handler={ProfileCenter} />
