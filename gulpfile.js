@@ -99,7 +99,7 @@ gulp.task('browserify-watch', ['browserify-vendor'], function() {
  |--------------------------------------------------------------------------
  */
 gulp.task('styles', function() {
-    return gulp.src('app/less/app.less')
+    return gulp.src('app/less/**/*.less')
         .pipe(plumber())
         .pipe(less())
         .pipe(autoprefixer())
@@ -107,9 +107,20 @@ gulp.task('styles', function() {
         .pipe(gulp.dest('public/css'));
 });
 
-gulp.task('watch', function() {
-    gulp.watch('app/less/**/*.less', ['styles']);
+/**
+ *  合并css文件
+ */
+gulp.task('concat',function() {
+    return gulp.src('public/css/*.css')
+            .pipe(plumber())
+            .pipe(concat('main.css'))
+            .pipe(gulp.dest('public/css'));
 });
 
-gulp.task('default', ['styles', 'vendor', 'browserify-watch', 'watch']);
+gulp.task('watch', function() {
+    gulp.watch('app/less/**/*.less', ['styles']);
+    gulp.watch('public/css/*.css',['concat']);
+});
+
+gulp.task('default', ['styles', 'vendor', 'browserify-watch', 'watch','concat']);
 gulp.task('build', ['styles', 'vendor', 'browserify']);
