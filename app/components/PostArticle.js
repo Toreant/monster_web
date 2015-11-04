@@ -26,10 +26,7 @@ class PostArticle extends React.Component {
     }
 
     handleClick() {
-        console.log('title : '+this.state.title);
-        console.log('tag : '+this.state.tag);
-        console.log('summary : '+this.state.summary);
-        console.log('content : '+this.state.content);
+        PostArticleActions.postArticle(this.state.title,this.state.summary,this.state.tag,'',this.state.content);
     }
 
     render() {
@@ -53,7 +50,7 @@ class PostArticle extends React.Component {
                             <label className='label label-default' htmlFor='tag'>文章标签</label>
                         </div>
                         <div className='col-md-11'>
-                            <input type="text" className='form-control' id='tag' ref='tag' onChange={PostArticleActions.changeTag} placeholder='请输入文章标签'/>
+                            <input type="text" className='form-control' id='tag' ref='tag' onChange={PostArticleActions.changeTag} placeholder='请输入文章标签 (标签间以空格分隔)'/>
                         </div>
                     </div>
                     <div className='form-group'>
@@ -78,7 +75,10 @@ class PostArticle extends React.Component {
                         </div>
                     </div>
                     <textarea id='some-textarea' name="content" data-provide="markdown" rows="15" onChange={PostArticleActions.changeContent}></textarea>
-                    <a href="javascript:;" className='btn btn-success pull-right mon-post-btn' onClick={this.handleClick.bind(this)}>提交稿件</a>
+                    <a href="javascript:;" className='btn btn-success pull-right mon-post-btn' onClick={this.handleClick.bind(this)}>
+                        <span className='fa fa-check-circle-o'></span>
+                        提交稿件
+                    </a>
                 </form>
             </div>
         );

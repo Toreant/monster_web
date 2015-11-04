@@ -4,6 +4,7 @@
 import express from 'express';
 let router = express.Router();
 import UserCtrl from './controllers/User';
+import ArticleCtrl from './controllers/Article';
 
 router.post('/api/login',UserCtrl.getLogin);
 
@@ -20,6 +21,8 @@ router.post('/api/follow',UserCtrl.addFollow);
 router.post('/api/following',UserCtrl.getFollowing);
 
 router.post('/api/unFollow',UserCtrl.unFollowing);
+
+router.post('/api/article',ArticleCtrl.getSaveArticle);
 
 router.post('/api/session',function(req,res,next){
     if((req.session.passport !== undefined || req.session.user !== undefined)) {

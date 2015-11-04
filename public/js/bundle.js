@@ -507,6 +507,8 @@ Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -515,11 +517,48 @@ var _alt = require('../alt');
 
 var _alt2 = _interopRequireDefault(_alt);
 
-var PostArticleActions = function PostArticleActions() {
-    _classCallCheck(this, PostArticleActions);
+var PostArticleActions = (function () {
+    function PostArticleActions() {
+        _classCallCheck(this, PostArticleActions);
 
-    this.generateActions('changeTitle', 'changeAbbreviations', 'changeTag', 'changeContent', 'changeSummary');
-};
+        this.generateActions('changeTitle', 'changeAbbreviations', 'changeTag', 'changeContent', 'changeSummary');
+    }
+
+    _createClass(PostArticleActions, [{
+        key: 'postArticle',
+        value: function postArticle(title, summary, tags, abbreviations, content) {
+            var localStorage = window.localStorage,
+                userProfile = localStorage.getItem('user');
+            userProfile = JSON.parse(userProfile);
+            var params = {
+                params: {
+                    title: title,
+                    summary: summary,
+                    tags: tags,
+                    abbreviations: abbreviations,
+                    content: content,
+                    create_user_id: userProfile.raw._id,
+                    create_user_name: userProfile.raw.username
+                }
+            };
+
+            $.ajax({
+                url: '/api/article',
+                type: 'post',
+                dataType: 'json',
+                cache: false,
+                contentType: 'application/json;charset=utf-8',
+                data: JSON.stringify(params)
+            }).done(function (data) {
+                console.log(data);
+            }).fail(function () {
+                toastr.warning('发表文章不成功');
+            });
+        }
+    }]);
+
+    return PostArticleActions;
+})();
 
 exports['default'] = _alt2['default'].createActions(PostArticleActions);
 module.exports = exports['default'];
@@ -2472,10 +2511,7 @@ var PostArticle = (function (_React$Component) {
     }, {
         key: 'handleClick',
         value: function handleClick() {
-            console.log('title : ' + this.state.title);
-            console.log('tag : ' + this.state.tag);
-            console.log('summary : ' + this.state.summary);
-            console.log('content : ' + this.state.content);
+            _actionsPostArticleActions2['default'].postArticle(this.state.title, this.state.summary, this.state.tag, '', this.state.content);
         }
     }, {
         key: 'render',
@@ -2524,7 +2560,7 @@ var PostArticle = (function (_React$Component) {
                         _react2['default'].createElement(
                             'div',
                             { className: 'col-md-11' },
-                            _react2['default'].createElement('input', { type: 'text', className: 'form-control', id: 'tag', ref: 'tag', onChange: _actionsPostArticleActions2['default'].changeTag, placeholder: '请输入文章标签' })
+                            _react2['default'].createElement('input', { type: 'text', className: 'form-control', id: 'tag', ref: 'tag', onChange: _actionsPostArticleActions2['default'].changeTag, placeholder: '请输入文章标签 (标签间以空格分隔)' })
                         )
                     ),
                     _react2['default'].createElement(
@@ -2581,6 +2617,7 @@ var PostArticle = (function (_React$Component) {
                     _react2['default'].createElement(
                         'a',
                         { href: 'javascript:;', className: 'btn btn-success pull-right mon-post-btn', onClick: this.handleClick.bind(this) },
+                        _react2['default'].createElement('span', { className: 'fa fa-check-circle-o' }),
                         '提交稿件'
                     )
                 )

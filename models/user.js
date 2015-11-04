@@ -14,10 +14,13 @@ var UserSchema = new Schema({
     account : {type : Number},
     domain : {type : String},
     introduce : {type : String,default : '这家伙很懒，什么也没留下'},
-    followers :[Number],
+    followers :[String],
     following : [String],
     star : [Number],
-    contribute : [Number]
+    contribute : [String],
+    article : [String],
+    animate : [String],
+    music : [String]
 });
 
 UserSchema.index({email: 1}, {unique: true});

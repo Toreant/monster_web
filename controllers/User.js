@@ -1,7 +1,6 @@
 /**
  * Created by apache on 15-10-24.
  */
-import mongoose from 'mongoose';
 import User from '../proxy/user';
 import crypto from 'crypto';
 import _ from 'underscore';
