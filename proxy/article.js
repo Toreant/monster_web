@@ -12,8 +12,32 @@ class md {
      * @param callback
      */
     getArticleById(id,callback) {
-        Article.findById(id,(err,docs) => {
-            callback(docs);
+
+        async.waterfall([
+
+            //查找文章
+            function(_callback) {
+                Article.findById(id,(err,docs) => {
+                    _callback(null,docs);
+                });
+            },
+
+            //查找文章的读者
+            function(docs,_callback) {
+                if(docs === null) {
+                    _callback(null);
+                } else {
+                    User.findById(docs.create_user_id,'username avatar_url domain',(err,user) => {
+                        if(err) {
+                            console.log(err);
+                        } else {
+                            _callback(null,{article : docs, user : user});
+                        }
+                    });
+                }
+            }
+        ],function(err,result) {
+            callback(result);
         });
     }
 

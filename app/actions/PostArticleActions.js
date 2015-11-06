@@ -27,7 +27,7 @@ class PostArticleActions {
                 content : content,
                 create_user_id : userProfile.raw._id,
                 create_user_name : userProfile.raw.username,
-                create_time : Date.parse(new Date())
+                create_time : Math.round(new Date().getTime()/1000)
             }
         };
 

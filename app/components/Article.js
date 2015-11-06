@@ -26,17 +26,34 @@ class Article extends React.Component {
         this.setState(state);
         let markdown = md.markdown;
         let content = markdown.toHTML(this.state.content);
-        //document.getElementById('content').innerHTML = content;
         this.refs.content.getDOMNode().innerHTML = content;
     }
 
     render() {
+        let tags = this.state.tags.map((data) => {
+            return (
+                <span className='mon-article-tag'>{data}</span>
+            );
+        });
         return (
             <div className='container'>
                 <div className='raw'>
-                    <p>{this.state.title}</p>
-                    <p>{this.state.summary}</p>
-                    <div ref='content'></div>
+                    <div className='col-md-8 col-sm-8 mon-article'>
+                        <p className='mon-article-title'>{this.state.title}</p>
+                        <div className='mon-article-detail'>
+                            <a href={'/u/'+this.state.createUserDomain}>
+                                <img src={this.state.createUserAvatar} alt="loading" width='40'/>
+                            </a>
+                            <a href={'/u/'+this.state.createUserDomain}>{this.state.createUser}</a>
+                            <span>|</span>
+                            <span>{this.state.createTime}</span>
+                        </div>
+                        <p className='bg-success mon-article-summary'>{this.state.summary}</p>
+                        <div ref='content' className='mon-article-content'></div>
+                        <div className='mon-article-tags'>
+                            {tags}
+                        </div>
+                    </div>
                 </div>
             </div>
         );

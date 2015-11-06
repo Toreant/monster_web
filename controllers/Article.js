@@ -49,10 +49,14 @@ class ArticleCtrl {
         };
         let markdown = md.markdown;
         article.getArticleById(id,(data) => {
-            console.log('data : '+data);
-            result.meta = '获取文章成功';
-            result.code = 200;
-            result.raw = data;
+            if(data === null) {
+                result.meta = '找不到这个文章';
+                result.code = 400;
+            } else {
+                result.meta  = '获取文章成功';
+                result.code = 200;
+                result.raw = data;
+            }
             res.json(result);
         });
     }
