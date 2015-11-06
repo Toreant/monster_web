@@ -18,21 +18,36 @@ class md {
             //查找文章
             function(_callback) {
                 Article.findById(id,(err,docs) => {
-                    _callback(null,docs);
+                    //文章阅读数增１
+                    docs.browser_count += 1;
+                    docs.save((err) => {
+                        _callback(null,docs);
+                    });
                 });
             },
 
             //查找文章的读者
             function(docs,_callback) {
                 if(docs === null) {
-                    _callback(null);
+                    _callback(null,null,null);
                 } else {
-                    User.findById(docs.create_user_id,'username avatar_url domain',(err,user) => {
+                    User.findById(docs.create_user_id,'username avatar_url domain introduce',(err,user) => {
                         if(err) {
                             console.log(err);
                         } else {
-                            _callback(null,{article : docs, user : user});
+                            _callback(null,docs, user);
                         }
+                    });
+                }
+            },
+
+            //推荐文章
+            function(docs,user,_callback) {
+                if(docs === null && user === null) {
+                    _callback(null,null);
+                } else {
+                    Article.find({},'title',{sort : {browser_count : -1},skip : 1,limit : 6},(err,articles) => {
+                        _callback(null,{article : docs, user : user, recommend : articles});
                     });
                 }
             }

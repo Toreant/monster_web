@@ -8,7 +8,7 @@
 .mon-article blockquote {
   position: relative;
   padding-left: 50px;
-  background-color: #D4D4D4;
+  background-color: #ddd;
   font-size: 16px;
 }
 
@@ -91,4 +91,64 @@
 .mon-article-tag:hover {
   opacity: 1;
   cursor: pointer;
+}
+
+
+.mon-article-user {
+  display: inline-block;
+  border-radius: 50%;
+  box-shadow: 0 0 10px grey;
+  overflow: hidden;
+}
+
+.mon-article-user:hover {
+  box-shadow: 0 0 10px #43CD80;
+}
+
+.mon-article-user img {
+  border-radius: 50%;
+  width: 80px;
+}
+
+.mon-article-user-detail {
+  display: inline-block;
+}
+
+.mon-user-name {
+  font-size: 20px;
+  color: #5e5e5e;
+}
+
+.mon-user-name:hover {
+  text-decoration: none;
+}
+
+.mon-recommend {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.mon-recommend>li {
+  position: relative;
+  display: block;
+}
+
+.mon-recommend .mon-re-item {
+  display: block;
+  font-size: 16px;
+  position: relative;
+  height: 40px;
+  width: 100%;
+  line-height: 40px;
+  text-decoration: none;
+  padding-left: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: grey;
+}
+
+.mon-re-item:hover {
+  background-color: #ddd;
 }

@@ -931,6 +931,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouter = require('react-router');
+
+var _underscore = require('underscore');
+
 var _actionsArticleActions = require('../actions/ArticleActions');
 
 var _actionsArticleActions2 = _interopRequireDefault(_actionsArticleActions);
@@ -966,6 +970,13 @@ var Article = (function (_React$Component) {
             _storesArticleStore2['default'].unlisten(this.onChange);
         }
     }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps) {
+            if (!(0, _underscore.isEqual)(prevProps.params, this.props.params)) {
+                _actionsArticleActions2['default'].getArticle(this.props.params.id);
+            }
+        }
+    }, {
         key: 'onChange',
         value: function onChange(state) {
             this.setState(state);
@@ -981,6 +992,22 @@ var Article = (function (_React$Component) {
                     'span',
                     { className: 'mon-article-tag' },
                     data
+                );
+            });
+
+            var recommends = this.state.recommends.map(function (data) {
+                return _react2['default'].createElement(
+                    'li',
+                    null,
+                    _react2['default'].createElement(
+                        _reactRouter.Link,
+                        { to: '/article/' + data._id },
+                        _react2['default'].createElement(
+                            'a',
+                            { href: 'javascript:;', className: 'mon-re-item', title: data.title },
+                            data.title
+                        )
+                    )
                 );
             });
             return _react2['default'].createElement(
@@ -1032,6 +1059,64 @@ var Article = (function (_React$Component) {
                             { className: 'mon-article-tags' },
                             tags
                         )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'col-md-4 col-sm-4 mon-offset' },
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'panel panel-default' },
+                            _react2['default'].createElement(
+                                'div',
+                                { className: 'panel-heading' },
+                                '文章作者'
+                            ),
+                            _react2['default'].createElement(
+                                'div',
+                                { className: 'panel-body media' },
+                                _react2['default'].createElement(
+                                    'div',
+                                    { className: 'media-left' },
+                                    _react2['default'].createElement(
+                                        'a',
+                                        { href: '/u/' + this.state.createUserDomain, className: 'mon-article-user' },
+                                        _react2['default'].createElement('img', { src: this.state.createUserAvatar, alt: 'loading' })
+                                    )
+                                ),
+                                _react2['default'].createElement(
+                                    'div',
+                                    { className: 'media-body' },
+                                    _react2['default'].createElement(
+                                        'div',
+                                        { className: 'media-heading' },
+                                        _react2['default'].createElement(
+                                            'a',
+                                            { href: '/u/' + this.state.createUserDomain, className: 'mon-user-name' },
+                                            this.state.createUser
+                                        )
+                                    ),
+                                    _react2['default'].createElement(
+                                        'p',
+                                        null,
+                                        this.state.createUserIntro
+                                    )
+                                )
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'panel panel-info' },
+                            _react2['default'].createElement(
+                                'div',
+                                { className: 'panel-heading' },
+                                '推荐文章'
+                            ),
+                            _react2['default'].createElement(
+                                'ul',
+                                { className: 'mon-recommend' },
+                                recommends
+                            )
+                        )
                     )
                 )
             );
@@ -1044,7 +1129,7 @@ var Article = (function (_React$Component) {
 exports['default'] = Article;
 module.exports = exports['default'];
 
-},{"../actions/ArticleActions":1,"../stores/ArticleStore":37,"markdown":56,"react":"react"}],19:[function(require,module,exports){
+},{"../actions/ArticleActions":1,"../stores/ArticleStore":37,"markdown":56,"react":"react","react-router":"react-router","underscore":"underscore"}],19:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -3711,25 +3796,30 @@ var ArticleStore = (function () {
         this.createUserAvatar = '';
         this.createTime = '';
         this.createUserDomain = '';
+        this.createUserIntro = '';
         this.tags = [];
+        this.recommends = [];
     }
 
     _createClass(ArticleStore, [{
         key: 'onGetArticleSuccess',
         value: function onGetArticleSuccess(data) {
             if (data.code === 200) {
+                console.log(data);
                 var options = {
                     weekday: "long", year: "numeric", month: "short",
                     day: "numeric", hour: "2-digit", minute: "2-digit"
                 };
                 this.content = data.raw.article.content;
                 this.title = data.raw.article.title;
-                this.summary = data.raw.article.summary;
+                this.summary = data.raw.article.summary || '这个文章没有简介，呜呜';
                 this.createUser = data.raw.article.create_user_name;
                 this.createUserAvatar = data.raw.user.avatar_url;
                 this.createUserDomain = data.raw.user.domain;
                 this.tags = data.raw.article.tags;
+                this.createUserIntro = data.raw.user.introduce;
                 this.createTime = new Date(data.raw.article.create_time * 1000).toLocaleTimeString();
+                this.recommends = data.raw.recommend;
             } else if (data.code === 400) {
                 toastr.warning(data.meta);
             }
