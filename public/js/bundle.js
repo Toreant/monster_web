@@ -1070,7 +1070,7 @@ var Article = (function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var tags = this.state.tags.map(function (data, index) {
+            var Tags = this.state.tags.map(function (data, index) {
                 return _react2['default'].createElement(
                     'span',
                     { key: index, className: 'mon-article-tag' },
@@ -1078,7 +1078,7 @@ var Article = (function (_React$Component) {
                 );
             });
 
-            var recommends = this.state.recommends.map(function (data, index) {
+            var Recommends = this.state.recommends.map(function (data, index) {
                 return _react2['default'].createElement(
                     'li',
                     { key: index },
@@ -1093,10 +1093,10 @@ var Article = (function (_React$Component) {
                     )
                 );
             });
-            return _react2['default'].createElement(
-                'div',
-                { className: 'container' },
-                _react2['default'].createElement(
+
+            var Article = undefined;
+            if (this.state.article) {
+                Article = _react2['default'].createElement(
                     'div',
                     { className: 'raw animated fadeInUp' },
                     _react2['default'].createElement(
@@ -1140,7 +1140,7 @@ var Article = (function (_React$Component) {
                         _react2['default'].createElement(
                             'div',
                             { className: 'mon-article-tags' },
-                            tags
+                            Tags
                         ),
                         _react2['default'].createElement(_Comment2['default'], { id: this.props.params.id })
                     ),
@@ -1193,11 +1193,22 @@ var Article = (function (_React$Component) {
                             _react2['default'].createElement(
                                 'ul',
                                 { className: 'mon-recommend' },
-                                recommends
+                                Recommends
                             )
                         )
                     )
-                )
+                );
+            } else {
+                Article = _react2['default'].createElement(
+                    'p',
+                    { className: 'text-danger mon-bg-tigle' },
+                    '找不到这篇文章'
+                );
+            }
+            return _react2['default'].createElement(
+                'div',
+                { className: 'container' },
+                Article
             );
         }
     }]);
@@ -4067,6 +4078,7 @@ var ArticleStore = (function () {
         _classCallCheck(this, ArticleStore);
 
         this.bindActions(_actionsArticleActions2['default']);
+        this.article = false;
         this.content = '';
         this.title = '';
         this.summary = '';
@@ -4083,11 +4095,11 @@ var ArticleStore = (function () {
         key: 'onGetArticleSuccess',
         value: function onGetArticleSuccess(data) {
             if (data.code === 200) {
-                console.log(data);
                 var options = {
                     weekday: "long", year: "numeric", month: "short",
                     day: "numeric", hour: "2-digit", minute: "2-digit"
                 };
+                this.article = true;
                 this.content = data.raw.article.content;
                 this.title = data.raw.article.title;
                 this.summary = data.raw.article.summary || '这个文章没有简介，呜呜';

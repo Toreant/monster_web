@@ -39,19 +39,21 @@ class Article extends React.Component {
     }
 
     render() {
-        let tags = this.state.tags.map((data,index) => {
+        let Tags = this.state.tags.map((data,index) => {
             return (
                 <span key={index} className='mon-article-tag'>{data}</span>
             );
         });
 
-        let recommends = this.state.recommends.map((data,index) => {
+        let Recommends = this.state.recommends.map((data,index) => {
             return (
                 <li key={index}><Link to={'/article/'+data._id}><a href='javascript:;' className='mon-re-item' title={data.title}>{data.title}</a></Link></li>
             );
         });
-        return (
-            <div className='container'>
+
+        let Article;
+        if(this.state.article) {
+            Article = (
                 <div className='raw animated fadeInUp'>
                     <div className='col-md-8 col-sm-8 mon-article'>
                         <p className='mon-article-title'>{this.state.title}</p>
@@ -66,7 +68,7 @@ class Article extends React.Component {
                         <p className='bg-success mon-article-summary'>{this.state.summary}</p>
                         <div ref='content' className='mon-article-content'></div>
                         <div className='mon-article-tags'>
-                            {tags}
+                            {Tags}
                         </div>
                         <Comment id={this.props.params.id}/>
                     </div>
@@ -93,11 +95,20 @@ class Article extends React.Component {
                                 推荐文章
                             </div>
                             <ul className='mon-recommend'>
-                                {recommends}
+                                {Recommends}
                             </ul>
                         </div>
                     </div>
                 </div>
+            );
+        } else {
+            Article = (
+                <p className='text-danger mon-bg-tigle'>找不到这篇文章</p>
+            );
+        }
+        return (
+            <div className='container'>
+                {Article}
             </div>
         );
     }

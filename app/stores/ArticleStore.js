@@ -6,6 +6,7 @@ import ArticleActions from '../actions/ArticleActions';
 class ArticleStore　{
     constructor() {
         this.bindActions(ArticleActions);
+        this.article = false;
         this.content = '';
         this.title = '';
         this.summary = '';
@@ -20,11 +21,11 @@ class ArticleStore　{
 
     onGetArticleSuccess(data) {
         if(data.code === 200) {
-            console.log(data);
             var options = {
                 weekday: "long", year: "numeric", month: "short",
                 day: "numeric", hour: "2-digit", minute: "2-digit"
             };
+            this.article = true;
             this.content = data.raw.article.content;
             this.title = data.raw.article.title;
             this.summary = data.raw.article.summary || '这个文章没有简介，呜呜';

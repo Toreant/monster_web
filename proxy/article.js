@@ -18,11 +18,15 @@ class md {
             //查找文章
             function(_callback) {
                 Article.findById(id,(err,docs) => {
-                    //文章阅读数增１
-                    docs.browser_count += 1;
-                    docs.save((err) => {
-                        _callback(null,docs);
-                    });
+                    if(docs !== undefined && docs !== null) {
+                        //文章阅读数增１
+                        docs.browser_count += 1;
+                        docs.save((err) => {
+                            _callback(null,docs);
+                        });
+                    } else {
+                        _callback(null,null);
+                    }
                 });
             },
 
