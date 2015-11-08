@@ -1276,8 +1276,43 @@ var BtnBlock = (function (_React$Component) {
                 { className: 'mon-btn-block' },
                 _react2['default'].createElement(
                     'a',
+                    { href: 'javascript:;', className: 'btn btn-default' },
+                    _react2['default'].createElement('span', { className: 'fa fa-weibo' }),
+                    _react2['default'].createElement(
+                        'span',
+                        { className: 'mon-btn-fix' },
+                        '微博分享'
+                    )
+                ),
+                _react2['default'].createElement(
+                    'a',
+                    { href: 'javascript:;', className: 'btn btn-default' },
+                    _react2['default'].createElement('span', { className: 'fa fa-facebook' }),
+                    _react2['default'].createElement(
+                        'span',
+                        { className: 'mon-btn-fix' },
+                        'FA分享'
+                    )
+                ),
+                _react2['default'].createElement(
+                    'a',
+                    { href: 'javascript:;', className: 'btn btn-default' },
+                    _react2['default'].createElement('span', { className: 'fa fa-weixin' }),
+                    _react2['default'].createElement(
+                        'span',
+                        { className: 'mon-btn-fix' },
+                        '微信分享'
+                    )
+                ),
+                _react2['default'].createElement(
+                    'a',
                     { href: 'javascript:;', className: 'btn btn-default', onClick: this.handlerClick.bind(this) },
-                    _react2['default'].createElement('span', { className: 'fa fa-arrow-up' })
+                    _react2['default'].createElement('span', { className: 'fa fa-arrow-up' }),
+                    _react2['default'].createElement(
+                        'span',
+                        { className: 'mon-btn-fix' },
+                        '回到顶部'
+                    )
                 )
             );
         }
