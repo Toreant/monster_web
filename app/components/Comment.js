@@ -107,6 +107,8 @@ class Comment extends React.Component {
                 </ul>
                 <a href="javascript:;" className='btn mon-page mon-prev-page' onClick={this.getComment.bind(this,0)}><span className='fa fa-long-arrow-left'></span></a>
                 <a href="javascript:;" className='btn mon-page mon-next-page' onClick={this.getComment.bind(this,1)}><span className='fa fa-long-arrow-right'></span></a>
+
+
             </div>
         );
     }

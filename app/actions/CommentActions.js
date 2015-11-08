@@ -47,7 +47,7 @@ class CommentActions {
         }).done((data) => {
             this.actions.postCommentSuccess(data);
         }).fail(() => {
-            toastr.warning('评论不成功');
+            toastr.error('网络链接有问题   ');
         });
     }
 }

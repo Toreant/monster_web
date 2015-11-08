@@ -114,7 +114,7 @@ var CommentActions = (function () {
             }).done(function (data) {
                 _this2.actions.postCommentSuccess(data);
             }).fail(function () {
-                toastr.warning('评论不成功');
+                toastr.error('网络链接有问题   ');
             });
         }
     }]);
@@ -1269,6 +1269,40 @@ var BtnBlock = (function (_React$Component) {
             $("html,body").animate({ scrollTop: 0 }, 700);
         }
     }, {
+        key: 'shareFB',
+        value: function shareFB() {
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '1162206170473800',
+                    xfbml: true,
+                    version: 'v2.5'
+                });
+
+                var u = window.location.href;
+                FB.ui({
+                    method: 'share_open_graph',
+                    action_type: 'og.likes',
+                    action_properties: JSON.stringify({
+                        object: u.toString()
+                    })
+                }, function (response) {
+                    // Debug response (optional)
+                    console.log(response);
+                });
+            };
+
+            (function (d, s, id) {
+                var js,
+                    fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {
+                    return;
+                }
+                js = d.createElement(s);js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            })(document, 'script', 'facebook-jssdk');
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2['default'].createElement(
@@ -1286,7 +1320,7 @@ var BtnBlock = (function (_React$Component) {
                 ),
                 _react2['default'].createElement(
                     'a',
-                    { href: 'javascript:;', className: 'btn btn-default' },
+                    { href: 'javascript:;', className: 'btn btn-default', onClick: this.shareFB.bind(this) },
                     _react2['default'].createElement('span', { className: 'fa fa-facebook' }),
                     _react2['default'].createElement(
                         'span',
