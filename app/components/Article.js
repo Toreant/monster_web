@@ -57,7 +57,7 @@ class Article extends React.Component {
                         <p className='mon-article-title'>{this.state.title}</p>
                         <div className='mon-article-detail'>
                             <a href={'/u/'+this.state.createUserDomain}>
-                                <img src={this.state.createUserAvatar} alt="loading" width='40'/>
+                                <img src={this.state.createUserAvatar || '/img/default.png'} alt="loading" width='40'/>
                             </a>
                             <a href={'/u/'+this.state.createUserDomain}>{this.state.createUser}</a>
                             <span>|</span>
@@ -75,7 +75,7 @@ class Article extends React.Component {
                             <div className='panel-body media'>
                                 <div className='media-left'>
                                     <a href={'/u/'+this.state.createUserDomain} className='mon-article-user'>
-                                        <img src={this.state.createUserAvatar} alt="loading"/>
+                                        <img src={this.state.createUserAvatar || '/img/default.png'} alt="loading"/>
                                     </a>
                                 </div>
                                 <div className='media-body'>

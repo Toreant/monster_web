@@ -1113,7 +1113,7 @@ var Article = (function (_React$Component) {
                             _react2['default'].createElement(
                                 'a',
                                 { href: '/u/' + this.state.createUserDomain },
-                                _react2['default'].createElement('img', { src: this.state.createUserAvatar, alt: 'loading', width: '40' })
+                                _react2['default'].createElement('img', { src: this.state.createUserAvatar || '/img/default.png', alt: 'loading', width: '40' })
                             ),
                             _react2['default'].createElement(
                                 'a',
@@ -1159,7 +1159,7 @@ var Article = (function (_React$Component) {
                                     _react2['default'].createElement(
                                         'a',
                                         { href: '/u/' + this.state.createUserDomain, className: 'mon-article-user' },
-                                        _react2['default'].createElement('img', { src: this.state.createUserAvatar, alt: 'loading' })
+                                        _react2['default'].createElement('img', { src: this.state.createUserAvatar || '/img/default.png', alt: 'loading' })
                                     )
                                 ),
                                 _react2['default'].createElement(
