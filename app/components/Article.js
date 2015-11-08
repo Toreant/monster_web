@@ -8,6 +8,7 @@ import ArticleActions from '../actions/ArticleActions';
 import ArticleStore from '../stores/ArticleStore';
 import md from 'markdown';
 import Comment from './Comment';
+import BtnBlock from './BtnBlock';
 
 class Article extends React.Component {
     constructor(props) {
@@ -109,6 +110,7 @@ class Article extends React.Component {
         return (
             <div className='container'>
                 {Article}
+                <BtnBlock />
             </div>
         );
     }

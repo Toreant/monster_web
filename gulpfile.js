@@ -104,23 +104,24 @@ gulp.task('styles', function() {
         .pipe(less())
         .pipe(autoprefixer())
         .pipe(gulpif(production, cssmin()))
-        .pipe(gulp.dest('public/css'));
+        .pipe(gulp.dest('public/css/app'));
 });
 
 /**
  *  合并css文件
  */
 gulp.task('concat',function() {
-    return gulp.src('public/css/*.css')
+    return gulp.src('public/css/app/*.css')
             .pipe(plumber())
-            .pipe(concat('main.css'))
+            .pipe(concat('main.min.css'))
+            .pipe(cssmin())
             .pipe(gulp.dest('public/css'));
 });
 
 gulp.task('watch', function() {
     gulp.watch('app/less/**/*.less', ['styles']);
-    gulp.watch('public/css/*.css',['concat']);
+    gulp.watch('public/css/app/*.css',['concat']);
 });
 
-gulp.task('default', ['styles', 'vendor', 'browserify-watch', 'watch','concat']);
+gulp.task('default', ['styles', 'vendor', 'browserify-watch', 'watch']);
 gulp.task('build', ['styles', 'vendor', 'browserify']);
