@@ -68,6 +68,7 @@ class Article extends React.Component {
                         <div className='mon-article-tags'>
                             {tags}
                         </div>
+                        <Comment id={this.props.params.id}/>
                     </div>
                     <div className='col-md-4 col-sm-4 mon-offset'>
                         <div className='panel panel-default'>
@@ -97,7 +98,6 @@ class Article extends React.Component {
                         </div>
                     </div>
                 </div>
-                <Comment id={this.props.params.id}/>
             </div>
         );
     }

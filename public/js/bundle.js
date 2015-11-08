@@ -70,25 +70,29 @@ var CommentActions = (function () {
     function CommentActions() {
         _classCallCheck(this, CommentActions);
 
-        this.generateActions('getCommentSuccess', 'postCommentSuccess', 'changeComment');
+        this.generateActions('getCommentSuccess', 'postCommentSuccess', 'changeComment', 'changeSkip');
     }
 
     _createClass(CommentActions, [{
         key: 'getComment',
-        value: function getComment(id) {
+        value: function getComment(id, skip) {
             var _this = this;
 
             var params = {
                 con_id: id
             };
-
+            if (skip < 0) {
+                skip = 0;
+                toastr.warning('不能在向前获取评论了');
+                return false;
+            }
             $.ajax({
                 url: '/api/comment',
                 type: 'post',
                 contentType: 'application/json;charset=utf-8',
                 cache: false,
                 dataType: 'json',
-                data: JSON.stringify({ params: params })
+                data: JSON.stringify({ params: params, option: { skip: skip, limit: 10, sort: { create_time: -1 } } })
             }).done(function (data) {
                 _this.actions.getCommentSuccess(data);
             }).fail(function () {
@@ -106,7 +110,7 @@ var CommentActions = (function () {
                 contentType: 'application/json;charset=utf-8',
                 dataType: 'json',
                 cache: false,
-                data: JSON.stringify({ params: params, option: { skip: 0, limit: 10 } })
+                data: JSON.stringify({ params: params })
             }).done(function (data) {
                 _this2.actions.postCommentSuccess(data);
             }).fail(function () {
@@ -1137,7 +1141,8 @@ var Article = (function (_React$Component) {
                             'div',
                             { className: 'mon-article-tags' },
                             tags
-                        )
+                        ),
+                        _react2['default'].createElement(_Comment2['default'], { id: this.props.params.id })
                     ),
                     _react2['default'].createElement(
                         'div',
@@ -1192,8 +1197,7 @@ var Article = (function (_React$Component) {
                             )
                         )
                     )
-                ),
-                _react2['default'].createElement(_Comment2['default'], { id: this.props.params.id })
+                )
             );
         }
     }]);
@@ -1230,6 +1234,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _underscore = require('underscore');
 
+var _reactRouter = require('react-router');
+
 var _actionsCommentActions = require('../actions/CommentActions');
 
 var _actionsCommentActions2 = _interopRequireDefault(_actionsCommentActions);
@@ -1253,14 +1259,14 @@ var Comment = (function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             _storesCommentStore2['default'].listen(this.onChange);
-            _actionsCommentActions2['default'].getComment(this.props.id);
+            _actionsCommentActions2['default'].getComment(this.props.id, 0);
         }
     }, {
         key: 'componentDidUpdate',
         value: function componentDidUpdate(prevProps) {
             //　判断是不是更改了文章
             if (prevProps.id !== this.props.id) {
-                _actionsCommentActions2['default'].getComment(this.props.id);
+                _actionsCommentActions2['default'].getComment(this.props.id, 0);
             }
         }
     }, {
@@ -1286,42 +1292,110 @@ var Comment = (function (_React$Component) {
             _actionsCommentActions2['default'].postComment(params);
         }
     }, {
+        key: 'getComment',
+        value: function getComment(option) {
+            if (option === 0) {
+                _actionsCommentActions2['default'].changeSkip(0);
+                console.log(this.state.skip);
+                _actionsCommentActions2['default'].getComment(this.props.id, this.state.skip - 10);
+            } else {
+                _actionsCommentActions2['default'].changeSkip(1);
+                console.log(this.state.skip);
+                _actionsCommentActions2['default'].getComment(this.props.id, this.state.skip + 10);
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
 
-            var CommentList = this.state.commentList.map(function (data) {
-                return _react2['default'].createElement(
-                    'li',
-                    { key: data.comment._id },
-                    _react2['default'].createElement(
-                        'a',
-                        { href: '/u/' + data.user.domain },
-                        _react2['default'].createElement('img', { src: data.user.avatar_url, alt: 'loading', width: '40' })
-                    ),
-                    data.comment.content
+            var CommentList = undefined;
+            if (this.state.commentList.length > 0) {
+                CommentList = this.state.commentList.map(function (data) {
+                    return _react2['default'].createElement(
+                        'li',
+                        { key: data.comment._id, className: 'clearfix mon-comment-item' },
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-1' },
+                            _react2['default'].createElement(
+                                _reactRouter.Link,
+                                { to: '/u/' + data.user.domain },
+                                _react2['default'].createElement('img', { src: data.user.avatar_url, alt: 'loading', width: '40' })
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-11' },
+                            _react2['default'].createElement(
+                                'div',
+                                null,
+                                _react2['default'].createElement(
+                                    _reactRouter.Link,
+                                    { to: '/u/' + data.user.domain, className: 'mon-user-name' },
+                                    data.user.username
+                                ),
+                                _react2['default'].createElement(
+                                    'span',
+                                    { className: 'pull-right' },
+                                    new Date(data.comment.create_time).toLocaleDateString()
+                                )
+                            ),
+                            _react2['default'].createElement(
+                                'article',
+                                null,
+                                data.comment.content
+                            )
+                        )
+                    );
+                });
+            } else {
+                CommentList = _react2['default'].createElement(
+                    'p',
+                    { className: 'text-danger' },
+                    '没有评论了'
                 );
-            });
+            }
+
             return _react2['default'].createElement(
                 'div',
-                { className: 'row' },
+                { className: 'row mon-comment' },
                 _react2['default'].createElement(
                     'form',
                     { role: 'form' },
                     _react2['default'].createElement(
                         'div',
                         { className: 'form-group' },
-                        _react2['default'].createElement('textarea', { name: 'comment', className: 'form-control', onChange: _actionsCommentActions2['default'].changeComment })
+                        _react2['default'].createElement('textarea', { name: 'comment', className: 'form-control', rows: '5', placeholder: '输入你的大评吧！！！', onChange: _actionsCommentActions2['default'].changeComment })
                     ),
                     _react2['default'].createElement(
-                        'a',
-                        { href: 'javascript:;', className: 'btn btn-info', onClick: this.handleClick.bind(this) },
-                        '保存评论'
+                        'div',
+                        { className: 'form-group clearfix' },
+                        _react2['default'].createElement(
+                            'a',
+                            { href: 'javascript:;', className: 'btn btn-info pull-right', onClick: this.handleClick.bind(this) },
+                            '保存评论'
+                        )
                     )
                 ),
                 _react2['default'].createElement(
+                    'p',
+                    { className: 'mon-comment-title' },
+                    '评论列表'
+                ),
+                _react2['default'].createElement(
                     'ul',
-                    null,
+                    { className: 'mon-comment-list' },
                     CommentList
+                ),
+                _react2['default'].createElement(
+                    'a',
+                    { href: 'javascript:;', className: 'btn mon-page mon-prev-page', onClick: this.getComment.bind(this, 0) },
+                    _react2['default'].createElement('span', { className: 'fa fa-long-arrow-left' })
+                ),
+                _react2['default'].createElement(
+                    'a',
+                    { href: 'javascript:;', className: 'btn mon-page mon-next-page', onClick: this.getComment.bind(this, 1) },
+                    _react2['default'].createElement('span', { className: 'fa fa-long-arrow-right' })
                 )
             );
         }
@@ -1333,7 +1407,7 @@ var Comment = (function (_React$Component) {
 exports['default'] = Comment;
 module.exports = exports['default'];
 
-},{"../actions/CommentActions":2,"../stores/CommentStore":40,"react":"react","underscore":"underscore"}],21:[function(require,module,exports){
+},{"../actions/CommentActions":2,"../stores/CommentStore":40,"react":"react","react-router":"react-router","underscore":"underscore"}],21:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -4067,13 +4141,16 @@ var CommentStore = (function () {
         this.bindActions(_actionsCommentActions2['default']);
         this.commentList = [];
         this.comment = '';
+        this.skip = 0;
     }
 
     _createClass(CommentStore, [{
         key: 'onGetCommentSuccess',
         value: function onGetCommentSuccess(data) {
             if (data.code === 200) {
-                console.log(data);
+                if (data.raw.length === 0) {
+                    toastr.warning('没有评论了');
+                }
                 this.commentList = data.raw;
             } else {
                 toastr.warning('获取评论失败');
@@ -4084,14 +4161,28 @@ var CommentStore = (function () {
         value: function onPostCommentSuccess(data) {
             if (data.code === 200) {
                 toastr.success(data.meta);
-            } else {
+            } else if (data.code === 400) {
                 toastr.error(data.meta);
+            } else {
+                toastr.warning(data.meta);
             }
         }
     }, {
         key: 'onChangeComment',
         value: function onChangeComment(event) {
             this.comment = event.target.value;
+        }
+    }, {
+        key: 'onChangeSkip',
+        value: function onChangeSkip(option) {
+            if (option === 0) {
+                this.skip = this.skip - 10;
+            } else {
+                this.skip = this.skip + 10;
+            }
+            if (this.skip <= 0) {
+                this.skip = 0;
+            }
         }
     }]);
 

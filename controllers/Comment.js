@@ -12,7 +12,6 @@ class CommentCtrl {
      * @param next
      */
     getComments(req,res,next) {
-        console.log('huoqu pinglun');
         let params = req.body.params,
             option = req.body.option;
         let result = {
@@ -81,26 +80,29 @@ class CommentCtrl {
      * @param next
      */
     savaComment(req,res,next) {
-        console.log('评论');
         let params = req.body.params;
-        params.create_user_id = req.session.user._id;
-        console.log(params);
-        let result = {
-            meta : '',
-            code : 0
-        };
+        if(req.session.user === undefined) {
+            res.json({meta : '你还没登陆，不能评论',code : 404});
+        } else {
+            params.create_user_id = req.session.user._id;
+            let result = {
+                meta : '',
+                code : 0
+            };
 
-        Comment.saveComment(params,(data) => {
-            if(data === null) {
-                result.meta = '评论失败';
-                result.code = 400;
-            } else {
-                result.meta = '评论成功';
-                result.code = 200;
-            }
+            Comment.saveComment(params,(data) => {
+                if(data === null) {
+                    result.meta = '评论失败';
+                    result.code = 400;
+                } else {
+                    result.meta = '评论成功';
+                    result.code = 200;
+                }
 
-            res.json(result);
-        });
+                res.json(result);
+            });
+        }
+
     }
 }
 

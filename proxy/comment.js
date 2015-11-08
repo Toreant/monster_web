@@ -18,7 +18,7 @@ class md {
 
             //　获取评论
             function(_callback) {
-                Comment.find(param,option,(err,docs) => {
+                Comment.find(param,null,option,(err,docs) => {
                     _callback(null,docs);
                 });
             },

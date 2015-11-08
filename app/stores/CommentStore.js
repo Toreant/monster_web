@@ -9,11 +9,14 @@ class CommentStore {
         this.bindActions(CommentActions);
         this.commentList = [];
         this.comment = '';
+        this.skip = 0;
     }
 
     onGetCommentSuccess(data) {
         if(data.code === 200) {
-            console.log(data);
+            if(data.raw.length === 0) {
+                toastr.warning('没有评论了');
+            }
             this.commentList = data.raw;
         } else {
             toastr.warning('获取评论失败');
@@ -23,13 +26,26 @@ class CommentStore {
     onPostCommentSuccess(data) {
         if(data.code === 200) {
             toastr.success(data.meta);
-        } else {
+        } else if(data.code === 400) {
             toastr.error(data.meta);
+        } else {
+            toastr.warning(data.meta);
         }
     };
 
     onChangeComment(event) {
         this.comment = event.target.value;
+    }
+
+    onChangeSkip(option) {
+        if(option === 0) {
+            this.skip = this.skip-10;
+        } else {
+            this.skip = this.skip+10;
+        }
+        if(this.skip <= 0) {
+            this.skip = 0;
+        }
     }
 }
 

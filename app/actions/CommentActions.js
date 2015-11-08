@@ -8,22 +8,27 @@ class CommentActions {
         this.generateActions(
             'getCommentSuccess',
             'postCommentSuccess',
-            'changeComment'
+            'changeComment',
+            'changeSkip'
         );
     }
 
-    getComment(id) {
+    getComment(id,skip) {
         let params = {
             con_id : id
         };
-
+        if(skip < 0) {
+            skip = 0;
+            toastr.warning('不能在向前获取评论了');
+            return false;
+        }
         $.ajax({
             url : '/api/comment',
             type : 'post',
             contentType: 'application/json;charset=utf-8',
             cache : false,
             dataType : 'json',
-            data : JSON.stringify({params : params })
+            data : JSON.stringify({params : params,option : {skip : skip,limit : 10,sort : {create_time : -1}}})
         }).done((data) => {
             this.actions.getCommentSuccess(data);
         }).fail(() => {
@@ -38,7 +43,7 @@ class CommentActions {
             contentType: 'application/json;charset=utf-8',
             dataType : 'json',
             cache : false,
-            data : JSON.stringify({params : params,option : {skip : 0,limit : 10}})
+            data : JSON.stringify({params : params})
         }).done((data) => {
             this.actions.postCommentSuccess(data);
         }).fail(() => {
