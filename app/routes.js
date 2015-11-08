@@ -23,7 +23,7 @@ export default (
     <Route handler={App}>
         <Route path='/' handler={Home} />
         <Route path='/login' handler={Login} />
-        <Route path='/article' handler={Article}>
+        <Route path='/article'>
             <Route path=':id' handler={Article} />
         </Route>
         <Route path='profile' handler={User}>

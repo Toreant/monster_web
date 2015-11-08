@@ -37,7 +37,7 @@ class SetActions {
         $.ajax({
             url : '/api/user',
             type : 'put',
-            cahce : 'false',
+            cache : 'false',
             dataType : 'json',
             contentType: 'application/json;charset=utf-8',
             data : JSON.stringify(params)

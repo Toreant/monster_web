@@ -5,6 +5,7 @@ import express from 'express';
 let router = express.Router();
 import UserCtrl from './controllers/User';
 import ArticleCtrl from './controllers/Article';
+import CommentCtrl from './controllers/Comment';
 
 router.post('/api/login',UserCtrl.getLogin);
 
@@ -25,6 +26,12 @@ router.post('/api/unFollow',UserCtrl.unFollowing);
 router.post('/api/article',ArticleCtrl.getSaveArticle);
 
 router.post('/api/getArticle',ArticleCtrl.getArticle);
+
+router.post('/api/comment',CommentCtrl.getComments);
+
+router.put('/api/comment',CommentCtrl.savaComment);
+
+router.delete('/api/comment',CommentCtrl.deleteComment);
 
 router.post('/api/session',function(req,res,next){
     if((req.session.passport !== undefined || req.session.user !== undefined)) {

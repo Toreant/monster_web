@@ -7,6 +7,7 @@ import {isEqual} from 'underscore';
 import ArticleActions from '../actions/ArticleActions';
 import ArticleStore from '../stores/ArticleStore';
 import md from 'markdown';
+import Comment from './Comment';
 
 class Article extends React.Component {
     constructor(props) {
@@ -38,20 +39,20 @@ class Article extends React.Component {
     }
 
     render() {
-        let tags = this.state.tags.map((data) => {
+        let tags = this.state.tags.map((data,index) => {
             return (
-                <span className='mon-article-tag'>{data}</span>
+                <span key={index} className='mon-article-tag'>{data}</span>
             );
         });
 
-        let recommends = this.state.recommends.map((data) => {
+        let recommends = this.state.recommends.map((data,index) => {
             return (
-                <li><Link to={'/article/'+data._id}><a href='javascript:;' className='mon-re-item' title={data.title}>{data.title}</a></Link></li>
+                <li key={index}><Link to={'/article/'+data._id}><a href='javascript:;' className='mon-re-item' title={data.title}>{data.title}</a></Link></li>
             );
         });
         return (
             <div className='container'>
-                <div className='raw'>
+                <div className='raw animated fadeInUp'>
                     <div className='col-md-8 col-sm-8 mon-article'>
                         <p className='mon-article-title'>{this.state.title}</p>
                         <div className='mon-article-detail'>
@@ -70,9 +71,6 @@ class Article extends React.Component {
                     </div>
                     <div className='col-md-4 col-sm-4 mon-offset'>
                         <div className='panel panel-default'>
-                            <div className='panel-heading'>
-                                文章作者
-                            </div>
                             <div className='panel-body media'>
                                 <div className='media-left'>
                                     <a href={'/u/'+this.state.createUserDomain} className='mon-article-user'>
@@ -99,6 +97,7 @@ class Article extends React.Component {
                         </div>
                     </div>
                 </div>
+                <Comment id={this.props.params.id}/>
             </div>
         );
     }
