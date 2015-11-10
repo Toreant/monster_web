@@ -71,6 +71,87 @@ class md {
         });
     }
 
+
+    /**
+     * 获取文章列表
+     * @param option
+     * @param callback
+     */
+    getArticles(option,callback) {
+        async.waterfall([
+            /*
+             获取文章
+             */
+            function(_callback) {
+                Article.find({},null,option,(err,docs) => {
+                    if(err) {
+                        _callback(null,500);
+                    } else {
+                        _callback(null,docs);
+                    }
+                });
+            },
+
+            /*
+             获取作者
+             */
+            function(docs,_callback) {
+                let ids = [];
+
+                if(Array.isArray(docs)) {
+                    for(let i=0, len = docs.length ; i < len; i++) {
+                        ids.push(docs[i].create_user_id);
+                    }
+
+                    User.find({_id : {$in : ids}},(err,users) => {
+                        if(err) {
+                            _callback(null,docs,888);
+                        } else {
+                            _callback(null,docs,users);
+                        }
+                    });
+                } else {
+                    _callback(null,docs,null);
+                }
+            },
+
+            /*
+             把文章和作者组合在一起
+             */
+            function(docs,users,_callback) {
+                if(docs === 500) {
+
+                    /*
+                     * 服务器错误
+                     */
+                    _callback(null,500);
+                } else {
+                    let result = [];
+                    for(let i = 0, len = docs.length; i < len; i++) {
+                        let item = {};
+                        item.article = docs[i];
+                        item.user = null;
+                        for(let j = 0, num = users.length; j < num; j++) {
+                            if(docs[i].create_user_id == users[j]._id) {
+                                item.user = users[j];
+                                break;
+                            }
+                        }
+                        result.unshift(item);
+                    }
+
+                    _callback(null,result);
+                }
+            }
+        ],function(err,result) {
+            /**
+             * result = 500 ；服务器错误
+             * result = 【｛article,user｝】 ; 结果
+             */
+            callback(result);
+        });
+    }
+
     /**
      * 保存文章
      * @param params

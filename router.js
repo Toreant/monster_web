@@ -27,6 +27,8 @@ router.post('/api/article',ArticleCtrl.getSaveArticle);
 
 router.post('/api/getArticle',ArticleCtrl.getArticle);
 
+router.post('/api/articles',ArticleCtrl.getArticles);
+
 router.post('/api/comment',CommentCtrl.getComments);
 
 router.put('/api/comment',CommentCtrl.savaComment);

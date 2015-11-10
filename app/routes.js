@@ -18,14 +18,17 @@ import Following from './components/Following';
 import Contribute from './components/Contribute';
 import PostArticle from './components/PostArticle';
 import Article from './components/Article';
+import List from './components/List';
 
 export default (
     <Route handler={App}>
         <Route path='/' handler={Home} />
         <Route path='/login' handler={Login} />
+
         <Route path='/article'>
             <Route path=':id' handler={Article} />
         </Route>
+
         <Route path='profile' handler={User}>
             <Route path='setting' handler={Set} />
             <Route path='center' handler={ProfileCenter} />
@@ -43,6 +46,10 @@ export default (
                 <Route path='music' />
                 <Route path='article' handler={PostArticle}/>
             </Route>
+        </Route>
+
+        <Route path=':column' handler={List}>
+            <Route path=':skip' handler={List} />
         </Route>
         <Route path='*' handler={NotFound} />
     </Route>

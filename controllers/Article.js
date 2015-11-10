@@ -3,7 +3,6 @@
  */
 import article from '../proxy/article';
 import user from '../proxy/user';
-import md from 'markdown';
 import _ from 'underscore';
 
 class ArticleCtrl {
@@ -47,7 +46,6 @@ class ArticleCtrl {
             code : 0,
             raw : null
         };
-        let markdown = md.markdown;
         article.getArticleById(id,(data) => {
             if(data === null) {
                 result.meta = '找不到这个文章';
@@ -57,6 +55,35 @@ class ArticleCtrl {
                 result.code = 200;
                 result.raw = data;
             }
+            res.json(result);
+        });
+    }
+
+
+    /**
+     * 获取文章列表
+     * @param req
+     * @param res
+     * @param next
+     */
+    getArticles(req,res,next) {
+        let option = req.body.option;
+        console.log(option);
+        article.getArticles(option,(data) => {
+            let result = {
+                meta : '',
+                code : 0,
+                raw  : null
+            };
+            if(data === 500) {
+                result.meta = '服务器错误';
+                result.code = 500;
+            } else if(Array.isArray(data)) {
+                result.meta = '获取文章列表成功';
+                result.code = 200;
+                result.raw  = data;
+            }
+
             res.json(result);
         });
     }

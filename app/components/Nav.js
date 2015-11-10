@@ -2,6 +2,7 @@
  * Created by apache on 15-10-23.
  */
 import React from 'react';
+import {Link} from 'react-router';
 import NavStore from '../stores/NavStore';
 import NavAction from '../actions/NavActions';
 
@@ -78,10 +79,10 @@ class Nav extends React.Component {
                     </div>
                     <div className='collapse navbar-collapse' id='my-nav'>
                         <ul className='nav navbar-nav'>
-                            <li><a href="/">首页</a></li>
-                            <li><a href="/anime">动漫</a></li>
-                            <li><a href="/music">音乐</a></li>
-                            <li><a href="/article">文章</a></li>
+                            <li><Link to="/">首页</Link></li>
+                            <li><Link to="/animates">动漫</Link></li>
+                            <li><Link to="/musics">音乐</Link></li>
+                            <li><Link to="/articles">文章</Link></li>
                         </ul>
                         <form className='navbar-form navbar-left' role='search'>
                             <div className='form-group'>
