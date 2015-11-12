@@ -8,13 +8,15 @@ class ListStore {
     constructor() {
         this.bindActions(ListActions);
         this.list = [];
+        this.count = 0;
         this.loading = true;
     }
 
     onGetListSuccess(data) {
         console.log(data);
         if(data.code === 200) {
-            this.list = data.raw;
+            this.list = data.raw._raw;
+            this.count = data.raw.count;
             this.loading = false;
         } else if(data.code === 500) {
             toastr.error('服务器错误');

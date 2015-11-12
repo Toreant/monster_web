@@ -16,7 +16,11 @@ class ListActions {
      * @param skip
      */
     getList(column,skip) {
-
+        let _skip = skip===undefined?1:parseInt(skip);
+        if(_skip <= 0) {
+            toastr.warning('找不到内容');
+            return false;
+        }
         /*
          * 通过column,获取是哪一个栏目的列表
          * skip 从那个开始
@@ -27,7 +31,7 @@ class ListActions {
             dataType : 'json',
             contentType : 'application/json;charset=utf-8',
             cache : false,
-            data : JSON.stringify({option : {skip : (skip-1)*6,limit : 6,sort : {create_time : -1}}})
+            data : JSON.stringify({option : {skip : (_skip-1)*6,limit : 6,sort : {create_time : -1}}})
         }).done((data) => {
             this.actions.getListSuccess(data);
         }).fail(() => {

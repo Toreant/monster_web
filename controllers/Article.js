@@ -78,7 +78,7 @@ class ArticleCtrl {
             if(data === 500) {
                 result.meta = '服务器错误';
                 result.code = 500;
-            } else if(Array.isArray(data)) {
+            } else {
                 result.meta = '获取文章列表成功';
                 result.code = 200;
                 result.raw  = data;

@@ -142,6 +142,22 @@ class md {
 
                     _callback(null,result);
                 }
+            },
+
+            //计算文章总数
+            function(result,_callback) {
+                if(result === 500) {
+                    _callback(null,500);
+                } else {
+                    Article.count({},function(err,count) {
+                        console.log(count);
+                        if(err) {
+                            _callback(null,500);
+                        } else {
+                            _callback(null,{_raw: result,count: count});
+                        }
+                    });
+                }
             }
         ],function(err,result) {
             /**

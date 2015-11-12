@@ -393,6 +393,11 @@ var ListActions = (function () {
         value: function getList(column, skip) {
             var _this = this;
 
+            var _skip = skip === undefined ? 1 : parseInt(skip);
+            if (_skip <= 0) {
+                toastr.warning('找不到内容');
+                return false;
+            }
             /*
              * 通过column,获取是哪一个栏目的列表
              * skip 从那个开始
@@ -403,7 +408,7 @@ var ListActions = (function () {
                 dataType: 'json',
                 contentType: 'application/json;charset=utf-8',
                 cache: false,
-                data: JSON.stringify({ option: { skip: (skip - 1) * 6, limit: 6, sort: { create_time: -1 } } })
+                data: JSON.stringify({ option: { skip: (_skip - 1) * 6, limit: 6, sort: { create_time: -1 } } })
             }).done(function (data) {
                 _this.actions.getListSuccess(data);
             }).fail(function () {
@@ -2364,7 +2369,48 @@ var List = (function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            console.log(this.state.list);
+            var Offset = undefined;
+            switch (this.props.params.column) {
+                case 'animates':
+                    Offset = _react2['default'].createElement(
+                        'div',
+                        null,
+                        _react2['default'].createElement(
+                            'span',
+                            { className: 'text-info mon-bg-title' },
+                            '动漫区'
+                        )
+                    );
+                    break;
+                case 'articles':
+                    Offset = _react2['default'].createElement(
+                        'div',
+                        null,
+                        _react2['default'].createElement(
+                            'span',
+                            { className: 'text-info mon-bg-title' },
+                            '文章区'
+                        ),
+                        _react2['default'].createElement(
+                            'p',
+                            { className: 'bg-success mon-column-info' },
+                            '吐槽，欣赏美文，黄黄的。。。。'
+                        )
+                    );
+                    break;
+                case 'musics':
+                    Offset = _react2['default'].createElement(
+                        'div',
+                        null,
+                        _react2['default'].createElement(
+                            'span',
+                            { className: 'text-info mon-bg-title' },
+                            '音乐区'
+                        ),
+                        _react2['default'].createElement('p', null)
+                    );
+                    break;
+            }
             var List = this.state.list.map(function (data) {
                 return _react2['default'].createElement(
                     'li',
@@ -2375,7 +2421,7 @@ var List = (function (_React$Component) {
                         _react2['default'].createElement(
                             'div',
                             { className: 'mon-overlay' },
-                            _react2['default'].createElement('img', { src: data.article.abbreviations || '/img/abbreviations.png', alt: 'loading' })
+                            _react2['default'].createElement('img', { className: 'img-response', src: data.article.abbreviations || '/img/abbreviations.png', alt: 'loading' })
                         ),
                         _react2['default'].createElement(
                             'div',
@@ -2383,19 +2429,52 @@ var List = (function (_React$Component) {
                             _react2['default'].createElement(
                                 'div',
                                 null,
+                                _react2['default'].createElement('img', { src: data.user.avatar_url, alt: 'loading' }),
                                 _react2['default'].createElement(
-                                    'h2',
+                                    'span',
                                     null,
-                                    data.article.title
+                                    data.user.username
+                                ),
+                                _react2['default'].createElement(
+                                    'span',
+                                    { className: 'pull-right' },
+                                    new Date(data.article.create_time).toLocaleDateString()
                                 )
+                            ),
+                            _react2['default'].createElement(
+                                'h2',
+                                null,
+                                data.article.title
                             )
                         )
                     )
                 );
             });
+            var skip = this.props.params.skip === undefined ? 1 : parseInt(this.props.params.skip),
+                disabled = '',
+                disabledN = '';
+            if (skip === 1) {
+                disabled = 'disabled';
+            } else if (skip >= this.state.count / 6) {
+                disabledN = 'disabled';
+            }
+            var Page = _react2['default'].createElement(
+                'div',
+                { className: 'row mon-skip' },
+                _react2['default'].createElement(
+                    _reactRouter.Link,
+                    { to: '/' + this.props.params.column + '/' + (skip - 1), className: 'btn mon-page mon-prev-page ' + disabled },
+                    _react2['default'].createElement('span', { className: 'fa fa-arrow-left' })
+                ),
+                _react2['default'].createElement(
+                    _reactRouter.Link,
+                    { to: '/' + this.props.params.column + '/' + (skip + 1), className: 'btn mon-page mon-next-page ' + disabledN },
+                    _react2['default'].createElement('span', { className: 'fa fa-arrow-right' })
+                )
+            );
             return _react2['default'].createElement(
                 'div',
-                { className: 'container' },
+                { className: 'container animated fadeInUp' },
                 _react2['default'].createElement(
                     'div',
                     { className: 'row' },
@@ -2407,8 +2486,14 @@ var List = (function (_React$Component) {
                             { className: 'nav' },
                             List
                         )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'col-md-2' },
+                        Offset
                     )
-                )
+                ),
+                Page
             );
         }
     }]);
@@ -4823,6 +4908,7 @@ var ListStore = (function () {
 
         this.bindActions(_actionsListActions2['default']);
         this.list = [];
+        this.count = 0;
         this.loading = true;
     }
 
@@ -4831,7 +4917,8 @@ var ListStore = (function () {
         value: function onGetListSuccess(data) {
             console.log(data);
             if (data.code === 200) {
-                this.list = data.raw;
+                this.list = data.raw._raw;
+                this.count = data.raw.count;
                 this.loading = false;
             } else if (data.code === 500) {
                 toastr.error('服务器错误');

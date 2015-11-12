@@ -34,33 +34,90 @@ class List extends React.Component {
     }
 
     render() {
-        console.log(this.state.list);
+        let Offset;
+        switch(this.props.params.column) {
+            case 'animates' :
+                Offset = (
+                    <div>
+                        <span className='text-info mon-bg-title'>
+                            动漫区
+                        </span>
+                    </div>
+                );
+                break;
+            case 'articles' :
+                Offset = (
+                    <div>
+                        <span className='text-info mon-bg-title'>
+                            文章区
+                        </span>
+                        <p className='bg-success mon-column-info'>
+                            吐槽，欣赏美文，黄黄的。。。。
+                        </p>
+                    </div>
+                );
+                break;
+            case 'musics' :
+                Offset = (
+                    <div>
+                        <span className='text-info mon-bg-title'>
+                            音乐区
+                        </span>
+                        <p></p>
+                    </div>
+                );
+                break;
+        }
         let List = this.state.list.map((data) => {
             return (
                 <li key={data.article._id}>
                     <Link  to={'/article/'+data.article._id} className='mon-top'>
                         <div className='mon-overlay'>
-                            <img src={data.article.abbreviations || '/img/abbreviations.png'} alt="loading"/>
+                            <img className='img-response' src={data.article.abbreviations || '/img/abbreviations.png'} alt="loading"/>
                         </div>
                         <div className='mon-title'>
                             <div>
-                                <h2>{data.article.title}</h2>
+                                <img src={data.user.avatar_url} alt="loading"/>
+                                <span>{data.user.username}</span>
+                                <span className='pull-right'>{new Date(data.article.create_time).toLocaleDateString()}</span>
                             </div>
+                            <h2>{data.article.title}</h2>
                         </div>
                     </Link>
                 </li>
-
             );
         });
+        let skip = this.props.params.skip===undefined?1:parseInt(this.props.params.skip),
+            disabled = '',
+            disabledN = '';
+        if(skip === 1) {
+            disabled = 'disabled';
+        } else if(skip >= (this.state.count/6)) {
+            disabledN = 'disabled';
+        }
+        let Page = (
+            <div className='row mon-skip'>
+                <Link to={'/'+this.props.params.column+'/'+(skip-1)} className={'btn mon-page mon-prev-page '+disabled}>
+                    <span className='fa fa-arrow-left'></span>
+                </Link>
+                <Link to={'/'+this.props.params.column+'/'+(skip+1)} className={'btn mon-page mon-next-page '+disabledN}>
+                    <span className='fa fa-arrow-right'></span>
+                </Link>
+            </div>
+        );
         return (
-            <div className='container'>
+            <div className='container animated fadeInUp'>
                 <div className='row'>
                     <div className='col-md-8 col-md-offset-2'>
                         <ul className='nav'>
                             {List}
                         </ul>
                     </div>
+                    <div className='col-md-2'>
+                        {Offset}
+                    </div>
                 </div>
+                {Page}
             </div>
         );
     }
