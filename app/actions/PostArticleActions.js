@@ -31,6 +31,8 @@ class PostArticleActions {
             }
         };
 
+        console.log(params);
+
         $.ajax({
             url : '/api/article',
             type : 'post',

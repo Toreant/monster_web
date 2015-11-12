@@ -740,6 +740,8 @@ var PostArticleActions = (function () {
                 }
             };
 
+            console.log(params);
+
             $.ajax({
                 url: '/api/article',
                 type: 'post',
@@ -4915,7 +4917,6 @@ var ListStore = (function () {
     _createClass(ListStore, [{
         key: 'onGetListSuccess',
         value: function onGetListSuccess(data) {
-            console.log(data);
             if (data.code === 200) {
                 this.list = data.raw._raw;
                 this.count = data.raw.count;
@@ -5314,11 +5315,13 @@ var PostArticleStore = (function () {
         value: function onChangeTag(event) {
             var _this = this;
 
-            var tags = event.target.value.split(" ");
+            var tags = event.target.value.replace(/\s+/g, ",");
+            tags = tags.split(',');
             this.tag = [];
             tags.map(function (data) {
                 _this.tag.push(data);
             });
+            console.log(this.tag);
         }
     }, {
         key: 'onChangeContent',

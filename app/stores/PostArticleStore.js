@@ -22,11 +22,13 @@ class PostArticleStore {
     }
 
     onChangeTag(event) {
-        let tags = event.target.value.split(" ");
+        let tags = event.target.value.replace(/\s+/g,",");
+        tags = tags.split(',');
         this.tag = [];
         tags.map((data) => {
             this.tag.push(data);
         });
+        console.log(this.tag);
     }
 
     onChangeContent(event) {
