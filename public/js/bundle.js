@@ -149,7 +149,7 @@ var ConListActions = (function () {
     function ConListActions() {
         _classCallCheck(this, ConListActions);
 
-        this.generateActions('getConListSuccess');
+        this.generateActions('getConListSuccess', 'subSkip', 'plusSkip');
     }
 
     /**
@@ -185,6 +185,15 @@ var ConListActions = (function () {
             }).fail(function (data) {
                 toastr.error('网络链接有问题');
             });
+        }
+    }, {
+        key: 'changeSkip',
+        value: function changeSkip(option) {
+            if (option === 0) {
+                this.actions.subSkip();
+            } else if (option === 1) {
+                this.actions.plusSkip();
+            }
         }
     }]);
 
@@ -1861,6 +1870,20 @@ var ConList = (function (_React$Component) {
             this.setState(state);
         }
     }, {
+        key: 'prevPage',
+        value: function prevPage() {
+            var option = this.props;
+            _actionsConListActions2['default'].getConList(props.option, props.tab, props.domain, this.state.skip - 1);
+            _actionsConListActions2['default'].changeSkip(0);
+        }
+    }, {
+        key: 'nextPage',
+        value: function nextPage() {
+            var props = this.props;
+            _actionsConListActions2['default'].getConList(props.option, props.tab, props.domain, this.state.skip + 1);
+            _actionsConListActions2['default'].changeSkip(1);
+        }
+    }, {
         key: 'render',
         value: function render() {
             var option = undefined;
@@ -1917,10 +1940,35 @@ var ConList = (function (_React$Component) {
                     )
                 );
             });
+
+            var disabled = '',
+                disabledN = '';
+            if (this.state.skip === 0) {
+                disabled = 'disabled';
+            }
+            if (this.state.skip >= this.state.count / 10 || this.state.count < 10) {
+                disabledN = 'disabled';
+            }
+
+            var SkipPage = _react2['default'].createElement(
+                'div',
+                { className: 'mon-skip' },
+                _react2['default'].createElement(
+                    'a',
+                    { href: 'javascript:;', className: 'btn mon-page mon-prev-page ' + disabled, onClick: this.prevPage.bind(this) },
+                    _react2['default'].createElement('span', { className: 'fa fa-arrow-left' })
+                ),
+                _react2['default'].createElement(
+                    'a',
+                    { href: 'javascript:;', className: 'btn mon-page mon-next-page ' + disabledN, onClick: this.nextPage.bind(this) },
+                    _react2['default'].createElement('span', { className: 'fa fa-arrow-right' })
+                )
+            );
             return _react2['default'].createElement(
                 'div',
                 { className: 'animated flipInX' },
-                List
+                List,
+                SkipPage
             );
         }
     }]);
@@ -5219,6 +5267,7 @@ var ConListStore = (function () {
         this.bindActions(_actionsConListActions2['default']);
         this.contributes = [];
         this.count = 0;
+        this.skip = 0;
     }
 
     _createClass(ConListStore, [{
@@ -5230,6 +5279,16 @@ var ConListStore = (function () {
             } else if (data.code === 500) {
                 toastr.error('服务器错误');
             }
+        }
+    }, {
+        key: 'onSubSkip',
+        value: function onSubSkip() {
+            this.skip = this.skip - 1;
+        }
+    }, {
+        key: 'onPlusSkip',
+        value: function onPlusSkip() {
+            this.skip = this.skip + 1;
         }
     }]);
 

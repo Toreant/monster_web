@@ -39,7 +39,7 @@
 .mon-conlist-index {
   position: absolute;
   right: 10px;
-  top: 0;
+  bottom: 0;
   font-size: 50px;
   color: #ddd;
   opacity: 0.5;

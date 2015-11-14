@@ -6,7 +6,9 @@ import alt from '../alt';
 class ConListActions {
     constructor() {
         this.generateActions(
-            'getConListSuccess'
+            'getConListSuccess',
+            'subSkip',
+            'plusSkip'
         );
     }
 
@@ -39,6 +41,14 @@ class ConListActions {
         }).fail((data) => {
             toastr.error('网络链接有问题');
         });
+    }
+
+    changeSkip(option) {
+        if(option === 0) {
+            this.actions.subSkip();
+        } else if(option === 1) {
+            this.actions.plusSkip();
+        }
     }
 }
 

@@ -28,6 +28,18 @@ class ConList extends React.Component {
         this.setState(state);
     }
 
+    prevPage() {
+        let option = this.props;
+        ConListActions.getConList(props.option,props.tab,props.domain,this.state.skip-1);
+        ConListActions.changeSkip(0);
+    }
+
+    nextPage() {
+        let props = this.props;
+        ConListActions.getConList(props.option,props.tab,props.domain,this.state.skip+1);
+        ConListActions.changeSkip(1);
+    }
+
     render() {
         let option;
         if(this.props.tab === 'articles') {
@@ -57,9 +69,30 @@ class ConList extends React.Component {
                 </div>
             );
         });
+
+        let disabled = '',
+            disabledN = '';
+        if(this.state.skip === 0) {
+            disabled = 'disabled';
+        }
+        if(this.state.skip >= (this.state.count/10) || this.state.count < 10) {
+            disabledN = 'disabled';
+        }
+
+        let SkipPage = (
+            <div className='mon-skip'>
+                <a href="javascript:;" className={'btn mon-page mon-prev-page '+disabled} onClick={this.prevPage.bind(this)}>
+                    <span className='fa fa-arrow-left'></span>
+                </a>
+                <a href="javascript:;" className={'btn mon-page mon-next-page '+disabledN} onClick={this.nextPage.bind(this)}>
+                    <span className='fa fa-arrow-right'></span>
+                </a>
+            </div>
+        );
         return (
             <div className='animated flipInX'>
                 {List}
+                {SkipPage}
             </div>
         );
     }

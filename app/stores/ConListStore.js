@@ -9,6 +9,7 @@ class ConListStore {
         this.bindActions(ConListActions);
         this.contributes = [];
         this.count = 0;
+        this.skip = 0;
     }
 
     onGetConListSuccess(data) {
@@ -18,6 +19,14 @@ class ConListStore {
         } else if(data.code === 500) {
             toastr.error('服务器错误');
         }
+    }
+
+    onSubSkip() {
+        this.skip = this.skip-1;
+    }
+
+    onPlusSkip() {
+        this.skip = this.skip+1;
     }
 }
 
