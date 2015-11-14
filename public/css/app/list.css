@@ -71,5 +71,6 @@
 }
 /*　分页　*/
 .mon-skip {
+  margin-top: 10px;
   text-align: center;
 }

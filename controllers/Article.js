@@ -13,7 +13,15 @@ class ArticleCtrl {
      * @param next
      */
     getSaveArticle(req,res,next) {
+        if(req.session.user === undefined) {
+            res.json({meta : '你还没登陆',code : 404});
+        }
+
         let params = req.body.params;
+        params.create_user_id = req.session.user._id;
+        params.create_user_domain = req.session.user.domain;
+        console.log(params);
+
         article.saveArticle(params,(data) => {
             let result = {
                 meta : '',
@@ -68,7 +76,8 @@ class ArticleCtrl {
      */
     getArticles(req,res,next) {
         let option = req.body.option;
-        console.log(option);
+        let params = req.body.params;
+        console.log(params);
         article.getArticles(option,(data) => {
             let result = {
                 meta : '',
@@ -85,7 +94,7 @@ class ArticleCtrl {
             }
 
             res.json(result);
-        });
+        },params);
     }
 }
 

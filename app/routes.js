@@ -2,7 +2,7 @@
  * Created by apache on 15-10-23.
  */
 import React from 'react';
-import {Route} from 'react-router';
+import {Route,DefaultRoute} from 'react-router';
 import App from './components/App';
 import Home from './components/Home';
 import Login from './components/Login';
@@ -19,6 +19,8 @@ import Contribute from './components/Contribute';
 import PostArticle from './components/PostArticle';
 import Article from './components/Article';
 import List from './components/List';
+import Member from './components/Member';
+import ConArticle from './components/ConArticle';
 
 export default (
     <Route handler={App}>
@@ -27,6 +29,22 @@ export default (
 
         <Route path='/article'>
             <Route path=':id' handler={Article} />
+        </Route>
+
+        <Route path='/member' handler={Member}>
+            <Route path=':domain' hanlder={Contribute}>
+                <Route path='article' handler={ConArticle} />
+                <Route path='music' handler={NotFound} />
+                <Route path='animate' handler={NotFound} />
+            </Route>
+        </Route>
+
+        <Route path='/member'>
+            <Route path=':domain'>
+                <Route path='following' handler={Notice}/>
+                <Route Path='followers' handler={Notice}/>
+                <Route path='star' handler={Notice} />
+            </Route>
         </Route>
 
         <Route path='profile' handler={User}>

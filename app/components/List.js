@@ -70,18 +70,18 @@ class List extends React.Component {
         }
         let List = this.state.list.map((data) => {
             return (
-                <li key={data.article._id}>
-                    <Link  to={'/article/'+data.article._id} className='mon-top'>
+                <li key={data.data._id}>
+                    <Link  to={'/article/'+data.data._id} className='mon-top'>
                         <div className='mon-overlay'>
-                            <img className='img-response' src={data.article.abbreviations || '/img/abbreviations.png'} alt="loading"/>
+                            <img className='img-response' src={data.data.abbreviations || '/img/abbreviations.png'} alt="loading"/>
                         </div>
                         <div className='mon-title'>
                             <div>
                                 <img src={data.user.avatar_url} alt="loading"/>
                                 <span>{data.user.username}</span>
-                                <span className='pull-right'>{new Date(data.article.create_time).toLocaleDateString()}</span>
+                                <span className='pull-right'>{new Date(data.data.create_time).toLocaleDateString()}</span>
                             </div>
-                            <h2>{data.article.title}</h2>
+                            <h2>{data.data.title}</h2>
                         </div>
                     </Link>
                 </li>

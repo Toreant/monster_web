@@ -46,7 +46,7 @@ var ArticleActions = (function () {
 exports['default'] = _alt2['default'].createActions(ArticleActions);
 module.exports = exports['default'];
 
-},{"../alt":18}],2:[function(require,module,exports){
+},{"../alt":20}],2:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -125,7 +125,76 @@ var CommentActions = (function () {
 exports['default'] = _alt2['default'].createActions(CommentActions);
 module.exports = exports['default'];
 
-},{"../alt":18}],3:[function(require,module,exports){
+},{"../alt":20}],3:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-14.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var ConListActions = (function () {
+    function ConListActions() {
+        _classCallCheck(this, ConListActions);
+
+        this.generateActions('getConListSuccess');
+    }
+
+    /**
+     * 获取列表
+     * @param option 0 -- member 1 -- profile
+     * @param tab
+     * @param param
+     */
+
+    _createClass(ConListActions, [{
+        key: 'getConList',
+        value: function getConList(option, tab, param) {
+            var _this = this;
+
+            var params = {
+                option: { skip: 0, limit: 10, sort: { create_time: 1 } }
+            },
+                url = '';
+            if (option === '0') {
+                params.params = { create_user_domain: param };
+                url = '/api/' + tab;
+            }
+
+            $.ajax({
+                url: url,
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json;charset=utf-8',
+                cache: false,
+                data: JSON.stringify(params)
+            }).done(function (data) {
+                _this.actions.getConListSuccess(data);
+            }).fail(function (data) {
+                toastr.error('网络链接有问题');
+            });
+        }
+    }]);
+
+    return ConListActions;
+})();
+
+exports['default'] = _alt2['default'].createActions(ConListActions);
+module.exports = exports['default'];
+
+},{"../alt":20}],4:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -152,7 +221,7 @@ var ContributeActions = function ContributeActions() {
 exports['default'] = _alt2['default'].createActions(ContributeActions);
 module.exports = exports['default'];
 
-},{"../alt":18}],4:[function(require,module,exports){
+},{"../alt":20}],5:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -230,7 +299,7 @@ var FollowersActions = (function () {
 exports['default'] = _alt2['default'].createActions(FollowersActions);
 module.exports = exports['default'];
 
-},{"../alt":18}],5:[function(require,module,exports){
+},{"../alt":20}],6:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -313,7 +382,7 @@ var FollowingActions = (function () {
 exports['default'] = _alt2['default'].createActions(FollowingActions);
 module.exports = exports['default'];
 
-},{"../alt":18}],6:[function(require,module,exports){
+},{"../alt":20}],7:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -355,7 +424,7 @@ var HomeActions = (function () {
 exports['default'] = _alt2['default'].createActions(HomeActions);
 module.exports = exports['default'];
 
-},{"../alt":18}],7:[function(require,module,exports){
+},{"../alt":20}],8:[function(require,module,exports){
 /**
  * Created by apache on 15-11-10.
  */
@@ -423,7 +492,7 @@ var ListActions = (function () {
 exports['default'] = _alt2['default'].createActions(ListActions);
 module.exports = exports['default'];
 
-},{"../alt":18}],8:[function(require,module,exports){
+},{"../alt":20}],9:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -518,7 +587,57 @@ var LoginActions = (function () {
 exports['default'] = _alt2['default'].createActions(LoginActions);
 module.exports = exports['default'];
 
-},{"../alt":18}],9:[function(require,module,exports){
+},{"../alt":20}],10:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-14.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var MemberActions = (function () {
+    function MemberActions() {
+        _classCallCheck(this, MemberActions);
+
+        this.generateActions('getMemberSuccess');
+    }
+
+    _createClass(MemberActions, [{
+        key: 'getMember',
+        value: function getMember(domain) {
+            var _this = this;
+
+            $.ajax({
+                url: '/api/member/' + domain,
+                type: 'get',
+                cache: false
+            }).done(function (data) {
+                _this.actions.getMemberSuccess(data);
+            }).fail(function () {
+                toastr.error('获取信息失败');
+            });
+        }
+    }]);
+
+    return MemberActions;
+})();
+
+exports['default'] = _alt2['default'].createActions(MemberActions);
+module.exports = exports['default'];
+
+},{"../alt":20}],11:[function(require,module,exports){
 /**
  * Created by apache on 15-10-25.
  */
@@ -585,7 +704,7 @@ var NavActions = (function () {
 exports['default'] = _alt2['default'].createActions(NavActions);
 module.exports = exports['default'];
 
-},{"../alt":18}],10:[function(require,module,exports){
+},{"../alt":20}],12:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -625,7 +744,7 @@ var NoticeActions = (function () {
 exports['default'] = _alt2['default'].createActions(NoticeActions);
 module.exports = exports['default'];
 
-},{"../alt":18}],11:[function(require,module,exports){
+},{"../alt":20}],13:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -652,7 +771,7 @@ var PaginationActions = function PaginationActions() {
 exports['default'] = _alt2['default'].createActions(PaginationActions);
 module.exports = exports['default'];
 
-},{"../alt":18}],12:[function(require,module,exports){
+},{"../alt":20}],14:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -692,7 +811,7 @@ var PostAnimateActions = (function () {
 exports['default'] = _alt2['default'].createActions(PostAnimateActions);
 module.exports = exports['default'];
 
-},{"../alt":18}],13:[function(require,module,exports){
+},{"../alt":20}],15:[function(require,module,exports){
 /**
  * Created by apache on 15-11-3.
  */
@@ -734,9 +853,7 @@ var PostArticleActions = (function () {
                     tags: tags,
                     abbreviations: abbreviations,
                     content: content,
-                    create_user_id: userProfile.raw._id,
-                    create_user_name: userProfile.raw.username,
-                    create_time: Math.round(new Date().getTime() / 1000)
+                    create_time: new Date().getTime() / 1000
                 }
             };
 
@@ -763,7 +880,7 @@ var PostArticleActions = (function () {
 exports['default'] = _alt2['default'].createActions(PostArticleActions);
 module.exports = exports['default'];
 
-},{"../alt":18}],14:[function(require,module,exports){
+},{"../alt":20}],16:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -790,7 +907,7 @@ var ProfileCenterActions = function ProfileCenterActions() {
 exports['default'] = _alt2['default'].createActions(ProfileCenterActions);
 module.exports = exports['default'];
 
-},{"../alt":18}],15:[function(require,module,exports){
+},{"../alt":20}],17:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -868,7 +985,7 @@ var SetActions = (function () {
 exports['default'] = _alt2['default'].createActions(SetActions);
 module.exports = exports['default'];
 
-},{"../alt":18}],16:[function(require,module,exports){
+},{"../alt":20}],18:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -925,7 +1042,7 @@ var StarActions = (function () {
 exports['default'] = _alt2['default'].createActions(StarActions);
 module.exports = exports['default'];
 
-},{"../alt":18}],17:[function(require,module,exports){
+},{"../alt":20}],19:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -975,7 +1092,7 @@ var UserActions = (function () {
 exports['default'] = _alt2['default'].createActions(UserActions);
 module.exports = exports['default'];
 
-},{"../alt":18}],18:[function(require,module,exports){
+},{"../alt":20}],20:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -994,7 +1111,7 @@ var _alt2 = _interopRequireDefault(_alt);
 exports['default'] = new _alt2['default']();
 module.exports = exports['default'];
 
-},{"alt":"alt"}],19:[function(require,module,exports){
+},{"alt":"alt"}],21:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -1056,7 +1173,7 @@ var App = (function (_React$Component) {
 exports['default'] = App;
 module.exports = exports['default'];
 
-},{"./Footer":26,"./Nav":30,"react":"react","react-router":"react-router"}],20:[function(require,module,exports){
+},{"./Footer":30,"./Nav":35,"react":"react","react-router":"react-router"}],22:[function(require,module,exports){
 /**
  * Created by apache on 15-11-4.
  */
@@ -1294,7 +1411,7 @@ var Article = (function (_React$Component) {
 exports['default'] = Article;
 module.exports = exports['default'];
 
-},{"../actions/ArticleActions":1,"../stores/ArticleStore":42,"./BtnBlock":21,"./Comment":22,"markdown":63,"react":"react","react-router":"react-router","underscore":"underscore"}],21:[function(require,module,exports){
+},{"../actions/ArticleActions":1,"../stores/ArticleStore":47,"./BtnBlock":23,"./Comment":24,"markdown":70,"react":"react","react-router":"react-router","underscore":"underscore"}],23:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -1428,7 +1545,7 @@ var BtnBlock = (function (_React$Component) {
 exports['default'] = BtnBlock;
 module.exports = exports['default'];
 
-},{"react":"react"}],22:[function(require,module,exports){
+},{"react":"react"}],24:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -1627,7 +1744,194 @@ var Comment = (function (_React$Component) {
 exports['default'] = Comment;
 module.exports = exports['default'];
 
-},{"../actions/CommentActions":2,"../stores/CommentStore":43,"react":"react","react-router":"react-router","underscore":"underscore"}],23:[function(require,module,exports){
+},{"../actions/CommentActions":2,"../stores/CommentStore":48,"react":"react","react-router":"react-router","underscore":"underscore"}],25:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-14.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ConList = require('./ConList');
+
+var _ConList2 = _interopRequireDefault(_ConList);
+
+var ConArticle = (function (_React$Component) {
+    _inherits(ConArticle, _React$Component);
+
+    function ConArticle() {
+        _classCallCheck(this, ConArticle);
+
+        _get(Object.getPrototypeOf(ConArticle.prototype), 'constructor', this).apply(this, arguments);
+    }
+
+    _createClass(ConArticle, [{
+        key: 'render',
+        value: function render() {
+            return _react2['default'].createElement(
+                'div',
+                null,
+                _react2['default'].createElement(_ConList2['default'], { option: '0', tab: 'articles', type: '', domain: this.props.params.domain })
+            );
+        }
+    }]);
+
+    return ConArticle;
+})(_react2['default'].Component);
+
+exports['default'] = ConArticle;
+module.exports = exports['default'];
+
+},{"./ConList":26,"react":"react"}],26:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-14.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = require('react-router');
+
+var _actionsConListActions = require('../actions/ConListActions');
+
+var _actionsConListActions2 = _interopRequireDefault(_actionsConListActions);
+
+var _storesConListStore = require('../stores/ConListStore');
+
+var _storesConListStore2 = _interopRequireDefault(_storesConListStore);
+
+var ConList = (function (_React$Component) {
+    _inherits(ConList, _React$Component);
+
+    function ConList(props) {
+        _classCallCheck(this, ConList);
+
+        _get(Object.getPrototypeOf(ConList.prototype), 'constructor', this).call(this, props);
+        this.state = _storesConListStore2['default'].getState();
+        this.onChange = this.onChange.bind(this);
+    }
+
+    _createClass(ConList, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            _storesConListStore2['default'].listen(this.onChange);
+            var props = this.props;
+            _actionsConListActions2['default'].getConList(props.option, props.tab, props.domain);
+        }
+    }, {
+        key: 'componentWillUnMount',
+        value: function componentWillUnMount() {
+            _storesConListStore2['default'].unlisten(this.onChange);
+        }
+    }, {
+        key: 'onChange',
+        value: function onChange(state) {
+            this.setState(state);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var option = undefined;
+            if (this.props.tab === 'articles') {
+                option = 'article';
+            }
+            var List = this.state.contributes.map(function (data, index) {
+                return _react2['default'].createElement(
+                    'div',
+                    { className: 'media mon-conlist-item', key: data.data._id },
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'media-left' },
+                        _react2['default'].createElement(
+                            _reactRouter.Link,
+                            { to: '/' + option + '/' + data.data._id },
+                            _react2['default'].createElement('img', { src: data.data.abbreviations || '/img/abbreviations.png', alt: 'loading', width: '80' })
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'media-body' },
+                        _react2['default'].createElement(
+                            _reactRouter.Link,
+                            { to: '/' + option + '/' + data.data._id, className: 'text-primary mon-conlist-title' },
+                            data.data.title
+                        ),
+                        _react2['default'].createElement(
+                            'p',
+                            { className: 'text-muted mon-conlist-info' },
+                            _react2['default'].createElement(
+                                'span',
+                                null,
+                                '投稿日期：',
+                                new Date(data.data.create_time).toLocaleDateString()
+                            ),
+                            _react2['default'].createElement(
+                                'span',
+                                null,
+                                '浏览次数：',
+                                data.data.browser_count
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'p',
+                            { className: 'text-muted' },
+                            data.data.summary
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'span',
+                        { className: 'mon-conlist-index' },
+                        index + 1
+                    )
+                );
+            });
+            return _react2['default'].createElement(
+                'div',
+                { className: 'animated flipInX' },
+                List
+            );
+        }
+    }]);
+
+    return ConList;
+})(_react2['default'].Component);
+
+exports['default'] = ConList;
+module.exports = exports['default'];
+
+},{"../actions/ConListActions":3,"../stores/ConListStore":49,"react":"react","react-router":"react-router"}],27:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -1650,6 +1954,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = require('react-router');
 
 var _actionsContributeActions = require('../actions/ContributeActions');
 
@@ -1688,15 +1994,47 @@ var Contribute = (function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var Contributes = undefined;
-            if (this.state.contributes.length === 0) {
-                Contributes = _react2['default'].createElement(
-                    'p',
-                    { className: 'bg-danger mon-padding' },
-                    '我还没有分享任何东西'
+            var ConNav = undefined;
+            if (this.props.option === '0') {
+                ConNav = _react2['default'].createElement(
+                    'div',
+                    { className: 'mon-contribute-nav' },
+                    _react2['default'].createElement(
+                        _reactRouter.Link,
+                        { to: '/member/' + this.props.domain + '/article' },
+                        '文章'
+                    ),
+                    _react2['default'].createElement(
+                        _reactRouter.Link,
+                        { to: '/member/' + this.props.domain + '/music' },
+                        '音乐'
+                    ),
+                    _react2['default'].createElement(
+                        _reactRouter.Link,
+                        { to: '/member/' + this.props.domain + '/animate' },
+                        '动漫'
+                    )
                 );
             } else {
-                Contributes = this.state.contributes.map(function (data, index) {});
+                ConNav = _react2['default'].createElement(
+                    'div',
+                    { className: 'mon-contribute-nav' },
+                    _react2['default'].createElement(
+                        _reactRouter.Link,
+                        { to: '/profile/article' },
+                        '文章'
+                    ),
+                    _react2['default'].createElement(
+                        _reactRouter.Link,
+                        { to: '/profile/music' },
+                        '音乐'
+                    ),
+                    _react2['default'].createElement(
+                        _reactRouter.Link,
+                        { to: '/profile/animate' },
+                        '动漫'
+                    )
+                );
             }
             return _react2['default'].createElement(
                 'div',
@@ -1706,7 +2044,12 @@ var Contribute = (function (_React$Component) {
                     { className: 'bg-success mon-padding mon-bg-title' },
                     '我的贡献分享'
                 ),
-                Contributes
+                _react2['default'].createElement(
+                    'div',
+                    { className: 'mon-contribute-block' },
+                    ConNav
+                ),
+                _react2['default'].createElement(_reactRouter.RouteHandler, null)
             );
         }
     }]);
@@ -1717,7 +2060,7 @@ var Contribute = (function (_React$Component) {
 exports['default'] = Contribute;
 module.exports = exports['default'];
 
-},{"../actions/ContributeActions":3,"../stores/ContributeStore":44,"react":"react"}],24:[function(require,module,exports){
+},{"../actions/ContributeActions":4,"../stores/ContributeStore":50,"react":"react","react-router":"react-router"}],28:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -1889,7 +2232,7 @@ var Followers = (function (_React$Component) {
 exports['default'] = Followers;
 module.exports = exports['default'];
 
-},{"../actions/FollowersActions":4,"../stores/FollowersStore":45,"./Pagination":33,"react":"react","react-router":"react-router","underscore":"underscore"}],25:[function(require,module,exports){
+},{"../actions/FollowersActions":5,"../stores/FollowersStore":51,"./Pagination":38,"react":"react","react-router":"react-router","underscore":"underscore"}],29:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -2062,7 +2405,7 @@ var Following = (function (_React$Component) {
 exports['default'] = Following;
 module.exports = exports['default'];
 
-},{"../actions/FollowingActions":5,"../stores/FollowingStore":46,"./Pagination":33,"react":"react","react-router":"react-router","underscore":"underscore"}],26:[function(require,module,exports){
+},{"../actions/FollowingActions":6,"../stores/FollowingStore":52,"./Pagination":38,"react":"react","react-router":"react-router","underscore":"underscore"}],30:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -2202,7 +2545,7 @@ var Footer = (function (_React$Component) {
 exports['default'] = Footer;
 module.exports = exports['default'];
 
-},{"react":"react"}],27:[function(require,module,exports){
+},{"react":"react"}],31:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -2298,7 +2641,7 @@ var Home = (function (_React$Component) {
 exports['default'] = Home;
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":6,"../stores/HomeStore":47,"react":"react"}],28:[function(require,module,exports){
+},{"../actions/HomeActions":7,"../stores/HomeStore":53,"react":"react"}],32:[function(require,module,exports){
 /**
  * Created by apache on 15-11-10.
  */
@@ -2416,14 +2759,14 @@ var List = (function (_React$Component) {
             var List = this.state.list.map(function (data) {
                 return _react2['default'].createElement(
                     'li',
-                    { key: data.article._id },
+                    { key: data.data._id },
                     _react2['default'].createElement(
                         _reactRouter.Link,
-                        { to: '/article/' + data.article._id, className: 'mon-top' },
+                        { to: '/article/' + data.data._id, className: 'mon-top' },
                         _react2['default'].createElement(
                             'div',
                             { className: 'mon-overlay' },
-                            _react2['default'].createElement('img', { className: 'img-response', src: data.article.abbreviations || '/img/abbreviations.png', alt: 'loading' })
+                            _react2['default'].createElement('img', { className: 'img-response', src: data.data.abbreviations || '/img/abbreviations.png', alt: 'loading' })
                         ),
                         _react2['default'].createElement(
                             'div',
@@ -2440,13 +2783,13 @@ var List = (function (_React$Component) {
                                 _react2['default'].createElement(
                                     'span',
                                     { className: 'pull-right' },
-                                    new Date(data.article.create_time).toLocaleDateString()
+                                    new Date(data.data.create_time).toLocaleDateString()
                                 )
                             ),
                             _react2['default'].createElement(
                                 'h2',
                                 null,
-                                data.article.title
+                                data.data.title
                             )
                         )
                     )
@@ -2510,7 +2853,7 @@ List.contextTypes = {
 exports['default'] = List;
 module.exports = exports['default'];
 
-},{"../actions/ListActions":7,"../stores/ListStore":48,"react":"react","react-router":"react-router","underscore":"underscore"}],29:[function(require,module,exports){
+},{"../actions/ListActions":8,"../stores/ListStore":54,"react":"react","react-router":"react-router","underscore":"underscore"}],33:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -2802,7 +3145,186 @@ var Login = (function (_React$Component) {
 exports['default'] = Login;
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":8,"../stores/LoginStore":49,"react":"react"}],30:[function(require,module,exports){
+},{"../actions/LoginActions":9,"../stores/LoginStore":55,"react":"react"}],34:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-14.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _underscore = require('underscore');
+
+var _reactRouter = require('react-router');
+
+var _Contribute = require('./Contribute');
+
+var _Contribute2 = _interopRequireDefault(_Contribute);
+
+var _NotFound = require('./NotFound');
+
+var _NotFound2 = _interopRequireDefault(_NotFound);
+
+var _actionsMemberActions = require('../actions/MemberActions');
+
+var _actionsMemberActions2 = _interopRequireDefault(_actionsMemberActions);
+
+var _storesMemberStore = require('../stores/MemberStore');
+
+var _storesMemberStore2 = _interopRequireDefault(_storesMemberStore);
+
+var Member = (function (_React$Component) {
+    _inherits(Member, _React$Component);
+
+    function Member(props) {
+        _classCallCheck(this, Member);
+
+        _get(Object.getPrototypeOf(Member.prototype), 'constructor', this).call(this, props);
+        this.state = _storesMemberStore2['default'].getState();
+        this.onChange = this.onChange.bind(this);
+    }
+
+    _createClass(Member, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            _storesMemberStore2['default'].listen(this.onChange);
+            _actionsMemberActions2['default'].getMember(this.props.params.domain);
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps) {
+            if (!(0, _underscore.isEqual)(prevProps.params, this.props.params)) {
+                _actionsMemberActions2['default'].getMember(this.props.params.domain);
+            }
+        }
+    }, {
+        key: 'componentWillUnMount',
+        value: function componentWillUnMount() {
+            _storesMemberStore2['default'].unlisten(this.onChange);
+        }
+    }, {
+        key: 'onChange',
+        value: function onChange(state) {
+            this.setState(state);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            var Mem = _react2['default'].createElement(
+                'div',
+                { className: 'col-md-3 col-sm-3' },
+                _react2['default'].createElement(
+                    'div',
+                    { className: 'mon-center' },
+                    _react2['default'].createElement('img', { src: this.state.avatar_url, width: '200', alt: 'loading' })
+                ),
+                _react2['default'].createElement(
+                    'div',
+                    { className: 'mon-user-name' },
+                    this.state.username
+                ),
+                _react2['default'].createElement(
+                    'div',
+                    { className: 'mon-vcard-stats' },
+                    _react2['default'].createElement(
+                        _reactRouter.Link,
+                        { to: '/member/' + this.props.params.domain + '/followers', className: 'mon-link' },
+                        _react2['default'].createElement(
+                            'span',
+                            null,
+                            this.state.followers
+                        ),
+                        _react2['default'].createElement(
+                            'b',
+                            null,
+                            'Followers'
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        _reactRouter.Link,
+                        { to: '/member/' + this.props.params.domain + '/following', className: 'mon-link' },
+                        _react2['default'].createElement(
+                            'span',
+                            null,
+                            this.state.following
+                        ),
+                        _react2['default'].createElement(
+                            'b',
+                            null,
+                            'Following'
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        _reactRouter.Link,
+                        { to: '/member/' + this.props.params.domain + '/contribute', className: 'mon-link' },
+                        _react2['default'].createElement(
+                            'span',
+                            null,
+                            this.state.contribute
+                        ),
+                        _react2['default'].createElement(
+                            'b',
+                            null,
+                            'Star'
+                        )
+                    )
+                ),
+                _react2['default'].createElement(
+                    'div',
+                    { className: 'mon-center mon-member' },
+                    _react2['default'].createElement(
+                        'p',
+                        { className: 'text-muted mon-bg-title' },
+                        '个人简介'
+                    ),
+                    _react2['default'].createElement(
+                        'p',
+                        { className: 'text-success bg-info mon-member-intr' },
+                        this.state.introduce
+                    )
+                )
+            );
+            return _react2['default'].createElement(
+                'div',
+                { className: 'container' },
+                _react2['default'].createElement(
+                    'div',
+                    { className: 'row' },
+                    Mem,
+                    _react2['default'].createElement(_Contribute2['default'], { option: '0', domain: this.props.params.domain })
+                )
+            );
+        }
+    }]);
+
+    return Member;
+})(_react2['default'].Component);
+
+Member.contextTypes = {
+    router: _react2['default'].PropTypes.func.isRequired
+};
+
+exports['default'] = Member;
+module.exports = exports['default'];
+
+},{"../actions/MemberActions":10,"../stores/MemberStore":56,"./Contribute":27,"./NotFound":36,"react":"react","react-router":"react-router","underscore":"underscore"}],35:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -3063,7 +3585,7 @@ var Nav = (function (_React$Component) {
 exports['default'] = Nav;
 module.exports = exports['default'];
 
-},{"../actions/NavActions":9,"../stores/NavStore":50,"react":"react","react-router":"react-router"}],31:[function(require,module,exports){
+},{"../actions/NavActions":11,"../stores/NavStore":57,"react":"react","react-router":"react-router"}],36:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -3117,7 +3639,7 @@ var NotFound = (function (_React$Component) {
 exports['default'] = NotFound;
 module.exports = exports['default'];
 
-},{"react":"react"}],32:[function(require,module,exports){
+},{"react":"react"}],37:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -3192,7 +3714,7 @@ var Notice = (function (_React$Component) {
 exports['default'] = Notice;
 module.exports = exports['default'];
 
-},{"../actions/NoticeActions":10,"../stores/NoticeStore":51,"react":"react"}],33:[function(require,module,exports){
+},{"../actions/NoticeActions":12,"../stores/NoticeStore":58,"react":"react"}],38:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -3346,7 +3868,7 @@ var Pagination = (function (_React$Component) {
 exports['default'] = Pagination;
 module.exports = exports['default'];
 
-},{"../actions/PaginationActions":11,"../stores/PaginationStore":52,"react":"react"}],34:[function(require,module,exports){
+},{"../actions/PaginationActions":13,"../stores/PaginationStore":59,"react":"react"}],39:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -3433,7 +3955,7 @@ var PostAnimate = (function (_React$Component) {
 exports['default'] = PostAnimate;
 module.exports = exports['default'];
 
-},{"../actions/PostAnimateActions":12,"../stores/PostAnimateStore":53,"react":"react"}],35:[function(require,module,exports){
+},{"../actions/PostAnimateActions":14,"../stores/PostAnimateStore":60,"react":"react"}],40:[function(require,module,exports){
 /**
  * Created by apache on 15-11-3.
  */
@@ -3665,7 +4187,7 @@ var PostArticle = (function (_React$Component) {
 exports['default'] = PostArticle;
 module.exports = exports['default'];
 
-},{"../actions/PostArticleActions":13,"../stores/PostArticleStore":54,"markdown":63,"react":"react"}],36:[function(require,module,exports){
+},{"../actions/PostArticleActions":15,"../stores/PostArticleStore":61,"markdown":70,"react":"react"}],41:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -3740,7 +4262,7 @@ var ProfileCenter = (function (_React$Component) {
 exports['default'] = ProfileCenter;
 module.exports = exports['default'];
 
-},{"../actions/ProfileCenterActions":14,"../stores/ProfileCenterStore":55,"react":"react"}],37:[function(require,module,exports){
+},{"../actions/ProfileCenterActions":16,"../stores/ProfileCenterStore":62,"react":"react"}],42:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -3997,7 +4519,7 @@ var Set = (function (_React$Component) {
 exports['default'] = Set;
 module.exports = exports['default'];
 
-},{"../actions/SetActions":15,"../stores/SetStore":56,"react":"react"}],38:[function(require,module,exports){
+},{"../actions/SetActions":17,"../stores/SetStore":63,"react":"react"}],43:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -4069,7 +4591,7 @@ var Star = (function (_React$Component) {
 exports['default'] = Star;
 module.exports = exports['default'];
 
-},{"../actions/StarActions":16,"../stores/StarStore":57,"react":"react"}],39:[function(require,module,exports){
+},{"../actions/StarActions":18,"../stores/StarStore":64,"react":"react"}],44:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -4330,7 +4852,7 @@ User.contextTypes = {
 exports['default'] = User;
 module.exports = exports['default'];
 
-},{"../actions/UserActions":17,"../stores/UserStore":58,"react":"react","react-router":"react-router"}],40:[function(require,module,exports){
+},{"../actions/UserActions":19,"../stores/UserStore":65,"react":"react","react-router":"react-router"}],45:[function(require,module,exports){
 /**
  * Created by apache on 15-10-22.
  */
@@ -4354,7 +4876,7 @@ _reactRouter2['default'].run(_routes2['default'], _reactRouter2['default'].Histo
   _react2['default'].render(_react2['default'].createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./routes":41,"react":"react","react-router":"react-router"}],41:[function(require,module,exports){
+},{"./routes":46,"react":"react","react-router":"react-router"}],46:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -4436,6 +4958,14 @@ var _componentsList = require('./components/List');
 
 var _componentsList2 = _interopRequireDefault(_componentsList);
 
+var _componentsMember = require('./components/Member');
+
+var _componentsMember2 = _interopRequireDefault(_componentsMember);
+
+var _componentsConArticle = require('./components/ConArticle');
+
+var _componentsConArticle2 = _interopRequireDefault(_componentsConArticle);
+
 exports['default'] = _react2['default'].createElement(
     _reactRouter.Route,
     { handler: _componentsApp2['default'] },
@@ -4445,6 +4975,28 @@ exports['default'] = _react2['default'].createElement(
         _reactRouter.Route,
         { path: '/article' },
         _react2['default'].createElement(_reactRouter.Route, { path: ':id', handler: _componentsArticle2['default'] })
+    ),
+    _react2['default'].createElement(
+        _reactRouter.Route,
+        { path: '/member', handler: _componentsMember2['default'] },
+        _react2['default'].createElement(
+            _reactRouter.Route,
+            { path: ':domain', hanlder: _componentsContribute2['default'] },
+            _react2['default'].createElement(_reactRouter.Route, { path: 'article', handler: _componentsConArticle2['default'] }),
+            _react2['default'].createElement(_reactRouter.Route, { path: 'music', handler: _componentsNotFound2['default'] }),
+            _react2['default'].createElement(_reactRouter.Route, { path: 'animate', handler: _componentsNotFound2['default'] })
+        )
+    ),
+    _react2['default'].createElement(
+        _reactRouter.Route,
+        { path: '/member' },
+        _react2['default'].createElement(
+            _reactRouter.Route,
+            { path: ':domain' },
+            _react2['default'].createElement(_reactRouter.Route, { path: 'following', handler: _componentsNotice2['default'] }),
+            _react2['default'].createElement(_reactRouter.Route, { Path: 'followers', handler: _componentsNotice2['default'] }),
+            _react2['default'].createElement(_reactRouter.Route, { path: 'star', handler: _componentsNotice2['default'] })
+        )
     ),
     _react2['default'].createElement(
         _reactRouter.Route,
@@ -4481,7 +5033,7 @@ exports['default'] = _react2['default'].createElement(
 );
 module.exports = exports['default'];
 
-},{"./components/App":19,"./components/Article":20,"./components/Contribute":23,"./components/Followers":24,"./components/Following":25,"./components/Home":27,"./components/List":28,"./components/Login":29,"./components/NotFound":31,"./components/Notice":32,"./components/PostAnimate":34,"./components/PostArticle":35,"./components/ProfileCenter":36,"./components/Set":37,"./components/Star":38,"./components/User":39,"react":"react","react-router":"react-router"}],42:[function(require,module,exports){
+},{"./components/App":21,"./components/Article":22,"./components/ConArticle":25,"./components/Contribute":27,"./components/Followers":28,"./components/Following":29,"./components/Home":31,"./components/List":32,"./components/Login":33,"./components/Member":34,"./components/NotFound":36,"./components/Notice":37,"./components/PostAnimate":39,"./components/PostArticle":40,"./components/ProfileCenter":41,"./components/Set":42,"./components/Star":43,"./components/User":44,"react":"react","react-router":"react-router"}],47:[function(require,module,exports){
 /**
  * Created by apache on 15-11-4.
  */
@@ -4554,7 +5106,7 @@ var ArticleStore = (function () {
 exports['default'] = _alt2['default'].createStore(ArticleStore);
 module.exports = exports['default'];
 
-},{"../actions/ArticleActions":1,"../alt":18}],43:[function(require,module,exports){
+},{"../actions/ArticleActions":1,"../alt":20}],48:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -4636,7 +5188,58 @@ var CommentStore = (function () {
 exports['default'] = _alt2['default'].createStore(CommentStore);
 module.exports = exports['default'];
 
-},{"../actions/CommentActions":2,"../alt":18}],44:[function(require,module,exports){
+},{"../actions/CommentActions":2,"../alt":20}],49:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-14.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _actionsConListActions = require('../actions/ConListActions');
+
+var _actionsConListActions2 = _interopRequireDefault(_actionsConListActions);
+
+var ConListStore = (function () {
+    function ConListStore() {
+        _classCallCheck(this, ConListStore);
+
+        this.bindActions(_actionsConListActions2['default']);
+        this.contributes = [];
+        this.count = 0;
+    }
+
+    _createClass(ConListStore, [{
+        key: 'onGetConListSuccess',
+        value: function onGetConListSuccess(data) {
+            if (data.code === 200) {
+                this.contributes = data.raw._raw;
+                this.count = data.raw.count;
+            } else if (data.code === 500) {
+                toastr.error('服务器错误');
+            }
+        }
+    }]);
+
+    return ConListStore;
+})();
+
+exports['default'] = _alt2['default'].createStore(ConListStore);
+module.exports = exports['default'];
+
+},{"../actions/ConListActions":3,"../alt":20}],50:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -4671,7 +5274,7 @@ var ContributeStore = function ContributeStore() {
 exports['default'] = _alt2['default'].createStore(ContributeStore);
 module.exports = exports['default'];
 
-},{"../actions/ContributeActions":3,"../alt":18}],45:[function(require,module,exports){
+},{"../actions/ContributeActions":4,"../alt":20}],51:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -4751,7 +5354,7 @@ var FollowersStore = (function () {
 exports['default'] = _alt2['default'].createStore(FollowersStore);
 module.exports = exports['default'];
 
-},{"../actions/FollowersActions":4,"../alt":18}],46:[function(require,module,exports){
+},{"../actions/FollowersActions":5,"../alt":20}],52:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -4831,7 +5434,7 @@ var FollowingStore = (function () {
 exports['default'] = _alt2['default'].createStore(FollowingStore);
 module.exports = exports['default'];
 
-},{"../actions/FollowingActions":5,"../alt":18}],47:[function(require,module,exports){
+},{"../actions/FollowingActions":6,"../alt":20}],53:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -4880,7 +5483,7 @@ var HomeStore = (function () {
 exports['default'] = _alt2['default'].createStore(HomeStore);
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":6,"../alt":18}],48:[function(require,module,exports){
+},{"../actions/HomeActions":7,"../alt":20}],54:[function(require,module,exports){
 /**
  * Created by apache on 15-11-10.
  */
@@ -4933,7 +5536,7 @@ var ListStore = (function () {
 exports['default'] = _alt2['default'].createStore(ListStore);
 module.exports = exports['default'];
 
-},{"../actions/ListActions":7,"../alt":18}],49:[function(require,module,exports){
+},{"../actions/ListActions":8,"../alt":20}],55:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -5067,7 +5670,76 @@ var LoginStore = (function () {
 exports['default'] = _alt2['default'].createStore(LoginStore);
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":8,"../alt":18}],50:[function(require,module,exports){
+},{"../actions/LoginActions":9,"../alt":20}],56:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-14.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _actionsMemberActions = require('../actions/MemberActions');
+
+var _actionsMemberActions2 = _interopRequireDefault(_actionsMemberActions);
+
+var MemberStore = (function () {
+    function MemberStore() {
+        _classCallCheck(this, MemberStore);
+
+        this.bindActions(_actionsMemberActions2['default']);
+        this.username = '';
+        this.avatar_url = '';
+        this.followers = 0;
+        this.following = 0;
+        this.contribute = 0;
+        this.article = [];
+        this.animate = [];
+        this.music = [];
+        this.introduce = 'heh';
+        this.star = 0;
+    }
+
+    _createClass(MemberStore, [{
+        key: 'onGetMemberSuccess',
+        value: function onGetMemberSuccess(data) {
+            if (data.code === 200) {
+                this.username = data.raw.username;
+                this.avatar_url = data.raw.avatar_url;
+                this.followers = data.raw.followers.length;
+                this.following = data.raw.following.length;
+                this.contribute = data.raw.contribute.length;
+                this.animate = data.raw.animate;
+                this.music = data.raw.music;
+                this.article = data.raw.article;
+                this.introduce = data.raw.introduce;
+                this.star = data.raw.star.length;
+            } else if (data.code === 500) {
+                toastr.error('服务器错误');
+            } else if (data.code === 404) {
+                toastr.warning('找不到这个人');
+            }
+        }
+    }]);
+
+    return MemberStore;
+})();
+
+exports['default'] = _alt2['default'].createStore(MemberStore);
+module.exports = exports['default'];
+
+},{"../actions/MemberActions":10,"../alt":20}],57:[function(require,module,exports){
 /**
  * Created by apache on 15-10-25.
  */
@@ -5145,7 +5817,7 @@ var NavStore = (function () {
 exports['default'] = _alt2['default'].createStore(NavStore);
 module.exports = exports['default'];
 
-},{"../actions/NavActions":9,"../alt":18}],51:[function(require,module,exports){
+},{"../actions/NavActions":11,"../alt":20}],58:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -5189,7 +5861,7 @@ var NoticeStore = (function () {
 exports['default'] = _alt2['default'].createStore(NoticeStore);
 module.exports = exports['default'];
 
-},{"../actions/NoticeActions":10,"../alt":18}],52:[function(require,module,exports){
+},{"../actions/NoticeActions":12,"../alt":20}],59:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -5220,7 +5892,7 @@ var PaginationStore = function PaginationStore() {
 exports['default'] = _alt2['default'].createStore(PaginationStore);
 module.exports = exports['default'];
 
-},{"../actions/PaginationActions":11,"../alt":18}],53:[function(require,module,exports){
+},{"../actions/PaginationActions":13,"../alt":20}],60:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -5264,7 +5936,7 @@ var PostAnimateStore = (function () {
 exports['default'] = _alt2['default'].createStore(PostAnimateStore);
 module.exports = exports['default'];
 
-},{"../actions/PostAnimateActions":12,"../alt":18}],54:[function(require,module,exports){
+},{"../actions/PostAnimateActions":14,"../alt":20}],61:[function(require,module,exports){
 /**
  * Created by apache on 15-11-3.
  */
@@ -5352,7 +6024,7 @@ var PostArticleStore = (function () {
 exports['default'] = _alt2['default'].createStore(PostArticleStore);
 module.exports = exports['default'];
 
-},{"../actions/PostArticleActions":13,"../alt":18}],55:[function(require,module,exports){
+},{"../actions/PostArticleActions":15,"../alt":20}],62:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -5383,7 +6055,7 @@ var ProfileCenterStore = function ProfileCenterStore() {
 exports['default'] = _alt2['default'].createStore(ProfileCenterStore);
 module.exports = exports['default'];
 
-},{"../actions/ProfileCenterActions":14,"../alt":18}],56:[function(require,module,exports){
+},{"../actions/ProfileCenterActions":16,"../alt":20}],63:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -5534,7 +6206,7 @@ var SetStore = (function () {
 exports['default'] = _alt2['default'].createStore(SetStore);
 module.exports = exports['default'];
 
-},{"../actions/SetActions":15,"../alt":18}],57:[function(require,module,exports){
+},{"../actions/SetActions":17,"../alt":20}],64:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -5578,7 +6250,7 @@ var StarStore = (function () {
 exports['default'] = _alt2['default'].createStore(StarStore);
 module.exports = exports['default'];
 
-},{"../actions/StarActions":16,"../alt":18}],58:[function(require,module,exports){
+},{"../actions/StarActions":18,"../alt":20}],65:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -5646,7 +6318,7 @@ var UserStore = (function () {
 exports['default'] = _alt2['default'].createStore(UserStore);
 module.exports = exports['default'];
 
-},{"../actions/UserActions.js":17,"../alt":18}],59:[function(require,module,exports){
+},{"../actions/UserActions.js":19,"../alt":20}],66:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -5671,7 +6343,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],60:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -5764,14 +6436,14 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],61:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],62:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -6361,12 +7033,12 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":61,"_process":60,"inherits":59}],63:[function(require,module,exports){
+},{"./support/isBuffer":68,"_process":67,"inherits":66}],70:[function(require,module,exports){
 // super simple module for the most common nodejs use case.
 exports.markdown = require("./markdown");
 exports.parse = exports.markdown.toHTML;
 
-},{"./markdown":64}],64:[function(require,module,exports){
+},{"./markdown":71}],71:[function(require,module,exports){
 // Released under MIT license
 // Copyright (c) 2009-2010 Dominic Baggott
 // Copyright (c) 2009-2010 Ash Berlin
@@ -8093,4 +8765,4 @@ function merge_text_nodes( jsonml ) {
   }
 } )() );
 
-},{"util":62}]},{},[40]);
+},{"util":69}]},{},[45]);

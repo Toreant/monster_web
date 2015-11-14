@@ -107,9 +107,9 @@ class md {
      * @param callback
      */
     getUserByDomain(domain,callback) {
-        User.find({domain : domain},(err,docs) => {
+        User.findOne({domain : domain},'username domain avatar_url introduce contribute article music animate star followers following',(err,docs) => {
             if(err) {
-                callback(err);
+                callback(500);
             } else {
                 callback(docs);
             }

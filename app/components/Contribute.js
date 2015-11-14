@@ -2,6 +2,7 @@
  * Created by apache on 15-11-2.
  */
 import React from 'react';
+import {RouteHandler,Link} from 'react-router';
 import ContributeActions from '../actions/ContributeActions';
 import ContributeStore from '../stores/ContributeStore';
 class Contribute extends React.Component {
@@ -24,20 +25,43 @@ class Contribute extends React.Component {
     }
 
     render() {
-        let Contributes;
-        if(this.state.contributes.length === 0) {
-            Contributes = (
-                <p className='bg-danger mon-padding'>我还没有分享任何东西</p>
+        let ConNav;
+        if(this.props.option === '0') {
+            ConNav = (
+                <div className='mon-contribute-nav'>
+                    <Link to={'/member/'+this.props.domain+'/article'}>
+                        文章
+                    </Link>
+                    <Link to={'/member/'+this.props.domain+'/music'}>
+                        音乐
+                    </Link>
+                    <Link to={'/member/'+this.props.domain+'/animate'}>
+                        动漫
+                    </Link>
+                </div>
             );
-        } else {
-            Contributes = this.state.contributes.map((data,index) => {
-
-            });
+        }　else {
+            ConNav = (
+                <div className='mon-contribute-nav'>
+                    <Link to={'/profile/article'}>
+                        文章
+                    </Link>
+                    <Link to={'/profile/music'}>
+                        音乐
+                    </Link>
+                    <Link to={'/profile/animate'} >
+                        动漫
+                    </Link>
+                </div>
+            );
         }
         return(
             <div className='col-sm-9 col-md-9 animated fadeInUp'>
                 <p className='bg-success mon-padding mon-bg-title'>我的贡献分享</p>
-                {Contributes}
+                <div className='mon-contribute-block'>
+                    {ConNav}
+                </div>
+                <RouteHandler />
             </div>
         );
     }

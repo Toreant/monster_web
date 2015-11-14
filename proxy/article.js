@@ -77,13 +77,13 @@ class md {
      * @param option
      * @param callback
      */
-    getArticles(option,callback) {
+    getArticles(option,callback,params = {}) {
         async.waterfall([
             /*
              获取文章
              */
             function(_callback) {
-                Article.find({},null,option,(err,docs) => {
+                Article.find(params,null,option,(err,docs) => {
                     if(err) {
                         _callback(null,500);
                     } else {
@@ -129,7 +129,7 @@ class md {
                     let result = [];
                     for(let i = 0, len = docs.length; i < len; i++) {
                         let item = {};
-                        item.article = docs[i];
+                        item.data = docs[i];
                         item.user = null;
                         for(let j = 0, num = users.length; j < num; j++) {
                             if(docs[i].create_user_id == users[j]._id) {
@@ -149,7 +149,7 @@ class md {
                 if(result === 500) {
                     _callback(null,500);
                 } else {
-                    Article.count({},function(err,count) {
+                    Article.count(params,function(err,count) {
                         console.log(count);
                         if(err) {
                             _callback(null,500);

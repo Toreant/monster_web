@@ -1,0 +1,21 @@
+.mon-member {
+  margin-top: 30px;
+}
+.mon-member-intr {
+  line-height: 1.2;
+  padding: 20px;
+}
+/*　导航　*/
+.mon-member-nav {
+  border: 1px solid #ddd;
+}
+.mon-member-nav > a {
+  border-right: 1px solid #ddd;
+  padding: 10px 20px;
+  font-size: 18px;
+  color: #0f0f0f !important;
+}
+.mon-member-nav > a:hover {
+  background-color: #999;
+  color: #fff !important;
+}

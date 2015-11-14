@@ -115,22 +115,26 @@ class UserCtrl {
      * @param next
      */
     getUserByDomain(req,res,next) {
-        let domain = req.body.domain;
+        let domain = req.params.domain;
+        console.log(domain);
 
         let result = {
             meta : '',
             code : 0,
-            data : null
+            raw : null
         };
 
         User.getUserByDomain(domain,function(docs){
-            if(docs.length >=1) {
+            if(docs !== null) {
                 result.meta = '获取用户资料成功';
                 result.code = 200;
                 result.raw = docs;
+            } else if(docs === 500) {
+                result.meta = '服务器错误';
+                result.code = 500;
             } else {
-                result.meta = '获取用户资料不成功';
-                result.code = 400;
+                result.meta = '找不到这个人';
+                result.code = 404;
             }
             res.json(result);
         })

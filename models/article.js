@@ -15,6 +15,7 @@ var ArticleSchema = new Schema({
     create_user_id : {type : String},
     create_user_name : {type : String},
     create_time : {type : Number},
+    create_user_domain : {type : String},
     comment : [Number]
 });
 

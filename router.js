@@ -7,8 +7,8 @@ import UserCtrl from './controllers/User';
 import ArticleCtrl from './controllers/Article';
 import CommentCtrl from './controllers/Comment';
 
-router.post('/api/login',UserCtrl.getLogin);
 
+// 用户有关
 router.post('/api/user',UserCtrl.getSign);
 
 router.put('/api/user',UserCtrl.getUpdate);
@@ -17,23 +17,29 @@ router.post('/api/getUser',UserCtrl.getUserByDomain);
 
 router.post('/api/users',UserCtrl.getUserById);
 
+router.get('/api/member/:domain',UserCtrl.getUserByDomain);
+
+//　follow有关
 router.post('/api/follow',UserCtrl.addFollow);
 
 router.post('/api/following',UserCtrl.getFollowing);
 
 router.post('/api/unFollow',UserCtrl.unFollowing);
 
+//　文章有关
 router.post('/api/article',ArticleCtrl.getSaveArticle);
 
 router.post('/api/getArticle',ArticleCtrl.getArticle);
 
 router.post('/api/articles',ArticleCtrl.getArticles);
 
+//　评论有关
 router.post('/api/comment',CommentCtrl.getComments);
 
 router.put('/api/comment',CommentCtrl.savaComment);
 
 router.delete('/api/comment',CommentCtrl.deleteComment);
+
 
 router.post('/api/session',function(req,res,next){
     if((req.session.passport !== undefined || req.session.user !== undefined)) {
@@ -43,6 +49,9 @@ router.post('/api/session',function(req,res,next){
         res.json({meta : '你还没登陆',code : 400});
     }
 });
+
+// 登陆登出
+router.post('/api/login',UserCtrl.getLogin);
 
 router.post('/api/signout',function(req,res,next){
     if(req.session.destroy()) {
