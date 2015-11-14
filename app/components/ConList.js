@@ -29,7 +29,8 @@ class ConList extends React.Component {
     }
 
     prevPage() {
-        let option = this.props;
+        console.log('hgeh');
+        let props = this.props;
         ConListActions.getConList(props.option,props.tab,props.domain,this.state.skip-1);
         ConListActions.changeSkip(0);
     }
@@ -75,7 +76,7 @@ class ConList extends React.Component {
         if(this.state.skip === 0) {
             disabled = 'disabled';
         }
-        if(this.state.skip >= (this.state.count/10) || this.state.count < 10) {
+        if(this.state.skip >= (this.state.count/4-1) || this.state.count < 4) {
             disabledN = 'disabled';
         }
 

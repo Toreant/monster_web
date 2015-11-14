@@ -161,11 +161,11 @@ var ConListActions = (function () {
 
     _createClass(ConListActions, [{
         key: 'getConList',
-        value: function getConList(option, tab, param) {
+        value: function getConList(option, tab, param, skip) {
             var _this = this;
 
             var params = {
-                option: { skip: 0, limit: 10, sort: { create_time: 1 } }
+                option: { skip: skip * 4, limit: 4, sort: { create_time: 1 } }
             },
                 url = '';
             if (option === '0') {
@@ -1872,7 +1872,8 @@ var ConList = (function (_React$Component) {
     }, {
         key: 'prevPage',
         value: function prevPage() {
-            var option = this.props;
+            console.log('hgeh');
+            var props = this.props;
             _actionsConListActions2['default'].getConList(props.option, props.tab, props.domain, this.state.skip - 1);
             _actionsConListActions2['default'].changeSkip(0);
         }
@@ -1946,7 +1947,7 @@ var ConList = (function (_React$Component) {
             if (this.state.skip === 0) {
                 disabled = 'disabled';
             }
-            if (this.state.skip >= this.state.count / 10 || this.state.count < 10) {
+            if (this.state.skip >= this.state.count / 4 - 1 || this.state.count < 4) {
                 disabledN = 'disabled';
             }
 

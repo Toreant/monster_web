@@ -18,10 +18,10 @@ class ConListActions {
      * @param tab
      * @param param
      */
-    getConList(option,tab,param) {
+    getConList(option,tab,param,skip) {
 
         let params = {
-                option: {skip: 0,limit: 10,sort: {create_time: 1}}
+                option: {skip: skip*4,limit: 4,sort: {create_time: 1}}
             },
             url = '';
         if(option === '0') {
