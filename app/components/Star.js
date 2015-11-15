@@ -1,5 +1,5 @@
 /**
- * Created by apache on 15-10-30.
+ * Created by apache on 15-11-15.
  */
 import React from 'react';
 import StarActions from '../actions/StarActions';
@@ -9,12 +9,11 @@ class Star extends React.Component {
     constructor(props) {
         super(props);
         this.state = StarStore.getState();
-        this.onChange =  this.onChange.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
     componentDidMount() {
         StarStore.listen(this.onChange);
-        StarActions.getStar();
     }
 
     componentWillUnMount() {
@@ -25,11 +24,17 @@ class Star extends React.Component {
         this.setState(state);
     }
 
+    handleClick() {
+        let column = this.props.column,
+            star_id = this.props.star;
+        StarActions.getStar(star_id,column);
+    }
+
     render() {
         return (
-            <div className='col-md-9 col-sm-9'>
-
-            </div>
+            <a href="javascript:;" className='btn btn-primary' onClick={this.handleClick.bind(this)}>
+                <span className='fa fa-star'></span>收藏
+            </a>
         );
     }
 }

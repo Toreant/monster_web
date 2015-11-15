@@ -9,6 +9,7 @@ import ArticleStore from '../stores/ArticleStore';
 import md from 'markdown';
 import Comment from './Comment';
 import BtnBlock from './BtnBlock';
+import Star from './Star';
 
 class Article extends React.Component {
     constructor(props) {
@@ -71,6 +72,7 @@ class Article extends React.Component {
                         <div className='mon-article-tags'>
                             {Tags}
                         </div>
+                        <Star star={this.props.params.id} column='article' />
                         <Comment id={this.props.params.id}/>
                     </div>
                     <div className='col-md-4 col-sm-4 mon-offset'>

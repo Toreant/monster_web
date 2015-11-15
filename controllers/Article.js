@@ -77,7 +77,6 @@ class ArticleCtrl {
     getArticles(req,res,next) {
         let option = req.body.option;
         let params = req.body.params;
-        console.log(params);
         article.getArticles(option,(data) => {
             let result = {
                 meta : '',
@@ -92,10 +91,12 @@ class ArticleCtrl {
                 result.code = 200;
                 result.raw  = data;
             }
-
             res.json(result);
         },params);
     }
+
+
+
 }
 
 export default new ArticleCtrl();

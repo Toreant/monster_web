@@ -1,5 +1,5 @@
 /**
- * Created by apache on 15-10-30.
+ * Created by apache on 15-11-15.
  */
 import alt from '../alt';
 
@@ -10,22 +10,19 @@ class StarActions {
         );
     }
 
-    getStar() {
-        let params = {
-            arrayId : [56115100,48561100]
-        };
-        params = JSON.stringify(params);
+    getStar(id,column) {
+
         $.ajax({
-            url : '/api/getStar',
-            cache : false,
-            type : 'post',
-            data : params,
+            url : '/api/star',
             dataType : 'json',
-            contentType: 'application/json;charset=utf-8'
+            type : 'post',
+            cache : false,
+            contentType : 'application/json;charset=utf-8',
+            data : JSON.stringify({star_id : id,column : column})
         }).done((data) => {
             this.actions.getStarSuccess(data);
-        }).fail((data) => {
-            toastr.error('链接出现问题');
+        }).fail(() => {
+            toastr.error('收藏不成功');
         });
     }
 }

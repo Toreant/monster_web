@@ -40,6 +40,8 @@ router.put('/api/comment',CommentCtrl.savaComment);
 
 router.delete('/api/comment',CommentCtrl.deleteComment);
 
+// 收藏
+router.post('/api/star',UserCtrl.getStar);
 
 router.post('/api/session',function(req,res,next){
     if((req.session.passport !== undefined || req.session.user !== undefined)) {

@@ -9,7 +9,7 @@ import Login from './components/Login';
 import User from './components/User';
 import Set from './components/Set';
 import Notice from './components/Notice';
-import Star from './components/Star';
+import Star from './components/StarList';
 import NotFound from './components/NotFound';
 import PostAnimate from './components/PostAnimate';
 import ProfileCenter from './components/ProfileCenter';

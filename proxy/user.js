@@ -216,6 +216,69 @@ class md {
             callback(result);
         });
     }
+
+    /**
+     * 收藏
+     * @param user_id
+     * @param star_id
+     * @param column
+     * @param callback
+     */
+    getStar(user_id,star_id,column,callback) {
+        async.waterfall([
+
+            // 查找用户
+            function(_callback) {
+                User.findOne({_id : user_id},(err,user) => {
+                    if(err) {
+                        _callback(null,500);
+                    } else {
+                        _callback(null,user);
+                    }
+                });
+            },
+
+            // 添加关注到用户资料中
+            function(user,_callback) {
+                if(user === null) {
+                    _callback(null,404);
+                } else {
+                    if(_.indexOf(user.star,star_id) === -1) {
+                        switch(column) {
+                            case 'article' :
+                                user.star_article.unshift(star_id);
+                                break;
+                            case 'music' :
+                                user.star_music.unshift(star_id);
+                                break;
+                            case 'animate' :
+                                user.star_animate.unshift(star_id);
+                                break;
+                        }
+                        user.star.unshift(star_id);
+                        user.save((err, product, numAffected) => {
+                            if(err) {
+                                _callback(null,500);
+                            } else {
+                                _callback(null,200);
+                            }
+                        });
+                    } else {
+                        _callback(null,304);
+                    }
+                }
+            }
+        ],function(err,result) {
+            /**
+             * result
+             * 200 成功收藏
+             * 304　已经收藏过
+             * 404 没有这个用户
+             * 500　服务器错误
+             */
+            callback(result);
+        });
+    }
 }
 
 export default new md();

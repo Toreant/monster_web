@@ -53,7 +53,7 @@ class Member extends React.Component {
                         <b>Following</b>
                     </Link>
                     <Link to={'/member/'+this.props.params.domain+'/contribute'} className='mon-link'>
-                        <span>{this.state.contribute}</span>
+                        <span>{this.state.star}</span>
                         <b>Star</b>
                     </Link>
                 </div>

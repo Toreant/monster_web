@@ -12,6 +12,7 @@ var babelify = require('babelify');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var uglify = require('gulp-uglify');
+var mocha = require('gulp-mocha');
 
 var production = process.env.NODE_ENV === 'production';
 
@@ -34,7 +35,7 @@ gulp.task('vendor', function() {
         'bower_components/bootstrap/dist/js/bootstrap.js',
         'bower_components/toastr/toastr.js'
     ]).pipe(concat('vendor.js'))
-        .pipe(gulpif(production, uglify({ mangle: false })))
+        .pipe(uglify({ mangle: false }))
         .pipe(gulp.dest('public/js'));
 });
 
@@ -48,7 +49,7 @@ gulp.task('browserify-vendor', function() {
         .require(dependencies)
         .bundle()
         .pipe(source('vendor.bundle.js'))
-        .pipe(gulpif(production, streamify(uglify({ mangle: false }))))
+        .pipe(streamify(uglify({ mangle: false })))
         .pipe(gulp.dest('public/js'));
 });
 
@@ -116,6 +117,11 @@ gulp.task('concat',function() {
             .pipe(concat('main.min.css'))
             .pipe(cssmin())
             .pipe(gulp.dest('public/css'));
+});
+
+gulp.task('mocha',function() {
+    return gulp.src('tests/*.js')
+                .pipe(mocha({}));
 });
 
 gulp.task('watch', function() {
