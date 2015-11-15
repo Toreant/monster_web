@@ -7,12 +7,13 @@ class StarActions {
     constructor() {
         this.generateActions(
             'getStarSuccess',
-            'unStarSuccess'
+            'unStarSuccess',
+            'changeStateSuccess'
         );
     }
 
     getStar(id,column) {
-
+        console.log('heh');
         $.ajax({
             url : '/api/star',
             dataType : 'json',
@@ -41,6 +42,16 @@ class StarActions {
         }).fail(() => {
             toastr.error('取消收藏不成功');
         });
+    }
+
+    changeState(option) {
+        if(this.$Dispatcher_isDispatching) {
+            console.log('hehe');
+            window.setTimeout(() => {
+                this.actions.changeSuccess(option);
+            });
+        }
+
     }
 }
 

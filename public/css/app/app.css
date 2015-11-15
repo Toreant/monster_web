@@ -1,6 +1,9 @@
 .mon-disabled {
   display: none;
 }
+.mon-star {
+  text-align: center;
+}
 .mon-padding {
   padding: 10px;
   color: #5e5e5e;

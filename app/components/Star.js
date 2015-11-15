@@ -24,35 +24,38 @@ class Star extends React.Component {
         this.setState(state);
     }
 
-    handleClick() {
-        let column = this.props.column,
-            star_id = this.props.star;
-        StarActions.getStar(star_id,column);
-    }
+    handleClick(option) {
 
-    unStarClick() {
         let column = this.props.column,
             star_id = this.props.star;
-        StarActions.unStar(star_id,column);
+
+        // option 0-- 关注　１－－ 取消关注
+        if(option === 0) {
+            StarActions.getStar(star_id,column);
+        } else {
+            StarActions.unStar(star_id,column);
+        }
     }
 
     render() {
         let StarBtn;
-        if(this.props.stared === 'true') {
+        if(this.state.stared === 'true' || this.state.stared ) {
             StarBtn = (
-                <a href="javascript:;" className='btn btn-danger' onClick={this.unStarClick.bind(this)}>
-                    <span className='fa fa-star-o'></span>取消收藏
+                <a href="javascript:;" className='btn btn-danger'
+                   onClick={this.handleClick.bind(this,1)}>
+                    <span className='fa fa-star-o'>取消收藏</span>
                 </a>
             );
         } else {
             StarBtn = (
-                <a href="javascript:;" className='btn btn-primary' onClick={this.handleClick.bind(this)}>
-                    <span className='fa fa-star'></span>收藏
+                <a href="javascript:;" className='btn btn-primary'
+                   onClick={this.handleClick.bind(this,0)}>
+                    <span className='fa fa-star'>收藏</span>
                 </a>
             );
         }
         return (
-            <div>
+            <div className='mon-star'>
                 {StarBtn}
             </div>
         );

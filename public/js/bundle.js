@@ -1018,7 +1018,7 @@ var StarActions = (function () {
     function StarActions() {
         _classCallCheck(this, StarActions);
 
-        this.generateActions('getStarSuccess', 'unStarSuccess');
+        this.generateActions('getStarSuccess', 'unStarSuccess', 'changeStateSuccess');
     }
 
     _createClass(StarActions, [{
@@ -1026,6 +1026,7 @@ var StarActions = (function () {
         value: function getStar(id, column) {
             var _this = this;
 
+            console.log('heh');
             $.ajax({
                 url: '/api/star',
                 dataType: 'json',
@@ -1056,6 +1057,18 @@ var StarActions = (function () {
             }).fail(function () {
                 toastr.error('取消收藏不成功');
             });
+        }
+    }, {
+        key: 'changeState',
+        value: function changeState(option) {
+            var _this3 = this;
+
+            if (this.$Dispatcher_isDispatching) {
+                console.log('hehe');
+                window.setTimeout(function () {
+                    _this3.actions.changeSuccess(option);
+                });
+            }
         }
     }]);
 
@@ -1417,7 +1430,7 @@ var Article = (function (_React$Component) {
                             { className: 'mon-article-tags' },
                             Tags
                         ),
-                        _react2['default'].createElement(_Star2['default'], { star: this.props.params.id, column: 'article', stared: 'true' }),
+                        _react2['default'].createElement(_Star2['default'], { star: this.props.params.id, column: 'article', stared: 'false' }),
                         _react2['default'].createElement(_Comment2['default'], { id: this.props.params.id })
                     ),
                     _react2['default'].createElement(
@@ -4716,40 +4729,48 @@ var Star = (function (_React$Component) {
         }
     }, {
         key: 'handleClick',
-        value: function handleClick() {
+        value: function handleClick(option) {
+
             var column = this.props.column,
                 star_id = this.props.star;
-            _actionsStarActions2['default'].getStar(star_id, column);
-        }
-    }, {
-        key: 'unStarClick',
-        value: function unStarClick() {
-            var column = this.props.column,
-                star_id = this.props.star;
-            _actionsStarActions2['default'].unStar(star_id, column);
+
+            // option 0-- 关注　１－－ 取消关注
+            if (option === 0) {
+                _actionsStarActions2['default'].getStar(star_id, column);
+            } else {
+                _actionsStarActions2['default'].unStar(star_id, column);
+            }
         }
     }, {
         key: 'render',
         value: function render() {
             var StarBtn = undefined;
-            if (this.props.stared === 'true') {
+            if (this.state.stared === 'true' || this.state.stared) {
                 StarBtn = _react2['default'].createElement(
                     'a',
-                    { href: 'javascript:;', className: 'btn btn-danger', onClick: this.unStarClick.bind(this) },
-                    _react2['default'].createElement('span', { className: 'fa fa-star-o' }),
-                    '取消收藏'
+                    { href: 'javascript:;', className: 'btn btn-danger',
+                        onClick: this.handleClick.bind(this, 1) },
+                    _react2['default'].createElement(
+                        'span',
+                        { className: 'fa fa-star-o' },
+                        '取消收藏'
+                    )
                 );
             } else {
                 StarBtn = _react2['default'].createElement(
                     'a',
-                    { href: 'javascript:;', className: 'btn btn-primary', onClick: this.handleClick.bind(this) },
-                    _react2['default'].createElement('span', { className: 'fa fa-star' }),
-                    '收藏'
+                    { href: 'javascript:;', className: 'btn btn-primary',
+                        onClick: this.handleClick.bind(this, 0) },
+                    _react2['default'].createElement(
+                        'span',
+                        { className: 'fa fa-star' },
+                        '收藏'
+                    )
                 );
             }
             return _react2['default'].createElement(
                 'div',
-                null,
+                { className: 'mon-star' },
                 StarBtn
             );
         }
@@ -6533,6 +6554,8 @@ var StarStore = (function () {
 
         this.bindActions(_actionsStarActions2['default']);
         this.stared = false;
+        this.option = 0;
+        this.btnClass = 'btn-primary';
     }
 
     _createClass(StarStore, [{
@@ -6541,6 +6564,9 @@ var StarStore = (function () {
             switch (data.code) {
                 case 200:
                     toastr.success('收藏成功');
+                    this.stared = true;
+                    this.option = 1;
+                    this.btnClass = 'btn-danger';
                     break;
                 case 304:
                     toastr.warning('你已经收藏过了');
@@ -6562,6 +6588,9 @@ var StarStore = (function () {
             switch (data.code) {
                 case 200:
                     toastr.success('取消收藏成功');
+                    this.stared = false;
+                    this.option = 0;
+                    this.btnClass = 'btn-primary';
                     break;
                 case 304:
                     toastr.warning('你还没有收藏过');
@@ -6575,6 +6604,19 @@ var StarStore = (function () {
                 case 505:
                     toastr.error('服务器错误');
                     break;
+            }
+        }
+    }, {
+        key: 'onChangeStateSuccess',
+        value: function onChangeStateSuccess(option) {
+            if (option === 0) {
+                this.stared = true;
+                this.option = 1;
+                this.btnClass = 'btn-danger';
+            } else {
+                this.stared = false;
+                this.option = 0;
+                this.btnClass = 'btn-primary';
             }
         }
     }]);
