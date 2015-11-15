@@ -6,7 +6,8 @@ import alt from '../alt';
 class StarActions {
     constructor() {
         this.generateActions(
-            'getStarSuccess'
+            'getStarSuccess',
+            'unStarSuccess'
         );
     }
 
@@ -23,6 +24,22 @@ class StarActions {
             this.actions.getStarSuccess(data);
         }).fail(() => {
             toastr.error('收藏不成功');
+        });
+    }
+
+    unStar(id,column) {
+
+        $.ajax({
+            url : '/api/star',
+            dataType : 'json',
+            type : 'delete',
+            cache : false,
+            contentType : 'application/json;charset=utf-8',
+            data : JSON.stringify({star_id : id,column : column})
+        }).done((data) => {
+            this.actions.unStarSuccess(data);
+        }).fail(() => {
+            toastr.error('取消收藏不成功');
         });
     }
 }

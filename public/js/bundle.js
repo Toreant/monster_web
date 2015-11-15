@@ -1018,7 +1018,7 @@ var StarActions = (function () {
     function StarActions() {
         _classCallCheck(this, StarActions);
 
-        this.generateActions('getStarSuccess');
+        this.generateActions('getStarSuccess', 'unStarSuccess');
     }
 
     _createClass(StarActions, [{
@@ -1037,6 +1037,24 @@ var StarActions = (function () {
                 _this.actions.getStarSuccess(data);
             }).fail(function () {
                 toastr.error('收藏不成功');
+            });
+        }
+    }, {
+        key: 'unStar',
+        value: function unStar(id, column) {
+            var _this2 = this;
+
+            $.ajax({
+                url: '/api/star',
+                dataType: 'json',
+                type: 'delete',
+                cache: false,
+                contentType: 'application/json;charset=utf-8',
+                data: JSON.stringify({ star_id: id, column: column })
+            }).done(function (data) {
+                _this2.actions.unStarSuccess(data);
+            }).fail(function () {
+                toastr.error('取消收藏不成功');
             });
         }
     }]);
@@ -1399,7 +1417,7 @@ var Article = (function (_React$Component) {
                             { className: 'mon-article-tags' },
                             Tags
                         ),
-                        _react2['default'].createElement(_Star2['default'], { star: this.props.params.id, column: 'article' }),
+                        _react2['default'].createElement(_Star2['default'], { star: this.props.params.id, column: 'article', stared: 'true' }),
                         _react2['default'].createElement(_Comment2['default'], { id: this.props.params.id })
                     ),
                     _react2['default'].createElement(
@@ -4704,13 +4722,35 @@ var Star = (function (_React$Component) {
             _actionsStarActions2['default'].getStar(star_id, column);
         }
     }, {
+        key: 'unStarClick',
+        value: function unStarClick() {
+            var column = this.props.column,
+                star_id = this.props.star;
+            _actionsStarActions2['default'].unStar(star_id, column);
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var StarBtn = undefined;
+            if (this.props.stared === 'true') {
+                StarBtn = _react2['default'].createElement(
+                    'a',
+                    { href: 'javascript:;', className: 'btn btn-danger', onClick: this.unStarClick.bind(this) },
+                    _react2['default'].createElement('span', { className: 'fa fa-star-o' }),
+                    '取消收藏'
+                );
+            } else {
+                StarBtn = _react2['default'].createElement(
+                    'a',
+                    { href: 'javascript:;', className: 'btn btn-primary', onClick: this.handleClick.bind(this) },
+                    _react2['default'].createElement('span', { className: 'fa fa-star' }),
+                    '收藏'
+                );
+            }
             return _react2['default'].createElement(
-                'a',
-                { href: 'javascript:;', className: 'btn btn-primary', onClick: this.handleClick.bind(this) },
-                _react2['default'].createElement('span', { className: 'fa fa-star' }),
-                '收藏'
+                'div',
+                null,
+                StarBtn
             );
         }
     }]);
@@ -6492,18 +6532,39 @@ var StarStore = (function () {
         _classCallCheck(this, StarStore);
 
         this.bindActions(_actionsStarActions2['default']);
+        this.stared = false;
     }
 
     _createClass(StarStore, [{
         key: 'onGetStarSuccess',
         value: function onGetStarSuccess(data) {
-            console.log(data);
             switch (data.code) {
                 case 200:
                     toastr.success('收藏成功');
                     break;
                 case 304:
                     toastr.warning('你已经收藏过了');
+                    break;
+                case 400:
+                    toastr.warning('你还没登陆');
+                    break;
+                case 404:
+                    toastr.warning('没有这个用户');
+                    break;
+                case 505:
+                    toastr.error('服务器错误');
+                    break;
+            }
+        }
+    }, {
+        key: 'unStarSuccess',
+        value: function unStarSuccess(data) {
+            switch (data.code) {
+                case 200:
+                    toastr.success('取消收藏成功');
+                    break;
+                case 304:
+                    toastr.warning('你还没有收藏过');
                     break;
                 case 400:
                     toastr.warning('你还没登陆');

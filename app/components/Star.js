@@ -30,11 +30,31 @@ class Star extends React.Component {
         StarActions.getStar(star_id,column);
     }
 
+    unStarClick() {
+        let column = this.props.column,
+            star_id = this.props.star;
+        StarActions.unStar(star_id,column);
+    }
+
     render() {
+        let StarBtn;
+        if(this.props.stared === 'true') {
+            StarBtn = (
+                <a href="javascript:;" className='btn btn-danger' onClick={this.unStarClick.bind(this)}>
+                    <span className='fa fa-star-o'></span>取消收藏
+                </a>
+            );
+        } else {
+            StarBtn = (
+                <a href="javascript:;" className='btn btn-primary' onClick={this.handleClick.bind(this)}>
+                    <span className='fa fa-star'></span>收藏
+                </a>
+            );
+        }
         return (
-            <a href="javascript:;" className='btn btn-primary' onClick={this.handleClick.bind(this)}>
-                <span className='fa fa-star'></span>收藏
-            </a>
+            <div>
+                {StarBtn}
+            </div>
         );
     }
 }

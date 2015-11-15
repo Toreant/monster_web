@@ -231,7 +231,7 @@ class md {
             function(_callback) {
                 User.findOne({_id : user_id},(err,user) => {
                     if(err) {
-                        _callback(null,500);
+                        callback(500);
                     } else {
                         _callback(null,user);
                     }
@@ -241,7 +241,7 @@ class md {
             // 添加关注到用户资料中
             function(user,_callback) {
                 if(user === null) {
-                    _callback(null,404);
+                    callback(404);
                 } else {
                     if(_.indexOf(user.star,star_id) === -1) {
                         switch(column) {
@@ -276,6 +276,62 @@ class md {
              * 404 没有这个用户
              * 500　服务器错误
              */
+            callback(result);
+        });
+    }
+
+    /**
+     * 取消关注
+     * @param user_id
+     * @param star_id
+     * @param column
+     * @param callback
+     */
+    unStar(user_id,star_id,column,callback) {
+        async.waterfall([
+
+            //　查找用户
+            function(_callback) {
+                User.findOne({_id : user_id},(err,user) => {
+                    if(err) {
+                        callback(500);
+                    } else {
+                        _callback(null,user);
+                    }
+                });
+            },
+
+            //　取消关注
+            function(user,_callback) {
+                if(user === null) {
+                    callback(404);
+                } else {
+                    if(_.indexOf(user.star,star_id) === -1) {
+                        callback(304);
+                    } else {
+                        user.star = _.without(user.star,star_id);
+                        switch(column) {
+                            case 'article' :
+                                user.star_article = _.without(user.star_article,star_id);
+                                break;
+                            case 'music' :
+                                user.star_music = _.without(user.star_music,star_id);
+                                break;
+                            case 'animate' :
+                                user.star_animate = _.without(user.star_animate,star_id);
+                                break;
+                        }
+                        user.save((err) => {
+                            if(err) {
+                                callback(500);
+                            } else {
+                                _callback(null,200);
+                            }
+                        });
+                    }
+                }
+            }
+        ],(err,result) => {
             callback(result);
         });
     }

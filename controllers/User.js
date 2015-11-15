@@ -301,6 +301,47 @@ class UserCtrl {
             });
         }
     }
+
+    /**
+     * 取消关注
+     * @param req
+     * @param res
+     * @param next
+     */
+    unStar(req,res,next) {
+        if(req.session.user === undefined) {
+            res.json({
+                meta : '你还没登陆',
+                code : 400
+            });
+        } else {
+            let star_id = req.body.star_id,
+                user_id = req.session.user._id,
+                column = req.body.column;
+            User.unStar(user_id,star_id,column,(data) => {
+                let result = {
+                    meta : '',
+                    code : 0
+                };
+                switch(data) {
+                    case 200 :
+                        result.meta = '取消收藏成功';
+                        break;
+                    case 304 :
+                        result.meta = '你还没有收藏';
+                        break;
+                    case 404 :
+                        result.meta = '没有这个用户';
+                        break;
+                    case 500 :
+                        result.meta = '服务器错误';
+                        break;
+                }
+                result.code = data;
+                res.json(result);
+            });
+        }
+    }
 }
 
 export default new UserCtrl();
