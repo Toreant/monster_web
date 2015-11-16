@@ -4827,6 +4827,8 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouter = require('react-router');
+
 var _actionsStarListActions = require('../actions/StarListActions');
 
 var _actionsStarListActions2 = _interopRequireDefault(_actionsStarListActions);
@@ -4869,6 +4871,41 @@ var StarList = (function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var List = this.state.starList.map(function (data) {
+                return _react2['default'].createElement(
+                    'div',
+                    { className: 'media' },
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'media-left' },
+                        _react2['default'].createElement(
+                            _reactRouter.Link,
+                            { to: '/article/' + data._id },
+                            _react2['default'].createElement('img', { src: data.abbreviations || '/img/abbreviations.png', alt: 'loading', width: '80' })
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'media-body' },
+                        _react2['default'].createElement(
+                            'p',
+                            { className: 'text-primary' },
+                            data.title
+                        ),
+                        _react2['default'].createElement(
+                            'span',
+                            null,
+                            _react2['default'].createElement('span', { className: 'fa fa-time' }),
+                            new Date(data.create_time).toLocaleDateString()
+                        ),
+                        _react2['default'].createElement(
+                            'p',
+                            { className: 'text-muted' },
+                            data.summary
+                        )
+                    )
+                );
+            });
             return _react2['default'].createElement(
                 'div',
                 { className: 'col-md-9 col-sm-9 animated fadeInUp mon-padding' },
@@ -4876,7 +4913,8 @@ var StarList = (function (_React$Component) {
                     'p',
                     { className: 'bg-info mon-bg-title' },
                     '收藏列表'
-                )
+                ),
+                List
             );
         }
     }]);
@@ -4887,7 +4925,7 @@ var StarList = (function (_React$Component) {
 exports['default'] = StarList;
 module.exports = exports['default'];
 
-},{"../actions/StarListActions":19,"../stores/StarListStore":66,"react":"react"}],46:[function(require,module,exports){
+},{"../actions/StarListActions":19,"../stores/StarListStore":66,"react":"react","react-router":"react-router"}],46:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
