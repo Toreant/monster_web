@@ -72,7 +72,7 @@ class Article extends React.Component {
                         <div className='mon-article-tags'>
                             {Tags}
                         </div>
-                        <Star star={this.props.params.id} column='article' stared='false' />
+                        <Star star={this.props.params.id} column='article' stared={this.state.stared} />
                         <Comment id={this.props.params.id}/>
                     </div>
                     <div className='col-md-4 col-sm-4 mon-offset'>

@@ -17,14 +17,12 @@ class ArticleStore　{
         this.createUserIntro = '';
         this.tags = [];
         this.recommends = [];
+        this.stared = 'false';
     }
 
     onGetArticleSuccess(data) {
+        console.log(data);
         if(data.code === 200) {
-            var options = {
-                weekday: "long", year: "numeric", month: "short",
-                day: "numeric", hour: "2-digit", minute: "2-digit"
-            };
             this.article = true;
             this.content = data.raw.article.content;
             this.title = data.raw.article.title;
@@ -36,6 +34,7 @@ class ArticleStore　{
             this.createUserIntro = data.raw.user.introduce;
             this.createTime = new Date(data.raw.article.create_time*1000).toLocaleTimeString();
             this.recommends = data.raw.recommend;
+            this.stared = data.raw.stared.toString();
         } else if(data.code === 400) {
             toastr.warning(data.meta);
         }

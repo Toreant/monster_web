@@ -1430,7 +1430,7 @@ var Article = (function (_React$Component) {
                             { className: 'mon-article-tags' },
                             Tags
                         ),
-                        _react2['default'].createElement(_Star2['default'], { star: this.props.params.id, column: 'article', stared: 'false' }),
+                        _react2['default'].createElement(_Star2['default'], { star: this.props.params.id, column: 'article', stared: this.state.stared }),
                         _react2['default'].createElement(_Comment2['default'], { id: this.props.params.id })
                     ),
                     _react2['default'].createElement(
@@ -4745,7 +4745,8 @@ var Star = (function (_React$Component) {
         key: 'render',
         value: function render() {
             var StarBtn = undefined;
-            if (this.state.stared === 'true' || this.state.stared) {
+            console.log();
+            if (this.props.stared === 'true' || this.state.stared) {
                 StarBtn = _react2['default'].createElement(
                     'a',
                     { href: 'javascript:;', className: 'btn btn-danger',
@@ -5336,16 +5337,14 @@ var ArticleStore = (function () {
         this.createUserIntro = '';
         this.tags = [];
         this.recommends = [];
+        this.stared = 'false';
     }
 
     _createClass(ArticleStore, [{
         key: 'onGetArticleSuccess',
         value: function onGetArticleSuccess(data) {
+            console.log(data);
             if (data.code === 200) {
-                var options = {
-                    weekday: "long", year: "numeric", month: "short",
-                    day: "numeric", hour: "2-digit", minute: "2-digit"
-                };
                 this.article = true;
                 this.content = data.raw.article.content;
                 this.title = data.raw.article.title;
@@ -5357,6 +5356,7 @@ var ArticleStore = (function () {
                 this.createUserIntro = data.raw.user.introduce;
                 this.createTime = new Date(data.raw.article.create_time * 1000).toLocaleTimeString();
                 this.recommends = data.raw.recommend;
+                this.stared = data.raw.stared.toString();
             } else if (data.code === 400) {
                 toastr.warning(data.meta);
             }

@@ -39,7 +39,8 @@ class Star extends React.Component {
 
     render() {
         let StarBtn;
-        if(this.state.stared === 'true' || this.state.stared ) {
+        console.log();
+        if(this.props.stared === 'true' || this.state.stared ) {
             StarBtn = (
                 <a href="javascript:;" className='btn btn-danger'
                    onClick={this.handleClick.bind(this,1)}>

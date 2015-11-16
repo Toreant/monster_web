@@ -48,16 +48,20 @@ class ArticleCtrl {
      * @param next
      */
     getArticle(req,res,next) {
-        let id = req.body.id;
+        let id = req.body.id,
+            user = req.session.user;
         let result = {
             meta : '',
             code : 0,
             raw : null
         };
-        article.getArticleById(id,(data) => {
+        article.getArticleById(id,user,(data) => {
             if(data === null) {
                 result.meta = '找不到这个文章';
                 result.code = 400;
+            } else if(data === 500){
+                result.meta= '服务器错误';
+                result.code = 500;
             } else {
                 result.meta  = '获取文章成功';
                 result.code = 200;

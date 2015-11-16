@@ -4,20 +4,25 @@
 import async from 'async';
 import Article from '../models/article';
 import User from '../models/user';
+import _ from 'underscore';
 
 class md {
     /**
      * 通过id号查找文章
      * @param id
+     * @param user_id 登陆的用户
      * @param callback
      */
-    getArticleById(id,callback) {
+    getArticleById(id,u,callback) {
 
         async.waterfall([
 
             //查找文章
             function(_callback) {
                 Article.findById(id,(err,docs) => {
+                    if(err) {
+                        callback(500);
+                    }
                     if(docs !== undefined && docs !== null) {
                         //文章阅读数增１
                         docs.browser_count += 1;
@@ -30,28 +35,48 @@ class md {
                 });
             },
 
-            //查找文章的读者
+            // 查看是否登陆的用户收藏了
             function(docs,_callback) {
+                if(u === undefined) {
+                    _callback(null,docs,false);
+                } else {
+                    User.findById(u._id,(err,user) => {
+                        if(err) {
+                            callback(500);
+                        }
+                        if(_.indexOf(user.star_article,docs._id.toString()) === -1) {
+                            _callback(null,docs,false);
+                        } else {
+                            _callback(null,docs,true);
+                        }
+                    });
+                }
+
+            },
+
+            //查找文章的读者
+            function(docs,stared,_callback) {
+
                 if(docs === null) {
                     _callback(null,null,null);
                 } else {
                     User.findById(docs.create_user_id,'username avatar_url domain introduce',(err,user) => {
                         if(err) {
-                            console.log(err);
+                            callback(500);
                         } else {
-                            _callback(null,docs, user);
+                            _callback(null,docs, user,stared);
                         }
                     });
                 }
             },
 
             //推荐文章
-            function(docs,user,_callback) {
+            function(docs,user,stared,_callback) {
                 if(docs === null && user === null) {
                     _callback(null,null);
                 } else {
                     Article.find({},'title',{sort : {browser_count : -1},skip : 1,limit : 6},(err,articles) => {
-                        _callback(null,{article : docs, user : user, recommend : articles});
+                        _callback(null,{article : docs, user : user,stared : stared, recommend : articles});
                     });
                 }
             }
