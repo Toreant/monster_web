@@ -3,6 +3,7 @@
  */
 import async from 'async';
 import User from '../models/user';
+import Article from '../models/article';
 import _ from 'underscore';
 
 class md {
@@ -330,6 +331,83 @@ class md {
                         });
                     }
                 }
+            }
+        ],(err,result) => {
+            callback(result);
+        });
+    }
+
+    /**
+     * 获取收藏列表
+     * @param user
+     * @param skip
+     * @param callback
+     */
+    getStars(user,skip,option,callback) {
+        console.log(user);
+        async.waterfall([
+
+            // 获取用户的收藏列表
+            function(_callback) {
+                User.findOne(user,(err,user) => {
+                    if(err) {
+                        console.log(err);
+                        callback(500);
+                    } else {
+                        switch (option) {
+                            case 'all' :
+                                _callback(null,user.star);
+                                break;
+                            case 'article' :
+                                _callback(null,user.star_article);
+                                break;
+                            case 'music' :
+                                _callback(null,user.star_music);
+                                break;
+                            case 'animate' :
+                                _callback(null,user.star_animate);
+                                break;
+                        }
+                    }
+                });
+            },
+
+            // 实例化收藏列表
+            function(starList,_callback) {
+                if(starList === null) {
+                    callback(404);
+                }
+                switch (option) {
+                    case 'all' :
+                        _callback(null,starList);
+                        break;
+                    case 'article' :
+                        Article.find({_id : {$in : starList}},null,{skip : skip,limit: 10},(err,docs) => {
+                            if(err) {
+                                callback(500);
+                            } else {
+                                callback(docs);
+                            }
+                        });
+                        break;
+                    case 'music' :
+                        callback(null);
+                        break;
+                    case 'animate' :
+                        callback(null);
+                        break;
+                }
+            },
+
+            // 藏的文章收
+            function(starList,_callback) {
+                Article.find({_id : {$in : starList}},null,{skip : skip,limit: 10},(err,docs) => {
+                    if(err) {
+                        callback(500);
+                    } else {
+                        _callback(null,docs);
+                    }
+                });
             }
         ],(err,result) => {
             callback(result);

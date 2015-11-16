@@ -39,7 +39,6 @@ class Star extends React.Component {
 
     render() {
         let StarBtn;
-        console.log();
         if(this.props.stared === 'true' || this.state.stared ) {
             StarBtn = (
                 <a href="javascript:;" className='btn btn-danger'

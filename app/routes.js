@@ -9,7 +9,7 @@ import Login from './components/Login';
 import User from './components/User';
 import Set from './components/Set';
 import Notice from './components/Notice';
-import Star from './components/StarList';
+import StarList from './components/StarList';
 import NotFound from './components/NotFound';
 import PostAnimate from './components/PostAnimate';
 import ProfileCenter from './components/ProfileCenter';
@@ -58,7 +58,7 @@ export default (
             </Route>
             <Route path='contribute' handler={Contribute} />
             <Route path='notice' handler={Notice} />
-            <Route path='star' handler={Star} />
+            <Route path='star' handler={StarList} />
             <Route path='/post'>
                 <Route path='animate' handler={PostAnimate}/>
                 <Route path='music' />

@@ -7,10 +7,16 @@ import StarActions from '../actions/StarListActions';
 class StarListStore {
     constructor() {
         this.bindActions(StarActions);
+        this.starList = [];
     }
 
-    onGetStarSuccess(data) {
+    onGetStarListSuccess(data) {
         console.log(data);
+        if(data.code === 500) {
+            toastr.error('服务器错误');
+        } else if(data.code === 200) {
+            this.starList = data.raw;
+        }
     }
 }
 

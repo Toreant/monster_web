@@ -342,6 +342,43 @@ class UserCtrl {
             });
         }
     }
+
+    /**
+     * 获取收藏列表
+     * @param req
+     * @param res
+     * @param next
+     */
+    getStars(req,res,next) {
+        let what = req.body.what,
+            skip = req.body.skip,
+            option = req.body.option,
+            user;
+
+        if(what === 0) {
+            user = {_id : req.session.user._id};
+        } else {
+            user = req.body.user;
+        }
+
+        User.getStars(user,skip,option,(data) => {
+            let result = {
+                meta : '',
+                code : 0,
+                raw  : null
+            };
+
+            if(data === 500) {
+                result.meta = '服务器错误';
+                result.code = 500;
+            } else {
+                result.meta = '获取收藏列表成功';
+                result.code = 200;
+                result.raw  = data;
+            }
+            res.json(result);
+        });
+    }
 }
 
 export default new UserCtrl();

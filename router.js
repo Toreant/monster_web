@@ -45,6 +45,8 @@ router.post('/api/star',UserCtrl.getStar);
 
 router.delete('/api/star',UserCtrl.unStar);
 
+router.post('/api/stars',UserCtrl.getStars);
+
 router.post('/api/session',function(req,res,next){
     if((req.session.passport !== undefined || req.session.user !== undefined)) {
         let data = req.session.passport === undefined? req.session.user:req.session.passport.user;

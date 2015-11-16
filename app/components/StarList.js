@@ -8,17 +8,21 @@ import StarListStore from '../stores/StarListStore';
 class StarList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = StarStore.getState();
+        this.state = StarListStore.getState();
         this.onChange =  this.onChange.bind(this);
     }
 
     componentDidMount() {
-        StarStore.listen(this.onChange);
-        StarActions.getStar();
+        StarListStore.listen(this.onChange);
+        if(this.props.what === undefined) {
+            StarListActions.getStarList(0,null);
+        } else {
+            StarListActions.getStarList(1,this.props.domain,this.props.option);
+        }
     }
 
     componentWillUnMount() {
-        StarStore.unlisten(this.onChange);
+        StarListStore.unlisten(this.onChange);
     }
 
     onChange(state) {
@@ -27,8 +31,10 @@ class StarList extends React.Component {
 
     render() {
         return (
-            <div className='col-md-9 col-sm-9'>
-
+            <div className='col-md-9 col-sm-9 animated fadeInUp mon-padding'>
+                <p className='bg-info mon-bg-title'>
+                    收藏列表
+                </p>
             </div>
         );
     }

@@ -10,7 +10,7 @@ class md {
     /**
      * 通过id号查找文章
      * @param id
-     * @param user_id 登陆的用户
+     * @param u 登陆的用户
      * @param callback
      */
     getArticleById(id,u,callback) {
@@ -54,7 +54,7 @@ class md {
 
             },
 
-            //查找文章的读者
+            // 查找文章的读者
             function(docs,stared,_callback) {
 
                 if(docs === null) {
@@ -70,7 +70,7 @@ class md {
                 }
             },
 
-            //推荐文章
+            // 推荐文章
             function(docs,user,stared,_callback) {
                 if(docs === null && user === null) {
                     _callback(null,null);

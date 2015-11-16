@@ -21,7 +21,6 @@ class ArticleStore　{
     }
 
     onGetArticleSuccess(data) {
-        console.log(data);
         if(data.code === 200) {
             this.article = true;
             this.content = data.raw.article.content;
@@ -37,6 +36,8 @@ class ArticleStore　{
             this.stared = data.raw.stared.toString();
         } else if(data.code === 400) {
             toastr.warning(data.meta);
+        } else if(data.code === 500) {
+            toastr.error('服务器错误');
         }
     }
 }

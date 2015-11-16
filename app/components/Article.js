@@ -85,7 +85,7 @@ class Article extends React.Component {
                                 </div>
                                 <div className='media-body'>
                                     <div className='media-heading'>
-                                        <a href={'/u/'+this.state.createUserDomain} className='mon-user-name'>
+                                        <a href={'/member/'+this.state.createUserDomain} className='mon-user-name'>
                                             {this.state.createUser}
                                         </a>
                                     </div>

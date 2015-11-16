@@ -1102,27 +1102,48 @@ var StarListActions = (function () {
     function StarListActions() {
         _classCallCheck(this, StarListActions);
 
-        this.generateActions('getStarSuccess');
+        this.generateActions('getStarListSuccess');
     }
 
+    /**
+     * 获取收藏列表
+     * @param what　0--通过id 获取用户　１－－通过domain 获取用户
+     * @param user
+     * @param option　　'all','article','music','animate'
+     * @param skip
+     */
+
     _createClass(StarListActions, [{
-        key: 'getStar',
-        value: function getStar() {
+        key: 'getStarList',
+        value: function getStarList(what, user) {
             var _this = this;
 
+            var option = arguments.length <= 2 || arguments[2] === undefined ? 'all' : arguments[2];
+            var skip = arguments.length <= 3 || arguments[3] === undefined ? 0 : arguments[3];
+
+            console.log('hehe');
             var params = {
-                arrayId: [56115100, 48561100]
+                what: what,
+                user: {},
+                option: option,
+                skip: skip
             };
-            params = JSON.stringify(params);
+
+            if (what === 0) {
+                params.user = { _id: user };
+            } else {
+                parasm.user = { domain: user };
+            }
+
             $.ajax({
-                url: '/api/getStar',
+                url: '/api/stars',
                 cache: false,
                 type: 'post',
-                data: params,
+                data: JSON.stringify(params),
                 dataType: 'json',
                 contentType: 'application/json;charset=utf-8'
             }).done(function (data) {
-                _this.actions.getStarSuccess(data);
+                _this.actions.getStarListSuccess(data);
             }).fail(function (data) {
                 toastr.error('链接出现问题');
             });
@@ -1459,7 +1480,7 @@ var Article = (function (_React$Component) {
                                         { className: 'media-heading' },
                                         _react2['default'].createElement(
                                             'a',
-                                            { href: '/u/' + this.state.createUserDomain, className: 'mon-user-name' },
+                                            { href: '/member/' + this.state.createUserDomain, className: 'mon-user-name' },
                                             this.state.createUser
                                         )
                                     ),
@@ -4745,7 +4766,6 @@ var Star = (function (_React$Component) {
         key: 'render',
         value: function render() {
             var StarBtn = undefined;
-            console.log();
             if (this.props.stared === 'true' || this.state.stared) {
                 StarBtn = _react2['default'].createElement(
                     'a',
@@ -4822,20 +4842,24 @@ var StarList = (function (_React$Component) {
         _classCallCheck(this, StarList);
 
         _get(Object.getPrototypeOf(StarList.prototype), 'constructor', this).call(this, props);
-        this.state = StarStore.getState();
+        this.state = _storesStarListStore2['default'].getState();
         this.onChange = this.onChange.bind(this);
     }
 
     _createClass(StarList, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            StarStore.listen(this.onChange);
-            StarActions.getStar();
+            _storesStarListStore2['default'].listen(this.onChange);
+            if (this.props.what === undefined) {
+                _actionsStarListActions2['default'].getStarList(0, null);
+            } else {
+                _actionsStarListActions2['default'].getStarList(1, this.props.domain, this.props.option);
+            }
         }
     }, {
         key: 'componentWillUnMount',
         value: function componentWillUnMount() {
-            StarStore.unlisten(this.onChange);
+            _storesStarListStore2['default'].unlisten(this.onChange);
         }
     }, {
         key: 'onChange',
@@ -4845,7 +4869,15 @@ var StarList = (function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            return _react2['default'].createElement('div', { className: 'col-md-9 col-sm-9' });
+            return _react2['default'].createElement(
+                'div',
+                { className: 'col-md-9 col-sm-9 animated fadeInUp mon-padding' },
+                _react2['default'].createElement(
+                    'p',
+                    { className: 'bg-info mon-bg-title' },
+                    '收藏列表'
+                )
+            );
         }
     }]);
 
@@ -5343,7 +5375,6 @@ var ArticleStore = (function () {
     _createClass(ArticleStore, [{
         key: 'onGetArticleSuccess',
         value: function onGetArticleSuccess(data) {
-            console.log(data);
             if (data.code === 200) {
                 this.article = true;
                 this.content = data.raw.article.content;
@@ -5359,6 +5390,8 @@ var ArticleStore = (function () {
                 this.stared = data.raw.stared.toString();
             } else if (data.code === 400) {
                 toastr.warning(data.meta);
+            } else if (data.code === 500) {
+                toastr.error('服务器错误');
             }
         }
     }]);
@@ -6509,12 +6542,18 @@ var StarListStore = (function () {
         _classCallCheck(this, StarListStore);
 
         this.bindActions(_actionsStarListActions2['default']);
+        this.starList = [];
     }
 
     _createClass(StarListStore, [{
-        key: 'onGetStarSuccess',
-        value: function onGetStarSuccess(data) {
+        key: 'onGetStarListSuccess',
+        value: function onGetStarListSuccess(data) {
             console.log(data);
+            if (data.code === 500) {
+                toastr.error('服务器错误');
+            } else if (data.code === 200) {
+                this.starList = data.raw;
+            }
         }
     }]);
 
