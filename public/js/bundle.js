@@ -263,11 +263,11 @@ var FollowersActions = (function () {
             var _this = this;
 
             var params = {
-                arrayId: [48561100, 56115067],
+                where: { _id: '56376c400edda2c51e9945f5' },
                 option: { skip: (page - 1) * 10, limit: 10 }
             };
             $.ajax({
-                url: '/api/users',
+                url: '/api/followers',
                 type: 'post',
                 dataType: 'json',
                 contentType: 'application/json;charset=utf-8',
@@ -1102,7 +1102,7 @@ var StarListActions = (function () {
     function StarListActions() {
         _classCallCheck(this, StarListActions);
 
-        this.generateActions('getStarListSuccess');
+        this.generateActions('getStarListSuccess', 'changeSkipSuccess');
     }
 
     /**
@@ -1132,7 +1132,7 @@ var StarListActions = (function () {
             if (what === 0) {
                 params.user = { _id: user };
             } else {
-                parasm.user = { domain: user };
+                params.user = { domain: user };
             }
 
             $.ajax({
@@ -1147,6 +1147,11 @@ var StarListActions = (function () {
             }).fail(function (data) {
                 toastr.error('链接出现问题');
             });
+        }
+    }, {
+        key: 'changeSkip',
+        value: function changeSkip(option) {
+            this.actions.changeSkipSuccess(option);
         }
     }]);
 
@@ -1943,6 +1948,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
+var _underscore = require('underscore');
+
 var _actionsConListActions = require('../actions/ConListActions');
 
 var _actionsConListActions2 = _interopRequireDefault(_actionsConListActions);
@@ -1950,6 +1957,17 @@ var _actionsConListActions2 = _interopRequireDefault(_actionsConListActions);
 var _storesConListStore = require('../stores/ConListStore');
 
 var _storesConListStore2 = _interopRequireDefault(_storesConListStore);
+
+var isMounted = function isMounted(component) {
+    // exceptions for flow control :(
+    try {
+        _react2['default'].findDOMNode(component);
+        return true;
+    } catch (e) {
+        // Error: Invariant Violation: Component (with keys: props,context,state,refs,_reactInternalInstance) contains `render` method but is not mounted in the DOM
+        return false;
+    }
+};
 
 var ConList = (function (_React$Component) {
     _inherits(ConList, _React$Component);
@@ -1963,16 +1981,37 @@ var ConList = (function (_React$Component) {
     }
 
     _createClass(ConList, [{
+        key: 'componentWillUnMount',
+        value: function componentWillUnMount() {
+            _storesConListStore2['default'].unlisten(this.onChange);
+        }
+    }, {
+        key: 'componentWillUpdate',
+        value: function componentWillUpdate(prevProps) {
+            console.log('will update' + isMounted(this));
+            if (!(0, _underscore.isEqual)(prevProps.params, this.props.params)) {
+                _actionsConListActions2['default'].getConList(props.option, props.tab, props.domain);
+            }
+        }
+    }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
             _storesConListStore2['default'].listen(this.onChange);
             var props = this.props;
-            _actionsConListActions2['default'].getConList(props.option, props.tab, props.domain);
+            console.log('did' + isMounted(this));
+            if (isMounted(this)) {
+                _actionsConListActions2['default'].getConList(props.option, props.tab, props.domain);
+            }
         }
     }, {
-        key: 'componentWillUnMount',
-        value: function componentWillUnMount() {
-            _storesConListStore2['default'].unlisten(this.onChange);
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps) {
+            console.log('update' + isMounted(this));
+            if (!(0, _underscore.isEqual)(prevProps.params, this.props.params)) {
+                if (isMounted(this)) {
+                    _actionsConListActions2['default'].getConList(props.option, props.tab, props.domain);
+                }
+            }
         }
     }, {
         key: 'onChange',
@@ -1982,7 +2021,6 @@ var ConList = (function (_React$Component) {
     }, {
         key: 'prevPage',
         value: function prevPage() {
-            console.log('hgeh');
             var props = this.props;
             _actionsConListActions2['default'].getConList(props.option, props.tab, props.domain, this.state.skip - 1);
             _actionsConListActions2['default'].changeSkip(0);
@@ -2008,7 +2046,7 @@ var ConList = (function (_React$Component) {
             if (this.state.skip === 0) {
                 disabled = 'disabled';
             }
-            if (this.state.skip >= this.state.count / 4 - 1 || this.state.count < 4) {
+            if (this.state.skip >= this.state.count / 5 - 1 || this.state.count < 4) {
                 disabledN = 'disabled';
             }
             if (this.state.contributes.length > 0) {
@@ -2102,7 +2140,7 @@ var ConList = (function (_React$Component) {
 exports['default'] = ConList;
 module.exports = exports['default'];
 
-},{"../actions/ConListActions":3,"../stores/ConListStore":51,"react":"react","react-router":"react-router"}],28:[function(require,module,exports){
+},{"../actions/ConListActions":3,"../stores/ConListStore":51,"react":"react","react-router":"react-router","underscore":"underscore"}],28:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -2165,6 +2203,7 @@ var Contribute = (function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var domain = this.props.domain;
             var ConNav = undefined;
             if (this.props.option === '0') {
                 ConNav = _react2['default'].createElement(
@@ -2172,17 +2211,17 @@ var Contribute = (function (_React$Component) {
                     { className: 'mon-contribute-nav' },
                     _react2['default'].createElement(
                         _reactRouter.Link,
-                        { to: '/member/' + this.props.domain + '/article' },
+                        { to: '/member/' + domain + '/article' },
                         '文章'
                     ),
                     _react2['default'].createElement(
                         _reactRouter.Link,
-                        { to: '/member/' + this.props.domain + '/music' },
+                        { to: '/member/' + domain + '/music' },
                         '音乐'
                     ),
                     _react2['default'].createElement(
                         _reactRouter.Link,
-                        { to: '/member/' + this.props.domain + '/animate' },
+                        { to: '/member/' + domain + '/animate' },
                         '动漫'
                     )
                 );
@@ -2211,14 +2250,13 @@ var Contribute = (function (_React$Component) {
                 'div',
                 { className: 'col-sm-9 col-md-9 animated fadeInUp' },
                 _react2['default'].createElement(
-                    'p',
-                    { className: 'bg-success mon-padding mon-bg-title' },
-                    '我的贡献分享'
-                ),
-                _react2['default'].createElement(
                     'div',
-                    { className: 'mon-contribute-block' },
-                    ConNav
+                    null,
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'mon-contribute-block' },
+                        ConNav
+                    )
                 ),
                 _react2['default'].createElement(_reactRouter.RouteHandler, null)
             );
@@ -3397,7 +3435,7 @@ var Member = (function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-
+            var domain = this.props.params.domain;
             var Mem = _react2['default'].createElement(
                 'div',
                 { className: 'col-md-3 col-sm-3' },
@@ -3416,7 +3454,7 @@ var Member = (function (_React$Component) {
                     { className: 'mon-vcard-stats' },
                     _react2['default'].createElement(
                         _reactRouter.Link,
-                        { to: '/member/' + this.props.params.domain + '/followers', className: 'mon-link' },
+                        { to: '/member/' + domain + '/followers', className: 'mon-link' },
                         _react2['default'].createElement(
                             'span',
                             null,
@@ -3430,7 +3468,7 @@ var Member = (function (_React$Component) {
                     ),
                     _react2['default'].createElement(
                         _reactRouter.Link,
-                        { to: '/member/' + this.props.params.domain + '/following', className: 'mon-link' },
+                        { to: '/member/' + domain + '/following', className: 'mon-link' },
                         _react2['default'].createElement(
                             'span',
                             null,
@@ -3444,7 +3482,7 @@ var Member = (function (_React$Component) {
                     ),
                     _react2['default'].createElement(
                         _reactRouter.Link,
-                        { to: '/member/' + this.props.params.domain + '/contribute', className: 'mon-link' },
+                        { to: '/member/' + domain + '/star', className: 'mon-link' },
                         _react2['default'].createElement(
                             'span',
                             null,
@@ -4852,10 +4890,12 @@ var StarList = (function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             _storesStarListStore2['default'].listen(this.onChange);
-            if (this.props.what === undefined) {
+
+            // profile
+            if (this.props.params.domain === undefined) {
                 _actionsStarListActions2['default'].getStarList(0, null);
             } else {
-                _actionsStarListActions2['default'].getStarList(1, this.props.domain, this.props.option);
+                _actionsStarListActions2['default'].getStarList(1, this.props.params.domain);
             }
         }
     }, {
@@ -4869,52 +4909,110 @@ var StarList = (function (_React$Component) {
             this.setState(state);
         }
     }, {
+        key: 'prevPage',
+        value: function prevPage() {
+            var props = this.props;
+            _actionsStarListActions2['default'].getStarList(0, null, null, this.state.skip - 1);
+            _actionsStarListActions2['default'].changeSkip(0);
+        }
+    }, {
+        key: 'nextPage',
+        value: function nextPage() {
+            var props = this.props;
+            _actionsStarListActions2['default'].getStarList(0, null, null, this.state.skip + 1);
+            _actionsStarListActions2['default'].changeSkip(1);
+        }
+    }, {
         key: 'render',
         value: function render() {
-            var List = this.state.starList.map(function (data) {
-                return _react2['default'].createElement(
-                    'div',
-                    { className: 'media' },
-                    _react2['default'].createElement(
+
+            var List = undefined,
+                SkipPage = undefined,
+                disabled = '',
+                disabledN = '';
+            if (this.state.skip === 0) {
+                disabled = 'disabled';
+            }
+            if (this.state.skip >= this.state.count / 10 - 1 || this.state.count < 10) {
+                disabledN = 'disabled';
+            }
+            if (this.state.starList.length === 0) {
+                List = _react2['default'].createElement(
+                    'p',
+                    { className: 'bg-info' },
+                    '还没有收藏任何东西'
+                );
+                SkipPage = null;
+            } else {
+                List = this.state.starList.map(function (data) {
+                    return _react2['default'].createElement(
                         'div',
-                        { className: 'media-left' },
+                        { className: 'media mon-conlist-item', key: data._id },
                         _react2['default'].createElement(
-                            _reactRouter.Link,
-                            { to: '/article/' + data._id },
-                            _react2['default'].createElement('img', { src: data.abbreviations || '/img/abbreviations.png', alt: 'loading', width: '80' })
+                            'div',
+                            { className: 'media-left' },
+                            _react2['default'].createElement(
+                                _reactRouter.Link,
+                                { to: '/article/' + data._id },
+                                _react2['default'].createElement('img', { src: data.abbreviations || '/img/abbreviations.png', alt: 'loading', width: '80' })
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'media-body' },
+                            _react2['default'].createElement(
+                                _reactRouter.Link,
+                                { className: 'text-primary', to: '/article/' + data._id },
+                                data.title
+                            ),
+                            _react2['default'].createElement(
+                                'div',
+                                { className: 'mon-conlist-info' },
+                                _react2['default'].createElement(
+                                    'span',
+                                    { className: 'fa fa-clock-o' },
+                                    new Date(data.create_time).toLocaleDateString()
+                                ),
+                                _react2['default'].createElement(
+                                    'span',
+                                    { className: 'fa fa-user' },
+                                    data.create_user_name
+                                )
+                            ),
+                            _react2['default'].createElement(
+                                'p',
+                                { className: 'text-muted' },
+                                data.summary
+                            )
                         )
+                    );
+                });
+
+                SkipPage = _react2['default'].createElement(
+                    'div',
+                    { className: 'mon-skip' },
+                    _react2['default'].createElement(
+                        'a',
+                        { href: 'javascript:;', className: 'btn mon-page mon-prev-page ' + disabled, onClick: this.prevPage.bind(this) },
+                        _react2['default'].createElement('span', { className: 'fa fa-arrow-left' })
                     ),
                     _react2['default'].createElement(
-                        'div',
-                        { className: 'media-body' },
-                        _react2['default'].createElement(
-                            'p',
-                            { className: 'text-primary' },
-                            data.title
-                        ),
-                        _react2['default'].createElement(
-                            'span',
-                            null,
-                            _react2['default'].createElement('span', { className: 'fa fa-time' }),
-                            new Date(data.create_time).toLocaleDateString()
-                        ),
-                        _react2['default'].createElement(
-                            'p',
-                            { className: 'text-muted' },
-                            data.summary
-                        )
+                        'a',
+                        { href: 'javascript:;', className: 'btn mon-page mon-next-page ' + disabledN, onClick: this.nextPage.bind(this) },
+                        _react2['default'].createElement('span', { className: 'fa fa-arrow-right' })
                     )
                 );
-            });
+            }
             return _react2['default'].createElement(
                 'div',
                 { className: 'col-md-9 col-sm-9 animated fadeInUp mon-padding' },
                 _react2['default'].createElement(
                     'p',
-                    { className: 'bg-info mon-bg-title' },
+                    { className: 'bg-info mon-bg-title mon-padding' },
                     '收藏列表'
                 ),
-                List
+                List,
+                SkipPage
             );
         }
     }]);
@@ -5329,7 +5427,7 @@ exports['default'] = _react2['default'].createElement(
             { path: ':domain' },
             _react2['default'].createElement(_reactRouter.Route, { path: 'following', handler: _componentsNotice2['default'] }),
             _react2['default'].createElement(_reactRouter.Route, { Path: 'followers', handler: _componentsNotice2['default'] }),
-            _react2['default'].createElement(_reactRouter.Route, { path: 'star', handler: _componentsNotice2['default'] })
+            _react2['default'].createElement(_reactRouter.Route, { path: 'star', handler: _componentsStarList2['default'] })
         )
     ),
     _react2['default'].createElement(
@@ -5654,13 +5752,12 @@ var FollowersStore = (function () {
     _createClass(FollowersStore, [{
         key: 'onGetFollowersSuccess',
         value: function onGetFollowersSuccess(data) {
-            var _this = this;
-
-            if (data.code === 200) {
-                data.raw.map(function (obj) {
-                    _this.followers.push(obj);
-                });
-            }
+            console.log(data);
+            //if(data.code === 200) {
+            //    data.raw.map((obj) => {
+            //        this.followers.push(obj);
+            //    });
+            //}
         }
     }, {
         key: 'onChangeFollowId',
@@ -6581,6 +6678,8 @@ var StarListStore = (function () {
 
         this.bindActions(_actionsStarListActions2['default']);
         this.starList = [];
+        this.skip = 0;
+        this.count = 0;
     }
 
     _createClass(StarListStore, [{
@@ -6590,7 +6689,17 @@ var StarListStore = (function () {
             if (data.code === 500) {
                 toastr.error('服务器错误');
             } else if (data.code === 200) {
-                this.starList = data.raw;
+                this.starList = data.raw._raw;
+                this.count = data.raw.count;
+            }
+        }
+    }, {
+        key: 'onChangeSkipSuccess',
+        value: function onChangeSkipSuccess(option) {
+            if (option === 0) {
+                this.skip = this.skip - 1;
+            } else {
+                this.skip = this.skip + 1;
             }
         }
     }]);

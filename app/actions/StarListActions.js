@@ -6,7 +6,8 @@ import alt from '../alt';
 class StarListActions {
     constructor() {
         this.generateActions(
-            'getStarListSuccess'
+            'getStarListSuccess',
+            'changeSkipSuccess'
         );
     }
 
@@ -29,7 +30,7 @@ class StarListActions {
         if(what === 0) {
             params.user = {_id : user};
         } else {
-            parasm.user = {domain : user};
+            params.user = {domain : user};
         }
 
         $.ajax({
@@ -44,6 +45,10 @@ class StarListActions {
         }).fail((data) => {
             toastr.error('链接出现问题');
         });
+    }
+
+    changeSkip(option) {
+        this.actions.changeSkipSuccess(option);
     }
 }
 

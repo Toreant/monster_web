@@ -17,6 +17,8 @@ router.post('/api/getUser',UserCtrl.getUserByDomain);
 
 router.post('/api/users',UserCtrl.getUserById);
 
+router.post('/api/followers',UserCtrl.getFollowers);
+
 router.get('/api/member/:domain',UserCtrl.getUserByDomain);
 
 //　follow有关

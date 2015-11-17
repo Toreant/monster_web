@@ -147,6 +147,85 @@ class md {
     }
 
     /**
+     * 获取关注我的用户
+     * @param where
+     * @param option
+     * @param user
+     * @param callback
+     */
+    getFollowers(where,option,user,callback) {
+        async.waterfall([
+
+            // 检查where中的followers
+            function(_callback) {
+                User.findOne(where,'followers',option,(err,u) =>{
+                    if(err) {
+                        callback(err);
+                    } else {
+                        _callback(null,u.followers);
+                    }
+                });
+            },
+
+            // 实例化followers
+            function(followers,_callback) {
+                User.find({_id : {$in : followers}},'username avatar_url introduce',(err,users) => {
+                    if(err) {
+                        callback(500);
+                    } else {
+                        _callback(null,users);
+                    }
+                });
+            },
+
+            //　检查用户中是否有我关注的
+            function(users,_callback) {
+                if(user === undefined) {
+                    let result = [],
+                        item = {};
+
+                    for(let i = 0, len = users.length; i < len ; i++) {
+                        item.user = users[i];
+                        item.following = false;
+                        result.unshift(item);
+                    }
+
+                    _callback(null,result);
+                } else {
+                    User.findById(user._id,'following',(err,docs) => {
+
+                        let following = docs.following;
+
+                        if(err) {
+                            callback(500);
+                        } else {
+                            let result = [];
+
+
+                            for(let i=0, len = users.length; i < len; i++) {
+                                let item = {};
+                                item.user = users[i];
+
+                                if(_.indexOf(following,users[i]._id.toString()) !== -1) {
+                                    item.following = true;
+                                } else {
+                                    item.following = false;
+                                }
+
+                                result.unshift(item);
+                            }
+
+                            _callback(null,result);
+                        }
+                    });
+                }
+            }
+        ],(err,result) => {
+            callback(result);
+        });
+    }
+
+    /**
      * 添加关注，取消关注
      * @param where
      * @param auth_id
@@ -386,7 +465,7 @@ class md {
                             if(err) {
                                 callback(500);
                             } else {
-                                callback(docs);
+                                callback({_raw : docs,count : starList.length});
                             }
                         });
                         break;
@@ -405,7 +484,7 @@ class md {
                     if(err) {
                         callback(500);
                     } else {
-                        _callback(null,docs);
+                        _callback(null,{_raw : docs,count : starList.length});
                     }
                 });
             }

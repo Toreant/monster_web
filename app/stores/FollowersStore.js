@@ -11,11 +11,12 @@ class FollowersStore {
     }
 
     onGetFollowersSuccess(data) {
-        if(data.code === 200) {
-            data.raw.map((obj) => {
-                this.followers.push(obj);
-            });
-        }
+        console.log(data);
+        //if(data.code === 200) {
+        //    data.raw.map((obj) => {
+        //        this.followers.push(obj);
+        //    });
+        //}
     }
 
     onChangeFollowId(event) {

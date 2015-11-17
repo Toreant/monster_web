@@ -36,7 +36,7 @@ class Member extends React.Component {
     }
 
     render() {
-
+        let domain = this.props.params.domain;
         let Mem = (
             <div className="col-md-3 col-sm-3">
                 <div className='mon-center'>
@@ -44,15 +44,15 @@ class Member extends React.Component {
                 </div>
                 <div className='mon-user-name'>{this.state.username}</div>
                 <div className='mon-vcard-stats'>
-                    <Link to={'/member/'+this.props.params.domain+'/followers'} className='mon-link'>
+                    <Link to={'/member/'+domain+'/followers'} className='mon-link'>
                         <span>{this.state.followers}</span>
                         <b>Followers</b>
                     </Link>
-                    <Link to={'/member/'+this.props.params.domain+'/following'} className='mon-link'>
+                    <Link to={'/member/'+domain+'/following'} className='mon-link'>
                         <span>{this.state.following}</span>
                         <b>Following</b>
                     </Link>
-                    <Link to={'/member/'+this.props.params.domain+'/contribute'} className='mon-link'>
+                    <Link to={'/member/'+domain+'/star'} className='mon-link'>
                         <span>{this.state.star}</span>
                         <b>Star</b>
                     </Link>

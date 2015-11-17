@@ -43,7 +43,7 @@ export default (
             <Route path=':domain'>
                 <Route path='following' handler={Notice}/>
                 <Route Path='followers' handler={Notice}/>
-                <Route path='star' handler={Notice} />
+                <Route path='star' handler={StarList} />
             </Route>
         </Route>
 

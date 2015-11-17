@@ -8,6 +8,8 @@ class StarListStore {
     constructor() {
         this.bindActions(StarActions);
         this.starList = [];
+        this.skip = 0;
+        this.count = 0;
     }
 
     onGetStarListSuccess(data) {
@@ -15,7 +17,16 @@ class StarListStore {
         if(data.code === 500) {
             toastr.error('服务器错误');
         } else if(data.code === 200) {
-            this.starList = data.raw;
+            this.starList = data.raw._raw;
+            this.count = data.raw.count;
+        }
+    }
+
+    onChangeSkipSuccess(option) {
+        if(option === 0) {
+            this.skip = this.skip-1;
+        } else {
+            this.skip = this.skip+1;
         }
     }
 }

@@ -15,10 +15,12 @@ class StarList extends React.Component {
 
     componentDidMount() {
         StarListStore.listen(this.onChange);
-        if(this.props.what === undefined) {
+
+        // profile
+        if(this.props.params.domain === undefined) {
             StarListActions.getStarList(0,null);
         } else {
-            StarListActions.getStarList(1,this.props.domain,this.props.option);
+            StarListActions.getStarList(1,this.props.params.domain);
         }
     }
 
@@ -30,36 +32,83 @@ class StarList extends React.Component {
         this.setState(state);
     }
 
+    prevPage() {
+        let props = this.props;
+        StarListActions.getStarList(0,null,null,this.state.skip-1);
+        StarListActions.changeSkip(0);
+    }
+
+    nextPage() {
+        let props = this.props;
+        StarListActions.getStarList(0,null,null,this.state.skip+1);
+        StarListActions.changeSkip(1);
+    }
+
     render() {
-        let List = this.state.starList.map((data) => {
-            return (
-                <div className='media'>
-                    <div className="media-left">
-                        <Link to={'/article/'+data._id}>
-                            <img src={data.abbreviations || '/img/abbreviations.png'} alt="loading" width='80'/>
-                        </Link>
+
+        let List, SkipPage,
+            disabled = '',disabledN = '';
+        if(this.state.skip === 0) {
+            disabled = 'disabled';
+        }
+        if(this.state.skip >= (this.state.count/10-1) || this.state.count < 10) {
+            disabledN = 'disabled';
+        }
+        if(this.state.starList.length === 0) {
+            List = (
+                <p className="bg-info">
+                    还没有收藏任何东西
+                </p>
+            );
+            SkipPage = null;
+        } else {
+            List = this.state.starList.map((data) => {
+                return (
+                    <div className='media mon-conlist-item' key={data._id}>
+                        <div className="media-left">
+                            <Link to={'/article/'+data._id}>
+                                <img src={data.abbreviations || '/img/abbreviations.png'} alt="loading" width='80'/>
+                            </Link>
+                        </div>
+                        <div className="media-body">
+
+                            <Link className='text-primary' to={'/article/'+data._id}>
+                                {data.title}
+                            </Link>
+                            <div className='mon-conlist-info'>
+                            <span className="fa fa-clock-o">
+                                {new Date(data.create_time).toLocaleDateString()}
+                            </span>
+                            <span className='fa fa-user'>
+                                {data.create_user_name}
+                            </span>
+                            </div>
+                            <p className='text-muted'>
+                                {data.summary}
+                            </p>
+                        </div>
                     </div>
-                    <div className="media-body">
-                        <p className='text-primary'>
-                            {data.title}
-                        </p>
-                        <span>
-                            <span className="fa fa-time"></span>
-                            {new Date(data.create_time).toLocaleDateString()}
-                        </span>
-                        <p className='text-muted'>
-                            {data.summary}
-                        </p>
-                    </div>
+                );
+            });
+
+            SkipPage = (
+                <div className='mon-skip'>
+                    <a href="javascript:;" className={'btn mon-page mon-prev-page '+disabled} onClick={this.prevPage.bind(this)}>
+                        <span className='fa fa-arrow-left'></span>
+                    </a>
+                    <a href="javascript:;" className={'btn mon-page mon-next-page '+disabledN} onClick={this.nextPage.bind(this)}>
+                        <span className='fa fa-arrow-right'></span>
+                    </a>
                 </div>
             );
-        });
+        }
         return (
             <div className='col-md-9 col-sm-9 animated fadeInUp mon-padding'>
-                <p className='bg-info mon-bg-title'>
+                <p className='bg-info mon-bg-title mon-padding'>
                     收藏列表
                 </p>
                 {List}
+                {SkipPage}
             </div>
         );
     }

@@ -25,17 +25,18 @@ class Contribute extends React.Component {
     }
 
     render() {
+        let domain = this.props.domain;
         let ConNav;
         if(this.props.option === '0') {
             ConNav = (
                 <div className='mon-contribute-nav'>
-                    <Link to={'/member/'+this.props.domain+'/article'}>
+                    <Link to={'/member/'+domain+'/article'}>
                         文章
                     </Link>
-                    <Link to={'/member/'+this.props.domain+'/music'}>
+                    <Link to={'/member/'+domain+'/music'}>
                         音乐
                     </Link>
-                    <Link to={'/member/'+this.props.domain+'/animate'}>
+                    <Link to={'/member/'+domain+'/animate'}>
                         动漫
                     </Link>
                 </div>
@@ -57,9 +58,10 @@ class Contribute extends React.Component {
         }
         return(
             <div className='col-sm-9 col-md-9 animated fadeInUp'>
-                <p className='bg-success mon-padding mon-bg-title'>我的贡献分享</p>
-                <div className='mon-contribute-block'>
-                    {ConNav}
+                <div>
+                    <div className='mon-contribute-block'>
+                        {ConNav}
+                    </div>
                 </div>
                 <RouteHandler />
             </div>

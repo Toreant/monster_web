@@ -3,8 +3,20 @@
  */
 import React from 'react';
 import {Link} from 'react-router';
+import {isEqual} from 'underscore';
 import ConListActions from '../actions/ConListActions';
 import ConListStore from '../stores/ConListStore';
+
+var isMounted = (component) => {
+    // exceptions for flow control :(
+    try {
+        React.findDOMNode(component);
+        return true;
+    } catch (e) {
+        // Error: Invariant Violation: Component (with keys: props,context,state,refs,_reactInternalInstance) contains `render` method but is not mounted in the DOM
+        return false;
+    }
+};
 
 class ConList extends React.Component {
 
@@ -14,14 +26,35 @@ class ConList extends React.Component {
         this.onChange = this.onChange.bind(this);
     }
 
+    componentWillUnMount() {
+        ConListStore.unlisten(this.onChange);
+    }
+
+    componentWillUpdate(prevProps) {
+        console.log('will update'+isMounted(this));
+        if(!isEqual(prevProps.params,this.props.params)) {
+            ConListActions.getConList(props.option,props.tab,props.domain);
+        }
+    }
+
     componentDidMount() {
         ConListStore.listen(this.onChange);
         let props = this.props;
-        ConListActions.getConList(props.option,props.tab,props.domain);
+        console.log('did'+isMounted(this));
+        if(isMounted(this)) {
+            ConListActions.getConList(props.option,props.tab,props.domain);
+        }
     }
 
-    componentWillUnMount() {
-        ConListStore.unlisten(this.onChange);
+
+
+    componentDidUpdate(prevProps) {
+        console.log('update'+isMounted(this));
+        if(!isEqual(prevProps.params,this.props.params)) {
+            if(isMounted(this)) {
+                ConListActions.getConList(props.option,props.tab,props.domain);
+            }
+        }
     }
 
     onChange(state) {
@@ -29,7 +62,6 @@ class ConList extends React.Component {
     }
 
     prevPage() {
-        console.log('hgeh');
         let props = this.props;
         ConListActions.getConList(props.option,props.tab,props.domain,this.state.skip-1);
         ConListActions.changeSkip(0);
@@ -51,7 +83,7 @@ class ConList extends React.Component {
         if(this.state.skip === 0) {
             disabled = 'disabled';
         }
-        if(this.state.skip >= (this.state.count/4-1) || this.state.count < 4) {
+        if(this.state.skip >= (this.state.count/5-1) || this.state.count < 4) {
             disabledN = 'disabled';
         }
         if(this.state.contributes.length > 0) {

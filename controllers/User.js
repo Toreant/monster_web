@@ -199,6 +199,39 @@ class UserCtrl {
     }
 
     /**
+     * 获取关注我的用户
+     * @param req
+     * @param res
+     * @param next
+     */
+    getFollowers(req,res,next) {
+        let option = req.body.option,
+            where = req.body.where,
+            user = req.session.user; //　本地登陆用户
+
+        console.log(where);
+
+        User.getFollowers(where,option,user,(data) => {
+            let result = {
+                meta : '',
+                code : 0,
+                raw  : null
+            };
+
+            if(data === 500) {
+                result.meta = '服务器错误';
+                result.code = 500;
+            } else {
+                result.meta = '获取关注者成功';
+                result.code = 200;
+                result.raw  = data;
+            }
+
+            res.json(result);
+        });
+    }
+
+    /**
      * 关注
      * @param req
      * @param res
