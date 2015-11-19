@@ -21,7 +21,7 @@ class Home extends React.Component {
 
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         HomeStore.unlisten(this.onChange);
     }
 

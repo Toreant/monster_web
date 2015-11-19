@@ -23,9 +23,10 @@ class Article extends React.Component {
         ArticleActions.getArticle(this.props.params.id);
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         ArticleStore.unlisten(this.onChange);
     }
+
 
     componentDidUpdate(prevProps) {
         if (!isEqual(prevProps.params, this.props.params)) {

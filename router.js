@@ -26,7 +26,7 @@ router.post('/api/follow',UserCtrl.addFollow);
 
 router.post('/api/following',UserCtrl.getFollowing);
 
-router.post('/api/unFollow',UserCtrl.unFollowing);
+router.delete('/api/follow',UserCtrl.unFollowing);
 
 //　文章有关
 router.post('/api/article',ArticleCtrl.getSaveArticle);

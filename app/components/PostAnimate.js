@@ -25,7 +25,7 @@ class PostAnimate extends React.Component {
         console.log('did update animate');
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         PostAnimateStore.unlisten(this.onChange);
     }
 

@@ -24,7 +24,7 @@ class StarList extends React.Component {
         }
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         StarListStore.unlisten(this.onChange);
     }
 

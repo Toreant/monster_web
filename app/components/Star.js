@@ -16,7 +16,7 @@ class Star extends React.Component {
         StarStore.listen(this.onChange);
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         StarStore.unlisten(this.onChange);
     }
 

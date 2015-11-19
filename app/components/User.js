@@ -25,7 +25,7 @@ class User extends React.Component {
         }
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         UserStore.unlisten(this.onChange);
     }
 

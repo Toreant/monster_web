@@ -26,7 +26,7 @@ class Comment extends React.Component {
         }
     }
 
-    ComponentWillUnMount() {
+    componentWillUnmount() {
         CommentStore.unlisten(this.onChange);
     }
 

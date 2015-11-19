@@ -30,7 +30,7 @@ class Following extends React.Component {
         }
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         FollowingStore.unlisten(this.onChange);
     }
 
@@ -52,7 +52,7 @@ class Following extends React.Component {
         } else {
             following = this.state.following.map((data,index) => {
                 return (
-                    <div key={data._id} className='listgroup'>
+                    <div key={'following:'+data._id} className='listgroup'>
                         <div className='media'>
                             <span className='position pull-left'>{index + 1}</span>
                             <div className='pull-left thumb-lg'>

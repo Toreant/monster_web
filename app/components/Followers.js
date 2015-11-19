@@ -7,6 +7,7 @@ import {isEqual} from 'underscore';
 import FollowersActions from '../actions/FollowersActions';
 import FollowersStore from '../stores/FollowersStore';
 import Pagination from './Pagination';
+import FollowBtn from './FollowBtn';
 
 class Followers extends React.Component {
     constructor(props) {
@@ -30,7 +31,7 @@ class Followers extends React.Component {
         }
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         FollowersStore.unlisten(this.onChange);
     }
 
@@ -38,10 +39,16 @@ class Followers extends React.Component {
         this.setState(state);
     }
 
-    handleClick(auth_id) {
+    handleClick(option,auth_id) {
+        console.log();
         let $self = $("[data-self="+ auth_id +"]");
-        FollowersActions.addFollow($self,auth_id);
+        if(option === 0) {
+            FollowersActions.addFollow($self,auth_id);
+        } else if(option === 1) {
+            FollowersActions.unFollow($self,auth_id)
+        }
     }
+
 
     render() {
         let followers;
@@ -51,23 +58,32 @@ class Followers extends React.Component {
             );
         } else {
             followers = this.state.followers.map((data,index) => {
+                let FollowBtn;
+                if(data.following) {
+                    FollowBtn = (
+                        <a href="javascript:;" data-self={data.user._id.toString()} onClick={this.handleClick.bind(this,1,data.user._id.toString())}>取消关注</a>
+                    );
+                } else {
+                    FollowBtn = (
+                        <a href="javascript:;"　data-self={data.user._id.toString()}　onClick={this.handleClick.bind(this,0,data.user._id.toString())}>关注</a>
+                    );
+                }
                 return (
-                    <div key={data.auth_id} className='listgroup'>
+                    <div key={'followers:'+data.user._id} className='listgroup'>
                         <div className='media'>
                             <span className='position pull-left'>{index + 1}</span>
                             <div className='pull-left thumb-lg'>
-                                <Link to={'/characters/' + data.auth_id}>
-                                    <img className='media-object' src={data.avatar_url} />
+                                <Link to={'/characters/' + data.user._id}>
+                                    <img className='media-object' src={data.user.avatar_url} />
                                 </Link>
                             </div>
                             <div className='media-body'>
                                 <h4 className='media-heading followers-name'>
-                                    <Link to={'/characters/' + data.auth_id}>{data.username}</Link>
+                                    <Link to={'/characters/' + data.user._id}>{data.user.username}</Link>
                                 </h4>
-                                <p className='followers-intro'>{data.introduce}</p>
+                                <p className='followers-intro'>{data.user.introduce}</p>
                                 <div className='follow'>
-                                    <span className='fa fa-star-o'></span>
-                                    <a href="javascript:;" data-self={data.auth_id.toString()} onClick={this.handleClick.bind(this,data.auth_id)}>关注</a>
+                                    {FollowBtn}
                                 </div>
                             </div>
                         </div>

@@ -15,7 +15,7 @@ class Pagination extends React.Component {
         PaginationStore.listen(this.onChange);
     }
 
-    componentWillUnMout() {
+    componentWillUnmMout() {
         PaginationStore.unlisten(this.onChange);
     }
 

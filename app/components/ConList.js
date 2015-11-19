@@ -26,7 +26,7 @@ class ConList extends React.Component {
         this.onChange = this.onChange.bind(this);
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         ConListStore.unlisten(this.onChange);
     }
 

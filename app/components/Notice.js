@@ -16,7 +16,7 @@ class Notice extends React.Component {
         NoticeStore.listen(this.onChange);
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         NoticeStore.unlisten(this.onChange);
     }
 

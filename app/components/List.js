@@ -6,6 +6,7 @@ import {Link} from 'react-router';
 import {isEqual} from 'underscore';
 import ListActions from '../actions/ListActions';
 import ListStore　from '../stores/ListStore';
+import isMounted from '../services/Mounted';
 
 class List extends React.Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class List extends React.Component {
         ListActions.getList(this.props.params.column,this.props.params.skip);
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         ListStore.unlisten(this.onChange);
     }
 

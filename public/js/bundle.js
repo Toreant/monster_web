@@ -46,7 +46,7 @@ var ArticleActions = (function () {
 exports['default'] = _alt2['default'].createActions(ArticleActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],2:[function(require,module,exports){
+},{"../alt":22}],2:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -125,7 +125,7 @@ var CommentActions = (function () {
 exports['default'] = _alt2['default'].createActions(CommentActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],3:[function(require,module,exports){
+},{"../alt":22}],3:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -203,7 +203,7 @@ var ConListActions = (function () {
 exports['default'] = _alt2['default'].createActions(ConListActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],4:[function(require,module,exports){
+},{"../alt":22}],4:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -230,7 +230,76 @@ var ContributeActions = function ContributeActions() {
 exports['default'] = _alt2['default'].createActions(ContributeActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],5:[function(require,module,exports){
+},{"../alt":22}],5:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-19.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var FollowBtnActions = (function () {
+    function FollowBtnActions() {
+        _classCallCheck(this, FollowBtnActions);
+
+        this.generateActions('followSuccess', 'unFollowSuccess');
+    }
+
+    _createClass(FollowBtnActions, [{
+        key: 'follow',
+        value: function follow(option, auth_id) {
+            var _this = this;
+
+            console.log(auth_id);
+            var type = undefined;
+            if (!option) {
+                type = 'post';
+            } else {
+                type = 'delete';
+            }
+
+            $.ajax({
+                url: '/api/follow',
+                type: type,
+                cache: false,
+                contentType: 'application/json;charset=utf-8',
+                dataType: 'json',
+                data: JSON.stringify({ _id: auth_id })
+            }).done(function (data) {
+                if (!option) {
+                    _this.actions.followSuccess(data);
+                } else {
+                    _this.actions.unFollowSuccess(data);
+                }
+            }).fail(function () {
+                if (option) {
+                    toastr.warning('关注不成功');
+                } else {
+                    toastr.warning('取消关注不成功');
+                }
+            });
+        }
+    }]);
+
+    return FollowBtnActions;
+})();
+
+exports['default'] = _alt2['default'].createActions(FollowBtnActions);
+module.exports = exports['default'];
+
+},{"../alt":22}],6:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -254,7 +323,7 @@ var FollowersActions = (function () {
     function FollowersActions() {
         _classCallCheck(this, FollowersActions);
 
-        this.generateActions('getFollowersSuccess', 'changeFollowId', 'addFollowSuccess');
+        this.generateActions('getFollowersSuccess', 'changeFollowId', 'addFollowSuccess', 'unFollowSuccess');
     }
 
     _createClass(FollowersActions, [{
@@ -284,8 +353,7 @@ var FollowersActions = (function () {
             var _this2 = this;
 
             var params = {
-                where: { auth_id: 48561100 },
-                auth_id: auth_id
+                _id: auth_id
             };
 
             $.ajax({
@@ -300,6 +368,28 @@ var FollowersActions = (function () {
                 toastr.error('关注不成功');
             });
         }
+    }, {
+        key: 'unFollow',
+        value: function unFollow($self, auth_id) {
+            var _this3 = this;
+
+            var params = {
+                _id: auth_id
+            };
+
+            $.ajax({
+                url: '/api/follow',
+                type: 'delete',
+                cache: false,
+                contentType: 'application/json;charset=UTF-8',
+                dataType: 'json',
+                data: JSON.stringify(params)
+            }).done(function (data) {
+                _this3.actions.unFollowSuccess([$self, data]);
+            }).fail(function () {
+                toastr.warning('取消关注不成功');
+            });
+        }
     }]);
 
     return FollowersActions;
@@ -308,7 +398,7 @@ var FollowersActions = (function () {
 exports['default'] = _alt2['default'].createActions(FollowersActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],6:[function(require,module,exports){
+},{"../alt":22}],7:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -391,7 +481,7 @@ var FollowingActions = (function () {
 exports['default'] = _alt2['default'].createActions(FollowingActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],7:[function(require,module,exports){
+},{"../alt":22}],8:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -433,7 +523,7 @@ var HomeActions = (function () {
 exports['default'] = _alt2['default'].createActions(HomeActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],8:[function(require,module,exports){
+},{"../alt":22}],9:[function(require,module,exports){
 /**
  * Created by apache on 15-11-10.
  */
@@ -501,7 +591,7 @@ var ListActions = (function () {
 exports['default'] = _alt2['default'].createActions(ListActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],9:[function(require,module,exports){
+},{"../alt":22}],10:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -596,7 +686,7 @@ var LoginActions = (function () {
 exports['default'] = _alt2['default'].createActions(LoginActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],10:[function(require,module,exports){
+},{"../alt":22}],11:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -646,7 +736,7 @@ var MemberActions = (function () {
 exports['default'] = _alt2['default'].createActions(MemberActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],11:[function(require,module,exports){
+},{"../alt":22}],12:[function(require,module,exports){
 /**
  * Created by apache on 15-10-25.
  */
@@ -713,7 +803,7 @@ var NavActions = (function () {
 exports['default'] = _alt2['default'].createActions(NavActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],12:[function(require,module,exports){
+},{"../alt":22}],13:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -753,7 +843,7 @@ var NoticeActions = (function () {
 exports['default'] = _alt2['default'].createActions(NoticeActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],13:[function(require,module,exports){
+},{"../alt":22}],14:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -780,7 +870,7 @@ var PaginationActions = function PaginationActions() {
 exports['default'] = _alt2['default'].createActions(PaginationActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],14:[function(require,module,exports){
+},{"../alt":22}],15:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -820,7 +910,7 @@ var PostAnimateActions = (function () {
 exports['default'] = _alt2['default'].createActions(PostAnimateActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],15:[function(require,module,exports){
+},{"../alt":22}],16:[function(require,module,exports){
 /**
  * Created by apache on 15-11-3.
  */
@@ -889,7 +979,7 @@ var PostArticleActions = (function () {
 exports['default'] = _alt2['default'].createActions(PostArticleActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],16:[function(require,module,exports){
+},{"../alt":22}],17:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -916,7 +1006,7 @@ var ProfileCenterActions = function ProfileCenterActions() {
 exports['default'] = _alt2['default'].createActions(ProfileCenterActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],17:[function(require,module,exports){
+},{"../alt":22}],18:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -994,7 +1084,7 @@ var SetActions = (function () {
 exports['default'] = _alt2['default'].createActions(SetActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],18:[function(require,module,exports){
+},{"../alt":22}],19:[function(require,module,exports){
 /**
  * Created by apache on 15-11-15.
  */
@@ -1078,7 +1168,7 @@ var StarActions = (function () {
 exports['default'] = _alt2['default'].createActions(StarActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],19:[function(require,module,exports){
+},{"../alt":22}],20:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -1161,7 +1251,7 @@ var StarListActions = (function () {
 exports['default'] = _alt2['default'].createActions(StarListActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],20:[function(require,module,exports){
+},{"../alt":22}],21:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -1211,7 +1301,7 @@ var UserActions = (function () {
 exports['default'] = _alt2['default'].createActions(UserActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],21:[function(require,module,exports){
+},{"../alt":22}],22:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -1230,7 +1320,7 @@ var _alt2 = _interopRequireDefault(_alt);
 exports['default'] = new _alt2['default']();
 module.exports = exports['default'];
 
-},{"alt":"alt"}],22:[function(require,module,exports){
+},{"alt":"alt"}],23:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -1292,7 +1382,7 @@ var App = (function (_React$Component) {
 exports['default'] = App;
 module.exports = exports['default'];
 
-},{"./Footer":31,"./Nav":36,"react":"react","react-router":"react-router"}],23:[function(require,module,exports){
+},{"./Footer":33,"./Nav":38,"react":"react","react-router":"react-router"}],24:[function(require,module,exports){
 /**
  * Created by apache on 15-11-4.
  */
@@ -1362,8 +1452,8 @@ var Article = (function (_React$Component) {
             _actionsArticleActions2['default'].getArticle(this.props.params.id);
         }
     }, {
-        key: 'componentWillUnMount',
-        value: function componentWillUnMount() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
             _storesArticleStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -1535,7 +1625,7 @@ var Article = (function (_React$Component) {
 exports['default'] = Article;
 module.exports = exports['default'];
 
-},{"../actions/ArticleActions":1,"../stores/ArticleStore":49,"./BtnBlock":24,"./Comment":25,"./Star":44,"markdown":73,"react":"react","react-router":"react-router","underscore":"underscore"}],24:[function(require,module,exports){
+},{"../actions/ArticleActions":1,"../stores/ArticleStore":52,"./BtnBlock":25,"./Comment":26,"./Star":46,"markdown":77,"react":"react","react-router":"react-router","underscore":"underscore"}],25:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -1566,15 +1656,9 @@ var BtnBlock = (function (_React$Component) {
         _classCallCheck(this, BtnBlock);
 
         _get(Object.getPrototypeOf(BtnBlock.prototype), 'constructor', this).call(this, props);
-        this.onChange = this.onChange.bind(this);
     }
 
     _createClass(BtnBlock, [{
-        key: 'onChange',
-        value: function onChange(state) {
-            this.setState(state);
-        }
-    }, {
         key: 'handlerClick',
         value: function handlerClick() {
             $("html,body").animate({ scrollTop: 0 }, 700);
@@ -1669,7 +1753,7 @@ var BtnBlock = (function (_React$Component) {
 exports['default'] = BtnBlock;
 module.exports = exports['default'];
 
-},{"react":"react"}],25:[function(require,module,exports){
+},{"react":"react"}],26:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -1731,8 +1815,8 @@ var Comment = (function (_React$Component) {
             }
         }
     }, {
-        key: 'ComponentWillUnMount',
-        value: function ComponentWillUnMount() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
             _storesCommentStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -1868,7 +1952,7 @@ var Comment = (function (_React$Component) {
 exports['default'] = Comment;
 module.exports = exports['default'];
 
-},{"../actions/CommentActions":2,"../stores/CommentStore":50,"react":"react","react-router":"react-router","underscore":"underscore"}],26:[function(require,module,exports){
+},{"../actions/CommentActions":2,"../stores/CommentStore":53,"react":"react","react-router":"react-router","underscore":"underscore"}],27:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -1922,7 +2006,7 @@ var ConArticle = (function (_React$Component) {
 exports['default'] = ConArticle;
 module.exports = exports['default'];
 
-},{"./ConList":27,"react":"react"}],27:[function(require,module,exports){
+},{"./ConList":28,"react":"react"}],28:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -1981,8 +2065,8 @@ var ConList = (function (_React$Component) {
     }
 
     _createClass(ConList, [{
-        key: 'componentWillUnMount',
-        value: function componentWillUnMount() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
             _storesConListStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -2140,7 +2224,7 @@ var ConList = (function (_React$Component) {
 exports['default'] = ConList;
 module.exports = exports['default'];
 
-},{"../actions/ConListActions":3,"../stores/ConListStore":51,"react":"react","react-router":"react-router","underscore":"underscore"}],28:[function(require,module,exports){
+},{"../actions/ConListActions":3,"../stores/ConListStore":54,"react":"react","react-router":"react-router","underscore":"underscore"}],29:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -2191,8 +2275,8 @@ var Contribute = (function (_React$Component) {
             _storesContributeStore2['default'].listen(this.onChange);
         }
     }, {
-        key: 'componentWillUnMount',
-        value: function componentWillUnMount() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
             _storesContributeStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -2269,7 +2353,95 @@ var Contribute = (function (_React$Component) {
 exports['default'] = Contribute;
 module.exports = exports['default'];
 
-},{"../actions/ContributeActions":4,"../stores/ContributeStore":52,"react":"react","react-router":"react-router"}],29:[function(require,module,exports){
+},{"../actions/ContributeActions":4,"../stores/ContributeStore":55,"react":"react","react-router":"react-router"}],30:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-19.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _actionsFollowBtnActions = require('../actions/FollowBtnActions');
+
+var _actionsFollowBtnActions2 = _interopRequireDefault(_actionsFollowBtnActions);
+
+var _storesFollowBtnStore = require('../stores/FollowBtnStore');
+
+var _storesFollowBtnStore2 = _interopRequireDefault(_storesFollowBtnStore);
+
+var FollowBtn = (function (_React$Component) {
+    _inherits(FollowBtn, _React$Component);
+
+    function FollowBtn(props) {
+        _classCallCheck(this, FollowBtn);
+
+        _get(Object.getPrototypeOf(FollowBtn.prototype), 'constructor', this).call(this, props);
+        this.state = _storesFollowBtnStore2['default'].getState();
+        this.state.follow = props.follow;
+        this.onChange = this.onChange.bind(this);
+    }
+
+    _createClass(FollowBtn, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            _storesFollowBtnStore2['default'].listen(this.onChange);
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            _storesFollowBtnStore2['default'].unlisten(this.onChange);
+        }
+    }, {
+        key: 'onChange',
+        value: function onChange(state) {
+            this.setState(state);
+        }
+    }, {
+        key: 'handleClick',
+        value: function handleClick() {
+            _actionsFollowBtnActions2['default'].follow(this.state.follow, this.props.auth_id);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var Btn = undefined;
+            if (this.props.follow || this.state.follow) {
+                Btn = '取消关注';
+            } else {
+                Btn = '关注';
+            }
+
+            return _react2['default'].createElement(
+                'a',
+                { href: 'javascript:;', className: 'btn btn-default', onClick: this.handleClick.bind(this) },
+                Btn
+            );
+        }
+    }]);
+
+    return FollowBtn;
+})(_react2['default'].Component);
+
+exports['default'] = FollowBtn;
+module.exports = exports['default'];
+
+},{"../actions/FollowBtnActions":5,"../stores/FollowBtnStore":56,"react":"react"}],31:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -2309,6 +2481,10 @@ var _Pagination = require('./Pagination');
 
 var _Pagination2 = _interopRequireDefault(_Pagination);
 
+var _FollowBtn = require('./FollowBtn');
+
+var _FollowBtn2 = _interopRequireDefault(_FollowBtn);
+
 var Followers = (function (_React$Component) {
     _inherits(Followers, _React$Component);
 
@@ -2338,8 +2514,8 @@ var Followers = (function (_React$Component) {
             }
         }
     }, {
-        key: 'componentWillUnMount',
-        value: function componentWillUnMount() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
             _storesFollowersStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -2349,9 +2525,14 @@ var Followers = (function (_React$Component) {
         }
     }, {
         key: 'handleClick',
-        value: function handleClick(auth_id) {
+        value: function handleClick(option, auth_id) {
+            console.log();
             var $self = $("[data-self=" + auth_id + "]");
-            _actionsFollowersActions2['default'].addFollow($self, auth_id);
+            if (option === 0) {
+                _actionsFollowersActions2['default'].addFollow($self, auth_id);
+            } else if (option === 1) {
+                _actionsFollowersActions2['default'].unFollow($self, auth_id);
+            }
         }
     }, {
         key: 'render',
@@ -2367,9 +2548,23 @@ var Followers = (function (_React$Component) {
                 );
             } else {
                 followers = this.state.followers.map(function (data, index) {
+                    var FollowBtn = undefined;
+                    if (data.following) {
+                        FollowBtn = _react2['default'].createElement(
+                            'a',
+                            { href: 'javascript:;', 'data-self': data.user._id.toString(), onClick: _this.handleClick.bind(_this, 1, data.user._id.toString()) },
+                            '取消关注'
+                        );
+                    } else {
+                        FollowBtn = _react2['default'].createElement(
+                            'a',
+                            { href: 'javascript:;', 'data-self': data.user._id.toString(), onClick: _this.handleClick.bind(_this, 0, data.user._id.toString()) },
+                            '关注'
+                        );
+                    }
                     return _react2['default'].createElement(
                         'div',
-                        { key: data.auth_id, className: 'listgroup' },
+                        { key: 'followers:' + data.user._id, className: 'listgroup' },
                         _react2['default'].createElement(
                             'div',
                             { className: 'media' },
@@ -2383,8 +2578,8 @@ var Followers = (function (_React$Component) {
                                 { className: 'pull-left thumb-lg' },
                                 _react2['default'].createElement(
                                     _reactRouter.Link,
-                                    { to: '/characters/' + data.auth_id },
-                                    _react2['default'].createElement('img', { className: 'media-object', src: data.avatar_url })
+                                    { to: '/characters/' + data.user._id },
+                                    _react2['default'].createElement('img', { className: 'media-object', src: data.user.avatar_url })
                                 )
                             ),
                             _react2['default'].createElement(
@@ -2395,24 +2590,19 @@ var Followers = (function (_React$Component) {
                                     { className: 'media-heading followers-name' },
                                     _react2['default'].createElement(
                                         _reactRouter.Link,
-                                        { to: '/characters/' + data.auth_id },
-                                        data.username
+                                        { to: '/characters/' + data.user._id },
+                                        data.user.username
                                     )
                                 ),
                                 _react2['default'].createElement(
                                     'p',
                                     { className: 'followers-intro' },
-                                    data.introduce
+                                    data.user.introduce
                                 ),
                                 _react2['default'].createElement(
                                     'div',
                                     { className: 'follow' },
-                                    _react2['default'].createElement('span', { className: 'fa fa-star-o' }),
-                                    _react2['default'].createElement(
-                                        'a',
-                                        { href: 'javascript:;', 'data-self': data.auth_id.toString(), onClick: _this.handleClick.bind(_this, data.auth_id) },
-                                        '关注'
-                                    )
+                                    FollowBtn
                                 )
                             )
                         )
@@ -2441,7 +2631,7 @@ var Followers = (function (_React$Component) {
 exports['default'] = Followers;
 module.exports = exports['default'];
 
-},{"../actions/FollowersActions":5,"../stores/FollowersStore":53,"./Pagination":39,"react":"react","react-router":"react-router","underscore":"underscore"}],30:[function(require,module,exports){
+},{"../actions/FollowersActions":6,"../stores/FollowersStore":57,"./FollowBtn":30,"./Pagination":41,"react":"react","react-router":"react-router","underscore":"underscore"}],32:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -2510,8 +2700,8 @@ var Following = (function (_React$Component) {
             }
         }
     }, {
-        key: 'componentWillUnMount',
-        value: function componentWillUnMount() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
             _storesFollowingStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -2541,7 +2731,7 @@ var Following = (function (_React$Component) {
                 following = this.state.following.map(function (data, index) {
                     return _react2['default'].createElement(
                         'div',
-                        { key: data._id, className: 'listgroup' },
+                        { key: 'following:' + data._id, className: 'listgroup' },
                         _react2['default'].createElement(
                             'div',
                             { className: 'media' },
@@ -2614,7 +2804,7 @@ var Following = (function (_React$Component) {
 exports['default'] = Following;
 module.exports = exports['default'];
 
-},{"../actions/FollowingActions":6,"../stores/FollowingStore":54,"./Pagination":39,"react":"react","react-router":"react-router","underscore":"underscore"}],31:[function(require,module,exports){
+},{"../actions/FollowingActions":7,"../stores/FollowingStore":58,"./Pagination":41,"react":"react","react-router":"react-router","underscore":"underscore"}],33:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -2754,7 +2944,7 @@ var Footer = (function (_React$Component) {
 exports['default'] = Footer;
 module.exports = exports['default'];
 
-},{"react":"react"}],32:[function(require,module,exports){
+},{"react":"react"}],34:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -2806,8 +2996,8 @@ var Home = (function (_React$Component) {
         key: 'componentDidUpdate',
         value: function componentDidUpdate(nextProps, preProps) {}
     }, {
-        key: 'componentWillUnMount',
-        value: function componentWillUnMount() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
             _storesHomeStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -2850,7 +3040,7 @@ var Home = (function (_React$Component) {
 exports['default'] = Home;
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":7,"../stores/HomeStore":55,"react":"react"}],33:[function(require,module,exports){
+},{"../actions/HomeActions":8,"../stores/HomeStore":59,"react":"react"}],35:[function(require,module,exports){
 /**
  * Created by apache on 15-11-10.
  */
@@ -2886,6 +3076,10 @@ var _storesListStore = require('../stores/ListStore');
 
 var _storesListStore2 = _interopRequireDefault(_storesListStore);
 
+var _servicesMounted = require('../services/Mounted');
+
+var _servicesMounted2 = _interopRequireDefault(_servicesMounted);
+
 var List = (function (_React$Component) {
     _inherits(List, _React$Component);
 
@@ -2904,8 +3098,8 @@ var List = (function (_React$Component) {
             _actionsListActions2['default'].getList(this.props.params.column, this.props.params.skip);
         }
     }, {
-        key: 'componentWillUnMount',
-        value: function componentWillUnMount() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
             _storesListStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -3062,7 +3256,7 @@ List.contextTypes = {
 exports['default'] = List;
 module.exports = exports['default'];
 
-},{"../actions/ListActions":8,"../stores/ListStore":56,"react":"react","react-router":"react-router","underscore":"underscore"}],34:[function(require,module,exports){
+},{"../actions/ListActions":9,"../services/Mounted":51,"../stores/ListStore":60,"react":"react","react-router":"react-router","underscore":"underscore"}],36:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -3126,8 +3320,8 @@ var Login = (function (_React$Component) {
             }
         }
     }, {
-        key: 'componentWillUnMount',
-        value: function componentWillUnMount() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
             _storesLoginStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -3354,7 +3548,7 @@ var Login = (function (_React$Component) {
 exports['default'] = Login;
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":9,"../stores/LoginStore":57,"react":"react"}],35:[function(require,module,exports){
+},{"../actions/LoginActions":10,"../stores/LoginStore":61,"react":"react"}],37:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -3423,8 +3617,8 @@ var Member = (function (_React$Component) {
             }
         }
     }, {
-        key: 'componentWillUnMount',
-        value: function componentWillUnMount() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
             _storesMemberStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -3533,7 +3727,7 @@ Member.contextTypes = {
 exports['default'] = Member;
 module.exports = exports['default'];
 
-},{"../actions/MemberActions":10,"../stores/MemberStore":58,"./Contribute":28,"./NotFound":37,"react":"react","react-router":"react-router","underscore":"underscore"}],36:[function(require,module,exports){
+},{"../actions/MemberActions":11,"../stores/MemberStore":62,"./Contribute":29,"./NotFound":39,"react":"react","react-router":"react-router","underscore":"underscore"}],38:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -3585,8 +3779,8 @@ var Nav = (function (_React$Component) {
             _actionsNavActions2['default'].checkLogin();
         }
     }, {
-        key: 'componentWillUnMount',
-        value: function componentWillUnMount() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
             _storesNavStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -3794,7 +3988,7 @@ var Nav = (function (_React$Component) {
 exports['default'] = Nav;
 module.exports = exports['default'];
 
-},{"../actions/NavActions":11,"../stores/NavStore":59,"react":"react","react-router":"react-router"}],37:[function(require,module,exports){
+},{"../actions/NavActions":12,"../stores/NavStore":63,"react":"react","react-router":"react-router"}],39:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -3848,7 +4042,7 @@ var NotFound = (function (_React$Component) {
 exports['default'] = NotFound;
 module.exports = exports['default'];
 
-},{"react":"react"}],38:[function(require,module,exports){
+},{"react":"react"}],40:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -3897,8 +4091,8 @@ var Notice = (function (_React$Component) {
             _storesNoticeStore2['default'].listen(this.onChange);
         }
     }, {
-        key: 'componentWillUnMount',
-        value: function componentWillUnMount() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
             _storesNoticeStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -3923,7 +4117,7 @@ var Notice = (function (_React$Component) {
 exports['default'] = Notice;
 module.exports = exports['default'];
 
-},{"../actions/NoticeActions":12,"../stores/NoticeStore":60,"react":"react"}],39:[function(require,module,exports){
+},{"../actions/NoticeActions":13,"../stores/NoticeStore":64,"react":"react"}],41:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -3972,8 +4166,8 @@ var Pagination = (function (_React$Component) {
             _storesPaginationStore2['default'].listen(this.onChange);
         }
     }, {
-        key: 'componentWillUnMout',
-        value: function componentWillUnMout() {
+        key: 'componentWillUnmMout',
+        value: function componentWillUnmMout() {
             _storesPaginationStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -4077,7 +4271,7 @@ var Pagination = (function (_React$Component) {
 exports['default'] = Pagination;
 module.exports = exports['default'];
 
-},{"../actions/PaginationActions":13,"../stores/PaginationStore":61,"react":"react"}],40:[function(require,module,exports){
+},{"../actions/PaginationActions":14,"../stores/PaginationStore":65,"react":"react"}],42:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -4138,8 +4332,8 @@ var PostAnimate = (function (_React$Component) {
             console.log('did update animate');
         }
     }, {
-        key: 'componentWillUnMount',
-        value: function componentWillUnMount() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
             _storesPostAnimateStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -4164,7 +4358,7 @@ var PostAnimate = (function (_React$Component) {
 exports['default'] = PostAnimate;
 module.exports = exports['default'];
 
-},{"../actions/PostAnimateActions":14,"../stores/PostAnimateStore":62,"react":"react"}],41:[function(require,module,exports){
+},{"../actions/PostAnimateActions":15,"../stores/PostAnimateStore":66,"react":"react"}],43:[function(require,module,exports){
 /**
  * Created by apache on 15-11-3.
  */
@@ -4241,8 +4435,8 @@ var PostArticle = (function (_React$Component) {
             });
         }
     }, {
-        key: 'componentWillUnMount',
-        value: function componentWillUnMount() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
             _storesPostArticleStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -4396,7 +4590,7 @@ var PostArticle = (function (_React$Component) {
 exports['default'] = PostArticle;
 module.exports = exports['default'];
 
-},{"../actions/PostArticleActions":15,"../stores/PostArticleStore":63,"markdown":73,"react":"react"}],42:[function(require,module,exports){
+},{"../actions/PostArticleActions":16,"../stores/PostArticleStore":67,"markdown":77,"react":"react"}],44:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -4445,8 +4639,8 @@ var ProfileCenter = (function (_React$Component) {
             _storesProfileCenterStore2['default'].listen(this.onChange);
         }
     }, {
-        key: 'componentWillUnMount',
-        value: function componentWillUnMount() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
             _storesProfileCenterStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -4471,7 +4665,7 @@ var ProfileCenter = (function (_React$Component) {
 exports['default'] = ProfileCenter;
 module.exports = exports['default'];
 
-},{"../actions/ProfileCenterActions":16,"../stores/ProfileCenterStore":64,"react":"react"}],43:[function(require,module,exports){
+},{"../actions/ProfileCenterActions":17,"../stores/ProfileCenterStore":68,"react":"react"}],45:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -4521,8 +4715,8 @@ var Set = (function (_React$Component) {
             _actionsSetActions2['default'].getProfile();
         }
     }, {
-        key: 'componentWillUnMount',
-        value: function componentWillUnMount() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
             _storesSetStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -4728,7 +4922,7 @@ var Set = (function (_React$Component) {
 exports['default'] = Set;
 module.exports = exports['default'];
 
-},{"../actions/SetActions":17,"../stores/SetStore":65,"react":"react"}],44:[function(require,module,exports){
+},{"../actions/SetActions":18,"../stores/SetStore":69,"react":"react"}],46:[function(require,module,exports){
 /**
  * Created by apache on 15-11-15.
  */
@@ -4777,8 +4971,8 @@ var Star = (function (_React$Component) {
             _storesStarStore2['default'].listen(this.onChange);
         }
     }, {
-        key: 'componentWillUnMount',
-        value: function componentWillUnMount() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
             _storesStarStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -4841,7 +5035,7 @@ var Star = (function (_React$Component) {
 exports['default'] = Star;
 module.exports = exports['default'];
 
-},{"../actions/StarActions":18,"../stores/StarStore":67,"react":"react"}],45:[function(require,module,exports){
+},{"../actions/StarActions":19,"../stores/StarStore":71,"react":"react"}],47:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -4899,8 +5093,8 @@ var StarList = (function (_React$Component) {
             }
         }
     }, {
-        key: 'componentWillUnMount',
-        value: function componentWillUnMount() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
             _storesStarListStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -5023,7 +5217,7 @@ var StarList = (function (_React$Component) {
 exports['default'] = StarList;
 module.exports = exports['default'];
 
-},{"../actions/StarListActions":19,"../stores/StarListStore":66,"react":"react","react-router":"react-router"}],46:[function(require,module,exports){
+},{"../actions/StarListActions":20,"../stores/StarListStore":70,"react":"react","react-router":"react-router"}],48:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -5083,8 +5277,8 @@ var User = (function (_React$Component) {
             }
         }
     }, {
-        key: 'componentWillUnMount',
-        value: function componentWillUnMount() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
             _storesUserStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -5284,7 +5478,7 @@ User.contextTypes = {
 exports['default'] = User;
 module.exports = exports['default'];
 
-},{"../actions/UserActions":20,"../stores/UserStore":68,"react":"react","react-router":"react-router"}],47:[function(require,module,exports){
+},{"../actions/UserActions":21,"../stores/UserStore":72,"react":"react","react-router":"react-router"}],49:[function(require,module,exports){
 /**
  * Created by apache on 15-10-22.
  */
@@ -5308,7 +5502,7 @@ _reactRouter2['default'].run(_routes2['default'], _reactRouter2['default'].Histo
   _react2['default'].render(_react2['default'].createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./routes":48,"react":"react","react-router":"react-router"}],48:[function(require,module,exports){
+},{"./routes":50,"react":"react","react-router":"react-router"}],50:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -5465,7 +5659,30 @@ exports['default'] = _react2['default'].createElement(
 );
 module.exports = exports['default'];
 
-},{"./components/App":22,"./components/Article":23,"./components/ConArticle":26,"./components/Contribute":28,"./components/Followers":29,"./components/Following":30,"./components/Home":32,"./components/List":33,"./components/Login":34,"./components/Member":35,"./components/NotFound":37,"./components/Notice":38,"./components/PostAnimate":40,"./components/PostArticle":41,"./components/ProfileCenter":42,"./components/Set":43,"./components/StarList":45,"./components/User":46,"react":"react","react-router":"react-router"}],49:[function(require,module,exports){
+},{"./components/App":23,"./components/Article":24,"./components/ConArticle":27,"./components/Contribute":29,"./components/Followers":31,"./components/Following":32,"./components/Home":34,"./components/List":35,"./components/Login":36,"./components/Member":37,"./components/NotFound":39,"./components/Notice":40,"./components/PostAnimate":42,"./components/PostArticle":43,"./components/ProfileCenter":44,"./components/Set":45,"./components/StarList":47,"./components/User":48,"react":"react","react-router":"react-router"}],51:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-19.
+ */
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var isMounted = function isMounted(component) {
+    // exceptions for flow control :(
+    try {
+        React.findDOMNode(component);
+        return true;
+    } catch (e) {
+        // Error: Invariant Violation: Component (with keys: props,context,state,refs,_reactInternalInstance) contains `render` method but is not mounted in the DOM
+        return false;
+    }
+};
+
+exports["default"] = isMounted;
+module.exports = exports["default"];
+
+},{}],52:[function(require,module,exports){
 /**
  * Created by apache on 15-11-4.
  */
@@ -5538,7 +5755,7 @@ var ArticleStore = (function () {
 exports['default'] = _alt2['default'].createStore(ArticleStore);
 module.exports = exports['default'];
 
-},{"../actions/ArticleActions":1,"../alt":21}],50:[function(require,module,exports){
+},{"../actions/ArticleActions":1,"../alt":22}],53:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -5620,7 +5837,7 @@ var CommentStore = (function () {
 exports['default'] = _alt2['default'].createStore(CommentStore);
 module.exports = exports['default'];
 
-},{"../actions/CommentActions":2,"../alt":21}],51:[function(require,module,exports){
+},{"../actions/CommentActions":2,"../alt":22}],54:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -5682,7 +5899,7 @@ var ConListStore = (function () {
 exports['default'] = _alt2['default'].createStore(ConListStore);
 module.exports = exports['default'];
 
-},{"../actions/ConListActions":3,"../alt":21}],52:[function(require,module,exports){
+},{"../actions/ConListActions":3,"../alt":22}],55:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -5717,7 +5934,77 @@ var ContributeStore = function ContributeStore() {
 exports['default'] = _alt2['default'].createStore(ContributeStore);
 module.exports = exports['default'];
 
-},{"../actions/ContributeActions":4,"../alt":21}],53:[function(require,module,exports){
+},{"../actions/ContributeActions":4,"../alt":22}],56:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-19.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _actionsFollowBtnActions = require('../actions/FollowBtnActions');
+
+var _actionsFollowBtnActions2 = _interopRequireDefault(_actionsFollowBtnActions);
+
+var FollowBtnStore = (function () {
+    function FollowBtnStore() {
+        _classCallCheck(this, FollowBtnStore);
+
+        this.bindActions(_actionsFollowBtnActions2['default']);
+        this.follow = false;
+        this.opion = 0;
+    }
+
+    _createClass(FollowBtnStore, [{
+        key: 'onFollowSuccess',
+        value: function onFollowSuccess(data) {
+            console.log(data);
+            if (data.code === 200) {
+                this.follow = true;
+                toastr.success('关注成功');
+            } else if (data.code === 400) {
+                toastr.warning('你还没有登陆');
+            } else if (data.code === 400) {
+                toastr.warning('用户不存在');
+            } else if (data.code === 304) {
+                toastr.warning(data.meta);
+            }
+        }
+    }, {
+        key: 'onUnFollowSuccess',
+        value: function onUnFollowSuccess(data) {
+            if (data.code === 200) {
+                this.follow = false;
+                toastr.success('取消关注成功');
+            } else if (data.code === 400) {
+                toastr.warning('你还没有登陆');
+            } else if (data.code === 400) {
+                toastr.warning('用户不存在');
+            } else {
+                toastr.warning('服务器错误');
+            }
+        }
+    }]);
+
+    return FollowBtnStore;
+})();
+
+exports['default'] = _alt2['default'].createStore(FollowBtnStore);
+module.exports = exports['default'];
+
+},{"../actions/FollowBtnActions":5,"../alt":22}],57:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -5753,11 +6040,11 @@ var FollowersStore = (function () {
         key: 'onGetFollowersSuccess',
         value: function onGetFollowersSuccess(data) {
             console.log(data);
-            //if(data.code === 200) {
-            //    data.raw.map((obj) => {
-            //        this.followers.push(obj);
-            //    });
-            //}
+            if (data.code === 200) {
+                this.followers = data.raw;
+            } else if (data.code === 500) {
+                toastr.error('服务器错误');
+            }
         }
     }, {
         key: 'onChangeFollowId',
@@ -5788,6 +6075,26 @@ var FollowersStore = (function () {
                     break;
             }
         }
+    }, {
+        key: 'onUnFollowSuccess',
+        value: function onUnFollowSuccess(data) {
+            console.log(data);
+            switch (data[1].code) {
+                case 400:
+                    toastr.error('本地用户不存在');
+                    break;
+                case 200:
+                    toastr.success('取消关注成功');
+                    data[0].text('关注');
+                    break;
+                case 304:
+                    toastr.warning('你还没有关注过这个用户');
+                    break;
+                case 404:
+                    toastr.error('关注的用户不存在');
+                    break;
+            }
+        }
     }]);
 
     return FollowersStore;
@@ -5796,7 +6103,7 @@ var FollowersStore = (function () {
 exports['default'] = _alt2['default'].createStore(FollowersStore);
 module.exports = exports['default'];
 
-},{"../actions/FollowersActions":5,"../alt":21}],54:[function(require,module,exports){
+},{"../actions/FollowersActions":6,"../alt":22}],58:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -5876,7 +6183,7 @@ var FollowingStore = (function () {
 exports['default'] = _alt2['default'].createStore(FollowingStore);
 module.exports = exports['default'];
 
-},{"../actions/FollowingActions":6,"../alt":21}],55:[function(require,module,exports){
+},{"../actions/FollowingActions":7,"../alt":22}],59:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -5925,7 +6232,7 @@ var HomeStore = (function () {
 exports['default'] = _alt2['default'].createStore(HomeStore);
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":7,"../alt":21}],56:[function(require,module,exports){
+},{"../actions/HomeActions":8,"../alt":22}],60:[function(require,module,exports){
 /**
  * Created by apache on 15-11-10.
  */
@@ -5978,7 +6285,7 @@ var ListStore = (function () {
 exports['default'] = _alt2['default'].createStore(ListStore);
 module.exports = exports['default'];
 
-},{"../actions/ListActions":8,"../alt":21}],57:[function(require,module,exports){
+},{"../actions/ListActions":9,"../alt":22}],61:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -6112,7 +6419,7 @@ var LoginStore = (function () {
 exports['default'] = _alt2['default'].createStore(LoginStore);
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":9,"../alt":21}],58:[function(require,module,exports){
+},{"../actions/LoginActions":10,"../alt":22}],62:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -6181,7 +6488,7 @@ var MemberStore = (function () {
 exports['default'] = _alt2['default'].createStore(MemberStore);
 module.exports = exports['default'];
 
-},{"../actions/MemberActions":10,"../alt":21}],59:[function(require,module,exports){
+},{"../actions/MemberActions":11,"../alt":22}],63:[function(require,module,exports){
 /**
  * Created by apache on 15-10-25.
  */
@@ -6259,7 +6566,7 @@ var NavStore = (function () {
 exports['default'] = _alt2['default'].createStore(NavStore);
 module.exports = exports['default'];
 
-},{"../actions/NavActions":11,"../alt":21}],60:[function(require,module,exports){
+},{"../actions/NavActions":12,"../alt":22}],64:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -6303,7 +6610,7 @@ var NoticeStore = (function () {
 exports['default'] = _alt2['default'].createStore(NoticeStore);
 module.exports = exports['default'];
 
-},{"../actions/NoticeActions":12,"../alt":21}],61:[function(require,module,exports){
+},{"../actions/NoticeActions":13,"../alt":22}],65:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -6334,7 +6641,7 @@ var PaginationStore = function PaginationStore() {
 exports['default'] = _alt2['default'].createStore(PaginationStore);
 module.exports = exports['default'];
 
-},{"../actions/PaginationActions":13,"../alt":21}],62:[function(require,module,exports){
+},{"../actions/PaginationActions":14,"../alt":22}],66:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -6378,7 +6685,7 @@ var PostAnimateStore = (function () {
 exports['default'] = _alt2['default'].createStore(PostAnimateStore);
 module.exports = exports['default'];
 
-},{"../actions/PostAnimateActions":14,"../alt":21}],63:[function(require,module,exports){
+},{"../actions/PostAnimateActions":15,"../alt":22}],67:[function(require,module,exports){
 /**
  * Created by apache on 15-11-3.
  */
@@ -6466,7 +6773,7 @@ var PostArticleStore = (function () {
 exports['default'] = _alt2['default'].createStore(PostArticleStore);
 module.exports = exports['default'];
 
-},{"../actions/PostArticleActions":15,"../alt":21}],64:[function(require,module,exports){
+},{"../actions/PostArticleActions":16,"../alt":22}],68:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -6497,7 +6804,7 @@ var ProfileCenterStore = function ProfileCenterStore() {
 exports['default'] = _alt2['default'].createStore(ProfileCenterStore);
 module.exports = exports['default'];
 
-},{"../actions/ProfileCenterActions":16,"../alt":21}],65:[function(require,module,exports){
+},{"../actions/ProfileCenterActions":17,"../alt":22}],69:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -6648,7 +6955,7 @@ var SetStore = (function () {
 exports['default'] = _alt2['default'].createStore(SetStore);
 module.exports = exports['default'];
 
-},{"../actions/SetActions":17,"../alt":21}],66:[function(require,module,exports){
+},{"../actions/SetActions":18,"../alt":22}],70:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -6710,7 +7017,7 @@ var StarListStore = (function () {
 exports['default'] = _alt2['default'].createStore(StarListStore);
 module.exports = exports['default'];
 
-},{"../actions/StarListActions":19,"../alt":21}],67:[function(require,module,exports){
+},{"../actions/StarListActions":20,"../alt":22}],71:[function(require,module,exports){
 /**
  * Created by apache on 15-11-15.
  */
@@ -6813,7 +7120,7 @@ var StarStore = (function () {
 exports['default'] = _alt2['default'].createStore(StarStore);
 module.exports = exports['default'];
 
-},{"../actions/StarActions":18,"../alt":21}],68:[function(require,module,exports){
+},{"../actions/StarActions":19,"../alt":22}],72:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -6881,7 +7188,7 @@ var UserStore = (function () {
 exports['default'] = _alt2['default'].createStore(UserStore);
 module.exports = exports['default'];
 
-},{"../actions/UserActions.js":20,"../alt":21}],69:[function(require,module,exports){
+},{"../actions/UserActions.js":21,"../alt":22}],73:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -6906,7 +7213,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],70:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -6999,14 +7306,14 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],71:[function(require,module,exports){
+},{}],75:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],72:[function(require,module,exports){
+},{}],76:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -7596,12 +7903,12 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":71,"_process":70,"inherits":69}],73:[function(require,module,exports){
+},{"./support/isBuffer":75,"_process":74,"inherits":73}],77:[function(require,module,exports){
 // super simple module for the most common nodejs use case.
 exports.markdown = require("./markdown");
 exports.parse = exports.markdown.toHTML;
 
-},{"./markdown":74}],74:[function(require,module,exports){
+},{"./markdown":78}],78:[function(require,module,exports){
 // Released under MIT license
 // Copyright (c) 2009-2010 Dominic Baggott
 // Copyright (c) 2009-2010 Ash Berlin
@@ -9328,4 +9635,4 @@ function merge_text_nodes( jsonml ) {
   }
 } )() );
 
-},{"util":72}]},{},[47]);
+},{"util":76}]},{},[49]);

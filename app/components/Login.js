@@ -31,7 +31,7 @@ class Login extends React.Component {
         }
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         LoginStore.unlisten(this.onChange);
     }
 

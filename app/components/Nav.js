@@ -19,7 +19,7 @@ class Nav extends React.Component {
         NavAction.checkLogin();
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         NavStore.unlisten(this.onChange);
     }
 

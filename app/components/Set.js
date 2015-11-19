@@ -17,7 +17,7 @@ class Set extends React.Component {
         SetActions.getProfile();
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         SetStore.unlisten(this.onChange);
     }
 

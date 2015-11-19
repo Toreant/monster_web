@@ -27,7 +27,7 @@ class Member extends React.Component {
         }
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         MemberStore.unlisten(this.onChange);
     }
 

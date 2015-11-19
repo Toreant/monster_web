@@ -209,8 +209,6 @@ class UserCtrl {
             where = req.body.where,
             user = req.session.user; //　本地登陆用户
 
-        console.log(where);
-
         User.getFollowers(where,option,user,(data) => {
             let result = {
                 meta : '',
@@ -238,13 +236,18 @@ class UserCtrl {
      * @param next
      */
     addFollow(req,res,next) {
-        let auth_id = req.body.auth_id,
-            where = req.body.where;
+        let auth_id = req.body._id,
+            where = req.session.user;
+
+        if(where === undefined) {
+            res.json({meta : '你还没有登陆',code : 400});
+        }
+
         let result = {
             meta : '',
             code : 0
         };
-        User.follow(where,auth_id,0,(data) => {
+        User.follow({_id : where._id},auth_id,0,(data) => {
             if(data === 0) {
                 result.meta = '本地用户不存在';
                 result.code = 400;
@@ -269,13 +272,18 @@ class UserCtrl {
      * @param next
      */
     unFollowing(req,res,next) {
-        let auth_id = req.body.auth_id,
-            where = req.body.where;
+        let auth_id = req.body._id,
+            where = req.session.user;
+        console.log(auth_id);
+
+        if(where === undefined) {
+            res.json({meta : '你还没有登陆',code : 400});
+        }
         let result = {
             meta : '',
             code : 0
         };
-        User.follow(where,auth_id,1,(data) => {
+        User.follow({_id : where._id},auth_id,1,(data) => {
             if(data === 0) {
                 result.meta = '本地用户不存在';
                 result.code = 400;

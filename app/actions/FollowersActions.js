@@ -7,7 +7,8 @@ class FollowersActions {
         this.generateActions(
             'getFollowersSuccess',
             'changeFollowId',
-            'addFollowSuccess'
+            'addFollowSuccess',
+            'unFollowSuccess'
         );
     }
 
@@ -31,8 +32,7 @@ class FollowersActions {
 
     addFollow($self,auth_id) {
         let params = {
-            where : {auth_id : 48561100},
-            auth_id : auth_id
+            _id : auth_id
         };
 
         $.ajax({
@@ -47,6 +47,26 @@ class FollowersActions {
             toastr.error('关注不成功');
         });
     }
+
+    unFollow($self,auth_id) {
+        let params = {
+            _id : auth_id
+        };
+
+        $.ajax({
+            url : '/api/follow',
+            type : 'delete',
+            cache: false,
+            contentType : 'application/json;charset=UTF-8',
+            dataType: 'json',
+            data: JSON.stringify(params)
+        }).done((data) => {
+            this.actions.unFollowSuccess([$self,data]);
+        }).fail(() => {
+            toastr.warning('取消关注不成功');
+        });
+    };
+
 }
 
 export default alt.createActions(FollowersActions);

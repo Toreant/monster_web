@@ -7,11 +7,6 @@ class BtnBlock extends React.Component {
 
     constructor(props) {
         super(props);
-        this.onChange = this.onChange.bind(this);
-    }
-
-    onChange(state) {
-        this.setState(state);
     }
 
     handlerClick() {

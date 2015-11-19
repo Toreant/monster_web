@@ -16,7 +16,7 @@ class ProfileCenter extends React.Component {
         ProfileCenterStore.listen(this.onChange);
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         ProfileCenterStore.unlisten(this.onChange);
     }
 

@@ -16,7 +16,7 @@ class Contribute extends React.Component {
         ContributeStore.listen(this.onChange);
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         ContributeStore.unlisten(this.onChange);
     }
 

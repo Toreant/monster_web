@@ -40,7 +40,7 @@ class PostArticle extends React.Component {
         });
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         PostArticleStore.unlisten(this.onChange);
     }
 

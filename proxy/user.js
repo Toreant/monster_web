@@ -160,7 +160,7 @@ class md {
             function(_callback) {
                 User.findOne(where,'followers',option,(err,u) =>{
                     if(err) {
-                        callback(err);
+                        callback(500);
                     } else {
                         _callback(null,u.followers);
                     }
@@ -249,7 +249,7 @@ class md {
                 if(user === 0) {
                     _callback(null,0);
                 } else {
-                    User.findOne({auth_id : auth_id},(err,docs) => {
+                    User.findOne({_id : auth_id},(err,docs) => {
                         _callback(null,docs,user);
                     })
                 }
