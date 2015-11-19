@@ -7,7 +7,6 @@ import {isEqual} from 'underscore';
 import FollowersActions from '../actions/FollowersActions';
 import FollowersStore from '../stores/FollowersStore';
 import Pagination from './Pagination';
-import FollowBtn from './FollowBtn';
 
 class Followers extends React.Component {
     constructor(props) {
@@ -39,12 +38,12 @@ class Followers extends React.Component {
         this.setState(state);
     }
 
-    handleClick(option,auth_id) {
-        console.log();
+    handleClick(auth_id) {
         let $self = $("[data-self="+ auth_id +"]");
-        if(option === 0) {
+        console.log($self.data('option'));
+        if($self.data('option').toString() === '0') {
             FollowersActions.addFollow($self,auth_id);
-        } else if(option === 1) {
+        } else {
             FollowersActions.unFollow($self,auth_id)
         }
     }
@@ -61,11 +60,11 @@ class Followers extends React.Component {
                 let FollowBtn;
                 if(data.following) {
                     FollowBtn = (
-                        <a href="javascript:;" data-self={data.user._id.toString()} onClick={this.handleClick.bind(this,1,data.user._id.toString())}>取消关注</a>
+                        <a href="javascript:;" data-self={data.user._id.toString()} data-option='1' onClick={this.handleClick.bind(this,data.user._id.toString())}>取消关注</a>
                     );
                 } else {
                     FollowBtn = (
-                        <a href="javascript:;"　data-self={data.user._id.toString()}　onClick={this.handleClick.bind(this,0,data.user._id.toString())}>关注</a>
+                        <a href="javascript:;"　data-self={data.user._id.toString()} data-option='0'　onClick={this.handleClick.bind(this,data.user._id.toString())}>关注</a>
                     );
                 }
                 return (

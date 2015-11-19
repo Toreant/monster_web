@@ -23,6 +23,8 @@ class FollowBtn extends React.Component {
 
     onChange(state) {
         this.setState(state);
+        console.log('heh');
+        console.log(this.props.auth_id);
     }
 
     handleClick() {
@@ -31,7 +33,7 @@ class FollowBtn extends React.Component {
 
     render() {
         let Btn;
-        if(this.props.follow || this.state.follow ) {
+        if(this.state.follow ) {
             Btn = '取消关注';
         } else {
             Btn = '关注';

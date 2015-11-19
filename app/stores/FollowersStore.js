@@ -35,6 +35,7 @@ class FollowersStore {
             case 200 :
                 toastr.success('关注成功');
                 data[0].text('取消关注');
+                data[0].data("option",1);
                 break;
             case 304 :
                 toastr.warning('你已经关注过这个用户');
@@ -54,6 +55,7 @@ class FollowersStore {
             case 200 :
                 toastr.success('取消关注成功');
                 data[0].text('关注');
+                data[0].data("option",0);
                 break;
             case 304 :
                 toastr.warning('你还没有关注过这个用户');
