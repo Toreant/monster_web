@@ -18,6 +18,7 @@ class PostArticleStore {
     }
 
     onChangeAbbreviations(event) {
+        console.log(event.target.value);
         this.abbreviations = event.target.value;
     }
 

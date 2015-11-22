@@ -45,9 +45,7 @@ class PostArticle extends React.Component {
     }
 
     handleClick() {
-        console.log(this.state.summary);
-        console.log(this.state.content);
-        PostArticleActions.postArticle(this.state.title,this.state.summary,this.state.tag,this.state.abbreviations,this.state.content);
+        PostArticleActions.postArticle(this.state.title,this.state.summary,this.state.tag,$("#upload_img_value").val(),this.state.content);
     }
 
     saveArticle() {
@@ -57,7 +55,7 @@ class PostArticle extends React.Component {
             summary : this.state.summary,
             tags : this.state.tag,
             content : this.state.content,
-            abbreviations : this.state.abbreviations,
+            abbreviations : $("#upload_img_value").val(),
             post : false
         };
         localStorage.setItem('postArticle',JSON.stringify(article));
@@ -101,12 +99,13 @@ class PostArticle extends React.Component {
                             <label className='label label-default'>封面图片</label>
                         </div>
                         <div className='col-md-8'>
-                            <Upload img='#upload_img'/>
+                            <Upload img='#upload_img' img_value="#upload_img_value"/>
                             <p className='text-muted'>请选择您的文章封面图片。封面图片不得包含令人反感的信息，尺寸为480*270像素。
                                 请勿使用与内容无关，或分辨率不为16:9的图片作为封面图片。</p>
                         </div>
                         <div className='col-md-3'>
-                            <img src="/img/cover-night.png" id='upload_img' width='120' alt="loading"/>
+                            <img src="/img/cover-night.png" id='upload_img' width='120' alt="loading" />
+                            <input id='upload_img_value' type="hidden" onChange={PostArticleActions.changeAbbreviations}/>
                         </div>
                     </div>
                     <textarea id='some-textarea' name="content" data-provide="markdown" rows="15" onChange={PostArticleActions.changeContent}></textarea>

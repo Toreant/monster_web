@@ -875,9 +875,6 @@ var PostArticleActions = (function () {
         value: function postArticle(title, summary, tags, abbreviations, content) {
             var _this = this;
 
-            var localStorage = window.localStorage,
-                userProfile = localStorage.getItem('user');
-            userProfile = JSON.parse(userProfile);
             var params = {
                 params: {
                     title: title,
@@ -1210,10 +1207,8 @@ var _underscore2 = _interopRequireDefault(_underscore);
 
 function uploadLoad(option) {
     if (option === 0) {
-        $("#file_loader_file").removeClass('mon-upload').addClass('mon-upload-o');
         $("#loader").removeClass('mon-loader').addClass('mon-loader-o');
     } else {
-        $("#file_loader_file").removeClass('mon-upload-o').addClass('mon-upload');
         $("#loader").removeClass('mon-loader-o').addClass('mon-loader');
     }
 }
@@ -1227,7 +1222,7 @@ var UploadActions = (function () {
 
     _createClass(UploadActions, [{
         key: 'upload',
-        value: function upload(target, preImg) {
+        value: function upload(target, preImg, imgValue) {
             var _this = this;
 
             uploadLoad(0);
@@ -1243,7 +1238,7 @@ var UploadActions = (function () {
                 timeout: 10000,
                 data: formData
             }).success(function (data) {
-                _this.actions.uploadSuccess([data, preImg]);
+                _this.actions.uploadSuccess(data, preImg, imgValue);
             }).fail(function () {
                 toastr.error('上传图片不成功');
             }).error(function () {
@@ -1253,11 +1248,12 @@ var UploadActions = (function () {
         }
     }, {
         key: 'uploadSuccess',
-        value: function uploadSuccess(data) {
+        value: function uploadSuccess(data, preImg, imgValue) {
             uploadLoad(1);
             this.actions.uploadSuccessAfter();
-            if (data[0].code === 200) {
-                $(data[1]).attr('src', '/upload/' + data[0].raw);
+            if (data.code === 200) {
+                $(preImg).attr('src', '/img/upload/' + data.raw);
+                $(imgValue).val('/img/upload/' + data.raw);
             } else {
                 toastr.warning('上传图片不成功');
             }
@@ -4372,9 +4368,7 @@ var PostArticle = (function (_React$Component) {
     }, {
         key: 'handleClick',
         value: function handleClick() {
-            console.log(this.state.summary);
-            console.log(this.state.content);
-            _actionsPostArticleActions2['default'].postArticle(this.state.title, this.state.summary, this.state.tag, this.state.abbreviations, this.state.content);
+            _actionsPostArticleActions2['default'].postArticle(this.state.title, this.state.summary, this.state.tag, $("#upload_img_value").val(), this.state.content);
         }
     }, {
         key: 'saveArticle',
@@ -4385,7 +4379,7 @@ var PostArticle = (function (_React$Component) {
                 summary: this.state.summary,
                 tags: this.state.tag,
                 content: this.state.content,
-                abbreviations: this.state.abbreviations,
+                abbreviations: $("#upload_img_value").val(),
                 post: false
             };
             localStorage.setItem('postArticle', JSON.stringify(article));
@@ -4474,7 +4468,7 @@ var PostArticle = (function (_React$Component) {
                         _react2['default'].createElement(
                             'div',
                             { className: 'col-md-8' },
-                            _react2['default'].createElement(_Upload2['default'], { img: '#upload_img' }),
+                            _react2['default'].createElement(_Upload2['default'], { img: '#upload_img', img_value: '#upload_img_value' }),
                             _react2['default'].createElement(
                                 'p',
                                 { className: 'text-muted' },
@@ -4484,7 +4478,8 @@ var PostArticle = (function (_React$Component) {
                         _react2['default'].createElement(
                             'div',
                             { className: 'col-md-3' },
-                            _react2['default'].createElement('img', { src: '/img/cover-night.png', id: 'upload_img', width: '120', alt: 'loading' })
+                            _react2['default'].createElement('img', { src: '/img/cover-night.png', id: 'upload_img', width: '120', alt: 'loading' }),
+                            _react2['default'].createElement('input', { id: 'upload_img_value', type: 'hidden', onChange: _actionsPostArticleActions2['default'].changeAbbreviations })
                         )
                     ),
                     _react2['default'].createElement('textarea', { id: 'some-textarea', name: 'content', 'data-provide': 'markdown', rows: '15', onChange: _actionsPostArticleActions2['default'].changeContent }),
@@ -5209,7 +5204,7 @@ var Upload = (function (_React$Component) {
     }, {
         key: 'upload',
         value: function upload() {
-            _actionsUploadActions2['default'].upload(this.state.file, this.props.img);
+            _actionsUploadActions2['default'].upload(this.state.file, this.props.img, this.props.img_value);
         }
     }, {
         key: 'render',
@@ -5253,6 +5248,15 @@ var Upload = (function (_React$Component) {
                             _react2['default'].createElement('img', { src: '/img/cover-night.png', id: 'img-preview', width: '200', alt: 'loading' })
                         ),
                         _react2['default'].createElement(
+                            'div',
+                            { id: 'loader', className: 'loader-inner ball-pulse mon-loader' },
+                            _react2['default'].createElement('div', null),
+                            _react2['default'].createElement('div', null),
+                            _react2['default'].createElement('div', null),
+                            _react2['default'].createElement('div', null),
+                            _react2['default'].createElement('div', null)
+                        ),
+                        _react2['default'].createElement(
                             'a',
                             { href: 'javascript:;', className: 'btn btn-danger', htmlFor: 'uploader' },
                             _react2['default'].createElement(
@@ -5268,15 +5272,6 @@ var Upload = (function (_React$Component) {
                             _react2['default'].createElement('span', { className: 'fa fa-check-circle' }),
                             '确定'
                         )
-                    ),
-                    _react2['default'].createElement(
-                        'div',
-                        { id: 'loader', className: 'loader-inner ball-pulse mon-loader' },
-                        _react2['default'].createElement('div', null),
-                        _react2['default'].createElement('div', null),
-                        _react2['default'].createElement('div', null),
-                        _react2['default'].createElement('div', null),
-                        _react2['default'].createElement('div', null)
                     ),
                     _react2['default'].createElement('span', { className: 'fa fa-close mon-close', onClick: this.closeClick.bind(this) })
                 )
@@ -6711,6 +6706,7 @@ var PostArticleStore = (function () {
     }, {
         key: 'onChangeAbbreviations',
         value: function onChangeAbbreviations(event) {
+            console.log(event.target.value);
             this.abbreviations = event.target.value;
         }
     }, {

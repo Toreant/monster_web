@@ -6,10 +6,8 @@ import _ from 'underscore';
 
 function uploadLoad(option) {
     if(option === 0) {
-        $("#file_loader_file").removeClass('mon-upload').addClass('mon-upload-o');
         $("#loader").removeClass('mon-loader').addClass('mon-loader-o');
     } else {
-        $("#file_loader_file").removeClass('mon-upload-o').addClass('mon-upload');
         $("#loader").removeClass('mon-loader-o').addClass('mon-loader');
     }
 }
@@ -21,7 +19,7 @@ class UploadActions {
         );
     }
 
-    upload(target,preImg) {
+    upload(target,preImg,imgValue) {
         uploadLoad(0);
         var formData = new FormData();
         formData.append('file',target);
@@ -35,7 +33,7 @@ class UploadActions {
             timeout : 10000,
             data : formData
         }).success((data) => {
-            this.actions.uploadSuccess([data,preImg]);
+            this.actions.uploadSuccess(data,preImg,imgValue);
         }).fail(() => {
             toastr.error('上传图片不成功')
         }).error(() => {
@@ -44,11 +42,12 @@ class UploadActions {
         });
     }
 
-    uploadSuccess(data) {
+    uploadSuccess(data,preImg,imgValue) {
         uploadLoad(1);
         this.actions.uploadSuccessAfter();
-        if(data[0].code === 200) {
-            $(data[1]).attr('src','/upload/'+data[0].raw);
+        if(data.code === 200) {
+            $(preImg).attr('src','/img/upload/'+data.raw);
+            $(imgValue).val('/img/upload/'+data.raw);
         } else {
             toastr.warning('上传图片不成功');
         }

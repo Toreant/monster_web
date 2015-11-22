@@ -11,7 +11,6 @@ import multer from 'multer';
 
 var upload = multer({dest : './public/img/upload'});
 
-
 // 用户有关
 router.post('/api/user',UserCtrl.getSign);
 

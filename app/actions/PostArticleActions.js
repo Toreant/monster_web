@@ -15,9 +15,6 @@ class PostArticleActions {
     }
 
     postArticle(title,summary,tags,abbreviations,content) {
-        let localStorage = window.localStorage,
-            userProfile = localStorage.getItem('user');
-        userProfile = JSON.parse(userProfile);
         let params = {
             params : {
                 title : title,
