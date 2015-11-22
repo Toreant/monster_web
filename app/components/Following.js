@@ -26,7 +26,7 @@ class Following extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (!isEqual(prevProps.params, this.props.params)) {
-            FollowingActions.getFollowing(this.params.page);
+            FollowingActions.getFollowing(1);
         }
     }
 
@@ -52,7 +52,7 @@ class Following extends React.Component {
         } else {
             following = this.state.following.map((data,index) => {
                 return (
-                    <div key={'following:'+data._id} className='listgroup'>
+                    <div key={"following"+data._id.toString()} className='listgroup'>
                         <div className='media'>
                             <span className='position pull-left'>{index + 1}</span>
                             <div className='pull-left thumb-lg'>
@@ -66,7 +66,6 @@ class Following extends React.Component {
                                 </h4>
                                 <p className='followers-intro'>{data.introduce}</p>
                                 <div className='follow'>
-                                    <span className='fa fa-star-o'></span>
                                     <a href="javascript:;" data-self={data._id} onClick={this.handleClick.bind(this,data._id)}>取消关注</a>
                                 </div>
                             </div>

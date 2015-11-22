@@ -4,6 +4,7 @@
 import React from 'react';
 import PostArticleActions from '../actions/PostArticleActions';
 import PostArticleStore from '../stores/PostArticleStore';
+import Upload from './Upload';
 import md from 'markdown';
 class PostArticle extends React.Component {
     constructor(props) {
@@ -15,12 +16,7 @@ class PostArticle extends React.Component {
     componentDidMount() {
         PostArticleStore.listen(this.onChange);
         this.refs.title.getDOMNode().focus();
-        let localStorage = window.localStorage;
-        let postArticle = localStorage.getItem('postArticle');
-        postArticle = JSON.parse(postArticle);
-        if(postArticle.post !== undefined && postArticle.post === false) {
-            toastr.warning('是否加载保存的稿件');
-        }
+
         let markdown = md.markdown;
         $("#some-textarea").markdown({
             autofocus:false,
@@ -105,12 +101,12 @@ class PostArticle extends React.Component {
                             <label className='label label-default'>封面图片</label>
                         </div>
                         <div className='col-md-8'>
-                            <a href="javascript:;" className='btn btn-info'>上传封面图片</a>
+                            <Upload img='#upload_img'/>
                             <p className='text-muted'>请选择您的文章封面图片。封面图片不得包含令人反感的信息，尺寸为480*270像素。
                                 请勿使用与内容无关，或分辨率不为16:9的图片作为封面图片。</p>
                         </div>
                         <div className='col-md-3'>
-                            <img src="/img/cover-night.png" alt="loading"/>
+                            <img src="/img/cover-night.png" id='upload_img' width='120' alt="loading"/>
                         </div>
                     </div>
                     <textarea id='some-textarea' name="content" data-provide="markdown" rows="15" onChange={PostArticleActions.changeContent}></textarea>

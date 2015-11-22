@@ -23,6 +23,7 @@ class FollowingActions {
             url : '/api/following',
             type : 'post',
             dataType : 'json',
+            cache: false,
             contentType: 'application/json;charset=utf-8',
             data : JSON.stringify(params)
         }).done((data) => {
@@ -44,6 +45,7 @@ class FollowingActions {
             url : '/api/unFollow',
             dataType : 'json',
             type : 'post',
+            cache: false,
             contentType: 'application/json;charset=utf-8',
             data : JSON.stringify(params)
         }).done((data) => {

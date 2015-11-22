@@ -1,0 +1,80 @@
+.mon-upload-block {
+  display: none;
+}
+
+.mon-upload-block-o {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  width: 100%;
+  z-index: 3000;
+  border: 1px dashed #999;
+}
+
+.mon-upload {
+  display: block;
+  padding: 20px;
+}
+
+.mon-upload-o {
+  display: none;
+}
+
+.mon-fileloader {
+  visibility: hidden;
+}
+
+.mon-close {
+  position: absolute;
+  font-size: 26px !important;
+  top: 10px;
+  right: 10px;
+  color: #5e5e5e;
+  &:hover {
+    cursor: pointer;
+    color: #d4d4d4;
+  }
+}
+
+
+/* 等待 */
+.mon-loader {
+  display: none;
+}
+
+.mon-loader-o {
+  display: block;
+  div {
+    background-color: #5e5e5e !important;
+  }
+}
+
+/* 图片预览 */
+.mon-preview-block {
+  display: none;
+}
+
+.mon-preview-block-o {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 10px;
+  a {
+    margin-right: 20px;
+    font-size: 20px;
+    span {
+      margin-right: 10px;
+    }
+  }
+}
+
+.mon-preview-img {
+  background-color: #d4d4d4;
+  margin-bottom: 10px;
+  padding: 10px;
+}

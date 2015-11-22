@@ -46,7 +46,7 @@ var ArticleActions = (function () {
 exports['default'] = _alt2['default'].createActions(ArticleActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],2:[function(require,module,exports){
+},{"../alt":22}],2:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -125,7 +125,7 @@ var CommentActions = (function () {
 exports['default'] = _alt2['default'].createActions(CommentActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],3:[function(require,module,exports){
+},{"../alt":22}],3:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -203,7 +203,7 @@ var ConListActions = (function () {
 exports['default'] = _alt2['default'].createActions(ConListActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],4:[function(require,module,exports){
+},{"../alt":22}],4:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -230,7 +230,7 @@ var ContributeActions = function ContributeActions() {
 exports['default'] = _alt2['default'].createActions(ContributeActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],5:[function(require,module,exports){
+},{"../alt":22}],5:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -329,7 +329,7 @@ var FollowersActions = (function () {
 exports['default'] = _alt2['default'].createActions(FollowersActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],6:[function(require,module,exports){
+},{"../alt":22}],6:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -372,6 +372,7 @@ var FollowingActions = (function () {
                 url: '/api/following',
                 type: 'post',
                 dataType: 'json',
+                cache: false,
                 contentType: 'application/json;charset=utf-8',
                 data: JSON.stringify(params)
             }).done(function (data) {
@@ -396,6 +397,7 @@ var FollowingActions = (function () {
                 url: '/api/unFollow',
                 dataType: 'json',
                 type: 'post',
+                cache: false,
                 contentType: 'application/json;charset=utf-8',
                 data: JSON.stringify(params)
             }).done(function (data) {
@@ -412,7 +414,7 @@ var FollowingActions = (function () {
 exports['default'] = _alt2['default'].createActions(FollowingActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],7:[function(require,module,exports){
+},{"../alt":22}],7:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -454,7 +456,7 @@ var HomeActions = (function () {
 exports['default'] = _alt2['default'].createActions(HomeActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],8:[function(require,module,exports){
+},{"../alt":22}],8:[function(require,module,exports){
 /**
  * Created by apache on 15-11-10.
  */
@@ -522,7 +524,7 @@ var ListActions = (function () {
 exports['default'] = _alt2['default'].createActions(ListActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],9:[function(require,module,exports){
+},{"../alt":22}],9:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -617,7 +619,7 @@ var LoginActions = (function () {
 exports['default'] = _alt2['default'].createActions(LoginActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],10:[function(require,module,exports){
+},{"../alt":22}],10:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -667,7 +669,7 @@ var MemberActions = (function () {
 exports['default'] = _alt2['default'].createActions(MemberActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],11:[function(require,module,exports){
+},{"../alt":22}],11:[function(require,module,exports){
 /**
  * Created by apache on 15-10-25.
  */
@@ -734,7 +736,7 @@ var NavActions = (function () {
 exports['default'] = _alt2['default'].createActions(NavActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],12:[function(require,module,exports){
+},{"../alt":22}],12:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -774,7 +776,7 @@ var NoticeActions = (function () {
 exports['default'] = _alt2['default'].createActions(NoticeActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],13:[function(require,module,exports){
+},{"../alt":22}],13:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -801,7 +803,7 @@ var PaginationActions = function PaginationActions() {
 exports['default'] = _alt2['default'].createActions(PaginationActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],14:[function(require,module,exports){
+},{"../alt":22}],14:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -841,7 +843,7 @@ var PostAnimateActions = (function () {
 exports['default'] = _alt2['default'].createActions(PostAnimateActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],15:[function(require,module,exports){
+},{"../alt":22}],15:[function(require,module,exports){
 /**
  * Created by apache on 15-11-3.
  */
@@ -910,7 +912,7 @@ var PostArticleActions = (function () {
 exports['default'] = _alt2['default'].createActions(PostArticleActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],16:[function(require,module,exports){
+},{"../alt":22}],16:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -937,7 +939,7 @@ var ProfileCenterActions = function ProfileCenterActions() {
 exports['default'] = _alt2['default'].createActions(ProfileCenterActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],17:[function(require,module,exports){
+},{"../alt":22}],17:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -1015,7 +1017,7 @@ var SetActions = (function () {
 exports['default'] = _alt2['default'].createActions(SetActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],18:[function(require,module,exports){
+},{"../alt":22}],18:[function(require,module,exports){
 /**
  * Created by apache on 15-11-15.
  */
@@ -1099,7 +1101,7 @@ var StarActions = (function () {
 exports['default'] = _alt2['default'].createActions(StarActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],19:[function(require,module,exports){
+},{"../alt":22}],19:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -1182,7 +1184,100 @@ var StarListActions = (function () {
 exports['default'] = _alt2['default'].createActions(StarListActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],20:[function(require,module,exports){
+},{"../alt":22}],20:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-22.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+function uploadLoad(option) {
+    if (option === 0) {
+        $("#file_loader_file").removeClass('mon-upload').addClass('mon-upload-o');
+        $("#loader").removeClass('mon-loader').addClass('mon-loader-o');
+    } else {
+        $("#file_loader_file").removeClass('mon-upload-o').addClass('mon-upload');
+        $("#loader").removeClass('mon-loader-o').addClass('mon-loader');
+    }
+}
+
+var UploadActions = (function () {
+    function UploadActions() {
+        _classCallCheck(this, UploadActions);
+
+        this.generateActions('changeFile');
+    }
+
+    _createClass(UploadActions, [{
+        key: 'upload',
+        value: function upload(target, preImg) {
+            var _this = this;
+
+            uploadLoad(0);
+            var formData = new FormData();
+            formData.append('file', target);
+            $.ajax({
+                url: '/api/upload',
+                contentType: false,
+                type: 'post',
+                cache: false,
+                dataType: 'json',
+                processData: false,
+                timeout: 10000,
+                data: formData
+            }).success(function (data) {
+                _this.actions.uploadSuccess([data, preImg]);
+            }).fail(function () {
+                toastr.error('上传图片不成功');
+            }).error(function () {
+                toastr.warning('上传时间超时');
+                uploadLoad(1);
+            });
+        }
+    }, {
+        key: 'uploadSuccess',
+        value: function uploadSuccess(data) {
+            uploadLoad(1);
+            this.actions.uploadSuccessAfter();
+            if (data[0].code === 200) {
+                $(data[1]).attr('src', '/upload/' + data[0].raw);
+            } else {
+                toastr.warning('上传图片不成功');
+            }
+        }
+    }, {
+        key: 'uploadSuccessAfter',
+        value: function uploadSuccessAfter() {
+            $("#file_loader").removeClass('mon-upload-block-o').addClass('mon-upload-block');
+            $("#file_loader_file").removeClass('mon-upload-o').addClass('mon-upload');
+            $("#preview_block").removeClass('mon-preview-block-o').addClass('mon-preview-block');
+        }
+    }]);
+
+    return UploadActions;
+})();
+
+exports['default'] = _alt2['default'].createActions(UploadActions);
+module.exports = exports['default'];
+
+},{"../alt":22,"underscore":"underscore"}],21:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -1232,7 +1327,7 @@ var UserActions = (function () {
 exports['default'] = _alt2['default'].createActions(UserActions);
 module.exports = exports['default'];
 
-},{"../alt":21}],21:[function(require,module,exports){
+},{"../alt":22}],22:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -1251,7 +1346,7 @@ var _alt2 = _interopRequireDefault(_alt);
 exports['default'] = new _alt2['default']();
 module.exports = exports['default'];
 
-},{"alt":"alt"}],22:[function(require,module,exports){
+},{"alt":"alt"}],23:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -1313,7 +1408,7 @@ var App = (function (_React$Component) {
 exports['default'] = App;
 module.exports = exports['default'];
 
-},{"./Footer":31,"./Nav":36,"react":"react","react-router":"react-router"}],23:[function(require,module,exports){
+},{"./Footer":32,"./Nav":37,"react":"react","react-router":"react-router"}],24:[function(require,module,exports){
 /**
  * Created by apache on 15-11-4.
  */
@@ -1556,7 +1651,7 @@ var Article = (function (_React$Component) {
 exports['default'] = Article;
 module.exports = exports['default'];
 
-},{"../actions/ArticleActions":1,"../stores/ArticleStore":49,"./BtnBlock":24,"./Comment":25,"./Star":44,"markdown":73,"react":"react","react-router":"react-router","underscore":"underscore"}],24:[function(require,module,exports){
+},{"../actions/ArticleActions":1,"../stores/ArticleStore":51,"./BtnBlock":25,"./Comment":26,"./Star":45,"markdown":76,"react":"react","react-router":"react-router","underscore":"underscore"}],25:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -1684,7 +1779,7 @@ var BtnBlock = (function (_React$Component) {
 exports['default'] = BtnBlock;
 module.exports = exports['default'];
 
-},{"react":"react"}],25:[function(require,module,exports){
+},{"react":"react"}],26:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -1883,7 +1978,7 @@ var Comment = (function (_React$Component) {
 exports['default'] = Comment;
 module.exports = exports['default'];
 
-},{"../actions/CommentActions":2,"../stores/CommentStore":50,"react":"react","react-router":"react-router","underscore":"underscore"}],26:[function(require,module,exports){
+},{"../actions/CommentActions":2,"../stores/CommentStore":52,"react":"react","react-router":"react-router","underscore":"underscore"}],27:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -1937,7 +2032,7 @@ var ConArticle = (function (_React$Component) {
 exports['default'] = ConArticle;
 module.exports = exports['default'];
 
-},{"./ConList":27,"react":"react"}],27:[function(require,module,exports){
+},{"./ConList":28,"react":"react"}],28:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -2155,7 +2250,7 @@ var ConList = (function (_React$Component) {
 exports['default'] = ConList;
 module.exports = exports['default'];
 
-},{"../actions/ConListActions":3,"../stores/ConListStore":51,"react":"react","react-router":"react-router","underscore":"underscore"}],28:[function(require,module,exports){
+},{"../actions/ConListActions":3,"../stores/ConListStore":53,"react":"react","react-router":"react-router","underscore":"underscore"}],29:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -2284,7 +2379,7 @@ var Contribute = (function (_React$Component) {
 exports['default'] = Contribute;
 module.exports = exports['default'];
 
-},{"../actions/ContributeActions":4,"../stores/ContributeStore":52,"react":"react","react-router":"react-router"}],29:[function(require,module,exports){
+},{"../actions/ContributeActions":4,"../stores/ContributeStore":54,"react":"react","react-router":"react-router"}],30:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -2470,7 +2565,7 @@ var Followers = (function (_React$Component) {
 exports['default'] = Followers;
 module.exports = exports['default'];
 
-},{"../actions/FollowersActions":5,"../stores/FollowersStore":53,"./Pagination":39,"react":"react","react-router":"react-router","underscore":"underscore"}],30:[function(require,module,exports){
+},{"../actions/FollowersActions":5,"../stores/FollowersStore":55,"./Pagination":40,"react":"react","react-router":"react-router","underscore":"underscore"}],31:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -2535,7 +2630,7 @@ var Following = (function (_React$Component) {
         key: 'componentDidUpdate',
         value: function componentDidUpdate(prevProps) {
             if (!(0, _underscore.isEqual)(prevProps.params, this.props.params)) {
-                _actionsFollowingActions2['default'].getFollowing(this.params.page);
+                _actionsFollowingActions2['default'].getFollowing(1);
             }
         }
     }, {
@@ -2570,7 +2665,7 @@ var Following = (function (_React$Component) {
                 following = this.state.following.map(function (data, index) {
                     return _react2['default'].createElement(
                         'div',
-                        { key: 'following:' + data._id, className: 'listgroup' },
+                        { key: "following" + data._id.toString(), className: 'listgroup' },
                         _react2['default'].createElement(
                             'div',
                             { className: 'media' },
@@ -2608,7 +2703,6 @@ var Following = (function (_React$Component) {
                                 _react2['default'].createElement(
                                     'div',
                                     { className: 'follow' },
-                                    _react2['default'].createElement('span', { className: 'fa fa-star-o' }),
                                     _react2['default'].createElement(
                                         'a',
                                         { href: 'javascript:;', 'data-self': data._id, onClick: _this.handleClick.bind(_this, data._id) },
@@ -2640,7 +2734,7 @@ var Following = (function (_React$Component) {
 exports['default'] = Following;
 module.exports = exports['default'];
 
-},{"../actions/FollowingActions":6,"../stores/FollowingStore":54,"./Pagination":39,"react":"react","react-router":"react-router","underscore":"underscore"}],31:[function(require,module,exports){
+},{"../actions/FollowingActions":6,"../stores/FollowingStore":56,"./Pagination":40,"react":"react","react-router":"react-router","underscore":"underscore"}],32:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -2780,7 +2874,7 @@ var Footer = (function (_React$Component) {
 exports['default'] = Footer;
 module.exports = exports['default'];
 
-},{"react":"react"}],32:[function(require,module,exports){
+},{"react":"react"}],33:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -2876,7 +2970,7 @@ var Home = (function (_React$Component) {
 exports['default'] = Home;
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":7,"../stores/HomeStore":55,"react":"react"}],33:[function(require,module,exports){
+},{"../actions/HomeActions":7,"../stores/HomeStore":57,"react":"react"}],34:[function(require,module,exports){
 /**
  * Created by apache on 15-11-10.
  */
@@ -3088,7 +3182,7 @@ List.contextTypes = {
 exports['default'] = List;
 module.exports = exports['default'];
 
-},{"../actions/ListActions":8,"../stores/ListStore":56,"react":"react","react-router":"react-router","underscore":"underscore"}],34:[function(require,module,exports){
+},{"../actions/ListActions":8,"../stores/ListStore":58,"react":"react","react-router":"react-router","underscore":"underscore"}],35:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -3380,7 +3474,7 @@ var Login = (function (_React$Component) {
 exports['default'] = Login;
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":9,"../stores/LoginStore":57,"react":"react"}],35:[function(require,module,exports){
+},{"../actions/LoginActions":9,"../stores/LoginStore":59,"react":"react"}],36:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -3559,7 +3653,7 @@ Member.contextTypes = {
 exports['default'] = Member;
 module.exports = exports['default'];
 
-},{"../actions/MemberActions":10,"../stores/MemberStore":58,"./Contribute":28,"./NotFound":37,"react":"react","react-router":"react-router","underscore":"underscore"}],36:[function(require,module,exports){
+},{"../actions/MemberActions":10,"../stores/MemberStore":60,"./Contribute":29,"./NotFound":38,"react":"react","react-router":"react-router","underscore":"underscore"}],37:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -3820,7 +3914,7 @@ var Nav = (function (_React$Component) {
 exports['default'] = Nav;
 module.exports = exports['default'];
 
-},{"../actions/NavActions":11,"../stores/NavStore":59,"react":"react","react-router":"react-router"}],37:[function(require,module,exports){
+},{"../actions/NavActions":11,"../stores/NavStore":61,"react":"react","react-router":"react-router"}],38:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -3874,7 +3968,7 @@ var NotFound = (function (_React$Component) {
 exports['default'] = NotFound;
 module.exports = exports['default'];
 
-},{"react":"react"}],38:[function(require,module,exports){
+},{"react":"react"}],39:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -3949,7 +4043,7 @@ var Notice = (function (_React$Component) {
 exports['default'] = Notice;
 module.exports = exports['default'];
 
-},{"../actions/NoticeActions":12,"../stores/NoticeStore":60,"react":"react"}],39:[function(require,module,exports){
+},{"../actions/NoticeActions":12,"../stores/NoticeStore":62,"react":"react"}],40:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -4103,7 +4197,7 @@ var Pagination = (function (_React$Component) {
 exports['default'] = Pagination;
 module.exports = exports['default'];
 
-},{"../actions/PaginationActions":13,"../stores/PaginationStore":61,"react":"react"}],40:[function(require,module,exports){
+},{"../actions/PaginationActions":13,"../stores/PaginationStore":63,"react":"react"}],41:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -4190,7 +4284,7 @@ var PostAnimate = (function (_React$Component) {
 exports['default'] = PostAnimate;
 module.exports = exports['default'];
 
-},{"../actions/PostAnimateActions":14,"../stores/PostAnimateStore":62,"react":"react"}],41:[function(require,module,exports){
+},{"../actions/PostAnimateActions":14,"../stores/PostAnimateStore":64,"react":"react"}],42:[function(require,module,exports){
 /**
  * Created by apache on 15-11-3.
  */
@@ -4222,6 +4316,10 @@ var _storesPostArticleStore = require('../stores/PostArticleStore');
 
 var _storesPostArticleStore2 = _interopRequireDefault(_storesPostArticleStore);
 
+var _Upload = require('./Upload');
+
+var _Upload2 = _interopRequireDefault(_Upload);
+
 var _markdown = require('markdown');
 
 var _markdown2 = _interopRequireDefault(_markdown);
@@ -4242,12 +4340,7 @@ var PostArticle = (function (_React$Component) {
         value: function componentDidMount() {
             _storesPostArticleStore2['default'].listen(this.onChange);
             this.refs.title.getDOMNode().focus();
-            var localStorage = window.localStorage;
-            var postArticle = localStorage.getItem('postArticle');
-            postArticle = JSON.parse(postArticle);
-            if (postArticle.post !== undefined && postArticle.post === false) {
-                toastr.warning('是否加载保存的稿件');
-            }
+
             var markdown = _markdown2['default'].markdown;
             $("#some-textarea").markdown({
                 autofocus: false,
@@ -4381,11 +4474,7 @@ var PostArticle = (function (_React$Component) {
                         _react2['default'].createElement(
                             'div',
                             { className: 'col-md-8' },
-                            _react2['default'].createElement(
-                                'a',
-                                { href: 'javascript:;', className: 'btn btn-info' },
-                                '上传封面图片'
-                            ),
+                            _react2['default'].createElement(_Upload2['default'], { img: '#upload_img' }),
                             _react2['default'].createElement(
                                 'p',
                                 { className: 'text-muted' },
@@ -4395,7 +4484,7 @@ var PostArticle = (function (_React$Component) {
                         _react2['default'].createElement(
                             'div',
                             { className: 'col-md-3' },
-                            _react2['default'].createElement('img', { src: '/img/cover-night.png', alt: 'loading' })
+                            _react2['default'].createElement('img', { src: '/img/cover-night.png', id: 'upload_img', width: '120', alt: 'loading' })
                         )
                     ),
                     _react2['default'].createElement('textarea', { id: 'some-textarea', name: 'content', 'data-provide': 'markdown', rows: '15', onChange: _actionsPostArticleActions2['default'].changeContent }),
@@ -4422,7 +4511,7 @@ var PostArticle = (function (_React$Component) {
 exports['default'] = PostArticle;
 module.exports = exports['default'];
 
-},{"../actions/PostArticleActions":15,"../stores/PostArticleStore":63,"markdown":73,"react":"react"}],42:[function(require,module,exports){
+},{"../actions/PostArticleActions":15,"../stores/PostArticleStore":65,"./Upload":47,"markdown":76,"react":"react"}],43:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -4497,7 +4586,7 @@ var ProfileCenter = (function (_React$Component) {
 exports['default'] = ProfileCenter;
 module.exports = exports['default'];
 
-},{"../actions/ProfileCenterActions":16,"../stores/ProfileCenterStore":64,"react":"react"}],43:[function(require,module,exports){
+},{"../actions/ProfileCenterActions":16,"../stores/ProfileCenterStore":66,"react":"react"}],44:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -4754,7 +4843,7 @@ var Set = (function (_React$Component) {
 exports['default'] = Set;
 module.exports = exports['default'];
 
-},{"../actions/SetActions":17,"../stores/SetStore":65,"react":"react"}],44:[function(require,module,exports){
+},{"../actions/SetActions":17,"../stores/SetStore":67,"react":"react"}],45:[function(require,module,exports){
 /**
  * Created by apache on 15-11-15.
  */
@@ -4867,7 +4956,7 @@ var Star = (function (_React$Component) {
 exports['default'] = Star;
 module.exports = exports['default'];
 
-},{"../actions/StarActions":18,"../stores/StarStore":67,"react":"react"}],45:[function(require,module,exports){
+},{"../actions/StarActions":18,"../stores/StarStore":69,"react":"react"}],46:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -5049,7 +5138,159 @@ var StarList = (function (_React$Component) {
 exports['default'] = StarList;
 module.exports = exports['default'];
 
-},{"../actions/StarListActions":19,"../stores/StarListStore":66,"react":"react","react-router":"react-router"}],46:[function(require,module,exports){
+},{"../actions/StarListActions":19,"../stores/StarListStore":68,"react":"react","react-router":"react-router"}],47:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-22.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _actionsUploadActions = require('../actions/UploadActions');
+
+var _actionsUploadActions2 = _interopRequireDefault(_actionsUploadActions);
+
+var _storesUploadStore = require('../stores/UploadStore');
+
+var _storesUploadStore2 = _interopRequireDefault(_storesUploadStore);
+
+var Upload = (function (_React$Component) {
+    _inherits(Upload, _React$Component);
+
+    function Upload(props) {
+        _classCallCheck(this, Upload);
+
+        _get(Object.getPrototypeOf(Upload.prototype), 'constructor', this).call(this, props);
+        this.state = _storesUploadStore2['default'].getState();
+        this.onChange = this.onChange.bind(this);
+    }
+
+    _createClass(Upload, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            _storesUploadStore2['default'].listen(this.onChange);
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            _storesUploadStore2['default'].unlisten(this.onChange);
+        }
+    }, {
+        key: 'onChange',
+        value: function onChange(state) {
+            this.setState(state);
+        }
+    }, {
+        key: 'handleClick',
+        value: function handleClick() {
+            $("#file_loader").removeClass('mon-upload-block').addClass('mon-upload-block-o');
+        }
+    }, {
+        key: 'closeClick',
+        value: function closeClick() {
+            $("#file_loader").removeClass('mon-upload-block-o').addClass('mon-upload-block');
+        }
+    }, {
+        key: 'upload',
+        value: function upload() {
+            _actionsUploadActions2['default'].upload(this.state.file, this.props.img);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2['default'].createElement(
+                'div',
+                null,
+                _react2['default'].createElement(
+                    'a',
+                    { className: 'btn btn-info', onClick: this.handleClick.bind(this) },
+                    _react2['default'].createElement(
+                        'span',
+                        { className: 'fa fa-file' },
+                        '上传图片'
+                    )
+                ),
+                _react2['default'].createElement(
+                    'div',
+                    { id: 'file_loader', className: 'mon-upload-block animated flipInX' },
+                    _react2['default'].createElement(
+                        'div',
+                        { id: 'file_loader_file', className: 'mon-upload' },
+                        _react2['default'].createElement(
+                            'label',
+                            { htmlFor: 'uploader', className: 'btn btn-info' },
+                            '选择文件'
+                        ),
+                        _react2['default'].createElement('input', { type: 'file', id: 'uploader', className: 'mon-fileloader', onChange: _actionsUploadActions2['default'].changeFile }),
+                        _react2['default'].createElement(
+                            'p',
+                            { className: 'text-muted' },
+                            '图片选择尺寸为800*400'
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { id: 'preview_block', className: 'mon-preview-block' },
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'mon-preview-img' },
+                            _react2['default'].createElement('img', { src: '/img/cover-night.png', id: 'img-preview', width: '200', alt: 'loading' })
+                        ),
+                        _react2['default'].createElement(
+                            'a',
+                            { href: 'javascript:;', className: 'btn btn-danger', htmlFor: 'uploader' },
+                            _react2['default'].createElement(
+                                'label',
+                                { htmlFor: 'uploader' },
+                                _react2['default'].createElement('span', { className: 'fa fa-history' }),
+                                '重新选择图片'
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'a',
+                            { href: 'javascript:;', className: 'btn btn-primary', onClick: this.upload.bind(this) },
+                            _react2['default'].createElement('span', { className: 'fa fa-check-circle' }),
+                            '确定'
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { id: 'loader', className: 'loader-inner ball-pulse mon-loader' },
+                        _react2['default'].createElement('div', null),
+                        _react2['default'].createElement('div', null),
+                        _react2['default'].createElement('div', null),
+                        _react2['default'].createElement('div', null),
+                        _react2['default'].createElement('div', null)
+                    ),
+                    _react2['default'].createElement('span', { className: 'fa fa-close mon-close', onClick: this.closeClick.bind(this) })
+                )
+            );
+        }
+    }]);
+
+    return Upload;
+})(_react2['default'].Component);
+
+exports['default'] = Upload;
+module.exports = exports['default'];
+
+},{"../actions/UploadActions":20,"../stores/UploadStore":70,"react":"react"}],48:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -5310,7 +5551,7 @@ User.contextTypes = {
 exports['default'] = User;
 module.exports = exports['default'];
 
-},{"../actions/UserActions":20,"../stores/UserStore":68,"react":"react","react-router":"react-router"}],47:[function(require,module,exports){
+},{"../actions/UserActions":21,"../stores/UserStore":71,"react":"react","react-router":"react-router"}],49:[function(require,module,exports){
 /**
  * Created by apache on 15-10-22.
  */
@@ -5334,7 +5575,7 @@ _reactRouter2['default'].run(_routes2['default'], _reactRouter2['default'].Histo
   _react2['default'].render(_react2['default'].createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./routes":48,"react":"react","react-router":"react-router"}],48:[function(require,module,exports){
+},{"./routes":50,"react":"react","react-router":"react-router"}],50:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -5491,7 +5732,7 @@ exports['default'] = _react2['default'].createElement(
 );
 module.exports = exports['default'];
 
-},{"./components/App":22,"./components/Article":23,"./components/ConArticle":26,"./components/Contribute":28,"./components/Followers":29,"./components/Following":30,"./components/Home":32,"./components/List":33,"./components/Login":34,"./components/Member":35,"./components/NotFound":37,"./components/Notice":38,"./components/PostAnimate":40,"./components/PostArticle":41,"./components/ProfileCenter":42,"./components/Set":43,"./components/StarList":45,"./components/User":46,"react":"react","react-router":"react-router"}],49:[function(require,module,exports){
+},{"./components/App":23,"./components/Article":24,"./components/ConArticle":27,"./components/Contribute":29,"./components/Followers":30,"./components/Following":31,"./components/Home":33,"./components/List":34,"./components/Login":35,"./components/Member":36,"./components/NotFound":38,"./components/Notice":39,"./components/PostAnimate":41,"./components/PostArticle":42,"./components/ProfileCenter":43,"./components/Set":44,"./components/StarList":46,"./components/User":48,"react":"react","react-router":"react-router"}],51:[function(require,module,exports){
 /**
  * Created by apache on 15-11-4.
  */
@@ -5564,7 +5805,7 @@ var ArticleStore = (function () {
 exports['default'] = _alt2['default'].createStore(ArticleStore);
 module.exports = exports['default'];
 
-},{"../actions/ArticleActions":1,"../alt":21}],50:[function(require,module,exports){
+},{"../actions/ArticleActions":1,"../alt":22}],52:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -5646,7 +5887,7 @@ var CommentStore = (function () {
 exports['default'] = _alt2['default'].createStore(CommentStore);
 module.exports = exports['default'];
 
-},{"../actions/CommentActions":2,"../alt":21}],51:[function(require,module,exports){
+},{"../actions/CommentActions":2,"../alt":22}],53:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -5708,7 +5949,7 @@ var ConListStore = (function () {
 exports['default'] = _alt2['default'].createStore(ConListStore);
 module.exports = exports['default'];
 
-},{"../actions/ConListActions":3,"../alt":21}],52:[function(require,module,exports){
+},{"../actions/ConListActions":3,"../alt":22}],54:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -5743,7 +5984,7 @@ var ContributeStore = function ContributeStore() {
 exports['default'] = _alt2['default'].createStore(ContributeStore);
 module.exports = exports['default'];
 
-},{"../actions/ContributeActions":4,"../alt":21}],53:[function(require,module,exports){
+},{"../actions/ContributeActions":4,"../alt":22}],55:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -5844,7 +6085,7 @@ var FollowersStore = (function () {
 exports['default'] = _alt2['default'].createStore(FollowersStore);
 module.exports = exports['default'];
 
-},{"../actions/FollowersActions":5,"../alt":21}],54:[function(require,module,exports){
+},{"../actions/FollowersActions":5,"../alt":22}],56:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -5924,7 +6165,7 @@ var FollowingStore = (function () {
 exports['default'] = _alt2['default'].createStore(FollowingStore);
 module.exports = exports['default'];
 
-},{"../actions/FollowingActions":6,"../alt":21}],55:[function(require,module,exports){
+},{"../actions/FollowingActions":6,"../alt":22}],57:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -5973,7 +6214,7 @@ var HomeStore = (function () {
 exports['default'] = _alt2['default'].createStore(HomeStore);
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":7,"../alt":21}],56:[function(require,module,exports){
+},{"../actions/HomeActions":7,"../alt":22}],58:[function(require,module,exports){
 /**
  * Created by apache on 15-11-10.
  */
@@ -6026,7 +6267,7 @@ var ListStore = (function () {
 exports['default'] = _alt2['default'].createStore(ListStore);
 module.exports = exports['default'];
 
-},{"../actions/ListActions":8,"../alt":21}],57:[function(require,module,exports){
+},{"../actions/ListActions":8,"../alt":22}],59:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -6160,7 +6401,7 @@ var LoginStore = (function () {
 exports['default'] = _alt2['default'].createStore(LoginStore);
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":9,"../alt":21}],58:[function(require,module,exports){
+},{"../actions/LoginActions":9,"../alt":22}],60:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -6229,7 +6470,7 @@ var MemberStore = (function () {
 exports['default'] = _alt2['default'].createStore(MemberStore);
 module.exports = exports['default'];
 
-},{"../actions/MemberActions":10,"../alt":21}],59:[function(require,module,exports){
+},{"../actions/MemberActions":10,"../alt":22}],61:[function(require,module,exports){
 /**
  * Created by apache on 15-10-25.
  */
@@ -6307,7 +6548,7 @@ var NavStore = (function () {
 exports['default'] = _alt2['default'].createStore(NavStore);
 module.exports = exports['default'];
 
-},{"../actions/NavActions":11,"../alt":21}],60:[function(require,module,exports){
+},{"../actions/NavActions":11,"../alt":22}],62:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -6351,7 +6592,7 @@ var NoticeStore = (function () {
 exports['default'] = _alt2['default'].createStore(NoticeStore);
 module.exports = exports['default'];
 
-},{"../actions/NoticeActions":12,"../alt":21}],61:[function(require,module,exports){
+},{"../actions/NoticeActions":12,"../alt":22}],63:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -6382,7 +6623,7 @@ var PaginationStore = function PaginationStore() {
 exports['default'] = _alt2['default'].createStore(PaginationStore);
 module.exports = exports['default'];
 
-},{"../actions/PaginationActions":13,"../alt":21}],62:[function(require,module,exports){
+},{"../actions/PaginationActions":13,"../alt":22}],64:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -6426,7 +6667,7 @@ var PostAnimateStore = (function () {
 exports['default'] = _alt2['default'].createStore(PostAnimateStore);
 module.exports = exports['default'];
 
-},{"../actions/PostAnimateActions":14,"../alt":21}],63:[function(require,module,exports){
+},{"../actions/PostAnimateActions":14,"../alt":22}],65:[function(require,module,exports){
 /**
  * Created by apache on 15-11-3.
  */
@@ -6514,7 +6755,7 @@ var PostArticleStore = (function () {
 exports['default'] = _alt2['default'].createStore(PostArticleStore);
 module.exports = exports['default'];
 
-},{"../actions/PostArticleActions":15,"../alt":21}],64:[function(require,module,exports){
+},{"../actions/PostArticleActions":15,"../alt":22}],66:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -6545,7 +6786,7 @@ var ProfileCenterStore = function ProfileCenterStore() {
 exports['default'] = _alt2['default'].createStore(ProfileCenterStore);
 module.exports = exports['default'];
 
-},{"../actions/ProfileCenterActions":16,"../alt":21}],65:[function(require,module,exports){
+},{"../actions/ProfileCenterActions":16,"../alt":22}],67:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -6696,7 +6937,7 @@ var SetStore = (function () {
 exports['default'] = _alt2['default'].createStore(SetStore);
 module.exports = exports['default'];
 
-},{"../actions/SetActions":17,"../alt":21}],66:[function(require,module,exports){
+},{"../actions/SetActions":17,"../alt":22}],68:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -6758,7 +6999,7 @@ var StarListStore = (function () {
 exports['default'] = _alt2['default'].createStore(StarListStore);
 module.exports = exports['default'];
 
-},{"../actions/StarListActions":19,"../alt":21}],67:[function(require,module,exports){
+},{"../actions/StarListActions":19,"../alt":22}],69:[function(require,module,exports){
 /**
  * Created by apache on 15-11-15.
  */
@@ -6861,7 +7102,73 @@ var StarStore = (function () {
 exports['default'] = _alt2['default'].createStore(StarStore);
 module.exports = exports['default'];
 
-},{"../actions/StarActions":18,"../alt":21}],68:[function(require,module,exports){
+},{"../actions/StarActions":18,"../alt":22}],70:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-22.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _actionsUploadActions = require('../actions/UploadActions');
+
+var _actionsUploadActions2 = _interopRequireDefault(_actionsUploadActions);
+
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+var UploadStore = (function () {
+    function UploadStore() {
+        _classCallCheck(this, UploadStore);
+
+        this.bindActions(_actionsUploadActions2['default']);
+        this.file = {};
+    }
+
+    _createClass(UploadStore, [{
+        key: 'changeFile',
+        value: function changeFile(event) {
+            var target = $("#uploader").get(0).files[0];
+            this.file = target;
+            $("#file_loader_file").removeClass('mon-upload').addClass('mon-upload-o');
+            $("#preview_block").removeClass('mon-preview-block').addClass('mon-preview-block-o');
+
+            if (typeof FileReader !== undefined) {
+                var acceptType = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
+
+                if (_underscore2['default'].indexOf(acceptType, target.type) !== -1) {
+                    var fileReader = new FileReader();
+                    fileReader.readAsDataURL(target);
+                    fileReader.onload = function (e) {
+                        $("#img-preview").attr('src', this.result);
+                    };
+                } else {
+                    toastr.warning('不支持的图片格式');
+                }
+            }
+        }
+    }]);
+
+    return UploadStore;
+})();
+
+exports['default'] = _alt2['default'].createStore(UploadStore);
+module.exports = exports['default'];
+
+},{"../actions/UploadActions":20,"../alt":22,"underscore":"underscore"}],71:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -6929,7 +7236,7 @@ var UserStore = (function () {
 exports['default'] = _alt2['default'].createStore(UserStore);
 module.exports = exports['default'];
 
-},{"../actions/UserActions.js":20,"../alt":21}],69:[function(require,module,exports){
+},{"../actions/UserActions.js":21,"../alt":22}],72:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -6954,7 +7261,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],70:[function(require,module,exports){
+},{}],73:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -7047,14 +7354,14 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],71:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],72:[function(require,module,exports){
+},{}],75:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -7644,12 +7951,12 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":71,"_process":70,"inherits":69}],73:[function(require,module,exports){
+},{"./support/isBuffer":74,"_process":73,"inherits":72}],76:[function(require,module,exports){
 // super simple module for the most common nodejs use case.
 exports.markdown = require("./markdown");
 exports.parse = exports.markdown.toHTML;
 
-},{"./markdown":74}],74:[function(require,module,exports){
+},{"./markdown":77}],77:[function(require,module,exports){
 // Released under MIT license
 // Copyright (c) 2009-2010 Dominic Baggott
 // Copyright (c) 2009-2010 Ash Berlin
@@ -9376,4 +9683,4 @@ function merge_text_nodes( jsonml ) {
   }
 } )() );
 
-},{"util":72}]},{},[47]);
+},{"util":75}]},{},[49]);

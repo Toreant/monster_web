@@ -6,6 +6,10 @@ let router = express.Router();
 import UserCtrl from './controllers/User';
 import ArticleCtrl from './controllers/Article';
 import CommentCtrl from './controllers/Comment';
+import UploaderCtrl from './controllers/Uploader';
+import multer from 'multer';
+
+var upload = multer({dest : './public/img/upload'});
 
 
 // 用户有关
@@ -68,5 +72,8 @@ router.post('/api/signout',function(req,res,next){
         res.json({meta : '退出不登陆不成功',code : 400});
     }
 });
+
+// 上传
+router.post('/api/upload',upload.single('file'),UploaderCtrl.upload);
 
 export default router;
