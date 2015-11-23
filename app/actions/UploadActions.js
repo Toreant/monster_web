@@ -21,12 +21,21 @@ class UploadActions {
 
     upload(target,preImg) {
         uploadLoad(0);
+        console.log($(".jcrop-holder img").css('width'));
+        var $tracker = $(".jcrop-holder img");
+        let raw_width = $tracker.css('width'),
+            raw_height = $tracker.css('height');
+        raw_width = raw_width.split('p')[0];
+        raw_height = raw_height.split('p')[0];
+        console.log(raw_width);
         var formData = new FormData(),
             params = {
                 width : $(preImg+'_width').val(),
                 height : $(preImg+'_height').val(),
                 X : $(preImg+'_X').val(),
-                Y : $(preImg+'_Y').val()
+                Y : $(preImg+'_Y').val(),
+                raw_width : raw_width,
+                raw_height : raw_height
             };
         formData.append('file',target);
         formData.append('params',JSON.stringify(params));

@@ -17,24 +17,25 @@ class Uploader {
      */
     upload(req, res, next) {
         var form = new multiparty.Form(),
-            fileName;
+            fileName,
+            width,height,x,y;
 
         async.waterfall([
 
             // 得到multiparty 数据
-            function(_callback) {
-                form.parse(req,function(err,field,file) {
+            function (_callback) {
+                form.parse(req, function (err, field, file) {
 
                     // 目标
                     let target = file.file[0];
-                    console.log(target);
 
                     // 裁剪参数
                     let params = field.params[0];
                     params = JSON.parse(params);
+                    console.log(params);
 
                     // 对名字进行加密
-                    fileName = (new Date().toString())+target.originalFilename;
+                    fileName = (new Date().toString()) + target.originalFilename;
                     var md5sum = crypto.createHash('md5');
                     md5sum.update(fileName);
                     fileName = md5sum.digest('hex');
@@ -43,33 +44,39 @@ class Uploader {
                         tmp_path = target.path;
 
                     // 进行裁剪
-                    gm(tmp_path).crop(parseInt(params.width),
-                        parseInt(params.height),
-                        parseInt(params.X),
-                        parseInt(params.Y))
-                        .write(target_path, (err) => {
-                            if(err) {
-                                console.log(err);
-                                res.json({meta : '上传文件失败',code : 500});
-                            } else {
-                                _callback(null,tmp_path,fileName);
-                            }
-                        });
+                    gm(tmp_path).size(function(err, value) {
+                        console.log(value);
+                        width = value.width * parseInt(params.width) / parseInt(params.raw_width)  ;
+                        height = value.height * parseInt(params.height) / parseInt(params.raw_height)  ;
+                        x = value.width  * parseInt(params.X) / parseInt(params.raw_width) ;
+                        y = value.height * parseInt(params.Y) / parseInt(params.raw_height)  ;
+                        console.log(width+" "+height+" "+x+" "+y);
+                        this.crop(
+                            width, height, x, y
+                        ).write(target_path, (err) => {
+                                if (err) {
+                                    console.log(err);
+                                    res.json({meta: '上传文件失败', code: 500});
+                                } else {
+                                    _callback(null, tmp_path, fileName);
+                                }
+                            });
+                    })
                 });
             },
 
             // 删除临时文件
-            function(tmp_path,fileName,_callback) {
-                fs.unlink(tmp_path,(err) => {
-                    if(err) {
+            function (tmp_path, fileName, _callback) {
+                fs.unlink(tmp_path, (err) => {
+                    if (err) {
                         console.log(err);
                     } else {
-                        _callback(null,fileName);
+                        _callback(null, fileName);
                     }
                 });
             }
 
-        ],(err,fileName) => {
+        ], (err, fileName) => {
 
             let result = {
                 meta: '',
