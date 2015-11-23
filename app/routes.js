@@ -48,6 +48,7 @@ export default (
         </Route>
 
         <Route path='profile' handler={User}>
+            <DefaultRoute handler={ProfileCenter}/>
             <Route path='setting' handler={Set} />
             <Route path='center' handler={ProfileCenter} />
             <Route path='followers' handler={Followers}>

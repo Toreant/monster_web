@@ -1572,12 +1572,12 @@ var Article = (function (_React$Component) {
                             { className: 'mon-article-detail' },
                             _react2['default'].createElement(
                                 'a',
-                                { href: '/u/' + this.state.createUserDomain },
+                                { href: '/member/' + this.state.createUserDomain },
                                 _react2['default'].createElement('img', { src: this.state.createUserAvatar || '/img/default.png', alt: 'loading', width: '40' })
                             ),
                             _react2['default'].createElement(
                                 'a',
-                                { href: '/u/' + this.state.createUserDomain },
+                                { href: '/member/' + this.state.createUserDomain },
                                 this.state.createUser
                             ),
                             _react2['default'].createElement(
@@ -1619,7 +1619,7 @@ var Article = (function (_React$Component) {
                                     { className: 'media-left' },
                                     _react2['default'].createElement(
                                         'a',
-                                        { href: '/u/' + this.state.createUserDomain, className: 'mon-article-user' },
+                                        { href: '/member/' + this.state.createUserDomain, className: 'mon-article-user' },
                                         _react2['default'].createElement('img', { src: this.state.createUserAvatar || '/img/default.png', alt: 'loading' })
                                     )
                                 ),
@@ -1672,7 +1672,7 @@ var Article = (function (_React$Component) {
             }
             return _react2['default'].createElement(
                 'div',
-                { className: 'container' },
+                { className: 'container mon-main' },
                 Article,
                 _react2['default'].createElement(_BtnBlock2['default'], null)
             );
@@ -2554,8 +2554,8 @@ var Followers = (function (_React$Component) {
                                 { className: 'pull-left thumb-lg' },
                                 _react2['default'].createElement(
                                     _reactRouter.Link,
-                                    { to: '/characters/' + data.user._id },
-                                    _react2['default'].createElement('img', { className: 'media-object', src: data.user.avatar_url })
+                                    { to: '/member/' + data.user.domain },
+                                    _react2['default'].createElement('img', { className: 'media-object', width: '80', src: data.user.avatar_url })
                                 )
                             ),
                             _react2['default'].createElement(
@@ -2566,7 +2566,7 @@ var Followers = (function (_React$Component) {
                                     { className: 'media-heading followers-name' },
                                     _react2['default'].createElement(
                                         _reactRouter.Link,
-                                        { to: '/characters/' + data.user._id },
+                                        { to: '/member/' + data.user.domain },
                                         data.user.username
                                     )
                                 ),
@@ -2722,7 +2722,7 @@ var Following = (function (_React$Component) {
                                 _react2['default'].createElement(
                                     _reactRouter.Link,
                                     { to: '/member/' + data.domain },
-                                    _react2['default'].createElement('img', { className: 'media-object', src: data.avatar_url })
+                                    _react2['default'].createElement('img', { className: 'media-object', width: '80', src: data.avatar_url })
                                 )
                             ),
                             _react2['default'].createElement(
@@ -5765,6 +5765,7 @@ exports['default'] = _react2['default'].createElement(
     _react2['default'].createElement(
         _reactRouter.Route,
         { path: 'profile', handler: _componentsUser2['default'] },
+        _react2['default'].createElement(_reactRouter.DefaultRoute, { handler: _componentsProfileCenter2['default'] }),
         _react2['default'].createElement(_reactRouter.Route, { path: 'setting', handler: _componentsSet2['default'] }),
         _react2['default'].createElement(_reactRouter.Route, { path: 'center', handler: _componentsProfileCenter2['default'] }),
         _react2['default'].createElement(

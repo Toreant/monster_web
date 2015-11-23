@@ -72,13 +72,13 @@ class Followers extends React.Component {
                         <div className='media'>
                             <span className='position pull-left'>{index + 1}</span>
                             <div className='pull-left thumb-lg'>
-                                <Link to={'/characters/' + data.user._id}>
-                                    <img className='media-object' src={data.user.avatar_url} />
+                                <Link to={'/member/' + data.user.domain}>
+                                    <img className='media-object' width='80' src={data.user.avatar_url} />
                                 </Link>
                             </div>
                             <div className='media-body'>
                                 <h4 className='media-heading followers-name'>
-                                    <Link to={'/characters/' + data.user._id}>{data.user.username}</Link>
+                                    <Link to={'/member/' + data.user.domain}>{data.user.username}</Link>
                                 </h4>
                                 <p className='followers-intro'>{data.user.introduce}</p>
                                 <div className='follow'>

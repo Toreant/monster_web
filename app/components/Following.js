@@ -57,7 +57,7 @@ class Following extends React.Component {
                             <span className='position pull-left'>{index + 1}</span>
                             <div className='pull-left thumb-lg'>
                                 <Link to={'/member/' + data.domain}>
-                                    <img className='media-object' src={data.avatar_url} />
+                                    <img className='media-object' width='80' src={data.avatar_url} />
                                 </Link>
                             </div>
                             <div className='media-body'>

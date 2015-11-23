@@ -138,7 +138,7 @@ class md {
                     _callback(null,0);
                 } else {
                     let following = user.following;
-                    User.find({_id : {$in : following}},'username avatar_url introduce',option,(err,docs) => {
+                    User.find({_id : {$in : following}},'username domain avatar_url introduce',option,(err,docs) => {
                         _callback(null,docs);
                     });
                 }
@@ -171,7 +171,7 @@ class md {
 
             // 实例化followers
             function(followers,_callback) {
-                User.find({_id : {$in : followers}},'username avatar_url introduce',(err,users) => {
+                User.find({_id : {$in : followers}},'username domain avatar_url introduce',(err,users) => {
                     if(err) {
                         callback(500);
                     } else {
