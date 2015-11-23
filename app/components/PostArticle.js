@@ -105,11 +105,6 @@ class PostArticle extends React.Component {
                         </div>
                         <div className='col-md-3'>
                             <img src="/img/cover-night.png" id='upload_img' width='120' alt="loading" />
-                            <input id='upload_img_value' type="hidden" onChange={PostArticleActions.changeAbbreviations}/>
-                            <input id='upload_img_width' type="hidden"/>
-                            <input id='upload_img_height' type="hidden"/>
-                            <input id='upload_img_X' type="hidden"/>
-                            <input id='upload_img_Y' type="hidden"/>
                         </div>
                     </div>
                     <textarea id='some-textarea' name="content" data-provide="markdown" rows="15" onChange={PostArticleActions.changeContent}></textarea>

@@ -31,10 +31,10 @@ class UploadActions {
 
         var formData = new FormData(),
             params = {
-                width : $(preImg+'_width').val(),
-                height : $(preImg+'_height').val(),
-                X : $(preImg+'_X').val(),
-                Y : $(preImg+'_Y').val(),
+                width : $("#upload_img_width").val(),
+                height : $("#upload_img_height").val(),
+                X : $("#upload_img_X").val(),
+                Y : $("#upload_img_Y").val(),
                 raw_width : raw_width,
                 raw_height : raw_height
             };

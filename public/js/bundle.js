@@ -971,19 +971,19 @@ var SetActions = (function () {
 
     _createClass(SetActions, [{
         key: 'changeProfile',
-        value: function changeProfile(domain, username, email, intro) {
+        value: function changeProfile(domain, username, email, intro, avatar_url) {
             var _this = this;
 
             var localStorage = window.localStorage;
             var userProfile = localStorage.getItem('user');
             userProfile = JSON.parse(userProfile);
             var params = {
-                where: { auth_id: userProfile.raw.auth_id },
                 params: {
                     email: email,
                     domain: domain,
                     username: username,
-                    introduce: intro
+                    introduce: intro,
+                    avatar_url: avatar_url
                 }
             };
             $.ajax({
@@ -1242,10 +1242,10 @@ var UploadActions = (function () {
 
             var formData = new FormData(),
                 params = {
-                width: $(preImg + '_width').val(),
-                height: $(preImg + '_height').val(),
-                X: $(preImg + '_X').val(),
-                Y: $(preImg + '_Y').val(),
+                width: $("#upload_img_width").val(),
+                height: $("#upload_img_height").val(),
+                X: $("#upload_img_X").val(),
+                Y: $("#upload_img_Y").val(),
                 raw_width: raw_width,
                 raw_height: raw_height
             };
@@ -4506,12 +4506,7 @@ var PostArticle = (function (_React$Component) {
                         _react2['default'].createElement(
                             'div',
                             { className: 'col-md-3' },
-                            _react2['default'].createElement('img', { src: '/img/cover-night.png', id: 'upload_img', width: '120', alt: 'loading' }),
-                            _react2['default'].createElement('input', { id: 'upload_img_value', type: 'hidden', onChange: _actionsPostArticleActions2['default'].changeAbbreviations }),
-                            _react2['default'].createElement('input', { id: 'upload_img_width', type: 'hidden' }),
-                            _react2['default'].createElement('input', { id: 'upload_img_height', type: 'hidden' }),
-                            _react2['default'].createElement('input', { id: 'upload_img_X', type: 'hidden' }),
-                            _react2['default'].createElement('input', { id: 'upload_img_Y', type: 'hidden' })
+                            _react2['default'].createElement('img', { src: '/img/cover-night.png', id: 'upload_img', width: '120', alt: 'loading' })
                         )
                     ),
                     _react2['default'].createElement('textarea', { id: 'some-textarea', name: 'content', 'data-provide': 'markdown', rows: '15', onChange: _actionsPostArticleActions2['default'].changeContent }),
@@ -4645,6 +4640,10 @@ var _storesSetStore = require('../stores/SetStore');
 
 var _storesSetStore2 = _interopRequireDefault(_storesSetStore);
 
+var _Upload = require('./Upload');
+
+var _Upload2 = _interopRequireDefault(_Upload);
+
 var Set = (function (_React$Component) {
     _inherits(Set, _React$Component);
 
@@ -4678,7 +4677,8 @@ var Set = (function (_React$Component) {
             var domain = this.state.domain,
                 email = this.state.email,
                 username = this.state.username,
-                intro = this.state.intro;
+                intro = this.state.intro,
+                avatar_url = $("#user_img").attr('src');
             var error = false;
 
             console.log(intro);
@@ -4706,7 +4706,7 @@ var Set = (function (_React$Component) {
             }
 
             if (!error) {
-                _actionsSetActions2['default'].changeProfile(domain, username, email, intro);
+                _actionsSetActions2['default'].changeProfile(domain, username, email, intro, avatar_url);
             }
         }
     }, {
@@ -4768,6 +4768,21 @@ var Set = (function (_React$Component) {
                 _react2['default'].createElement(
                     'form',
                     { className: 'form-horizontal', role: 'form' },
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2['default'].createElement('label', { className: 'col-sm-2 control-label' }),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-sm-3' },
+                            _react2['default'].createElement('img', { id: 'user_img', src: this.state.avatar_url, alt: 'loading', width: '200' })
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-sm-7' },
+                            _react2['default'].createElement(_Upload2['default'], { img: '#user_img' })
+                        )
+                    ),
                     _react2['default'].createElement(
                         'div',
                         { className: 'form-group ' + this.state.domainValidate },
@@ -4870,7 +4885,7 @@ var Set = (function (_React$Component) {
 exports['default'] = Set;
 module.exports = exports['default'];
 
-},{"../actions/SetActions":17,"../stores/SetStore":67,"react":"react"}],45:[function(require,module,exports){
+},{"../actions/SetActions":17,"../stores/SetStore":67,"./Upload":47,"react":"react"}],45:[function(require,module,exports){
 /**
  * Created by apache on 15-11-15.
  */
@@ -5277,7 +5292,12 @@ var Upload = (function (_React$Component) {
                         _react2['default'].createElement(
                             'div',
                             { className: 'mon-preview-img' },
-                            _react2['default'].createElement('img', { src: '/img/cover-night.png', id: 'img-preview', width: '200', alt: 'loading' })
+                            _react2['default'].createElement('img', { src: '/img/cover-night.png', id: 'img-preview', width: '200', alt: 'loading' }),
+                            _react2['default'].createElement('input', { id: 'upload_img_value', type: 'hidden' }),
+                            _react2['default'].createElement('input', { id: 'upload_img_width', type: 'hidden' }),
+                            _react2['default'].createElement('input', { id: 'upload_img_height', type: 'hidden' }),
+                            _react2['default'].createElement('input', { id: 'upload_img_X', type: 'hidden' }),
+                            _react2['default'].createElement('input', { id: 'upload_img_Y', type: 'hidden' })
                         ),
                         _react2['default'].createElement(
                             'div',
@@ -5399,7 +5419,7 @@ var User = (function (_React$Component) {
                         { className: 'col-md-3 col-sm-3' },
                         _react2['default'].createElement(
                             'div',
-                            { className: 'mon-center' },
+                            { className: 'mon-center mon-user-img' },
                             _react2['default'].createElement('img', { src: this.state.avatar_url, width: '200', alt: 'loading' })
                         ),
                         _react2['default'].createElement(
@@ -6843,6 +6863,7 @@ var SetStore = (function () {
         _classCallCheck(this, SetStore);
 
         this.bindActions(_actionsSetActions2['default']);
+        this.avatar_url = '';
         this.username = '';
         this.domain = '';
         this.email = '';
@@ -6860,9 +6881,10 @@ var SetStore = (function () {
         value: function onChangeProfileSuccess(data) {
             if (data.code === 200) {
                 toastr.success('修改用户资料成功');
-            } else if (data.code === 400) {
-                toastr.warning('修改用户资料不成功');
-                console.log(data);
+            } else if (data.code === 500) {
+                toastr.error('服务器错误');
+            } else {
+                toastr.warning(data.meta);
             }
         }
     }, {
@@ -6875,6 +6897,7 @@ var SetStore = (function () {
         value: function onGetProfileSuccess(data) {
 
             if (data !== undefined && data.code === 200) {
+                this.avatar_url = data.raw.avatar_url;
                 this.username = data.raw.username;
                 this.domain = data.raw.domain;
                 this.email = data.raw.email;
@@ -7165,19 +7188,18 @@ var UploadStore = (function () {
         this.bindActions(_actionsUploadActions2['default']);
         this.file = {};
         this.croper = {};
-        this.width = 0;
-        this.height = 0;
-        this.X = 0;
-        this.Y = 0;
+
+        // 保存参数的块
+        this.width = '';
+        this.height = '';
+        this.X = '';
+        this.Y = '';
     }
 
     _createClass(UploadStore, [{
-        key: 'setParams',
-        value: function setParams(w, h, x, y) {
-            this.width = w;
-            this.height = h;
-            this.X = x;
-            this.Y = y;
+        key: 'heh',
+        value: function heh() {
+            console.log('hehe');
         }
     }, {
         key: 'onChangeFile',

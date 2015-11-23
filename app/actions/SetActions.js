@@ -21,17 +21,17 @@ class SetActions {
         );
     }
 
-    changeProfile(domain,username,email,intro) {
+    changeProfile(domain,username,email,intro,avatar_url) {
         let localStorage = window.localStorage;
         let userProfile = localStorage.getItem('user');
         userProfile = JSON.parse(userProfile);
         let params = {
-            where : {auth_id : userProfile.raw.auth_id},
             params : {
                 email : email,
                 domain : domain,
                 username : username,
-                introduce : intro
+                introduce : intro,
+                avatar_url : avatar_url
             }
         };
         $.ajax({

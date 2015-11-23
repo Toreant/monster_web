@@ -7,6 +7,7 @@ import SetActions from '../actions/SetActions';
 class SetStore {
     constructor() {
         this.bindActions(SetActions);
+        this.avatar_url = '';
         this.username = '';
         this.domain = '';
         this.email = '';
@@ -20,11 +21,12 @@ class SetStore {
     }
 
     onChangeProfileSuccess(data) {
-        if(data.code === 200) {
+        if (data.code === 200) {
             toastr.success('修改用户资料成功');
-        } else if(data.code === 400) {
-            toastr.warning('修改用户资料不成功');
-            console.log(data);
+        } else if(data.code === 500) {
+            toastr.error('服务器错误');
+        } else {
+            toastr.warning(data.meta);
         }
     }
 
@@ -35,6 +37,7 @@ class SetStore {
     onGetProfileSuccess(data) {
 
         if(data !== undefined && data.code === 200) {
+            this.avatar_url = data.raw.avatar_url;
             this.username = data.raw.username;
             this.domain = data.raw.domain;
             this.email = data.raw.email;

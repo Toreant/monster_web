@@ -84,28 +84,41 @@ class UserCtrl {
      * @param next
      */
     getUpdate(req,res,next) {
-        let where = req.body.where,
-            params = req.body.params;
+        let params = req.body.params,
+            user = req.session.user,
+            where = {};
 
-        let result = {
-            meta : '',
-            code : 0,
-            data : ''
-        };
+        if(user === !undefined) {
+            res.json({meta : '你还没登陆',code : 406});
+        } else {
 
-        User.updateUser(where,params,(data,docs) => {
-            if(data.ok === 1) {
-                result.meta = '修改成功';
-                result.code = 200;
-                result.data = docs;
-            } else {
-                result.meta = '修改不成功';
-                result.code = 400;
-                result.data = null;
-                result.err = data;
-            }
-            res.json(result);
-        });
+            where._id = user._id;
+
+            User.updateUser(where,params,(data,docs) => {
+
+                let result = {
+                    meta : '',
+                    code : 0,
+                    data : null
+                };
+
+                if(data.ok === 1) {
+                    result.meta = '修改成功';
+                    result.code = 200;
+                    result.data = docs;
+                } else if(data === 500) {
+                    result.meta = '服务器错误';
+                    result.code = 500;
+                } else if (docs === null){
+                    result.meta = '没有这个用户';
+                    result.code = 404;
+                } else {
+                    result.meta = '修改用户资料不成功';
+                    result.code = 400;
+                }
+                res.json(result);
+            });
+        }
     }
 
     /**

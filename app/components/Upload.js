@@ -55,6 +55,11 @@ class Upload extends React.Component {
                     <div id='preview_block' className='mon-preview-block'>
                         <div className='mon-preview-img'>
                             <img src="/img/cover-night.png" id='img-preview' width='200' alt="loading"/>
+                            <input id='upload_img_value' type="hidden" />
+                            <input id='upload_img_width' type="hidden"/>
+                            <input id='upload_img_height' type="hidden"/>
+                            <input id='upload_img_X' type="hidden"/>
+                            <input id='upload_img_Y' type="hidden"/>
                         </div>
                         <div id='loader' className="loader-inner ball-pulse mon-loader">
                             <div></div>

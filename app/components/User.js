@@ -39,7 +39,7 @@ class User extends React.Component {
             content = (
                 <div className="row">
                     <div className='col-md-3 col-sm-3'>
-                        <div className='mon-center'>
+                        <div className='mon-center mon-user-img'>
                             <img src={this.state.avatar_url} width='200' alt="loading"/>
                         </div>
                         <div className='mon-user-name'>{this.state.username}</div>

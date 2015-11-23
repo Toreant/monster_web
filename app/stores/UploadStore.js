@@ -10,17 +10,16 @@ class UploadStore {
         this.bindActions(UploadActions);
         this.file = {};
         this.croper = {};
-        this.width = 0;
-        this.height = 0;
-        this.X = 0;
-        this.Y = 0;
+
+        // 保存参数的块
+        this.width = '';
+        this.height = '';
+        this.X = '';
+        this.Y = '';
     }
 
-    setParams(w,h,x,y) {
-        this.width = w;
-        this.height = h;
-        this.X = x;
-        this.Y = y;
+    heh() {
+        console.log('hehe');
     }
 
     onChangeFile(event) {

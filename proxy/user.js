@@ -41,7 +41,8 @@ class md {
     updateUser(where,params,callback) {
         User.update(where,params,{upsert : true},(err,raw,docs) => {
             if(err) {
-                callback(err);
+                console.log(err);
+                callback(500);
             } else {
                 callback(raw,docs);
             }

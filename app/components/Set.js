@@ -4,6 +4,7 @@
 import React from 'react';
 import SetActions from '../actions/SetActions';
 import SetStore from '../stores/SetStore';
+import Upload from './Upload';
 
 class Set extends React.Component {
     constructor(props) {
@@ -29,7 +30,8 @@ class Set extends React.Component {
         let domain = this.state.domain,
             email = this.state.email,
             username = this.state.username,
-            intro = this.state.intro;
+            intro = this.state.intro,
+            avatar_url = $("#user_img").attr('src');
         let error = false;
 
         console.log(intro);
@@ -57,7 +59,7 @@ class Set extends React.Component {
         }
 
         if(!error) {
-            SetActions.changeProfile(domain,username,email,intro);
+            SetActions.changeProfile(domain,username,email,intro,avatar_url);
         }
     }
 
@@ -95,6 +97,15 @@ class Set extends React.Component {
             <div className='col-md-9 col-sm-9 animated fadeInUp'>
                 <legend>设置</legend>
                 <form className='form-horizontal' role='form'>
+                    <div className='form-group'>
+                        <label className='col-sm-2 control-label'></label>
+                        <div className='col-sm-3'>
+                            <img id='user_img' src={this.state.avatar_url} alt="loading" width='200'/>
+                        </div>
+                        <div className='col-sm-7'>
+                            <Upload img="#user_img" />
+                        </div>
+                    </div>
                     <div className={'form-group '+this.state.domainValidate}>
                         <label htmlFor="individuality_domain" className='col-sm-2 control-label'>个性域名</label>
                         <div className='col-sm-10'>
