@@ -40,13 +40,8 @@ class ConList extends React.Component {
     componentDidMount() {
         ConListStore.listen(this.onChange);
         let props = this.props;
-        console.log('did'+isMounted(this));
-        if(isMounted(this)) {
-            ConListActions.getConList(props.option,props.tab,props.domain);
-        }
+        ConListActions.getConList(props.option,props.tab,props.domain);
     }
-
-
 
     componentDidUpdate(prevProps) {
         console.log('update'+isMounted(this));

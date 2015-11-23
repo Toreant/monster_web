@@ -56,7 +56,12 @@ export default (
             <Route path='following' handler={Following}>
                 <Route path=':page' handler={Following}/>
             </Route>
-            <Route path='contribute' handler={Contribute} />
+            <Route path='contribute' handler={Contribute}>
+                <DefaultRoute handler={ConArticle} />
+                <Route path='/profile/article'handler={ConArticle} />
+                <Route path='/profile/music' handler={ConArticle} />
+                <Route path='/profile/animate' handler={ConArticle} />
+            </Route>
             <Route path='notice' handler={Notice} />
             <Route path='star' handler={StarList} />
             <Route path='/post'>

@@ -79,8 +79,22 @@ class ArticleCtrl {
      * @param next
      */
     getArticles(req,res,next) {
-        let option = req.body.option;
-        let params = req.body.params;
+        let option = req.body.option,
+            params = req.body.params;
+
+        console.log(option);
+        console.log(params);
+
+        if(params !== undefined && params.create_user_id !== undefined) {
+            console.log('jeje');
+            let user = req.session.user;
+            if(user === undefined) {
+                res.json({meta : '你还没有登陆',code : 406});
+            } else {
+                params.create_user_id = user._id;
+            }
+        }
+
         article.getArticles(option,(data) => {
             let result = {
                 meta : '',
@@ -98,9 +112,6 @@ class ArticleCtrl {
             res.json(result);
         },params);
     }
-
-
-
 }
 
 export default new ArticleCtrl();

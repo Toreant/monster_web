@@ -23,10 +23,14 @@ class ConListActions {
         let params = {
                 option: {skip: skip*4,limit: 4,sort: {create_time: 1}}
             },
-            url = '';
-        if(option === '0') {
-            params.params = {create_user_domain: param};
             url = '/api/'+tab;
+
+        if(option === '0') {
+            console.log('jaja');
+            params.params = {create_user_domain: param};
+        } else {
+            console.log('hehe');
+            params.params = {create_user_id : ''};
         }
 
         $.ajax({

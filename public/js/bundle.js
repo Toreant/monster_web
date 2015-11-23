@@ -167,10 +167,14 @@ var ConListActions = (function () {
             var params = {
                 option: { skip: skip * 4, limit: 4, sort: { create_time: 1 } }
             },
-                url = '';
-            if (option === '0') {
-                params.params = { create_user_domain: param };
                 url = '/api/' + tab;
+
+            if (option === '0') {
+                console.log('jaja');
+                params.params = { create_user_domain: param };
+            } else {
+                console.log('hehe');
+                params.params = { create_user_id: '' };
             }
 
             $.ajax({
@@ -2033,19 +2037,30 @@ var _ConList2 = _interopRequireDefault(_ConList);
 var ConArticle = (function (_React$Component) {
     _inherits(ConArticle, _React$Component);
 
-    function ConArticle() {
+    function ConArticle(props) {
         _classCallCheck(this, ConArticle);
 
-        _get(Object.getPrototypeOf(ConArticle.prototype), 'constructor', this).apply(this, arguments);
+        _get(Object.getPrototypeOf(ConArticle.prototype), 'constructor', this).call(this, props);
     }
 
     _createClass(ConArticle, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            console.log(this.props.params);
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var Result = undefined;
+            if (this.props.params.domain !== undefined) {
+                Result = _react2['default'].createElement(_ConList2['default'], { option: '0', tab: 'articles', type: '', domain: this.props.params.domain });
+            } else {
+                Result = _react2['default'].createElement(_ConList2['default'], { option: '1', tab: 'articles' });
+            }
             return _react2['default'].createElement(
                 'div',
                 null,
-                _react2['default'].createElement(_ConList2['default'], { option: '0', tab: 'articles', type: '', domain: this.props.params.domain })
+                Result
             );
         }
     }]);
@@ -2132,10 +2147,7 @@ var ConList = (function (_React$Component) {
         value: function componentDidMount() {
             _storesConListStore2['default'].listen(this.onChange);
             var props = this.props;
-            console.log('did' + isMounted(this));
-            if (isMounted(this)) {
-                _actionsConListActions2['default'].getConList(props.option, props.tab, props.domain);
-            }
+            _actionsConListActions2['default'].getConList(props.option, props.tab, props.domain);
         }
     }, {
         key: 'componentDidUpdate',
@@ -5759,7 +5771,14 @@ exports['default'] = _react2['default'].createElement(
             { path: 'following', handler: _componentsFollowing2['default'] },
             _react2['default'].createElement(_reactRouter.Route, { path: ':page', handler: _componentsFollowing2['default'] })
         ),
-        _react2['default'].createElement(_reactRouter.Route, { path: 'contribute', handler: _componentsContribute2['default'] }),
+        _react2['default'].createElement(
+            _reactRouter.Route,
+            { path: 'contribute', handler: _componentsContribute2['default'] },
+            _react2['default'].createElement(_reactRouter.DefaultRoute, { handler: _componentsConArticle2['default'] }),
+            _react2['default'].createElement(_reactRouter.Route, { path: '/profile/article', handler: _componentsConArticle2['default'] }),
+            _react2['default'].createElement(_reactRouter.Route, { path: '/profile/music', handler: _componentsConArticle2['default'] }),
+            _react2['default'].createElement(_reactRouter.Route, { path: '/profile/animate', handler: _componentsConArticle2['default'] })
+        ),
         _react2['default'].createElement(_reactRouter.Route, { path: 'notice', handler: _componentsNotice2['default'] }),
         _react2['default'].createElement(_reactRouter.Route, { path: 'star', handler: _componentsStarList2['default'] }),
         _react2['default'].createElement(
