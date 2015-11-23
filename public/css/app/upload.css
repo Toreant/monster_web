@@ -49,9 +49,17 @@
 }
 .mon-loader-o {
   display: block;
+  text-align: center;
 }
 .mon-loader-o div {
   background-color: #5e5e5e !important;
+}
+.mon-loader-bg {
+  margin: 50px auto;
+}
+.mon-loader-bg > div {
+  height: 150px !important;
+  width: 30px !important;
 }
 /* 图片预览 */
 .mon-preview-block {

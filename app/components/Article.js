@@ -36,9 +36,11 @@ class Article extends React.Component {
 
     onChange(state) {
         this.setState(state);
-        let markdown = md.markdown;
-        let content = markdown.toHTML(this.state.content);
-        this.refs.content.getDOMNode().innerHTML = content;
+        if(state.article) {
+            let markdown = md.markdown;
+            let content = markdown.toHTML(this.state.content);
+            this.refs.content.getDOMNode().innerHTML = content;
+        }
     }
 
     render() {
@@ -107,7 +109,13 @@ class Article extends React.Component {
             );
         } else {
             Article = (
-                <p className='text-danger mon-bg-tigle'>找不到这篇文章</p>
+                <div className='loader-inner line-scale-pulse-out mon-loader-o mon-loader-bg'>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
             );
         }
         return (

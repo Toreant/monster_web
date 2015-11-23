@@ -1521,9 +1521,11 @@ var Article = (function (_React$Component) {
         key: 'onChange',
         value: function onChange(state) {
             this.setState(state);
-            var markdown = _markdown2['default'].markdown;
-            var content = markdown.toHTML(this.state.content);
-            this.refs.content.getDOMNode().innerHTML = content;
+            if (state.article) {
+                var markdown = _markdown2['default'].markdown;
+                var content = markdown.toHTML(this.state.content);
+                this.refs.content.getDOMNode().innerHTML = content;
+            }
         }
     }, {
         key: 'render',
@@ -1659,9 +1661,13 @@ var Article = (function (_React$Component) {
                 );
             } else {
                 Article = _react2['default'].createElement(
-                    'p',
-                    { className: 'text-danger mon-bg-tigle' },
-                    '找不到这篇文章'
+                    'div',
+                    { className: 'loader-inner line-scale-pulse-out mon-loader-o mon-loader-bg' },
+                    _react2['default'].createElement('div', null),
+                    _react2['default'].createElement('div', null),
+                    _react2['default'].createElement('div', null),
+                    _react2['default'].createElement('div', null),
+                    _react2['default'].createElement('div', null)
                 );
             }
             return _react2['default'].createElement(

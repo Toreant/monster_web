@@ -20,29 +20,35 @@ class md {
             //查找文章
             function(_callback) {
                 Article.findById(id,(err,docs) => {
-                    if(err) {
-                        callback(500);
+                    if(!id.match(/^[0-9a-fA-F]{24}$/)) {
+                        return callback(null);
                     }
-                    if(docs !== undefined && docs !== null) {
+                    if(err) {
+                        return callback(500);
+                    }
+                    if(docs != undefined && docs !== null) {
                         //文章阅读数增１
                         docs.browser_count += 1;
                         docs.save((err) => {
                             _callback(null,docs);
                         });
                     } else {
-                        _callback(null,null);
+                        return callback(null);
                     }
                 });
             },
 
             // 查看是否登陆的用户收藏了
             function(docs,_callback) {
+                if(docs === 400) {
+                    _callback(null,docs,false);
+                }
                 if(u === undefined) {
                     _callback(null,docs,false);
                 } else {
                     User.findById(u._id,(err,user) => {
                         if(err) {
-                            callback(500);
+                            return callback(500);
                         }
                         if(_.indexOf(user.star_article,docs._id.toString()) === -1) {
                             _callback(null,docs,false);
@@ -51,18 +57,16 @@ class md {
                         }
                     });
                 }
-
             },
 
             // 查找文章的读者
             function(docs,stared,_callback) {
-
-                if(docs === null) {
-                    _callback(null,null,null);
+                if(docs === 400) {
+                    _callback(null,400,null,null);
                 } else {
                     User.findById(docs.create_user_id,'username avatar_url domain introduce',(err,user) => {
                         if(err) {
-                            callback(500);
+                            return callback(500);
                         } else {
                             _callback(null,docs, user,stared);
                         }
@@ -72,8 +76,8 @@ class md {
 
             // 推荐文章
             function(docs,user,stared,_callback) {
-                if(docs === null && user === null) {
-                    _callback(null,null);
+                if(docs === 400) {
+                    _callback(null,400);
                 } else {
                     Article.find({},'title',{sort : {browser_count : -1},skip : 1,limit : 6},(err,articles) => {
                         _callback(null,{article : docs, user : user,stared : stared, recommend : articles});

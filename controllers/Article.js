@@ -51,12 +51,16 @@ class ArticleCtrl {
     getArticle(req,res,next) {
         let id = req.body.id,
             user = req.session.user;
-        let result = {
-            meta : '',
-            code : 0,
-            raw : null
-        };
+
         article.getArticleById(id,user,(data) => {
+            let result = {
+                meta : '',
+                code : 0,
+                raw : null
+            };
+
+            console.log(data);
+
             if(data === null) {
                 result.meta = '找不到这个文章';
                 result.code = 400;
