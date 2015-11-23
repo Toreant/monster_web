@@ -49,7 +49,6 @@ class UploadStore {
                     result = e.target.result;
                     $("#img-preview").attr('src',result).Jcrop({
                         onChange: (event) => {
-                            console.log(event);
                             $("#upload_img_width").val(event.w);
                             $("#upload_img_height").val(event.h);
                             $("#upload_img_X").val(event.x);

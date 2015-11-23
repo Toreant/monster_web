@@ -162,7 +162,7 @@ class md {
                                 break;
                             }
                         }
-                        result.unshift(item);
+                        result.push(item);
                     }
 
                     _callback(null,result);

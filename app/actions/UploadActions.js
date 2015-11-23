@@ -21,13 +21,14 @@ class UploadActions {
 
     upload(target,preImg) {
         uploadLoad(0);
-        console.log($(".jcrop-holder img").css('width'));
+
+        // 裁剪时的图片大小
         var $tracker = $(".jcrop-holder img");
         let raw_width = $tracker.css('width'),
             raw_height = $tracker.css('height');
         raw_width = raw_width.split('p')[0];
         raw_height = raw_height.split('p')[0];
-        console.log(raw_width);
+
         var formData = new FormData(),
             params = {
                 width : $(preImg+'_width').val(),
@@ -40,7 +41,6 @@ class UploadActions {
         formData.append('file',target);
         formData.append('params',JSON.stringify(params));
 
-        console.log(formData);
         $.ajax({
             url : '/api/upload',
             contentType : false,
@@ -61,7 +61,6 @@ class UploadActions {
     }
 
     uploadSuccess(data,preImg) {
-        console.log(data);
         uploadLoad(1);
         this.actions.uploadSuccessAfter();
         if(data.code === 200) {

@@ -32,7 +32,6 @@ class Uploader {
                     // 裁剪参数
                     let params = field.params[0];
                     params = JSON.parse(params);
-                    console.log(params);
 
                     // 对名字进行加密
                     fileName = (new Date().toString()) + target.originalFilename;
@@ -45,12 +44,13 @@ class Uploader {
 
                     // 进行裁剪
                     gm(tmp_path).size(function(err, value) {
-                        console.log(value);
+
+                        // 实际裁剪时的数据
                         width = value.width * parseInt(params.width) / parseInt(params.raw_width)  ;
                         height = value.height * parseInt(params.height) / parseInt(params.raw_height)  ;
                         x = value.width  * parseInt(params.X) / parseInt(params.raw_width) ;
                         y = value.height * parseInt(params.Y) / parseInt(params.raw_height)  ;
-                        console.log(width+" "+height+" "+x+" "+y);
+
                         this.crop(
                             width, height, x, y
                         ).write(target_path, (err) => {

@@ -882,7 +882,7 @@ var PostArticleActions = (function () {
                     tags: tags,
                     abbreviations: abbreviations,
                     content: content,
-                    create_time: new Date().getTime() / 1000
+                    create_time: new Date().getTime()
                 },
                 option: {
                     width: w,
@@ -1232,13 +1232,14 @@ var UploadActions = (function () {
             var _this = this;
 
             uploadLoad(0);
-            console.log($(".jcrop-holder img").css('width'));
+
+            // 裁剪时的图片大小
             var $tracker = $(".jcrop-holder img");
             var raw_width = $tracker.css('width'),
                 raw_height = $tracker.css('height');
             raw_width = raw_width.split('p')[0];
             raw_height = raw_height.split('p')[0];
-            console.log(raw_width);
+
             var formData = new FormData(),
                 params = {
                 width: $(preImg + '_width').val(),
@@ -1251,7 +1252,6 @@ var UploadActions = (function () {
             formData.append('file', target);
             formData.append('params', JSON.stringify(params));
 
-            console.log(formData);
             $.ajax({
                 url: '/api/upload',
                 contentType: false,
@@ -1273,7 +1273,6 @@ var UploadActions = (function () {
     }, {
         key: 'uploadSuccess',
         value: function uploadSuccess(data, preImg) {
-            console.log(data);
             uploadLoad(1);
             this.actions.uploadSuccessAfter();
             if (data.code === 200) {
@@ -7205,7 +7204,6 @@ var UploadStore = (function () {
                         result = e.target.result;
                         $("#img-preview").attr('src', result).Jcrop({
                             onChange: function onChange(event) {
-                                console.log(event);
                                 $("#upload_img_width").val(event.w);
                                 $("#upload_img_height").val(event.h);
                                 $("#upload_img_X").val(event.x);

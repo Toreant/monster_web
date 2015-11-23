@@ -22,7 +22,7 @@ class PostArticleActions {
                 tags : tags,
                 abbreviations : abbreviations,
                 content : content,
-                create_time : new Date().getTime()/1000
+                create_time : new Date().getTime()
             },
             option : {
                 width : w,
