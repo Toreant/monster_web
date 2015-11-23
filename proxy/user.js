@@ -111,6 +111,7 @@ class md {
     getUserByDomain(domain,callback) {
         User.findOne({domain : domain},'username domain avatar_url introduce contribute article music animate star followers following',(err,docs) => {
             if(err) {
+                console.log(err);
                 callback(500);
             } else {
                 callback(docs);
