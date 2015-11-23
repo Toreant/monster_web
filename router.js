@@ -73,6 +73,6 @@ router.post('/api/signout',function(req,res,next){
 });
 
 // 上传
-router.post('/api/upload',upload.single('file'),UploaderCtrl.upload);
+router.post('/api/upload',UploaderCtrl.upload);
 
 export default router;

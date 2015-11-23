@@ -76,3 +76,10 @@
   margin-bottom: 10px;
   padding: 10px;
 }
+.mon-preview-img .jcrop-holder {
+  margin: 0 auto;
+}
+.mon-preview-img .jcrop-holder img {
+  max-width: 480px;
+  max-height: 240px;
+}

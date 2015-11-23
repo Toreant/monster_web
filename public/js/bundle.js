@@ -872,7 +872,7 @@ var PostArticleActions = (function () {
 
     _createClass(PostArticleActions, [{
         key: 'postArticle',
-        value: function postArticle(title, summary, tags, abbreviations, content) {
+        value: function postArticle(title, summary, tags, abbreviations, content, w, h, x, y) {
             var _this = this;
 
             var params = {
@@ -883,6 +883,12 @@ var PostArticleActions = (function () {
                     abbreviations: abbreviations,
                     content: content,
                     create_time: new Date().getTime() / 1000
+                },
+                option: {
+                    width: w,
+                    height: h,
+                    x: x,
+                    y: y
                 }
             };
 
@@ -1222,12 +1228,21 @@ var UploadActions = (function () {
 
     _createClass(UploadActions, [{
         key: 'upload',
-        value: function upload(target, preImg, imgValue) {
+        value: function upload(target, preImg) {
             var _this = this;
 
             uploadLoad(0);
-            var formData = new FormData();
+            var formData = new FormData(),
+                params = {
+                width: $(preImg + '_width').val(),
+                height: $(preImg + '_height').val(),
+                X: $(preImg + '_X').val(),
+                Y: $(preImg + '_Y').val()
+            };
             formData.append('file', target);
+            formData.append('params', JSON.stringify(params));
+
+            console.log(formData);
             $.ajax({
                 url: '/api/upload',
                 contentType: false,
@@ -1238,7 +1253,7 @@ var UploadActions = (function () {
                 timeout: 10000,
                 data: formData
             }).success(function (data) {
-                _this.actions.uploadSuccess(data, preImg, imgValue);
+                _this.actions.uploadSuccess(data, preImg);
             }).fail(function () {
                 toastr.error('上传图片不成功');
             }).error(function () {
@@ -1248,15 +1263,20 @@ var UploadActions = (function () {
         }
     }, {
         key: 'uploadSuccess',
-        value: function uploadSuccess(data, preImg, imgValue) {
+        value: function uploadSuccess(data, preImg) {
+            console.log(data);
             uploadLoad(1);
             this.actions.uploadSuccessAfter();
             if (data.code === 200) {
                 $(preImg).attr('src', '/img/upload/' + data.raw);
-                $(imgValue).val('/img/upload/' + data.raw);
+                $(preImg + '_value').val('/img/upload/' + data.raw);
+                //$(preImg+'_width').val(width);
+                //$(preImg+'_height').val(height);
+                //$(preImg+'_X').val(X);
+                //$(preImg+'_Y').val(Y);
             } else {
-                toastr.warning('上传图片不成功');
-            }
+                    toastr.warning('上传图片不成功');
+                }
         }
     }, {
         key: 'uploadSuccessAfter',
@@ -4468,7 +4488,7 @@ var PostArticle = (function (_React$Component) {
                         _react2['default'].createElement(
                             'div',
                             { className: 'col-md-8' },
-                            _react2['default'].createElement(_Upload2['default'], { img: '#upload_img', img_value: '#upload_img_value' }),
+                            _react2['default'].createElement(_Upload2['default'], { img: '#upload_img' }),
                             _react2['default'].createElement(
                                 'p',
                                 { className: 'text-muted' },
@@ -4479,7 +4499,11 @@ var PostArticle = (function (_React$Component) {
                             'div',
                             { className: 'col-md-3' },
                             _react2['default'].createElement('img', { src: '/img/cover-night.png', id: 'upload_img', width: '120', alt: 'loading' }),
-                            _react2['default'].createElement('input', { id: 'upload_img_value', type: 'hidden', onChange: _actionsPostArticleActions2['default'].changeAbbreviations })
+                            _react2['default'].createElement('input', { id: 'upload_img_value', type: 'hidden', onChange: _actionsPostArticleActions2['default'].changeAbbreviations }),
+                            _react2['default'].createElement('input', { id: 'upload_img_width', type: 'hidden' }),
+                            _react2['default'].createElement('input', { id: 'upload_img_height', type: 'hidden' }),
+                            _react2['default'].createElement('input', { id: 'upload_img_X', type: 'hidden' }),
+                            _react2['default'].createElement('input', { id: 'upload_img_Y', type: 'hidden' })
                         )
                     ),
                     _react2['default'].createElement('textarea', { id: 'some-textarea', name: 'content', 'data-provide': 'markdown', rows: '15', onChange: _actionsPostArticleActions2['default'].changeContent }),
@@ -5204,7 +5228,7 @@ var Upload = (function (_React$Component) {
     }, {
         key: 'upload',
         value: function upload() {
-            _actionsUploadActions2['default'].upload(this.state.file, this.props.img, this.props.img_value);
+            _actionsUploadActions2['default'].upload(this.state.file, this.props.img);
         }
     }, {
         key: 'render',
@@ -7132,13 +7156,32 @@ var UploadStore = (function () {
 
         this.bindActions(_actionsUploadActions2['default']);
         this.file = {};
+        this.croper = {};
+        this.width = 0;
+        this.height = 0;
+        this.X = 0;
+        this.Y = 0;
     }
 
     _createClass(UploadStore, [{
-        key: 'changeFile',
-        value: function changeFile(event) {
+        key: 'setParams',
+        value: function setParams(w, h, x, y) {
+            this.width = w;
+            this.height = h;
+            this.X = x;
+            this.Y = y;
+        }
+    }, {
+        key: 'onChangeFile',
+        value: function onChangeFile(event) {
+            var _this = this;
+
             var target = $("#uploader").get(0).files[0];
             this.file = target;
+
+            var croper,
+                isChange = false;
+
             $("#file_loader_file").removeClass('mon-upload').addClass('mon-upload-o');
             $("#preview_block").removeClass('mon-preview-block').addClass('mon-preview-block-o');
 
@@ -7146,14 +7189,31 @@ var UploadStore = (function () {
                 var acceptType = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
 
                 if (_underscore2['default'].indexOf(acceptType, target.type) !== -1) {
-                    var fileReader = new FileReader();
+                    var fileReader = new FileReader(),
+                        result;
                     fileReader.readAsDataURL(target);
                     fileReader.onload = function (e) {
-                        $("#img-preview").attr('src', this.result);
+                        result = e.target.result;
+                        $("#img-preview").attr('src', result).Jcrop({
+                            onChange: function onChange(event) {
+                                console.log(event);
+                                $("#upload_img_width").val(event.w);
+                                $("#upload_img_height").val(event.h);
+                                $("#upload_img_X").val(event.x);
+                                $("#upload_img_Y").val(event.y);
+                            }
+                        }, function () {
+                            croper = this;
+                            isChange = true;
+                        });
+                        if (isChange) {
+                            _this.croper = croper;
+                        }
+                        _this.croper.setImage(result); // 设置图片
                     };
                 } else {
-                    toastr.warning('不支持的图片格式');
-                }
+                        toastr.warning('不支持的图片格式');
+                    }
             }
         }
     }]);

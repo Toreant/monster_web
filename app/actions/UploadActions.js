@@ -19,10 +19,19 @@ class UploadActions {
         );
     }
 
-    upload(target,preImg,imgValue) {
+    upload(target,preImg) {
         uploadLoad(0);
-        var formData = new FormData();
+        var formData = new FormData(),
+            params = {
+                width : $(preImg+'_width').val(),
+                height : $(preImg+'_height').val(),
+                X : $(preImg+'_X').val(),
+                Y : $(preImg+'_Y').val()
+            };
         formData.append('file',target);
+        formData.append('params',JSON.stringify(params));
+
+        console.log(formData);
         $.ajax({
             url : '/api/upload',
             contentType : false,
@@ -33,7 +42,7 @@ class UploadActions {
             timeout : 10000,
             data : formData
         }).success((data) => {
-            this.actions.uploadSuccess(data,preImg,imgValue);
+            this.actions.uploadSuccess(data,preImg);
         }).fail(() => {
             toastr.error('上传图片不成功')
         }).error(() => {
@@ -42,12 +51,17 @@ class UploadActions {
         });
     }
 
-    uploadSuccess(data,preImg,imgValue) {
+    uploadSuccess(data,preImg) {
+        console.log(data);
         uploadLoad(1);
         this.actions.uploadSuccessAfter();
         if(data.code === 200) {
             $(preImg).attr('src','/img/upload/'+data.raw);
-            $(imgValue).val('/img/upload/'+data.raw);
+            $(preImg+'_value').val('/img/upload/'+data.raw);
+            //$(preImg+'_width').val(width);
+            //$(preImg+'_height').val(height);
+            //$(preImg+'_X').val(X);
+            //$(preImg+'_Y').val(Y);
         } else {
             toastr.warning('上传图片不成功');
         }

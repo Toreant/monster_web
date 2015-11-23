@@ -14,7 +14,7 @@ class PostArticleActions {
         );
     }
 
-    postArticle(title,summary,tags,abbreviations,content) {
+    postArticle(title,summary,tags,abbreviations,content,w,h,x,y) {
         let params = {
             params : {
                 title : title,
@@ -23,6 +23,12 @@ class PostArticleActions {
                 abbreviations : abbreviations,
                 content : content,
                 create_time : new Date().getTime()/1000
+            },
+            option : {
+                width : w,
+                height : h,
+                x : x,
+                y : y
             }
         };
 
