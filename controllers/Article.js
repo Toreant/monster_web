@@ -14,14 +14,10 @@ class ArticleCtrl {
      * @param next
      */
     getSaveArticle(req,res,next) {
-        if(req.session.user === undefined) {
-            res.json({meta : '你还没登陆',code : 404});
-        }
 
         let params = req.body.params;
         params.create_user_id = req.session.user._id;
         params.create_user_domain = req.session.user.domain;
-        console.log(params);
 
         article.saveArticle(params,(data) => {
             let result = {

@@ -8,13 +8,14 @@ import ArticleCtrl from './controllers/Article';
 import CommentCtrl from './controllers/Comment';
 import UploaderCtrl from './controllers/Uploader';
 import multer from 'multer';
+import auth from './middleware/auth';
 
-var upload = multer({dest : './public/img/upload'});
+var upload = multer({dest : './public/music'});
 
 // 用户有关
 router.post('/api/user',UserCtrl.getSign);
 
-router.put('/api/user',UserCtrl.getUpdate);
+router.put('/api/user',auth.isAuth,UserCtrl.getUpdate);
 
 router.post('/api/getUser',UserCtrl.getUserByDomain);
 
@@ -25,14 +26,14 @@ router.post('/api/followers',UserCtrl.getFollowers);
 router.get('/api/member/:domain',UserCtrl.getUserByDomain);
 
 //　follow有关
-router.post('/api/follow',UserCtrl.addFollow);
+router.post('/api/follow',auth.isAuth,UserCtrl.addFollow);
 
 router.post('/api/following',UserCtrl.getFollowing);
 
-router.delete('/api/follow',UserCtrl.unFollowing);
+router.delete('/api/follow',auth.isAuth,UserCtrl.unFollowing);
 
 //　文章有关
-router.post('/api/article',ArticleCtrl.getSaveArticle);
+router.post('/api/article',auth.isAuth,ArticleCtrl.getSaveArticle);
 
 router.post('/api/getArticle',ArticleCtrl.getArticle);
 
@@ -41,14 +42,14 @@ router.post('/api/articles',ArticleCtrl.getArticles);
 //　评论有关
 router.post('/api/comment',CommentCtrl.getComments);
 
-router.put('/api/comment',CommentCtrl.savaComment);
+router.put('/api/comment',auth.isAuth,CommentCtrl.savaComment);
 
-router.delete('/api/comment',CommentCtrl.deleteComment);
+router.delete('/api/comment',auth.isAuth,CommentCtrl.deleteComment);
 
 // 收藏
-router.post('/api/star',UserCtrl.getStar);
+router.post('/api/star',auth.isAuth,UserCtrl.getStar);
 
-router.delete('/api/star',UserCtrl.unStar);
+router.delete('/api/star',auth.isAuth,UserCtrl.unStar);
 
 router.post('/api/stars',UserCtrl.getStars);
 
@@ -62,9 +63,9 @@ router.post('/api/session',function(req,res,next){
 });
 
 // 登陆登出
-router.post('/api/login',UserCtrl.getLogin);
+router.post('/api/login',auth.isNotAuth,UserCtrl.getLogin);
 
-router.post('/api/signout',function(req,res,next){
+router.post('/api/signout',auth.isAuth,function(req,res,next){
     if(req.session.destroy()) {
         res.json({meta : '退出登陆成功',code : 200});
     } else {
@@ -73,6 +74,8 @@ router.post('/api/signout',function(req,res,next){
 });
 
 // 上传
-router.post('/api/upload',UploaderCtrl.upload);
+router.post('/api/upload',auth.isAuth,UploaderCtrl.upload);
+
+router.post('/api/upload/music',auth.isAuth,UploaderCtrl.uploadMusic);
 
 export default router;

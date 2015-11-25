@@ -79,30 +79,26 @@ class CommentCtrl {
      * @param res
      * @param next
      */
-    savaComment(req,res,next) {
+    savaComment(req, res, next) {
         let params = req.body.params;
-        if(req.session.user === undefined) {
-            res.json({meta : '你还没登陆，不能评论',code : 404});
-        } else {
-            params.create_user_id = req.session.user._id;
-            let result = {
-                meta : '',
-                code : 0
-            };
 
-            Comment.saveComment(params,(data) => {
-                if(data === null) {
-                    result.meta = '评论失败';
-                    result.code = 400;
-                } else {
-                    result.meta = '评论成功';
-                    result.code = 200;
-                }
+        params.create_user_id = req.session.user._id;
+        let result = {
+            meta: '',
+            code: 0
+        };
 
-                res.json(result);
-            });
-        }
+        Comment.saveComment(params, (data) => {
+            if (data === null) {
+                result.meta = '评论失败';
+                result.code = 400;
+            } else {
+                result.meta = '评论成功';
+                result.code = 200;
+            }
 
+            res.json(result);
+        });
     }
 }
 

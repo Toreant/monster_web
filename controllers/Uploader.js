@@ -4,13 +4,13 @@
 import multiparty from 'multiparty';
 import fs from 'fs';
 import gm from 'gm';
-import crypto from 'crypto';
 import async from 'async';
+import crypt from '../middleware/crypt';
 
 class Uploader {
 
     /**
-     * 上传
+     * 上传图片
      * @param req
      * @param res
      * @param next
@@ -35,9 +35,7 @@ class Uploader {
 
                     // 对名字进行加密
                     fileName = (new Date().toString()) + target.originalFilename;
-                    var md5sum = crypto.createHash('md5');
-                    md5sum.update(fileName);
-                    fileName = md5sum.digest('hex');
+                    fileName = crypt.getMd5String(fileName);
 
                     var target_path = './public/img/upload/' + fileName,
                         tmp_path = target.path;
@@ -94,6 +92,55 @@ class Uploader {
             }
 
             res.json(result);
+        });
+    }
+
+
+    /**
+     * 上传音乐
+     * @param req
+     * @param res
+     * @param next
+     */
+    uploadMusic(req,res,next) {
+        var form = new multiparty.Form();
+        let result = {
+            meta : '',
+            code : 0,
+            raw  : ''
+        };
+        form.parse(req,function(err,field,file) {
+            if(err) {
+                result.code = 500;
+                result.meta = '上传音乐失败';
+                res.json(result);
+            } else {
+                let target = file.file[0],
+                    tmp_path = target.path,
+                    target_path = __dirpath+'/public/music/',
+                    filename = target.originalFilename;
+                filename = crypt.getMd5String((new Date().toString())+filename);
+                target_path = target_path+filename;
+
+                fs.link(tmp_path,target_path,(err) => {
+                    if(err) {
+                        result.code = 500;
+                        result.meta = '保存文件失败';
+                        res.json(result);
+                    }
+                });
+
+                fs.unlink(tmp_path,(err) => {
+                    if(err) {
+                        console.log(err);
+                    } else {
+                        result.code = 200;
+                        result.meta = '上传文件成功';
+                        result.raw = filename;
+                        res.json(result);
+                    }
+                });
+            }
         });
     }
 }

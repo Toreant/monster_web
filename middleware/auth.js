@@ -1,15 +1,28 @@
 /**
  * Created by apache on 15-10-25.
  */
-import passport from 'passport';
-import Github from 'passport-github';
+class auth {
 
-var GithubStrategy = Github.Strategy;
+    // 是否登陆
+    isAuth (req,res,next) {
+        if(req.session.user !== undefined) {
+            next();
+        } else {
+            res.json({meta : '你还没登陆',code : 406});
+        }
+    }
 
-passport.use(new GithubStrategy({
-    clientID: "XXXXX",
-    clientSecret: "XXXXX",
-    callbackURL: "http://localhost:3000/auth/github/callback"
-},function(accessToken, refreshToken, profile, done) {
-    done(null, profile);
-}));
+    // 是否未登陆
+    isNotAuth(req,res,next) {
+        if(req.session.user === undefined ) {
+            next();
+        } else {
+            res.json({
+                meta : '你已经登陆了',
+                code : 304
+            });
+        }
+    }
+}
+
+export default new auth();
