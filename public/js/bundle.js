@@ -1354,10 +1354,10 @@ var UploadActions = (function () {
 
             var formData = new FormData(),
                 params = {
-                width: $("#upload_img_width").val(),
-                height: $("#upload_img_height").val(),
-                X: $("#upload_img_X").val(),
-                Y: $("#upload_img_Y").val(),
+                width: $("#upload_img_width").val() || raw_width,
+                height: $("#upload_img_height").val() || raw_height,
+                X: $("#upload_img_X").val() || 0,
+                Y: $("#upload_img_Y").val() || 0,
                 raw_width: raw_width,
                 raw_height: raw_height
             };
@@ -4963,9 +4963,15 @@ var PostMusic = (function (_React$Component) {
     }, {
         key: 'handleClick',
         value: function handleClick() {
-            var music_url = '/upload/' + $('#music_file').text(),
-                avatar_url = $("#upload_album_img").attr('src');
-            _actionsPostMusicActions2['default'].postMusic(this.state.title, this.state.tags, music_url, avatar_url);
+            var $music = $('#music_file');
+            if ($music.text() === '') {
+                $("#upload_music").addClass('disabled');
+            } else {
+                $("#upload_music").removeClass('disabled');
+                var music_url = '/upload/' + $('#music_file').text(),
+                    avatar_url = $("#upload_album_img").attr('src');
+                _actionsPostMusicActions2['default'].postMusic(this.state.title, this.state.tags, music_url, avatar_url);
+            }
         }
     }, {
         key: 'render',
@@ -5066,7 +5072,7 @@ var PostMusic = (function (_React$Component) {
                     ),
                     _react2['default'].createElement(
                         'a',
-                        { href: 'javascript:;', className: 'btn btn-success pull-right mon-post-btn', onClick: this.handleClick.bind(this) },
+                        { href: 'javascript:;', id: 'upload_music', className: 'btn btn-success disabled pull-right mon-post-btn', onClick: this.handleClick.bind(this) },
                         _react2['default'].createElement('span', { className: 'fa fa-check-circle-o' }),
                         '提交稿件'
                     )
