@@ -31,11 +31,13 @@ class BigUpload extends React.Component {
                 let $upload = $("#upload"),
                     accept_type = [
                         'audio/mpeg',
+                        'audio/ogg',
                         'video/mp4'
                     ];
                 if(_.indexOf(accept_type,target.type) === -1) {
                     toastr.warning('不支持的格式');
                     $("#file_type_error").text('不支持的格式');
+                    $upload.addClass('disabled');
                 } else {
                     this.error = '';
                     let $fileLoader = $('#upload_file_loader');
@@ -43,6 +45,7 @@ class BigUpload extends React.Component {
                         $("#upload_file_select").removeClass('mon-upload').addClass('mon-upload-o');
                         $fileLoader.removeClass('mon-preview-block').addClass('mon-preview-block-o');
                     }
+                    $upload.removeClass('disabled');
                     $(this.props.target).html(file.uniqueIdentifier);
                     $("#mon_cancel").attr('data-target',file.uniqueIdentifier);
                     $("#progress_bar").css('width','0');

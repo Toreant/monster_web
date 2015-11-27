@@ -71,8 +71,10 @@ class md {
 
             // 保存音乐资料
             function(user,_callback) {
-                Music.save(params,(err,product) => {
+                let music = new Music(params);
+                music.save((err,product) => {
                     if(err) {
+                        console.log(err);
                         return callback(500);
                     } else {
                         _callback(null,user,product);
@@ -82,8 +84,9 @@ class md {
 
             // 更新用户资料
             function(user,product,_callback) {
-                if(raw) {
+                if(product) {
                     user.music.push(product._id);
+                    user.contribute.push(product._id);
                     user.save((err) => {
                         if(err) {
                             return callback(500);

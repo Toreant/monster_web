@@ -6,16 +6,16 @@ var Schema = mongoose.Schema;
 
 var MusicSchema = new Schema({
     title : {type : String},
-    music_url : {String},
-    music_name : {String},
+    music_url : {type : String},
+    music_name : {type : String},
     album : {type : String},
     avatar_url : {type : String},
     tags : [String],
     stars : {type : Number,default : 0},
     browser_count : {type : Number,default :0},
-    create_user_id : {type : Number},
-    lyric : {String},
-    comment : [Number]
+    create_user_id : {type : String},
+    lyric : {type : String},
+    comment : [String]
 });
 
 export default mongoose.model('Music',MusicSchema);

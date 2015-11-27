@@ -27,7 +27,9 @@ class PostMusic extends React.Component {
     }
 
     handleClick() {
-        PostMusicActions.postMusic(this.state.title,this.state.tags,this.state.music_url,this.state.avatar_url);
+        let music_url = '/upload/'+$('#music_file').text(),
+            avatar_url = $("#upload_album_img").attr('src');
+        PostMusicActions.postMusic(this.state.title,this.state.tags,music_url,avatar_url);
     }
 
     render() {
@@ -42,7 +44,7 @@ class PostMusic extends React.Component {
                             <label className='label label-default' htmlFor='title'>音乐标题</label>
                         </div>
                         <div className='col-md-11'>
-                            <input type="email" className="form-control" id="title" ref='title' onChange={PostMusic.changeTitle} placeholder="文章标题"/>
+                            <input type="email" className="form-control" id="title" ref='title' onChange={PostMusicActions.changeTitle} placeholder="文章标题"/>
                         </div>
                     </div>
                     <div className='form-group'>
@@ -51,7 +53,7 @@ class PostMusic extends React.Component {
                         </div>
                         <div className="col-md-11">
                             <BigUpload tab='music' target="#music_file"/>
-                            <p id="music_file" className="text-primary mon-upload-file"></p>
+                            <p id="music_file" className="text-primary mon-upload-file" onChange={PostMusicActions.changeMusic}></p>
                         </div>
                     </div>
                     <div className='form-group'>
@@ -59,7 +61,7 @@ class PostMusic extends React.Component {
                             <label className='label label-default' htmlFor='tag'>音乐标签</label>
                         </div>
                         <div className='col-md-11'>
-                            <input type="text" className='form-control' id='tag' ref='tag' onChange={PostMusic.changeTag} placeholder='请输入文章标签 (标签间以空格分隔)'/>
+                            <input type="text" className='form-control' id='tag' ref='tag' onChange={PostMusicActions.changeTags} placeholder='请输入文章标签 (标签间以空格分隔)'/>
                         </div>
                     </div>
                     <div className='form-group'>

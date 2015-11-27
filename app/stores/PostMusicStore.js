@@ -14,20 +14,24 @@ class PostMusicStore {
     }
 
     onChangeTitle(event) {
+        console.log('rere');
         this.title = event.target.value;
     }
 
-    onChangeMusicUrl(url) {
+    onChangeMusic(url) {
+        console.log('hehe');
         this.music_url = url;
     }
 
     onChangeTags(event) {
+        console.log('heh');
         let tags = event.target.value.replace(/\s+/g,",");
         tags = tags.split(',');
-        this.tag = [];
+        this.tags = [];
         tags.map((data) => {
-            this.tag.push(data);
+            this.tags.push(data);
         });
+        console.log(this.tags);
     }
 
     onChangeAvatar(url) {

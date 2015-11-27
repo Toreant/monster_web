@@ -12,14 +12,13 @@ import path from 'path';
 import colors from 'colors';
 import apiRouter from './router';
 import mongoose from 'mongoose';
-import mongo from './models';
+var mongoDB = require('./models') ;
 import bodyParser from 'body-parser';
 import passport from 'passport';
 import Github from 'passport-github';
 import Facebook from 'passport-facebook';
 import session from 'express-session';
 import redis from 'redis';
-import multipart from 'connect-multiparty';
 
 
 var app = new express();
@@ -30,7 +29,6 @@ app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(multipart());
 app.use(session({
     secret: 'keyboard cat',
     resave: false,

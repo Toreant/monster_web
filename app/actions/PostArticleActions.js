@@ -10,11 +10,12 @@ class PostArticleActions {
             'changeTag',
             'changeContent',
             'changeSummary',
+            'changeMusic',
             'postArticleSuccess'
         );
     }
 
-    postArticle(title,summary,tags,abbreviations,content,w,h,x,y) {
+    postArticle(title,summary,tags,abbreviations,content) {
         let params = {
             params : {
                 title : title,
@@ -23,12 +24,6 @@ class PostArticleActions {
                 abbreviations : abbreviations,
                 content : content,
                 create_time : new Date().getTime()
-            },
-            option : {
-                width : w,
-                height : h,
-                x : x,
-                y : y
             }
         };
 

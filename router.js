@@ -10,6 +10,7 @@ import UploaderCtrl from './controllers/Uploader';
 import MusicCtrl from './controllers/Music';
 import multer from 'multer';
 import auth from './middleware/auth';
+import multipart from 'connect-multiparty';
 var resumable = require('./middleware/resumable-node');
 
 
@@ -79,7 +80,7 @@ router.post('/api/signout',auth.isAuth,function(req,res,next){
 // 上传
 router.post('/api/upload',auth.isAuth,UploaderCtrl.upload);
 
-router.post('/api/upload/:column',auth.isAuth,function(req,res,next) {
+router.post('/api/upload/:column',auth.isAuth,multipart(),function(req,res,next) {
     resumable.post(req, function(status, filename, original_filename, identifier){
         console.log('POST', status, original_filename, identifier);
 
@@ -90,7 +91,7 @@ router.post('/api/upload/:column',auth.isAuth,function(req,res,next) {
     });
 });
 
-router.delete('/api/upload/:column',auth.isAuth,function(req,res,next) {
+router.delete('/api/upload/:column',auth.isAuth,multipart(),function(req,res,next) {
     console.log(req.body);
     resumable.clean(req.body.identifier,function() {
         res.status(200).json({

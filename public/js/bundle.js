@@ -923,12 +923,12 @@ var PostArticleActions = (function () {
     function PostArticleActions() {
         _classCallCheck(this, PostArticleActions);
 
-        this.generateActions('changeTitle', 'changeAbbreviations', 'changeTag', 'changeContent', 'changeSummary', 'postArticleSuccess');
+        this.generateActions('changeTitle', 'changeAbbreviations', 'changeTag', 'changeContent', 'changeSummary', 'changeMusic', 'postArticleSuccess');
     }
 
     _createClass(PostArticleActions, [{
         key: 'postArticle',
-        value: function postArticle(title, summary, tags, abbreviations, content, w, h, x, y) {
+        value: function postArticle(title, summary, tags, abbreviations, content) {
             var _this = this;
 
             var params = {
@@ -939,12 +939,6 @@ var PostArticleActions = (function () {
                     abbreviations: abbreviations,
                     content: content,
                     create_time: new Date().getTime()
-                },
-                option: {
-                    width: w,
-                    height: h,
-                    x: x,
-                    y: y
                 }
             };
 
@@ -1866,10 +1860,11 @@ var BigUpload = (function (_React$Component) {
                     var target = file.file;
                     console.log(target);
                     var $upload = $("#upload"),
-                        accept_type = ['audio/mpeg', 'video/mp4'];
+                        accept_type = ['audio/mpeg', 'audio/ogg', 'video/mp4'];
                     if (_underscore2['default'].indexOf(accept_type, target.type) === -1) {
                         toastr.warning('不支持的格式');
                         $("#file_type_error").text('不支持的格式');
+                        $upload.addClass('disabled');
                     } else {
                         _this.error = '';
                         var $fileLoader = $('#upload_file_loader');
@@ -1877,6 +1872,7 @@ var BigUpload = (function (_React$Component) {
                             $("#upload_file_select").removeClass('mon-upload').addClass('mon-upload-o');
                             $fileLoader.removeClass('mon-preview-block').addClass('mon-preview-block-o');
                         }
+                        $upload.removeClass('disabled');
                         $(_this.props.target).html(file.uniqueIdentifier);
                         $("#mon_cancel").attr('data-target', file.uniqueIdentifier);
                         $("#progress_bar").css('width', '0');
@@ -4967,7 +4963,9 @@ var PostMusic = (function (_React$Component) {
     }, {
         key: 'handleClick',
         value: function handleClick() {
-            _actionsPostMusicActions2['default'].postMusic(this.state.title, this.state.tags, this.state.music_url, this.state.avatar_url);
+            var music_url = '/upload/' + $('#music_file').text(),
+                avatar_url = $("#upload_album_img").attr('src');
+            _actionsPostMusicActions2['default'].postMusic(this.state.title, this.state.tags, music_url, avatar_url);
         }
     }, {
         key: 'render',
@@ -4998,7 +4996,7 @@ var PostMusic = (function (_React$Component) {
                         _react2['default'].createElement(
                             'div',
                             { className: 'col-md-11' },
-                            _react2['default'].createElement('input', { type: 'email', className: 'form-control', id: 'title', ref: 'title', onChange: PostMusic.changeTitle, placeholder: '文章标题' })
+                            _react2['default'].createElement('input', { type: 'email', className: 'form-control', id: 'title', ref: 'title', onChange: _actionsPostMusicActions2['default'].changeTitle, placeholder: '文章标题' })
                         )
                     ),
                     _react2['default'].createElement(
@@ -5017,7 +5015,7 @@ var PostMusic = (function (_React$Component) {
                             'div',
                             { className: 'col-md-11' },
                             _react2['default'].createElement(_BigUpload2['default'], { tab: 'music', target: '#music_file' }),
-                            _react2['default'].createElement('p', { id: 'music_file', className: 'text-primary mon-upload-file' })
+                            _react2['default'].createElement('p', { id: 'music_file', className: 'text-primary mon-upload-file', onChange: _actionsPostMusicActions2['default'].changeMusic })
                         )
                     ),
                     _react2['default'].createElement(
@@ -5035,7 +5033,7 @@ var PostMusic = (function (_React$Component) {
                         _react2['default'].createElement(
                             'div',
                             { className: 'col-md-11' },
-                            _react2['default'].createElement('input', { type: 'text', className: 'form-control', id: 'tag', ref: 'tag', onChange: PostMusic.changeTag, placeholder: '请输入文章标签 (标签间以空格分隔)' })
+                            _react2['default'].createElement('input', { type: 'text', className: 'form-control', id: 'tag', ref: 'tag', onChange: _actionsPostMusicActions2['default'].changeTags, placeholder: '请输入文章标签 (标签间以空格分隔)' })
                         )
                     ),
                     _react2['default'].createElement(
@@ -8503,11 +8501,13 @@ var PostMusicStore = (function () {
     _createClass(PostMusicStore, [{
         key: 'onChangeTitle',
         value: function onChangeTitle(event) {
+            console.log('rere');
             this.title = event.target.value;
         }
     }, {
-        key: 'onChangeMusicUrl',
-        value: function onChangeMusicUrl(url) {
+        key: 'onChangeMusic',
+        value: function onChangeMusic(url) {
+            console.log('hehe');
             this.music_url = url;
         }
     }, {
@@ -8515,12 +8515,14 @@ var PostMusicStore = (function () {
         value: function onChangeTags(event) {
             var _this = this;
 
+            console.log('heh');
             var tags = event.target.value.replace(/\s+/g, ",");
             tags = tags.split(',');
-            this.tag = [];
+            this.tags = [];
             tags.map(function (data) {
-                _this.tag.push(data);
+                _this.tags.push(data);
             });
+            console.log(this.tags);
         }
     }, {
         key: 'onChangeAvatar',

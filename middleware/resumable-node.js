@@ -28,7 +28,7 @@ class resumable {
         identifier = this.cleanIdentifier(identifier);
         // What would the file name be?
         console.log(__dirname);
-        return path.join(__dirname, '../public/upload/resumable-' + identifier + '.' + chunkNumber);
+        return path.join(__dirname, '../public/upload/' + identifier + '.' + chunkNumber);
     }
 
     validateRequest(chunkNumber, chunkSize, totalSize, identifier, filename, fileSize) {
