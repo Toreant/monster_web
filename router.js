@@ -7,8 +7,11 @@ import UserCtrl from './controllers/User';
 import ArticleCtrl from './controllers/Article';
 import CommentCtrl from './controllers/Comment';
 import UploaderCtrl from './controllers/Uploader';
+import MusicCtrl from './controllers/Music';
 import multer from 'multer';
 import auth from './middleware/auth';
+var resumable = require('./middleware/resumable-node');
+
 
 var upload = multer({dest : './public/music'});
 
@@ -76,6 +79,30 @@ router.post('/api/signout',auth.isAuth,function(req,res,next){
 // 上传
 router.post('/api/upload',auth.isAuth,UploaderCtrl.upload);
 
-router.post('/api/upload/music',auth.isAuth,UploaderCtrl.uploadMusic);
+router.post('/api/upload/:column',auth.isAuth,function(req,res,next) {
+    resumable.post(req, function(status, filename, original_filename, identifier){
+        console.log('POST', status, original_filename, identifier);
+
+        res.send(status, {
+            // NOTE: Uncomment this funciton to enable cross-domain request.
+            //'Access-Control-Allow-Origin': '*'
+        });
+    });
+});
+
+router.delete('/api/upload/:column',auth.isAuth,function(req,res,next) {
+    console.log(req.body);
+    resumable.clean(req.body.identifier,function() {
+        res.status(200).json({
+            meta : '取消上传成功',
+            code : 200
+        });
+    });
+});
+
+
+// 音乐
+router.post('/api/music',auth.isAuth,MusicCtrl.postMusic);
+
 
 export default router;

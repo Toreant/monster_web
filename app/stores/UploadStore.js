@@ -18,14 +18,9 @@ class UploadStore {
         this.Y = '';
     }
 
-    heh() {
-        console.log('hehe');
-    }
-
     onChangeFile(event) {
-        var target = $("#uploader").get(0).files[0];
-        this.file = target;
-
+        let target = this.file = event.target.files[0];
+        console.log(target);
         var croper,
             isChange = false;
 

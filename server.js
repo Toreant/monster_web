@@ -19,6 +19,8 @@ import Github from 'passport-github';
 import Facebook from 'passport-facebook';
 import session from 'express-session';
 import redis from 'redis';
+import multipart from 'connect-multiparty';
+
 
 var app = new express();
 var client = redis.createClient();
@@ -28,6 +30,7 @@ app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(multipart());
 app.use(session({
     secret: 'keyboard cat',
     resave: false,

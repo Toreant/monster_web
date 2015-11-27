@@ -46,7 +46,59 @@ var ArticleActions = (function () {
 exports['default'] = _alt2['default'].createActions(ArticleActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],2:[function(require,module,exports){
+},{"../alt":24}],2:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-25.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var BgUploadActions = (function () {
+    function BgUploadActions() {
+        _classCallCheck(this, BgUploadActions);
+
+        this.generateActions('postBgFileSuccess', 'changeFile');
+    }
+
+    _createClass(BgUploadActions, [{
+        key: 'cancelPost',
+        value: function cancelPost(identifier) {
+            $.ajax({
+                url: '/api/upload/music',
+                type: 'delete',
+                dataType: 'json',
+                cache: false,
+                data: { identifier: identifier }
+            }).done(function (data) {
+                if (data.code === 200) {
+                    toastr.success(data.meta);
+                }
+            }).fail(function () {
+                toastr.error('取消上传失败');
+            });
+        }
+    }]);
+
+    return BgUploadActions;
+})();
+
+exports['default'] = _alt2['default'].createActions(BgUploadActions);
+module.exports = exports['default'];
+
+},{"../alt":24}],3:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -125,7 +177,7 @@ var CommentActions = (function () {
 exports['default'] = _alt2['default'].createActions(CommentActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],3:[function(require,module,exports){
+},{"../alt":24}],4:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -207,7 +259,7 @@ var ConListActions = (function () {
 exports['default'] = _alt2['default'].createActions(ConListActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],4:[function(require,module,exports){
+},{"../alt":24}],5:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -234,7 +286,7 @@ var ContributeActions = function ContributeActions() {
 exports['default'] = _alt2['default'].createActions(ContributeActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],5:[function(require,module,exports){
+},{"../alt":24}],6:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -333,7 +385,7 @@ var FollowersActions = (function () {
 exports['default'] = _alt2['default'].createActions(FollowersActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],6:[function(require,module,exports){
+},{"../alt":24}],7:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -418,7 +470,7 @@ var FollowingActions = (function () {
 exports['default'] = _alt2['default'].createActions(FollowingActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],7:[function(require,module,exports){
+},{"../alt":24}],8:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -460,7 +512,7 @@ var HomeActions = (function () {
 exports['default'] = _alt2['default'].createActions(HomeActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],8:[function(require,module,exports){
+},{"../alt":24}],9:[function(require,module,exports){
 /**
  * Created by apache on 15-11-10.
  */
@@ -528,7 +580,7 @@ var ListActions = (function () {
 exports['default'] = _alt2['default'].createActions(ListActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],9:[function(require,module,exports){
+},{"../alt":24}],10:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -623,7 +675,7 @@ var LoginActions = (function () {
 exports['default'] = _alt2['default'].createActions(LoginActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],10:[function(require,module,exports){
+},{"../alt":24}],11:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -673,7 +725,7 @@ var MemberActions = (function () {
 exports['default'] = _alt2['default'].createActions(MemberActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],11:[function(require,module,exports){
+},{"../alt":24}],12:[function(require,module,exports){
 /**
  * Created by apache on 15-10-25.
  */
@@ -740,7 +792,7 @@ var NavActions = (function () {
 exports['default'] = _alt2['default'].createActions(NavActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],12:[function(require,module,exports){
+},{"../alt":24}],13:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -780,7 +832,7 @@ var NoticeActions = (function () {
 exports['default'] = _alt2['default'].createActions(NoticeActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],13:[function(require,module,exports){
+},{"../alt":24}],14:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -807,7 +859,7 @@ var PaginationActions = function PaginationActions() {
 exports['default'] = _alt2['default'].createActions(PaginationActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],14:[function(require,module,exports){
+},{"../alt":24}],15:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -847,7 +899,7 @@ var PostAnimateActions = (function () {
 exports['default'] = _alt2['default'].createActions(PostAnimateActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],15:[function(require,module,exports){
+},{"../alt":24}],16:[function(require,module,exports){
 /**
  * Created by apache on 15-11-3.
  */
@@ -919,7 +971,69 @@ var PostArticleActions = (function () {
 exports['default'] = _alt2['default'].createActions(PostArticleActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],16:[function(require,module,exports){
+},{"../alt":24}],17:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-25.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var PostMusicActions = (function () {
+    function PostMusicActions() {
+        _classCallCheck(this, PostMusicActions);
+
+        this.generateActions('changeTitle', 'changeMusicUrl', 'changeTags', 'changeAvatar', 'postMusicSuccess');
+    }
+
+    _createClass(PostMusicActions, [{
+        key: 'postMusic',
+        value: function postMusic(title, tags, music_url, avatar_url) {
+            var _this = this;
+
+            var postData = {
+                params: {
+                    title: title,
+                    tags: tags,
+                    music_url: music_url,
+                    avatar_url: avatar_url
+                }
+            };
+
+            $.ajax({
+                url: '/api/music',
+                cache: false,
+                dataType: 'json',
+                contentType: 'application/json;charset=utf-8',
+                type: 'post',
+                data: JSON.stringify(postData)
+            }).success(function (data) {
+                _this.actions.postMusicSuccess(data);
+            }).fail(function () {
+                toastr.warning('分享不成功');
+            });
+        }
+    }]);
+
+    return PostMusicActions;
+})();
+
+exports['default'] = _alt2['default'].createActions(PostMusicActions);
+module.exports = exports['default'];
+
+},{"../alt":24}],18:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -946,7 +1060,7 @@ var ProfileCenterActions = function ProfileCenterActions() {
 exports['default'] = _alt2['default'].createActions(ProfileCenterActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],17:[function(require,module,exports){
+},{"../alt":24}],19:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -1024,7 +1138,7 @@ var SetActions = (function () {
 exports['default'] = _alt2['default'].createActions(SetActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],18:[function(require,module,exports){
+},{"../alt":24}],20:[function(require,module,exports){
 /**
  * Created by apache on 15-11-15.
  */
@@ -1108,7 +1222,7 @@ var StarActions = (function () {
 exports['default'] = _alt2['default'].createActions(StarActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],19:[function(require,module,exports){
+},{"../alt":24}],21:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -1191,7 +1305,7 @@ var StarListActions = (function () {
 exports['default'] = _alt2['default'].createActions(StarListActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],20:[function(require,module,exports){
+},{"../alt":24}],22:[function(require,module,exports){
 /**
  * Created by apache on 15-11-22.
  */
@@ -1305,7 +1419,7 @@ var UploadActions = (function () {
 exports['default'] = _alt2['default'].createActions(UploadActions);
 module.exports = exports['default'];
 
-},{"../alt":22,"underscore":"underscore"}],21:[function(require,module,exports){
+},{"../alt":24,"underscore":"underscore"}],23:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -1355,7 +1469,7 @@ var UserActions = (function () {
 exports['default'] = _alt2['default'].createActions(UserActions);
 module.exports = exports['default'];
 
-},{"../alt":22}],22:[function(require,module,exports){
+},{"../alt":24}],24:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -1374,7 +1488,7 @@ var _alt2 = _interopRequireDefault(_alt);
 exports['default'] = new _alt2['default']();
 module.exports = exports['default'];
 
-},{"alt":"alt"}],23:[function(require,module,exports){
+},{"alt":"alt"}],25:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -1436,7 +1550,7 @@ var App = (function (_React$Component) {
 exports['default'] = App;
 module.exports = exports['default'];
 
-},{"./Footer":32,"./Nav":37,"react":"react","react-router":"react-router"}],24:[function(require,module,exports){
+},{"./Footer":35,"./Nav":40,"react":"react","react-router":"react-router"}],26:[function(require,module,exports){
 /**
  * Created by apache on 15-11-4.
  */
@@ -1685,7 +1799,240 @@ var Article = (function (_React$Component) {
 exports['default'] = Article;
 module.exports = exports['default'];
 
-},{"../actions/ArticleActions":1,"../stores/ArticleStore":51,"./BtnBlock":25,"./Comment":26,"./Star":45,"markdown":76,"react":"react","react-router":"react-router","underscore":"underscore"}],25:[function(require,module,exports){
+},{"../actions/ArticleActions":1,"../stores/ArticleStore":56,"./BtnBlock":28,"./Comment":29,"./Star":49,"markdown":83,"react":"react","react-router":"react-router","underscore":"underscore"}],27:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-25.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _actionsBigUploadActions = require('../actions/BigUploadActions');
+
+var _actionsBigUploadActions2 = _interopRequireDefault(_actionsBigUploadActions);
+
+var _storesBigUploadStore = require('../stores/BigUploadStore');
+
+var _storesBigUploadStore2 = _interopRequireDefault(_storesBigUploadStore);
+
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+var BigUpload = (function (_React$Component) {
+    _inherits(BigUpload, _React$Component);
+
+    function BigUpload(props) {
+        _classCallCheck(this, BigUpload);
+
+        _get(Object.getPrototypeOf(BigUpload.prototype), 'constructor', this).call(this, props);
+        this.state = _storesBigUploadStore2['default'].getState();
+        this.onChange = this.onChange.bind(this);
+    }
+
+    _createClass(BigUpload, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this = this;
+
+            _storesBigUploadStore2['default'].listen(this.onChange);
+
+            // 超大文件上传
+
+            if (!this.state.r.support) {
+                toastr.warning('你的浏览器不支持这个功能，请更新为最新的浏览器');
+            } else {
+                // r.assignDrop($('.resumable-drop')[0]);
+                this.state.r.assignBrowse($('#file_select')[0]); //　添加选择的文件的功能键
+
+                // 添加文件
+                this.state.r.on('fileAdded', function (file, event) {
+                    var target = file.file;
+                    console.log(target);
+                    var $upload = $("#upload"),
+                        accept_type = ['audio/mpeg', 'video/mp4'];
+                    if (_underscore2['default'].indexOf(accept_type, target.type) === -1) {
+                        toastr.warning('不支持的格式');
+                        $("#file_type_error").text('不支持的格式');
+                    } else {
+                        _this.error = '';
+                        var $fileLoader = $('#upload_file_loader');
+                        if (!$fileLoader.hasClass('mon-preview-block-o')) {
+                            $("#upload_file_select").removeClass('mon-upload').addClass('mon-upload-o');
+                            $fileLoader.removeClass('mon-preview-block').addClass('mon-preview-block-o');
+                        }
+                        $(_this.props.target).html(file.uniqueIdentifier);
+                        $("#mon_cancel").attr('data-target', file.uniqueIdentifier);
+                        $("#progress_bar").css('width', '0');
+                    }
+                });
+
+                // 文件成功添加后
+                this.state.r.on('fileSuccess', function (file, message) {
+                    $("#progress_bar").css('width', '0');
+                });
+
+                this.state.r.on('fileError', function () {
+                    toastr.error('文件添加失败');
+                });
+
+                // 上传文件期间
+                this.state.r.on('fileProgress', function (file) {
+                    console.log(file.uniqueIdentifier);
+                    $("#progress_bar").css('width', parseInt(file.progress() * 100) + '%');
+                });
+
+                // 上传文件结束
+                this.state.r.on('complete', function () {
+                    $("#progress_bar").css('width', '100%');
+                    //this.closeBlock();
+                });
+
+                // 暂停
+                this.state.r.on('pause', function () {
+                    $(".mon-upload-btn").removeClass('mon-active');
+                    $("#mon_pause").addClass('mon-active');
+                });
+
+                // 取消
+                this.state.r.on('cancel', function () {
+                    $("#progress_bar").css('width', '0');
+                });
+            }
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            _storesBigUploadStore2['default'].unlisten(this.onChange);
+        }
+    }, {
+        key: 'onChange',
+        value: function onChange(state) {
+            this.setState(state);
+        }
+    }, {
+        key: 'closeBlock',
+        value: function closeBlock() {
+            $("#file_upload").removeClass('mon-upload-block-o').addClass('mon-upload-block');
+        }
+    }, {
+        key: 'openBlock',
+        value: function openBlock() {
+            $("#file_upload").removeClass('mon-upload-block').addClass('mon-upload-block-o');
+        }
+    }, {
+        key: 'handleClick',
+        value: function handleClick() {
+            this.state.r.upload();
+        }
+    }, {
+        key: 'pause',
+        value: function pause() {
+            this.state.r.pause();
+        }
+    }, {
+        key: 'cancel',
+        value: function cancel() {
+            this.state.r.cancel();
+            _actionsBigUploadActions2['default'].cancelPost($("#mon_cancel").data('target'));
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var Type = this.props.tab === 'music' ? '.mp3、.ape、.ogg' : '.mp4';
+            return _react2['default'].createElement(
+                'div',
+                null,
+                _react2['default'].createElement(
+                    'a',
+                    { href: 'javascript:;', className: 'btn btn-info', onClick: this.openBlock.bind(this) },
+                    _react2['default'].createElement('span', { className: 'fa fa-file' }),
+                    '选择文件'
+                ),
+                _react2['default'].createElement(
+                    'div',
+                    { id: 'file_upload', className: 'mon-upload-block animated flipInX' },
+                    _react2['default'].createElement(
+                        'div',
+                        { id: 'upload_file_select', className: 'mon-upload' },
+                        _react2['default'].createElement(
+                            'label',
+                            { htmlFor: 'file_select', className: 'btn btn-info' },
+                            '打开文件'
+                        ),
+                        _react2['default'].createElement('input', { id: 'file_select', type: 'file', className: 'mon-fileloader' }),
+                        _react2['default'].createElement(
+                            'p',
+                            { className: 'text-warning' },
+                            '文件的类型为',
+                            Type
+                        ),
+                        _react2['default'].createElement(
+                            'p',
+                            { id: 'file_type_error', className: 'text-danger mon-disabled' },
+                            '不支持的文件类型'
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { id: 'upload_file_loader', className: 'mon-preview-block' },
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'mon-progress-block' },
+                            _react2['default'].createElement(
+                                'div',
+                                { className: 'mon-progress' },
+                                _react2['default'].createElement('div', { id: 'progress_bar', className: 'mon-progress-bar' })
+                            ),
+                            _react2['default'].createElement('a', { id: 'mon_pause', className: 'fa fa-pause mon-upload-btn', onClick: this.pause.bind(this) }),
+                            _react2['default'].createElement('a', { id: 'mon_upload', className: 'fa fa-play mon-upload-btn', onClick: this.handleClick.bind(this) }),
+                            _react2['default'].createElement('a', { id: 'mon_cancel', className: 'fa fa-close mon-upload-btn', 'data-target': '', onClick: this.cancel.bind(this) })
+                        ),
+                        _react2['default'].createElement(
+                            'a',
+                            { href: 'javascript:;', className: 'btn btn-danger' },
+                            _react2['default'].createElement(
+                                'label',
+                                { htmlFor: 'file_select' },
+                                _react2['default'].createElement('span', { className: 'fa fa-history' }),
+                                '重新选择文件'
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'a',
+                            { href: 'javascript:;', id: 'upload', className: 'btn btn-primary disabled', onClick: this.handleClick.bind(this) },
+                            '上传'
+                        )
+                    ),
+                    _react2['default'].createElement('span', { className: 'mon-close fa fa-close', onClick: this.closeBlock.bind(this) })
+                )
+            );
+        }
+    }]);
+
+    return BigUpload;
+})(_react2['default'].Component);
+
+exports['default'] = BigUpload;
+module.exports = exports['default'];
+
+},{"../actions/BigUploadActions":2,"../stores/BigUploadStore":57,"react":"react","underscore":"underscore"}],28:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -1813,7 +2160,7 @@ var BtnBlock = (function (_React$Component) {
 exports['default'] = BtnBlock;
 module.exports = exports['default'];
 
-},{"react":"react"}],26:[function(require,module,exports){
+},{"react":"react"}],29:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -2012,7 +2359,7 @@ var Comment = (function (_React$Component) {
 exports['default'] = Comment;
 module.exports = exports['default'];
 
-},{"../actions/CommentActions":2,"../stores/CommentStore":52,"react":"react","react-router":"react-router","underscore":"underscore"}],27:[function(require,module,exports){
+},{"../actions/CommentActions":3,"../stores/CommentStore":58,"react":"react","react-router":"react-router","underscore":"underscore"}],30:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -2077,7 +2424,7 @@ var ConArticle = (function (_React$Component) {
 exports['default'] = ConArticle;
 module.exports = exports['default'];
 
-},{"./ConList":28,"react":"react"}],28:[function(require,module,exports){
+},{"./ConList":31,"react":"react"}],31:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -2292,7 +2639,7 @@ var ConList = (function (_React$Component) {
 exports['default'] = ConList;
 module.exports = exports['default'];
 
-},{"../actions/ConListActions":3,"../stores/ConListStore":53,"react":"react","react-router":"react-router","underscore":"underscore"}],29:[function(require,module,exports){
+},{"../actions/ConListActions":4,"../stores/ConListStore":59,"react":"react","react-router":"react-router","underscore":"underscore"}],32:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -2421,7 +2768,7 @@ var Contribute = (function (_React$Component) {
 exports['default'] = Contribute;
 module.exports = exports['default'];
 
-},{"../actions/ContributeActions":4,"../stores/ContributeStore":54,"react":"react","react-router":"react-router"}],30:[function(require,module,exports){
+},{"../actions/ContributeActions":5,"../stores/ContributeStore":60,"react":"react","react-router":"react-router"}],33:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -2607,7 +2954,7 @@ var Followers = (function (_React$Component) {
 exports['default'] = Followers;
 module.exports = exports['default'];
 
-},{"../actions/FollowersActions":5,"../stores/FollowersStore":55,"./Pagination":40,"react":"react","react-router":"react-router","underscore":"underscore"}],31:[function(require,module,exports){
+},{"../actions/FollowersActions":6,"../stores/FollowersStore":61,"./Pagination":43,"react":"react","react-router":"react-router","underscore":"underscore"}],34:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -2776,7 +3123,7 @@ var Following = (function (_React$Component) {
 exports['default'] = Following;
 module.exports = exports['default'];
 
-},{"../actions/FollowingActions":6,"../stores/FollowingStore":56,"./Pagination":40,"react":"react","react-router":"react-router","underscore":"underscore"}],32:[function(require,module,exports){
+},{"../actions/FollowingActions":7,"../stores/FollowingStore":62,"./Pagination":43,"react":"react","react-router":"react-router","underscore":"underscore"}],35:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -2916,7 +3263,7 @@ var Footer = (function (_React$Component) {
 exports['default'] = Footer;
 module.exports = exports['default'];
 
-},{"react":"react"}],33:[function(require,module,exports){
+},{"react":"react"}],36:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -3012,7 +3359,7 @@ var Home = (function (_React$Component) {
 exports['default'] = Home;
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":7,"../stores/HomeStore":57,"react":"react"}],34:[function(require,module,exports){
+},{"../actions/HomeActions":8,"../stores/HomeStore":63,"react":"react"}],37:[function(require,module,exports){
 /**
  * Created by apache on 15-11-10.
  */
@@ -3224,7 +3571,7 @@ List.contextTypes = {
 exports['default'] = List;
 module.exports = exports['default'];
 
-},{"../actions/ListActions":8,"../stores/ListStore":58,"react":"react","react-router":"react-router","underscore":"underscore"}],35:[function(require,module,exports){
+},{"../actions/ListActions":9,"../stores/ListStore":64,"react":"react","react-router":"react-router","underscore":"underscore"}],38:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -3516,7 +3863,7 @@ var Login = (function (_React$Component) {
 exports['default'] = Login;
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":9,"../stores/LoginStore":59,"react":"react"}],36:[function(require,module,exports){
+},{"../actions/LoginActions":10,"../stores/LoginStore":65,"react":"react"}],39:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -3695,7 +4042,7 @@ Member.contextTypes = {
 exports['default'] = Member;
 module.exports = exports['default'];
 
-},{"../actions/MemberActions":10,"../stores/MemberStore":60,"./Contribute":29,"./NotFound":38,"react":"react","react-router":"react-router","underscore":"underscore"}],37:[function(require,module,exports){
+},{"../actions/MemberActions":11,"../stores/MemberStore":66,"./Contribute":32,"./NotFound":41,"react":"react","react-router":"react-router","underscore":"underscore"}],40:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -3956,7 +4303,7 @@ var Nav = (function (_React$Component) {
 exports['default'] = Nav;
 module.exports = exports['default'];
 
-},{"../actions/NavActions":11,"../stores/NavStore":61,"react":"react","react-router":"react-router"}],38:[function(require,module,exports){
+},{"../actions/NavActions":12,"../stores/NavStore":67,"react":"react","react-router":"react-router"}],41:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -4010,7 +4357,7 @@ var NotFound = (function (_React$Component) {
 exports['default'] = NotFound;
 module.exports = exports['default'];
 
-},{"react":"react"}],39:[function(require,module,exports){
+},{"react":"react"}],42:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -4085,7 +4432,7 @@ var Notice = (function (_React$Component) {
 exports['default'] = Notice;
 module.exports = exports['default'];
 
-},{"../actions/NoticeActions":12,"../stores/NoticeStore":62,"react":"react"}],40:[function(require,module,exports){
+},{"../actions/NoticeActions":13,"../stores/NoticeStore":68,"react":"react"}],43:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -4239,7 +4586,7 @@ var Pagination = (function (_React$Component) {
 exports['default'] = Pagination;
 module.exports = exports['default'];
 
-},{"../actions/PaginationActions":13,"../stores/PaginationStore":63,"react":"react"}],41:[function(require,module,exports){
+},{"../actions/PaginationActions":14,"../stores/PaginationStore":69,"react":"react"}],44:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -4326,7 +4673,7 @@ var PostAnimate = (function (_React$Component) {
 exports['default'] = PostAnimate;
 module.exports = exports['default'];
 
-},{"../actions/PostAnimateActions":14,"../stores/PostAnimateStore":64,"react":"react"}],42:[function(require,module,exports){
+},{"../actions/PostAnimateActions":15,"../stores/PostAnimateStore":70,"react":"react"}],45:[function(require,module,exports){
 /**
  * Created by apache on 15-11-3.
  */
@@ -4551,7 +4898,192 @@ var PostArticle = (function (_React$Component) {
 exports['default'] = PostArticle;
 module.exports = exports['default'];
 
-},{"../actions/PostArticleActions":15,"../stores/PostArticleStore":65,"./Upload":47,"markdown":76,"react":"react"}],43:[function(require,module,exports){
+},{"../actions/PostArticleActions":16,"../stores/PostArticleStore":71,"./Upload":51,"markdown":83,"react":"react"}],46:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-25.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _actionsPostMusicActions = require('../actions/PostMusicActions');
+
+var _actionsPostMusicActions2 = _interopRequireDefault(_actionsPostMusicActions);
+
+var _storesPostMusicStore = require('../stores/PostMusicStore');
+
+var _storesPostMusicStore2 = _interopRequireDefault(_storesPostMusicStore);
+
+var _Upload = require('./Upload');
+
+var _Upload2 = _interopRequireDefault(_Upload);
+
+var _BigUpload = require('./BigUpload');
+
+var _BigUpload2 = _interopRequireDefault(_BigUpload);
+
+var PostMusic = (function (_React$Component) {
+    _inherits(PostMusic, _React$Component);
+
+    function PostMusic(props) {
+        _classCallCheck(this, PostMusic);
+
+        _get(Object.getPrototypeOf(PostMusic.prototype), 'constructor', this).call(this, props);
+        this.state = _storesPostMusicStore2['default'].getState();
+        this.onChange = this.onChange.bind(this);
+    }
+
+    _createClass(PostMusic, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            _storesPostMusicStore2['default'].listen(this.onChange);
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            _storesPostMusicStore2['default'].unlisten(this.onChange);
+        }
+    }, {
+        key: 'onChange',
+        value: function onChange(state) {
+            this.setState(state);
+        }
+    }, {
+        key: 'handleClick',
+        value: function handleClick() {
+            _actionsPostMusicActions2['default'].postMusic(this.state.title, this.state.tags, this.state.music_url, this.state.avatar_url);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2['default'].createElement(
+                'div',
+                { className: 'col-md-9 col-sm-9 animated fadeInUp' },
+                _react2['default'].createElement(
+                    'p',
+                    { className: 'bg-success mon-padding mon-bg-title' },
+                    '分享音乐'
+                ),
+                _react2['default'].createElement(
+                    'form',
+                    { className: 'form-horizontal' },
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-1' },
+                            _react2['default'].createElement(
+                                'label',
+                                { className: 'label label-default', htmlFor: 'title' },
+                                '音乐标题'
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-11' },
+                            _react2['default'].createElement('input', { type: 'email', className: 'form-control', id: 'title', ref: 'title', onChange: PostMusic.changeTitle, placeholder: '文章标题' })
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-1' },
+                            _react2['default'].createElement(
+                                'label',
+                                { className: 'label label-default' },
+                                '音乐'
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-11' },
+                            _react2['default'].createElement(_BigUpload2['default'], { tab: 'music', target: '#music_file' }),
+                            _react2['default'].createElement('p', { id: 'music_file', className: 'text-primary mon-upload-file' })
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-1' },
+                            _react2['default'].createElement(
+                                'label',
+                                { className: 'label label-default', htmlFor: 'tag' },
+                                '音乐标签'
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-11' },
+                            _react2['default'].createElement('input', { type: 'text', className: 'form-control', id: 'tag', ref: 'tag', onChange: PostMusic.changeTag, placeholder: '请输入文章标签 (标签间以空格分隔)' })
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-1' },
+                            _react2['default'].createElement(
+                                'label',
+                                { className: 'label label-default' },
+                                '封面图片'
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-8' },
+                            _react2['default'].createElement(_Upload2['default'], { img: '#upload_album_img' }),
+                            _react2['default'].createElement(
+                                'p',
+                                { className: 'text-muted' },
+                                '请选择您的文章封面图片。封面图片不得包含令人反感的信息，尺寸为480*270像素。 请勿使用与内容无关，或分辨率不为16:9的图片作为封面图片。'
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-3' },
+                            _react2['default'].createElement('img', { src: '/img/cover-night.png', id: 'upload_album_img', width: '120', alt: 'loading' })
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'a',
+                        { href: 'javascript:;', className: 'btn btn-success pull-right mon-post-btn', onClick: this.handleClick.bind(this) },
+                        _react2['default'].createElement('span', { className: 'fa fa-check-circle-o' }),
+                        '提交稿件'
+                    )
+                )
+            );
+        }
+    }]);
+
+    return PostMusic;
+})(_react2['default'].Component);
+
+exports['default'] = PostMusic;
+module.exports = exports['default'];
+
+},{"../actions/PostMusicActions":17,"../stores/PostMusicStore":72,"./BigUpload":27,"./Upload":51,"react":"react"}],47:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -4626,7 +5158,7 @@ var ProfileCenter = (function (_React$Component) {
 exports['default'] = ProfileCenter;
 module.exports = exports['default'];
 
-},{"../actions/ProfileCenterActions":16,"../stores/ProfileCenterStore":66,"react":"react"}],44:[function(require,module,exports){
+},{"../actions/ProfileCenterActions":18,"../stores/ProfileCenterStore":73,"react":"react"}],48:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -4903,7 +5435,7 @@ var Set = (function (_React$Component) {
 exports['default'] = Set;
 module.exports = exports['default'];
 
-},{"../actions/SetActions":17,"../stores/SetStore":67,"./Upload":47,"react":"react"}],45:[function(require,module,exports){
+},{"../actions/SetActions":19,"../stores/SetStore":74,"./Upload":51,"react":"react"}],49:[function(require,module,exports){
 /**
  * Created by apache on 15-11-15.
  */
@@ -5016,7 +5548,7 @@ var Star = (function (_React$Component) {
 exports['default'] = Star;
 module.exports = exports['default'];
 
-},{"../actions/StarActions":18,"../stores/StarStore":69,"react":"react"}],46:[function(require,module,exports){
+},{"../actions/StarActions":20,"../stores/StarStore":76,"react":"react"}],50:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -5198,7 +5730,7 @@ var StarList = (function (_React$Component) {
 exports['default'] = StarList;
 module.exports = exports['default'];
 
-},{"../actions/StarListActions":19,"../stores/StarListStore":68,"react":"react","react-router":"react-router"}],47:[function(require,module,exports){
+},{"../actions/StarListActions":21,"../stores/StarListStore":75,"react":"react","react-router":"react-router"}],51:[function(require,module,exports){
 /**
  * Created by apache on 15-11-22.
  */
@@ -5355,7 +5887,7 @@ var Upload = (function (_React$Component) {
 exports['default'] = Upload;
 module.exports = exports['default'];
 
-},{"../actions/UploadActions":20,"../stores/UploadStore":70,"react":"react"}],48:[function(require,module,exports){
+},{"../actions/UploadActions":22,"../stores/UploadStore":77,"react":"react"}],52:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -5616,7 +6148,7 @@ User.contextTypes = {
 exports['default'] = User;
 module.exports = exports['default'];
 
-},{"../actions/UserActions":21,"../stores/UserStore":71,"react":"react","react-router":"react-router"}],49:[function(require,module,exports){
+},{"../actions/UserActions":23,"../stores/UserStore":78,"react":"react","react-router":"react-router"}],53:[function(require,module,exports){
 /**
  * Created by apache on 15-10-22.
  */
@@ -5640,7 +6172,1028 @@ _reactRouter2['default'].run(_routes2['default'], _reactRouter2['default'].Histo
   _react2['default'].render(_react2['default'].createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./routes":50,"react":"react","react-router":"react-router"}],50:[function(require,module,exports){
+},{"./routes":55,"react":"react","react-router":"react-router"}],54:[function(require,module,exports){
+/*
+ * MIT Licensed
+ * http://www.23developer.com/opensource
+ * http://github.com/23/resumable.js
+ * Steffen Tiedemann Christensen, steffen@23company.com
+ */
+
+'use strict';
+
+(function () {
+    "use strict";
+
+    var Resumable = function Resumable(opts) {
+        if (!(this instanceof Resumable)) {
+            return new Resumable(opts);
+        }
+        this.version = 1.0;
+        // SUPPORTED BY BROWSER?
+        // Check if these features are support by the browser:
+        // - File object type
+        // - Blob object type
+        // - FileList object type
+        // - slicing files
+        this.support = typeof File !== 'undefined' && typeof Blob !== 'undefined' && typeof FileList !== 'undefined' && (!!Blob.prototype.webkitSlice || !!Blob.prototype.mozSlice || !!Blob.prototype.slice || false);
+        if (!this.support) return false;
+
+        // PROPERTIES
+        var $ = this;
+        $.files = [];
+        $.defaults = {
+            chunkSize: 1 * 1024 * 1024,
+            forceChunkSize: false,
+            simultaneousUploads: 3,
+            fileParameterName: 'file',
+            throttleProgressCallbacks: 0.5,
+            query: {},
+            headers: {},
+            preprocess: null,
+            method: 'multipart',
+            uploadMethod: 'POST',
+            testMethod: 'GET',
+            prioritizeFirstAndLastChunk: false,
+            target: '/',
+            parameterNamespace: '',
+            testChunks: true,
+            generateUniqueIdentifier: null,
+            getTarget: null,
+            maxChunkRetries: undefined,
+            chunkRetryInterval: undefined,
+            permanentErrors: [400, 404, 415, 500, 501],
+            maxFiles: undefined,
+            withCredentials: false,
+            xhrTimeout: 0,
+            maxFilesErrorCallback: function maxFilesErrorCallback(files, errorCount) {
+                var maxFiles = $.getOpt('maxFiles');
+                alert('Please upload no more than ' + maxFiles + ' file' + (maxFiles === 1 ? '' : 's') + ' at a time.');
+            },
+            minFileSize: 1,
+            minFileSizeErrorCallback: function minFileSizeErrorCallback(file, errorCount) {
+                alert(file.fileName || file.name + ' is too small, please upload files larger than ' + $h.formatSize($.getOpt('minFileSize')) + '.');
+            },
+            maxFileSize: undefined,
+            maxFileSizeErrorCallback: function maxFileSizeErrorCallback(file, errorCount) {
+                alert(file.fileName || file.name + ' is too large, please upload files less than ' + $h.formatSize($.getOpt('maxFileSize')) + '.');
+            },
+            fileType: [],
+            fileTypeErrorCallback: function fileTypeErrorCallback(file, errorCount) {
+                alert(file.fileName || file.name + ' has type not allowed, please upload files of type ' + $.getOpt('fileType') + '.');
+            }
+        };
+        $.opts = opts || {};
+        $.getOpt = function (o) {
+            var $opt = this;
+            // Get multiple option if passed an array
+            if (o instanceof Array) {
+                var options = {};
+                $h.each(o, function (option) {
+                    options[option] = $opt.getOpt(option);
+                });
+                return options;
+            }
+            // Otherwise, just return a simple option
+            if ($opt instanceof ResumableChunk) {
+                if (typeof $opt.opts[o] !== 'undefined') {
+                    return $opt.opts[o];
+                } else {
+                    $opt = $opt.fileObj;
+                }
+            }
+            if ($opt instanceof ResumableFile) {
+                if (typeof $opt.opts[o] !== 'undefined') {
+                    return $opt.opts[o];
+                } else {
+                    $opt = $opt.resumableObj;
+                }
+            }
+            if ($opt instanceof Resumable) {
+                if (typeof $opt.opts[o] !== 'undefined') {
+                    return $opt.opts[o];
+                } else {
+                    return $opt.defaults[o];
+                }
+            }
+        };
+
+        // EVENTS
+        // catchAll(event, ...)
+        // fileSuccess(file), fileProgress(file), fileAdded(file, event), fileRetry(file), fileError(file, message),
+        // complete(), progress(), error(message, file), pause()
+        $.events = [];
+        $.on = function (event, callback) {
+            $.events.push(event.toLowerCase(), callback);
+        };
+        $.fire = function () {
+            // `arguments` is an object, not array, in FF, so:
+            var args = [];
+            for (var i = 0; i < arguments.length; i++) args.push(arguments[i]);
+            // Find event listeners, and support pseudo-event `catchAll`
+            var event = args[0].toLowerCase();
+            for (var i = 0; i <= $.events.length; i += 2) {
+                if ($.events[i] == event) $.events[i + 1].apply($, args.slice(1));
+                if ($.events[i] == 'catchall') $.events[i + 1].apply(null, args);
+            }
+            if (event == 'fileerror') $.fire('error', args[2], args[1]);
+            if (event == 'fileprogress') $.fire('progress');
+        };
+
+        // INTERNAL HELPER METHODS (handy, but ultimately not part of uploading)
+        var $h = {
+            stopEvent: function stopEvent(e) {
+                e.stopPropagation();
+                e.preventDefault();
+            },
+            each: function each(o, callback) {
+                if (typeof o.length !== 'undefined') {
+                    for (var i = 0; i < o.length; i++) {
+                        // Array or FileList
+                        if (callback(o[i]) === false) return;
+                    }
+                } else {
+                    for (i in o) {
+                        // Object
+                        if (callback(i, o[i]) === false) return;
+                    }
+                }
+            },
+            generateUniqueIdentifier: function generateUniqueIdentifier(file) {
+                var custom = $.getOpt('generateUniqueIdentifier');
+                if (typeof custom === 'function') {
+                    return custom(file);
+                }
+                var relativePath = file.webkitRelativePath || file.fileName || file.name; // Some confusion in different versions of Firefox
+                var size = file.size;
+                return size + '-' + relativePath.replace(/[^0-9a-zA-Z_-]/img, '');
+            },
+            contains: function contains(array, test) {
+                var result = false;
+
+                $h.each(array, function (value) {
+                    if (value == test) {
+                        result = true;
+                        return false;
+                    }
+                    return true;
+                });
+
+                return result;
+            },
+            formatSize: function formatSize(size) {
+                if (size < 1024) {
+                    return size + ' bytes';
+                } else if (size < 1024 * 1024) {
+                    return (size / 1024.0).toFixed(0) + ' KB';
+                } else if (size < 1024 * 1024 * 1024) {
+                    return (size / 1024.0 / 1024.0).toFixed(1) + ' MB';
+                } else {
+                    return (size / 1024.0 / 1024.0 / 1024.0).toFixed(1) + ' GB';
+                }
+            },
+            getTarget: function getTarget(params) {
+                var target = $.getOpt('target');
+                if (typeof target === 'function') {
+                    return target(params);
+                }
+                if (target.indexOf('?') < 0) {
+                    target += '?';
+                } else {
+                    target += '&';
+                }
+                return target + params.join('&');
+            }
+        };
+
+        var onDrop = function onDrop(event) {
+            $h.stopEvent(event);
+
+            //handle dropped things as items if we can (this lets us deal with folders nicer in some cases)
+            if (event.dataTransfer && event.dataTransfer.items) {
+                loadFiles(event.dataTransfer.items, event);
+            }
+            //else handle them as files
+            else if (event.dataTransfer && event.dataTransfer.files) {
+                    loadFiles(event.dataTransfer.files, event);
+                }
+        };
+        var preventDefault = function preventDefault(e) {
+            e.preventDefault();
+        };
+
+        // INTERNAL METHODS (both handy and responsible for the heavy load)
+        /**
+         * @summary This function loops over the files passed in from a drag and drop operation and gets them ready for appendFilesFromFileList
+         *            It attempts to use FileSystem API calls to extract files and subfolders if the dropped items include folders
+         *            That capability is only currently available in Chrome, but if it isn't available it will just pass the items along to
+         *            appendFilesFromFileList (via enqueueFileAddition to help with asynchronous processing.)
+         * @param files {Array} - the File or Entry objects to be processed depending on your browser support
+         * @param event {Object} - the drop event object
+         * @param [queue] {Object} - an object to keep track of our progress processing the dropped items
+         * @param [path] {String} - the relative path from the originally selected folder to the current files if extracting files from subfolders
+         */
+        var loadFiles = function loadFiles(files, event, queue, path) {
+            //initialize the queue object if it doesn't exist
+            if (!queue) {
+                queue = {
+                    total: 0,
+                    files: [],
+                    event: event
+                };
+            }
+
+            //update the total number of things we plan to process
+            updateQueueTotal(files.length, queue);
+
+            //loop over all the passed in objects checking if they are files or folders
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var entry, reader;
+
+                if (file.isFile || file.isDirectory) {
+                    //this is an object we can handle below with no extra work needed up front
+                    entry = file;
+                } else if (file.getAsEntry) {
+                    //get the file as an entry object if we can using the proposed HTML5 api (unlikely to get implemented by anyone)
+                    entry = file.getAsEntry();
+                } else if (file.webkitGetAsEntry) {
+                    //get the file as an entry object if we can using the Chrome specific webkit implementation
+                    entry = file.webkitGetAsEntry();
+                } else if (typeof file.getAsFile === 'function') {
+                    //if this is still a DataTransferItem object, get it as a file object
+                    enqueueFileAddition(file.getAsFile(), queue, path);
+                    //we just added this file object to the queue so we can go to the next object in the loop and skip the processing below
+                    continue;
+                } else if (File && file instanceof File) {
+                    //this is already a file object so just queue it up and move on
+                    enqueueFileAddition(file, queue, path);
+                    //we just added this file object to the queue so we can go to the next object in the loop and skip the processing below
+                    continue;
+                } else {
+                    //we can't do anything with this object, decrement the expected total and skip the processing below
+                    updateQueueTotal(-1, queue);
+                    continue;
+                }
+
+                if (!entry) {
+                    //there isn't anything we can do with this so decrement the total expected
+                    updateQueueTotal(-1, queue);
+                } else if (entry.isFile) {
+                    //this is handling to read an entry object representing a file, parsing the file object is asynchronous which is why we need the queue
+                    //currently entry objects will only exist in this flow for Chrome
+                    entry.file(function (file) {
+                        enqueueFileAddition(file, queue, path);
+                    }, function (err) {
+                        console.warn(err);
+                    });
+                } else if (entry.isDirectory) {
+                    //this is handling to read an entry object representing a folder, parsing the directory object is asynchronous which is why we need the queue
+                    //currently entry objects will only exist in this flow for Chrome
+                    reader = entry.createReader();
+
+                    var newEntries = [];
+                    //wrap the callback in another function so we can store the path in a closure
+                    var readDir = function readDir(path) {
+                        reader.readEntries(
+                        //success callback: read entries out of the directory
+                        function (entries) {
+                            if (entries.length > 0) {
+                                //add these results to the array of all the new stuff
+                                for (var i = 0; i < entries.length; i++) {
+                                    newEntries.push(entries[i]);
+                                }
+                                //call this function again as all the results may not have been sent yet
+                                readDir(entry.fullPath);
+                            } else {
+                                //we have now gotten all the results in newEntries so let's process them recursively
+                                loadFiles(newEntries, event, queue, path);
+                                //this was a directory rather than a file so decrement the expected file count
+                                updateQueueTotal(-1, queue);
+                            }
+                        },
+                        //error callback, most often hit if there is a directory with nothing inside it
+                        function (err) {
+                            //this was a directory rather than a file so decrement the expected file count
+                            updateQueueTotal(-1, queue);
+                            console.warn(err);
+                        });
+                    };
+                    readDir(entry.fullPath);
+                }
+            }
+        };
+
+        /**
+         * @summary Adjust the total number of files we are expecting to process
+         *          if decrementing and the new expected total is equal to the number processed, flush the queue
+         * @param addition {Number} - the number of additional files we expect to process (may be negative)
+         * @param queue {Object} - an object to keep track of our progress processing the dropped items
+         */
+        var updateQueueTotal = function updateQueueTotal(addition, queue) {
+            queue.total += addition;
+
+            // If all the files we expect have shown up, then flush the queue.
+            if (queue.files.length === queue.total) {
+                appendFilesFromFileList(queue.files, queue.event);
+            }
+        };
+
+        /**
+         * @summary Add a file to the queue of processed files, if it brings the total up to the expected total, flush the queue
+         * @param file {Object} - File object to be passed along to appendFilesFromFileList eventually
+         * @param queue {Object} - an object to keep track of our progress processing the dropped items
+         * @param [path] {String} - the file's relative path from the originally dropped folder if we are parsing folder content (Chrome only for now)
+         */
+        var enqueueFileAddition = function enqueueFileAddition(file, queue, path) {
+            //store the path to this file if it came in as part of a folder
+            if (path) file.relativePath = path + '/' + file.name;
+            queue.files.push(file);
+
+            // If all the files we expect have shown up, then flush the queue.
+            if (queue.files.length === queue.total) {
+                appendFilesFromFileList(queue.files, queue.event);
+            }
+        };
+
+        var appendFilesFromFileList = function appendFilesFromFileList(fileList, event) {
+            // check for uploading too many files
+            var errorCount = 0;
+            var o = $.getOpt(['maxFiles', 'minFileSize', 'maxFileSize', 'maxFilesErrorCallback', 'minFileSizeErrorCallback', 'maxFileSizeErrorCallback', 'fileType', 'fileTypeErrorCallback']);
+            if (typeof o.maxFiles !== 'undefined' && o.maxFiles < fileList.length + $.files.length) {
+                // if single-file upload, file is already added, and trying to add 1 new file, simply replace the already-added file
+                if (o.maxFiles === 1 && $.files.length === 1 && fileList.length === 1) {
+                    $.removeFile($.files[0]);
+                } else {
+                    o.maxFilesErrorCallback(fileList, errorCount++);
+                    return false;
+                }
+            }
+            var files = [];
+            $h.each(fileList, function (file) {
+                var fileName = file.name;
+                if (o.fileType.length > 0) {
+                    var fileTypeFound = false;
+                    for (var index in o.fileType) {
+                        var extension = '.' + o.fileType[index];
+                        if (fileName.indexOf(extension, fileName.length - extension.length) !== -1) {
+                            fileTypeFound = true;
+                            break;
+                        }
+                    }
+                    if (!fileTypeFound) {
+                        o.fileTypeErrorCallback(file, errorCount++);
+                        return false;
+                    }
+                }
+
+                if (typeof o.minFileSize !== 'undefined' && file.size < o.minFileSize) {
+                    o.minFileSizeErrorCallback(file, errorCount++);
+                    return false;
+                }
+                if (typeof o.maxFileSize !== 'undefined' && file.size > o.maxFileSize) {
+                    o.maxFileSizeErrorCallback(file, errorCount++);
+                    return false;
+                }
+
+                function addFile(uniqueIdentifier) {
+                    if (!$.getFromUniqueIdentifier(uniqueIdentifier)) {
+                        (function () {
+                            file.uniqueIdentifier = uniqueIdentifier;
+                            var f = new ResumableFile($, file, uniqueIdentifier);
+                            $.files.push(f);
+                            files.push(f);
+                            f.container = typeof event != 'undefined' ? event.srcElement : null;
+                            window.setTimeout(function () {
+                                $.fire('fileAdded', f, event);
+                            }, 0);
+                        })();
+                    }
+                    ;
+                }
+
+                // directories have size == 0
+                var uniqueIdentifier = $h.generateUniqueIdentifier(file);
+                if (uniqueIdentifier && typeof uniqueIdentifier.done === 'function' && typeof uniqueIdentifier.fail === 'function') {
+                    uniqueIdentifier.done(function (uniqueIdentifier) {
+                        addFile(uniqueIdentifier);
+                    }).fail(function () {
+                        addFile();
+                    });
+                } else {
+                    addFile(uniqueIdentifier);
+                }
+            });
+            window.setTimeout(function () {
+                $.fire('filesAdded', files);
+            }, 0);
+        };
+
+        // INTERNAL OBJECT TYPES
+        function ResumableFile(resumableObj, file, uniqueIdentifier) {
+            var $ = this;
+            $.opts = {};
+            $.getOpt = resumableObj.getOpt;
+            $._prevProgress = 0;
+            $.resumableObj = resumableObj;
+            $.file = file;
+            $.fileName = file.fileName || file.name; // Some confusion in different versions of Firefox
+            $.size = file.size;
+            $.relativePath = file.webkitRelativePath || file.relativePath || $.fileName;
+            $.uniqueIdentifier = uniqueIdentifier;
+            $._pause = false;
+            $.container = '';
+            var _error = uniqueIdentifier !== undefined;
+
+            // Callback when something happens within the chunk
+            var chunkEvent = function chunkEvent(event, message) {
+                // event can be 'progress', 'success', 'error' or 'retry'
+                switch (event) {
+                    case 'progress':
+                        $.resumableObj.fire('fileProgress', $);
+                        break;
+                    case 'error':
+                        $.abort();
+                        _error = true;
+                        $.chunks = [];
+                        $.resumableObj.fire('fileError', $, message);
+                        break;
+                    case 'success':
+                        if (_error) return;
+                        $.resumableObj.fire('fileProgress', $); // it's at least progress
+                        if ($.isComplete()) {
+                            $.resumableObj.fire('fileSuccess', $, message);
+                        }
+                        break;
+                    case 'retry':
+                        $.resumableObj.fire('fileRetry', $);
+                        break;
+                }
+            };
+
+            // Main code to set up a file object with chunks,
+            // packaged to be able to handle retries if needed.
+            $.chunks = [];
+            $.abort = function () {
+                // Stop current uploads
+                var abortCount = 0;
+                $h.each($.chunks, function (c) {
+                    if (c.status() == 'uploading') {
+                        c.abort();
+                        abortCount++;
+                    }
+                });
+                if (abortCount > 0) $.resumableObj.fire('fileProgress', $);
+            };
+            $.cancel = function () {
+                // Reset this file to be void
+                var _chunks = $.chunks;
+                $.chunks = [];
+                // Stop current uploads
+                $h.each(_chunks, function (c) {
+                    if (c.status() == 'uploading') {
+                        c.abort();
+                        $.resumableObj.uploadNextChunk();
+                    }
+                });
+                $.resumableObj.removeFile($);
+                $.resumableObj.fire('fileProgress', $);
+            };
+            $.retry = function () {
+                $.bootstrap();
+                var firedRetry = false;
+                $.resumableObj.on('chunkingComplete', function () {
+                    if (!firedRetry) $.resumableObj.upload();
+                    firedRetry = true;
+                });
+            };
+            $.bootstrap = function () {
+                $.abort();
+                _error = false;
+                // Rebuild stack of chunks from file
+                $.chunks = [];
+                $._prevProgress = 0;
+                var round = $.getOpt('forceChunkSize') ? Math.ceil : Math.floor;
+                var maxOffset = Math.max(round($.file.size / $.getOpt('chunkSize')), 1);
+                for (var offset = 0; offset < maxOffset; offset++) {
+                    (function (offset) {
+                        window.setTimeout(function () {
+                            $.chunks.push(new ResumableChunk($.resumableObj, $, offset, chunkEvent));
+                            $.resumableObj.fire('chunkingProgress', $, offset / maxOffset);
+                        }, 0);
+                    })(offset);
+                }
+                window.setTimeout(function () {
+                    $.resumableObj.fire('chunkingComplete', $);
+                }, 0);
+            };
+            $.progress = function () {
+                if (_error) return 1;
+                // Sum up progress across everything
+                var ret = 0;
+                var error = false;
+                $h.each($.chunks, function (c) {
+                    if (c.status() == 'error') error = true;
+                    ret += c.progress(true); // get chunk progress relative to entire file
+                });
+                ret = error ? 1 : ret > 0.99999 ? 1 : ret;
+                ret = Math.max($._prevProgress, ret); // We don't want to lose percentages when an upload is paused
+                $._prevProgress = ret;
+                return ret;
+            };
+            $.isUploading = function () {
+                var uploading = false;
+                $h.each($.chunks, function (chunk) {
+                    if (chunk.status() == 'uploading') {
+                        uploading = true;
+                        return false;
+                    }
+                });
+                return uploading;
+            };
+            $.isComplete = function () {
+                var outstanding = false;
+                $h.each($.chunks, function (chunk) {
+                    var status = chunk.status();
+                    if (status == 'pending' || status == 'uploading' || chunk.preprocessState === 1) {
+                        outstanding = true;
+                        return false;
+                    }
+                });
+                return !outstanding;
+            };
+            $.pause = function (pause) {
+                if (typeof pause === 'undefined') {
+                    $._pause = $._pause ? false : true;
+                } else {
+                    $._pause = pause;
+                }
+            };
+            $.isPaused = function () {
+                return $._pause;
+            };
+
+            // Bootstrap and return
+            $.resumableObj.fire('chunkingStart', $);
+            $.bootstrap();
+            return this;
+        }
+
+        function ResumableChunk(resumableObj, fileObj, offset, callback) {
+            var $ = this;
+            $.opts = {};
+            $.getOpt = resumableObj.getOpt;
+            $.resumableObj = resumableObj;
+            $.fileObj = fileObj;
+            $.fileObjSize = fileObj.size;
+            $.fileObjType = fileObj.file.type;
+            $.offset = offset;
+            $.callback = callback;
+            $.lastProgressCallback = new Date();
+            $.tested = false;
+            $.retries = 0;
+            $.pendingRetry = false;
+            $.preprocessState = 0; // 0 = unprocessed, 1 = processing, 2 = finished
+
+            // Computed properties
+            var chunkSize = $.getOpt('chunkSize');
+            $.loaded = 0;
+            $.startByte = $.offset * chunkSize;
+            $.endByte = Math.min($.fileObjSize, ($.offset + 1) * chunkSize);
+            if ($.fileObjSize - $.endByte < chunkSize && !$.getOpt('forceChunkSize')) {
+                // The last chunk will be bigger than the chunk size, but less than 2*chunkSize
+                $.endByte = $.fileObjSize;
+            }
+            $.xhr = null;
+
+            // test() makes a GET request without any data to see if the chunk has already been uploaded in a previous session
+            $.test = function () {
+                // Set up request and listen for event
+                $.xhr = new XMLHttpRequest();
+
+                var testHandler = function testHandler(e) {
+                    $.tested = true;
+                    var status = $.status();
+                    if (status == 'success') {
+                        $.callback(status, $.message());
+                        $.resumableObj.uploadNextChunk();
+                    } else {
+                        $.send();
+                    }
+                };
+                $.xhr.addEventListener('load', testHandler, false);
+                $.xhr.addEventListener('error', testHandler, false);
+                $.xhr.addEventListener('timeout', testHandler, false);
+
+                // Add data from the query options
+                var params = [];
+                var parameterNamespace = $.getOpt('parameterNamespace');
+                var customQuery = $.getOpt('query');
+                if (typeof customQuery == 'function') customQuery = customQuery($.fileObj, $);
+                $h.each(customQuery, function (k, v) {
+                    params.push([encodeURIComponent(parameterNamespace + k), encodeURIComponent(v)].join('='));
+                });
+                // Add extra data to identify chunk
+                params.push([parameterNamespace + 'resumableChunkNumber', encodeURIComponent($.offset + 1)].join('='));
+                params.push([parameterNamespace + 'resumableChunkSize', encodeURIComponent($.getOpt('chunkSize'))].join('='));
+                params.push([parameterNamespace + 'resumableCurrentChunkSize', encodeURIComponent($.endByte - $.startByte)].join('='));
+                params.push([parameterNamespace + 'resumableTotalSize', encodeURIComponent($.fileObjSize)].join('='));
+                params.push([parameterNamespace + 'resumableType', encodeURIComponent($.fileObjType)].join('='));
+                params.push([parameterNamespace + 'resumableIdentifier', encodeURIComponent($.fileObj.uniqueIdentifier)].join('='));
+                params.push([parameterNamespace + 'resumableFilename', encodeURIComponent($.fileObj.fileName)].join('='));
+                params.push([parameterNamespace + 'resumableRelativePath', encodeURIComponent($.fileObj.relativePath)].join('='));
+                params.push([parameterNamespace + 'resumableTotalChunks', encodeURIComponent($.fileObj.chunks.length)].join('='));
+                // Append the relevant chunk and send it
+                $.xhr.open($.getOpt('testMethod'), $h.getTarget(params));
+                $.xhr.timeout = $.getOpt('xhrTimeout');
+                $.xhr.withCredentials = $.getOpt('withCredentials');
+                // Add data from header options
+                var customHeaders = $.getOpt('headers');
+                if (typeof customHeaders === 'function') {
+                    customHeaders = customHeaders($.fileObj, $);
+                }
+                $h.each(customHeaders, function (k, v) {
+                    $.xhr.setRequestHeader(k, v);
+                });
+                $.xhr.send(null);
+            };
+
+            $.preprocessFinished = function () {
+                $.preprocessState = 2;
+                $.send();
+            };
+
+            // send() uploads the actual data in a POST call
+            $.send = function () {
+                var preprocess = $.getOpt('preprocess');
+                if (typeof preprocess === 'function') {
+                    switch ($.preprocessState) {
+                        case 0:
+                            $.preprocessState = 1;
+                            preprocess($);
+                            return;
+                        case 1:
+                            return;
+                        case 2:
+                            break;
+                    }
+                }
+                if ($.getOpt('testChunks') && !$.tested) {
+                    $.test();
+                    return;
+                }
+
+                // Set up request and listen for event
+                $.xhr = new XMLHttpRequest();
+
+                // Progress
+                $.xhr.upload.addEventListener('progress', function (e) {
+                    if (new Date() - $.lastProgressCallback > $.getOpt('throttleProgressCallbacks') * 1000) {
+                        $.callback('progress');
+                        $.lastProgressCallback = new Date();
+                    }
+                    $.loaded = e.loaded || 0;
+                }, false);
+                $.loaded = 0;
+                $.pendingRetry = false;
+                $.callback('progress');
+
+                // Done (either done, failed or retry)
+                var doneHandler = function doneHandler(e) {
+                    var status = $.status();
+                    if (status == 'success' || status == 'error') {
+                        $.callback(status, $.message());
+                        $.resumableObj.uploadNextChunk();
+                    } else {
+                        $.callback('retry', $.message());
+                        $.abort();
+                        $.retries++;
+                        var retryInterval = $.getOpt('chunkRetryInterval');
+                        if (retryInterval !== undefined) {
+                            $.pendingRetry = true;
+                            setTimeout($.send, retryInterval);
+                        } else {
+                            $.send();
+                        }
+                    }
+                };
+                $.xhr.addEventListener('load', doneHandler, false);
+                $.xhr.addEventListener('error', doneHandler, false);
+                $.xhr.addEventListener('timeout', doneHandler, false);
+
+                // Set up the basic query data from Resumable
+                var query = {
+                    resumableChunkNumber: $.offset + 1,
+                    resumableChunkSize: $.getOpt('chunkSize'),
+                    resumableCurrentChunkSize: $.endByte - $.startByte,
+                    resumableTotalSize: $.fileObjSize,
+                    resumableType: $.fileObjType,
+                    resumableIdentifier: $.fileObj.uniqueIdentifier,
+                    resumableFilename: $.fileObj.fileName,
+                    resumableRelativePath: $.fileObj.relativePath,
+                    resumableTotalChunks: $.fileObj.chunks.length
+                };
+                // Mix in custom data
+                var customQuery = $.getOpt('query');
+                if (typeof customQuery == 'function') customQuery = customQuery($.fileObj, $);
+                $h.each(customQuery, function (k, v) {
+                    query[k] = v;
+                });
+
+                var func = $.fileObj.file.slice ? 'slice' : $.fileObj.file.mozSlice ? 'mozSlice' : $.fileObj.file.webkitSlice ? 'webkitSlice' : 'slice',
+                    bytes = $.fileObj.file[func]($.startByte, $.endByte),
+                    data = null,
+                    target = $.getOpt('target');
+
+                var parameterNamespace = $.getOpt('parameterNamespace');
+                if ($.getOpt('method') === 'octet') {
+                    // Add data from the query options
+                    data = bytes;
+                    var params = [];
+                    $h.each(query, function (k, v) {
+                        params.push([encodeURIComponent(parameterNamespace + k), encodeURIComponent(v)].join('='));
+                    });
+                    target = $h.getTarget(params);
+                } else {
+                    // Add data from the query options
+                    data = new FormData();
+                    $h.each(query, function (k, v) {
+                        data.append(parameterNamespace + k, v);
+                    });
+                    data.append(parameterNamespace + $.getOpt('fileParameterName'), bytes);
+                }
+
+                var method = $.getOpt('uploadMethod');
+                $.xhr.open(method, target);
+                if ($.getOpt('method') === 'octet') {
+                    $.xhr.setRequestHeader('Content-Type', 'binary/octet-stream');
+                }
+                $.xhr.timeout = $.getOpt('xhrTimeout');
+                $.xhr.withCredentials = $.getOpt('withCredentials');
+                // Add data from header options
+                var customHeaders = $.getOpt('headers');
+                if (typeof customHeaders === 'function') {
+                    customHeaders = customHeaders($.fileObj, $);
+                }
+                $h.each(customHeaders, function (k, v) {
+                    $.xhr.setRequestHeader(k, v);
+                });
+                $.xhr.send(data);
+            };
+            $.abort = function () {
+                // Abort and reset
+                if ($.xhr) $.xhr.abort();
+                $.xhr = null;
+            };
+            $.status = function () {
+                // Returns: 'pending', 'uploading', 'success', 'error'
+                if ($.pendingRetry) {
+                    // if pending retry then that's effectively the same as actively uploading,
+                    // there might just be a slight delay before the retry starts
+                    return 'uploading';
+                } else if (!$.xhr) {
+                    return 'pending';
+                } else if ($.xhr.readyState < 4) {
+                    // Status is really 'OPENED', 'HEADERS_RECEIVED' or 'LOADING' - meaning that stuff is happening
+                    return 'uploading';
+                } else {
+                    if ($.xhr.status == 200 || $.xhr.status == 201) {
+                        // HTTP 200 or 201 (created) perfect
+                        return 'success';
+                    } else if ($h.contains($.getOpt('permanentErrors'), $.xhr.status) || $.retries >= $.getOpt('maxChunkRetries')) {
+                        // HTTP 415/500/501, permanent error
+                        return 'error';
+                    } else {
+                        // this should never happen, but we'll reset and queue a retry
+                        // a likely case for this would be 503 service unavailable
+                        $.abort();
+                        return 'pending';
+                    }
+                }
+            };
+            $.message = function () {
+                return $.xhr ? $.xhr.responseText : '';
+            };
+            $.progress = function (relative) {
+                if (typeof relative === 'undefined') relative = false;
+                var factor = relative ? ($.endByte - $.startByte) / $.fileObjSize : 1;
+                if ($.pendingRetry) return 0;
+                var s = $.status();
+                switch (s) {
+                    case 'success':
+                    case 'error':
+                        return 1 * factor;
+                    case 'pending':
+                        return 0 * factor;
+                    default:
+                        return $.loaded / ($.endByte - $.startByte) * factor;
+                }
+            };
+            return this;
+        }
+
+        // QUEUE
+        $.uploadNextChunk = function () {
+            var found = false;
+
+            // In some cases (such as videos) it's really handy to upload the first
+            // and last chunk of a file quickly; this let's the server check the file's
+            // metadata and determine if there's even a point in continuing.
+            if ($.getOpt('prioritizeFirstAndLastChunk')) {
+                $h.each($.files, function (file) {
+                    if (file.chunks.length && file.chunks[0].status() == 'pending' && file.chunks[0].preprocessState === 0) {
+                        file.chunks[0].send();
+                        found = true;
+                        return false;
+                    }
+                    if (file.chunks.length > 1 && file.chunks[file.chunks.length - 1].status() == 'pending' && file.chunks[file.chunks.length - 1].preprocessState === 0) {
+                        file.chunks[file.chunks.length - 1].send();
+                        found = true;
+                        return false;
+                    }
+                });
+                if (found) return true;
+            }
+
+            // Now, simply look for the next, best thing to upload
+            $h.each($.files, function (file) {
+                if (file.isPaused() === false) {
+                    $h.each(file.chunks, function (chunk) {
+                        if (chunk.status() == 'pending' && chunk.preprocessState === 0) {
+                            chunk.send();
+                            found = true;
+                            return false;
+                        }
+                    });
+                }
+                if (found) return false;
+            });
+            if (found) return true;
+
+            // The are no more outstanding chunks to upload, check is everything is done
+            var outstanding = false;
+            $h.each($.files, function (file) {
+                if (!file.isComplete()) {
+                    outstanding = true;
+                    return false;
+                }
+            });
+            if (!outstanding) {
+                // All chunks have been uploaded, complete
+                $.fire('complete');
+            }
+            return false;
+        };
+
+        // PUBLIC METHODS FOR RESUMABLE.JS
+        $.assignBrowse = function (domNodes, isDirectory) {
+            if (typeof domNodes.length == 'undefined') domNodes = [domNodes];
+
+            $h.each(domNodes, function (domNode) {
+                var input;
+                if (domNode.tagName === 'INPUT' && domNode.type === 'file') {
+                    input = domNode;
+                } else {
+                    input = document.createElement('input');
+                    input.setAttribute('type', 'file');
+                    input.style.display = 'none';
+                    domNode.addEventListener('click', function () {
+                        input.style.opacity = 0;
+                        input.style.display = 'block';
+                        input.focus();
+                        input.click();
+                        input.style.display = 'none';
+                    }, false);
+                    domNode.appendChild(input);
+                }
+                var maxFiles = $.getOpt('maxFiles');
+                if (typeof maxFiles === 'undefined' || maxFiles != 1) {
+                    input.setAttribute('multiple', 'multiple');
+                } else {
+                    input.removeAttribute('multiple');
+                }
+                if (isDirectory) {
+                    input.setAttribute('webkitdirectory', 'webkitdirectory');
+                } else {
+                    input.removeAttribute('webkitdirectory');
+                }
+                // When new files are added, simply append them to the overall list
+                input.addEventListener('change', function (e) {
+                    appendFilesFromFileList(e.target.files, e);
+                    e.target.value = '';
+                }, false);
+            });
+        };
+        $.assignDrop = function (domNodes) {
+            if (typeof domNodes.length == 'undefined') domNodes = [domNodes];
+
+            $h.each(domNodes, function (domNode) {
+                domNode.addEventListener('dragover', preventDefault, false);
+                domNode.addEventListener('dragenter', preventDefault, false);
+                domNode.addEventListener('drop', onDrop, false);
+            });
+        };
+        $.unAssignDrop = function (domNodes) {
+            if (typeof domNodes.length == 'undefined') domNodes = [domNodes];
+
+            $h.each(domNodes, function (domNode) {
+                domNode.removeEventListener('dragover', preventDefault);
+                domNode.removeEventListener('dragenter', preventDefault);
+                domNode.removeEventListener('drop', onDrop);
+            });
+        };
+        $.isUploading = function () {
+            var uploading = false;
+            $h.each($.files, function (file) {
+                if (file.isUploading()) {
+                    uploading = true;
+                    return false;
+                }
+            });
+            return uploading;
+        };
+        $.upload = function () {
+            // Make sure we don't start too many uploads at once
+            if ($.isUploading()) return;
+            // Kick off the queue
+            $.fire('uploadStart');
+            for (var num = 1; num <= $.getOpt('simultaneousUploads'); num++) {
+                $.uploadNextChunk();
+            }
+        };
+        $.pause = function () {
+            // Resume all chunks currently being uploaded
+            $h.each($.files, function (file) {
+                file.abort();
+            });
+            $.fire('pause');
+        };
+        $.cancel = function () {
+            for (var i = $.files.length - 1; i >= 0; i--) {
+                $.files[i].cancel();
+            }
+            $.fire('cancel');
+        };
+        $.progress = function () {
+            var totalDone = 0;
+            var totalSize = 0;
+            // Resume all chunks currently being uploaded
+            $h.each($.files, function (file) {
+                totalDone += file.progress() * file.size;
+                totalSize += file.size;
+            });
+            return totalSize > 0 ? totalDone / totalSize : 0;
+        };
+        $.addFile = function (file, event) {
+            appendFilesFromFileList([file], event);
+        };
+        $.removeFile = function (file) {
+            for (var i = $.files.length - 1; i >= 0; i--) {
+                if ($.files[i] === file) {
+                    $.files.splice(i, 1);
+                }
+            }
+        };
+        $.getFromUniqueIdentifier = function (uniqueIdentifier) {
+            var ret = false;
+            $h.each($.files, function (f) {
+                if (f.uniqueIdentifier == uniqueIdentifier) ret = f;
+            });
+            return ret;
+        };
+        $.getSize = function () {
+            var totalSize = 0;
+            $h.each($.files, function (file) {
+                totalSize += file.size;
+            });
+            return totalSize;
+        };
+        $.handleDropEvent = function (e) {
+            onDrop(e);
+        };
+        $.handleChangeEvent = function (e) {
+            appendFilesFromFileList(e.target.files, e);
+            e.target.value = '';
+        };
+
+        return this;
+    };
+
+    // Node.js-style export for Node and Component
+    if (typeof module != 'undefined') {
+        module.exports = Resumable;
+    } else if (typeof define === "function" && define.amd) {
+        // AMD/requirejs: Define the module
+        define(function () {
+            return Resumable;
+        });
+    } else {
+        // Browser: Expose to window
+        window.Resumable = Resumable;
+    }
+})();
+
+},{}],55:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -5690,9 +7243,19 @@ var _componentsNotFound = require('./components/NotFound');
 
 var _componentsNotFound2 = _interopRequireDefault(_componentsNotFound);
 
+// 投稿
+
 var _componentsPostAnimate = require('./components/PostAnimate');
 
 var _componentsPostAnimate2 = _interopRequireDefault(_componentsPostAnimate);
+
+var _componentsPostMusic = require('./components/PostMusic');
+
+var _componentsPostMusic2 = _interopRequireDefault(_componentsPostMusic);
+
+var _componentsPostArticle = require('./components/PostArticle');
+
+var _componentsPostArticle2 = _interopRequireDefault(_componentsPostArticle);
 
 var _componentsProfileCenter = require('./components/ProfileCenter');
 
@@ -5709,10 +7272,6 @@ var _componentsFollowing2 = _interopRequireDefault(_componentsFollowing);
 var _componentsContribute = require('./components/Contribute');
 
 var _componentsContribute2 = _interopRequireDefault(_componentsContribute);
-
-var _componentsPostArticle = require('./components/PostArticle');
-
-var _componentsPostArticle2 = _interopRequireDefault(_componentsPostArticle);
 
 var _componentsArticle = require('./components/Article');
 
@@ -5792,7 +7351,7 @@ exports['default'] = _react2['default'].createElement(
             _reactRouter.Route,
             { path: '/post' },
             _react2['default'].createElement(_reactRouter.Route, { path: 'animate', handler: _componentsPostAnimate2['default'] }),
-            _react2['default'].createElement(_reactRouter.Route, { path: 'music' }),
+            _react2['default'].createElement(_reactRouter.Route, { path: 'music', handler: _componentsPostMusic2['default'] }),
             _react2['default'].createElement(_reactRouter.Route, { path: 'article', handler: _componentsPostArticle2['default'] })
         )
     ),
@@ -5805,7 +7364,7 @@ exports['default'] = _react2['default'].createElement(
 );
 module.exports = exports['default'];
 
-},{"./components/App":23,"./components/Article":24,"./components/ConArticle":27,"./components/Contribute":29,"./components/Followers":30,"./components/Following":31,"./components/Home":33,"./components/List":34,"./components/Login":35,"./components/Member":36,"./components/NotFound":38,"./components/Notice":39,"./components/PostAnimate":41,"./components/PostArticle":42,"./components/ProfileCenter":43,"./components/Set":44,"./components/StarList":46,"./components/User":48,"react":"react","react-router":"react-router"}],51:[function(require,module,exports){
+},{"./components/App":25,"./components/Article":26,"./components/ConArticle":30,"./components/Contribute":32,"./components/Followers":33,"./components/Following":34,"./components/Home":36,"./components/List":37,"./components/Login":38,"./components/Member":39,"./components/NotFound":41,"./components/Notice":42,"./components/PostAnimate":44,"./components/PostArticle":45,"./components/PostMusic":46,"./components/ProfileCenter":47,"./components/Set":48,"./components/StarList":50,"./components/User":52,"react":"react","react-router":"react-router"}],56:[function(require,module,exports){
 /**
  * Created by apache on 15-11-4.
  */
@@ -5878,7 +7437,85 @@ var ArticleStore = (function () {
 exports['default'] = _alt2['default'].createStore(ArticleStore);
 module.exports = exports['default'];
 
-},{"../actions/ArticleActions":1,"../alt":22}],52:[function(require,module,exports){
+},{"../actions/ArticleActions":1,"../alt":24}],57:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-25.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _actionsBigUploadActions = require('../actions/BigUploadActions');
+
+var _actionsBigUploadActions2 = _interopRequireDefault(_actionsBigUploadActions);
+
+var _resumable = require('../resumable');
+
+var _resumable2 = _interopRequireDefault(_resumable);
+
+var BigUploadStore = (function () {
+    function BigUploadStore() {
+        _classCallCheck(this, BigUploadStore);
+
+        this.bindActions(_actionsBigUploadActions2['default']);
+        this.file = {};
+        this.r = new _resumable2['default']({
+            target: '/api/upload/music',
+            chunkSize: 1 * 1024 * 1024,
+            simultaneousUploads: 4,
+            testChunks: false,
+            throttleProgressCallbacks: 1,
+            generateUniqueIdentifier: null
+        });
+        this.error = '';
+    }
+
+    _createClass(BigUploadStore, [{
+        key: 'onChangeFile',
+        value: function onChangeFile(event) {
+            console.log(event.target.files);
+            var target = this.file = event.target.files[0];
+            console.log(target);
+            var $upload = $("#upload"),
+                accept_type = ['audio/mpeg', 'video/mp4'];
+            if (_.indexOf(accept_type, this.file.type) === -1) {
+                toastr.warning('不支持的格式');
+                this.error = '不支持的格式';
+            } else {
+                this.error = '';
+                var $fileLoader = $('#upload_file_loader');
+                if (!$fileLoader.hasClass('mon-preview-block-o')) {
+                    $("#upload_file_select").removeClass('mon-upload').addClass('mon-upload-o');
+                    $fileLoader.removeClass('mon-preview-block').addClass('mon-preview-block-o');
+                }
+            }
+        }
+    }, {
+        key: 'onPostBgFileSuccess',
+        value: function onPostBgFileSuccess(data) {
+            console.log(data);
+        }
+    }]);
+
+    return BigUploadStore;
+})();
+
+exports['default'] = _alt2['default'].createStore(BigUploadStore);
+module.exports = exports['default'];
+
+},{"../actions/BigUploadActions":2,"../alt":24,"../resumable":54}],58:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -5960,7 +7597,7 @@ var CommentStore = (function () {
 exports['default'] = _alt2['default'].createStore(CommentStore);
 module.exports = exports['default'];
 
-},{"../actions/CommentActions":2,"../alt":22}],53:[function(require,module,exports){
+},{"../actions/CommentActions":3,"../alt":24}],59:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -6022,7 +7659,7 @@ var ConListStore = (function () {
 exports['default'] = _alt2['default'].createStore(ConListStore);
 module.exports = exports['default'];
 
-},{"../actions/ConListActions":3,"../alt":22}],54:[function(require,module,exports){
+},{"../actions/ConListActions":4,"../alt":24}],60:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -6057,7 +7694,7 @@ var ContributeStore = function ContributeStore() {
 exports['default'] = _alt2['default'].createStore(ContributeStore);
 module.exports = exports['default'];
 
-},{"../actions/ContributeActions":4,"../alt":22}],55:[function(require,module,exports){
+},{"../actions/ContributeActions":5,"../alt":24}],61:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -6158,7 +7795,7 @@ var FollowersStore = (function () {
 exports['default'] = _alt2['default'].createStore(FollowersStore);
 module.exports = exports['default'];
 
-},{"../actions/FollowersActions":5,"../alt":22}],56:[function(require,module,exports){
+},{"../actions/FollowersActions":6,"../alt":24}],62:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -6238,7 +7875,7 @@ var FollowingStore = (function () {
 exports['default'] = _alt2['default'].createStore(FollowingStore);
 module.exports = exports['default'];
 
-},{"../actions/FollowingActions":6,"../alt":22}],57:[function(require,module,exports){
+},{"../actions/FollowingActions":7,"../alt":24}],63:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -6287,7 +7924,7 @@ var HomeStore = (function () {
 exports['default'] = _alt2['default'].createStore(HomeStore);
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":7,"../alt":22}],58:[function(require,module,exports){
+},{"../actions/HomeActions":8,"../alt":24}],64:[function(require,module,exports){
 /**
  * Created by apache on 15-11-10.
  */
@@ -6340,7 +7977,7 @@ var ListStore = (function () {
 exports['default'] = _alt2['default'].createStore(ListStore);
 module.exports = exports['default'];
 
-},{"../actions/ListActions":8,"../alt":22}],59:[function(require,module,exports){
+},{"../actions/ListActions":9,"../alt":24}],65:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -6474,7 +8111,7 @@ var LoginStore = (function () {
 exports['default'] = _alt2['default'].createStore(LoginStore);
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":9,"../alt":22}],60:[function(require,module,exports){
+},{"../actions/LoginActions":10,"../alt":24}],66:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -6543,7 +8180,7 @@ var MemberStore = (function () {
 exports['default'] = _alt2['default'].createStore(MemberStore);
 module.exports = exports['default'];
 
-},{"../actions/MemberActions":10,"../alt":22}],61:[function(require,module,exports){
+},{"../actions/MemberActions":11,"../alt":24}],67:[function(require,module,exports){
 /**
  * Created by apache on 15-10-25.
  */
@@ -6621,7 +8258,7 @@ var NavStore = (function () {
 exports['default'] = _alt2['default'].createStore(NavStore);
 module.exports = exports['default'];
 
-},{"../actions/NavActions":11,"../alt":22}],62:[function(require,module,exports){
+},{"../actions/NavActions":12,"../alt":24}],68:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -6665,7 +8302,7 @@ var NoticeStore = (function () {
 exports['default'] = _alt2['default'].createStore(NoticeStore);
 module.exports = exports['default'];
 
-},{"../actions/NoticeActions":12,"../alt":22}],63:[function(require,module,exports){
+},{"../actions/NoticeActions":13,"../alt":24}],69:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -6696,7 +8333,7 @@ var PaginationStore = function PaginationStore() {
 exports['default'] = _alt2['default'].createStore(PaginationStore);
 module.exports = exports['default'];
 
-},{"../actions/PaginationActions":13,"../alt":22}],64:[function(require,module,exports){
+},{"../actions/PaginationActions":14,"../alt":24}],70:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -6740,7 +8377,7 @@ var PostAnimateStore = (function () {
 exports['default'] = _alt2['default'].createStore(PostAnimateStore);
 module.exports = exports['default'];
 
-},{"../actions/PostAnimateActions":14,"../alt":22}],65:[function(require,module,exports){
+},{"../actions/PostAnimateActions":15,"../alt":24}],71:[function(require,module,exports){
 /**
  * Created by apache on 15-11-3.
  */
@@ -6798,7 +8435,6 @@ var PostArticleStore = (function () {
             tags.map(function (data) {
                 _this.tag.push(data);
             });
-            console.log(this.tag);
         }
     }, {
         key: 'onChangeContent',
@@ -6829,7 +8465,92 @@ var PostArticleStore = (function () {
 exports['default'] = _alt2['default'].createStore(PostArticleStore);
 module.exports = exports['default'];
 
-},{"../actions/PostArticleActions":15,"../alt":22}],66:[function(require,module,exports){
+},{"../actions/PostArticleActions":16,"../alt":24}],72:[function(require,module,exports){
+/**
+ * Created by apache on 15-11-25.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _actionsPostMusicActions = require('../actions/PostMusicActions');
+
+var _actionsPostMusicActions2 = _interopRequireDefault(_actionsPostMusicActions);
+
+var PostMusicStore = (function () {
+    function PostMusicStore() {
+        _classCallCheck(this, PostMusicStore);
+
+        this.bindActions(_actionsPostMusicActions2['default']);
+        this.title; // 标题
+        this.music_url; //　音乐地址
+        this.tags = []; // 标签
+        this.avatar_url; //　封面图
+    }
+
+    _createClass(PostMusicStore, [{
+        key: 'onChangeTitle',
+        value: function onChangeTitle(event) {
+            this.title = event.target.value;
+        }
+    }, {
+        key: 'onChangeMusicUrl',
+        value: function onChangeMusicUrl(url) {
+            this.music_url = url;
+        }
+    }, {
+        key: 'onChangeTags',
+        value: function onChangeTags(event) {
+            var _this = this;
+
+            var tags = event.target.value.replace(/\s+/g, ",");
+            tags = tags.split(',');
+            this.tag = [];
+            tags.map(function (data) {
+                _this.tag.push(data);
+            });
+        }
+    }, {
+        key: 'onChangeAvatar',
+        value: function onChangeAvatar(url) {
+            this.avatar_url = url;
+        }
+    }, {
+        key: 'onPostMusicSuccess',
+        value: function onPostMusicSuccess(data) {
+            switch (data.code) {
+                case 200:
+                    toastr.success('分享成功');
+                    break;
+                case 404:
+                    toastr.warning('用户不存在');
+                    break;
+                case 500:
+                    toastr.error('服务器错误');
+                    break;
+            }
+        }
+    }]);
+
+    return PostMusicStore;
+})();
+
+exports['default'] = _alt2['default'].createStore(PostMusicStore);
+module.exports = exports['default'];
+
+},{"../actions/PostMusicActions":17,"../alt":24}],73:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -6860,7 +8581,7 @@ var ProfileCenterStore = function ProfileCenterStore() {
 exports['default'] = _alt2['default'].createStore(ProfileCenterStore);
 module.exports = exports['default'];
 
-},{"../actions/ProfileCenterActions":16,"../alt":22}],67:[function(require,module,exports){
+},{"../actions/ProfileCenterActions":18,"../alt":24}],74:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -7014,7 +8735,7 @@ var SetStore = (function () {
 exports['default'] = _alt2['default'].createStore(SetStore);
 module.exports = exports['default'];
 
-},{"../actions/SetActions":17,"../alt":22}],68:[function(require,module,exports){
+},{"../actions/SetActions":19,"../alt":24}],75:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -7076,7 +8797,7 @@ var StarListStore = (function () {
 exports['default'] = _alt2['default'].createStore(StarListStore);
 module.exports = exports['default'];
 
-},{"../actions/StarListActions":19,"../alt":22}],69:[function(require,module,exports){
+},{"../actions/StarListActions":21,"../alt":24}],76:[function(require,module,exports){
 /**
  * Created by apache on 15-11-15.
  */
@@ -7179,7 +8900,7 @@ var StarStore = (function () {
 exports['default'] = _alt2['default'].createStore(StarStore);
 module.exports = exports['default'];
 
-},{"../actions/StarActions":18,"../alt":22}],70:[function(require,module,exports){
+},{"../actions/StarActions":20,"../alt":24}],77:[function(require,module,exports){
 /**
  * Created by apache on 15-11-22.
  */
@@ -7223,18 +8944,12 @@ var UploadStore = (function () {
     }
 
     _createClass(UploadStore, [{
-        key: 'heh',
-        value: function heh() {
-            console.log('hehe');
-        }
-    }, {
         key: 'onChangeFile',
         value: function onChangeFile(event) {
             var _this = this;
 
-            var target = $("#uploader").get(0).files[0];
-            this.file = target;
-
+            var target = this.file = event.target.files[0];
+            console.log(target);
             var croper,
                 isChange = false;
 
@@ -7279,7 +8994,7 @@ var UploadStore = (function () {
 exports['default'] = _alt2['default'].createStore(UploadStore);
 module.exports = exports['default'];
 
-},{"../actions/UploadActions":20,"../alt":22,"underscore":"underscore"}],71:[function(require,module,exports){
+},{"../actions/UploadActions":22,"../alt":24,"underscore":"underscore"}],78:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -7347,7 +9062,7 @@ var UserStore = (function () {
 exports['default'] = _alt2['default'].createStore(UserStore);
 module.exports = exports['default'];
 
-},{"../actions/UserActions.js":21,"../alt":22}],72:[function(require,module,exports){
+},{"../actions/UserActions.js":23,"../alt":24}],79:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -7372,7 +9087,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],73:[function(require,module,exports){
+},{}],80:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -7465,14 +9180,14 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],74:[function(require,module,exports){
+},{}],81:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],75:[function(require,module,exports){
+},{}],82:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -8062,12 +9777,12 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":74,"_process":73,"inherits":72}],76:[function(require,module,exports){
+},{"./support/isBuffer":81,"_process":80,"inherits":79}],83:[function(require,module,exports){
 // super simple module for the most common nodejs use case.
 exports.markdown = require("./markdown");
 exports.parse = exports.markdown.toHTML;
 
-},{"./markdown":77}],77:[function(require,module,exports){
+},{"./markdown":84}],84:[function(require,module,exports){
 // Released under MIT license
 // Copyright (c) 2009-2010 Dominic Baggott
 // Copyright (c) 2009-2010 Ash Berlin
@@ -9794,4 +11509,4 @@ function merge_text_nodes( jsonml ) {
   }
 } )() );
 
-},{"util":75}]},{},[49]);
+},{"util":82}]},{},[53]);

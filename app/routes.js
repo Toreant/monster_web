@@ -11,12 +11,15 @@ import Set from './components/Set';
 import Notice from './components/Notice';
 import StarList from './components/StarList';
 import NotFound from './components/NotFound';
+// 投稿
 import PostAnimate from './components/PostAnimate';
+import PostMusic from './components/PostMusic';
+import PostArticle from './components/PostArticle';
+
 import ProfileCenter from './components/ProfileCenter';
 import Followers from './components/Followers';
 import Following from './components/Following';
 import Contribute from './components/Contribute';
-import PostArticle from './components/PostArticle';
 import Article from './components/Article';
 import List from './components/List';
 import Member from './components/Member';
@@ -67,7 +70,7 @@ export default (
             <Route path='star' handler={StarList} />
             <Route path='/post'>
                 <Route path='animate' handler={PostAnimate}/>
-                <Route path='music' />
+                <Route path='music' handler={PostMusic}/>
                 <Route path='article' handler={PostArticle}/>
             </Route>
         </Route>

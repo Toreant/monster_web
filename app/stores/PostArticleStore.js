@@ -29,7 +29,6 @@ class PostArticleStore {
         tags.map((data) => {
             this.tag.push(data);
         });
-        console.log(this.tag);
     }
 
     onChangeContent(event) {

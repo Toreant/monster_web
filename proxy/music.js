@@ -55,6 +55,9 @@ class md {
 
             //　查找用户是否存在
             function(_callback) {
+                if(!where._id.match(/^[0-9a-fA-F]{24}$/)) {
+                    return callback(404);
+                }
                 User.findOne(where,(err,user) => {
                     if(err) {
                         return callback(500);
