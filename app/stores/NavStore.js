@@ -30,19 +30,31 @@ class NavStore {
     }
 
     onSignOutSuccess(data) {
-        console.log(data);
         if(data.code === 200) {
-            let localStorage = window.localStorage;
-            localStorage.setItem('user','');
+            let localStorage = window.localStorage,
+                sessionStorage = window.sessionStorage;
+
+            // 设置数据归零
+            localStorage.setItem('user',null);
+            sessionStorage.setItem('profile',null);
+
             window.location = '/';
         } else if(data.code === 400) {
             toastr.error('退出不成功');
-        } else if(data.code === 406) {}
-        toastr.warning('你还没登陆');
+        } else if(data.code === 406) {
+            toastr.warning('你还没登陆');
+        }
     }
 
     onSignOutFail() {
         toastr.error("服务器错误");
+    }
+
+    onGetProfileLocal(data) {
+        this.loginState = true;
+        this.userName = data.username ;
+        this.avatar = data._json === undefined ? data.avatar_url : data._json.avatar_url;
+        this.domain = data._json === undefined ? data.domain : data._json.username;
     }
 }
 

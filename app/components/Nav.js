@@ -42,13 +42,13 @@ class Nav extends React.Component {
                         </a>
                         <ul className="dropdown-menu">
                             <li>
-                                <a href='/profile' className='mon-user'>
+                                <Link to='/profile' className='mon-user'>
                                     <span>Signed as </span>
                                     <span>{this.state.userName}</span>
-                                </a>
+                                </Link>
                             </li>
-                            <li><a href='/profile/setting'>设置</a></li>
-                            <li><a href='/profile/notice'>通知</a></li>
+                            <li><Link to='/profile/setting'>设置</Link></li>
+                            <li><Link to='/profile/notice'>通知</Link></li>
                             <li role="separator" className="divider"></li>
                             <li><a href="javascript:;" onClick={this.signOut.bind(this)}>退出</a></li>
                         </ul>

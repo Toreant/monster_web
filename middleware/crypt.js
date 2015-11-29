@@ -13,6 +13,12 @@ class crypt {
     }
 
     //
+    getShaString(str) {
+        let sha = crypto.createHash("sha1");
+        sha.update(str);
+        str = sha.digest('hex');
+        return str;
+    }
 }
 
 export default new crypt();
