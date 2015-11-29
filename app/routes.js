@@ -25,6 +25,8 @@ import List from './components/List';
 import Member from './components/Member';
 import ConArticle from './components/ConArticle';
 
+import Music from './components/Music';
+
 export default (
     <Route handler={App}>
         <Route path='/' handler={Home} />
@@ -32,6 +34,10 @@ export default (
 
         <Route path='/article'>
             <Route path=':id' handler={Article} />
+        </Route>
+
+        <Route path="/music">
+            <Route path=":id" handler={Music} />
         </Route>
 
         <Route path='/member' handler={Member}>

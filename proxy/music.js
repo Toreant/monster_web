@@ -13,11 +13,11 @@ class md {
      * 通过id号找到
      * @param id
      */
-    getMusicById(id,callback) {
+    getMusicById(id,option,callback) {
         if(!id.match(/^[0-9a-fA-F]{24}$/)) {
             return callback(null);
         } else {
-            Music.findById(id,(err,music) => {
+            Music.findById(id,null,option,(err,music) => {
                 if(err) {
                     return callback(500);
                 } else {

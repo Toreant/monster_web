@@ -55,8 +55,6 @@ class ArticleCtrl {
                 raw : null
             };
 
-            console.log(data);
-
             if(data === null) {
                 result.meta = '找不到这个文章';
                 result.code = 400;

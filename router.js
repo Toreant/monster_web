@@ -105,5 +105,6 @@ router.delete('/api/upload/:column',auth.isAuth,multipart(),function(req,res,nex
 // 音乐
 router.post('/api/music',auth.isAuth,MusicCtrl.postMusic);
 
+router.get('/api/music/:id',MusicCtrl.getMusic);
 
 export default router;

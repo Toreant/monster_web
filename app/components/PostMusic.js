@@ -27,16 +27,19 @@ class PostMusic extends React.Component {
     }
 
     handleClick() {
-        let $music= $('#music_file');
-        if($music.text() === '') {
-            $("#upload_music").addClass('disabled');
-        } else {
-            $("#upload_music").removeClass('disabled');
-            let music_url = '/upload/'+$('#music_file').text(),
-                avatar_url = $("#upload_album_img").attr('src');
-            PostMusicActions.postMusic(this.state.title,this.state.tags,music_url,avatar_url);
-        }
-
+        //let $music= $('#music_file');
+        //console.log($music.text());
+        //if($music.text() === '') {
+        //    $("#upload_music").addClass('disabled');
+        //} else {
+        //    $("#upload_music").removeClass('disabled');
+        //    let music_url = '/upload/'+$('#music_file').text(),
+        //        avatar_url = $("#upload_album_img").attr('src');
+        //    PostMusicActions.postMusic(this.state.title,this.state.tags,music_url,avatar_url);
+        //}
+        let music_url = '/upload/'+$('#music_file').text(),
+            avatar_url = $("#upload_album_img").attr('src');
+        PostMusicActions.postMusic(this.state.title,this.state.tags,music_url,avatar_url);
     }
 
     render() {
@@ -84,7 +87,7 @@ class PostMusic extends React.Component {
                             <img src="/img/cover-night.png" id='upload_album_img' width='120' alt="loading" />
                         </div>
                     </div>
-                    <a href="javascript:;" id="upload_music" className='btn btn-success disabled pull-right mon-post-btn' onClick={this.handleClick.bind(this)}>
+                    <a href="javascript:;" id="upload_music" className='btn btn-success pull-right mon-post-btn' onClick={this.handleClick.bind(this)}>
                         <span className='fa fa-check-circle-o'></span>
                         提交稿件
                     </a>

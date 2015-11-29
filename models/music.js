@@ -14,6 +14,7 @@ var MusicSchema = new Schema({
     stars : {type : Number,default : 0},
     browser_count : {type : Number,default :0},
     create_user_id : {type : String},
+    create_time : {type: Number},
     lyric : {type : String},
     comment : [String]
 });

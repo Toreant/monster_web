@@ -4,11 +4,15 @@
 import React from 'react';
 
 class NotFound extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
-            <div className='container'>
-                <div className='row'>
-                    404 Not Found
+            <div className=''>
+                <div className=''>
+                    {this.props.text}
                 </div>
             </div>
         );

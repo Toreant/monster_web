@@ -1,0 +1,48 @@
+.mon-music {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 10px #999;
+  & img {
+    width: 360px;
+  }
+}
+
+.mon-music-block {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  & a {
+    font-size: 80px;
+    display: flex;
+    color: #999;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    vertical-align: middle;
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: none;
+      color: #ddd;
+    }
+    &:hover {
+      background: rgba(10,10,10,0.1);
+    }
+  }
+  & a:nth-child(1) {
+    display: none !important;
+  }
+}
+
+.mon-music-url {
+  display: none;
+}
+
+.mon-music-tags {
+  &>span {
+    margin: 10px;
+  }
+}
