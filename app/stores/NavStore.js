@@ -30,13 +30,15 @@ class NavStore {
     }
 
     onSignOutSuccess(data) {
+        console.log(data);
         if(data.code === 200) {
             let localStorage = window.localStorage;
             localStorage.setItem('user','');
             window.location = '/';
         } else if(data.code === 400) {
             toastr.error('退出不成功');
-        }
+        } else if(data.code === 406) {}
+        toastr.warning('你还没登陆');
     }
 
     onSignOutFail() {

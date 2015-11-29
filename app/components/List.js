@@ -20,6 +20,8 @@ class List extends React.Component {
     }
 
     componentWillUnmount() {
+        console.log('hehe');
+        $("#lists").removeClass('fadeInUp');
         ListStore.unlisten(this.onChange);
     }
 
@@ -34,7 +36,19 @@ class List extends React.Component {
     }
 
     render() {
-        let Offset;
+        let Offset,
+            column;
+        switch(this.props.params.column) {
+            case 'articles' :
+                column = '/article/';
+                break;
+            case 'musics' :
+                column = '/music/';
+                break;
+            case 'animates' :
+                column = '/animate/';
+                break;
+        }
         switch(this.props.params.column) {
             case 'animates' :
                 Offset = (
@@ -70,8 +84,8 @@ class List extends React.Component {
         }
         let List = this.state.list.map((data) => {
             return (
-                <li key={data.data._id}>
-                    <Link  to={'/article/'+data.data._id} className='mon-top'>
+                <li key={data.data._id} className="animated fadeInUp">
+                    <Link  to={column+data.data._id} className='mon-top'>
                         <div className='mon-overlay'>
                             <img className='img-response' src={data.data.abbreviations || '/img/abbreviations.png'} alt="loading"/>
                         </div>
@@ -106,7 +120,7 @@ class List extends React.Component {
             </div>
         );
         return (
-            <div className='container animated fadeInUp'>
+            <div id="lists" className='container'>
                 <div className='row'>
                     <div className='col-md-8 col-md-offset-2'>
                         <ul className='nav'>

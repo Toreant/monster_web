@@ -23,7 +23,7 @@ class StarStore {
             case 304 :
                 toastr.warning('你已经收藏过了');
                 break;
-            case 400 :
+            case 406 :
                 toastr.warning('你还没登陆');
                 break;
             case 404 :

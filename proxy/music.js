@@ -44,6 +44,69 @@ class md {
     }
 
     /**
+     * 获取音乐列表
+     * @param option
+     * @param callback
+     */
+    getMusics(option,params,callback) {
+        async.waterfall([
+            // 获取音乐列表
+            function(_callback) {
+                Music.find(params,null,option,(err,docs) => {
+                    if(err) {
+                        return callback(500);
+                    } else {
+                        _callback(null,docs);
+                    }
+                });
+            },
+
+            // 获取发布音乐的用户
+            function(docs,_callback) {
+                if(docs === undefined || docs === null) {
+                    return callback(null);
+                } else {
+                    let createUserIds = [];
+                    for(let i =0, len = docs.length; i < len; i++) {
+                        createUserIds.push(docs[i].create_user_id);
+                    }
+                    _callback(null,docs,createUserIds);
+                }
+            },
+
+            function(docs,createUserIds,_callback) {
+                User.find({_id : {$in : createUserIds}},(err,users) => {
+                    console.log(err);
+                    if(err) {
+                        return callback(500);
+                    } else {
+                        _callback(null,docs,users);
+                    }
+                });
+            },
+
+            // 将音乐和用户结合起来
+            function(docs,users,_callback) {
+                let result = [];
+                for(let i = 0, len = docs.length; i < len; i++) {
+                    let item = {};
+                    item.data = docs[i];
+                    for(let j = 0, num = users.length; j < num; j++) {
+                        if(docs[i].create_user_id == users[j]._id) {
+                            item.user = users[j];
+                            break;
+                        }
+                    }
+                    result.push(item);
+                }
+                _callback(null,{ _raw : result,count : result.length});
+            }
+        ],(err,result) => {
+            return callback(result);
+        });
+    }
+
+    /**
      * 上传音乐资料
      * @param params
      * @param where

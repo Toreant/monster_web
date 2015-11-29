@@ -160,7 +160,7 @@ class resumable {
         options.end = (typeof options['end'] == 'undefined' ? true : options['end']);
 
         // Iterate over each chunk
-        var pipeChunk = function (number) {
+        var pipeChunk = (number) => {
 
             var chunkFilename = this.getChunkFilename(number, identifier);
             fs.exists(chunkFilename, function (exists) {

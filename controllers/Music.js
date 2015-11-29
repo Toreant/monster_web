@@ -4,6 +4,7 @@
 import Music from '../proxy/music';
 import User from '../proxy/user';
 import async from 'async';
+import _ from 'underscore';
 
 class MusicCtrl {
 
@@ -45,7 +46,6 @@ class MusicCtrl {
      */
     getMusic(req,res,next) {
         let id = req.params.id;
-        console.log(id);
 
         let result = {
             meta : '',
@@ -58,7 +58,7 @@ class MusicCtrl {
             // 获取音乐
             function(_callback) {
                 Music.getMusicById(id,{},(data) => {
-                   _callback(null,data);
+                    _callback(null,data);
                 });
             },
 
@@ -69,15 +69,49 @@ class MusicCtrl {
                 } else {
                     User.getUserById([music.create_user_id],{},(data) => {
                         if(data === 500) {
-                            _callback(null,null,500);
+                            _callback(null,{music : music,user :500});
                         } else {
                             _callback(null,{music : music,user : data[0]});
                         }
                     });
                 }
+            },
+
+            // 判断用户是否收藏了这个音乐
+            function(data,_callback) {
+                let local_user = req.session.user;
+
+                if(local_user === undefined) {
+
+                    // 未登陆的当做还没收藏
+                    data.stared = false;
+                    _callback(null,data);
+                } else if(local_user !== undefined && data.music !== null && data.music !== 500 ){
+
+                    // 查找用户
+                    User.getUser({ _id : local_user._id },(user) => {
+
+                        if(user === 500) {
+                            _callback(null,500);
+                        } else if(_.indexOf(user[0].star,data.music._id.toString()) !== -1) {
+
+                            // 这首歌在用户的收藏列表中
+                            data.stared = true;
+                            _callback(null, data);
+                        } else {
+                            data.stared = false;
+                            _callback(null,data);
+                        }
+                    });
+                } else {
+
+                    // 音乐查找有问题，当做为收藏
+                    data.stared = false;
+                    _callback(null,data);
+                }
             }
         ],(err,data) => {
-            if(data.music === 500 || data.user === 500) {
+            if( data === 500 || data.music === 500 || data.user === 500) {
                 result.meta = '服务器错误';
                 result.code = 500;
             } else if (data.music === null){
@@ -90,6 +124,40 @@ class MusicCtrl {
             }
             res.status(result.code).json(result);
         });
+    }
+
+
+    /**
+     * 获取音乐列表
+     * @param req
+     * @param res
+     * @param next
+     */
+    getMusics(req,res,next) {
+        let option = req.body.option,
+            params = req.body.params;
+        if(params === undefined) {
+            Music.getMusics(option,params,(data) => {
+                let result = {
+                    meta : '',
+                    code : 0,
+                    raw  : null
+                };
+                if(data === 500) {
+                    result.meta = '服务器错误';
+                    result.code = 500;
+                } else if(data === null) {
+                    result.meta = '没有找到音乐';
+                    result.code = 404;
+                } else {
+                    result.meta = '查找音乐成功';
+                    result.code = 200;
+                    result.raw  = data;
+                }
+
+                res.json(result);
+            });
+        }
     }
 }
 

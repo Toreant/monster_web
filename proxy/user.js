@@ -66,7 +66,7 @@ class md {
      * @param name
      * @param callback
      */
-    getUser(where, callback) {
+    getUser(where,callback) {
         User.find(where, (err, docs) => {
             if (err) callback(err);
             else callback(docs);
@@ -94,7 +94,8 @@ class md {
      * @param callback
      */
     getUserById(arrayId,option,callback) {
-        User.find({_id : {$in : arrayId}},'username introduce domain avatar_url',option,(err,docs) => {
+        User.find({_id : {$in : arrayId}},'username introduce domain avatar_url star followers following contribute' +
+            ' star_music star_aricle star_animate',option,(err,docs) => {
             if(err) {
                 callback(500);
             } else {

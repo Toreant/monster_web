@@ -38,7 +38,7 @@ class Comment extends React.Component {
         let params = {
             content : this.state.comment,
             create_time : new Date().getTime(),
-            type : 'article',
+            type : this.props.type,
             con_id : this.props.id
         };
 
@@ -65,13 +65,13 @@ class Comment extends React.Component {
                 return (
                     <li key={data.comment._id} className='clearfix mon-comment-item'>
                         <div className='col-md-1'>
-                            <Link to={'/u/'+data.user.domain}>
+                            <Link to={'/member/'+data.user.domain}>
                                 <img src={data.user.avatar_url} alt="loading" width='40'/>
                             </Link>
                         </div>
                         <div className='col-md-11'>
                             <div>
-                                <Link to={'/u/'+data.user.domain} className='mon-user-name'>
+                                <Link to={'/member/'+data.user.domain} className='mon-user-name'>
                                     {data.user.username}
                                 </Link>
                                 <span className='pull-right'>{new Date(data.comment.create_time).toLocaleDateString()}</span>

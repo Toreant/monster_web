@@ -76,7 +76,7 @@ class Article extends React.Component {
                             {Tags}
                         </div>
                         <Star star={this.props.params.id} column='article' stared={this.state.stared} />
-                        <Comment id={this.props.params.id}/>
+                        <Comment id={this.props.params.id} type="article"/>
                     </div>
                     <div className='col-md-4 col-sm-4 mon-offset'>
                         <div className='panel panel-default'>

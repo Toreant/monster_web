@@ -18,11 +18,11 @@ class MusicStore {
         this.tags = [];
         this.finded = true;
         this.loading = true;
-        this.error = ''
+        this.error = '';
+        this.stared = false;
     }
 
     onGetMusicSuccess(data) {
-        console.log(data);
         if(data.code === 200) {
             this.avatar_url = data.raw.music.avatar_url;
             this.music = data.raw.music.music_url;
@@ -34,6 +34,7 @@ class MusicStore {
             this.create_user_domain = data.raw.user.domain;
             this.create_user_introduce = data.raw.user.introduce;
             this.loading = false;
+            this.stared = data.raw.stared.toString();
         } else if(data.code === 404) {
             this.finded = false;
             this.loading = false;

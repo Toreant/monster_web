@@ -92,7 +92,6 @@ router.post('/api/upload/:column',auth.isAuth,multipart(),function(req,res,next)
 });
 
 router.delete('/api/upload/:column',auth.isAuth,multipart(),function(req,res,next) {
-    console.log(req.body);
     resumable.clean(req.body.identifier,function() {
         res.status(200).json({
             meta : '取消上传成功',
@@ -101,10 +100,17 @@ router.delete('/api/upload/:column',auth.isAuth,multipart(),function(req,res,nex
     });
 });
 
+// 获取上传的资源
+router.get('/upload/:identifier',function(req,res,next) {
+    resumable.write(req.params.identifier,res);
+});
+
 
 // 音乐
 router.post('/api/music',auth.isAuth,MusicCtrl.postMusic);
 
 router.get('/api/music/:id',MusicCtrl.getMusic);
+
+router.post('/api/musics',MusicCtrl.getMusics);
 
 export default router;

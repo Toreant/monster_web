@@ -7,6 +7,7 @@ import MusicStore from '../stores/MusicStore';
 import Loading from './Loading';
 import NotFount from './NotFound';
 import Comment from './Comment';
+import Star from './Star';
 
 class Music extends React.Component {
     constructor(props) {
@@ -55,6 +56,7 @@ class Music extends React.Component {
         } else if(!this.state.loading && !this.state.finded) {
             Target = <NotFount text={this.state.error} />
         } else {
+            // 标签
             Tags = this.state.tags.map((data,index) => {
                 return (
                     <span key={index} className="label label-info">
@@ -68,24 +70,32 @@ class Music extends React.Component {
                     <p className="text-primary mon-bg-title">
                         {this.state.title}
                     </p>
-                    <div className="mon-music col-md-6">
-                        <img src={this.state.avatar_url} alt="loading"/>
-                        <div className="mon-music-block">
-                            <audio ref="music" className="mon-music-url" src={this.state.music+'.1'} controls="controls"></audio>
-                            <a href="javascript:;" id="music_play" onClick={this.play.bind(this)}>
-                                <span className="fa fa-play"></span>
-                            </a>
-                            <a href="javascript:;" id="music_pause" onClick={this.pause.bind(this)}>
-                                <span className="fa fa-pause"></span>
-                            </a>
+                    <div className="raw clearfix">
+                        <div className="mon-music col-md-6">
+                            <img src={this.state.avatar_url} alt="loading"/>
+                            <div className="mon-music-block">
+                                <audio ref="music" id="music" className="mon-music-url" src={this.state.music}></audio>
+                                <a href="javascript:;" id="music_play" onClick={this.play.bind(this)}>
+                                    <span className="fa fa-play"></span>
+                                </a>
+                                <a href="javascript:;" id="music_pause" onClick={this.pause.bind(this)}>
+                                    <span className="fa fa-pause"></span>
+                                </a>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <p className="text-info">
+                                dsdsd
+                            </p>
                         </div>
                     </div>
-                    <div className="col-md-6">
-                        <p className="text-info">
-                            dsdsd
-                        </p>
+                    <div className="raw mon-music-tags">
+                        {Tags}
                     </div>
-
+                    <Star star={this.props.params.id} column='music' stared={this.state.stared} />
+                    <div className="raw">
+                        <Comment id={this.props.params.id} type="music"/>
+                    </div>
                 </div>
             );
 
@@ -118,9 +128,6 @@ class Music extends React.Component {
             <div className="container animated fadeInUp">
                 {Target}
                 {User}
-                <div className="container mon-music-tags">
-                    {Tags}
-                </div>
             </div>
         );
     }

@@ -13,6 +13,7 @@ class ListStore {
     }
 
     onGetListSuccess(data) {
+        console.log(data);
         if(data.code === 200) {
             this.list = data.raw._raw;
             this.count = data.raw.count;

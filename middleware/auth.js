@@ -8,7 +8,10 @@ class auth {
         if(req.session.user !== undefined) {
             next();
         } else {
-            res.json({meta : '你还没登陆',code : 406});
+            res.json({
+                meta : '你还没登陆',
+                code : 406
+            });
         }
     }
 

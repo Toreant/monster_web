@@ -1761,7 +1761,7 @@ var Article = (function (_React$Component) {
                             Tags
                         ),
                         _react2['default'].createElement(_Star2['default'], { star: this.props.params.id, column: 'article', stared: this.state.stared }),
-                        _react2['default'].createElement(_Comment2['default'], { id: this.props.params.id })
+                        _react2['default'].createElement(_Comment2['default'], { id: this.props.params.id, type: 'article' })
                     ),
                     _react2['default'].createElement(
                         'div',
@@ -2283,7 +2283,7 @@ var Comment = (function (_React$Component) {
             var params = {
                 content: this.state.comment,
                 create_time: new Date().getTime(),
-                type: 'article',
+                type: this.props.type,
                 con_id: this.props.id
             };
 
@@ -2317,7 +2317,7 @@ var Comment = (function (_React$Component) {
                             { className: 'col-md-1' },
                             _react2['default'].createElement(
                                 _reactRouter.Link,
-                                { to: '/u/' + data.user.domain },
+                                { to: '/member/' + data.user.domain },
                                 _react2['default'].createElement('img', { src: data.user.avatar_url, alt: 'loading', width: '40' })
                             )
                         ),
@@ -2329,7 +2329,7 @@ var Comment = (function (_React$Component) {
                                 null,
                                 _react2['default'].createElement(
                                     _reactRouter.Link,
-                                    { to: '/u/' + data.user.domain, className: 'mon-user-name' },
+                                    { to: '/member/' + data.user.domain, className: 'mon-user-name' },
                                     data.user.username
                                 ),
                                 _react2['default'].createElement(
@@ -3461,6 +3461,8 @@ var List = (function (_React$Component) {
     }, {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
+            console.log('hehe');
+            $("#lists").removeClass('fadeInUp');
             _storesListStore2['default'].unlisten(this.onChange);
         }
     }, {
@@ -3478,7 +3480,19 @@ var List = (function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var Offset = undefined;
+            var Offset = undefined,
+                column = undefined;
+            switch (this.props.params.column) {
+                case 'articles':
+                    column = '/article/';
+                    break;
+                case 'musics':
+                    column = '/music/';
+                    break;
+                case 'animates':
+                    column = '/animate/';
+                    break;
+            }
             switch (this.props.params.column) {
                 case 'animates':
                     Offset = _react2['default'].createElement(
@@ -3523,10 +3537,10 @@ var List = (function (_React$Component) {
             var List = this.state.list.map(function (data) {
                 return _react2['default'].createElement(
                     'li',
-                    { key: data.data._id },
+                    { key: data.data._id, className: 'animated fadeInUp' },
                     _react2['default'].createElement(
                         _reactRouter.Link,
-                        { to: '/article/' + data.data._id, className: 'mon-top' },
+                        { to: column + data.data._id, className: 'mon-top' },
                         _react2['default'].createElement(
                             'div',
                             { className: 'mon-overlay' },
@@ -3583,7 +3597,7 @@ var List = (function (_React$Component) {
             );
             return _react2['default'].createElement(
                 'div',
-                { className: 'container animated fadeInUp' },
+                { id: 'lists', className: 'container' },
                 _react2['default'].createElement(
                     'div',
                     { className: 'row' },
@@ -4186,6 +4200,10 @@ var _Comment = require('./Comment');
 
 var _Comment2 = _interopRequireDefault(_Comment);
 
+var _Star = require('./Star');
+
+var _Star2 = _interopRequireDefault(_Star);
+
 var Music = (function (_React$Component) {
     _inherits(Music, _React$Component);
 
@@ -4247,6 +4265,7 @@ var Music = (function (_React$Component) {
             } else if (!this.state.loading && !this.state.finded) {
                 Target = _react2['default'].createElement(_NotFound2['default'], { text: this.state.error });
             } else {
+                // 标签
                 Tags = this.state.tags.map(function (data, index) {
                     return _react2['default'].createElement(
                         'span',
@@ -4265,32 +4284,47 @@ var Music = (function (_React$Component) {
                     ),
                     _react2['default'].createElement(
                         'div',
-                        { className: 'mon-music col-md-6' },
-                        _react2['default'].createElement('img', { src: this.state.avatar_url, alt: 'loading' }),
+                        { className: 'raw clearfix' },
                         _react2['default'].createElement(
                             'div',
-                            { className: 'mon-music-block' },
-                            _react2['default'].createElement('audio', { ref: 'music', className: 'mon-music-url', src: this.state.music + '.1', controls: 'controls' }),
+                            { className: 'mon-music col-md-6' },
+                            _react2['default'].createElement('img', { src: this.state.avatar_url, alt: 'loading' }),
                             _react2['default'].createElement(
-                                'a',
-                                { href: 'javascript:;', id: 'music_play', onClick: this.play.bind(this) },
-                                _react2['default'].createElement('span', { className: 'fa fa-play' })
-                            ),
+                                'div',
+                                { className: 'mon-music-block' },
+                                _react2['default'].createElement('audio', { ref: 'music', id: 'music', className: 'mon-music-url', src: this.state.music }),
+                                _react2['default'].createElement(
+                                    'a',
+                                    { href: 'javascript:;', id: 'music_play', onClick: this.play.bind(this) },
+                                    _react2['default'].createElement('span', { className: 'fa fa-play' })
+                                ),
+                                _react2['default'].createElement(
+                                    'a',
+                                    { href: 'javascript:;', id: 'music_pause', onClick: this.pause.bind(this) },
+                                    _react2['default'].createElement('span', { className: 'fa fa-pause' })
+                                )
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-6' },
                             _react2['default'].createElement(
-                                'a',
-                                { href: 'javascript:;', id: 'music_pause', onClick: this.pause.bind(this) },
-                                _react2['default'].createElement('span', { className: 'fa fa-pause' })
+                                'p',
+                                { className: 'text-info' },
+                                'dsdsd'
                             )
                         )
                     ),
                     _react2['default'].createElement(
                         'div',
-                        { className: 'col-md-6' },
-                        _react2['default'].createElement(
-                            'p',
-                            { className: 'text-info' },
-                            'dsdsd'
-                        )
+                        { className: 'raw mon-music-tags' },
+                        Tags
+                    ),
+                    _react2['default'].createElement(_Star2['default'], { star: this.props.params.id, column: 'music', stared: this.state.stared }),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'raw' },
+                        _react2['default'].createElement(_Comment2['default'], { id: this.props.params.id, type: 'music' })
                     )
                 );
 
@@ -4338,12 +4372,7 @@ var Music = (function (_React$Component) {
                 'div',
                 { className: 'container animated fadeInUp' },
                 Target,
-                User,
-                _react2['default'].createElement(
-                    'div',
-                    { className: 'container mon-music-tags' },
-                    Tags
-                )
+                User
             );
         }
     }]);
@@ -4354,7 +4383,7 @@ var Music = (function (_React$Component) {
 exports['default'] = Music;
 module.exports = exports['default'];
 
-},{"../actions/MusicActions":12,"../stores/MusicStore":70,"./Comment":30,"./Loading":39,"./NotFound":44,"react":"react"}],43:[function(require,module,exports){
+},{"../actions/MusicActions":12,"../stores/MusicStore":70,"./Comment":30,"./Loading":39,"./NotFound":44,"./Star":52,"react":"react"}],43:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -8294,6 +8323,7 @@ var ListStore = (function () {
     _createClass(ListStore, [{
         key: 'onGetListSuccess',
         value: function onGetListSuccess(data) {
+            console.log(data);
             if (data.code === 200) {
                 this.list = data.raw._raw;
                 this.count = data.raw.count;
@@ -8554,12 +8584,12 @@ var MusicStore = (function () {
         this.finded = true;
         this.loading = true;
         this.error = '';
+        this.stared = false;
     }
 
     _createClass(MusicStore, [{
         key: 'onGetMusicSuccess',
         value: function onGetMusicSuccess(data) {
-            console.log(data);
             if (data.code === 200) {
                 this.avatar_url = data.raw.music.avatar_url;
                 this.music = data.raw.music.music_url;
@@ -8571,6 +8601,7 @@ var MusicStore = (function () {
                 this.create_user_domain = data.raw.user.domain;
                 this.create_user_introduce = data.raw.user.introduce;
                 this.loading = false;
+                this.stared = data.raw.stared.toString();
             } else if (data.code === 404) {
                 this.finded = false;
                 this.loading = false;
@@ -8648,13 +8679,15 @@ var NavStore = (function () {
     }, {
         key: 'onSignOutSuccess',
         value: function onSignOutSuccess(data) {
+            console.log(data);
             if (data.code === 200) {
                 var _localStorage = window.localStorage;
                 _localStorage.setItem('user', '');
                 window.location = '/';
             } else if (data.code === 400) {
                 toastr.error('退出不成功');
-            }
+            } else if (data.code === 406) {}
+            toastr.warning('你还没登陆');
         }
     }, {
         key: 'onSignOutFail',
@@ -9259,7 +9292,7 @@ var StarStore = (function () {
                 case 304:
                     toastr.warning('你已经收藏过了');
                     break;
-                case 400:
+                case 406:
                     toastr.warning('你还没登陆');
                     break;
                 case 404:
