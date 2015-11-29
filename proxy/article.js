@@ -5,6 +5,7 @@ import async from 'async';
 import Article from '../models/article';
 import User from '../models/user';
 import _ from 'underscore';
+var markdown = require( "markdown" ).markdown;
 
 class md {
     /**
@@ -85,6 +86,9 @@ class md {
                 }
             }
         ],function(err,result) {
+
+            // 将markdown转成html实体
+            result.article.content = markdown.toHTML(result.article.content, 'Maruku');
             callback(result);
         });
     }

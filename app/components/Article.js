@@ -36,11 +36,11 @@ class Article extends React.Component {
 
     onChange(state) {
         this.setState(state);
-        if(state.article) {
-            let markdown = md.markdown;
-            let content = markdown.toHTML(this.state.content);
-            this.refs.content.getDOMNode().innerHTML = content;
-        }
+        //if(state.article) {
+        //    let markdown = md.markdown;
+        //    let content = markdown.toHTML(this.state.content);
+        //    this.refs.content.getDOMNode().innerHTML = content;
+        //}
     }
 
     render() {
@@ -71,7 +71,8 @@ class Article extends React.Component {
                             <span>{this.state.createTime}</span>
                         </div>
                         <p className='bg-success mon-article-summary'>{this.state.summary}</p>
-                        <div ref='content' className='mon-article-content'></div>
+                        <div ref='content' className='mon-article-content' dangerouslySetInnerHTML={{__html: this.state.content}}>
+                        </div>
                         <div className='mon-article-tags'>
                             {Tags}
                         </div>

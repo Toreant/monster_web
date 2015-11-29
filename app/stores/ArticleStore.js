@@ -7,7 +7,7 @@ class ArticleStore　{
     constructor() {
         this.bindActions(ArticleActions);
         this.article = false;
-        this.content = '';
+        this.content;
         this.title = '';
         this.summary = '';
         this.createUser = '';
@@ -26,7 +26,8 @@ class ArticleStore　{
             this.content = data.raw.article.content;
             this.title = data.raw.article.title;
             this.summary = data.raw.article.summary || '这个文章没有简介，呜呜';
-            this.createUser = data.raw.article.create_user_name;
+            this.createUser = data.raw.user.username;
+            console.log(this.createUser);
             this.createUserAvatar = data.raw.user.avatar_url;
             this.createUserDomain = data.raw.user.domain;
             this.tags = data.raw.article.tags;

@@ -1680,11 +1680,11 @@ var Article = (function (_React$Component) {
         key: 'onChange',
         value: function onChange(state) {
             this.setState(state);
-            if (state.article) {
-                var markdown = _markdown2['default'].markdown;
-                var content = markdown.toHTML(this.state.content);
-                this.refs.content.getDOMNode().innerHTML = content;
-            }
+            //if(state.article) {
+            //    let markdown = md.markdown;
+            //    let content = markdown.toHTML(this.state.content);
+            //    this.refs.content.getDOMNode().innerHTML = content;
+            //}
         }
     }, {
         key: 'render',
@@ -1755,7 +1755,7 @@ var Article = (function (_React$Component) {
                             { className: 'bg-success mon-article-summary' },
                             this.state.summary
                         ),
-                        _react2['default'].createElement('div', { ref: 'content', className: 'mon-article-content' }),
+                        _react2['default'].createElement('div', { ref: 'content', className: 'mon-article-content', dangerouslySetInnerHTML: { __html: this.state.content } }),
                         _react2['default'].createElement(
                             'div',
                             { className: 'mon-article-tags' },
@@ -7757,7 +7757,7 @@ var ArticleStore = (function () {
 
         this.bindActions(_actionsArticleActions2['default']);
         this.article = false;
-        this.content = '';
+        this.content;
         this.title = '';
         this.summary = '';
         this.createUser = '';
@@ -7778,7 +7778,8 @@ var ArticleStore = (function () {
                 this.content = data.raw.article.content;
                 this.title = data.raw.article.title;
                 this.summary = data.raw.article.summary || '这个文章没有简介，呜呜';
-                this.createUser = data.raw.article.create_user_name;
+                this.createUser = data.raw.user.username;
+                console.log(this.createUser);
                 this.createUserAvatar = data.raw.user.avatar_url;
                 this.createUserDomain = data.raw.user.domain;
                 this.tags = data.raw.article.tags;
