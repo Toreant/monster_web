@@ -76,7 +76,6 @@ class md {
 
             function(docs,createUserIds,_callback) {
                 User.find({_id : {$in : createUserIds}},(err,users) => {
-                    console.log(err);
                     if(err) {
                         return callback(500);
                     } else {
@@ -99,7 +98,19 @@ class md {
                     }
                     result.push(item);
                 }
-                _callback(null,{ _raw : result,count : result.length});
+                _callback(null,{ _raw : result});
+            },
+
+            // 音乐总数
+            function(data,_callback) {
+                Music.count(params,(err,count) => {
+                    if(err) {
+                        return callback(500);
+                    } else {
+                        data.count = count;
+                        _callback(null,data);
+                    }
+                });
             }
         ],(err,result) => {
             return callback(result);

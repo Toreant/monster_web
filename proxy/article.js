@@ -179,7 +179,6 @@ class md {
                     _callback(null,500);
                 } else {
                     Article.count(params,function(err,count) {
-                        console.log(count);
                         if(err) {
                             _callback(null,500);
                         } else {

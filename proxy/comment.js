@@ -19,7 +19,11 @@ class md {
             //　获取评论
             function(_callback) {
                 Comment.find(param,null,option,(err,docs) => {
-                    _callback(null,docs);
+                    if(err) {
+                        return callback(500);
+                    } else {
+                        _callback(null,docs);
+                    }
                 });
             },
 
@@ -89,7 +93,6 @@ class md {
         let comment = new Comment(params);
         comment.save((err, product, numAffected) => {
             if(err) {
-                console.log("err : "+err);
                 callback(null);
             } else {
                 callback(numAffected);

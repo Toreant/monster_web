@@ -113,9 +113,9 @@ class md {
         User.findOne({domain : domain},'username domain avatar_url introduce contribute article music animate star followers following',(err,docs) => {
             if(err) {
                 console.log(err);
-                callback(500);
+                return callback(500);
             } else {
-                callback(docs);
+                return callback(docs);
             }
         });
     }
@@ -163,7 +163,7 @@ class md {
             function(_callback) {
                 User.findOne(where,'followers',option,(err,u) =>{
                     if(err) {
-                        callback(500);
+                        return callback(500);
                     } else {
                         _callback(null,u.followers);
                     }
@@ -174,7 +174,7 @@ class md {
             function(followers,_callback) {
                 User.find({_id : {$in : followers}},'username domain avatar_url introduce',(err,users) => {
                     if(err) {
-                        callback(500);
+                        return callback(500);
                     } else {
                         _callback(null,users);
                     }
@@ -200,7 +200,7 @@ class md {
                         let following = docs.following;
 
                         if(err) {
-                            callback(500);
+                            return callback(500);
                         } else {
                             let result = [];
 
@@ -377,7 +377,7 @@ class md {
             function(_callback) {
                 User.findOne({_id : user_id},(err,user) => {
                     if(err) {
-                        callback(500);
+                        return callback(500);
                     } else {
                         _callback(null,user);
                     }
@@ -390,7 +390,7 @@ class md {
                     callback(404);
                 } else {
                     if(_.indexOf(user.star,star_id) === -1) {
-                        callback(304);
+                        return callback(304);
                     } else {
                         user.star = _.without(user.star,star_id);
                         switch(column) {
@@ -406,7 +406,7 @@ class md {
                         }
                         user.save((err) => {
                             if(err) {
-                                callback(500);
+                                return callback(500);
                             } else {
                                 _callback(null,200);
                             }
@@ -426,7 +426,6 @@ class md {
      * @param callback
      */
     getStars(user,skip,option,callback) {
-        console.log(user);
         async.waterfall([
 
             // 获取用户的收藏列表
@@ -434,7 +433,7 @@ class md {
                 User.findOne(user,(err,user) => {
                     if(err) {
                         console.log(err);
-                        callback(500);
+                        return callback(500);
                     } else {
                         switch (option) {
                             case 'all' :
@@ -457,7 +456,7 @@ class md {
             // 实例化收藏列表
             function(starList,_callback) {
                 if(starList === null) {
-                    callback(404);
+                    return callback(404);
                 }
                 switch (option) {
                     case 'all' :
@@ -466,17 +465,17 @@ class md {
                     case 'article' :
                         Article.find({_id : {$in : starList}},null,{skip : skip,limit: 10},(err,docs) => {
                             if(err) {
-                                callback(500);
+                                return callback(500);
                             } else {
-                                callback({_raw : docs,count : starList.length});
+                                return callback({_raw : docs,count : starList.length});
                             }
                         });
                         break;
                     case 'music' :
-                        callback(null);
+                        return callback(null);
                         break;
                     case 'animate' :
-                        callback(null);
+                        return callback(null);
                         break;
                 }
             },
@@ -485,7 +484,7 @@ class md {
             function(starList,_callback) {
                 Article.find({_id : {$in : starList}},null,{skip : skip,limit: 10},(err,docs) => {
                     if(err) {
-                        callback(500);
+                        return callback(500);
                     } else {
                         _callback(null,{_raw : docs,count : starList.length});
                     }

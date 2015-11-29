@@ -20,7 +20,8 @@ class PostMusicActions {
                 title : title,
                 tags : tags,
                 music_url : music_url,
-                avatar_url : avatar_url
+                avatar_url : avatar_url,
+                create_time : (new Date()).getTime()
             }
         };
 
