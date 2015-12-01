@@ -162,18 +162,23 @@ class md {
 
             // 检查where中的followers
             function(_callback) {
-                User.findOne(where,'followers',option,(err,u) =>{
+                User.findOne(where,'followers',(err,u) =>{
                     if(err) {
                         return callback(500);
                     } else {
-                        _callback(null,u.followers);
+                        console.log(u);
+                        if(u === null) {
+                            return callback(404);
+                        } else {
+                            _callback(null,u.followers);
+                        }
                     }
                 });
             },
 
             // 实例化followers
             function(followers,_callback) {
-                User.find({_id : {$in : followers}},'username domain avatar_url introduce',(err,users) => {
+                User.find({_id : {$in : followers}},'username domain avatar_url introduce',option,(err,users) => {
                     if(err) {
                         return callback(500);
                     } else {
@@ -218,7 +223,6 @@ class md {
 
                                 result.unshift(item);
                             }
-
                             _callback(null,result);
                         }
                     });

@@ -84,7 +84,7 @@ class ConList extends React.Component {
         if(this.state.contributes.length > 0) {
             List = this.state.contributes.map((data,index) => {
                 return (
-                    <div className="media mon-conlist-item" key={data.data._id}>
+                    <div className="media mon-conlist-item" key={'contribute:'+data.data._id}>
                         <div className="media-left">
                             <Link to={'/'+option+'/'+data.data._id}>
                                 <img src={data.data.abbreviations || '/img/abbreviations.png'} alt="loading" width='80'/>

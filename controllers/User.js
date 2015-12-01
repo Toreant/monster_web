@@ -224,6 +224,7 @@ class UserCtrl {
         let option = req.body.option,
             where = req.body.where,
             user = req.session.user; //　本地登陆用户
+        console.log(where);
 
         User.getFollowers(where, option, user, (data) => {
             let result = {
@@ -235,6 +236,9 @@ class UserCtrl {
             if (data === 500) {
                 result.meta = '服务器错误';
                 result.code = 500;
+            } else if(data === 404) {
+                result.meta = '没有这个用户';
+                result.code = 404;
             } else {
                 result.meta = '获取关注者成功';
                 result.code = 200;

@@ -25,6 +25,8 @@ import List from './components/List';
 import Member from './components/Member';
 import ConArticle from './components/ConArticle';
 import Music from './components/Music';
+import MemberCenter from './components/MemberCenter';
+import MemberFollow from './components/MemberFollow';
 
 export default(
     <Route handler={App}>
@@ -48,10 +50,11 @@ export default(
         </Route>
 
         <Route path='/member'>
-            <Route path=':domain'>
-                <Route path='following' handler={Notice}/>
-                <Route Path='followers' handler={Notice}/>
+            <Route path=':domain' handler={MemberCenter}>
                 <Route path='star' handler={StarList} />
+                <Route path=':follow' handler={MemberFollow}>
+                    <Route path=":skip" handler={MemberFollow} />
+                </Route>
             </Route>
         </Route>
 

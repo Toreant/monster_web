@@ -25,7 +25,6 @@ router.post('/api/getUser',UserCtrl.getUserByDomain);
 
 router.post('/api/users',UserCtrl.getUserById);
 
-router.post('/api/followers',UserCtrl.getFollowers);
 
 router.get('/api/member/:domain',UserCtrl.getUserByDomain);
 
@@ -33,6 +32,8 @@ router.get('/api/member/:domain',UserCtrl.getUserByDomain);
 router.post('/api/follow',auth.isAuth,UserCtrl.addFollow);
 
 router.post('/api/following',UserCtrl.getFollowing);
+
+router.post('/api/followers',UserCtrl.getFollowers);
 
 router.delete('/api/follow',auth.isAuth,UserCtrl.unFollowing);
 
