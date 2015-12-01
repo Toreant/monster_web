@@ -6,12 +6,34 @@ import alt from '../alt';
 class PostAnimateActions {
     constructor(){
         this.generateActions(
-            'postAnimateSuccess'
+            'postAnimateSuccess',
+            'changeTitle',
+            'changeTags'
         );
     }
 
-    postAnimate() {
-        this.actions.postAnimateSuccess();
+    postAnimate(title,tags,animate_url,avatar_url) {
+
+        let params = {
+            title : title,
+            tags : tags,
+            animate_url : animate_url,
+            avatar_url : avatar_url,
+            create_time : (new Date()).getTime()
+        };
+
+        $.ajax({
+            url : '/api/animate',
+            dataType : 'json',
+            type : 'post',
+            contentType : 'application/json;charset=utf-8',
+            cache : false,
+            data : JSON.stringify({params : params})
+        }).done((data) => {
+            this.actions.postAnimateSuccess(data);
+        }).fail(() => {
+            toastr.warning('分享失败');
+        })
     }
 }
 

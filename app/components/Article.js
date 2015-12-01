@@ -120,7 +120,7 @@ class Article extends React.Component {
             );
         }
         return (
-            <div className='container mon-main'>
+            <div className='container'>
                 {Article}
                 <BtnBlock />
             </div>

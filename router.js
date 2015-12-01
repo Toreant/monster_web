@@ -11,6 +11,8 @@ import MusicCtrl from './controllers/Music';
 import multer from 'multer';
 import auth from './middleware/auth';
 import multipart from 'connect-multiparty';
+import SearchCtrl from './controllers/Search';
+import AnimateCtrl from './controllers/Animate';
 var resumable = require('./middleware/resumable-node');
 
 
@@ -113,5 +115,13 @@ router.post('/api/music',auth.isAuth,MusicCtrl.postMusic);
 router.get('/api/music/:id',MusicCtrl.getMusic);
 
 router.post('/api/musics',MusicCtrl.getMusics);
+
+// 动漫
+router.post('/api/animate',auth.isAuth,AnimateCtrl.postAnimate);
+
+router.get('/api/animate/:id',AnimateCtrl.getAnimate);
+
+// 搜索
+router.post('/api/search',SearchCtrl.getSearch);
 
 export default router;

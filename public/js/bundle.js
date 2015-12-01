@@ -872,7 +872,7 @@ var NavActions = (function () {
     function NavActions() {
         _classCallCheck(this, NavActions);
 
-        this.generateActions('changeState', 'checkLoginSuccess', 'checkLoginFail', 'signOutSuccess', 'signOutFail', 'getProfileLocal');
+        this.generateActions('changeState', 'checkLoginSuccess', 'checkLoginFail', 'signOutSuccess', 'signOutFail', 'getProfileLocal', 'searchSuccess', 'changeSearch');
     }
 
     _createClass(NavActions, [{
@@ -914,6 +914,24 @@ var NavActions = (function () {
                 _this2.actions.signOutSuccess(data);
             }).fail(function (data) {
                 _this2.actions.signOutFail();
+            });
+        }
+    }, {
+        key: 'search',
+        value: function search(what) {
+            var _this3 = this;
+
+            $.ajax({
+                url: '/api/search',
+                dataType: 'json',
+                contentType: 'application/json;charset=utf-8',
+                cache: false,
+                type: 'post',
+                data: JSON.stringify({ what: what, option: { skip: 0, limit: 10 } })
+            }).done(function (data) {
+                _this3.actions.searchSuccess(data);
+            }).fail(function () {
+                toastr.warning('网络有问题');
             });
         }
     }]);
@@ -1015,13 +1033,34 @@ var PostAnimateActions = (function () {
     function PostAnimateActions() {
         _classCallCheck(this, PostAnimateActions);
 
-        this.generateActions('postAnimateSuccess');
+        this.generateActions('postAnimateSuccess', 'changeTitle', 'changeTags');
     }
 
     _createClass(PostAnimateActions, [{
         key: 'postAnimate',
-        value: function postAnimate() {
-            this.actions.postAnimateSuccess();
+        value: function postAnimate(title, tags, animate_url, avatar_url) {
+            var _this = this;
+
+            var params = {
+                title: title,
+                tags: tags,
+                animate_url: animate_url,
+                avatar_url: avatar_url,
+                create_time: new Date().getTime()
+            };
+
+            $.ajax({
+                url: '/api/animate',
+                dataType: 'json',
+                type: 'post',
+                contentType: 'application/json;charset=utf-8',
+                cache: false,
+                data: JSON.stringify({ params: params })
+            }).done(function (data) {
+                _this.actions.postAnimateSuccess(data);
+            }).fail(function () {
+                toastr.warning('分享失败');
+            });
         }
     }]);
 
@@ -1913,7 +1952,7 @@ var Article = (function (_React$Component) {
             }
             return _react2['default'].createElement(
                 'div',
-                { className: 'container mon-main' },
+                { className: 'container' },
                 Article,
                 _react2['default'].createElement(_BtnBlock2['default'], null)
             );
@@ -4674,13 +4713,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
-var _storesNavStore = require('../stores/NavStore');
-
-var _storesNavStore2 = _interopRequireDefault(_storesNavStore);
-
 var _actionsNavActions = require('../actions/NavActions');
 
 var _actionsNavActions2 = _interopRequireDefault(_actionsNavActions);
+
+var _storesNavStore = require('../stores/NavStore');
+
+var _storesNavStore2 = _interopRequireDefault(_storesNavStore);
 
 var Nav = (function (_React$Component) {
     _inherits(Nav, _React$Component);
@@ -4713,6 +4752,11 @@ var Nav = (function (_React$Component) {
         key: 'signOut',
         value: function signOut() {
             _actionsNavActions2['default'].signOut();
+        }
+    }, {
+        key: 'search',
+        value: function search() {
+            _actionsNavActions2['default'].search(this.state.search);
         }
     }, {
         key: 'render',
@@ -4888,11 +4932,11 @@ var Nav = (function (_React$Component) {
                             _react2['default'].createElement(
                                 'div',
                                 { className: 'form-group' },
-                                _react2['default'].createElement('input', { type: 'text', className: 'form-control', placeholder: '输入搜索' })
+                                _react2['default'].createElement('input', { type: 'text', className: 'form-control', placeholder: '输入搜索', onChange: _actionsNavActions2['default'].changeSearch })
                             ),
                             _react2['default'].createElement(
-                                'button',
-                                { type: 'submit', className: 'btn btn-default search-btn' },
+                                'a',
+                                { className: 'btn btn-default search-btn', onClick: this.search.bind(this) },
                                 'Submit'
                             )
                         ),
@@ -5228,6 +5272,14 @@ var _storesPostAnimateStore = require('../stores/PostAnimateStore');
 
 var _storesPostAnimateStore2 = _interopRequireDefault(_storesPostAnimateStore);
 
+var _Upload = require('./Upload');
+
+var _Upload2 = _interopRequireDefault(_Upload);
+
+var _BigUpload = require('./BigUpload');
+
+var _BigUpload2 = _interopRequireDefault(_BigUpload);
+
 var PostAnimate = (function (_React$Component) {
     _inherits(PostAnimate, _React$Component);
 
@@ -5243,18 +5295,6 @@ var PostAnimate = (function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             _storesPostAnimateStore2['default'].listen(this.onChange);
-            _actionsPostAnimateActions2['default'].postAnimate();
-            console.log('did mount');
-        }
-    }, {
-        key: 'componentWillUpdate',
-        value: function componentWillUpdate(nextProps, nextState) {
-            console.log('will update animate');
-        }
-    }, {
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate(preProps, prevState) {
-            console.log('did update animate');
         }
     }, {
         key: 'componentWillUnmount',
@@ -5267,12 +5307,114 @@ var PostAnimate = (function (_React$Component) {
             this.setState(state);
         }
     }, {
+        key: 'handleClick',
+        value: function handleClick() {
+            _actionsPostAnimateActions2['default'].postAnimate(this.state.title, this.state.tags, $("#animate_file").text(), $("#upload_animate_img").text());
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2['default'].createElement(
                 'div',
-                { className: 'col-md-9 col-sm-9' },
-                '动漫投稿'
+                { className: 'col-md-9 col-sm-9 animated fadeInUp' },
+                _react2['default'].createElement(
+                    'p',
+                    { className: 'bg-success mon-padding mon-bg-title' },
+                    '分享动漫'
+                ),
+                _react2['default'].createElement(
+                    'form',
+                    { className: 'form-horizontal' },
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-1' },
+                            _react2['default'].createElement(
+                                'label',
+                                { className: 'label label-default', htmlFor: 'title' },
+                                '动漫标题'
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-11' },
+                            _react2['default'].createElement('input', { type: 'email', className: 'form-control', id: 'title', ref: 'title', onChange: _actionsPostAnimateActions2['default'].changeTitle, placeholder: '文章标题' })
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-1' },
+                            _react2['default'].createElement(
+                                'label',
+                                { className: 'label label-default' },
+                                '动漫'
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-11' },
+                            _react2['default'].createElement(_BigUpload2['default'], { tab: 'animate', target: '#animate_file' }),
+                            _react2['default'].createElement('p', { id: 'animate_file', className: 'text-primary mon-upload-file', onChange: _actionsPostAnimateActions2['default'].changeMusic })
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-1' },
+                            _react2['default'].createElement(
+                                'label',
+                                { className: 'label label-default', htmlFor: 'tag' },
+                                '动漫标签'
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-11' },
+                            _react2['default'].createElement('input', { type: 'text', className: 'form-control', id: 'tag', ref: 'tag', onChange: _actionsPostAnimateActions2['default'].changeTags, placeholder: '请输入文章标签 (标签间以空格分隔)' })
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-1' },
+                            _react2['default'].createElement(
+                                'label',
+                                { className: 'label label-default' },
+                                '封面图片'
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-8' },
+                            _react2['default'].createElement(_Upload2['default'], { img: '#upload_animate_img' }),
+                            _react2['default'].createElement(
+                                'p',
+                                { className: 'text-muted' },
+                                '请选择您的文章封面图片。封面图片不得包含令人反感的信息，尺寸为480*270像素。 请勿使用与内容无关，或分辨率不为16:9的图片作为封面图片。'
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'col-md-3' },
+                            _react2['default'].createElement('img', { src: '/img/cover-night.png', id: 'upload_animate_img', width: '120', alt: 'loading' })
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'a',
+                        { href: 'javascript:;', id: 'upload_music', className: 'btn btn-success pull-right mon-post-btn', onClick: this.handleClick.bind(this) },
+                        _react2['default'].createElement('span', { className: 'fa fa-check-circle-o' }),
+                        '提交稿件'
+                    )
+                )
             );
         }
     }]);
@@ -5283,7 +5425,7 @@ var PostAnimate = (function (_React$Component) {
 exports['default'] = PostAnimate;
 module.exports = exports['default'];
 
-},{"../actions/PostAnimateActions":17,"../stores/PostAnimateStore":78,"react":"react"}],51:[function(require,module,exports){
+},{"../actions/PostAnimateActions":17,"../stores/PostAnimateStore":78,"./BigUpload":29,"./Upload":57,"react":"react"}],51:[function(require,module,exports){
 /**
  * Created by apache on 15-11-3.
  */
@@ -7944,6 +8086,7 @@ exports['default'] = _react2['default'].createElement(
         _react2['default'].createElement(
             _reactRouter.Route,
             { path: ':domain', hanlder: _componentsContribute2['default'] },
+            _react2['default'].createElement(_reactRouter.DefaultRoute, { handler: _componentsConArticle2['default'] }),
             _react2['default'].createElement(_reactRouter.Route, { path: 'article', handler: _componentsConArticle2['default'] }),
             _react2['default'].createElement(_reactRouter.Route, { path: 'music', handler: _componentsNotFound2['default'] }),
             _react2['default'].createElement(_reactRouter.Route, { path: 'animate', handler: _componentsNotFound2['default'] })
@@ -7955,6 +8098,7 @@ exports['default'] = _react2['default'].createElement(
         _react2['default'].createElement(
             _reactRouter.Route,
             { path: ':domain', handler: _componentsMemberCenter2['default'] },
+            _react2['default'].createElement(_reactRouter.DefaultRoute, { handler: _componentsStarList2['default'] }),
             _react2['default'].createElement(_reactRouter.Route, { path: 'star', handler: _componentsStarList2['default'] }),
             _react2['default'].createElement(
                 _reactRouter.Route,
@@ -8000,6 +8144,7 @@ exports['default'] = _react2['default'].createElement(
     _react2['default'].createElement(
         _reactRouter.Route,
         { path: ':column', handler: _componentsList2['default'] },
+        _react2['default'].createElement(_reactRouter.DefaultRoute, { handler: _componentsList2['default'] }),
         _react2['default'].createElement(_reactRouter.Route, { path: ':skip', handler: _componentsList2['default'] })
     ),
     _react2['default'].createElement(_reactRouter.Route, { path: '*', handler: _componentsNotFound2['default'] })
@@ -8999,6 +9144,7 @@ var NavStore = (function () {
         this.loginState = false;
         this.userName = '';
         this.avatar = '';
+        this.search = '';
     }
 
     _createClass(NavStore, [{
@@ -9051,6 +9197,18 @@ var NavStore = (function () {
             this.userName = data.username;
             this.avatar = data._json === undefined ? data.avatar_url : data._json.avatar_url;
             this.domain = data._json === undefined ? data.domain : data._json.username;
+        }
+    }, {
+        key: 'onChangeSearch',
+        value: function onChangeSearch(event) {
+            console.log('hehe');
+            this.search = event.target.value;
+            console.log(this.search);
+        }
+    }, {
+        key: 'onSearchSuccess',
+        value: function onSearchSuccess(data) {
+            console.log(data);
         }
     }]);
 
@@ -9164,12 +9322,41 @@ var PostAnimateStore = (function () {
         _classCallCheck(this, PostAnimateStore);
 
         this.bindActions(_actionsPostAnimateActions2['default']);
+        this.title = '';
+        this.tags = [];
+        this.avatar_url = '';
+        this.animate_url = '';
     }
 
     _createClass(PostAnimateStore, [{
         key: 'onPostAnimateSuccess',
-        value: function onPostAnimateSuccess() {
-            console.log('post animate success');
+        value: function onPostAnimateSuccess(data) {
+            if (data.code === 500) {
+                toastr.error(data.meta);
+            } else if (data.code === 404) {
+                toastr.warning('用户不存在');
+            } else if (data.code === 200) {
+                toastr.success('分享成功');
+            }
+        }
+    }, {
+        key: 'onChangeTitle',
+        value: function onChangeTitle(event) {
+            this.title = event.target.value;
+        }
+    }, {
+        key: 'onChangeTags',
+        value: function onChangeTags(event) {
+            var _this = this;
+
+            console.log('heh');
+            var tags = event.target.value.replace(/\s+/g, ",");
+            tags = tags.split(',');
+            this.tags = [];
+            tags.map(function (data) {
+                _this.tags.push(data);
+            });
+            console.log(this.tags);
         }
     }]);
 
@@ -9305,7 +9492,6 @@ var PostMusicStore = (function () {
     _createClass(PostMusicStore, [{
         key: 'onChangeTitle',
         value: function onChangeTitle(event) {
-            console.log('rere');
             this.title = event.target.value;
         }
     }, {

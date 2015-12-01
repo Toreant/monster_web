@@ -11,7 +11,9 @@ class NavActions {
             'checkLoginFail',
             'signOutSuccess',
             'signOutFail',
-            'getProfileLocal'
+            'getProfileLocal',
+            'searchSuccess',
+            'changeSearch'
         );
     }
 
@@ -44,6 +46,20 @@ class NavActions {
         .fail((data) => {this.actions.signOutFail();});
     }
 
+    search(what) {
+        $.ajax({
+            url : '/api/search',
+            dataType : 'json',
+            contentType : 'application/json;charset=utf-8',
+            cache : false,
+            type : 'post',
+            data : JSON.stringify({what : what,option : {skip : 0,limit : 10}})
+        }).done((data) => {
+            this.actions.searchSuccess(data);
+        }).fail(() => {
+            toastr.warning('网络有问题');
+        });
+    }
 }
 
 export default alt.createActions(NavActions);

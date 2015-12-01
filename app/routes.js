@@ -43,6 +43,7 @@ export default(
 
         <Route path='/member' handler={Member}>
             <Route path=':domain' hanlder={Contribute}>
+                <DefaultRoute handler={ConArticle} />
                 <Route path='article' handler={ConArticle} />
                 <Route path='music' handler={NotFound} />
                 <Route path='animate' handler={NotFound} />
@@ -51,6 +52,7 @@ export default(
 
         <Route path='/member'>
             <Route path=':domain' handler={MemberCenter}>
+                <DefaultRoute handler={StarList} />
                 <Route path='star' handler={StarList} />
                 <Route path=':follow' handler={MemberFollow}>
                     <Route path=":skip" handler={MemberFollow} />
@@ -84,6 +86,7 @@ export default(
         </Route>
 
         <Route path=':column' handler={List}>
+            <DefaultRoute handler={List} />
             <Route path=':skip' handler={List} />
         </Route>
         <Route path='*' handler={NotFound} />

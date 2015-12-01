@@ -14,7 +14,6 @@ class PostMusicStore {
     }
 
     onChangeTitle(event) {
-        console.log('rere');
         this.title = event.target.value;
     }
 

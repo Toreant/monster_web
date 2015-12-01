@@ -7,6 +7,10 @@ import Article from '../models/article';
 import _ from 'underscore';
 
 class md {
+    constructor() {
+        this.query = 'username avatar_url domain email following followers star star_article star_music star_animate' +
+            'article music animate contribute';
+    }
     /**
      * 保存用户和新增用户
      * @param email 邮箱
@@ -55,7 +59,7 @@ class md {
      * @param callback
      */
     getUserByEmail(email, callback) {
-        User.find({email: email}, (err, docs) => {
+        User.find({email: email},this.query,(err, docs) => {
             if (err) return callback(err);
             else callback(docs);
         });
@@ -67,7 +71,7 @@ class md {
      * @param callback
      */
     getUser(where,callback) {
-        User.find(where, (err, docs) => {
+        User.find(where,this.query, (err, docs) => {
             if (err) callback(err);
             else callback(docs);
         });
@@ -79,8 +83,7 @@ class md {
      * @param callback
      */
     getUserByEmailAndPwd(email,password,callback) {
-        User.find({email : email,password : password},'username avatar_url domain followers following ' +
-            'star star_article star_music star_animate contribute email introduce',(err,docs) => {
+        User.find({email : email,password : password},this.query,(err,docs) => {
             if(err) {
                 callback(err);
             } else {
@@ -95,8 +98,7 @@ class md {
      * @param callback
      */
     getUserById(arrayId,option,callback) {
-        User.find({_id : {$in : arrayId}},'username introduce domain avatar_url star followers following contribute' +
-            ' star_music star_aricle star_animate',option,(err,docs) => {
+        User.find({_id : {$in : arrayId}},this.query,option,(err,docs) => {
             if(err) {
                 callback(500);
             } else {

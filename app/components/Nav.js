@@ -3,8 +3,8 @@
  */
 import React from 'react';
 import {Link} from 'react-router';
+import NavActions from '../actions/NavActions';
 import NavStore from '../stores/NavStore';
-import NavAction from '../actions/NavActions';
 
 class Nav extends React.Component {
 
@@ -16,7 +16,7 @@ class Nav extends React.Component {
 
     componentDidMount() {
         NavStore.listen(this.onChange);
-        NavAction.checkLogin();
+        NavActions.checkLogin();
     }
 
     componentWillUnmount() {
@@ -28,7 +28,11 @@ class Nav extends React.Component {
     }
 
     signOut() {
-        NavAction.signOut();
+        NavActions.signOut();
+    }
+
+    search() {
+        NavActions.search(this.state.search);
     }
 
     render() {
@@ -86,9 +90,9 @@ class Nav extends React.Component {
                         </ul>
                         <form className='navbar-form navbar-left' role='search'>
                             <div className='form-group'>
-                                <input type="text" className='form-control' placeholder='输入搜索'/>
+                                <input type="text" className='form-control' placeholder='输入搜索' onChange={NavActions.changeSearch}/>
                             </div>
-                            <button type='submit' className='btn btn-default search-btn'>Submit</button>
+                            <a className='btn btn-default search-btn' onClick={this.search.bind(this)}>Submit</a>
                         </form>
                         {SUBNAV}
                     </div>
