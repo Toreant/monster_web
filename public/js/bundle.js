@@ -421,7 +421,7 @@ var FollowingActions = (function () {
                 userProfile = JSON.parse(localStorage.getItem('user'));
 
             var params = {
-                where: { _id: userProfile.raw._id },
+                where: { _id: userProfile.data._id },
                 option: { skip: (page - 1) * 10, limit: 10 }
             };
             $.ajax({
@@ -799,7 +799,7 @@ var NavActions = (function () {
     function NavActions() {
         _classCallCheck(this, NavActions);
 
-        this.generateActions('changeState', 'checkLoginSuccess', 'checkLoginFail', 'signOutSuccess', 'signOutFail');
+        this.generateActions('changeState', 'checkLoginSuccess', 'checkLoginFail', 'signOutSuccess', 'signOutFail', 'getProfileLocal');
     }
 
     _createClass(NavActions, [{
@@ -807,16 +807,25 @@ var NavActions = (function () {
         value: function checkLogin() {
             var _this = this;
 
-            $.ajax({
-                url: '/api/session',
-                cache: false,
-                type: 'post',
-                dataType: 'json'
-            }).done(function (data) {
-                _this.actions.checkLoginSuccess(data);
-            }).fail(function (data) {
-                _this.actions.checkLoginFail();
-            });
+            var sessionStorage = window.sessionStorage,
+                userProfile = sessionStorage.getItem('profile');
+            var localStorage = window.localStorage,
+                localProfile = JSON.parse(localStorage.getItem('user'));
+
+            if (userProfile !== null && localProfile !== null && userProfile !== '' && localProfile !== '' && userProfile._id === localProfile.data._id) {
+                this.actions.getProfileLocal(userProfile);
+            } else {
+                $.ajax({
+                    url: '/api/session',
+                    cache: false,
+                    type: 'post',
+                    dataType: 'json'
+                }).done(function (data) {
+                    _this.actions.checkLoginSuccess(data);
+                }).fail(function (data) {
+                    _this.actions.checkLoginFail();
+                });
+            }
         }
     }, {
         key: 'signOut',
@@ -1680,11 +1689,11 @@ var Article = (function (_React$Component) {
         key: 'onChange',
         value: function onChange(state) {
             this.setState(state);
-            if (state.article) {
-                var markdown = _markdown2['default'].markdown;
-                var content = markdown.toHTML(this.state.content);
-                this.refs.content.getDOMNode().innerHTML = content;
-            }
+            //if(state.article) {
+            //    let markdown = md.markdown;
+            //    let content = markdown.toHTML(this.state.content);
+            //    this.refs.content.getDOMNode().innerHTML = content;
+            //}
         }
     }, {
         key: 'render',
@@ -1755,7 +1764,7 @@ var Article = (function (_React$Component) {
                             { className: 'bg-success mon-article-summary' },
                             this.state.summary
                         ),
-                        _react2['default'].createElement('div', { ref: 'content', className: 'mon-article-content' }),
+                        _react2['default'].createElement('div', { ref: 'content', className: 'mon-article-content', dangerouslySetInnerHTML: { __html: this.state.content } }),
                         _react2['default'].createElement(
                             'div',
                             { className: 'mon-article-tags' },
@@ -4475,8 +4484,8 @@ var Nav = (function (_React$Component) {
                                 'li',
                                 null,
                                 _react2['default'].createElement(
-                                    'a',
-                                    { href: '/profile', className: 'mon-user' },
+                                    _reactRouter.Link,
+                                    { to: '/profile', className: 'mon-user' },
                                     _react2['default'].createElement(
                                         'span',
                                         null,
@@ -4493,8 +4502,8 @@ var Nav = (function (_React$Component) {
                                 'li',
                                 null,
                                 _react2['default'].createElement(
-                                    'a',
-                                    { href: '/profile/setting' },
+                                    _reactRouter.Link,
+                                    { to: '/profile/setting' },
                                     '设置'
                                 )
                             ),
@@ -4502,8 +4511,8 @@ var Nav = (function (_React$Component) {
                                 'li',
                                 null,
                                 _react2['default'].createElement(
-                                    'a',
-                                    { href: '/profile/notice' },
+                                    _reactRouter.Link,
+                                    { to: '/profile/notice' },
                                     '通知'
                                 )
                             ),
@@ -7757,7 +7766,7 @@ var ArticleStore = (function () {
 
         this.bindActions(_actionsArticleActions2['default']);
         this.article = false;
-        this.content = '';
+        this.content;
         this.title = '';
         this.summary = '';
         this.createUser = '';
@@ -7778,7 +7787,8 @@ var ArticleStore = (function () {
                 this.content = data.raw.article.content;
                 this.title = data.raw.article.title;
                 this.summary = data.raw.article.summary || '这个文章没有简介，呜呜';
-                this.createUser = data.raw.article.create_user_name;
+                this.createUser = data.raw.user.username;
+                console.log(this.createUser);
                 this.createUserAvatar = data.raw.user.avatar_url;
                 this.createUserDomain = data.raw.user.domain;
                 this.tags = data.raw.article.tags;
@@ -8401,8 +8411,10 @@ var LoginStore = (function () {
         key: 'onLoginSuccess',
         value: function onLoginSuccess(data) {
             if (data.code === 200) {
-                var _localStorage = window.localStorage;
+                var _localStorage = window.localStorage,
+                    _sessionStorage = window.sessionStorage;
                 _localStorage.setItem('user', JSON.stringify(data));
+                _sessionStorage.setItem('profile', JSON.stringify(data.data));
                 window.location = '/';
             } else if (data.code === 400) {
                 toastr.error('登陆失败');
@@ -8680,20 +8692,33 @@ var NavStore = (function () {
     }, {
         key: 'onSignOutSuccess',
         value: function onSignOutSuccess(data) {
-            console.log(data);
             if (data.code === 200) {
-                var _localStorage = window.localStorage;
-                _localStorage.setItem('user', '');
+                var _localStorage = window.localStorage,
+                    _sessionStorage = window.sessionStorage;
+
+                // 设置数据归零
+                _localStorage.setItem('user', null);
+                _sessionStorage.setItem('profile', null);
+
                 window.location = '/';
             } else if (data.code === 400) {
                 toastr.error('退出不成功');
-            } else if (data.code === 406) {}
-            toastr.warning('你还没登陆');
+            } else if (data.code === 406) {
+                toastr.warning('你还没登陆');
+            }
         }
     }, {
         key: 'onSignOutFail',
         value: function onSignOutFail() {
             toastr.error("服务器错误");
+        }
+    }, {
+        key: 'onGetProfileLocal',
+        value: function onGetProfileLocal(data) {
+            this.loginState = true;
+            this.userName = data.username;
+            this.avatar = data._json === undefined ? data.avatar_url : data._json.avatar_url;
+            this.domain = data._json === undefined ? data.domain : data._json.username;
         }
     }]);
 

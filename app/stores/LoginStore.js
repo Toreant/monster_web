@@ -33,8 +33,10 @@ class LoginStore {
      */
     onLoginSuccess(data) {
         if(data.code === 200) {
-            let localStorage = window.localStorage;
+            let localStorage = window.localStorage,
+                sessionStorage = window.sessionStorage;
             localStorage.setItem('user',JSON.stringify(data));
+            sessionStorage.setItem('profile',JSON.stringify(data.data));
             window.location = '/';
         } else if(data.code === 400) {
             toastr.error('登陆失败');

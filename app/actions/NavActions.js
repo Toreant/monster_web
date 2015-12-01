@@ -10,18 +10,28 @@ class NavActions {
             'checkLoginSuccess',
             'checkLoginFail',
             'signOutSuccess',
-            'signOutFail'
+            'signOutFail',
+            'getProfileLocal'
         );
     }
 
     checkLogin() {
-        $.ajax({
-            url : '/api/session',
-            cache : false,
-            type : 'post',
-            dataType : 'json'
-        }).done((data) => {this.actions.checkLoginSuccess(data);})
-        .fail((data) => {this.actions.checkLoginFail();});
+        let sessionStorage = window.sessionStorage,
+            userProfile = sessionStorage.getItem('profile');
+        let localStorage = window.localStorage,
+            localProfile = JSON.parse(localStorage.getItem('user'));
+
+        if(userProfile !== null && localProfile !== null && userProfile !== '' && localProfile !== '' && userProfile._id === localProfile.data._id) {
+            this.actions.getProfileLocal(userProfile);
+        } else {
+            $.ajax({
+                url : '/api/session',
+                cache : false,
+                type : 'post',
+                dataType : 'json'
+            }).done((data) => {this.actions.checkLoginSuccess(data);})
+                .fail((data) => {this.actions.checkLoginFail();});
+        }
     }
 
     signOut() {

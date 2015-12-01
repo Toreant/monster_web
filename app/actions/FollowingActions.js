@@ -16,7 +16,7 @@ class FollowingActions {
             userProfile = JSON.parse(localStorage.getItem('user'));
 
         let params = {
-            where : {_id : userProfile.raw._id},
+            where : {_id : userProfile.data._id},
             option : {skip : (page-1)*10,limit : 10}
         };
         $.ajax({

@@ -12,14 +12,13 @@ import path from 'path';
 import colors from 'colors';
 import apiRouter from './router';
 import mongoose from 'mongoose';
-var mongoDB = require('./models') ;
 import bodyParser from 'body-parser';
 import passport from 'passport';
 import Github from 'passport-github';
 import Facebook from 'passport-facebook';
 import session from 'express-session';
 import redis from 'redis';
-
+var mongoDB = require('./models') ;
 
 var app = new express();
 var client = redis.createClient();
@@ -29,11 +28,13 @@ app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.set('trust proxy', 1); // trust first proxy
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false } //由于没有配置ssl，所以必须设置为false
+    maxAge: 24*60*60*1000,
+    saveUninitialized: false,
+    cookie: { secure: false} //由于没有配置ssl，所以必须设置为false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -88,5 +89,5 @@ app.listen(app.get('port'),()=>{
     console.log(colors.grey("server listen "+app.get('port')));
 });
 
-
 export default app;
+

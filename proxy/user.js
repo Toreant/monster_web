@@ -79,7 +79,8 @@ class md {
      * @param callback
      */
     getUserByEmailAndPwd(email,password,callback) {
-        User.find({email : email,password : password},(err,docs) => {
+        User.find({email : email,password : password},'username avatar_url domain followers following ' +
+            'star star_article star_music star_animate contribute email introduce',(err,docs) => {
             if(err) {
                 callback(err);
             } else {

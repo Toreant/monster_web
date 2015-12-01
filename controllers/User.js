@@ -60,20 +60,23 @@ class UserCtrl {
             let result = {
                 meta: "",
                 code: "",
-                data: "",
+                data: null,
                 err: false
             };
             if (data.length > 0) {
                 result.meta = "登陆成功";
                 result.code = 200;
-                result.raw = data[0];
-                req.session.user = data[0];
+                req.session.save((err) => {
+                    req.session.user = data[0];
+                    result.data = req.session.user;
+                    res.json(result);
+                });
             } else {
                 result.meta = "登陆不成功";
                 result.code = 400;
-                result.data = null;
+                res.json(result);
             }
-            res.json(result);
+
         });
     }
 
