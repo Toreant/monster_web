@@ -107,7 +107,6 @@ class resumable {
         var filename = fields['resumableFilename'];
         var targetName = new Date().getTime() + filename;
         var original_filename = fields['resumableIdentifier'];
-        console.log(files);
 
         if (!files[this.fileParameterName] || !files[this.fileParameterName].size) {
             callback('invalid_resumable_request', null, null, null);
@@ -119,7 +118,6 @@ class resumable {
 
             // Save the chunk (TODO: OVERWRITE)
             fs.rename(files[this.fileParameterName].path, chunkFilename, () => {
-                console.log('chunkFilename' + chunkFilename);
 
                 // Do we have all the chunks?
                 var currentTestChunk = 1;

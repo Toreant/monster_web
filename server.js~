@@ -76,6 +76,7 @@ passport.deserializeUser( (user, done)=> {//删除user对象
 
 app.use(apiRouter);
 
+/**
 app.use(function(req,res) {
     Router.run(routes,req.path,(Handler) => {
         let html = React.renderToString(React.createElement(Handler));
@@ -83,6 +84,7 @@ app.use(function(req,res) {
         res.send(page);
     });
 });
+**/
 
 app.listen(app.get('port'),()=>{
     console.log(colors.grey("server listen "+app.get('port')));

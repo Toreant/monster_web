@@ -2,7 +2,6 @@
  * Created by apache on 15-10-23.
  */
 import React from 'react';
-import {Router,Route,DefaultRoute} from 'react-router';
 import App from './components/App';
 import Home from './components/Home';
 import Login from './components/Login';
@@ -25,8 +24,9 @@ import List from './components/List';
 import Member from './components/Member';
 import ConArticle from './components/ConArticle';
 import Music from './components/Music';
+import {Route,DefaultRoute} from 'react-router';
 
-export default(
+var routes = (
     <Route handler={App}>
         <Route path='/' handler={Home} />
         <Route path='/login' handler={Login} />
@@ -86,3 +86,4 @@ export default(
         <Route path='*' handler={NotFound} />
     </Route>
 );
+export default routes;
