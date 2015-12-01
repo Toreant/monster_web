@@ -7,7 +7,7 @@ import {RouteHandler} from "react-router";
 class MemberCenter extends React.Component {
     render() {
         return (
-            <div className="container">
+            <div className="container mon-main">
                 <RouteHandler />
             </div>
         );

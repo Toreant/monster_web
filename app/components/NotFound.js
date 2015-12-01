@@ -10,9 +10,11 @@ class NotFound extends React.Component {
 
     render() {
         return (
-            <div className=''>
-                <div className=''>
-                    {this.props.text}
+            <div className='container'>
+                <div className="mon-table">
+                    <div>
+                        404 NOT FOUND
+                    </div>
                 </div>
             </div>
         );

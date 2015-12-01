@@ -1663,7 +1663,7 @@ var App = (function (_React$Component) {
         value: function render() {
             return _react2['default'].createElement(
                 'div',
-                null,
+                { className: 'mon-app' },
                 _react2['default'].createElement(_Nav2['default'], null),
                 _react2['default'].createElement(_reactRouter.RouteHandler, null),
                 _react2['default'].createElement(_Footer2['default'], null)
@@ -3458,7 +3458,7 @@ var Home = (function (_React$Component) {
         value: function render() {
             return _react2['default'].createElement(
                 'div',
-                { className: 'container' },
+                { className: 'container mon-main' },
                 _react2['default'].createElement(
                     'div',
                     { className: 'jumbotron mon-home' },
@@ -3680,7 +3680,7 @@ var List = (function (_React$Component) {
             );
             return _react2['default'].createElement(
                 'div',
-                { id: 'lists', className: 'container' },
+                { id: 'lists', className: 'container mon-main' },
                 _react2['default'].createElement(
                     'div',
                     { className: 'row' },
@@ -3908,7 +3908,7 @@ var Login = (function (_React$Component) {
         value: function render() {
             return _react2['default'].createElement(
                 'div',
-                { className: 'container mon-login' },
+                { className: 'container mon-login mon-main' },
                 _react2['default'].createElement(
                     'div',
                     { className: 'row' },
@@ -4279,7 +4279,7 @@ var MemberCenter = (function (_React$Component) {
         value: function render() {
             return _react2["default"].createElement(
                 "div",
-                { className: "container" },
+                { className: "container mon-main" },
                 _react2["default"].createElement(_reactRouter.RouteHandler, null)
             );
         }
@@ -4328,6 +4328,10 @@ var _Loading = require('./Loading');
 var _Loading2 = _interopRequireDefault(_Loading);
 
 var _reactRouter = require('react-router');
+
+var _NotFound = require('./NotFound');
+
+var _NotFound2 = _interopRequireDefault(_NotFound);
 
 var MemberFollow = (function (_React$Component) {
     _inherits(MemberFollow, _React$Component);
@@ -4417,7 +4421,7 @@ var MemberFollow = (function (_React$Component) {
 exports['default'] = MemberFollow;
 module.exports = exports['default'];
 
-},{"../actions/MemberFollowActions":12,"../stores/MemberFollowStore":72,"./Loading":40,"react":"react","react-router":"react-router"}],45:[function(require,module,exports){
+},{"../actions/MemberFollowActions":12,"../stores/MemberFollowStore":72,"./Loading":40,"./NotFound":47,"react":"react","react-router":"react-router"}],45:[function(require,module,exports){
 /**
  * Created by apache on 15-11-29.
  */
@@ -4943,11 +4947,15 @@ var NotFound = (function (_React$Component) {
         value: function render() {
             return _react2['default'].createElement(
                 'div',
-                { className: '' },
+                { className: 'container' },
                 _react2['default'].createElement(
                     'div',
-                    { className: '' },
-                    this.props.text
+                    { className: 'mon-table' },
+                    _react2['default'].createElement(
+                        'div',
+                        null,
+                        '404 NOT FOUND'
+                    )
                 )
             );
         }

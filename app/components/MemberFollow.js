@@ -6,6 +6,7 @@ import MemberFollowActions from '../actions/MemberFollowActions';
 import MemberFollowStore from '../stores/MemberFollowStore';
 import Loading from './Loading';
 import {Link} from 'react-router';
+import NotFound from './NotFound';
 
 class MemberFollow extends React.Component {
     constructor(props) {

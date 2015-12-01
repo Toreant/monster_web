@@ -120,7 +120,7 @@ class List extends React.Component {
             </div>
         );
         return (
-            <div id="lists" className='container'>
+            <div id="lists" className='container mon-main'>
                 <div className='row'>
                     <div className='col-md-8 col-md-offset-2'>
                         <ul className='nav'>

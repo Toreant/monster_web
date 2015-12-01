@@ -1,9 +1,39 @@
+.mon-app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .mon-disabled {
   display: none;
 }
 
 .mon-main {
   min-height: 100%;
+  flex: 1;
+}
+
+.mon-table {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  min-height: 100vh;
+  &>div {
+    margin: 0 auto;
+    color: #999;
+  }
+}
+
+@media screen and(min-width: 500px) {
+  .mon-table>div {
+    font-size: 10rem;
+  }
+}
+
+@media screen and(max-width: 500px) {
+  .mon-table>div {
+    font-size: 3rem;
+  }
 }
 
 .mon-star {

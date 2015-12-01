@@ -31,7 +31,7 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div className='container'>
+            <div className='container mon-main'>
                 <div className='jumbotron mon-home'>
                     <p>Monster 分享你的乐趣</p>
                     <p>独乐乐，不如猪乐乐</p>

@@ -100,7 +100,7 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className='container mon-login'>
+            <div className='container mon-login mon-main'>
                 <div className='row'>
                     <div className='col-md-8 col-sm-8'></div>
                     <div className='col-md-4 col-sm-4'>
