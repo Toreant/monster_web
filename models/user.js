@@ -5,7 +5,6 @@ import mongoose from 'mongoose';
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-    id : {type : Number},
     email : {type : String},
     password : {type : String},
     username : {type : String},
@@ -23,7 +22,8 @@ var UserSchema = new Schema({
     contribute : [String],
     article : [String],
     animate : [String],
-    music : [String]
+    music : [String],
+    notice : [String] // 未读通知
 });
 
 UserSchema.index({email: 1}, {unique: true});

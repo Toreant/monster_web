@@ -171,6 +171,7 @@ class resumable {
                     sourceStream.pipe(writableStream, {
                         end: false
                     });
+
                     sourceStream.on('end', function () {
                         // When the chunk is fully streamed,
                         // jump to the next one

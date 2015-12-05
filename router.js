@@ -13,6 +13,7 @@ import auth from './middleware/auth';
 import multipart from 'connect-multiparty';
 import SearchCtrl from './controllers/Search';
 import AnimateCtrl from './controllers/Animate';
+import NoticeCtrl from './controllers/Notice';
 var resumable = require('./middleware/resumable-node');
 
 
@@ -121,7 +122,16 @@ router.post('/api/animate',auth.isAuth,AnimateCtrl.postAnimate);
 
 router.get('/api/animate/:id',AnimateCtrl.getAnimate);
 
+router.post('/api/animates',AnimateCtrl.getAnimates);
+
 // 搜索
 router.post('/api/search',SearchCtrl.getSearch);
+
+// 通知
+router.get('/api/notices',auth.isAuth,NoticeCtrl.getNotice);
+
+router.get('/api/notice/:id',auth.isAuth,NoticeCtrl.viewNotice);
+
+router.post('/api/notice',auth.isAuth,NoticeCtrl.postNotice);
 
 export default router;

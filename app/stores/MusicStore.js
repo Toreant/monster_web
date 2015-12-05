@@ -7,15 +7,16 @@ import MusicActions from '../actions/MusicActions';
 class MusicStore {
     constructor() {
         this.bindActions(MusicActions);
-        this.avatar_url = '';
+        this.abbreviations = '';
         this.title = '';
-        this.create_user_name = '';
-        this.create_user_avatar_url = '';
-        this.create_user_domain = '';
-        this.create_user_introduce = '';
+        this.createUserName = '';
+        this.createUserDomain = '';
+        this.createUserAvatarURL = '';
+        this.createUserIntr = '';
         this.music = '';
         this.star = 0;
         this.tags = [];
+        this.createTime;
         this.finded = true;
         this.loading = true;
         this.error = '';
@@ -24,15 +25,17 @@ class MusicStore {
 
     onGetMusicSuccess(data) {
         if(data.code === 200) {
-            this.avatar_url = data.raw.music.avatar_url;
+            this.abbreviations = data.raw.music.abbreviations;
             this.music = data.raw.music.music_url;
             this.title = data.raw.music.title;
             this.star = data.raw.music.star;
             this.tags = data.raw.music.tags;
-            this.create_user_name = data.raw.user.username;
-            this.create_user_avatar_url = data.raw.user.avatar_url;
-            this.create_user_domain = data.raw.user.domain;
-            this.create_user_introduce = data.raw.user.introduce;
+            this.summary = data.raw.music.summary;
+            this.createUserName = data.raw.user.username;
+            this.createUserAvatarURL = data.raw.user.avatar_url;
+            this.createUserDomain = data.raw.user.domain;
+            this.createUserIntr = data.raw.user.introduce;
+            this.createTime = new Date(data.raw.music.create_time).toLocaleDateString();
             this.loading = false;
             this.stared = data.raw.stared.toString();
         } else if(data.code === 404) {

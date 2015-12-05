@@ -27,6 +27,7 @@ import ConArticle from './components/ConArticle';
 import Music from './components/Music';
 import MemberCenter from './components/MemberCenter';
 import MemberFollow from './components/MemberFollow';
+import Animate from './components/Animate';
 
 export default(
     <Route handler={App}>
@@ -39,6 +40,10 @@ export default(
 
         <Route path="/music">
             <Route path=":id" handler={Music} />
+        </Route>
+
+        <Route path="/animate">
+            <Route path=":id" handler={Animate}/>
         </Route>
 
         <Route path='/member' handler={Member}>

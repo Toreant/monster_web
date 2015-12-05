@@ -27,19 +27,10 @@ class PostMusic extends React.Component {
     }
 
     handleClick() {
-        //let $music= $('#music_file');
-        //console.log($music.text());
-        //if($music.text() === '') {
-        //    $("#upload_music").addClass('disabled');
-        //} else {
-        //    $("#upload_music").removeClass('disabled');
-        //    let music_url = '/upload/'+$('#music_file').text(),
-        //        avatar_url = $("#upload_album_img").attr('src');
-        //    PostMusicActions.postMusic(this.state.title,this.state.tags,music_url,avatar_url);
-        //}
+
         let music_url = '/upload/'+$('#music_file').text(),
             avatar_url = $("#upload_album_img").attr('src');
-        PostMusicActions.postMusic(this.state.title,this.state.tags,music_url,avatar_url);
+        PostMusicActions.postMusic(this.state.title,this.state.tags,music_url,avatar_url,this.state.summary);
     }
 
     render() {
@@ -85,6 +76,16 @@ class PostMusic extends React.Component {
                         </div>
                         <div className='col-md-3'>
                             <img src="/img/cover-night.png" id='upload_album_img' width='120' alt="loading" />
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <div className="col-md-1">
+                            <label htmlFor="music_summary" className="label label-default">
+                                简介
+                            </label>
+                        </div>
+                        <div className="col-md-11">
+                            <textarea name="summary" id="music_summary" rows="10" className="form-control" placeholder="这里是写简介的" onChange={PostMusicActions.changeSummary}></textarea>
                         </div>
                     </div>
                     <a href="javascript:;" id="upload_music" className='btn btn-success pull-right mon-post-btn' onClick={this.handleClick.bind(this)}>

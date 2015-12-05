@@ -4,6 +4,8 @@
   box-shadow: 0 0 10px #999;
   & img {
     width: 360px;
+    height: 360px;
+    overflow: hidden;
   }
 }
 
@@ -37,8 +39,30 @@
   }
 }
 
+.mon-music-summary {
+  & label {
+    font-size: 2rem;
+  }
+  & p {
+    font-size: 1.6rem;
+    margin-top: 40px;
+  }
+}
+
 .mon-music-url {
   display: none;
+}
+
+.mon-music-info {
+  margin: 20px 0;
+  & img {
+    border: 1px solid #999;
+    border-radius : 50%;
+  }
+  &>a {
+    margin-left: 20px;
+    font-size: 1.8rem;
+  }
 }
 
 .mon-music-tags {

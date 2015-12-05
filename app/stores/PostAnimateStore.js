@@ -9,6 +9,7 @@ class PostAnimateStore {
         this.bindActions(PostAnimateActions);
         this.title = '';
         this.tags = [];
+        this.summary = '';
         this.avatar_url = '';
         this.animate_url = '';
     }
@@ -28,14 +29,16 @@ class PostAnimateStore {
     }
 
     onChangeTags(event) {
-        console.log('heh');
         let tags = event.target.value.replace(/\s+/g,",");
         tags = tags.split(',');
         this.tags = [];
         tags.map((data) => {
             this.tags.push(data);
         });
-        console.log(this.tags);
+    }
+
+    onChangeSummary(event) {
+        this.summary = event.target.value;
     }
 }
 

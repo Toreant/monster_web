@@ -8,15 +8,17 @@ class PostAnimateActions {
         this.generateActions(
             'postAnimateSuccess',
             'changeTitle',
-            'changeTags'
+            'changeTags',
+            'changeSummary'
         );
     }
 
-    postAnimate(title,tags,animate_url,avatar_url) {
+    postAnimate(title,tags,summary,animate_url,avatar_url) {
 
         let params = {
             title : title,
             tags : tags,
+            summary : summary,
             animate_url : animate_url,
             avatar_url : avatar_url,
             create_time : (new Date()).getTime()

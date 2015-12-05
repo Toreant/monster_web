@@ -52,7 +52,7 @@ class AnimateCtrl {
             code : 0,
             raw  : null
         };
-        Animate.getAnimate(id,user._id,(data) => {
+        Animate.getAnimate(id,user === undefined?undefined:user._id,(data) => {
             if(data === 500) {
                 result.meta = '服务器错误';
                 result.code = 500;
@@ -61,6 +61,38 @@ class AnimateCtrl {
                 result.code = 404;
             } else {
                 result.meta = '获取动漫成功';
+                result.code = 200;
+                result.raw  = data;
+            }
+            res.json(result);
+        });
+    }
+
+    /**
+     * 获取动漫列表
+     * @param req
+     * @param res
+     * @param next
+     */
+    getAnimates(req,res,next) {
+        let params = req.body.params,
+            option = req.body.option;
+
+        let result = {
+            meta : '',
+            code : 0,
+            raw  : null
+        };
+
+        Animate.getAnimates(params,option,(data) => {
+            if(data === 500) {
+                result.meta = '服务器错误';
+                result.code = 500;
+            } else if(data === null) {
+                result.meta = '没有动漫';
+                result.code = 404;
+            } else {
+                result.meta = '获取动漫列表成功';
                 result.code = 200;
                 result.raw  = data;
             }

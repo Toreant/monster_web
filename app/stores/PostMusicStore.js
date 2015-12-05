@@ -8,34 +8,27 @@ class PostMusicStore {
     constructor() {
         this.bindActions(PostMusicActions);
         this.title;　　　　 // 标题
-        this.music_url;　　//　音乐地址
         this.tags = [];　　// 标签
-        this.avatar_url;  //　封面图
+        this.summary = '';
     }
 
     onChangeTitle(event) {
         this.title = event.target.value;
     }
 
-    onChangeMusic(url) {
-        console.log('hehe');
-        this.music_url = url;
-    }
-
     onChangeTags(event) {
-        console.log('heh');
         let tags = event.target.value.replace(/\s+/g,",");
         tags = tags.split(',');
         this.tags = [];
         tags.map((data) => {
             this.tags.push(data);
         });
-        console.log(this.tags);
     }
 
-    onChangeAvatar(url) {
-        this.avatar_url = url;
+    onChangeSummary(event) {
+        this.summary = event.target.value;
     }
+
 
     onPostMusicSuccess(data) {
         switch(data.code) {

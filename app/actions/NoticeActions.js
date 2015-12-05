@@ -6,12 +6,12 @@ import alt from '../alt';
 class NoticeActions {
     constructor() {
         this.generateActions(
-            'getToastrSuccess'
+            'getNoticesListSuccess'
         );
     }
 
-    getToastr() {
-        this.actions.getToastrSuccess();
+    getNoticesList() {
+
     }
 }
 

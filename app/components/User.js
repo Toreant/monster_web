@@ -5,6 +5,7 @@ import React from 'react';
 import {Router,RouteHandler,Link} from 'react-router';
 import UserActions from '../actions/UserActions';
 import UserStore from '../stores/UserStore';
+import NoticePoint from './NoticePoint';
 
 class User extends React.Component {
     constructor(props) {
@@ -77,7 +78,12 @@ class User extends React.Component {
                                     <li><Link to='/post/article'><span className='fa fa-file'></span>文章</Link></li>
                                 </ul>
                             </li>
-                            <li><Link to='/profile/notice'><span className='fa fa-bell'></span>通知</Link></li>
+                            <li>
+                                <Link to='/profile/notice'>
+                                    <span className='fa fa-bell'></span>通知
+                                    <NoticePoint />
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                     <RouteHandler />

@@ -11,7 +11,7 @@
           flex-direction: column;
 }
 .mon-disabled {
-  display: none;
+  display: none !important;
 }
 .mon-main {
   min-height: 100%;

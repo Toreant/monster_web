@@ -5,6 +5,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import NavActions from '../actions/NavActions';
 import NavStore from '../stores/NavStore';
+import NoticePoint from './NoticePoint';
 
 class Nav extends React.Component {
 
@@ -43,6 +44,7 @@ class Nav extends React.Component {
                     <li className="dropdown">
                         <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <img src={this.state.avatar} width='30' alt="loading"/> <span className="caret"></span>
+                            <NoticePoint />
                         </a>
                         <ul className="dropdown-menu">
                             <li>

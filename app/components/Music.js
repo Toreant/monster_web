@@ -8,6 +8,7 @@ import Loading from './Loading';
 import NotFount from './NotFound';
 import Comment from './Comment';
 import Star from './Star';
+import {Link} from 'react-router';
 
 class Music extends React.Component {
     constructor(props) {
@@ -70,9 +71,20 @@ class Music extends React.Component {
                     <p className="text-primary mon-bg-title">
                         {this.state.title}
                     </p>
+                    <div className="mon-music-info">
+                        <Link to={'/member/'+this.state.createUserDomain}>
+                            <img src={this.state.createUserAvatarURL} alt="loading" width="80"/>
+                        </Link>
+                        <Link to={'/member/'+this.state.createUserDomain}>
+                            {this.state.createUserName}
+                        </Link>
+                        <span className="pull-right">
+                            {this.state.createTime}
+                        </span>
+                    </div>
                     <div className="raw clearfix">
                         <div className="mon-music col-md-6">
-                            <img src={this.state.avatar_url} alt="loading"/>
+                            <img src={this.state.abbreviations} alt="loading"/>
                             <div className="mon-music-block">
                                 <audio ref="music" id="music" className="mon-music-url" src={this.state.music}></audio>
                                 <a href="javascript:;" id="music_play" onClick={this.play.bind(this)}>
@@ -83,9 +95,12 @@ class Music extends React.Component {
                                 </a>
                             </div>
                         </div>
-                        <div className="col-md-6">
-                            <p className="text-info">
-                                dsdsd
+                        <div className="col-md-6 mon-music-summary">
+                            <label className="label label-info">
+                                简介
+                            </label>
+                            <p className="bg-info mon-padding">
+                                {this.state.summary}
                             </p>
                         </div>
                     </div>

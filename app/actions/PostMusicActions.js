@@ -7,21 +7,21 @@ class PostMusicActions {
     constructor() {
         this.generateActions(
             'changeTitle',
-            'changeMusicUrl',
             'changeTags',
-            'changeAvatar',
+            'changeSummary',
             'postMusicSuccess'
         );
     }
 
-    postMusic(title,tags,music_url,avatar_url) {
+    postMusic(title,tags,music_url,avatar_url,summary) {
         let postData = {
             params : {
                 title : title,
                 tags : tags,
                 music_url : music_url,
-                avatar_url : avatar_url,
-                create_time : (new Date()).getTime()
+                abbreviations : avatar_url,
+                create_time : (new Date()).getTime(),
+                summary : summary
             }
         };
 

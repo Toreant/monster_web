@@ -27,7 +27,8 @@ class PostAnimate extends React.Component {
     }
 
     handleClick() {
-        PostAnimateActions.postAnimate(this.state.title,this.state.tags,$("#animate_file").text(),$("#upload_animate_img").text());
+        PostAnimateActions.postAnimate(this.state.title,this.state.tags,
+            this.state.summary,$("#animate_file").text(),$("#upload_animate_img").text());
     }
 
     render() {
@@ -73,6 +74,16 @@ class PostAnimate extends React.Component {
                         </div>
                         <div className='col-md-3'>
                             <img src="/img/cover-night.png" id='upload_animate_img' width='120' alt="loading" />
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <div className="col-md-1">
+                            <label htmlFor="animate_summary" className="label label-default">
+                                简介
+                            </label>
+                        </div>
+                        <div className="col-md-11">
+                            <textarea id="animate_summary" name="summary" cols="30" rows="10" onChange={PostAnimateActions.changeSummary}></textarea>
                         </div>
                     </div>
                     <a href="javascript:;" id="upload_music" className='btn btn-success pull-right mon-post-btn' onClick={this.handleClick.bind(this)}>

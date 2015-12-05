@@ -5,6 +5,8 @@
 }
 .mon-music img {
   width: 360px;
+  height: 360px;
+  overflow: hidden;
 }
 .mon-music-block {
   position: absolute;
@@ -44,8 +46,26 @@
 .mon-music-block a:nth-child(1) {
   display: none !important;
 }
+.mon-music-summary label {
+  font-size: 2rem;
+}
+.mon-music-summary p {
+  font-size: 1.6rem;
+  margin-top: 40px;
+}
 .mon-music-url {
   display: none;
+}
+.mon-music-info {
+  margin: 20px 0;
+}
+.mon-music-info img {
+  border: 1px solid #999;
+  border-radius: 50%;
+}
+.mon-music-info > a {
+  margin-left: 20px;
+  font-size: 1.8rem;
 }
 .mon-music-tags {
   margin-top: 30px;
