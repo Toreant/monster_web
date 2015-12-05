@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 
 var NoticeSchema = new Schema({
     create_user_id : {type : String},
-    Receiver : {type : String},
+    receiver : {type : String},
     content : {type : String},
     create_time : {type : Number},
     type : {type : Number} // 0--系统通知　１--用户私信

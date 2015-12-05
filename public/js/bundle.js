@@ -54,7 +54,7 @@ var AnimateActions = (function () {
 exports['default'] = _alt2['default'].createActions(AnimateActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],2:[function(require,module,exports){
+},{"../alt":29}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -102,7 +102,7 @@ var ArticleActions = (function () {
 exports['default'] = _alt2['default'].createActions(ArticleActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],3:[function(require,module,exports){
+},{"../alt":29}],3:[function(require,module,exports){
 /**
  * Created by apache on 15-11-25.
  */
@@ -154,7 +154,7 @@ var BgUploadActions = (function () {
 exports['default'] = _alt2['default'].createActions(BgUploadActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],4:[function(require,module,exports){
+},{"../alt":29}],4:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -233,7 +233,7 @@ var CommentActions = (function () {
 exports['default'] = _alt2['default'].createActions(CommentActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],5:[function(require,module,exports){
+},{"../alt":29}],5:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -315,7 +315,7 @@ var ConListActions = (function () {
 exports['default'] = _alt2['default'].createActions(ConListActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],6:[function(require,module,exports){
+},{"../alt":29}],6:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -342,7 +342,7 @@ var ContributeActions = function ContributeActions() {
 exports['default'] = _alt2['default'].createActions(ContributeActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],7:[function(require,module,exports){
+},{"../alt":29}],7:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -441,7 +441,7 @@ var FollowersActions = (function () {
 exports['default'] = _alt2['default'].createActions(FollowersActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],8:[function(require,module,exports){
+},{"../alt":29}],8:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -526,7 +526,7 @@ var FollowingActions = (function () {
 exports['default'] = _alt2['default'].createActions(FollowingActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],9:[function(require,module,exports){
+},{"../alt":29}],9:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -568,7 +568,7 @@ var HomeActions = (function () {
 exports['default'] = _alt2['default'].createActions(HomeActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],10:[function(require,module,exports){
+},{"../alt":29}],10:[function(require,module,exports){
 /**
  * Created by apache on 15-11-10.
  */
@@ -636,7 +636,7 @@ var ListActions = (function () {
 exports['default'] = _alt2['default'].createActions(ListActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],11:[function(require,module,exports){
+},{"../alt":29}],11:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -731,7 +731,7 @@ var LoginActions = (function () {
 exports['default'] = _alt2['default'].createActions(LoginActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],12:[function(require,module,exports){
+},{"../alt":29}],12:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -781,7 +781,7 @@ var MemberActions = (function () {
 exports['default'] = _alt2['default'].createActions(MemberActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],13:[function(require,module,exports){
+},{"../alt":29}],13:[function(require,module,exports){
 /**
  * Created by apache on 15-12-1.
  */
@@ -854,7 +854,7 @@ var MemberFollowActions = (function () {
 exports['default'] = _alt2['default'].createActions(MemberFollowActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],14:[function(require,module,exports){
+},{"../alt":29}],14:[function(require,module,exports){
 /**
  * Created by apache on 15-11-29.
  */
@@ -904,7 +904,7 @@ var MusicActions = (function () {
 exports['default'] = _alt2['default'].createActions(MusicActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],15:[function(require,module,exports){
+},{"../alt":29}],15:[function(require,module,exports){
 /**
  * Created by apache on 15-10-25.
  */
@@ -998,7 +998,7 @@ var NavActions = (function () {
 exports['default'] = _alt2['default'].createActions(NavActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],16:[function(require,module,exports){
+},{"../alt":29}],16:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -1027,7 +1027,20 @@ var NoticeActions = (function () {
 
     _createClass(NoticeActions, [{
         key: 'getNoticesList',
-        value: function getNoticesList() {}
+        value: function getNoticesList() {
+            var _this = this;
+
+            $.ajax({
+                url: '/api/notices',
+                type: 'get',
+                cache: false,
+                contentType: 'application/json;charset=utf-8'
+            }).done(function (data) {
+                _this.actions.getNoticesListSuccess(data);
+            }).fail(function () {
+                toastr.warning('获取通知失败');
+            });
+        }
     }]);
 
     return NoticeActions;
@@ -1036,7 +1049,7 @@ var NoticeActions = (function () {
 exports['default'] = _alt2['default'].createActions(NoticeActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],17:[function(require,module,exports){
+},{"../alt":29}],17:[function(require,module,exports){
 /**
  * Created by apache on 15-12-5.
  */
@@ -1087,7 +1100,68 @@ var NoticePointActions = (function () {
 exports['default'] = _alt2['default'].createActions(NoticePointActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],18:[function(require,module,exports){
+},{"../alt":29}],18:[function(require,module,exports){
+/**
+ * Created by apache on 15-12-5.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var NoticeSenderActions = (function () {
+    function NoticeSenderActions() {
+        _classCallCheck(this, NoticeSenderActions);
+
+        this.generateActions('changeContent', 'postNoticeSuccess', 'postNoticeLoad');
+    }
+
+    _createClass(NoticeSenderActions, [{
+        key: 'postNotice',
+        value: function postNotice(content, receiver) {
+            var _this = this;
+
+            var params = {
+                params: {
+                    content: content,
+                    create_time: new Date().getTime(),
+                    type: 1,
+                    receiver: receiver
+                }
+            };
+
+            $.ajax({
+                url: '/api/notice',
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json;charset=utf-8',
+                data: JSON.stringify(params)
+            }).done(function (data) {
+                _this.actions.postNoticeSuccess(data);
+            }).fail(function () {
+                toastr.warning('发送私信失败');
+            });
+        }
+    }]);
+
+    return NoticeSenderActions;
+})();
+
+exports['default'] = _alt2['default'].createActions(NoticeSenderActions);
+module.exports = exports['default'];
+
+},{"../alt":29}],19:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -1114,7 +1188,7 @@ var PaginationActions = function PaginationActions() {
 exports['default'] = _alt2['default'].createActions(PaginationActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],19:[function(require,module,exports){
+},{"../alt":29}],20:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -1176,7 +1250,7 @@ var PostAnimateActions = (function () {
 exports['default'] = _alt2['default'].createActions(PostAnimateActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],20:[function(require,module,exports){
+},{"../alt":29}],21:[function(require,module,exports){
 /**
  * Created by apache on 15-11-3.
  */
@@ -1242,7 +1316,7 @@ var PostArticleActions = (function () {
 exports['default'] = _alt2['default'].createActions(PostArticleActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],21:[function(require,module,exports){
+},{"../alt":29}],22:[function(require,module,exports){
 /**
  * Created by apache on 15-11-25.
  */
@@ -1306,7 +1380,7 @@ var PostMusicActions = (function () {
 exports['default'] = _alt2['default'].createActions(PostMusicActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],22:[function(require,module,exports){
+},{"../alt":29}],23:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -1333,7 +1407,7 @@ var ProfileCenterActions = function ProfileCenterActions() {
 exports['default'] = _alt2['default'].createActions(ProfileCenterActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],23:[function(require,module,exports){
+},{"../alt":29}],24:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -1411,7 +1485,7 @@ var SetActions = (function () {
 exports['default'] = _alt2['default'].createActions(SetActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],24:[function(require,module,exports){
+},{"../alt":29}],25:[function(require,module,exports){
 /**
  * Created by apache on 15-11-15.
  */
@@ -1495,7 +1569,7 @@ var StarActions = (function () {
 exports['default'] = _alt2['default'].createActions(StarActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],25:[function(require,module,exports){
+},{"../alt":29}],26:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -1578,7 +1652,7 @@ var StarListActions = (function () {
 exports['default'] = _alt2['default'].createActions(StarListActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],26:[function(require,module,exports){
+},{"../alt":29}],27:[function(require,module,exports){
 /**
  * Created by apache on 15-11-22.
  */
@@ -1692,7 +1766,7 @@ var UploadActions = (function () {
 exports['default'] = _alt2['default'].createActions(UploadActions);
 module.exports = exports['default'];
 
-},{"../alt":28,"underscore":"underscore"}],27:[function(require,module,exports){
+},{"../alt":29,"underscore":"underscore"}],28:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -1742,7 +1816,7 @@ var UserActions = (function () {
 exports['default'] = _alt2['default'].createActions(UserActions);
 module.exports = exports['default'];
 
-},{"../alt":28}],28:[function(require,module,exports){
+},{"../alt":29}],29:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -1761,7 +1835,7 @@ var _alt2 = _interopRequireDefault(_alt);
 exports['default'] = new _alt2['default']();
 module.exports = exports['default'];
 
-},{"alt":"alt"}],29:[function(require,module,exports){
+},{"alt":"alt"}],30:[function(require,module,exports){
 /**
  * Created by apache on 15-12-1.
  */
@@ -1928,7 +2002,7 @@ var Animate = (function (_React$Component) {
 exports['default'] = Animate;
 module.exports = exports['default'];
 
-},{"../actions/AnimateActions":1,"../stores/AnimateStore":66,"./Loading":43,"./NotFound":50,"react":"react","react-router":"react-router"}],30:[function(require,module,exports){
+},{"../actions/AnimateActions":1,"../stores/AnimateStore":68,"./Loading":44,"./NotFound":51,"react":"react","react-router":"react-router"}],31:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -1990,7 +2064,7 @@ var App = (function (_React$Component) {
 exports['default'] = App;
 module.exports = exports['default'];
 
-},{"./Footer":40,"./Nav":49,"react":"react","react-router":"react-router"}],31:[function(require,module,exports){
+},{"./Footer":41,"./Nav":50,"react":"react","react-router":"react-router"}],32:[function(require,module,exports){
 /**
  * Created by apache on 15-11-4.
  */
@@ -2239,7 +2313,7 @@ var Article = (function (_React$Component) {
 exports['default'] = Article;
 module.exports = exports['default'];
 
-},{"../actions/ArticleActions":2,"../stores/ArticleStore":67,"./BtnBlock":33,"./Comment":34,"./Star":59,"markdown":97,"react":"react","react-router":"react-router","underscore":"underscore"}],32:[function(require,module,exports){
+},{"../actions/ArticleActions":2,"../stores/ArticleStore":69,"./BtnBlock":34,"./Comment":35,"./Star":61,"markdown":100,"react":"react","react-router":"react-router","underscore":"underscore"}],33:[function(require,module,exports){
 /**
  * Created by apache on 15-11-25.
  */
@@ -2474,7 +2548,7 @@ var BigUpload = (function (_React$Component) {
 exports['default'] = BigUpload;
 module.exports = exports['default'];
 
-},{"../actions/BigUploadActions":3,"../stores/BigUploadStore":68,"react":"react","underscore":"underscore"}],33:[function(require,module,exports){
+},{"../actions/BigUploadActions":3,"../stores/BigUploadStore":70,"react":"react","underscore":"underscore"}],34:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -2602,7 +2676,7 @@ var BtnBlock = (function (_React$Component) {
 exports['default'] = BtnBlock;
 module.exports = exports['default'];
 
-},{"react":"react"}],34:[function(require,module,exports){
+},{"react":"react"}],35:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -2801,7 +2875,7 @@ var Comment = (function (_React$Component) {
 exports['default'] = Comment;
 module.exports = exports['default'];
 
-},{"../actions/CommentActions":4,"../stores/CommentStore":69,"react":"react","react-router":"react-router","underscore":"underscore"}],35:[function(require,module,exports){
+},{"../actions/CommentActions":4,"../stores/CommentStore":71,"react":"react","react-router":"react-router","underscore":"underscore"}],36:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -2866,7 +2940,7 @@ var ConArticle = (function (_React$Component) {
 exports['default'] = ConArticle;
 module.exports = exports['default'];
 
-},{"./ConList":36,"react":"react"}],36:[function(require,module,exports){
+},{"./ConList":37,"react":"react"}],37:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -3081,7 +3155,7 @@ var ConList = (function (_React$Component) {
 exports['default'] = ConList;
 module.exports = exports['default'];
 
-},{"../actions/ConListActions":5,"../stores/ConListStore":70,"react":"react","react-router":"react-router","underscore":"underscore"}],37:[function(require,module,exports){
+},{"../actions/ConListActions":5,"../stores/ConListStore":72,"react":"react","react-router":"react-router","underscore":"underscore"}],38:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -3210,7 +3284,7 @@ var Contribute = (function (_React$Component) {
 exports['default'] = Contribute;
 module.exports = exports['default'];
 
-},{"../actions/ContributeActions":6,"../stores/ContributeStore":71,"react":"react","react-router":"react-router"}],38:[function(require,module,exports){
+},{"../actions/ContributeActions":6,"../stores/ContributeStore":73,"react":"react","react-router":"react-router"}],39:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -3396,7 +3470,7 @@ var Followers = (function (_React$Component) {
 exports['default'] = Followers;
 module.exports = exports['default'];
 
-},{"../actions/FollowersActions":7,"../stores/FollowersStore":72,"./Pagination":53,"react":"react","react-router":"react-router","underscore":"underscore"}],39:[function(require,module,exports){
+},{"../actions/FollowersActions":7,"../stores/FollowersStore":74,"./Pagination":55,"react":"react","react-router":"react-router","underscore":"underscore"}],40:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -3565,7 +3639,7 @@ var Following = (function (_React$Component) {
 exports['default'] = Following;
 module.exports = exports['default'];
 
-},{"../actions/FollowingActions":8,"../stores/FollowingStore":73,"./Pagination":53,"react":"react","react-router":"react-router","underscore":"underscore"}],40:[function(require,module,exports){
+},{"../actions/FollowingActions":8,"../stores/FollowingStore":75,"./Pagination":55,"react":"react","react-router":"react-router","underscore":"underscore"}],41:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -3705,7 +3779,7 @@ var Footer = (function (_React$Component) {
 exports['default'] = Footer;
 module.exports = exports['default'];
 
-},{"react":"react"}],41:[function(require,module,exports){
+},{"react":"react"}],42:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -3801,7 +3875,7 @@ var Home = (function (_React$Component) {
 exports['default'] = Home;
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":9,"../stores/HomeStore":74,"react":"react"}],42:[function(require,module,exports){
+},{"../actions/HomeActions":9,"../stores/HomeStore":76,"react":"react"}],43:[function(require,module,exports){
 /**
  * Created by apache on 15-11-10.
  */
@@ -4027,7 +4101,7 @@ List.contextTypes = {
 exports['default'] = List;
 module.exports = exports['default'];
 
-},{"../actions/ListActions":10,"../stores/ListStore":75,"react":"react","react-router":"react-router","underscore":"underscore"}],43:[function(require,module,exports){
+},{"../actions/ListActions":10,"../stores/ListStore":77,"react":"react","react-router":"react-router","underscore":"underscore"}],44:[function(require,module,exports){
 /**
  * Created by apache on 15-11-29.
  */
@@ -4081,7 +4155,7 @@ var Loading = (function (_React$Component) {
 exports['default'] = Loading;
 module.exports = exports['default'];
 
-},{"react":"react"}],44:[function(require,module,exports){
+},{"react":"react"}],45:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -4373,7 +4447,7 @@ var Login = (function (_React$Component) {
 exports['default'] = Login;
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":11,"../stores/LoginStore":76,"react":"react"}],45:[function(require,module,exports){
+},{"../actions/LoginActions":11,"../stores/LoginStore":78,"react":"react"}],46:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -4408,6 +4482,10 @@ var _Contribute2 = _interopRequireDefault(_Contribute);
 var _NotFound = require('./NotFound');
 
 var _NotFound2 = _interopRequireDefault(_NotFound);
+
+var _NoticeSender = require('./NoticeSender');
+
+var _NoticeSender2 = _interopRequireDefault(_NoticeSender);
 
 var _actionsMemberActions = require('../actions/MemberActions');
 
@@ -4526,6 +4604,11 @@ var Member = (function (_React$Component) {
                         'p',
                         { className: 'text-success bg-info mon-member-intr' },
                         this.state.introduce
+                    ),
+                    _react2['default'].createElement(
+                        'button',
+                        { className: 'btn btn-block btn-primary', 'data-toggle': 'modal', 'data-target': '#noticeSender' },
+                        '私信'
                     )
                 )
             );
@@ -4537,7 +4620,8 @@ var Member = (function (_React$Component) {
                     { className: 'row' },
                     Mem,
                     _react2['default'].createElement(_Contribute2['default'], { option: '0', domain: this.props.params.domain })
-                )
+                ),
+                _react2['default'].createElement(_NoticeSender2['default'], { receiver: this.state._id })
             );
         }
     }]);
@@ -4552,7 +4636,7 @@ Member.contextTypes = {
 exports['default'] = Member;
 module.exports = exports['default'];
 
-},{"../actions/MemberActions":12,"../stores/MemberStore":78,"./Contribute":37,"./NotFound":50,"react":"react","react-router":"react-router","underscore":"underscore"}],46:[function(require,module,exports){
+},{"../actions/MemberActions":12,"../stores/MemberStore":80,"./Contribute":38,"./NotFound":51,"./NoticeSender":54,"react":"react","react-router":"react-router","underscore":"underscore"}],47:[function(require,module,exports){
 /**
  * Created by apache on 15-12-1.
  */
@@ -4604,7 +4688,7 @@ var MemberCenter = (function (_React$Component) {
 exports["default"] = MemberCenter;
 module.exports = exports["default"];
 
-},{"react":"react","react-router":"react-router"}],47:[function(require,module,exports){
+},{"react":"react","react-router":"react-router"}],48:[function(require,module,exports){
 /**
  * Created by apache on 15-12-1.
  */
@@ -4734,7 +4818,7 @@ var MemberFollow = (function (_React$Component) {
 exports['default'] = MemberFollow;
 module.exports = exports['default'];
 
-},{"../actions/MemberFollowActions":13,"../stores/MemberFollowStore":77,"./Loading":43,"./NotFound":50,"react":"react","react-router":"react-router"}],48:[function(require,module,exports){
+},{"../actions/MemberFollowActions":13,"../stores/MemberFollowStore":79,"./Loading":44,"./NotFound":51,"react":"react","react-router":"react-router"}],49:[function(require,module,exports){
 /**
  * Created by apache on 15-11-29.
  */
@@ -4987,7 +5071,7 @@ var Music = (function (_React$Component) {
 exports['default'] = Music;
 module.exports = exports['default'];
 
-},{"../actions/MusicActions":14,"../stores/MusicStore":79,"./Comment":34,"./Loading":43,"./NotFound":50,"./Star":59,"react":"react","react-router":"react-router"}],49:[function(require,module,exports){
+},{"../actions/MusicActions":14,"../stores/MusicStore":81,"./Comment":35,"./Loading":44,"./NotFound":51,"./Star":61,"react":"react","react-router":"react-router"}],50:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -5258,7 +5342,7 @@ var Nav = (function (_React$Component) {
 exports['default'] = Nav;
 module.exports = exports['default'];
 
-},{"../actions/NavActions":15,"../stores/NavStore":80,"./NoticePoint":52,"react":"react","react-router":"react-router"}],50:[function(require,module,exports){
+},{"../actions/NavActions":15,"../stores/NavStore":82,"./NoticePoint":53,"react":"react","react-router":"react-router"}],51:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -5316,7 +5400,7 @@ var NotFound = (function (_React$Component) {
 exports['default'] = NotFound;
 module.exports = exports['default'];
 
-},{"react":"react"}],51:[function(require,module,exports){
+},{"react":"react"}],52:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -5348,6 +5432,12 @@ var _storesNoticeStore = require('../stores/NoticeStore');
 
 var _storesNoticeStore2 = _interopRequireDefault(_storesNoticeStore);
 
+var _reactRouter = require('react-router');
+
+var _Loading = require('./Loading');
+
+var _Loading2 = _interopRequireDefault(_Loading);
+
 var Notice = (function (_React$Component) {
     _inherits(Notice, _React$Component);
 
@@ -5363,6 +5453,7 @@ var Notice = (function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             _storesNoticeStore2['default'].listen(this.onChange);
+            _actionsNoticeActions2['default'].getNoticesList();
         }
     }, {
         key: 'componentWillUnmount',
@@ -5377,10 +5468,59 @@ var Notice = (function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var Target = undefined;
+            if (this.state.loading === false && this.state.notices.length !== 0) {
+                Target = this.state.notices.map(function (data) {
+                    return _react2['default'].createElement(
+                        'div',
+                        { className: 'mon-notice-item media animated flipInX' },
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'media-left' },
+                            _react2['default'].createElement(
+                                _reactRouter.Link,
+                                { to: '/member/' + data.user.domain },
+                                _react2['default'].createElement('img', { src: data.user.avatar_url, alt: 'loading', width: '60' })
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'media-body' },
+                            _react2['default'].createElement(
+                                'p',
+                                { className: 'text-info' },
+                                data.notice.content
+                            ),
+                            _react2['default'].createElement(
+                                'div',
+                                null,
+                                _react2['default'].createElement(
+                                    'span',
+                                    null,
+                                    new Date(data.notice.create_time)
+                                )
+                            )
+                        )
+                    );
+                });
+            } else if (this.state.loading === false && this.state.notices.length === 0) {
+                Target = _react2['default'].createElement(
+                    'p',
+                    { className: 'bg-primary mon-padding' },
+                    '没有私信或通知'
+                );
+            } else if (this.state.loadin === true) {
+                Target = _react2['default'].createElement(_Loading2['default'], null);
+            }
             return _react2['default'].createElement(
                 'div',
                 { className: 'col-md-9 col-sm-9' },
-                'Toastr'
+                _react2['default'].createElement(
+                    'p',
+                    { className: 'bg-info mon-bg-title mon-padding' },
+                    '通知／私信'
+                ),
+                Target
             );
         }
     }]);
@@ -5391,7 +5531,7 @@ var Notice = (function (_React$Component) {
 exports['default'] = Notice;
 module.exports = exports['default'];
 
-},{"../actions/NoticeActions":16,"../stores/NoticeStore":82,"react":"react"}],52:[function(require,module,exports){
+},{"../actions/NoticeActions":16,"../stores/NoticeStore":85,"./Loading":44,"react":"react","react-router":"react-router"}],53:[function(require,module,exports){
 /**
  * Created by apache on 15-12-5.
  */
@@ -5471,7 +5611,148 @@ var NoticePoint = (function (_React$Component) {
 exports['default'] = NoticePoint;
 module.exports = exports['default'];
 
-},{"../actions/NoticePointActions":17,"../stores/NoticePointStore":81,"react":"react"}],53:[function(require,module,exports){
+},{"../actions/NoticePointActions":17,"../stores/NoticePointStore":83,"react":"react"}],54:[function(require,module,exports){
+/**
+ * Created by apache on 15-12-5.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _actionsNoticeSenderActions = require('../actions/NoticeSenderActions');
+
+var _actionsNoticeSenderActions2 = _interopRequireDefault(_actionsNoticeSenderActions);
+
+var _storesNoticeSenderStore = require('../stores/NoticeSenderStore');
+
+var _storesNoticeSenderStore2 = _interopRequireDefault(_storesNoticeSenderStore);
+
+var NoticeSender = (function (_React$Component) {
+    _inherits(NoticeSender, _React$Component);
+
+    function NoticeSender(props) {
+        _classCallCheck(this, NoticeSender);
+
+        _get(Object.getPrototypeOf(NoticeSender.prototype), 'constructor', this).call(this, props);
+        this.state = _storesNoticeSenderStore2['default'].getState();
+        this.onChange = this.onChange.bind(this);
+    }
+
+    _createClass(NoticeSender, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            _storesNoticeSenderStore2['default'].listen(this.onChange);
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            _storesNoticeSenderStore2['default'].unlisten(this.onChange);
+        }
+    }, {
+        key: 'onChange',
+        value: function onChange(state) {
+            this.setState(state);
+        }
+    }, {
+        key: 'handleClick',
+        value: function handleClick() {
+            _actionsNoticeSenderActions2['default'].postNotice(this.state.content, this.props.receiver);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var Loading = undefined;
+            if (this.state.loading) {
+                Loading = _react2['default'].createElement(
+                    'div',
+                    { 'class': 'loader-inner ball-pulse' },
+                    _react2['default'].createElement('div', null),
+                    _react2['default'].createElement('div', null),
+                    _react2['default'].createElement('div', null)
+                );
+            } else {
+                Loading = null;
+            }
+            return _react2['default'].createElement(
+                'div',
+                { id: 'noticeSender', className: 'modal fade', tabIndex: '-1', role: 'dialog', 'aria-labelledby': 'myModalLabel', 'data-backdrop': 'static' },
+                _react2['default'].createElement(
+                    'div',
+                    { className: 'modal-dialog' },
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'modal-content' },
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'modal-header' },
+                            _react2['default'].createElement(
+                                'button',
+                                { type: 'button', className: 'close', 'data-dismiss': 'modal', 'aria-label': 'Close' },
+                                _react2['default'].createElement(
+                                    'span',
+                                    { 'aria-hidden': 'true' },
+                                    '×'
+                                )
+                            ),
+                            _react2['default'].createElement(
+                                'h4',
+                                { className: 'modal-title' },
+                                '私信'
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'modal-body' },
+                            _react2['default'].createElement(
+                                'form',
+                                { role: 'form' },
+                                _react2['default'].createElement('textarea', { name: 'content', rows: '10', className: 'form-control', placeholder: '输入你想对他说的话', onChange: _actionsNoticeSenderActions2['default'].changeContent })
+                            ),
+                            Loading
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'modal-footer' },
+                            _react2['default'].createElement(
+                                'button',
+                                { type: 'button', className: 'btn btn-default', 'data-dismiss': 'modal' },
+                                'Close'
+                            ),
+                            _react2['default'].createElement(
+                                'button',
+                                { type: 'button', className: 'btn btn-primary', onClick: this.handleClick.bind(this) },
+                                '提交'
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return NoticeSender;
+})(_react2['default'].Component);
+
+exports['default'] = NoticeSender;
+module.exports = exports['default'];
+
+},{"../actions/NoticeSenderActions":18,"../stores/NoticeSenderStore":84,"react":"react"}],55:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -5625,7 +5906,7 @@ var Pagination = (function (_React$Component) {
 exports['default'] = Pagination;
 module.exports = exports['default'];
 
-},{"../actions/PaginationActions":18,"../stores/PaginationStore":83,"react":"react"}],54:[function(require,module,exports){
+},{"../actions/PaginationActions":19,"../stores/PaginationStore":86,"react":"react"}],56:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -5828,7 +6109,7 @@ var PostAnimate = (function (_React$Component) {
 exports['default'] = PostAnimate;
 module.exports = exports['default'];
 
-},{"../actions/PostAnimateActions":19,"../stores/PostAnimateStore":84,"./BigUpload":32,"./Upload":61,"react":"react"}],55:[function(require,module,exports){
+},{"../actions/PostAnimateActions":20,"../stores/PostAnimateStore":87,"./BigUpload":33,"./Upload":63,"react":"react"}],57:[function(require,module,exports){
 /**
  * Created by apache on 15-11-3.
  */
@@ -6053,7 +6334,7 @@ var PostArticle = (function (_React$Component) {
 exports['default'] = PostArticle;
 module.exports = exports['default'];
 
-},{"../actions/PostArticleActions":20,"../stores/PostArticleStore":85,"./Upload":61,"markdown":97,"react":"react"}],56:[function(require,module,exports){
+},{"../actions/PostArticleActions":21,"../stores/PostArticleStore":88,"./Upload":63,"markdown":100,"react":"react"}],58:[function(require,module,exports){
 /**
  * Created by apache on 15-11-25.
  */
@@ -6259,7 +6540,7 @@ var PostMusic = (function (_React$Component) {
 exports['default'] = PostMusic;
 module.exports = exports['default'];
 
-},{"../actions/PostMusicActions":21,"../stores/PostMusicStore":86,"./BigUpload":32,"./Upload":61,"react":"react"}],57:[function(require,module,exports){
+},{"../actions/PostMusicActions":22,"../stores/PostMusicStore":89,"./BigUpload":33,"./Upload":63,"react":"react"}],59:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -6334,7 +6615,7 @@ var ProfileCenter = (function (_React$Component) {
 exports['default'] = ProfileCenter;
 module.exports = exports['default'];
 
-},{"../actions/ProfileCenterActions":22,"../stores/ProfileCenterStore":87,"react":"react"}],58:[function(require,module,exports){
+},{"../actions/ProfileCenterActions":23,"../stores/ProfileCenterStore":90,"react":"react"}],60:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -6611,7 +6892,7 @@ var Set = (function (_React$Component) {
 exports['default'] = Set;
 module.exports = exports['default'];
 
-},{"../actions/SetActions":23,"../stores/SetStore":88,"./Upload":61,"react":"react"}],59:[function(require,module,exports){
+},{"../actions/SetActions":24,"../stores/SetStore":91,"./Upload":63,"react":"react"}],61:[function(require,module,exports){
 /**
  * Created by apache on 15-11-15.
  */
@@ -6724,7 +7005,7 @@ var Star = (function (_React$Component) {
 exports['default'] = Star;
 module.exports = exports['default'];
 
-},{"../actions/StarActions":24,"../stores/StarStore":90,"react":"react"}],60:[function(require,module,exports){
+},{"../actions/StarActions":25,"../stores/StarStore":93,"react":"react"}],62:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -6906,7 +7187,7 @@ var StarList = (function (_React$Component) {
 exports['default'] = StarList;
 module.exports = exports['default'];
 
-},{"../actions/StarListActions":25,"../stores/StarListStore":89,"react":"react","react-router":"react-router"}],61:[function(require,module,exports){
+},{"../actions/StarListActions":26,"../stores/StarListStore":92,"react":"react","react-router":"react-router"}],63:[function(require,module,exports){
 /**
  * Created by apache on 15-11-22.
  */
@@ -7063,7 +7344,7 @@ var Upload = (function (_React$Component) {
 exports['default'] = Upload;
 module.exports = exports['default'];
 
-},{"../actions/UploadActions":26,"../stores/UploadStore":91,"react":"react"}],62:[function(require,module,exports){
+},{"../actions/UploadActions":27,"../stores/UploadStore":94,"react":"react"}],64:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -7329,7 +7610,7 @@ User.contextTypes = {
 exports['default'] = User;
 module.exports = exports['default'];
 
-},{"../actions/UserActions":27,"../stores/UserStore":92,"./NoticePoint":52,"react":"react","react-router":"react-router"}],63:[function(require,module,exports){
+},{"../actions/UserActions":28,"../stores/UserStore":95,"./NoticePoint":53,"react":"react","react-router":"react-router"}],65:[function(require,module,exports){
 /**
  * Created by apache on 15-10-22.
  */
@@ -7353,7 +7634,7 @@ _reactRouter2['default'].run(_routes2['default'], _reactRouter2['default'].Histo
   _react2['default'].render(_react2['default'].createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./routes":65,"react":"react","react-router":"react-router"}],64:[function(require,module,exports){
+},{"./routes":67,"react":"react","react-router":"react-router"}],66:[function(require,module,exports){
 /*
  * MIT Licensed
  * http://www.23developer.com/opensource
@@ -8374,7 +8655,7 @@ _reactRouter2['default'].run(_routes2['default'], _reactRouter2['default'].Histo
     }
 })();
 
-},{}],65:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 /**
  * Created by apache on 15-10-23.
  */
@@ -8577,7 +8858,7 @@ exports['default'] = _react2['default'].createElement(
 );
 module.exports = exports['default'];
 
-},{"./components/Animate":29,"./components/App":30,"./components/Article":31,"./components/ConArticle":35,"./components/Contribute":37,"./components/Followers":38,"./components/Following":39,"./components/Home":41,"./components/List":42,"./components/Login":44,"./components/Member":45,"./components/MemberCenter":46,"./components/MemberFollow":47,"./components/Music":48,"./components/NotFound":50,"./components/Notice":51,"./components/PostAnimate":54,"./components/PostArticle":55,"./components/PostMusic":56,"./components/ProfileCenter":57,"./components/Set":58,"./components/StarList":60,"./components/User":62,"react":"react","react-router":"react-router"}],66:[function(require,module,exports){
+},{"./components/Animate":30,"./components/App":31,"./components/Article":32,"./components/ConArticle":36,"./components/Contribute":38,"./components/Followers":39,"./components/Following":40,"./components/Home":42,"./components/List":43,"./components/Login":45,"./components/Member":46,"./components/MemberCenter":47,"./components/MemberFollow":48,"./components/Music":49,"./components/NotFound":51,"./components/Notice":52,"./components/PostAnimate":56,"./components/PostArticle":57,"./components/PostMusic":58,"./components/ProfileCenter":59,"./components/Set":60,"./components/StarList":62,"./components/User":64,"react":"react","react-router":"react-router"}],68:[function(require,module,exports){
 /**
  * Created by apache on 15-12-2.
  */
@@ -8654,7 +8935,7 @@ var AnimateStore = (function () {
 exports['default'] = _alt2['default'].createStore(AnimateStore);
 module.exports = exports['default'];
 
-},{"../actions/AnimateActions":1,"../alt":28}],67:[function(require,module,exports){
+},{"../actions/AnimateActions":1,"../alt":29}],69:[function(require,module,exports){
 /**
  * Created by apache on 15-11-4.
  */
@@ -8728,7 +9009,7 @@ var ArticleStore = (function () {
 exports['default'] = _alt2['default'].createStore(ArticleStore);
 module.exports = exports['default'];
 
-},{"../actions/ArticleActions":2,"../alt":28}],68:[function(require,module,exports){
+},{"../actions/ArticleActions":2,"../alt":29}],70:[function(require,module,exports){
 /**
  * Created by apache on 15-11-25.
  */
@@ -8806,7 +9087,7 @@ var BigUploadStore = (function () {
 exports['default'] = _alt2['default'].createStore(BigUploadStore);
 module.exports = exports['default'];
 
-},{"../actions/BigUploadActions":3,"../alt":28,"../resumable":64}],69:[function(require,module,exports){
+},{"../actions/BigUploadActions":3,"../alt":29,"../resumable":66}],71:[function(require,module,exports){
 /**
  * Created by apache on 15-11-8.
  */
@@ -8888,7 +9169,7 @@ var CommentStore = (function () {
 exports['default'] = _alt2['default'].createStore(CommentStore);
 module.exports = exports['default'];
 
-},{"../actions/CommentActions":4,"../alt":28}],70:[function(require,module,exports){
+},{"../actions/CommentActions":4,"../alt":29}],72:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -8950,7 +9231,7 @@ var ConListStore = (function () {
 exports['default'] = _alt2['default'].createStore(ConListStore);
 module.exports = exports['default'];
 
-},{"../actions/ConListActions":5,"../alt":28}],71:[function(require,module,exports){
+},{"../actions/ConListActions":5,"../alt":29}],73:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -8985,7 +9266,7 @@ var ContributeStore = function ContributeStore() {
 exports['default'] = _alt2['default'].createStore(ContributeStore);
 module.exports = exports['default'];
 
-},{"../actions/ContributeActions":6,"../alt":28}],72:[function(require,module,exports){
+},{"../actions/ContributeActions":6,"../alt":29}],74:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -9086,7 +9367,7 @@ var FollowersStore = (function () {
 exports['default'] = _alt2['default'].createStore(FollowersStore);
 module.exports = exports['default'];
 
-},{"../actions/FollowersActions":7,"../alt":28}],73:[function(require,module,exports){
+},{"../actions/FollowersActions":7,"../alt":29}],75:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -9166,7 +9447,7 @@ var FollowingStore = (function () {
 exports['default'] = _alt2['default'].createStore(FollowingStore);
 module.exports = exports['default'];
 
-},{"../actions/FollowingActions":8,"../alt":28}],74:[function(require,module,exports){
+},{"../actions/FollowingActions":8,"../alt":29}],76:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -9215,7 +9496,7 @@ var HomeStore = (function () {
 exports['default'] = _alt2['default'].createStore(HomeStore);
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":9,"../alt":28}],75:[function(require,module,exports){
+},{"../actions/HomeActions":9,"../alt":29}],77:[function(require,module,exports){
 /**
  * Created by apache on 15-11-10.
  */
@@ -9269,7 +9550,7 @@ var ListStore = (function () {
 exports['default'] = _alt2['default'].createStore(ListStore);
 module.exports = exports['default'];
 
-},{"../actions/ListActions":10,"../alt":28}],76:[function(require,module,exports){
+},{"../actions/ListActions":10,"../alt":29}],78:[function(require,module,exports){
 /**
  * Created by apache on 15-10-24.
  */
@@ -9405,7 +9686,7 @@ var LoginStore = (function () {
 exports['default'] = _alt2['default'].createStore(LoginStore);
 module.exports = exports['default'];
 
-},{"../actions/LoginActions":11,"../alt":28}],77:[function(require,module,exports){
+},{"../actions/LoginActions":11,"../alt":29}],79:[function(require,module,exports){
 /**
  * Created by apache on 15-12-1.
  */
@@ -9467,7 +9748,7 @@ var MemberFollowStore = (function () {
 exports['default'] = _alt2['default'].createStore(MemberFollowStore);
 module.exports = exports['default'];
 
-},{"../actions/MemberFollowActions":13,"../alt":28}],78:[function(require,module,exports){
+},{"../actions/MemberFollowActions":13,"../alt":29}],80:[function(require,module,exports){
 /**
  * Created by apache on 15-11-14.
  */
@@ -9496,6 +9777,7 @@ var MemberStore = (function () {
         _classCallCheck(this, MemberStore);
 
         this.bindActions(_actionsMemberActions2['default']);
+        this._id = '';
         this.username = '';
         this.avatar_url = '';
         this.followers = 0;
@@ -9512,6 +9794,7 @@ var MemberStore = (function () {
         key: 'onGetMemberSuccess',
         value: function onGetMemberSuccess(data) {
             if (data.code === 200) {
+                this._id = data.raw._id;
                 this.username = data.raw.username;
                 this.avatar_url = data.raw.avatar_url;
                 this.followers = data.raw.followers.length;
@@ -9536,7 +9819,7 @@ var MemberStore = (function () {
 exports['default'] = _alt2['default'].createStore(MemberStore);
 module.exports = exports['default'];
 
-},{"../actions/MemberActions":12,"../alt":28}],79:[function(require,module,exports){
+},{"../actions/MemberActions":12,"../alt":29}],81:[function(require,module,exports){
 /**
  * Created by apache on 15-11-29.
  */
@@ -9618,7 +9901,7 @@ var MusicStore = (function () {
 exports['default'] = _alt2['default'].createStore(MusicStore);
 module.exports = exports['default'];
 
-},{"../actions/MusicActions":14,"../alt":28}],80:[function(require,module,exports){
+},{"../actions/MusicActions":14,"../alt":29}],82:[function(require,module,exports){
 /**
  * Created by apache on 15-10-25.
  */
@@ -9724,7 +10007,7 @@ var NavStore = (function () {
 exports['default'] = _alt2['default'].createStore(NavStore);
 module.exports = exports['default'];
 
-},{"../actions/NavActions":15,"../alt":28}],81:[function(require,module,exports){
+},{"../actions/NavActions":15,"../alt":29}],83:[function(require,module,exports){
 /**
  * Created by apache on 15-12-5.
  */
@@ -9778,7 +10061,70 @@ var NoticePointStore = (function () {
 exports['default'] = _alt2['default'].createStore(NoticePointStore);
 module.exports = exports['default'];
 
-},{"../actions/NoticePointActions":17,"../alt":28}],82:[function(require,module,exports){
+},{"../actions/NoticePointActions":17,"../alt":29}],84:[function(require,module,exports){
+/**
+ * Created by apache on 15-12-5.
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _actionsNoticeSenderActions = require('../actions/NoticeSenderActions');
+
+var _actionsNoticeSenderActions2 = _interopRequireDefault(_actionsNoticeSenderActions);
+
+var NoticeSenderStore = (function () {
+    function NoticeSenderStore() {
+        _classCallCheck(this, NoticeSenderStore);
+
+        this.bindActions(_actionsNoticeSenderActions2['default']);
+        this.content = '';
+        this.loading = false;
+    }
+
+    _createClass(NoticeSenderStore, [{
+        key: 'onChangeContent',
+        value: function onChangeContent(event) {
+            this.content = event.target.value;
+        }
+    }, {
+        key: 'onPostNoticeSuccess',
+        value: function onPostNoticeSuccess(data) {
+            this.loading = false;
+            if (data.code === 500) {
+                toastr.warning('发送私信失败');
+            } else if (data.code === 404) {
+                toastr.warning('用户不存在');
+            } else if (data.code === 200) {
+                toastr.success('发送私信成功');
+            }
+        }
+    }, {
+        key: 'onPostNoticeLoad',
+        value: function onPostNoticeLoad() {
+            this.loading = true;
+        }
+    }]);
+
+    return NoticeSenderStore;
+})();
+
+exports['default'] = _alt2['default'].createStore(NoticeSenderStore);
+module.exports = exports['default'];
+
+},{"../actions/NoticeSenderActions":18,"../alt":29}],85:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -9807,12 +10153,22 @@ var NoticeStore = (function () {
         _classCallCheck(this, NoticeStore);
 
         this.bindActions(_actionsNoticeActions2['default']);
+        this.notices = [];
+        this.loading = true;
     }
 
     _createClass(NoticeStore, [{
-        key: 'onGetToastrSuccess',
-        value: function onGetToastrSuccess() {
-            toastr.success('hehe');
+        key: 'onGetNoticesListSuccess',
+        value: function onGetNoticesListSuccess(data) {
+            console.log(data);
+            this.loading = false;
+            if (data.code === 500) {
+                toastr.warning('获取通知失败');
+            } else if (data.code === 404) {
+                toastr.warning('用户不存在');
+            } else if (data.code === 200) {
+                this.notices = data.raw;
+            }
         }
     }]);
 
@@ -9822,7 +10178,7 @@ var NoticeStore = (function () {
 exports['default'] = _alt2['default'].createStore(NoticeStore);
 module.exports = exports['default'];
 
-},{"../actions/NoticeActions":16,"../alt":28}],83:[function(require,module,exports){
+},{"../actions/NoticeActions":16,"../alt":29}],86:[function(require,module,exports){
 /**
  * Created by apache on 15-11-2.
  */
@@ -9853,7 +10209,7 @@ var PaginationStore = function PaginationStore() {
 exports['default'] = _alt2['default'].createStore(PaginationStore);
 module.exports = exports['default'];
 
-},{"../actions/PaginationActions":18,"../alt":28}],84:[function(require,module,exports){
+},{"../actions/PaginationActions":19,"../alt":29}],87:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -9930,7 +10286,7 @@ var PostAnimateStore = (function () {
 exports['default'] = _alt2['default'].createStore(PostAnimateStore);
 module.exports = exports['default'];
 
-},{"../actions/PostAnimateActions":19,"../alt":28}],85:[function(require,module,exports){
+},{"../actions/PostAnimateActions":20,"../alt":29}],88:[function(require,module,exports){
 /**
  * Created by apache on 15-11-3.
  */
@@ -10018,7 +10374,7 @@ var PostArticleStore = (function () {
 exports['default'] = _alt2['default'].createStore(PostArticleStore);
 module.exports = exports['default'];
 
-},{"../actions/PostArticleActions":20,"../alt":28}],86:[function(require,module,exports){
+},{"../actions/PostArticleActions":21,"../alt":29}],89:[function(require,module,exports){
 /**
  * Created by apache on 15-11-25.
  */
@@ -10097,7 +10453,7 @@ var PostMusicStore = (function () {
 exports['default'] = _alt2['default'].createStore(PostMusicStore);
 module.exports = exports['default'];
 
-},{"../actions/PostMusicActions":21,"../alt":28}],87:[function(require,module,exports){
+},{"../actions/PostMusicActions":22,"../alt":29}],90:[function(require,module,exports){
 /**
  * Created by apache on 15-11-1.
  */
@@ -10128,7 +10484,7 @@ var ProfileCenterStore = function ProfileCenterStore() {
 exports['default'] = _alt2['default'].createStore(ProfileCenterStore);
 module.exports = exports['default'];
 
-},{"../actions/ProfileCenterActions":22,"../alt":28}],88:[function(require,module,exports){
+},{"../actions/ProfileCenterActions":23,"../alt":29}],91:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -10282,7 +10638,7 @@ var SetStore = (function () {
 exports['default'] = _alt2['default'].createStore(SetStore);
 module.exports = exports['default'];
 
-},{"../actions/SetActions":23,"../alt":28}],89:[function(require,module,exports){
+},{"../actions/SetActions":24,"../alt":29}],92:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -10344,7 +10700,7 @@ var StarListStore = (function () {
 exports['default'] = _alt2['default'].createStore(StarListStore);
 module.exports = exports['default'];
 
-},{"../actions/StarListActions":25,"../alt":28}],90:[function(require,module,exports){
+},{"../actions/StarListActions":26,"../alt":29}],93:[function(require,module,exports){
 /**
  * Created by apache on 15-11-15.
  */
@@ -10447,7 +10803,7 @@ var StarStore = (function () {
 exports['default'] = _alt2['default'].createStore(StarStore);
 module.exports = exports['default'];
 
-},{"../actions/StarActions":24,"../alt":28}],91:[function(require,module,exports){
+},{"../actions/StarActions":25,"../alt":29}],94:[function(require,module,exports){
 /**
  * Created by apache on 15-11-22.
  */
@@ -10541,7 +10897,7 @@ var UploadStore = (function () {
 exports['default'] = _alt2['default'].createStore(UploadStore);
 module.exports = exports['default'];
 
-},{"../actions/UploadActions":26,"../alt":28,"underscore":"underscore"}],92:[function(require,module,exports){
+},{"../actions/UploadActions":27,"../alt":29,"underscore":"underscore"}],95:[function(require,module,exports){
 /**
  * Created by apache on 15-10-27.
  */
@@ -10609,7 +10965,7 @@ var UserStore = (function () {
 exports['default'] = _alt2['default'].createStore(UserStore);
 module.exports = exports['default'];
 
-},{"../actions/UserActions.js":27,"../alt":28}],93:[function(require,module,exports){
+},{"../actions/UserActions.js":28,"../alt":29}],96:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -10634,7 +10990,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],94:[function(require,module,exports){
+},{}],97:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -10727,14 +11083,14 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],95:[function(require,module,exports){
+},{}],98:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],96:[function(require,module,exports){
+},{}],99:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -11324,12 +11680,12 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":95,"_process":94,"inherits":93}],97:[function(require,module,exports){
+},{"./support/isBuffer":98,"_process":97,"inherits":96}],100:[function(require,module,exports){
 // super simple module for the most common nodejs use case.
 exports.markdown = require("./markdown");
 exports.parse = exports.markdown.toHTML;
 
-},{"./markdown":98}],98:[function(require,module,exports){
+},{"./markdown":101}],101:[function(require,module,exports){
 // Released under MIT license
 // Copyright (c) 2009-2010 Dominic Baggott
 // Copyright (c) 2009-2010 Ash Berlin
@@ -13056,4 +13412,4 @@ function merge_text_nodes( jsonml ) {
   }
 } )() );
 
-},{"util":96}]},{},[63]);
+},{"util":99}]},{},[65]);

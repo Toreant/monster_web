@@ -7,6 +7,7 @@ import MemberActions from '../actions/MemberActions';
 class MemberStore {
     constructor() {
         this.bindActions(MemberActions);
+        this._id = '';
         this.username = '';
         this.avatar_url = '';
         this.followers = 0;
@@ -21,6 +22,7 @@ class MemberStore {
 
     onGetMemberSuccess(data) {
         if(data.code === 200) {
+            this._id = data.raw._id;
             this.username = data.raw.username;
             this.avatar_url = data.raw.avatar_url;
             this.followers = data.raw.followers.length;

@@ -6,6 +6,7 @@ import {isEqual} from 'underscore';
 import {RouteHandler,Link} from 'react-router';
 import Contribute from './Contribute';
 import NotFound from './NotFound';
+import NoticeSender from './NoticeSender';
 import MemberActions from '../actions/MemberActions';
 import MemberStore from '../stores/MemberStore';
 
@@ -62,6 +63,9 @@ class Member extends React.Component {
                     <p className='text-success bg-info mon-member-intr'>
                         {this.state.introduce}
                     </p>
+                    <button className="btn btn-block btn-primary" data-toggle="modal" data-target="#noticeSender">
+                        私信
+                    </button>
                 </div>
             </div>
         );
@@ -71,6 +75,7 @@ class Member extends React.Component {
                     {Mem}
                     <Contribute option='0' domain={this.props.params.domain}/>
                 </div>
+                <NoticeSender receiver={this.state._id}/>
             </div>
         );
     }

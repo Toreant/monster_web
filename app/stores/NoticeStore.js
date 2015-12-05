@@ -7,10 +7,20 @@ import NoticeActions from '../actions/NoticeActions';
 class NoticeStore {
     constructor() {
         this.bindActions(NoticeActions);
+        this.notices = [];
+        this.loading = true;
     }
 
-    onGetToastrSuccess() {
-        toastr.success('hehe');
+    onGetNoticesListSuccess(data) {
+        console.log(data);
+        this.loading = false;
+        if(data.code === 500) {
+            toastr.warning('获取通知失败');
+        } else if(data.code === 404) {
+            toastr.warning('用户不存在');
+        } else if(data.code === 200) {
+            this.notices = data.raw;
+        }
     }
 }
 

@@ -11,7 +11,16 @@ class NoticeActions {
     }
 
     getNoticesList() {
-
+        $.ajax({
+            url : '/api/notices',
+            type : 'get',
+            cache : false,
+            contentType : 'application/json;charset=utf-8'
+        }).done((data) => {
+            this.actions.getNoticesListSuccess(data);
+        }).fail(() => {
+            toastr.warning('获取通知失败');
+        })
     }
 }
 

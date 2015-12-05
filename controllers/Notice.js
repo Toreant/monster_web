@@ -43,7 +43,7 @@ class NoticeCtrl {
      */
     postNotice(req,res,next) {
         let params = req.body.params,
-            recvUser = params.receiver,
+            receiver = params.receiver,
             user = req.session.user;
 
         params.create_user_id = user._id;
@@ -53,7 +53,7 @@ class NoticeCtrl {
             code : 0
         };
 
-        Notice.postNotice(user._id,recvUser,params,(data) => {
+        Notice.postNotice(user._id,receiver,params,(data) => {
             if(data === 500) {
                 result.meta = '服务器错误';
             } else if(data === 404) {

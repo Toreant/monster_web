@@ -81,6 +81,7 @@ class md {
                             break;
                         }
                     }
+                    result.push(item);
                 }
 
                 _callback(null,result);
@@ -139,7 +140,7 @@ class md {
             },
 
             // 接手者接受通知
-            function(receiver,product) {
+            function(receiver,product,_callback) {
                 receiver.notice.push(product._id);
                 receiver.save((err) => {
                     if(err) {
