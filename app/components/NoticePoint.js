@@ -23,15 +23,12 @@ class NoticePoint extends React.Component {
 
     onChange(state) {
         this.setState(state);
-        if(this.state.count === 0) {
-            let node = this.refs.notice.getDOMNode();
-            node.className = node.className + ' mon-disabled';
-        }
     }
 
     render() {
+        let disabled = this.state.count ===0?'mon-disabled':'';
         return (
-            <span ref="notice" className="mon-notice-point badge">
+            <span ref="notice" className={"mon-notice-point badge "+disabled}>
                 {this.state.count}
             </span>
         );

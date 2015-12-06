@@ -46,6 +46,8 @@ class NoticeCtrl {
             receiver = params.receiver,
             user = req.session.user;
 
+        console.log(receiver);
+
         params.create_user_id = user._id;
 
         let result = {
@@ -80,7 +82,7 @@ class NoticeCtrl {
         let result = {
             meta : '',
             code : 0,
-            raw  : null
+            count  : 0
         };
 
         Notice.viewNotice(user._id,noticeId,(data) => {
@@ -91,9 +93,9 @@ class NoticeCtrl {
                 result.meta = '通知不存在';
                 result.code = 404;
             } else {
-                result.meta = '获取通知成功';
+                result.meta = '读取通知成功';
                 result.code = 200;
-                result.raw  = data;
+                result.count = data.count;
             }
 
             res.json(result);

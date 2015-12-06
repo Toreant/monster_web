@@ -116,7 +116,7 @@ class md {
 
             // 查找接受的用户
             function(user,_callback) {
-                User.findOne(recvUser,(err,receiver) => {
+                User.findById(recvUser,(err,receiver) => {
                     if(err) {
                         return callback(500);
                     } else if(receiver === null) {
@@ -166,7 +166,7 @@ class md {
 
             // 查看通知
             function(_callback) {
-                Notice.findById(noticeID,(err,notice) => {
+                Notice.findByIdAndRemove(noticeID,(err,notice) => {
                    if(err) {
                        return callback(500);
                    } else if(notice === null) {
@@ -185,27 +185,17 @@ class md {
                   } else {
 
                       // 在用户通知列表中删除该通知
-                      localUser.notice = _.without(localUser.notice,notice._id);
+                      localUser.notice = _.without(localUser.notice,notice._id.toString());
+                      console.log(localUser.notice);
                       localUser.save((err) => {
                           if(err) {
                               return callback(500);
                           } else {
-                              _callback(null,notice);
+                              _callback(null,{ code : 200,count : localUser.notice.length});
                           }
                       });
                   }
               });
-            },
-
-            // 查看发送通知的用户
-            function(notice,_callback) {
-                User.findById(notice.create_user_id,(err,user) => {
-                   if(err) {
-                       return callback(500);
-                   } else {
-                       _callback(null,{ data : notice,user : user});
-                   }
-                });
             }
         ],(err,result) => {
             if(err) {

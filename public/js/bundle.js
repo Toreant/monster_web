@@ -1022,7 +1022,7 @@ var NoticeActions = (function () {
     function NoticeActions() {
         _classCallCheck(this, NoticeActions);
 
-        this.generateActions('getNoticesListSuccess');
+        this.generateActions('getNoticesListSuccess', 'getNoticeSuccess');
     }
 
     _createClass(NoticeActions, [{
@@ -1039,6 +1039,22 @@ var NoticeActions = (function () {
                 _this.actions.getNoticesListSuccess(data);
             }).fail(function () {
                 toastr.warning('获取通知失败');
+            });
+        }
+    }, {
+        key: 'getNotice',
+        value: function getNotice(_id) {
+            var _this2 = this;
+
+            $.ajax({
+                url: '/api/notice/' + _id,
+                type: 'get',
+                cache: false,
+                contentType: 'application/json;charset=utf-8'
+            }).done(function (data) {
+                _this2.actions.getNoticeSuccess({ data: data, _id: _id });
+            }).fail(function () {
+                toastr.warning('网络链接不正常');
             });
         }
     }]);
@@ -5466,14 +5482,21 @@ var Notice = (function (_React$Component) {
             this.setState(state);
         }
     }, {
+        key: 'readed',
+        value: function readed(_id) {
+            _actionsNoticeActions2['default'].getNotice(_id);
+        }
+    }, {
         key: 'render',
         value: function render() {
-            var Target = undefined;
+            var _this = this;
+
+            var Target = null;
             if (this.state.loading === false && this.state.notices.length !== 0) {
                 Target = this.state.notices.map(function (data) {
                     return _react2['default'].createElement(
                         'div',
-                        { className: 'mon-notice-item media animated flipInX' },
+                        { key: data.notice._id, 'data-item': data.notice._id, className: 'mon-conlist-item mon-notice-item media animated flipInX' },
                         _react2['default'].createElement(
                             'div',
                             { className: 'media-left' },
@@ -5497,19 +5520,24 @@ var Notice = (function (_React$Component) {
                                 _react2['default'].createElement(
                                     'span',
                                     null,
-                                    new Date(data.notice.create_time)
+                                    new Date(data.notice.create_time).toLocaleDateString()
                                 )
                             )
+                        ),
+                        _react2['default'].createElement(
+                            'button',
+                            { className: 'btn btn-danger mon-read', onClick: _this.readed.bind(_this, data.notice._id) },
+                            '已读'
                         )
                     );
                 });
             } else if (this.state.loading === false && this.state.notices.length === 0) {
                 Target = _react2['default'].createElement(
-                    'p',
+                    'div',
                     { className: 'bg-primary mon-padding' },
                     '没有私信或通知'
                 );
-            } else if (this.state.loadin === true) {
+            } else if (this.state.loading === true) {
                 Target = _react2['default'].createElement(_Loading2['default'], null);
             }
             return _react2['default'].createElement(
@@ -5589,17 +5617,14 @@ var NoticePoint = (function (_React$Component) {
         key: 'onChange',
         value: function onChange(state) {
             this.setState(state);
-            if (this.state.count === 0) {
-                var node = this.refs.notice.getDOMNode();
-                node.className = node.className + ' mon-disabled';
-            }
         }
     }, {
         key: 'render',
         value: function render() {
+            var disabled = this.state.count === 0 ? 'mon-disabled' : '';
             return _react2['default'].createElement(
                 'span',
-                { ref: 'notice', className: 'mon-notice-point badge' },
+                { ref: 'notice', className: "mon-notice-point badge " + disabled },
                 this.state.count
             );
         }
@@ -10160,14 +10185,34 @@ var NoticeStore = (function () {
     _createClass(NoticeStore, [{
         key: 'onGetNoticesListSuccess',
         value: function onGetNoticesListSuccess(data) {
-            console.log(data);
-            this.loading = false;
             if (data.code === 500) {
                 toastr.warning('获取通知失败');
             } else if (data.code === 404) {
                 toastr.warning('用户不存在');
             } else if (data.code === 200) {
                 this.notices = data.raw;
+            }
+            this.loading = false;
+        }
+    }, {
+        key: 'onGetNoticeSuccess',
+        value: function onGetNoticeSuccess(raw) {
+            console.log(raw);
+            var data = raw.data,
+                item = raw._id;
+            if (data.code === 500) {
+                toastr.error('服务器错误');
+            } else if (data.code === 404) {
+                toastr.warning('通知（私信）不存在');
+            } else if (data.code === 200) {
+                $('[data-item="' + item + '"]').fadeOut("normal", function () {
+                    $(this).remove();
+                });
+            }
+            console.log(data);
+            if (data.count === 0) {
+                console.log('hdhsdas');
+                this.notices = [];
             }
         }
     }]);
