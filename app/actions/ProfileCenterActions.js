@@ -11,7 +11,6 @@ class ProfileCenterActions {
     }
 
     getProfile() {
-        console.log('dads');
         $.ajax({
             url : '/api/profile/center',
             type : 'get',

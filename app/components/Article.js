@@ -10,6 +10,7 @@ import md from 'markdown';
 import Comment from './Comment';
 import BtnBlock from './BtnBlock';
 import Star from './Star';
+import Loading from './Loading';
 
 class Article extends React.Component {
     constructor(props) {
@@ -36,11 +37,6 @@ class Article extends React.Component {
 
     onChange(state) {
         this.setState(state);
-        //if(state.article) {
-        //    let markdown = md.markdown;
-        //    let content = markdown.toHTML(this.state.content);
-        //    this.refs.content.getDOMNode().innerHTML = content;
-        //}
     }
 
     render() {
@@ -59,8 +55,8 @@ class Article extends React.Component {
         let Article;
         if(this.state.article) {
             Article = (
-                <div className='raw animated fadeInUp'>
-                    <div className='col-md-8 col-sm-8 mon-article'>
+                <div className='raw animated fadeInUp clearfix'>
+                    <div className='col-md-8 col-sm-8 col-xs-12 mon-article'>
                         <p className='mon-article-title'>{this.state.title}</p>
                         <div className='mon-article-detail'>
                             <a href={'/member/'+this.state.createUserDomain}>
@@ -79,7 +75,7 @@ class Article extends React.Component {
                         <Star star={this.props.params.id} column='article' stared={this.state.stared} />
                         <Comment id={this.props.params.id} type="article"/>
                     </div>
-                    <div className='col-md-4 col-sm-4 mon-offset'>
+                    <div className='col-md-4 col-sm-4 col-xs-12'>
                         <div className='panel panel-default'>
                             <div className='panel-body media'>
                                 <div className='media-left'>
@@ -109,15 +105,7 @@ class Article extends React.Component {
                 </div>
             );
         } else {
-            Article = (
-                <div className='loader-inner line-scale-pulse-out mon-loader-o mon-loader-bg'>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            );
+            Article =　<Loading/> ;
         }
         return (
             <div className='container'>

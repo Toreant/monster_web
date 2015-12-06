@@ -102,8 +102,8 @@ class Login extends React.Component {
         return (
             <div className='container mon-login mon-main'>
                 <div className='row'>
-                    <div className='col-md-8 col-sm-8'></div>
-                    <div className='col-md-4 col-sm-4'>
+                    <div className='col-md-8 col-sm-8 col-xs-12'></div>
+                    <div className='col-md-4 col-sm-4 col-xs-12'>
                         <form className='login-form' >
                             <div className='form-legend'>
                                 <span>登陆</span>

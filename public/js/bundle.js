@@ -1425,7 +1425,6 @@ var ProfileCenterActions = (function () {
         value: function getProfile() {
             var _this = this;
 
-            console.log('dads');
             $.ajax({
                 url: '/api/profile/center',
                 type: 'get',
@@ -2161,6 +2160,10 @@ var _Star = require('./Star');
 
 var _Star2 = _interopRequireDefault(_Star);
 
+var _Loading = require('./Loading');
+
+var _Loading2 = _interopRequireDefault(_Loading);
+
 var Article = (function (_React$Component) {
     _inherits(Article, _React$Component);
 
@@ -2194,11 +2197,6 @@ var Article = (function (_React$Component) {
         key: 'onChange',
         value: function onChange(state) {
             this.setState(state);
-            //if(state.article) {
-            //    let markdown = md.markdown;
-            //    let content = markdown.toHTML(this.state.content);
-            //    this.refs.content.getDOMNode().innerHTML = content;
-            //}
         }
     }, {
         key: 'render',
@@ -2231,10 +2229,10 @@ var Article = (function (_React$Component) {
             if (this.state.article) {
                 Article = _react2['default'].createElement(
                     'div',
-                    { className: 'raw animated fadeInUp' },
+                    { className: 'raw animated fadeInUp clearfix' },
                     _react2['default'].createElement(
                         'div',
-                        { className: 'col-md-8 col-sm-8 mon-article' },
+                        { className: 'col-md-8 col-sm-8 col-xs-12 mon-article' },
                         _react2['default'].createElement(
                             'p',
                             { className: 'mon-article-title' },
@@ -2280,7 +2278,7 @@ var Article = (function (_React$Component) {
                     ),
                     _react2['default'].createElement(
                         'div',
-                        { className: 'col-md-4 col-sm-4 mon-offset' },
+                        { className: 'col-md-4 col-sm-4 col-xs-12' },
                         _react2['default'].createElement(
                             'div',
                             { className: 'panel panel-default' },
@@ -2333,15 +2331,7 @@ var Article = (function (_React$Component) {
                     )
                 );
             } else {
-                Article = _react2['default'].createElement(
-                    'div',
-                    { className: 'loader-inner line-scale-pulse-out mon-loader-o mon-loader-bg' },
-                    _react2['default'].createElement('div', null),
-                    _react2['default'].createElement('div', null),
-                    _react2['default'].createElement('div', null),
-                    _react2['default'].createElement('div', null),
-                    _react2['default'].createElement('div', null)
-                );
+                Article = _react2['default'].createElement(_Loading2['default'], null);
             }
             return _react2['default'].createElement(
                 'div',
@@ -2358,7 +2348,7 @@ var Article = (function (_React$Component) {
 exports['default'] = Article;
 module.exports = exports['default'];
 
-},{"../actions/ArticleActions":2,"../stores/ArticleStore":69,"./BtnBlock":34,"./Comment":35,"./Star":61,"markdown":100,"react":"react","react-router":"react-router","underscore":"underscore"}],33:[function(require,module,exports){
+},{"../actions/ArticleActions":2,"../stores/ArticleStore":69,"./BtnBlock":34,"./Comment":35,"./Loading":44,"./Star":61,"markdown":100,"react":"react","react-router":"react-router","underscore":"underscore"}],33:[function(require,module,exports){
 /**
  * Created by apache on 15-11-25.
  */
@@ -4118,7 +4108,7 @@ var List = (function (_React$Component) {
                     { className: 'row' },
                     _react2['default'].createElement(
                         'div',
-                        { className: 'col-md-8 col-md-offset-2' },
+                        { className: 'col-md-8 col-md-offset-2 col-xs-12' },
                         _react2['default'].createElement(
                             'ul',
                             { className: 'nav' },
@@ -4344,10 +4334,10 @@ var Login = (function (_React$Component) {
                 _react2['default'].createElement(
                     'div',
                     { className: 'row' },
-                    _react2['default'].createElement('div', { className: 'col-md-8 col-sm-8' }),
+                    _react2['default'].createElement('div', { className: 'col-md-8 col-sm-8 col-xs-12' }),
                     _react2['default'].createElement(
                         'div',
-                        { className: 'col-md-4 col-sm-4' },
+                        { className: 'col-md-4 col-sm-4 col-xs-12' },
                         _react2['default'].createElement(
                             'form',
                             { className: 'login-form' },
@@ -6664,59 +6654,63 @@ var ProfileCenter = (function (_React$Component) {
         value: function render() {
             var Target = null,
                 More = null;
+            if (this.state.starsCount > 7) {
+                More = _react2['default'].createElement(
+                    'div',
+                    { className: 'col-md-3 col-xs-12 mon-more' },
+                    _react2['default'].createElement(
+                        _reactRouter.Link,
+                        { to: '/profile/star', className: 'mon-muted' },
+                        _react2['default'].createElement('span', { className: 'fa fa-plus' })
+                    )
+                );
+            }
             if (this.state.loading) {
                 Target = _react2['default'].createElement(_Loading2['default'], null);
             } else if (this.state.loading === false && this.state.stars.length > 0) {
                 Target = this.state.stars.map(function (data) {
                     return _react2['default'].createElement(
                         'div',
-                        { key: data._id, className: 'media col-md-4 col-xs-12' },
+                        { key: data._id, className: 'media col-md-6 col-xs-12' },
                         _react2['default'].createElement(
                             'div',
                             { className: 'media-left' },
-                            _react2['default'].createElement('img', { src: data.abbreviations || '/img/abbreviations.png', width: '120', alt: 'loading' })
+                            _react2['default'].createElement(
+                                _reactRouter.Link,
+                                { to: '/article/' + data._id },
+                                _react2['default'].createElement('img', { src: data.abbreviations || '/img/abbreviations.png', width: '120', alt: 'loading' })
+                            )
                         ),
                         _react2['default'].createElement(
                             'div',
                             { className: 'media-body' },
                             _react2['default'].createElement(
-                                'p',
-                                { className: 'text-primary' },
+                                _reactRouter.Link,
+                                { to: '/article/' + data._id, className: 'text-primary' },
                                 data.title
                             ),
                             _react2['default'].createElement(
                                 'p',
                                 { className: 'text-muted' },
-                                data.summary
+                                data.summary || '什么鬼也没有'
                             )
                         )
                     );
                 });
             }
-            if (this.state.starsCount > 10) {
-                More = _react2['default'].createElement(
-                    'div',
-                    null,
-                    _react2['default'].createElement(
-                        _reactRouter.Link,
-                        { to: '/profile/star' },
-                        _react2['default'].createElement('span', { className: 'fa fa-plus-square' })
-                    )
-                );
-            }
+
             return _react2['default'].createElement(
                 'div',
-                { className: 'col-md-9 col-sm-9' },
-                _react2['default'].createElement(
-                    'h1',
-                    { className: 'mon-padding-title' },
-                    '个人中心'
-                ),
+                { className: 'col-md-9 col-sm-9 animated fadeInUp' },
                 _react2['default'].createElement(
                     'div',
-                    { className: 'mon-badge' },
-                    _react2['default'].createElement('span', { className: 'fa fa-folder-open' }),
-                    '个人投稿',
+                    { className: 'mon-badge mon-tab' },
+                    _react2['default'].createElement('span', { className: 'fa fa-folder-open text-info' }),
+                    _react2['default'].createElement(
+                        _reactRouter.Link,
+                        { to: '/profile/contribute', className: 'mon-muted' },
+                        '个人投稿'
+                    ),
                     _react2['default'].createElement(
                         'span',
                         { className: 'badge' },
@@ -6725,12 +6719,16 @@ var ProfileCenter = (function (_React$Component) {
                 ),
                 _react2['default'].createElement(
                     'div',
-                    null,
+                    { className: 'mon-tab' },
                     _react2['default'].createElement(
                         'div',
                         { className: 'mon-badge' },
-                        _react2['default'].createElement('span', { className: 'fa fa-file-text' }),
-                        '收藏',
+                        _react2['default'].createElement('span', { className: 'fa fa-file-text text-success' }),
+                        _react2['default'].createElement(
+                            _reactRouter.Link,
+                            { to: '/profile/star', className: 'mon-muted' },
+                            '收藏'
+                        ),
                         _react2['default'].createElement(
                             'span',
                             { className: 'badge' },
@@ -6739,7 +6737,7 @@ var ProfileCenter = (function (_React$Component) {
                     ),
                     _react2['default'].createElement(
                         'div',
-                        { className: 'mon-star-list' },
+                        { className: 'mon-star-list clearfix' },
                         Target,
                         More
                     )

@@ -9,7 +9,7 @@ import Footer from './Footer';
 class App extends React.Component {
     render() {
         return (
-            <div  className="mon-app">
+            <div className="mon-app">
                 <Nav />
                 <RouteHandler />
                 <Footer/>

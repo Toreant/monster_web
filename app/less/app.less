@@ -2,6 +2,25 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  & > div {
+    flex: 1;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .mon-app>div {
+    max-width: 100%;
+  }
+}
+
+.mon-muted {
+  color: #3c3c3c;
+  text-decoration: none;
+  &:hover,
+  &:active {
+    color: #1b6d85;
+    text-decoration: none;
+  }
 }
 
 .mon-padding-title {

@@ -29,6 +29,15 @@ class ProfileCenter extends React.Component {
 
     render() {
         let Target = null,More = null;
+        if(this.state.starsCount > 7) {
+            More = (
+                <div className="col-md-3 col-xs-12 mon-more">
+                    <Link to="/profile/star" className="mon-muted">
+                        <span className="fa fa-plus"></span>
+                    </Link>
+                </div>
+            );
+        }
         if(this.state.loading) {
             Target = <Loading />;
         } else if(this.state.loading === false && this.state.stars.length > 0) {
@@ -36,48 +45,45 @@ class ProfileCenter extends React.Component {
                 return (
                     <div key={data._id} className="media col-md-6 col-xs-12">
                         <div className="media-left">
-                            <img src={data.abbreviations || '/img/abbreviations.png'} width="120" alt="loading"/>
+                            <Link to={'/article/'+data._id}>
+                                <img src={data.abbreviations || '/img/abbreviations.png'} width="120" alt="loading"/>
+                            </Link>
                         </div>
                         <div className="media-body">
-                            <p className="text-primary">
+                            <Link to={'/article/'+data._id} className="text-primary">
                                 {data.title}
-                            </p>
+                            </Link>
                             <p className="text-muted">
-                                {data.summary}
+                                {data.summary || '什么鬼也没有'}
                             </p>
                         </div>
                     </div>
                 );
             });
         }
-        if(this.state.starsCount > 10) {
-            More = (
-                <div>
-                    <Link to="/profile/star">
-                        <span className="fa fa-plus-square"></span>
-                    </Link>
-                </div>
-            );
-        }
+
         return (
-            <div className='col-md-9 col-sm-9'>
-                <h1 className="mon-padding-title">个人中心</h1>
-                <div className="mon-badge">
-                    <span className="fa fa-folder-open"></span>
-                    个人投稿
+            <div className='col-md-9 col-sm-9 animated fadeInUp'>
+                <div className="mon-badge mon-tab">
+                    <span className="fa fa-folder-open text-info"></span>
+                    <Link to={'/profile/contribute'} className="mon-muted">
+                        个人投稿
+                    </Link>
                     <span className="badge">
                         {this.state.contribute}
                     </span>
                 </div>
-                <div>
+                <div className="mon-tab">
                     <div className="mon-badge">
-                        <span className="fa fa-file-text"></span>
-                        收藏
+                        <span className="fa fa-file-text text-success"></span>
+                        <Link to={'/profile/star'} className="mon-muted">
+                             收藏
+                        </Link>
                         <span className="badge">
                             {this.state.starsCount}
                         </span>
                     </div>
-                    <div className="mon-star-list">
+                    <div className="mon-star-list clearfix">
                         {Target}
                         {More}
                     </div>

@@ -10,6 +10,26 @@
       -ms-flex-direction: column;
           flex-direction: column;
 }
+.mon-app > div {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+@media screen and (max-width: 700px) {
+  .mon-app > div {
+    max-width: 100%;
+  }
+}
+.mon-muted {
+  color: #3c3c3c;
+  text-decoration: none;
+}
+.mon-muted:hover,
+.mon-muted:active {
+  color: #1b6d85;
+  text-decoration: none;
+}
 .mon-padding-title {
   padding-left: 20px;
   border-left: 5px solid #0b97c4;

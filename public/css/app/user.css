@@ -27,3 +27,19 @@
 .mon-badge span {
   margin-right: 20px;
 }
+.mon-tab {
+  margin-top: 20px;
+  border-bottom: 1px solid #fcf8e3;
+}
+.mon-star-list > div {
+  margin-bottom: 20px;
+}
+.mon-more {
+  border: 1px dashed #999;
+}
+.mon-more a {
+  font-size: 10rem;
+  display: block;
+  margin: auto;
+  text-align: center;
+}

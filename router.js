@@ -16,7 +16,6 @@ import AnimateCtrl from './controllers/Animate';
 import NoticeCtrl from './controllers/Notice';
 var resumable = require('./middleware/resumable-node');
 
-
 var upload = multer({dest : './public/music'});
 
 // 用户有关
