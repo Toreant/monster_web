@@ -13,9 +13,9 @@ class UserActions {
 
     getUser() {
         $.ajax({
-            url : '/api/session',
+            url : '/api/profile',
             cache : false,
-            type : 'post'
+            type : 'get'
         }).done((data) => {
             this.actions.getUserSuccess(data);
         }).fail(() => {

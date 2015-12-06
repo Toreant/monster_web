@@ -3,6 +3,7 @@
  */
 import User from '../proxy/user';
 import crypto from 'crypto';
+import async from 'async';
 import _ from 'underscore';
 
 class UserCtrl {
@@ -248,11 +249,11 @@ class UserCtrl {
      */
     getFollowers(req, res, next) {
         let option = req.body.option,
-            where = req.body.where,
+            where = req.session.user,
             user = req.session.user; //　本地登陆用户
         console.log(where);
 
-        User.getFollowers(where, option, user, (data) => {
+        User.getFollowers({_id : where === undefined?null:where._id}, option, user, (data) => {
             let result = {
                 meta: '',
                 code: 0,
@@ -445,6 +446,53 @@ class UserCtrl {
                 result.code = 200;
                 result.raw = data;
             }
+            res.json(result);
+        });
+    }
+
+    /**
+     * 获取用户中心资料
+     * @param req
+     * @param res
+     * @param next
+     */
+    getProfileCenter(req,res) {
+        let user = req.session.user;
+        let result = {
+            meta : '',
+            code : 0,
+            raw  : null
+        };
+        let wrong = {
+            meta : '服务器错误',
+            code : 500,
+            raw  : null
+        };
+        async.waterfall([
+            function(_callback) {
+                User.getUserById([user._id],{},(data) => {
+                    if(data === 500) {
+                        return res.json(wrong);
+                    } else {
+                        _callback(null,data[0]);
+                    }
+                });
+            },
+
+            // 获取收藏列表
+            function(data,_callback) {
+                User.getStars({_id : user._id},0,'all',(stars) => {
+                    if(data === 500) {
+                        return res.json(wrong);
+                    } else {
+                        _callback(null,{profile : data,stars : stars});
+                    }
+                });
+            }
+        ],(err,data) => {
+            result.meta = '获取资料成功';
+            result.code = 200;
+            result.raw  = data;
             res.json(result);
         });
     }

@@ -30,6 +30,7 @@ router.post('/api/users',UserCtrl.getUserById);
 
 router.get('/api/profile',auth.isAuth,UserCtrl.getProfile);
 
+router.get('/api/profile/center',auth.isAuth,UserCtrl.getProfileCenter);
 
 router.get('/api/member/:domain',UserCtrl.getUserByDomain);
 

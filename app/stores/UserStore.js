@@ -18,6 +18,7 @@ class UserStore {
     }
 
     onGetUserSuccess(data) {
+        console.log(data);
         if(data.code === 200) {
             this.auth = true;
             this.username = data.raw.username;

@@ -88,6 +88,7 @@ export default(
                 <Route path='music' handler={PostMusic}/>
                 <Route path='article' handler={PostArticle}/>
             </Route>
+            <Route path="*" handler={ProfileCenter} />
         </Route>
 
         <Route path=':column' handler={List}>

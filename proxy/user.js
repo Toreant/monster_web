@@ -168,7 +168,6 @@ class md {
                     if(err) {
                         return callback(500);
                     } else {
-                        console.log(u);
                         if(u === null) {
                             return callback(404);
                         } else {
@@ -430,6 +429,7 @@ class md {
      * 获取收藏列表
      * @param user
      * @param skip
+     * @param option 选择那个关注列表 all article music animate
      * @param callback
      */
     getStars(user,skip,option,callback) {

@@ -278,10 +278,8 @@ var ConListActions = (function () {
                 url = '/api/' + tab;
 
             if (option === '0') {
-                console.log('jaja');
                 params.params = { create_user_domain: param };
             } else {
-                console.log('hehe');
                 params.params = { create_user_id: '' };
             }
 
@@ -375,7 +373,6 @@ var FollowersActions = (function () {
             var _this = this;
 
             var params = {
-                where: { _id: '56376c400edda2c51e9945f5' },
                 option: { skip: (page - 1) * 10, limit: 10 }
             };
             $.ajax({
@@ -1406,6 +1403,8 @@ Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -1414,11 +1413,37 @@ var _alt = require('../alt');
 
 var _alt2 = _interopRequireDefault(_alt);
 
-var ProfileCenterActions = function ProfileCenterActions() {
-    _classCallCheck(this, ProfileCenterActions);
+var ProfileCenterActions = (function () {
+    function ProfileCenterActions() {
+        _classCallCheck(this, ProfileCenterActions);
 
-    this.generateActions();
-};
+        this.generateActions('getProfileSuccess');
+    }
+
+    _createClass(ProfileCenterActions, [{
+        key: 'getProfile',
+        value: function getProfile() {
+            var _this = this;
+
+            console.log('dads');
+            $.ajax({
+                url: '/api/profile/center',
+                type: 'get',
+                cache: false,
+                contentType: 'application/json;charset=utf-8',
+                timeOut: 3000
+            }).done(function (data) {
+                _this.actions.getProfileSuccess(data);
+            }).fail(function () {
+                toastr.warning('获取资料失败');
+            }).error(function () {
+                toastr.warning('获取资料失败');
+            });
+        }
+    }]);
+
+    return ProfileCenterActions;
+})();
 
 exports['default'] = _alt2['default'].createActions(ProfileCenterActions);
 module.exports = exports['default'];
@@ -1819,9 +1844,9 @@ var UserActions = (function () {
             var _this = this;
 
             $.ajax({
-                url: '/api/session',
+                url: '/api/profile',
                 cache: false,
-                type: 'post'
+                type: 'get'
             }).done(function (data) {
                 _this.actions.getUserSuccess(data);
             }).fail(function () {
@@ -6601,6 +6626,12 @@ var _storesProfileCenterStore = require('../stores/ProfileCenterStore');
 
 var _storesProfileCenterStore2 = _interopRequireDefault(_storesProfileCenterStore);
 
+var _Loading = require('./Loading');
+
+var _Loading2 = _interopRequireDefault(_Loading);
+
+var _reactRouter = require('react-router');
+
 var ProfileCenter = (function (_React$Component) {
     _inherits(ProfileCenter, _React$Component);
 
@@ -6616,6 +6647,7 @@ var ProfileCenter = (function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             _storesProfileCenterStore2['default'].listen(this.onChange);
+            _actionsProfileCenterActions2['default'].getProfile();
         }
     }, {
         key: 'componentWillUnmount',
@@ -6630,10 +6662,88 @@ var ProfileCenter = (function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var Target = null,
+                More = null;
+            if (this.state.loading) {
+                Target = _react2['default'].createElement(_Loading2['default'], null);
+            } else if (this.state.loading === false && this.state.stars.length > 0) {
+                Target = this.state.stars.map(function (data) {
+                    return _react2['default'].createElement(
+                        'div',
+                        { key: data._id, className: 'media col-md-4 col-xs-12' },
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'media-left' },
+                            _react2['default'].createElement('img', { src: data.abbreviations || '/img/abbreviations.png', width: '120', alt: 'loading' })
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'media-body' },
+                            _react2['default'].createElement(
+                                'p',
+                                { className: 'text-primary' },
+                                data.title
+                            ),
+                            _react2['default'].createElement(
+                                'p',
+                                { className: 'text-muted' },
+                                data.summary
+                            )
+                        )
+                    );
+                });
+            }
+            if (this.state.starsCount > 10) {
+                More = _react2['default'].createElement(
+                    'div',
+                    null,
+                    _react2['default'].createElement(
+                        _reactRouter.Link,
+                        { to: '/profile/star' },
+                        _react2['default'].createElement('span', { className: 'fa fa-plus-square' })
+                    )
+                );
+            }
             return _react2['default'].createElement(
                 'div',
                 { className: 'col-md-9 col-sm-9' },
-                '个人用户中心'
+                _react2['default'].createElement(
+                    'h1',
+                    { className: 'mon-padding-title' },
+                    '个人中心'
+                ),
+                _react2['default'].createElement(
+                    'div',
+                    { className: 'mon-badge' },
+                    _react2['default'].createElement('span', { className: 'fa fa-folder-open' }),
+                    '个人投稿',
+                    _react2['default'].createElement(
+                        'span',
+                        { className: 'badge' },
+                        this.state.contribute
+                    )
+                ),
+                _react2['default'].createElement(
+                    'div',
+                    null,
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'mon-badge' },
+                        _react2['default'].createElement('span', { className: 'fa fa-file-text' }),
+                        '收藏',
+                        _react2['default'].createElement(
+                            'span',
+                            { className: 'badge' },
+                            this.state.starsCount
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'mon-star-list' },
+                        Target,
+                        More
+                    )
+                )
             );
         }
     }]);
@@ -6644,7 +6754,7 @@ var ProfileCenter = (function (_React$Component) {
 exports['default'] = ProfileCenter;
 module.exports = exports['default'];
 
-},{"../actions/ProfileCenterActions":23,"../stores/ProfileCenterStore":90,"react":"react"}],60:[function(require,module,exports){
+},{"../actions/ProfileCenterActions":23,"../stores/ProfileCenterStore":90,"./Loading":44,"react":"react","react-router":"react-router"}],60:[function(require,module,exports){
 /**
  * Created by apache on 15-10-30.
  */
@@ -8875,7 +8985,8 @@ exports['default'] = _react2['default'].createElement(
             _react2['default'].createElement(_reactRouter.Route, { path: 'animate', handler: _componentsPostAnimate2['default'] }),
             _react2['default'].createElement(_reactRouter.Route, { path: 'music', handler: _componentsPostMusic2['default'] }),
             _react2['default'].createElement(_reactRouter.Route, { path: 'article', handler: _componentsPostArticle2['default'] })
-        )
+        ),
+        _react2['default'].createElement(_reactRouter.Route, { path: '*', handler: _componentsProfileCenter2['default'] })
     ),
     _react2['default'].createElement(
         _reactRouter.Route,
@@ -10512,6 +10623,8 @@ Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -10524,11 +10637,33 @@ var _actionsProfileCenterActions = require('../actions/ProfileCenterActions');
 
 var _actionsProfileCenterActions2 = _interopRequireDefault(_actionsProfileCenterActions);
 
-var ProfileCenterStore = function ProfileCenterStore() {
-    _classCallCheck(this, ProfileCenterStore);
+var ProfileCenterStore = (function () {
+    function ProfileCenterStore() {
+        _classCallCheck(this, ProfileCenterStore);
 
-    this.bindActions(_actionsProfileCenterActions2['default']);
-};
+        this.bindActions(_actionsProfileCenterActions2['default']);
+        this.contribute = 0;
+        this.stars = [];
+        this.starsCount = 0;
+        this.loading = true;
+    }
+
+    _createClass(ProfileCenterStore, [{
+        key: 'onGetProfileSuccess',
+        value: function onGetProfileSuccess(data) {
+            this.loading = false;
+            if (data.code === 200) {
+                this.contribute = data.raw.profile.contribute.length;
+                this.stars = data.raw.stars._raw;
+                this.starsCount = data.raw.stars.count;
+            } else {
+                toastr.warning('获取资料失败');
+            }
+        }
+    }]);
+
+    return ProfileCenterStore;
+})();
 
 exports['default'] = _alt2['default'].createStore(ProfileCenterStore);
 module.exports = exports['default'];
@@ -10988,6 +11123,7 @@ var UserStore = (function () {
     _createClass(UserStore, [{
         key: 'onGetUserSuccess',
         value: function onGetUserSuccess(data) {
+            console.log(data);
             if (data.code === 200) {
                 this.auth = true;
                 this.username = data.raw.username;

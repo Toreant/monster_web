@@ -19,3 +19,11 @@
   color: #fff;
   margin-top: 20px;
 }
+/* 个人中心 */
+.mon-badge {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+.mon-badge span {
+  margin-right: 20px;
+}

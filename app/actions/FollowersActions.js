@@ -14,7 +14,6 @@ class FollowersActions {
 
     getFollowers(page) {
         let params = {
-            where: {_id : '56376c400edda2c51e9945f5'},
             option: {skip: (page - 1) * 10, limit: 10}
         };
         $.ajax({

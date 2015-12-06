@@ -10,6 +10,10 @@
       -ms-flex-direction: column;
           flex-direction: column;
 }
+.mon-padding-title {
+  padding-left: 20px;
+  border-left: 5px solid #0b97c4;
+}
 .mon-disabled {
   display: none !important;
 }
