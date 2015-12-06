@@ -28,6 +28,8 @@ router.post('/api/getUser',UserCtrl.getUserByDomain);
 
 router.post('/api/users',UserCtrl.getUserById);
 
+router.get('/api/profile',auth.isAuth,UserCtrl.getProfile);
+
 
 router.get('/api/member/:domain',UserCtrl.getUserByDomain);
 

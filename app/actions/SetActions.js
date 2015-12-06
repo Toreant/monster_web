@@ -34,6 +34,7 @@ class SetActions {
                 avatar_url : avatar_url
             }
         };
+        console.log(params.params);
         $.ajax({
             url : '/api/user',
             type : 'put',
@@ -50,12 +51,14 @@ class SetActions {
 
     getProfile() {
         $.ajax({
-            url: '/api/session',
-            type: 'post',
-            cache: false
+            url: '/api/profile',
+            type: 'get',
+            cache: false,
+            contentType : 'application/json;charset=utf-8'
         }).done((data) => {
             this.actions.getProfileSuccess(data);
         }).fail(() => {
+            toastr.warning('获取个人资料失败');
         });
 
     }

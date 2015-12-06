@@ -1467,6 +1467,7 @@ var SetActions = (function () {
                     avatar_url: avatar_url
                 }
             };
+            console.log(params.params);
             $.ajax({
                 url: '/api/user',
                 type: 'put',
@@ -1486,12 +1487,15 @@ var SetActions = (function () {
             var _this2 = this;
 
             $.ajax({
-                url: '/api/session',
-                type: 'post',
-                cache: false
+                url: '/api/profile',
+                type: 'get',
+                cache: false,
+                contentType: 'application/json;charset=utf-8'
             }).done(function (data) {
                 _this2.actions.getProfileSuccess(data);
-            }).fail(function () {});
+            }).fail(function () {
+                toastr.warning('获取个人资料失败');
+            });
         }
     }]);
 

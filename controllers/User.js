@@ -125,6 +125,32 @@ class UserCtrl {
     }
 
     /**
+     * 获取个人资料
+     * @param req
+     * @param res
+     */
+    getProfile(req,res) {
+        let user = req.session.user;
+        let result = {
+            meta: '',
+            code: 0,
+            raw: null
+        };
+
+        User.getUserById([user._id], {}, (docs) => {
+            if (docs.length >= 1) {
+                result.meta = '查找成功';
+                result.code = 200;
+                result.raw = docs[0];
+            } else {
+                result.meta = '查找不成功';
+                result.code = 400;
+            }
+            res.json(result);
+        });
+    }
+
+    /**
      * 通过个性域名查找用户
      * @param req
      * @param res

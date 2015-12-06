@@ -8,7 +8,7 @@ import _ from 'underscore';
 
 class md {
     constructor() {
-        this.query = 'username avatar_url domain email following followers star star_article star_music star_animate' +
+        this.query = 'username avatar_url introduce domain email following followers star star_article star_music star_animate' +
             'article music animate contribute';
     }
     /**
