@@ -8,6 +8,7 @@ import ArticleCtrl from './controllers/Article';
 import CommentCtrl from './controllers/Comment';
 import UploaderCtrl from './controllers/Uploader';
 import MusicCtrl from './controllers/Music';
+import ContributeCtrl from './controllers/Contribute';
 import multer from 'multer';
 import auth from './middleware/auth';
 import multipart from 'connect-multiparty';
@@ -125,6 +126,9 @@ router.post('/api/animate',auth.isAuth,AnimateCtrl.postAnimate);
 router.get('/api/animate/:id',AnimateCtrl.getAnimate);
 
 router.post('/api/animates',AnimateCtrl.getAnimates);
+
+// 推荐
+router.get('/api/recommend',ContributeCtrl.getRecommend);
 
 // 搜索
 router.post('/api/search',SearchCtrl.getSearch);

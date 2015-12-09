@@ -1,0 +1,15 @@
+.sangar-pagination-type-text > li {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 20px #000000;
+  margin-right: 10px;
+}
+.sangar-pagination-type-text > li:hover {
+  cursor: pointer;
+}
+.sangar-pagination-type-text > li.sangar-pagination-active {
+  background: #0b97c4;
+}

@@ -4,6 +4,7 @@
 import React from 'react';
 import HomeActions from '../actions/HomeActions';
 import HomeStore from '../stores/HomeStore';
+import Carousel from './Carousel';
 
 class Home extends React.Component {
 
@@ -31,11 +32,18 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div className='container mon-main'>
-                <div className='jumbotron mon-home'>
-                    <p>Monster 分享你的乐趣</p>
-                    <p>独乐乐，不如猪乐乐</p>
-                    <a href="/login" className='btn btn-primary'>登陆</a>
+            <div className="mon-main">
+                <div className='container'>
+                    <div className='jumbotron mon-home'>
+                        <p>Monster 分享你的乐趣</p>
+                        <p>独乐乐，不如猪乐乐</p>
+                        <a href="/login" className='btn btn-primary'>登陆</a>
+                    </div>
+                </div>
+                <div className="container">
+                    <div className="col-md-8">
+                        <Carousel />
+                    </div>
                 </div>
             </div>
         );
