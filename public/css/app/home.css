@@ -36,6 +36,11 @@
 .mon-item > div {
   max-width: 100%;
 }
+@media screen and (max-width: 1000px) {
+  .mon-item {
+    width: 30%;
+  }
+}
 @media screen and (max-width: 500px) {
   .mon-item {
     width: 43%;
