@@ -28,7 +28,11 @@ class Carousel extends React.Component {
         $("#carousel").sangarSlider({
             timer : false, // true or false to have the timer
             width : 850, // slideshow width
-            height : 500 // slideshow height
+            height : 500, // slideshow height,
+            directionalNav : 'show',
+            pagination : 'bullet', // bullet, content-horizontal, content-vertical, none
+            paginationContent : ["Lorem Ipsum Dolor", "Dolor Sit Amet", "Consectetur", "Do Eiusmod", "Magna Aliqua"],
+            paginationContentWidth : 200
         });
     }
 
@@ -42,8 +46,13 @@ class Carousel extends React.Component {
                     <div key={data.data._id} className="sangar-content">
                         <img src={data.data.abbreviations || '/img/abbreviations.png'} alt="loading"/>
                         <Link to={'/'+data.option+'/'+data.data._id}>
-                            data.data.title
+                            <data className="data title"></data>
                         </Link>
+                        <div className="mon-sanger-content">
+                            <p>
+                                {data.data.title}
+                            </p>
+                        </div>
                     </div>
                 );
             });

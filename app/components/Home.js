@@ -79,8 +79,8 @@ class Home extends React.Component {
                                     <img src={data.data.abbreviations || '/img/abbreviations.png'} alt="loading"/>
                                 </Link>
                             </div>
-                            <div>
-                                <Link to={'/music/'+data.data._id} className="mon-muted">
+                            <div >
+                                <Link to={'/article/'+data.data._id} className="mon-muted">
                                     {data.data.summary || '什么鬼也没有'}
                                 </Link>
                             </div>
@@ -94,7 +94,6 @@ class Home extends React.Component {
                             </span>
                         </div>
                     </div>
-
                 );
             });
         }

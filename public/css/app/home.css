@@ -1,5 +1,6 @@
 .mon-section {
   margin-bottom: 30px;
+  position: relative;
 }
 .mon-box {
   display: -webkit-box;
@@ -9,6 +10,7 @@
   -webkit-flex-wrap: wrap;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
+  width: 100%;
 }
 .mon-aside {
   margin-top: 10px;
@@ -26,11 +28,18 @@
   color: #999;
 }
 .mon-item {
+  display: inline-block;
+  position: relative;
   width: 200px;
   margin: 20px 10px;
 }
 .mon-item > div {
   max-width: 100%;
+}
+@media screen and (max-width: 500px) {
+  .mon-item {
+    width: 43%;
+  }
 }
 .mon-fragmentation {
   position: relative;

@@ -2875,7 +2875,11 @@ var Carousel = (function (_React$Component) {
             $("#carousel").sangarSlider({
                 timer: false, // true or false to have the timer
                 width: 850, // slideshow width
-                height: 500 // slideshow height
+                height: 500, // slideshow height,
+                directionalNav: 'show',
+                pagination: 'bullet', // bullet, content-horizontal, content-vertical, none
+                paginationContent: ["Lorem Ipsum Dolor", "Dolor Sit Amet", "Consectetur", "Do Eiusmod", "Magna Aliqua"],
+                paginationContentWidth: 200
             });
         }
     }, {
@@ -2893,7 +2897,16 @@ var Carousel = (function (_React$Component) {
                         _react2['default'].createElement(
                             _reactRouter.Link,
                             { to: '/' + data.option + '/' + data.data._id },
-                            'data.data.title'
+                            _react2['default'].createElement('data', { className: 'data title' })
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'mon-sanger-content' },
+                            _react2['default'].createElement(
+                                'p',
+                                null,
+                                data.data.title
+                            )
                         )
                     );
                 });
@@ -4167,7 +4180,7 @@ var Home = (function (_React$Component) {
                                 null,
                                 _react2['default'].createElement(
                                     _reactRouter.Link,
-                                    { to: '/music/' + data.data._id, className: 'mon-muted' },
+                                    { to: '/article/' + data.data._id, className: 'mon-muted' },
                                     data.data.summary || '什么鬼也没有'
                                 )
                             )
