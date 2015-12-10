@@ -154,7 +154,6 @@ class MusicCtrl {
                     result.code = 200;
                     result.raw  = data;
                 }
-
                 res.json(result);
             });
         }

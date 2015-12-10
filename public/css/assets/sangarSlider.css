@@ -298,12 +298,12 @@
 }
 
 .sangar-slideshow-container div.sangar-slider-nav span.sangar-arrow-right {
-    background: url("/images/right-arrow.png");
+    background: url("/img/right-arrow.png");
     right: 0px;
 }
 
 .sangar-slideshow-container div.sangar-slider-nav span.sangar-arrow-left {
-    background: url("/images/left-arrow.png");
+    background: url("/img/left-arrow.png");
     left: 0px;
 }
 

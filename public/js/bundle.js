@@ -598,14 +598,60 @@ var HomeActions = (function () {
     function HomeActions() {
         _classCallCheck(this, HomeActions);
 
-        this.generateActions('getPage');
+        this.generateActions('getArticlesSuccess', 'getMusicsSuccess');
     }
 
     _createClass(HomeActions, [{
-        key: 'getData',
-        value: function getData() {
-            $.post('/api/app/1', {}, function (data) {
-                console.log(data);
+        key: 'getArticles',
+        value: function getArticles() {
+            var _this = this;
+
+            var params = {
+                params: {},
+                option: {
+                    skip: 0,
+                    limit: 10,
+                    sort: { create_time: -1 }
+                }
+            };
+            $.ajax({
+                url: '/api/articles',
+                type: 'post',
+                contentType: 'application/json;charset=utf-8',
+                dataType: 'json',
+                cache: false,
+                data: JSON.stringify(params)
+            }).done(function (data) {
+                _this.actions.getArticlesSuccess(data);
+            }).fail(function () {
+                toastr.warning('获取数据失败');
+            });
+        }
+    }, {
+        key: 'getMusics',
+        value: function getMusics() {
+            var _this2 = this;
+
+            var params = {
+                option: {
+                    skip: 0,
+                    limit: 10,
+                    sort: {
+                        create_time: -1
+                    }
+                }
+            };
+            $.ajax({
+                url: '/api/musics',
+                type: 'post',
+                contentType: 'application/json;charset=utf-8',
+                cache: false,
+                data: JSON.stringify(params),
+                dataType: 'json'
+            }).done(function (data) {
+                _this2.actions.getMusicsSuccess(data);
+            }).fail(function () {
+                toastr.warning('获取数据失败');
             });
         }
     }]);
@@ -4009,6 +4055,12 @@ var _Carousel = require('./Carousel');
 
 var _Carousel2 = _interopRequireDefault(_Carousel);
 
+var _Loading = require('./Loading');
+
+var _Loading2 = _interopRequireDefault(_Loading);
+
+var _reactRouter = require('react-router');
+
 var Home = (function (_React$Component) {
     _inherits(Home, _React$Component);
 
@@ -4024,6 +4076,8 @@ var Home = (function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             _storesHomeStore2['default'].listen(this.onChange);
+            _actionsHomeActions2['default'].getArticles();
+            _actionsHomeActions2['default'].getMusics();
         }
     }, {
         key: 'componentDidUpdate',
@@ -4041,39 +4095,138 @@ var Home = (function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var Articles = undefined,
+                Musics = undefined;
+            if (this.state.a_loading) {
+                Articles = _react2['default'].createElement(_Loading2['default'], null);
+            } else {
+                Articles = this.state.articles.map(function (data) {
+                    return _react2['default'].createElement(
+                        'div',
+                        { key: 'article' + data.data._id, className: 'mon-item' },
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'mon-fragmentation' },
+                            _react2['default'].createElement(
+                                'div',
+                                null,
+                                _react2['default'].createElement(
+                                    _reactRouter.Link,
+                                    { to: '/article/' + data.data._id },
+                                    _react2['default'].createElement('img', { src: data.data.abbreviations || '/img/abbreviations.png', alt: 'loading' })
+                                )
+                            ),
+                            _react2['default'].createElement(
+                                'div',
+                                null,
+                                _react2['default'].createElement(
+                                    _reactRouter.Link,
+                                    { to: '/article/' + data.data._id, className: 'mon-muted' },
+                                    data.data.summary || '什么鬼也没有'
+                                )
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'mon-aside' },
+                            _react2['default'].createElement(
+                                _reactRouter.Link,
+                                { to: '/member/' + data.user.domain },
+                                _react2['default'].createElement('img', { src: data.user.avatar_url, alt: 'loading' })
+                            ),
+                            _react2['default'].createElement(
+                                'span',
+                                null,
+                                new Date(data.data.create_time).toLocaleDateString()
+                            )
+                        )
+                    );
+                });
+            }
+            if (this.state.m_loading) {
+                Musics = _react2['default'].createElement(_Loading2['default'], null);
+            } else {
+                Musics = this.state.musics.map(function (data) {
+                    return _react2['default'].createElement(
+                        'div',
+                        { key: 'music' + data.data._id, className: 'mon-item' },
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'mon-fragmentation' },
+                            _react2['default'].createElement(
+                                'div',
+                                null,
+                                _react2['default'].createElement(
+                                    _reactRouter.Link,
+                                    { to: '/music/' + data.data._id },
+                                    _react2['default'].createElement('img', { src: data.data.abbreviations || '/img/abbreviations.png', alt: 'loading' })
+                                )
+                            ),
+                            _react2['default'].createElement(
+                                'div',
+                                null,
+                                _react2['default'].createElement(
+                                    _reactRouter.Link,
+                                    { to: '/music/' + data.data._id, className: 'mon-muted' },
+                                    data.data.summary || '什么鬼也没有'
+                                )
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'mon-aside' },
+                            _react2['default'].createElement(
+                                _reactRouter.Link,
+                                { to: '/member/' + data.user.domain },
+                                _react2['default'].createElement('img', { src: data.user.avatar_url, alt: 'loading' })
+                            ),
+                            _react2['default'].createElement(
+                                'span',
+                                null,
+                                new Date(data.data.create_time).toLocaleDateString()
+                            )
+                        )
+                    );
+                });
+            }
             return _react2['default'].createElement(
                 'div',
-                { className: 'mon-main' },
+                { className: 'container mon-main' },
                 _react2['default'].createElement(
                     'div',
-                    { className: 'container' },
-                    _react2['default'].createElement(
-                        'div',
-                        { className: 'jumbotron mon-home' },
-                        _react2['default'].createElement(
-                            'p',
-                            null,
-                            'Monster 分享你的乐趣'
-                        ),
-                        _react2['default'].createElement(
-                            'p',
-                            null,
-                            '独乐乐，不如猪乐乐'
-                        ),
-                        _react2['default'].createElement(
-                            'a',
-                            { href: '/login', className: 'btn btn-primary' },
-                            '登陆'
-                        )
-                    )
-                ),
-                _react2['default'].createElement(
-                    'div',
-                    { className: 'container' },
+                    { className: 'raw clearfix mon-section' },
                     _react2['default'].createElement(
                         'div',
                         { className: 'col-md-8' },
                         _react2['default'].createElement(_Carousel2['default'], null)
+                    )
+                ),
+                _react2['default'].createElement(
+                    'div',
+                    { className: 'raw clearfix mon-section' },
+                    _react2['default'].createElement(
+                        'span',
+                        { className: 'mon-label' },
+                        '文章'
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'mon-box' },
+                        Articles
+                    )
+                ),
+                _react2['default'].createElement(
+                    'div',
+                    { className: 'raw clearfix mon-section' },
+                    _react2['default'].createElement(
+                        'p',
+                        { className: 'mon-label' },
+                        '音乐'
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'mon-box' },
+                        Musics
                     )
                 )
             );
@@ -4086,7 +4239,7 @@ var Home = (function (_React$Component) {
 exports['default'] = Home;
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":10,"../stores/HomeStore":79,"./Carousel":36,"react":"react"}],45:[function(require,module,exports){
+},{"../actions/HomeActions":10,"../stores/HomeStore":79,"./Carousel":36,"./Loading":46,"react":"react","react-router":"react-router"}],45:[function(require,module,exports){
 /**
  * Created by apache on 15-11-10.
  */
@@ -9846,17 +9999,35 @@ var HomeStore = (function () {
         _classCallCheck(this, HomeStore);
 
         this.bindActions(_actionsHomeActions2['default']);
-        this.userId = '';
+        this.articles = [];
+        this.musics = [];
+        this.a_loading = true;
+        this.m_loading = true;
     }
 
     //HomeActions 中的方法
 
     _createClass(HomeStore, [{
-        key: 'onGetPage',
-        value: function onGetPage() {
-            $.post('/api/app', {}, function (data) {
-                console.log(data);
-            });
+        key: 'onGetArticlesSuccess',
+        value: function onGetArticlesSuccess(data) {
+            console.log(data);
+            if (data.code === 200) {
+                this.articles = data.raw._raw;
+                this.a_loading = false;
+            } else if (data.code === 500) {
+                toastr.warning('获取数据失败');
+            }
+        }
+    }, {
+        key: 'onGetMusicsSuccess',
+        value: function onGetMusicsSuccess(data) {
+            console.log(data);
+            if (data.code === 200) {
+                this.musics = data.raw._raw;
+                this.m_loading = false;
+            } else if (data.code === 500) {
+                toastr.warning('获取数据失败');
+            }
         }
     }]);
 

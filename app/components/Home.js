@@ -5,6 +5,8 @@ import React from 'react';
 import HomeActions from '../actions/HomeActions';
 import HomeStore from '../stores/HomeStore';
 import Carousel from './Carousel';
+import Loading from './Loading';
+import {Link} from 'react-router';
 
 class Home extends React.Component {
 
@@ -16,6 +18,8 @@ class Home extends React.Component {
 
     componentDidMount() {
         HomeStore.listen(this.onChange);
+        HomeActions.getArticles();
+        HomeActions.getMusics();
     }
 
     componentDidUpdate(nextProps,preProps) {
@@ -31,18 +35,86 @@ class Home extends React.Component {
     }
 
     render() {
-        return (
-            <div className="mon-main">
-                <div className='container'>
-                    <div className='jumbotron mon-home'>
-                        <p>Monster 分享你的乐趣</p>
-                        <p>独乐乐，不如猪乐乐</p>
-                        <a href="/login" className='btn btn-primary'>登陆</a>
+        let Articles,Musics;
+        if(this.state.a_loading) {
+            Articles = <Loading/>;
+        } else {
+            Articles = this.state.articles.map((data) => {
+                return (
+                    <div key={'article'+data.data._id} className="mon-item">
+                        <div className="mon-fragmentation">
+                            <div>
+                                <Link to={'/article/'+data.data._id}>
+                                    <img src={data.data.abbreviations || '/img/abbreviations.png'} alt="loading"/>
+                                </Link>
+                            </div>
+                            <div >
+                                <Link to={'/article/'+data.data._id} className="mon-muted">
+                                    {data.data.summary || '什么鬼也没有'}
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="mon-aside">
+                            <Link to={'/member/'+data.user.domain}>
+                                <img src={data.user.avatar_url} alt="loading"/>
+                            </Link>
+                            <span>
+                                {(new Date(data.data.create_time)).toLocaleDateString()}
+                            </span>
+                        </div>
                     </div>
-                </div>
-                <div className="container">
+
+                );
+            });
+        }
+        if(this.state.m_loading) {
+            Musics = <Loading />;
+        } else {
+            Musics = this.state.musics.map((data) => {
+                return (
+                    <div key={'music'+data.data._id} className="mon-item">
+                        <div className="mon-fragmentation">
+                            <div>
+                                <Link to={'/music/'+data.data._id}>
+                                    <img src={data.data.abbreviations || '/img/abbreviations.png'} alt="loading"/>
+                                </Link>
+                            </div>
+                            <div>
+                                <Link to={'/music/'+data.data._id} className="mon-muted">
+                                    {data.data.summary || '什么鬼也没有'}
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="mon-aside">
+                            <Link to={'/member/'+data.user.domain}>
+                                <img src={data.user.avatar_url} alt="loading"/>
+                            </Link>
+                            <span>
+                                {(new Date(data.data.create_time)).toLocaleDateString()}
+                            </span>
+                        </div>
+                    </div>
+
+                );
+            });
+        }
+        return (
+            <div className="container mon-main">
+                <div className="raw clearfix mon-section">
                     <div className="col-md-8">
                         <Carousel />
+                    </div>
+                </div>
+                <div className="raw clearfix mon-section">
+                    <span className="mon-label">文章</span>
+                    <div className="mon-box">
+                        {Articles}
+                    </div>
+                </div>
+                <div className="raw clearfix mon-section">
+                    <p className="mon-label">音乐</p>
+                    <div className="mon-box">
+                        {Musics}
                     </div>
                 </div>
             </div>
