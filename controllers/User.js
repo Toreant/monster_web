@@ -249,11 +249,19 @@ class UserCtrl {
      */
     getFollowers(req, res, next) {
         let option = req.body.option,
-            where = req.session.user,
+            where = req.body.where,
             user = req.session.user; //　本地登陆用户
-        console.log(where);
 
-        User.getFollowers({_id : where === undefined?null:where._id}, option, user, (data) => {
+        if(where === undefined && user == undefined) {
+            return res.json({
+                meta : 'bad query',
+                code : 500
+            });
+        }
+
+        let query = where === undefined?{_id : user._id}:where;
+
+        User.getFollowers(query, option, user, (data) => {
             let result = {
                 meta: '',
                 code: 0,

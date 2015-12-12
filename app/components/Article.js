@@ -50,18 +50,22 @@ class Article extends React.Component {
         if(this.state.article) {
             Article = (
                 <div className='raw animated fadeInUp clearfix'>
-                    <div className='col-md-8 col-sm-8 col-xs-12 col-md-offset-2 mon-article'>
+                    <div className='col-md-8 col-sm-12 col-xs-12 col-md-offset-2 mon-article'>
                         <p className='mon-article-title'>{this.state.title}</p>
-                        <div className='mon-article-detail'>
-                            <a href={'/member/'+this.state.createUserDomain}>
-                                <img src={this.state.createUserAvatar || '/img/default.png'} alt="loading" width='30'/>
-                            </a>
-                            <a href={'/member/'+this.state.createUserDomain}>{this.state.createUser}</a>
-                            <Star star={this.props.params.id} column='article' stared={this.state.stared} />
-                            {this.state.stars}
-                            <span className="pull-right">
-                                {this.state.createTime}
-                            </span>
+                        <div className='mon-article-detail media'>
+                            <div className="media-left">
+                                <a href={'/member/'+this.state.createUserDomain}>
+                                    <img src={this.state.createUserAvatar || '/img/default.png'} alt="loading"/>
+                                </a>
+                            </div>
+                            <div className="media-body">
+                                <a href={'/member/'+this.state.createUserDomain}>{this.state.createUser}</a>
+                                <Star star={this.props.params.id} column='article' stared={this.state.stared} />
+                                {this.state.stars}
+                                <p className="mon-detail-time">
+                                    {this.state.createTime}
+                                </p>
+                            </div>
                         </div>
                         <p className='bg-success mon-article-summary'>{this.state.summary}</p>
                         <div ref='content' className='mon-article-content' dangerouslySetInnerHTML={{__html: this.state.content}}>
@@ -76,7 +80,7 @@ class Article extends React.Component {
 
             Aside = (
                 <div className="raw">
-                    <div className='col-md-8 col-sm-8 col-md-offset-2 col-xs-12'>
+                    <div className='col-md-8 col-sm-12 col-md-offset-2 col-xs-12'>
                         <div className='panel panel-default'>
                             <div className='panel-body media'>
                                 <div className='media-left'>

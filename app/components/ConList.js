@@ -7,17 +7,6 @@ import {isEqual} from 'underscore';
 import ConListActions from '../actions/ConListActions';
 import ConListStore from '../stores/ConListStore';
 
-var isMounted = (component) => {
-    // exceptions for flow control :(
-    try {
-        React.findDOMNode(component);
-        return true;
-    } catch (e) {
-        // Error: Invariant Violation: Component (with keys: props,context,state,refs,_reactInternalInstance) contains `render` method but is not mounted in the DOM
-        return false;
-    }
-};
-
 class ConList extends React.Component {
 
     constructor(props) {
@@ -31,7 +20,6 @@ class ConList extends React.Component {
     }
 
     componentWillUpdate(prevProps) {
-        console.log('will update'+isMounted(this));
         if(!isEqual(prevProps.params,this.props.params)) {
             ConListActions.getConList(props.option,props.tab,props.domain);
         }
@@ -44,7 +32,6 @@ class ConList extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log('update'+isMounted(this));
         if(!isEqual(prevProps.params,this.props.params)) {
             if(isMounted(this)) {
                 ConListActions.getConList(props.option,props.tab,props.domain);

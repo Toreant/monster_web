@@ -1,26 +1,26 @@
 /**
- * Created by apache on 15-11-1.
+ * Created by apache on 15-12-12.
  */
 import alt from '../alt';
-import FollowersActions from '../actions/FollowersActions';
+import FollowActions from '../actions/FollowActions';
 
-class FollowersStore {
+class FollowStore {
     constructor() {
-        this.bindActions(FollowersActions);
-        this.followers = [];
+        this.bindActions(FollowActions);
+        this.follows = [];
+        this.loading = true;
+        this.error = false;
     }
 
-    onGetFollowersSuccess(data) {
+    onGetFollowSuccess(data) {
         console.log(data);
+        this.loading = true;
         if(data.code === 200) {
-            this.followers = data.raw;
+            this.follows = data.raw;
         } else if(data.code === 500) {
-            toastr.error('服务器错误');
+            toastar.warning('获取数据失败');
+            this.error = true;
         }
-    }
-
-    onChangeFollowId(event) {
-        this.followId = event.target.value;
     }
 
     /**
@@ -47,7 +47,6 @@ class FollowersStore {
     }
 
     onUnFollowSuccess(data) {
-        console.log(data);
         switch (data[1].code) {
             case 400 :
                 toastr.error('本地用户不存在');
@@ -67,4 +66,4 @@ class FollowersStore {
     }
 }
 
-export default alt.createStore(FollowersStore);
+export default alt.createStore(FollowStore);

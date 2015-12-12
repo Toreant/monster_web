@@ -1,32 +1,40 @@
 /**
- * Created by apache on 15-11-1.
+ * Created by apache on 15-12-12.
  */
 import alt from '../alt';
-class FollowersActions {
+
+class FollowActions {
     constructor() {
         this.generateActions(
-            'getFollowersSuccess',
+            'getFollowSuccess',
             'changeFollowId',
             'addFollowSuccess',
             'unFollowSuccess'
         );
     }
 
-    getFollowers(page) {
+    getFollows(column,page) {
+        let url = '/api/'+column;
+
         let params = {
-            option: {skip: (page - 1) * 10, limit: 10}
+            option : {
+                skip : page,
+                limit : 10
+            }
         };
+
         $.ajax({
-            url : '/api/followers',
-            type : 'post',
+            url : url,
+            cache : false,
+            contentType : 'application/json;charset=utf-8',
             dataType : 'json',
-            contentType: 'application/json;charset=utf-8',
-            data : JSON.stringify(params)
+            type : 'post',
+            date : JSON.stringify(params)
         }).done((data) => {
-            this.actions.getFollowersSuccess(data);
+            this.actions.getFollowSuccess(data);
         }).fail(() => {
-            toastr.warning('获取关注者失败');
-        });
+            toastr.warning('获取数据失败');
+        })
     }
 
     addFollow($self,auth_id) {
@@ -65,7 +73,6 @@ class FollowersActions {
             toastr.warning('取消关注不成功');
         });
     };
-
 }
 
-export default alt.createActions(FollowersActions);
+export default alt.createActions(FollowActions);

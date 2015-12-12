@@ -148,6 +148,18 @@ class md {
                         _callback(null,docs);
                     });
                 }
+            },
+
+            // 标上已关注
+            function(users,_callback) {
+                let result = [];
+                for(let i = 0, num = users.length; i < num; i++) {
+                    let item = {};
+                    item.user = users[i];
+                    item.following = true;
+                    result.push(item);
+                }
+                _callback(null,result);
             }
         ],function(err,result){
             callback(result);

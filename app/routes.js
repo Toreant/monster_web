@@ -17,8 +17,9 @@ import PostMusic from './components/PostMusic';
 import PostArticle from './components/PostArticle';
 
 import ProfileCenter from './components/ProfileCenter';
-import Followers from './components/Followers';
-import Following from './components/Following';
+//import Followers from './components/Followers';
+//import Following from './components/Following';
+import Follow from './components/Follow';
 import Contribute from './components/Contribute';
 import Article from './components/Article';
 import List from './components/List';
@@ -69,12 +70,7 @@ export default(
             <DefaultRoute handler={ProfileCenter}/>
             <Route path='setting' handler={Set} />
             <Route path='center' handler={ProfileCenter} />
-            <Route path='followers' handler={Followers}>
-                <Route path=':page' handler={Followers}/>
-            </Route>
-            <Route path='following' handler={Following}>
-                <Route path=':page' handler={Following}/>
-            </Route>
+
             <Route path='contribute' handler={Contribute}>
                 <DefaultRoute handler={ConArticle} />
                 <Route path='/profile/article'handler={ConArticle} />
@@ -87,6 +83,10 @@ export default(
                 <Route path='animate' handler={PostAnimate}/>
                 <Route path='music' handler={PostMusic}/>
                 <Route path='article' handler={PostArticle}/>
+            </Route>
+            <Route path=":follow" handler={Follow}>
+                <DefaultRoute handler={Follow} />
+                <Route path=":page" handler={Follow}/>
             </Route>
             <Route path="*" handler={ProfileCenter} />
         </Route>

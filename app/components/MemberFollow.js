@@ -33,20 +33,20 @@ class MemberFollow extends React.Component {
         let follow;
         if(this.state.follows.length > 0 && this.state.loading === false && this.state.error === false) {
             Follows = this.state.follows.map((data) => {
-                follow = this.props.params.follow === 'following'?data:data.user;
+
                 return (
-                    <div key={follow._id} className="media mon-follow-item col-md-3 animated fadeIn">
+                    <div key={data.user._id} className="media mon-follow-item col-md-3 animated fadeIn">
                         <div className="media-left">
-                            <Link to={'/member/'+follow.domain}>
-                                <img src={follow.avatar_url} alt="loading"/>
+                            <Link to={'/member/'+data.user.domain}>
+                                <img src={data.user.avatar_url} alt="loading"/>
                             </Link>
                         </div>
                         <div className="media-body">
-                            <Link to={'/member/'+follow.domain}>
-                                {follow.username}
+                            <Link to={'/member/'+data.user.domain}>
+                                {data.user.username}
                             </Link>
                             <p className="text-muted mon-follow-intr">
-                                {follow.introduce}
+                                {data.user.introduce}
                             </p>
                         </div>
                     </div>

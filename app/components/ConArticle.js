@@ -9,10 +9,6 @@ class ConArticle extends React.Component {
         super(props);
     }
 
-    componentDidMount() {
-        console.log(this.props.params);
-    }
-
     render() {
         let Result;
         if(this.props.params.domain !== undefined) {

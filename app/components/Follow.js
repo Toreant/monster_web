@@ -1,37 +1,42 @@
 /**
- * Created by apache on 15-11-1.
+ * Created by apache on 15-12-12.
  */
 import React from 'react';
 import {Link} from 'react-router';
 import {isEqual} from 'underscore';
-import FollowersActions from '../actions/FollowersActions';
-import FollowersStore from '../stores/FollowersStore';
+import FollowActions from '../actions/FollowActions';
+import FollowStore from '../stores/FollowStore'
 import Pagination from './Pagination';
 
-class Followers extends React.Component {
+class Follow extends React.Component {
     constructor(props) {
         super(props);
-        this.state = FollowersStore.getState();
+        this.state = FollowStore.getState();
         this.onChange = this.onChange.bind(this);
     }
 
     componentDidMount() {
-        FollowersStore.listen(this.onChange);
+        FollowStore.listen(this.onChange);
         let page = this.props.params.page;
         if(page === undefined) {
             page = 1;
         }
-        FollowersActions.getFollowers(page);
+        let column = this.props.params.follow;
+        FollowActions.getFollows(column,page);
     }
 
     componentDidUpdate(prevProps) {
         if (!isEqual(prevProps.params, this.props.params)) {
-            FollowersActions.getFollowers(this.params.page);
+            let page = this.props.params.page;
+            if(page === undefined) {
+                page = 1;
+            }
+            FollowActions.getFollows(this.props.params.follow,page);
         }
     }
 
     componentWillUnmount() {
-        FollowersStore.unlisten(this.onChange);
+        FollowStore.unlisten(this.onChange);
     }
 
     onChange(state) {
@@ -40,23 +45,24 @@ class Followers extends React.Component {
 
     handleClick(auth_id) {
         let $self = $("[data-self="+ auth_id +"]");
-        console.log($self.data('option'));
         if($self.data('option').toString() === '0') {
-            FollowersActions.addFollow($self,auth_id);
+            FollowActions.addFollow($self,auth_id);
         } else {
-            FollowersActions.unFollow($self,auth_id)
+            FollowActions.unFollow($self,auth_id)
         }
     }
 
-
     render() {
-        let followers;
-        if(this.state.followers.length === 0) {
+        let followers,Title;
+
+        Title = this.props.params.follow === 'followers'?'关注我的':'我关注的';
+
+        if(this.state.follows.length === 0) {
             followers = (
-                <p className='bg-danger mon-padding'>还没有人关注我</p>
+                <p className='bg-danger mon-padding'>没有任何数据</p>
             );
         } else {
-            followers = this.state.followers.map((data,index) => {
+            followers = this.state.follows.map((data,index) => {
                 let FollowBtn;
                 if(data.following) {
                     FollowBtn = (
@@ -68,7 +74,7 @@ class Followers extends React.Component {
                     );
                 }
                 return (
-                    <div key={'followers:'+data.user._id} className='listgroup'>
+                    <div key={data.user._id} className='listgroup animated flipInX'>
                         <div className='media'>
                             <span className='position pull-left'>{index + 1}</span>
                             <div className='pull-left thumb-lg'>
@@ -91,10 +97,10 @@ class Followers extends React.Component {
             });
         }
 
-        let pagination = this.state.followers.length !== 0 ? (<Pagination/>):null;
+        let pagination = this.state.follows.length !== 0 ? (<Pagination/>):null;
         return(
-            <div className='col-md-9 col-sm-9 animated fadeInUp'>
-                <p className='bg-success mon-padding mon-bg-title'>关注我的</p>
+            <div className='col-md-9 col-sm-9'>
+                <p className='bg-success mon-padding mon-bg-title'>{Title}</p>
                 {followers}
                 {pagination}
             </div>
@@ -102,4 +108,4 @@ class Followers extends React.Component {
     }
 }
 
-export default Followers;
+export default Follow;
