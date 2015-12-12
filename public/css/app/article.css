@@ -58,7 +58,7 @@
 .mon-article-detail {
   padding: 10px;
   margin-bottom: 30px;
-  font-size: 2rem;
+  font-size: 1.2rem;
 }
 .mon-article-detail img {
   border-radius: 50%;
@@ -70,7 +70,7 @@
 }
 .mon-article-detail span {
   color: #998899;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 .mon-article-detail a {
   color: #5e5e5e;

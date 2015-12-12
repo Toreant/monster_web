@@ -69,22 +69,22 @@ class md {
                         if(err) {
                             return callback(500);
                         } else {
-                            _callback(null,docs, user,stared);
+                            _callback(null,{article : docs, user : user,stared : stared});
                         }
                     });
                 }
-            },
-
-            // 推荐文章
-            function(docs,user,stared,_callback) {
-                if(docs === 400) {
-                    _callback(null,400);
-                } else {
-                    Article.find({},'title',{sort : {browser_count : -1},skip : 1,limit : 6},(err,articles) => {
-                        _callback(null,{article : docs, user : user,stared : stared, recommend : articles});
-                    });
-                }
             }
+            //
+            //// 推荐文章
+            //function(docs,user,stared,_callback) {
+            //    if(docs === 400) {
+            //        _callback(null,400);
+            //    } else {
+            //        Article.find({},'title',{sort : {browser_count : -1},skip : 1,limit : 6},(err,articles) => {
+            //            _callback(null,{article : docs, user : user,stared : stared, recommend : articles});
+            //        });
+            //    }
+            //}
         ],function(err,result) {
 
             // 将markdown转成html实体

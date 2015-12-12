@@ -19,7 +19,7 @@ class Weather extends React.Component {
     }
 
     componentWillUnmount() {
-        WeatherStore.unlistent(this.onChange);
+        WeatherStore.unlisten(this.onChange);
     }
 
     onChange(state) {

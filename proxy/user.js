@@ -4,6 +4,8 @@
 import async from 'async';
 import User from '../models/user';
 import Article from '../models/article';
+import Music from '../models/music';
+import Animate from '../models/animate';
 import _ from 'underscore';
 
 class md {
@@ -356,6 +358,42 @@ class md {
                         _callback(null,304);
                     }
                 }
+            },
+
+            // 更新star
+            function(result,_callback) {
+                if(result === 200) {
+                    let Model;
+                    switch(column) {
+                        case 'article' :
+                            Model = Article;
+                            break;
+                        case 'music' :
+                            Model = Music;
+                            break;
+                        case 'animate' :
+                            Model = Animate;
+                            break;
+                    }
+
+                    // 查找，并更新
+                    Model.findById(star_id,(err,data) => {
+                        if(err) {
+                            return callback(500);
+                        } else {
+                            data.stars = data.stars + 1;
+                            data.save((err) => {
+                                if(err) {
+                                    return callback(500);
+                                } else {
+                                    _callback(null,200);
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    _callback(null,result);
+                }
             }
         ],function(err,result) {
             /**
@@ -418,6 +456,43 @@ class md {
                             }
                         });
                     }
+                }
+            },
+
+            // 更新star
+            function(result,_callback) {
+                if(result === 200) {
+                    let Model;
+
+                    switch(column) {
+                        case 'animate' :
+                            Model = Animate;
+                            break;
+                        case 'music' :
+                            Model = Music;
+                            break;
+                        case 'article' :
+                            Model = Article;
+                            break;
+                    }
+
+                    //　查找，并更新
+                    Model.findById(star_id,(err,data) => {
+                        if(err) {
+                            return callback(500);
+                        } else {
+                            data.stars = data.stars -1;
+                            data.save((err) => {
+                                if(err) {
+                                    return callback(500);
+                                } else {
+                                    _callback(null,200);
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    _callback(null,result);
                 }
             }
         ],(err,result) => {

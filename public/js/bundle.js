@@ -2357,30 +2357,15 @@ var Article = (function (_React$Component) {
                 );
             });
 
-            var Recommends = this.state.recommends.map(function (data, index) {
-                return _react2['default'].createElement(
-                    'li',
-                    { key: index },
-                    _react2['default'].createElement(
-                        _reactRouter.Link,
-                        { to: '/article/' + data._id },
-                        _react2['default'].createElement(
-                            'a',
-                            { href: 'javascript:;', className: 'mon-re-item', title: data.title },
-                            data.title
-                        )
-                    )
-                );
-            });
-
-            var Article = undefined;
+            var Article = undefined,
+                Aside = undefined;
             if (this.state.article) {
                 Article = _react2['default'].createElement(
                     'div',
                     { className: 'raw animated fadeInUp clearfix' },
                     _react2['default'].createElement(
                         'div',
-                        { className: 'col-md-8 col-sm-8 col-xs-12 mon-article' },
+                        { className: 'col-md-8 col-sm-8 col-xs-12 col-md-offset-2 mon-article' },
                         _react2['default'].createElement(
                             'p',
                             { className: 'mon-article-title' },
@@ -2392,21 +2377,18 @@ var Article = (function (_React$Component) {
                             _react2['default'].createElement(
                                 'a',
                                 { href: '/member/' + this.state.createUserDomain },
-                                _react2['default'].createElement('img', { src: this.state.createUserAvatar || '/img/default.png', alt: 'loading', width: '40' })
+                                _react2['default'].createElement('img', { src: this.state.createUserAvatar || '/img/default.png', alt: 'loading', width: '30' })
                             ),
                             _react2['default'].createElement(
                                 'a',
                                 { href: '/member/' + this.state.createUserDomain },
                                 this.state.createUser
                             ),
+                            _react2['default'].createElement(_Star2['default'], { star: this.props.params.id, column: 'article', stared: this.state.stared }),
+                            this.state.stars,
                             _react2['default'].createElement(
                                 'span',
-                                null,
-                                '|'
-                            ),
-                            _react2['default'].createElement(
-                                'span',
-                                null,
+                                { className: 'pull-right' },
                                 this.state.createTime
                             )
                         ),
@@ -2421,12 +2403,16 @@ var Article = (function (_React$Component) {
                             { className: 'mon-article-tags' },
                             Tags
                         ),
-                        _react2['default'].createElement(_Star2['default'], { star: this.props.params.id, column: 'article', stared: this.state.stared }),
                         _react2['default'].createElement(_Comment2['default'], { id: this.props.params.id, type: 'article' })
-                    ),
+                    )
+                );
+
+                Aside = _react2['default'].createElement(
+                    'div',
+                    { className: 'raw' },
                     _react2['default'].createElement(
                         'div',
-                        { className: 'col-md-4 col-sm-4 col-xs-12' },
+                        { className: 'col-md-8 col-sm-8 col-md-offset-2 col-xs-12' },
                         _react2['default'].createElement(
                             'div',
                             { className: 'panel panel-default' },
@@ -2461,20 +2447,6 @@ var Article = (function (_React$Component) {
                                     )
                                 )
                             )
-                        ),
-                        _react2['default'].createElement(
-                            'div',
-                            { className: 'panel panel-info' },
-                            _react2['default'].createElement(
-                                'div',
-                                { className: 'panel-heading' },
-                                '推荐文章'
-                            ),
-                            _react2['default'].createElement(
-                                'ul',
-                                { className: 'mon-recommend' },
-                                Recommends
-                            )
                         )
                     )
                 );
@@ -2485,6 +2457,7 @@ var Article = (function (_React$Component) {
                 'div',
                 { className: 'container' },
                 Article,
+                Aside,
                 _react2['default'].createElement(_BtnBlock2['default'], null)
             );
         }
@@ -7506,34 +7479,19 @@ var Star = (function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var StarBtn = undefined;
+            var stared = '',
+                option = 0;
+
             if (this.props.stared === 'true' || this.state.stared) {
-                StarBtn = _react2['default'].createElement(
-                    'a',
-                    { href: 'javascript:;', className: 'btn btn-danger',
-                        onClick: this.handleClick.bind(this, 1) },
-                    _react2['default'].createElement(
-                        'span',
-                        { className: 'fa fa-star-o' },
-                        '取消收藏'
-                    )
-                );
-            } else {
-                StarBtn = _react2['default'].createElement(
-                    'a',
-                    { href: 'javascript:;', className: 'btn btn-primary',
-                        onClick: this.handleClick.bind(this, 0) },
-                    _react2['default'].createElement(
-                        'span',
-                        { className: 'fa fa-star' },
-                        '收藏'
-                    )
-                );
+                stared = 'mon-stared';
+                option = 1;
             }
+
             return _react2['default'].createElement(
                 'div',
                 { className: 'mon-star' },
-                StarBtn
+                _react2['default'].createElement('a', { id: 'substitute', href: 'javascript:;', className: 'fa fa-heart-o animated ' + stared,
+                    onClick: this.handleClick.bind(this, option) })
             );
         }
     }]);
@@ -8205,7 +8163,7 @@ var Weather = (function (_React$Component) {
     }, {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
-            _storesWeatherStore2['default'].unlistent(this.onChange);
+            _storesWeatherStore2['default'].unlisten(this.onChange);
         }
     }, {
         key: 'onChange',
@@ -9665,7 +9623,7 @@ var ArticleStore = (function () {
         this.createUserDomain = '';
         this.createUserIntro = '';
         this.tags = [];
-        this.recommends = [];
+        this.stars = 0;
         this.stared = 'false';
     }
 
@@ -9673,18 +9631,18 @@ var ArticleStore = (function () {
         key: 'onGetArticleSuccess',
         value: function onGetArticleSuccess(data) {
             if (data.code === 200) {
+
                 this.article = true;
                 this.content = data.raw.article.content;
                 this.title = data.raw.article.title;
                 this.summary = data.raw.article.summary || '这个文章没有简介，呜呜';
                 this.createUser = data.raw.user.username;
-                console.log(this.createUser);
                 this.createUserAvatar = data.raw.user.avatar_url;
                 this.createUserDomain = data.raw.user.domain;
                 this.tags = data.raw.article.tags;
                 this.createUserIntro = data.raw.user.introduce;
-                this.createTime = new Date(data.raw.article.create_time * 1000).toLocaleTimeString();
-                this.recommends = data.raw.recommend;
+                this.createTime = new Date(data.raw.article.create_time).toLocaleDateString("en-US");
+                this.stars = data.raw.article.stars;
                 this.stared = data.raw.stared.toString();
             } else if (data.code === 400) {
                 toastr.warning(data.meta);

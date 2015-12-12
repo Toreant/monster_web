@@ -38,26 +38,20 @@ class Star extends React.Component {
     }
 
     render() {
-        let StarBtn;
+        let stared = '',option = 0;
+
         if(this.props.stared === 'true' || this.state.stared ) {
-            StarBtn = (
-                <a href="javascript:;" className='btn btn-danger'
-                   onClick={this.handleClick.bind(this,1)}>
-                    <span className='fa fa-star-o'>取消收藏</span>
-                </a>
-            );
-        } else {
-            StarBtn = (
-                <a href="javascript:;" className='btn btn-primary'
-                   onClick={this.handleClick.bind(this,0)}>
-                    <span className='fa fa-star'>收藏</span>
-                </a>
-            );
+            stared = 'mon-stared';
+            option = 1;
         }
+
         return (
-            <div className='mon-star'>
-                {StarBtn}
+            <div className="mon-star">
+                <a id="substitute" href="javascript:;" className={'fa fa-heart-o animated '+stared}
+                   onClick={this.handleClick.bind(this,option)}>
+                </a>
             </div>
+
         );
     }
 }

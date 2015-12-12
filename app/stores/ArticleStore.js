@@ -16,25 +16,26 @@ class ArticleStore　{
         this.createUserDomain = '';
         this.createUserIntro = '';
         this.tags = [];
-        this.recommends = [];
+        this.stars = 0;
         this.stared = 'false';
     }
 
     onGetArticleSuccess(data) {
         if(data.code === 200) {
+
             this.article = true;
             this.content = data.raw.article.content;
             this.title = data.raw.article.title;
             this.summary = data.raw.article.summary || '这个文章没有简介，呜呜';
             this.createUser = data.raw.user.username;
-            console.log(this.createUser);
             this.createUserAvatar = data.raw.user.avatar_url;
             this.createUserDomain = data.raw.user.domain;
             this.tags = data.raw.article.tags;
             this.createUserIntro = data.raw.user.introduce;
-            this.createTime = new Date(data.raw.article.create_time*1000).toLocaleTimeString();
-            this.recommends = data.raw.recommend;
+            this.createTime = new Date(data.raw.article.create_time).toLocaleDateString("en-US");
+            this.stars = data.raw.article.stars;
             this.stared = data.raw.stared.toString();
+
         } else if(data.code === 400) {
             toastr.warning(data.meta);
         } else if(data.code === 500) {

@@ -1,3 +1,7 @@
+a {
+  outline: 0 !important;
+}
+
 .mon-app {
   min-height: 100vh;
   display: flex;
@@ -10,6 +14,16 @@
 @media screen and (max-width: 700px) {
   .mon-app>div {
     max-width: 100%;
+  }
+}
+
+.mon-stared {
+  color: #BD362F !important;
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+    opacity: 0.6;
   }
 }
 
@@ -60,8 +74,22 @@
   }
 }
 
+// 收藏相关
 .mon-star {
-  text-align: center;
+  display: inline-block;
+  &>a {
+    margin: 0;
+  }
+}
+
+.mon-substitute {
+  font-size: 1.2rem;
+}
+
+.mon-star .mon-fadeOut {
+  font-size: 1.2rem;
+  transform: translate(0,30px);
+  transition: all linear 0.2s;
 }
 
 .mon-padding {
@@ -347,7 +375,7 @@
 
 .mon-vcard-stats .mon-link {
   display: inline-block;
-  padding: 10px 10px;
+  padding: 10px 5px;
   color: #00b3ee;
   text-decoration: none;
   font-weight: 500;
