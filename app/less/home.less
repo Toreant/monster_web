@@ -104,3 +104,73 @@
   border-left: 5px solid #0b97c4;
   font-size: 1.5rem;
 }
+
+/* 天气预报 */
+.mon-weather {
+  width: 100%;
+}
+
+.mon-weather-title {
+  position: relative;
+  background: #00b3ee;
+  padding: 5px 10px;
+  color: #fff;
+  &>span {
+    position: absolute;
+    top: 5px;
+    left : 10px;
+  }
+  &>p {
+    margin: 0;
+  }
+}
+
+.mon-weather-content {
+  background: #F0F8FF;
+
+  &>img {
+    display: block;
+    margin: auto;
+  }
+
+  &>p {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #2C2C2C;
+    &>span {
+      margin: 0 10px;
+    }
+  }
+}
+
+/* 定位 */
+.mon-location {
+  color: #1d7db1;
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+    color: #c0c0c0;
+  }
+}
+
+/* 错误刷新 */
+.mon-error {
+  display: table;
+  width: 100%;
+  height: 100px;
+
+  &>a {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    color: #2C2C2C;
+
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: none;
+      color: #c0c0c0;
+    }
+  }
+}

@@ -6,6 +6,7 @@ import HomeActions from '../actions/HomeActions';
 import HomeStore from '../stores/HomeStore';
 import Carousel from './Carousel';
 import Loading from './Loading';
+import Weather from './Weather';
 import {Link} from 'react-router';
 
 class Home extends React.Component {
@@ -102,6 +103,9 @@ class Home extends React.Component {
                 <div className="raw clearfix mon-section">
                     <div className="col-md-8">
                         <Carousel />
+                    </div>
+                    <div className="col-md-4">
+                        <Weather />
                     </div>
                 </div>
                 <div className="raw clearfix mon-section">

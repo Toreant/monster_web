@@ -15,6 +15,7 @@ import multipart from 'connect-multiparty';
 import SearchCtrl from './controllers/Search';
 import AnimateCtrl from './controllers/Animate';
 import NoticeCtrl from './controllers/Notice';
+import Helper from './controllers/Helper';
 var resumable = require('./middleware/resumable-node');
 
 var upload = multer({dest : './public/music'});
@@ -139,5 +140,8 @@ router.get('/api/notices',auth.isAuth,NoticeCtrl.getNotice);
 router.get('/api/notice/:id',auth.isAuth,NoticeCtrl.viewNotice);
 
 router.post('/api/notice',auth.isAuth,NoticeCtrl.postNotice);
+
+// 帮组
+router.get('/api/weather',Helper.getWeather);
 
 export default router;
