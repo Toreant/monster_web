@@ -1,6 +1,7 @@
 /**
  * Created by apache on 15-10-25.
  */
+require("babel-register");
 class auth {
 
     // 是否登陆
