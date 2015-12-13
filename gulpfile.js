@@ -33,7 +33,7 @@ gulp.task('vendor', function() {
     return gulp.src([
         'bower_components/jquery/dist/jquery.js',
         'bower_components/bootstrap/dist/js/bootstrap.js',
-        'bower_components/toastr/toastr.js',
+        'bower_components/toastr/toastr.js'
     ]).pipe(concat('vendor.js'))
         .pipe(uglify({ mangle: false }))
         .pipe(gulp.dest('public/js'));

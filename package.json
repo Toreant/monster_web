@@ -47,6 +47,8 @@
     "swig": "^1.4.2"
   },
   "devDependencies": {
+    "babel-core": "^6.3.17",
+    "babel-loader": "^6.2.0",
     "babelify": "^6.4.0",
     "browserify": "^11.2.0",
     "gulp": "^3.9.0",
@@ -60,8 +62,10 @@
     "gulp-streamify": "^1.0.2",
     "gulp-uglify": "^1.4.2",
     "gulp-util": "^3.0.7",
+    "jsx-loader": "^0.13.2",
     "vinyl-source-stream": "^1.1.0",
     "vinyl-transform": "^1.0.0",
-    "watchify": "^3.4.0"
+    "watchify": "^3.4.0",
+    "webpack": "^1.12.9"
   }
 }

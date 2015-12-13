@@ -15,7 +15,6 @@ class Search {
         let what = req.body.what,
             option = req.body.option,
             where = new RegExp(what);
-        console.log(what);
 
         let result = {
             meta : '',

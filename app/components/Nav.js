@@ -79,8 +79,8 @@ class Nav extends React.Component {
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <a href="/" className='navbar-brand'>
-                            <span className='icon-name'>Monster</span>
+                        <a href="/" className='navbar-brand icon-name'>
+                            Monster
                         </a>
                     </div>
                     <div className='collapse navbar-collapse' id='my-nav'>
