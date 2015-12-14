@@ -56,6 +56,19 @@ module.exports = {
     ]
 };
 ```  
+
+
+我还可以在gulp中配置，对gulpfile.js进行修改　
+
+```[javascript]
+gulp.task('webpack',function() {
+    return gulp.src(['app/main.js'])
+        .pipe(webpack(require('./webpack.config.js')))
+        .pipe(gulpif(production , uglify({mangle : false})))
+        .pipe(gulp.dest('public/js'));
+});
+```
+
 ####　解析　　
 - entry 实体的入口文件，common 公共模块的名字　　
 
