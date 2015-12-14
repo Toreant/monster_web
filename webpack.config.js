@@ -2,32 +2,39 @@
  * Created by apache on 15-12-13.
  */
 var webpack = require('webpack');
-var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
+var path  = require('path');
+var commonsPlugin = webpack.optimize.CommonsChunkPlugin;
 
 module.exports = {
     entry: {
-        entry1: ['./app/routes.js','./app/main.js']
+        bundle: [path.resolve(__dirname, 'app/main.js')],
+        common : ['alt','react','react-router','react-dom','underscore']
     },
     output: {
-        path: __dirname+'/public/js',
-        filename: '[name].entry.js'
+        path: path.resolve(__dirname, 'build'),
+        filename: '[name].test.js'
     },
     resolve: {
         extensions: ['', '.js', '.jsx']
     },
-    externals: {
-        'react' : 'react',
-        'react-router' : 'react-router'
-    },
     module: {
-        loaders: [{
-            test: /\.js$/,
-            exclude: /node_modules/, loader: "babel-loader"
-        }, {
-            test: /\.jsx?$/,
-            exclude : /node_modules/,
-            loader: 'babel-loader!jsx-loader?harmony'
-        }]
+        loaders: [
+            {
+                test: /.jsx?$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/,
+                query: {
+                    presets: ['es2015', 'react']
+                }
+            }
+        ]
     },
-    plugins: [commonsPlugin]
+    devtool: false,
+    plugins: [
+        new commonsPlugin({
+            name : 'common',
+            filename : 'common.js',
+            minChunks : 3
+        })
+    ]
 };

@@ -1,18 +1,13 @@
 var gulp = require('gulp');
-var gutil = require('gulp-util');
 var gulpif = require('gulp-if');
-var streamify = require('gulp-streamify');
 var autoprefixer = require('gulp-autoprefixer');
 var cssmin = require('gulp-cssmin');
 var less = require('gulp-less');
 var concat = require('gulp-concat');
 var plumber = require('gulp-plumber');
-var source = require('vinyl-source-stream');
-var babelify = require('babelify');
-var browserify = require('browserify');
-var watchify = require('watchify');
 var uglify = require('gulp-uglify');
 var mocha = require('gulp-mocha');
+var webpack = require('gulp-webpack');
 
 var production = process.env.NODE_ENV === 'production';
 
@@ -44,54 +39,68 @@ gulp.task('vendor', function() {
  | Compile third-party dependencies separately for faster performance.
  |--------------------------------------------------------------------------
  */
-gulp.task('browserify-vendor', function() {
-    return browserify()
-        .require(dependencies)
-        .bundle()
-        .pipe(source('vendor.bundle.js'))
-        .pipe(streamify(uglify({ mangle: false })))
-        .pipe(gulp.dest('public/js'));
-});
+//gulp.task('browserify-vendor', function() {
+//    return browserify()
+//        .require(dependencies)
+//        .bundle()
+//        .pipe(source('vendor.bundle.js'))
+//        .pipe(streamify(uglify({ mangle: false })))
+//        .pipe(gulp.dest('public/js'));
+//});
+//
+///*
+// |--------------------------------------------------------------------------
+// | Compile only project files, excluding all third-party dependencies.
+// |--------------------------------------------------------------------------
+// */
+//gulp.task('browserify', ['browserify-vendor'], function() {
+//    return browserify('app/main.js')
+//        .external(dependencies)
+//        .transform(babelify)
+//        .bundle()
+//        .pipe(source('bundle.js'))
+//        .pipe(gulpif(production, streamify(uglify({ mangle: false }))))
+//        .pipe(gulp.dest('public/js'));
+//});
+//
+///*
+// |--------------------------------------------------------------------------
+// | Same as browserify task, but will also watch for changes and re-compile.
+// |--------------------------------------------------------------------------
+// */
+//gulp.task('browserify-watch', ['browserify-vendor'], function() {
+//    var bundler = watchify(browserify('app/main.js', watchify.args));
+//    bundler.external(dependencies);
+//    bundler.transform(babelify);
+//    bundler.on('update', rebundle);
+//    return rebundle();
+//
+//    function rebundle() {
+//        var start = Date.now();
+//        return bundler.bundle()
+//            .on('error', function(err) {
+//                gutil.log(gutil.colors.red(err.toString()));
+//            })
+//            .on('end', function() {
+//                gutil.log(gutil.colors.green('Finished rebundling in', (Date.now() - start) + 'ms.'));
+//            })
+//            .pipe(source('bundle.js'))
+//            .pipe(gulp.dest('public/js/'));
+//    }
+//});
 
 /*
- |--------------------------------------------------------------------------
- | Compile only project files, excluding all third-party dependencies.
- |--------------------------------------------------------------------------
+ | build the app
  */
-gulp.task('browserify', ['browserify-vendor'], function() {
-    return browserify('app/main.js')
-        .external(dependencies)
-        .transform(babelify)
-        .bundle()
-        .pipe(source('bundle.js'))
-        .pipe(gulpif(production, streamify(uglify({ mangle: false }))))
-        .pipe(gulp.dest('public/js'));
-});
-
-/*
- |--------------------------------------------------------------------------
- | Same as browserify task, but will also watch for changes and re-compile.
- |--------------------------------------------------------------------------
- */
-gulp.task('browserify-watch', ['browserify-vendor'], function() {
-    var bundler = watchify(browserify('app/main.js', watchify.args));
-    bundler.external(dependencies);
-    bundler.transform(babelify);
-    bundler.on('update', rebundle);
-    return rebundle();
-
-    function rebundle() {
-        var start = Date.now();
-        return bundler.bundle()
-            .on('error', function(err) {
-                gutil.log(gutil.colors.red(err.toString()));
-            })
-            .on('end', function() {
-                gutil.log(gutil.colors.green('Finished rebundling in', (Date.now() - start) + 'ms.'));
-            })
-            .pipe(source('bundle.js'))
-            .pipe(gulp.dest('public/js/'));
-    }
+gulp.task('webpack',function() {
+    return gulp.src(['app/main.js','alt',
+            'react',
+            'react-dom',
+            'react-router',
+            'underscore'])
+        .pipe(webpack(require('./webpack.config.js')))
+        //.pipe(uglify({mangle : false}))
+        .pipe(gulp.dest('build/'));
 });
 
 /*
@@ -127,7 +136,8 @@ gulp.task('mocha',function() {
 gulp.task('watch', function() {
     gulp.watch('app/less/**/*.less', ['styles']);
     gulp.watch('public/css/app/*.css',['concat']);
+    gulp.watch(['app/*.js','app/**/*.js'],['webpack']);
 });
 
-gulp.task('default', ['styles', 'vendor', 'browserify-watch', 'watch']);
-gulp.task('build', ['styles', 'vendor', 'browserify']);
+gulp.task('default', ['styles', 'vendor', 'webpack', 'watch']);
+gulp.task('build', ['styles', 'vendor', 'webpack']);
