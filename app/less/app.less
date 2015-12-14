@@ -4,6 +4,7 @@ a {
 
 .mon-app {
   min-height: 100vh;
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
   & > div {
@@ -102,11 +103,17 @@ a {
 }
 
 .mon-nav {
-  background-color: rgba(250,250,250,0.6) !important;
+  position: relative;
+  background-color: rgba(250,250,250,1);
+  z-index: 9000;
 }
 
 .mon-subnav {
   text-align: center;
+}
+
+.mon-user-nav {
+  padding: 10px 15px !important;
 }
 
 .mon-subnav img {
@@ -262,6 +269,10 @@ a {
 
 .shake {
   animation-name: shake;
+}
+
+.search-btn {
+  color: #2C2C2C !important;
 }
 
 /* 搜索按钮样式 */

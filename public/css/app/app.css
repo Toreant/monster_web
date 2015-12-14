@@ -3,6 +3,7 @@ a {
 }
 .mon-app {
   min-height: 100vh;
+  margin-top: 60px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -109,10 +110,15 @@ a {
   font-size: 30px;
 }
 .mon-nav {
-  background-color: rgba(250, 250, 250, 0.6) !important;
+  position: relative;
+  background-color: #fafafa;
+  z-index: 9000;
 }
 .mon-subnav {
   text-align: center;
+}
+.mon-user-nav {
+  padding: 10px 15px !important;
 }
 .mon-subnav img {
   border-radius: 50%;
@@ -378,6 +384,9 @@ a {
 .shake {
   -webkit-animation-name: shake;
           animation-name: shake;
+}
+.search-btn {
+  color: #2C2C2C !important;
 }
 /* 搜索按钮样式 */
 @media screen and (min-width: 450px) {

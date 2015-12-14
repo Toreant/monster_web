@@ -7,6 +7,7 @@ class ArticleStore　{
     constructor() {
         this.bindActions(ArticleActions);
         this.article = false;
+        this.abbreviations = '';
         this.content;
         this.title = '';
         this.summary = '';
@@ -24,6 +25,7 @@ class ArticleStore　{
         if(data.code === 200) {
 
             this.article = true;
+            this.abbreviations = data.raw.article.abbreviations || '/img/abbreviations.png';
             this.content = data.raw.article.content;
             this.title = data.raw.article.title;
             this.summary = data.raw.article.summary || '这个文章没有简介，呜呜';

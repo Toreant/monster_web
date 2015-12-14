@@ -281,55 +281,55 @@ webpackJsonp([0],[
 
 	var _PostAnimate2 = _interopRequireDefault(_PostAnimate);
 
-	var _PostMusic = __webpack_require__(258);
+	var _PostMusic = __webpack_require__(259);
 
 	var _PostMusic2 = _interopRequireDefault(_PostMusic);
 
-	var _PostArticle = __webpack_require__(261);
+	var _PostArticle = __webpack_require__(262);
 
 	var _PostArticle2 = _interopRequireDefault(_PostArticle);
 
-	var _ProfileCenter = __webpack_require__(269);
+	var _ProfileCenter = __webpack_require__(270);
 
 	var _ProfileCenter2 = _interopRequireDefault(_ProfileCenter);
 
-	var _Follow = __webpack_require__(272);
+	var _Follow = __webpack_require__(273);
 
 	var _Follow2 = _interopRequireDefault(_Follow);
 
-	var _Contribute = __webpack_require__(278);
+	var _Contribute = __webpack_require__(279);
 
 	var _Contribute2 = _interopRequireDefault(_Contribute);
 
-	var _Article = __webpack_require__(281);
+	var _Article = __webpack_require__(282);
 
 	var _Article2 = _interopRequireDefault(_Article);
 
-	var _List = __webpack_require__(291);
+	var _List = __webpack_require__(292);
 
 	var _List2 = _interopRequireDefault(_List);
 
-	var _Member = __webpack_require__(294);
+	var _Member = __webpack_require__(295);
 
 	var _Member2 = _interopRequireDefault(_Member);
 
-	var _ConArticle = __webpack_require__(300);
+	var _ConArticle = __webpack_require__(301);
 
 	var _ConArticle2 = _interopRequireDefault(_ConArticle);
 
-	var _Music = __webpack_require__(304);
+	var _Music = __webpack_require__(305);
 
 	var _Music2 = _interopRequireDefault(_Music);
 
-	var _MemberCenter = __webpack_require__(307);
+	var _MemberCenter = __webpack_require__(308);
 
 	var _MemberCenter2 = _interopRequireDefault(_MemberCenter);
 
-	var _MemberFollow = __webpack_require__(308);
+	var _MemberFollow = __webpack_require__(309);
 
 	var _MemberFollow2 = _interopRequireDefault(_MemberFollow);
 
-	var _Animate = __webpack_require__(311);
+	var _Animate = __webpack_require__(312);
 
 	var _Animate2 = _interopRequireDefault(_Animate);
 
@@ -514,7 +514,7 @@ webpackJsonp([0],[
 
 	var _NavActions2 = _interopRequireDefault(_NavActions);
 
-	var _NavStore = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../stores/NavStore\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _NavStore = __webpack_require__(217);
 
 	var _NavStore2 = _interopRequireDefault(_NavStore);
 
@@ -584,7 +584,7 @@ webpackJsonp([0],[
 	                        { className: 'dropdown' },
 	                        _react2.default.createElement(
 	                            'a',
-	                            { href: '#', className: 'dropdown-toggle', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
+	                            { href: '#', className: 'mon-user-nav dropdown-toggle', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
 	                            _react2.default.createElement('img', { src: this.state.avatar, width: '30', alt: 'loading' }),
 	                            ' ',
 	                            _react2.default.createElement('span', { className: 'caret' }),
@@ -668,7 +668,7 @@ webpackJsonp([0],[
 	            }
 	            return _react2.default.createElement(
 	                'nav',
-	                { className: 'navbar navbar-default mon-nav', id: 'mon-fixed-nav' },
+	                { className: 'navbar navbar-default navbar-fixed-top mon-nav', id: 'mon-fixed-nav' },
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'container' },
@@ -689,12 +689,8 @@ webpackJsonp([0],[
 	                        ),
 	                        _react2.default.createElement(
 	                            'a',
-	                            { href: '/', className: 'navbar-brand' },
-	                            _react2.default.createElement(
-	                                'span',
-	                                { className: 'icon-name' },
-	                                'Monster'
-	                            )
+	                            { href: '/', className: 'navbar-brand icon-name' },
+	                            'Monster'
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -894,7 +890,113 @@ webpackJsonp([0],[
 /* 214 */,
 /* 215 */,
 /* 216 */,
-/* 217 */,
+/* 217 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-10-25.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	var _NavActions = __webpack_require__(203);
+
+	var _NavActions2 = _interopRequireDefault(_NavActions);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var NavStore = (function () {
+	    function NavStore() {
+	        _classCallCheck(this, NavStore);
+
+	        this.bindActions(_NavActions2.default);
+	        this.loginState = false;
+	        this.userName = '';
+	        this.avatar = '';
+	        this.search = '';
+	    }
+
+	    _createClass(NavStore, [{
+	        key: 'onChangeState',
+	        value: function onChangeState(data) {
+	            this.loginState = true;
+	            this.userName = data.username;
+	            this.avatar = data._json === undefined ? data.avatar_url : data._json.avatar_url;
+	            this.domain = data._json === undefined ? data.domain : data._json.username;
+	        }
+	    }, {
+	        key: 'onCheckLoginSuccess',
+	        value: function onCheckLoginSuccess(data) {
+	            if (data.code === 200) {
+	                this.onChangeState(data.raw);
+	            }
+	        }
+	    }, {
+	        key: 'onCheckLoginFail',
+	        value: function onCheckLoginFail() {
+	            toastr.error("服务器错误");
+	        }
+	    }, {
+	        key: 'onSignOutSuccess',
+	        value: function onSignOutSuccess(data) {
+	            if (data.code === 200) {
+	                var localStorage = window.localStorage,
+	                    sessionStorage = window.sessionStorage;
+
+	                // 设置数据归零
+	                localStorage.setItem('user', null);
+	                sessionStorage.setItem('profile', null);
+
+	                window.location = '/';
+	            } else if (data.code === 400) {
+	                toastr.error('退出不成功');
+	            } else if (data.code === 406) {
+	                toastr.warning('你还没登陆');
+	            }
+	        }
+	    }, {
+	        key: 'onSignOutFail',
+	        value: function onSignOutFail() {
+	            toastr.error("服务器错误");
+	        }
+	    }, {
+	        key: 'onGetProfileLocal',
+	        value: function onGetProfileLocal(data) {
+	            this.loginState = true;
+	            this.userName = data.username;
+	            this.avatar = data._json === undefined ? data.avatar_url : data._json.avatar_url;
+	            this.domain = data._json === undefined ? data.domain : data._json.username;
+	        }
+	    }, {
+	        key: 'onChangeSearch',
+	        value: function onChangeSearch(event) {
+	            console.log('hehe');
+	            this.search = event.target.value;
+	            console.log(this.search);
+	        }
+	    }, {
+	        key: 'onSearchSuccess',
+	        value: function onSearchSuccess(data) {
+	            console.log(data);
+	        }
+	    }]);
+
+	    return NavStore;
+	})();
+
+	exports.default = _alt2.default.createStore(NavStore);
+
+/***/ },
 /* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -910,11 +1012,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _NoticePointActions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../actions/NoticePointActions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _NoticePointActions = __webpack_require__(219);
 
 	var _NoticePointActions2 = _interopRequireDefault(_NoticePointActions);
 
-	var _NoticePointStore = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../stores/NoticePointStore\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _NoticePointStore = __webpack_require__(220);
 
 	var _NoticePointStore2 = _interopRequireDefault(_NoticePointStore);
 
@@ -975,8 +1077,113 @@ webpackJsonp([0],[
 	exports.default = NoticePoint;
 
 /***/ },
-/* 219 */,
-/* 220 */,
+/* 219 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-12-5.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var NoticePointActions = (function () {
+	    function NoticePointActions() {
+	        _classCallCheck(this, NoticePointActions);
+
+	        this.generateActions('getNoticesSuccess', 'getNoticesFail');
+	    }
+
+	    _createClass(NoticePointActions, [{
+	        key: 'getNotices',
+	        value: function getNotices() {
+	            var _this = this;
+
+	            $.ajax({
+	                url: '/api/notices',
+	                type: 'get',
+	                cache: false,
+	                contentType: 'application/json;charset=utf-8'
+	            }).done(function (data) {
+	                _this.actions.getNoticesSuccess(data);
+	            }).fail(function () {
+	                _this.actions.getNoticesFail();
+	            });
+	        }
+	    }]);
+
+	    return NoticePointActions;
+	})();
+
+	exports.default = _alt2.default.createActions(NoticePointActions);
+
+/***/ },
+/* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-12-5.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	var _NoticePointActions = __webpack_require__(219);
+
+	var _NoticePointActions2 = _interopRequireDefault(_NoticePointActions);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var NoticePointStore = (function () {
+	    function NoticePointStore() {
+	        _classCallCheck(this, NoticePointStore);
+
+	        this.bindActions(_NoticePointActions2.default);
+	        this.count = 0;
+	    }
+
+	    _createClass(NoticePointStore, [{
+	        key: 'onGetNoticesSuccess',
+	        value: function onGetNoticesSuccess(data) {
+	            if (data.code === 200) {
+	                this.count = data.raw.length;
+	            } else if (data.code === 500) {
+	                toastr.warning('获取通知失败');
+	            }
+	        }
+	    }, {
+	        key: 'onGetNoticesFail',
+	        value: function onGetNoticesFail() {
+	            toastr.warning('获取通知失败');
+	        }
+	    }]);
+
+	    return NoticePointStore;
+	})();
+
+	exports.default = _alt2.default.createStore(NoticePointStore);
+
+/***/ },
 /* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -1811,11 +2018,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _WeatherActions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../actions/WeatherActions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _WeatherActions = __webpack_require__(231);
 
 	var _WeatherActions2 = _interopRequireDefault(_WeatherActions);
 
-	var _WeatherStore = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../stores/WeatherStore\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _WeatherStore = __webpack_require__(232);
 
 	var _WeatherStore2 = _interopRequireDefault(_WeatherStore);
 
@@ -1950,8 +2157,118 @@ webpackJsonp([0],[
 	exports.default = Weather;
 
 /***/ },
-/* 231 */,
-/* 232 */,
+/* 231 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-12-11.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var WeatherActions = (function () {
+	    function WeatherActions() {
+	        _classCallCheck(this, WeatherActions);
+
+	        this.generateActions('getWeatherSuccess');
+	    }
+
+	    _createClass(WeatherActions, [{
+	        key: 'getWeather',
+	        value: function getWeather() {
+	            var _this = this;
+
+	            $.ajax({
+	                url: '/api/weather',
+	                type: 'get',
+	                cache: false,
+	                contentType: 'application/json;charset=utf-8'
+	            }).done(function (data) {
+	                _this.actions.getWeatherSuccess(data);
+	            }).fail(function () {
+	                toastr.warning('获取天气失败');
+	            });
+	        }
+	    }]);
+
+	    return WeatherActions;
+	})();
+
+	exports.default = _alt2.default.createActions(WeatherActions);
+
+/***/ },
+/* 232 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-12-11.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	var _WeatherActions = __webpack_require__(231);
+
+	var _WeatherActions2 = _interopRequireDefault(_WeatherActions);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var WeatherStore = (function () {
+	    function WeatherStore() {
+	        _classCallCheck(this, WeatherStore);
+
+	        this.bindActions(_WeatherActions2.default);
+	        this.loading = true;
+	        this.error = false;
+	        this.weather = null;
+	        this.city = '北京';
+	    }
+
+	    _createClass(WeatherStore, [{
+	        key: 'onGetWeatherSuccess',
+	        value: function onGetWeatherSuccess(data) {
+	            this.loading = false;
+
+	            if (data.code === 200) {
+	                this.city = data.raw.city;
+	                this.weather = data.raw.weather;
+	            } else if (data.code === 404) {
+	                this.error = true;
+	                toastr.warning(data.meta);
+	            } else {
+	                this.error = true;
+	                toastr.warning('查询天气失败');
+	            }
+	        }
+	    }]);
+
+	    return WeatherStore;
+	})();
+
+	exports.default = _alt2.default.createStore(WeatherStore);
+
+/***/ },
 /* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -3410,11 +3727,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _UploadActions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../actions/UploadActions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _UploadActions = __webpack_require__(243);
 
 	var _UploadActions2 = _interopRequireDefault(_UploadActions);
 
-	var _UploadStore = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../stores/UploadStore\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _UploadStore = __webpack_require__(244);
 
 	var _UploadStore2 = _interopRequireDefault(_UploadStore);
 
@@ -3555,8 +3872,218 @@ webpackJsonp([0],[
 	exports.default = Upload;
 
 /***/ },
-/* 243 */,
-/* 244 */,
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-11-22.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	var _underscore = __webpack_require__(228);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function uploadLoad(option) {
+	    if (option === 0) {
+	        $("#loader").removeClass('mon-loader').addClass('mon-loader-o');
+	    } else {
+	        $("#loader").removeClass('mon-loader-o').addClass('mon-loader');
+	    }
+	}
+
+	var UploadActions = (function () {
+	    function UploadActions() {
+	        _classCallCheck(this, UploadActions);
+
+	        this.generateActions('changeFile');
+	    }
+
+	    _createClass(UploadActions, [{
+	        key: 'upload',
+	        value: function upload(target, preImg) {
+	            var _this = this;
+
+	            uploadLoad(0);
+
+	            // 裁剪时的图片大小
+	            var $tracker = $(".jcrop-holder img");
+	            var raw_width = $tracker.css('width'),
+	                raw_height = $tracker.css('height');
+	            raw_width = raw_width.split('p')[0];
+	            raw_height = raw_height.split('p')[0];
+
+	            var formData = new FormData(),
+	                params = {
+	                width: $("#upload_img_width").val() || raw_width,
+	                height: $("#upload_img_height").val() || raw_height,
+	                X: $("#upload_img_X").val() || 0,
+	                Y: $("#upload_img_Y").val() || 0,
+	                raw_width: raw_width,
+	                raw_height: raw_height
+	            };
+	            formData.append('file', target);
+	            formData.append('params', JSON.stringify(params));
+
+	            $.ajax({
+	                url: '/api/upload',
+	                contentType: false,
+	                type: 'post',
+	                cache: false,
+	                dataType: 'json',
+	                processData: false,
+	                timeout: 10000,
+	                data: formData
+	            }).success(function (data) {
+	                _this.actions.uploadSuccess(data, preImg);
+	            }).fail(function () {
+	                toastr.error('上传图片不成功');
+	            }).error(function () {
+	                toastr.warning('上传时间超时');
+	                uploadLoad(1);
+	            });
+	        }
+	    }, {
+	        key: 'uploadSuccess',
+	        value: function uploadSuccess(data, preImg) {
+	            uploadLoad(1);
+	            this.actions.uploadSuccessAfter();
+	            if (data.code === 200) {
+	                $(preImg).attr('src', '/img/upload/' + data.raw);
+	                $(preImg + '_value').val('/img/upload/' + data.raw);
+	                //$(preImg+'_width').val(width);
+	                //$(preImg+'_height').val(height);
+	                //$(preImg+'_X').val(X);
+	                //$(preImg+'_Y').val(Y);
+	            } else {
+	                    toastr.warning('上传图片不成功');
+	                }
+	        }
+	    }, {
+	        key: 'uploadSuccessAfter',
+	        value: function uploadSuccessAfter() {
+	            $("#file_loader").removeClass('mon-upload-block-o').addClass('mon-upload-block');
+	            $("#file_loader_file").removeClass('mon-upload-o').addClass('mon-upload');
+	            $("#preview_block").removeClass('mon-preview-block-o').addClass('mon-preview-block');
+	        }
+	    }]);
+
+	    return UploadActions;
+	})();
+
+	exports.default = _alt2.default.createActions(UploadActions);
+
+/***/ },
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-11-22.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	var _UploadActions = __webpack_require__(243);
+
+	var _UploadActions2 = _interopRequireDefault(_UploadActions);
+
+	var _underscore = __webpack_require__(228);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var UploadStore = (function () {
+	    function UploadStore() {
+	        _classCallCheck(this, UploadStore);
+
+	        this.bindActions(_UploadActions2.default);
+	        this.file = {};
+	        this.croper = {};
+
+	        // 保存参数的块
+	        this.width = '';
+	        this.height = '';
+	        this.X = '';
+	        this.Y = '';
+	    }
+
+	    _createClass(UploadStore, [{
+	        key: 'onChangeFile',
+	        value: function onChangeFile(event) {
+	            var _this = this;
+
+	            var target = this.file = event.target.files[0];
+	            console.log(target);
+	            var croper,
+	                isChange = false;
+
+	            $("#file_loader_file").removeClass('mon-upload').addClass('mon-upload-o');
+	            $("#preview_block").removeClass('mon-preview-block').addClass('mon-preview-block-o');
+
+	            if ((typeof FileReader === 'undefined' ? 'undefined' : _typeof(FileReader)) !== undefined) {
+	                var acceptType = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
+
+	                if (_underscore2.default.indexOf(acceptType, target.type) !== -1) {
+	                    var fileReader = new FileReader(),
+	                        result;
+	                    fileReader.readAsDataURL(target);
+	                    fileReader.onload = function (e) {
+	                        result = e.target.result;
+	                        $("#img-preview").attr('src', result).Jcrop({
+	                            onChange: function onChange(event) {
+	                                $("#upload_img_width").val(event.w);
+	                                $("#upload_img_height").val(event.h);
+	                                $("#upload_img_X").val(event.x);
+	                                $("#upload_img_Y").val(event.y);
+	                            }
+	                        }, function () {
+	                            croper = this;
+	                            isChange = true;
+	                        });
+	                        if (isChange) {
+	                            _this.croper = croper;
+	                        }
+	                        _this.croper.setImage(result); // 设置图片
+	                    };
+	                } else {
+	                        toastr.warning('不支持的图片格式');
+	                    }
+	            }
+	        }
+	    }]);
+
+	    return UploadStore;
+	})();
+
+	exports.default = _alt2.default.createStore(UploadStore);
+
+/***/ },
 /* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -4599,11 +5126,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _BigUploadActions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../actions/BigUploadActions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _BigUploadActions = __webpack_require__(256);
 
 	var _BigUploadActions2 = _interopRequireDefault(_BigUploadActions);
 
-	var _BigUploadStore = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../stores/BigUploadStore\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _BigUploadStore = __webpack_require__(257);
 
 	var _BigUploadStore2 = _interopRequireDefault(_BigUploadStore);
 
@@ -4822,9 +5349,1164 @@ webpackJsonp([0],[
 	exports.default = BigUpload;
 
 /***/ },
-/* 256 */,
-/* 257 */,
+/* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-11-25.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var BgUploadActions = (function () {
+	    function BgUploadActions() {
+	        _classCallCheck(this, BgUploadActions);
+
+	        this.generateActions('postBgFileSuccess', 'changeFile');
+	    }
+
+	    _createClass(BgUploadActions, [{
+	        key: 'cancelPost',
+	        value: function cancelPost(identifier) {
+	            $.ajax({
+	                url: '/api/upload/music',
+	                type: 'delete',
+	                dataType: 'json',
+	                cache: false,
+	                data: { identifier: identifier }
+	            }).done(function (data) {
+	                if (data.code === 200) {
+	                    toastr.success(data.meta);
+	                }
+	            }).fail(function () {
+	                toastr.error('取消上传失败');
+	            });
+	        }
+	    }]);
+
+	    return BgUploadActions;
+	})();
+
+	exports.default = _alt2.default.createActions(BgUploadActions);
+
+/***/ },
+/* 257 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-11-25.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	var _BigUploadActions = __webpack_require__(256);
+
+	var _BigUploadActions2 = _interopRequireDefault(_BigUploadActions);
+
+	var _resumable = __webpack_require__(258);
+
+	var _resumable2 = _interopRequireDefault(_resumable);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var BigUploadStore = (function () {
+	    function BigUploadStore() {
+	        _classCallCheck(this, BigUploadStore);
+
+	        this.bindActions(_BigUploadActions2.default);
+	        this.file = {};
+	        this.r = new _resumable2.default({
+	            target: '/api/upload/music',
+	            chunkSize: 1 * 1024 * 1024,
+	            simultaneousUploads: 4,
+	            testChunks: false,
+	            throttleProgressCallbacks: 1,
+	            generateUniqueIdentifier: null
+	        });
+	        this.error = '';
+	    }
+
+	    _createClass(BigUploadStore, [{
+	        key: 'onChangeFile',
+	        value: function onChangeFile(event) {
+	            console.log(event.target.files);
+	            var target = this.file = event.target.files[0];
+	            console.log(target);
+	            var $upload = $("#upload"),
+	                accept_type = ['audio/mpeg', 'video/mp4'];
+	            if (_.indexOf(accept_type, this.file.type) === -1) {
+	                toastr.warning('不支持的格式');
+	                this.error = '不支持的格式';
+	            } else {
+	                this.error = '';
+	                var $fileLoader = $('#upload_file_loader');
+	                if (!$fileLoader.hasClass('mon-preview-block-o')) {
+	                    $("#upload_file_select").removeClass('mon-upload').addClass('mon-upload-o');
+	                    $fileLoader.removeClass('mon-preview-block').addClass('mon-preview-block-o');
+	                }
+	            }
+	        }
+	    }, {
+	        key: 'onPostBgFileSuccess',
+	        value: function onPostBgFileSuccess(data) {
+	            console.log(data);
+	        }
+	    }]);
+
+	    return BigUploadStore;
+	})();
+
+	exports.default = _alt2.default.createStore(BigUploadStore);
+
+/***/ },
 /* 258 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	/*
+	 * MIT Licensed
+	 * http://www.23developer.com/opensource
+	 * http://github.com/23/resumable.js
+	 * Steffen Tiedemann Christensen, steffen@23company.com
+	 */
+
+	(function () {
+	    "use strict";
+
+	    var Resumable = function Resumable(opts) {
+	        if (!(this instanceof Resumable)) {
+	            return new Resumable(opts);
+	        }
+	        this.version = 1.0;
+	        // SUPPORTED BY BROWSER?
+	        // Check if these features are support by the browser:
+	        // - File object type
+	        // - Blob object type
+	        // - FileList object type
+	        // - slicing files
+	        this.support = typeof File !== 'undefined' && typeof Blob !== 'undefined' && typeof FileList !== 'undefined' && (!!Blob.prototype.webkitSlice || !!Blob.prototype.mozSlice || !!Blob.prototype.slice || false);
+	        if (!this.support) return false;
+
+	        // PROPERTIES
+	        var $ = this;
+	        $.files = [];
+	        $.defaults = {
+	            chunkSize: 1 * 1024 * 1024,
+	            forceChunkSize: false,
+	            simultaneousUploads: 3,
+	            fileParameterName: 'file',
+	            throttleProgressCallbacks: 0.5,
+	            query: {},
+	            headers: {},
+	            preprocess: null,
+	            method: 'multipart',
+	            uploadMethod: 'POST',
+	            testMethod: 'GET',
+	            prioritizeFirstAndLastChunk: false,
+	            target: '/',
+	            parameterNamespace: '',
+	            testChunks: true,
+	            generateUniqueIdentifier: null,
+	            getTarget: null,
+	            maxChunkRetries: undefined,
+	            chunkRetryInterval: undefined,
+	            permanentErrors: [400, 404, 415, 500, 501],
+	            maxFiles: undefined,
+	            withCredentials: false,
+	            xhrTimeout: 0,
+	            maxFilesErrorCallback: function maxFilesErrorCallback(files, errorCount) {
+	                var maxFiles = $.getOpt('maxFiles');
+	                alert('Please upload no more than ' + maxFiles + ' file' + (maxFiles === 1 ? '' : 's') + ' at a time.');
+	            },
+	            minFileSize: 1,
+	            minFileSizeErrorCallback: function minFileSizeErrorCallback(file, errorCount) {
+	                alert(file.fileName || file.name + ' is too small, please upload files larger than ' + $h.formatSize($.getOpt('minFileSize')) + '.');
+	            },
+	            maxFileSize: undefined,
+	            maxFileSizeErrorCallback: function maxFileSizeErrorCallback(file, errorCount) {
+	                alert(file.fileName || file.name + ' is too large, please upload files less than ' + $h.formatSize($.getOpt('maxFileSize')) + '.');
+	            },
+	            fileType: [],
+	            fileTypeErrorCallback: function fileTypeErrorCallback(file, errorCount) {
+	                alert(file.fileName || file.name + ' has type not allowed, please upload files of type ' + $.getOpt('fileType') + '.');
+	            }
+	        };
+	        $.opts = opts || {};
+	        $.getOpt = function (o) {
+	            var $opt = this;
+	            // Get multiple option if passed an array
+	            if (o instanceof Array) {
+	                var options = {};
+	                $h.each(o, function (option) {
+	                    options[option] = $opt.getOpt(option);
+	                });
+	                return options;
+	            }
+	            // Otherwise, just return a simple option
+	            if ($opt instanceof ResumableChunk) {
+	                if (typeof $opt.opts[o] !== 'undefined') {
+	                    return $opt.opts[o];
+	                } else {
+	                    $opt = $opt.fileObj;
+	                }
+	            }
+	            if ($opt instanceof ResumableFile) {
+	                if (typeof $opt.opts[o] !== 'undefined') {
+	                    return $opt.opts[o];
+	                } else {
+	                    $opt = $opt.resumableObj;
+	                }
+	            }
+	            if ($opt instanceof Resumable) {
+	                if (typeof $opt.opts[o] !== 'undefined') {
+	                    return $opt.opts[o];
+	                } else {
+	                    return $opt.defaults[o];
+	                }
+	            }
+	        };
+
+	        // EVENTS
+	        // catchAll(event, ...)
+	        // fileSuccess(file), fileProgress(file), fileAdded(file, event), fileRetry(file), fileError(file, message),
+	        // complete(), progress(), error(message, file), pause()
+	        $.events = [];
+	        $.on = function (event, callback) {
+	            $.events.push(event.toLowerCase(), callback);
+	        };
+	        $.fire = function () {
+	            // `arguments` is an object, not array, in FF, so:
+	            var args = [];
+	            for (var i = 0; i < arguments.length; i++) {
+	                args.push(arguments[i]);
+	            } // Find event listeners, and support pseudo-event `catchAll`
+	            var event = args[0].toLowerCase();
+	            for (var i = 0; i <= $.events.length; i += 2) {
+	                if ($.events[i] == event) $.events[i + 1].apply($, args.slice(1));
+	                if ($.events[i] == 'catchall') $.events[i + 1].apply(null, args);
+	            }
+	            if (event == 'fileerror') $.fire('error', args[2], args[1]);
+	            if (event == 'fileprogress') $.fire('progress');
+	        };
+
+	        // INTERNAL HELPER METHODS (handy, but ultimately not part of uploading)
+	        var $h = {
+	            stopEvent: function stopEvent(e) {
+	                e.stopPropagation();
+	                e.preventDefault();
+	            },
+	            each: function each(o, callback) {
+	                if (typeof o.length !== 'undefined') {
+	                    for (var i = 0; i < o.length; i++) {
+	                        // Array or FileList
+	                        if (callback(o[i]) === false) return;
+	                    }
+	                } else {
+	                    for (i in o) {
+	                        // Object
+	                        if (callback(i, o[i]) === false) return;
+	                    }
+	                }
+	            },
+	            generateUniqueIdentifier: function generateUniqueIdentifier(file) {
+	                var custom = $.getOpt('generateUniqueIdentifier');
+	                if (typeof custom === 'function') {
+	                    return custom(file);
+	                }
+	                var relativePath = file.webkitRelativePath || file.fileName || file.name; // Some confusion in different versions of Firefox
+	                var size = file.size;
+	                return size + '-' + relativePath.replace(/[^0-9a-zA-Z_-]/img, '');
+	            },
+	            contains: function contains(array, test) {
+	                var result = false;
+
+	                $h.each(array, function (value) {
+	                    if (value == test) {
+	                        result = true;
+	                        return false;
+	                    }
+	                    return true;
+	                });
+
+	                return result;
+	            },
+	            formatSize: function formatSize(size) {
+	                if (size < 1024) {
+	                    return size + ' bytes';
+	                } else if (size < 1024 * 1024) {
+	                    return (size / 1024.0).toFixed(0) + ' KB';
+	                } else if (size < 1024 * 1024 * 1024) {
+	                    return (size / 1024.0 / 1024.0).toFixed(1) + ' MB';
+	                } else {
+	                    return (size / 1024.0 / 1024.0 / 1024.0).toFixed(1) + ' GB';
+	                }
+	            },
+	            getTarget: function getTarget(params) {
+	                var target = $.getOpt('target');
+	                if (typeof target === 'function') {
+	                    return target(params);
+	                }
+	                if (target.indexOf('?') < 0) {
+	                    target += '?';
+	                } else {
+	                    target += '&';
+	                }
+	                return target + params.join('&');
+	            }
+	        };
+
+	        var onDrop = function onDrop(event) {
+	            $h.stopEvent(event);
+
+	            //handle dropped things as items if we can (this lets us deal with folders nicer in some cases)
+	            if (event.dataTransfer && event.dataTransfer.items) {
+	                loadFiles(event.dataTransfer.items, event);
+	            }
+	            //else handle them as files
+	            else if (event.dataTransfer && event.dataTransfer.files) {
+	                    loadFiles(event.dataTransfer.files, event);
+	                }
+	        };
+	        var preventDefault = function preventDefault(e) {
+	            e.preventDefault();
+	        };
+
+	        // INTERNAL METHODS (both handy and responsible for the heavy load)
+	        /**
+	         * @summary This function loops over the files passed in from a drag and drop operation and gets them ready for appendFilesFromFileList
+	         *            It attempts to use FileSystem API calls to extract files and subfolders if the dropped items include folders
+	         *            That capability is only currently available in Chrome, but if it isn't available it will just pass the items along to
+	         *            appendFilesFromFileList (via enqueueFileAddition to help with asynchronous processing.)
+	         * @param files {Array} - the File or Entry objects to be processed depending on your browser support
+	         * @param event {Object} - the drop event object
+	         * @param [queue] {Object} - an object to keep track of our progress processing the dropped items
+	         * @param [path] {String} - the relative path from the originally selected folder to the current files if extracting files from subfolders
+	         */
+	        var loadFiles = function loadFiles(files, event, queue, path) {
+	            //initialize the queue object if it doesn't exist
+	            if (!queue) {
+	                queue = {
+	                    total: 0,
+	                    files: [],
+	                    event: event
+	                };
+	            }
+
+	            //update the total number of things we plan to process
+	            updateQueueTotal(files.length, queue);
+
+	            //loop over all the passed in objects checking if they are files or folders
+	            for (var i = 0; i < files.length; i++) {
+	                var file = files[i];
+	                var entry, reader;
+
+	                if (file.isFile || file.isDirectory) {
+	                    //this is an object we can handle below with no extra work needed up front
+	                    entry = file;
+	                } else if (file.getAsEntry) {
+	                    //get the file as an entry object if we can using the proposed HTML5 api (unlikely to get implemented by anyone)
+	                    entry = file.getAsEntry();
+	                } else if (file.webkitGetAsEntry) {
+	                    //get the file as an entry object if we can using the Chrome specific webkit implementation
+	                    entry = file.webkitGetAsEntry();
+	                } else if (typeof file.getAsFile === 'function') {
+	                    //if this is still a DataTransferItem object, get it as a file object
+	                    enqueueFileAddition(file.getAsFile(), queue, path);
+	                    //we just added this file object to the queue so we can go to the next object in the loop and skip the processing below
+	                    continue;
+	                } else if (File && file instanceof File) {
+	                    //this is already a file object so just queue it up and move on
+	                    enqueueFileAddition(file, queue, path);
+	                    //we just added this file object to the queue so we can go to the next object in the loop and skip the processing below
+	                    continue;
+	                } else {
+	                    //we can't do anything with this object, decrement the expected total and skip the processing below
+	                    updateQueueTotal(-1, queue);
+	                    continue;
+	                }
+
+	                if (!entry) {
+	                    //there isn't anything we can do with this so decrement the total expected
+	                    updateQueueTotal(-1, queue);
+	                } else if (entry.isFile) {
+	                    //this is handling to read an entry object representing a file, parsing the file object is asynchronous which is why we need the queue
+	                    //currently entry objects will only exist in this flow for Chrome
+	                    entry.file(function (file) {
+	                        enqueueFileAddition(file, queue, path);
+	                    }, function (err) {
+	                        console.warn(err);
+	                    });
+	                } else if (entry.isDirectory) {
+	                    //this is handling to read an entry object representing a folder, parsing the directory object is asynchronous which is why we need the queue
+	                    //currently entry objects will only exist in this flow for Chrome
+	                    reader = entry.createReader();
+
+	                    var newEntries = [];
+	                    //wrap the callback in another function so we can store the path in a closure
+	                    var readDir = function readDir(path) {
+	                        reader.readEntries(
+	                        //success callback: read entries out of the directory
+	                        function (entries) {
+	                            if (entries.length > 0) {
+	                                //add these results to the array of all the new stuff
+	                                for (var i = 0; i < entries.length; i++) {
+	                                    newEntries.push(entries[i]);
+	                                }
+	                                //call this function again as all the results may not have been sent yet
+	                                readDir(entry.fullPath);
+	                            } else {
+	                                //we have now gotten all the results in newEntries so let's process them recursively
+	                                loadFiles(newEntries, event, queue, path);
+	                                //this was a directory rather than a file so decrement the expected file count
+	                                updateQueueTotal(-1, queue);
+	                            }
+	                        },
+	                        //error callback, most often hit if there is a directory with nothing inside it
+	                        function (err) {
+	                            //this was a directory rather than a file so decrement the expected file count
+	                            updateQueueTotal(-1, queue);
+	                            console.warn(err);
+	                        });
+	                    };
+	                    readDir(entry.fullPath);
+	                }
+	            }
+	        };
+
+	        /**
+	         * @summary Adjust the total number of files we are expecting to process
+	         *          if decrementing and the new expected total is equal to the number processed, flush the queue
+	         * @param addition {Number} - the number of additional files we expect to process (may be negative)
+	         * @param queue {Object} - an object to keep track of our progress processing the dropped items
+	         */
+	        var updateQueueTotal = function updateQueueTotal(addition, queue) {
+	            queue.total += addition;
+
+	            // If all the files we expect have shown up, then flush the queue.
+	            if (queue.files.length === queue.total) {
+	                appendFilesFromFileList(queue.files, queue.event);
+	            }
+	        };
+
+	        /**
+	         * @summary Add a file to the queue of processed files, if it brings the total up to the expected total, flush the queue
+	         * @param file {Object} - File object to be passed along to appendFilesFromFileList eventually
+	         * @param queue {Object} - an object to keep track of our progress processing the dropped items
+	         * @param [path] {String} - the file's relative path from the originally dropped folder if we are parsing folder content (Chrome only for now)
+	         */
+	        var enqueueFileAddition = function enqueueFileAddition(file, queue, path) {
+	            //store the path to this file if it came in as part of a folder
+	            if (path) file.relativePath = path + '/' + file.name;
+	            queue.files.push(file);
+
+	            // If all the files we expect have shown up, then flush the queue.
+	            if (queue.files.length === queue.total) {
+	                appendFilesFromFileList(queue.files, queue.event);
+	            }
+	        };
+
+	        var appendFilesFromFileList = function appendFilesFromFileList(fileList, event) {
+	            // check for uploading too many files
+	            var errorCount = 0;
+	            var o = $.getOpt(['maxFiles', 'minFileSize', 'maxFileSize', 'maxFilesErrorCallback', 'minFileSizeErrorCallback', 'maxFileSizeErrorCallback', 'fileType', 'fileTypeErrorCallback']);
+	            if (typeof o.maxFiles !== 'undefined' && o.maxFiles < fileList.length + $.files.length) {
+	                // if single-file upload, file is already added, and trying to add 1 new file, simply replace the already-added file
+	                if (o.maxFiles === 1 && $.files.length === 1 && fileList.length === 1) {
+	                    $.removeFile($.files[0]);
+	                } else {
+	                    o.maxFilesErrorCallback(fileList, errorCount++);
+	                    return false;
+	                }
+	            }
+	            var files = [];
+	            $h.each(fileList, function (file) {
+	                var fileName = file.name;
+	                if (o.fileType.length > 0) {
+	                    var fileTypeFound = false;
+	                    for (var index in o.fileType) {
+	                        var extension = '.' + o.fileType[index];
+	                        if (fileName.indexOf(extension, fileName.length - extension.length) !== -1) {
+	                            fileTypeFound = true;
+	                            break;
+	                        }
+	                    }
+	                    if (!fileTypeFound) {
+	                        o.fileTypeErrorCallback(file, errorCount++);
+	                        return false;
+	                    }
+	                }
+
+	                if (typeof o.minFileSize !== 'undefined' && file.size < o.minFileSize) {
+	                    o.minFileSizeErrorCallback(file, errorCount++);
+	                    return false;
+	                }
+	                if (typeof o.maxFileSize !== 'undefined' && file.size > o.maxFileSize) {
+	                    o.maxFileSizeErrorCallback(file, errorCount++);
+	                    return false;
+	                }
+
+	                function addFile(uniqueIdentifier) {
+	                    if (!$.getFromUniqueIdentifier(uniqueIdentifier)) {
+	                        (function () {
+	                            file.uniqueIdentifier = uniqueIdentifier;
+	                            var f = new ResumableFile($, file, uniqueIdentifier);
+	                            $.files.push(f);
+	                            files.push(f);
+	                            f.container = typeof event != 'undefined' ? event.srcElement : null;
+	                            window.setTimeout(function () {
+	                                $.fire('fileAdded', f, event);
+	                            }, 0);
+	                        })();
+	                    }
+	                    ;
+	                }
+
+	                // directories have size == 0
+	                var uniqueIdentifier = $h.generateUniqueIdentifier(file);
+	                if (uniqueIdentifier && typeof uniqueIdentifier.done === 'function' && typeof uniqueIdentifier.fail === 'function') {
+	                    uniqueIdentifier.done(function (uniqueIdentifier) {
+	                        addFile(uniqueIdentifier);
+	                    }).fail(function () {
+	                        addFile();
+	                    });
+	                } else {
+	                    addFile(uniqueIdentifier);
+	                }
+	            });
+	            window.setTimeout(function () {
+	                $.fire('filesAdded', files);
+	            }, 0);
+	        };
+
+	        // INTERNAL OBJECT TYPES
+	        function ResumableFile(resumableObj, file, uniqueIdentifier) {
+	            var $ = this;
+	            $.opts = {};
+	            $.getOpt = resumableObj.getOpt;
+	            $._prevProgress = 0;
+	            $.resumableObj = resumableObj;
+	            $.file = file;
+	            $.fileName = file.fileName || file.name; // Some confusion in different versions of Firefox
+	            $.size = file.size;
+	            $.relativePath = file.webkitRelativePath || file.relativePath || $.fileName;
+	            $.uniqueIdentifier = uniqueIdentifier;
+	            $._pause = false;
+	            $.container = '';
+	            var _error = uniqueIdentifier !== undefined;
+
+	            // Callback when something happens within the chunk
+	            var chunkEvent = function chunkEvent(event, message) {
+	                // event can be 'progress', 'success', 'error' or 'retry'
+	                switch (event) {
+	                    case 'progress':
+	                        $.resumableObj.fire('fileProgress', $);
+	                        break;
+	                    case 'error':
+	                        $.abort();
+	                        _error = true;
+	                        $.chunks = [];
+	                        $.resumableObj.fire('fileError', $, message);
+	                        break;
+	                    case 'success':
+	                        if (_error) return;
+	                        $.resumableObj.fire('fileProgress', $); // it's at least progress
+	                        if ($.isComplete()) {
+	                            $.resumableObj.fire('fileSuccess', $, message);
+	                        }
+	                        break;
+	                    case 'retry':
+	                        $.resumableObj.fire('fileRetry', $);
+	                        break;
+	                }
+	            };
+
+	            // Main code to set up a file object with chunks,
+	            // packaged to be able to handle retries if needed.
+	            $.chunks = [];
+	            $.abort = function () {
+	                // Stop current uploads
+	                var abortCount = 0;
+	                $h.each($.chunks, function (c) {
+	                    if (c.status() == 'uploading') {
+	                        c.abort();
+	                        abortCount++;
+	                    }
+	                });
+	                if (abortCount > 0) $.resumableObj.fire('fileProgress', $);
+	            };
+	            $.cancel = function () {
+	                // Reset this file to be void
+	                var _chunks = $.chunks;
+	                $.chunks = [];
+	                // Stop current uploads
+	                $h.each(_chunks, function (c) {
+	                    if (c.status() == 'uploading') {
+	                        c.abort();
+	                        $.resumableObj.uploadNextChunk();
+	                    }
+	                });
+	                $.resumableObj.removeFile($);
+	                $.resumableObj.fire('fileProgress', $);
+	            };
+	            $.retry = function () {
+	                $.bootstrap();
+	                var firedRetry = false;
+	                $.resumableObj.on('chunkingComplete', function () {
+	                    if (!firedRetry) $.resumableObj.upload();
+	                    firedRetry = true;
+	                });
+	            };
+	            $.bootstrap = function () {
+	                $.abort();
+	                _error = false;
+	                // Rebuild stack of chunks from file
+	                $.chunks = [];
+	                $._prevProgress = 0;
+	                var round = $.getOpt('forceChunkSize') ? Math.ceil : Math.floor;
+	                var maxOffset = Math.max(round($.file.size / $.getOpt('chunkSize')), 1);
+	                for (var offset = 0; offset < maxOffset; offset++) {
+	                    (function (offset) {
+	                        window.setTimeout(function () {
+	                            $.chunks.push(new ResumableChunk($.resumableObj, $, offset, chunkEvent));
+	                            $.resumableObj.fire('chunkingProgress', $, offset / maxOffset);
+	                        }, 0);
+	                    })(offset);
+	                }
+	                window.setTimeout(function () {
+	                    $.resumableObj.fire('chunkingComplete', $);
+	                }, 0);
+	            };
+	            $.progress = function () {
+	                if (_error) return 1;
+	                // Sum up progress across everything
+	                var ret = 0;
+	                var error = false;
+	                $h.each($.chunks, function (c) {
+	                    if (c.status() == 'error') error = true;
+	                    ret += c.progress(true); // get chunk progress relative to entire file
+	                });
+	                ret = error ? 1 : ret > 0.99999 ? 1 : ret;
+	                ret = Math.max($._prevProgress, ret); // We don't want to lose percentages when an upload is paused
+	                $._prevProgress = ret;
+	                return ret;
+	            };
+	            $.isUploading = function () {
+	                var uploading = false;
+	                $h.each($.chunks, function (chunk) {
+	                    if (chunk.status() == 'uploading') {
+	                        uploading = true;
+	                        return false;
+	                    }
+	                });
+	                return uploading;
+	            };
+	            $.isComplete = function () {
+	                var outstanding = false;
+	                $h.each($.chunks, function (chunk) {
+	                    var status = chunk.status();
+	                    if (status == 'pending' || status == 'uploading' || chunk.preprocessState === 1) {
+	                        outstanding = true;
+	                        return false;
+	                    }
+	                });
+	                return !outstanding;
+	            };
+	            $.pause = function (pause) {
+	                if (typeof pause === 'undefined') {
+	                    $._pause = $._pause ? false : true;
+	                } else {
+	                    $._pause = pause;
+	                }
+	            };
+	            $.isPaused = function () {
+	                return $._pause;
+	            };
+
+	            // Bootstrap and return
+	            $.resumableObj.fire('chunkingStart', $);
+	            $.bootstrap();
+	            return this;
+	        }
+
+	        function ResumableChunk(resumableObj, fileObj, offset, callback) {
+	            var $ = this;
+	            $.opts = {};
+	            $.getOpt = resumableObj.getOpt;
+	            $.resumableObj = resumableObj;
+	            $.fileObj = fileObj;
+	            $.fileObjSize = fileObj.size;
+	            $.fileObjType = fileObj.file.type;
+	            $.offset = offset;
+	            $.callback = callback;
+	            $.lastProgressCallback = new Date();
+	            $.tested = false;
+	            $.retries = 0;
+	            $.pendingRetry = false;
+	            $.preprocessState = 0; // 0 = unprocessed, 1 = processing, 2 = finished
+
+	            // Computed properties
+	            var chunkSize = $.getOpt('chunkSize');
+	            $.loaded = 0;
+	            $.startByte = $.offset * chunkSize;
+	            $.endByte = Math.min($.fileObjSize, ($.offset + 1) * chunkSize);
+	            if ($.fileObjSize - $.endByte < chunkSize && !$.getOpt('forceChunkSize')) {
+	                // The last chunk will be bigger than the chunk size, but less than 2*chunkSize
+	                $.endByte = $.fileObjSize;
+	            }
+	            $.xhr = null;
+
+	            // test() makes a GET request without any data to see if the chunk has already been uploaded in a previous session
+	            $.test = function () {
+	                // Set up request and listen for event
+	                $.xhr = new XMLHttpRequest();
+
+	                var testHandler = function testHandler(e) {
+	                    $.tested = true;
+	                    var status = $.status();
+	                    if (status == 'success') {
+	                        $.callback(status, $.message());
+	                        $.resumableObj.uploadNextChunk();
+	                    } else {
+	                        $.send();
+	                    }
+	                };
+	                $.xhr.addEventListener('load', testHandler, false);
+	                $.xhr.addEventListener('error', testHandler, false);
+	                $.xhr.addEventListener('timeout', testHandler, false);
+
+	                // Add data from the query options
+	                var params = [];
+	                var parameterNamespace = $.getOpt('parameterNamespace');
+	                var customQuery = $.getOpt('query');
+	                if (typeof customQuery == 'function') customQuery = customQuery($.fileObj, $);
+	                $h.each(customQuery, function (k, v) {
+	                    params.push([encodeURIComponent(parameterNamespace + k), encodeURIComponent(v)].join('='));
+	                });
+	                // Add extra data to identify chunk
+	                params.push([parameterNamespace + 'resumableChunkNumber', encodeURIComponent($.offset + 1)].join('='));
+	                params.push([parameterNamespace + 'resumableChunkSize', encodeURIComponent($.getOpt('chunkSize'))].join('='));
+	                params.push([parameterNamespace + 'resumableCurrentChunkSize', encodeURIComponent($.endByte - $.startByte)].join('='));
+	                params.push([parameterNamespace + 'resumableTotalSize', encodeURIComponent($.fileObjSize)].join('='));
+	                params.push([parameterNamespace + 'resumableType', encodeURIComponent($.fileObjType)].join('='));
+	                params.push([parameterNamespace + 'resumableIdentifier', encodeURIComponent($.fileObj.uniqueIdentifier)].join('='));
+	                params.push([parameterNamespace + 'resumableFilename', encodeURIComponent($.fileObj.fileName)].join('='));
+	                params.push([parameterNamespace + 'resumableRelativePath', encodeURIComponent($.fileObj.relativePath)].join('='));
+	                params.push([parameterNamespace + 'resumableTotalChunks', encodeURIComponent($.fileObj.chunks.length)].join('='));
+	                // Append the relevant chunk and send it
+	                $.xhr.open($.getOpt('testMethod'), $h.getTarget(params));
+	                $.xhr.timeout = $.getOpt('xhrTimeout');
+	                $.xhr.withCredentials = $.getOpt('withCredentials');
+	                // Add data from header options
+	                var customHeaders = $.getOpt('headers');
+	                if (typeof customHeaders === 'function') {
+	                    customHeaders = customHeaders($.fileObj, $);
+	                }
+	                $h.each(customHeaders, function (k, v) {
+	                    $.xhr.setRequestHeader(k, v);
+	                });
+	                $.xhr.send(null);
+	            };
+
+	            $.preprocessFinished = function () {
+	                $.preprocessState = 2;
+	                $.send();
+	            };
+
+	            // send() uploads the actual data in a POST call
+	            $.send = function () {
+	                var preprocess = $.getOpt('preprocess');
+	                if (typeof preprocess === 'function') {
+	                    switch ($.preprocessState) {
+	                        case 0:
+	                            $.preprocessState = 1;
+	                            preprocess($);
+	                            return;
+	                        case 1:
+	                            return;
+	                        case 2:
+	                            break;
+	                    }
+	                }
+	                if ($.getOpt('testChunks') && !$.tested) {
+	                    $.test();
+	                    return;
+	                }
+
+	                // Set up request and listen for event
+	                $.xhr = new XMLHttpRequest();
+
+	                // Progress
+	                $.xhr.upload.addEventListener('progress', function (e) {
+	                    if (new Date() - $.lastProgressCallback > $.getOpt('throttleProgressCallbacks') * 1000) {
+	                        $.callback('progress');
+	                        $.lastProgressCallback = new Date();
+	                    }
+	                    $.loaded = e.loaded || 0;
+	                }, false);
+	                $.loaded = 0;
+	                $.pendingRetry = false;
+	                $.callback('progress');
+
+	                // Done (either done, failed or retry)
+	                var doneHandler = function doneHandler(e) {
+	                    var status = $.status();
+	                    if (status == 'success' || status == 'error') {
+	                        $.callback(status, $.message());
+	                        $.resumableObj.uploadNextChunk();
+	                    } else {
+	                        $.callback('retry', $.message());
+	                        $.abort();
+	                        $.retries++;
+	                        var retryInterval = $.getOpt('chunkRetryInterval');
+	                        if (retryInterval !== undefined) {
+	                            $.pendingRetry = true;
+	                            setTimeout($.send, retryInterval);
+	                        } else {
+	                            $.send();
+	                        }
+	                    }
+	                };
+	                $.xhr.addEventListener('load', doneHandler, false);
+	                $.xhr.addEventListener('error', doneHandler, false);
+	                $.xhr.addEventListener('timeout', doneHandler, false);
+
+	                // Set up the basic query data from Resumable
+	                var query = {
+	                    resumableChunkNumber: $.offset + 1,
+	                    resumableChunkSize: $.getOpt('chunkSize'),
+	                    resumableCurrentChunkSize: $.endByte - $.startByte,
+	                    resumableTotalSize: $.fileObjSize,
+	                    resumableType: $.fileObjType,
+	                    resumableIdentifier: $.fileObj.uniqueIdentifier,
+	                    resumableFilename: $.fileObj.fileName,
+	                    resumableRelativePath: $.fileObj.relativePath,
+	                    resumableTotalChunks: $.fileObj.chunks.length
+	                };
+	                // Mix in custom data
+	                var customQuery = $.getOpt('query');
+	                if (typeof customQuery == 'function') customQuery = customQuery($.fileObj, $);
+	                $h.each(customQuery, function (k, v) {
+	                    query[k] = v;
+	                });
+
+	                var func = $.fileObj.file.slice ? 'slice' : $.fileObj.file.mozSlice ? 'mozSlice' : $.fileObj.file.webkitSlice ? 'webkitSlice' : 'slice',
+	                    bytes = $.fileObj.file[func]($.startByte, $.endByte),
+	                    data = null,
+	                    target = $.getOpt('target');
+
+	                var parameterNamespace = $.getOpt('parameterNamespace');
+	                if ($.getOpt('method') === 'octet') {
+	                    // Add data from the query options
+	                    data = bytes;
+	                    var params = [];
+	                    $h.each(query, function (k, v) {
+	                        params.push([encodeURIComponent(parameterNamespace + k), encodeURIComponent(v)].join('='));
+	                    });
+	                    target = $h.getTarget(params);
+	                } else {
+	                    // Add data from the query options
+	                    data = new FormData();
+	                    $h.each(query, function (k, v) {
+	                        data.append(parameterNamespace + k, v);
+	                    });
+	                    data.append(parameterNamespace + $.getOpt('fileParameterName'), bytes);
+	                }
+
+	                var method = $.getOpt('uploadMethod');
+	                $.xhr.open(method, target);
+	                if ($.getOpt('method') === 'octet') {
+	                    $.xhr.setRequestHeader('Content-Type', 'binary/octet-stream');
+	                }
+	                $.xhr.timeout = $.getOpt('xhrTimeout');
+	                $.xhr.withCredentials = $.getOpt('withCredentials');
+	                // Add data from header options
+	                var customHeaders = $.getOpt('headers');
+	                if (typeof customHeaders === 'function') {
+	                    customHeaders = customHeaders($.fileObj, $);
+	                }
+	                $h.each(customHeaders, function (k, v) {
+	                    $.xhr.setRequestHeader(k, v);
+	                });
+	                $.xhr.send(data);
+	            };
+	            $.abort = function () {
+	                // Abort and reset
+	                if ($.xhr) $.xhr.abort();
+	                $.xhr = null;
+	            };
+	            $.status = function () {
+	                // Returns: 'pending', 'uploading', 'success', 'error'
+	                if ($.pendingRetry) {
+	                    // if pending retry then that's effectively the same as actively uploading,
+	                    // there might just be a slight delay before the retry starts
+	                    return 'uploading';
+	                } else if (!$.xhr) {
+	                    return 'pending';
+	                } else if ($.xhr.readyState < 4) {
+	                    // Status is really 'OPENED', 'HEADERS_RECEIVED' or 'LOADING' - meaning that stuff is happening
+	                    return 'uploading';
+	                } else {
+	                    if ($.xhr.status == 200 || $.xhr.status == 201) {
+	                        // HTTP 200 or 201 (created) perfect
+	                        return 'success';
+	                    } else if ($h.contains($.getOpt('permanentErrors'), $.xhr.status) || $.retries >= $.getOpt('maxChunkRetries')) {
+	                        // HTTP 415/500/501, permanent error
+	                        return 'error';
+	                    } else {
+	                        // this should never happen, but we'll reset and queue a retry
+	                        // a likely case for this would be 503 service unavailable
+	                        $.abort();
+	                        return 'pending';
+	                    }
+	                }
+	            };
+	            $.message = function () {
+	                return $.xhr ? $.xhr.responseText : '';
+	            };
+	            $.progress = function (relative) {
+	                if (typeof relative === 'undefined') relative = false;
+	                var factor = relative ? ($.endByte - $.startByte) / $.fileObjSize : 1;
+	                if ($.pendingRetry) return 0;
+	                var s = $.status();
+	                switch (s) {
+	                    case 'success':
+	                    case 'error':
+	                        return 1 * factor;
+	                    case 'pending':
+	                        return 0 * factor;
+	                    default:
+	                        return $.loaded / ($.endByte - $.startByte) * factor;
+	                }
+	            };
+	            return this;
+	        }
+
+	        // QUEUE
+	        $.uploadNextChunk = function () {
+	            var found = false;
+
+	            // In some cases (such as videos) it's really handy to upload the first
+	            // and last chunk of a file quickly; this let's the server check the file's
+	            // metadata and determine if there's even a point in continuing.
+	            if ($.getOpt('prioritizeFirstAndLastChunk')) {
+	                $h.each($.files, function (file) {
+	                    if (file.chunks.length && file.chunks[0].status() == 'pending' && file.chunks[0].preprocessState === 0) {
+	                        file.chunks[0].send();
+	                        found = true;
+	                        return false;
+	                    }
+	                    if (file.chunks.length > 1 && file.chunks[file.chunks.length - 1].status() == 'pending' && file.chunks[file.chunks.length - 1].preprocessState === 0) {
+	                        file.chunks[file.chunks.length - 1].send();
+	                        found = true;
+	                        return false;
+	                    }
+	                });
+	                if (found) return true;
+	            }
+
+	            // Now, simply look for the next, best thing to upload
+	            $h.each($.files, function (file) {
+	                if (file.isPaused() === false) {
+	                    $h.each(file.chunks, function (chunk) {
+	                        if (chunk.status() == 'pending' && chunk.preprocessState === 0) {
+	                            chunk.send();
+	                            found = true;
+	                            return false;
+	                        }
+	                    });
+	                }
+	                if (found) return false;
+	            });
+	            if (found) return true;
+
+	            // The are no more outstanding chunks to upload, check is everything is done
+	            var outstanding = false;
+	            $h.each($.files, function (file) {
+	                if (!file.isComplete()) {
+	                    outstanding = true;
+	                    return false;
+	                }
+	            });
+	            if (!outstanding) {
+	                // All chunks have been uploaded, complete
+	                $.fire('complete');
+	            }
+	            return false;
+	        };
+
+	        // PUBLIC METHODS FOR RESUMABLE.JS
+	        $.assignBrowse = function (domNodes, isDirectory) {
+	            if (typeof domNodes.length == 'undefined') domNodes = [domNodes];
+
+	            $h.each(domNodes, function (domNode) {
+	                var input;
+	                if (domNode.tagName === 'INPUT' && domNode.type === 'file') {
+	                    input = domNode;
+	                } else {
+	                    input = document.createElement('input');
+	                    input.setAttribute('type', 'file');
+	                    input.style.display = 'none';
+	                    domNode.addEventListener('click', function () {
+	                        input.style.opacity = 0;
+	                        input.style.display = 'block';
+	                        input.focus();
+	                        input.click();
+	                        input.style.display = 'none';
+	                    }, false);
+	                    domNode.appendChild(input);
+	                }
+	                var maxFiles = $.getOpt('maxFiles');
+	                if (typeof maxFiles === 'undefined' || maxFiles != 1) {
+	                    input.setAttribute('multiple', 'multiple');
+	                } else {
+	                    input.removeAttribute('multiple');
+	                }
+	                if (isDirectory) {
+	                    input.setAttribute('webkitdirectory', 'webkitdirectory');
+	                } else {
+	                    input.removeAttribute('webkitdirectory');
+	                }
+	                // When new files are added, simply append them to the overall list
+	                input.addEventListener('change', function (e) {
+	                    appendFilesFromFileList(e.target.files, e);
+	                    e.target.value = '';
+	                }, false);
+	            });
+	        };
+	        $.assignDrop = function (domNodes) {
+	            if (typeof domNodes.length == 'undefined') domNodes = [domNodes];
+
+	            $h.each(domNodes, function (domNode) {
+	                domNode.addEventListener('dragover', preventDefault, false);
+	                domNode.addEventListener('dragenter', preventDefault, false);
+	                domNode.addEventListener('drop', onDrop, false);
+	            });
+	        };
+	        $.unAssignDrop = function (domNodes) {
+	            if (typeof domNodes.length == 'undefined') domNodes = [domNodes];
+
+	            $h.each(domNodes, function (domNode) {
+	                domNode.removeEventListener('dragover', preventDefault);
+	                domNode.removeEventListener('dragenter', preventDefault);
+	                domNode.removeEventListener('drop', onDrop);
+	            });
+	        };
+	        $.isUploading = function () {
+	            var uploading = false;
+	            $h.each($.files, function (file) {
+	                if (file.isUploading()) {
+	                    uploading = true;
+	                    return false;
+	                }
+	            });
+	            return uploading;
+	        };
+	        $.upload = function () {
+	            // Make sure we don't start too many uploads at once
+	            if ($.isUploading()) return;
+	            // Kick off the queue
+	            $.fire('uploadStart');
+	            for (var num = 1; num <= $.getOpt('simultaneousUploads'); num++) {
+	                $.uploadNextChunk();
+	            }
+	        };
+	        $.pause = function () {
+	            // Resume all chunks currently being uploaded
+	            $h.each($.files, function (file) {
+	                file.abort();
+	            });
+	            $.fire('pause');
+	        };
+	        $.cancel = function () {
+	            for (var i = $.files.length - 1; i >= 0; i--) {
+	                $.files[i].cancel();
+	            }
+	            $.fire('cancel');
+	        };
+	        $.progress = function () {
+	            var totalDone = 0;
+	            var totalSize = 0;
+	            // Resume all chunks currently being uploaded
+	            $h.each($.files, function (file) {
+	                totalDone += file.progress() * file.size;
+	                totalSize += file.size;
+	            });
+	            return totalSize > 0 ? totalDone / totalSize : 0;
+	        };
+	        $.addFile = function (file, event) {
+	            appendFilesFromFileList([file], event);
+	        };
+	        $.removeFile = function (file) {
+	            for (var i = $.files.length - 1; i >= 0; i--) {
+	                if ($.files[i] === file) {
+	                    $.files.splice(i, 1);
+	                }
+	            }
+	        };
+	        $.getFromUniqueIdentifier = function (uniqueIdentifier) {
+	            var ret = false;
+	            $h.each($.files, function (f) {
+	                if (f.uniqueIdentifier == uniqueIdentifier) ret = f;
+	            });
+	            return ret;
+	        };
+	        $.getSize = function () {
+	            var totalSize = 0;
+	            $h.each($.files, function (file) {
+	                totalSize += file.size;
+	            });
+	            return totalSize;
+	        };
+	        $.handleDropEvent = function (e) {
+	            onDrop(e);
+	        };
+	        $.handleChangeEvent = function (e) {
+	            appendFilesFromFileList(e.target.files, e);
+	            e.target.value = '';
+	        };
+
+	        return this;
+	    };
+
+	    // Node.js-style export for Node and Component
+	    if (true) {
+	        module.exports = Resumable;
+	    } else if (typeof define === "function" && define.amd) {
+	        // AMD/requirejs: Define the module
+	        define(function () {
+	            return Resumable;
+	        });
+	    } else {
+	        // Browser: Expose to window
+	        window.Resumable = Resumable;
+	    }
+	})();
+
+/***/ },
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4839,11 +6521,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _PostMusicActions = __webpack_require__(259);
+	var _PostMusicActions = __webpack_require__(260);
 
 	var _PostMusicActions2 = _interopRequireDefault(_PostMusicActions);
 
-	var _PostMusicStore = __webpack_require__(260);
+	var _PostMusicStore = __webpack_require__(261);
 
 	var _PostMusicStore2 = _interopRequireDefault(_PostMusicStore);
 
@@ -5033,7 +6715,7 @@ webpackJsonp([0],[
 	exports.default = PostMusic;
 
 /***/ },
-/* 259 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5098,7 +6780,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(PostMusicActions);
 
 /***/ },
-/* 260 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5115,7 +6797,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _PostMusicActions = __webpack_require__(259);
+	var _PostMusicActions = __webpack_require__(260);
 
 	var _PostMusicActions2 = _interopRequireDefault(_PostMusicActions);
 
@@ -5178,7 +6860,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(PostMusicStore);
 
 /***/ },
-/* 261 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5193,11 +6875,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _PostArticleActions = __webpack_require__(262);
+	var _PostArticleActions = __webpack_require__(263);
 
 	var _PostArticleActions2 = _interopRequireDefault(_PostArticleActions);
 
-	var _PostArticleStore = __webpack_require__(263);
+	var _PostArticleStore = __webpack_require__(264);
 
 	var _PostArticleStore2 = _interopRequireDefault(_PostArticleStore);
 
@@ -5205,7 +6887,7 @@ webpackJsonp([0],[
 
 	var _Upload2 = _interopRequireDefault(_Upload);
 
-	var _markdown = __webpack_require__(264);
+	var _markdown = __webpack_require__(265);
 
 	var _markdown2 = _interopRequireDefault(_markdown);
 
@@ -5406,7 +7088,7 @@ webpackJsonp([0],[
 	exports.default = PostArticle;
 
 /***/ },
-/* 262 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5473,7 +7155,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(PostArticleActions);
 
 /***/ },
-/* 263 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5490,7 +7172,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _PostArticleActions = __webpack_require__(262);
+	var _PostArticleActions = __webpack_require__(263);
 
 	var _PostArticleActions2 = _interopRequireDefault(_PostArticleActions);
 
@@ -5562,16 +7244,16 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(PostArticleStore);
 
 /***/ },
-/* 264 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// super simple module for the most common nodejs use case.
-	exports.markdown = __webpack_require__(265);
+	exports.markdown = __webpack_require__(266);
 	exports.parse = exports.markdown.toHTML;
 
 
 /***/ },
-/* 265 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Released under MIT license
@@ -5703,7 +7385,7 @@ webpackJsonp([0],[
 
 	// node
 	function mk_block_inspect() {
-	  var util = __webpack_require__(266);
+	  var util = __webpack_require__(267);
 	  return "Markdown.mk_block( " +
 	          util.inspect(this.toString()) +
 	          ", " +
@@ -7302,7 +8984,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 266 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -7830,7 +9512,7 @@ webpackJsonp([0],[
 	}
 	exports.isPrimitive = isPrimitive;
 
-	exports.isBuffer = __webpack_require__(267);
+	exports.isBuffer = __webpack_require__(268);
 
 	function objectToString(o) {
 	  return Object.prototype.toString.call(o);
@@ -7874,7 +9556,7 @@ webpackJsonp([0],[
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(268);
+	exports.inherits = __webpack_require__(269);
 
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -7895,7 +9577,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(4)))
 
 /***/ },
-/* 267 */
+/* 268 */
 /***/ function(module, exports) {
 
 	module.exports = function isBuffer(arg) {
@@ -7906,7 +9588,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 268 */
+/* 269 */
 /***/ function(module, exports) {
 
 	if (typeof Object.create === 'function') {
@@ -7935,7 +9617,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 269 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7950,11 +9632,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ProfileCenterActions = __webpack_require__(270);
+	var _ProfileCenterActions = __webpack_require__(271);
 
 	var _ProfileCenterActions2 = _interopRequireDefault(_ProfileCenterActions);
 
-	var _ProfileCenterStore = __webpack_require__(271);
+	var _ProfileCenterStore = __webpack_require__(272);
 
 	var _ProfileCenterStore2 = _interopRequireDefault(_ProfileCenterStore);
 
@@ -8106,7 +9788,7 @@ webpackJsonp([0],[
 	exports.default = ProfileCenter;
 
 /***/ },
-/* 270 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8161,7 +9843,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(ProfileCenterActions);
 
 /***/ },
-/* 271 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8178,7 +9860,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _ProfileCenterActions = __webpack_require__(270);
+	var _ProfileCenterActions = __webpack_require__(271);
 
 	var _ProfileCenterActions2 = _interopRequireDefault(_ProfileCenterActions);
 
@@ -8217,7 +9899,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(ProfileCenterStore);
 
 /***/ },
-/* 272 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8236,15 +9918,15 @@ webpackJsonp([0],[
 
 	var _underscore = __webpack_require__(228);
 
-	var _FollowActions = __webpack_require__(273);
+	var _FollowActions = __webpack_require__(274);
 
 	var _FollowActions2 = _interopRequireDefault(_FollowActions);
 
-	var _FollowStore = __webpack_require__(274);
+	var _FollowStore = __webpack_require__(275);
 
 	var _FollowStore2 = _interopRequireDefault(_FollowStore);
 
-	var _Pagination = __webpack_require__(275);
+	var _Pagination = __webpack_require__(276);
 
 	var _Pagination2 = _interopRequireDefault(_Pagination);
 
@@ -8414,7 +10096,7 @@ webpackJsonp([0],[
 	exports.default = Follow;
 
 /***/ },
-/* 273 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8520,7 +10202,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(FollowActions);
 
 /***/ },
-/* 274 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8537,7 +10219,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _FollowActions = __webpack_require__(273);
+	var _FollowActions = __webpack_require__(274);
 
 	var _FollowActions2 = _interopRequireDefault(_FollowActions);
 
@@ -8621,7 +10303,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(FollowStore);
 
 /***/ },
-/* 275 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8636,11 +10318,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _PaginationActions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../actions/PaginationActions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _PaginationActions = __webpack_require__(277);
 
 	var _PaginationActions2 = _interopRequireDefault(_PaginationActions);
 
-	var _PaginationStore = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../stores/PaginationStore\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _PaginationStore = __webpack_require__(278);
 
 	var _PaginationStore2 = _interopRequireDefault(_PaginationStore);
 
@@ -8778,9 +10460,67 @@ webpackJsonp([0],[
 	exports.default = Pagination;
 
 /***/ },
-/* 276 */,
-/* 277 */,
+/* 277 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } } /**
+	                                                                                                                                                           * Created by apache on 15-11-2.
+	                                                                                                                                                           */
+
+	var PaginationActions = function PaginationActions() {
+	    _classCallCheck(this, PaginationActions);
+
+	    this.generateActions();
+	};
+
+	exports.default = _alt2.default.createActions(PaginationActions);
+
+/***/ },
 /* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	var _PaginationActions = __webpack_require__(277);
+
+	var _PaginationActions2 = _interopRequireDefault(_PaginationActions);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } } /**
+	                                                                                                                                                           * Created by apache on 15-11-2.
+	                                                                                                                                                           */
+
+	var PaginationStore = function PaginationStore() {
+	    _classCallCheck(this, PaginationStore);
+
+	    this.bindActions(_PaginationActions2.default);
+	};
+
+	exports.default = _alt2.default.createStore(PaginationStore);
+
+/***/ },
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8797,11 +10537,11 @@ webpackJsonp([0],[
 
 	var _reactRouter = __webpack_require__(158);
 
-	var _ContributeActions = __webpack_require__(279);
+	var _ContributeActions = __webpack_require__(280);
 
 	var _ContributeActions2 = _interopRequireDefault(_ContributeActions);
 
-	var _ContributeStore = __webpack_require__(280);
+	var _ContributeStore = __webpack_require__(281);
 
 	var _ContributeStore2 = _interopRequireDefault(_ContributeStore);
 
@@ -8912,7 +10652,7 @@ webpackJsonp([0],[
 	exports.default = Contribute;
 
 /***/ },
-/* 279 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8940,7 +10680,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(ContributeActions);
 
 /***/ },
-/* 280 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8953,7 +10693,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _ContributeActions = __webpack_require__(279);
+	var _ContributeActions = __webpack_require__(280);
 
 	var _ContributeActions2 = _interopRequireDefault(_ContributeActions);
 
@@ -8976,7 +10716,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(ContributeStore);
 
 /***/ },
-/* 281 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8995,27 +10735,27 @@ webpackJsonp([0],[
 
 	var _underscore = __webpack_require__(228);
 
-	var _ArticleActions = __webpack_require__(282);
+	var _ArticleActions = __webpack_require__(283);
 
 	var _ArticleActions2 = _interopRequireDefault(_ArticleActions);
 
-	var _ArticleStore = __webpack_require__(283);
+	var _ArticleStore = __webpack_require__(284);
 
 	var _ArticleStore2 = _interopRequireDefault(_ArticleStore);
 
-	var _markdown = __webpack_require__(264);
+	var _markdown = __webpack_require__(265);
 
 	var _markdown2 = _interopRequireDefault(_markdown);
 
-	var _Comment = __webpack_require__(284);
+	var _Comment = __webpack_require__(285);
 
 	var _Comment2 = _interopRequireDefault(_Comment);
 
-	var _BtnBlock = __webpack_require__(287);
+	var _BtnBlock = __webpack_require__(288);
 
 	var _BtnBlock2 = _interopRequireDefault(_BtnBlock);
 
-	var _Star = __webpack_require__(288);
+	var _Star = __webpack_require__(289);
 
 	var _Star2 = _interopRequireDefault(_Star);
 
@@ -9081,48 +10821,67 @@ webpackJsonp([0],[
 	            });
 
 	            var Article = undefined,
-	                Aside = undefined;
+	                Aside = undefined,
+	                Abbr = undefined;
 	            if (this.state.article) {
+	                Abbr = _react2.default.createElement(
+	                    'div',
+	                    { className: 'mon-abbr' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'mon-abbr-back' },
+	                        _react2.default.createElement('img', { src: this.state.abbreviations, alt: 'loading' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'mon-abbr-content' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-md-8 col-sm-12 col-xs-12' },
+	                            _react2.default.createElement(
+	                                'p',
+	                                { className: 'mon-article-title' },
+	                                this.state.title
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'mon-article-detail media' },
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { className: 'media-left' },
+	                                    _react2.default.createElement(
+	                                        'a',
+	                                        { href: '/member/' + this.state.createUserDomain },
+	                                        _react2.default.createElement('img', { src: this.state.createUserAvatar || '/img/default.png', alt: 'loading' })
+	                                    )
+	                                ),
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { className: 'media-body' },
+	                                    _react2.default.createElement(
+	                                        'a',
+	                                        { href: '/member/' + this.state.createUserDomain },
+	                                        this.state.createUser
+	                                    ),
+	                                    _react2.default.createElement(_Star2.default, { star: this.props.params.id, column: 'article', stared: this.state.stared }),
+	                                    this.state.stars,
+	                                    _react2.default.createElement(
+	                                        'p',
+	                                        { className: 'mon-detail-time' },
+	                                        this.state.createTime
+	                                    )
+	                                )
+	                            )
+	                        )
+	                    )
+	                );
+
 	                Article = _react2.default.createElement(
 	                    'div',
 	                    { className: 'raw animated fadeInUp clearfix' },
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'col-md-8 col-sm-12 col-xs-12 col-md-offset-2 mon-article' },
-	                        _react2.default.createElement(
-	                            'p',
-	                            { className: 'mon-article-title' },
-	                            this.state.title
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'mon-article-detail media' },
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'media-left' },
-	                                _react2.default.createElement(
-	                                    'a',
-	                                    { href: '/member/' + this.state.createUserDomain },
-	                                    _react2.default.createElement('img', { src: this.state.createUserAvatar || '/img/default.png', alt: 'loading' })
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'media-body' },
-	                                _react2.default.createElement(
-	                                    'a',
-	                                    { href: '/member/' + this.state.createUserDomain },
-	                                    this.state.createUser
-	                                ),
-	                                _react2.default.createElement(_Star2.default, { star: this.props.params.id, column: 'article', stared: this.state.stared }),
-	                                this.state.stars,
-	                                _react2.default.createElement(
-	                                    'p',
-	                                    { className: 'mon-detail-time' },
-	                                    this.state.createTime
-	                                )
-	                            )
-	                        ),
 	                        _react2.default.createElement(
 	                            'p',
 	                            { className: 'bg-success mon-article-summary' },
@@ -9186,10 +10945,15 @@ webpackJsonp([0],[
 	            }
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'container' },
-	                Article,
-	                Aside,
-	                _react2.default.createElement(_BtnBlock2.default, null)
+	                null,
+	                Abbr,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'container' },
+	                    Article,
+	                    Aside,
+	                    _react2.default.createElement(_BtnBlock2.default, null)
+	                )
 	            );
 	        }
 	    }]);
@@ -9200,7 +10964,7 @@ webpackJsonp([0],[
 	exports.default = Article;
 
 /***/ },
-/* 282 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9250,7 +11014,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(ArticleActions);
 
 /***/ },
-/* 283 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9267,7 +11031,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _ArticleActions = __webpack_require__(282);
+	var _ArticleActions = __webpack_require__(283);
 
 	var _ArticleActions2 = _interopRequireDefault(_ArticleActions);
 
@@ -9281,6 +11045,7 @@ webpackJsonp([0],[
 
 	        this.bindActions(_ArticleActions2.default);
 	        this.article = false;
+	        this.abbreviations = '';
 	        this.content;
 	        this.title = '';
 	        this.summary = '';
@@ -9300,6 +11065,7 @@ webpackJsonp([0],[
 	            if (data.code === 200) {
 
 	                this.article = true;
+	                this.abbreviations = data.raw.article.abbreviations || '/img/abbreviations.png';
 	                this.content = data.raw.article.content;
 	                this.title = data.raw.article.title;
 	                this.summary = data.raw.article.summary || '这个文章没有简介，呜呜';
@@ -9325,7 +11091,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(ArticleStore);
 
 /***/ },
-/* 284 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9344,11 +11110,11 @@ webpackJsonp([0],[
 
 	var _reactRouter = __webpack_require__(158);
 
-	var _CommentActions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../actions/CommentActions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _CommentActions = __webpack_require__(286);
 
 	var _CommentActions2 = _interopRequireDefault(_CommentActions);
 
-	var _CommentStore = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../stores/CommentStore\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _CommentStore = __webpack_require__(287);
 
 	var _CommentStore2 = _interopRequireDefault(_CommentStore);
 
@@ -9527,9 +11293,170 @@ webpackJsonp([0],[
 	exports.default = Comment;
 
 /***/ },
-/* 285 */,
-/* 286 */,
+/* 286 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-11-8.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var CommentActions = (function () {
+	    function CommentActions() {
+	        _classCallCheck(this, CommentActions);
+
+	        this.generateActions('getCommentSuccess', 'postCommentSuccess', 'changeComment', 'changeSkip');
+	    }
+
+	    _createClass(CommentActions, [{
+	        key: 'getComment',
+	        value: function getComment(id, skip) {
+	            var _this = this;
+
+	            var params = {
+	                con_id: id
+	            };
+	            if (skip < 0) {
+	                skip = 0;
+	                toastr.warning('不能在向前获取评论了');
+	                return false;
+	            }
+	            $.ajax({
+	                url: '/api/comment',
+	                type: 'post',
+	                contentType: 'application/json;charset=utf-8',
+	                cache: false,
+	                dataType: 'json',
+	                data: JSON.stringify({ params: params, option: { skip: skip, limit: 10, sort: { create_time: -1 } } })
+	            }).done(function (data) {
+	                _this.actions.getCommentSuccess(data);
+	            }).fail(function () {
+	                toastr.warning('获取评论失败');
+	            });
+	        }
+	    }, {
+	        key: 'postComment',
+	        value: function postComment(params) {
+	            var _this2 = this;
+
+	            $.ajax({
+	                url: '/api/comment',
+	                type: 'put',
+	                contentType: 'application/json;charset=utf-8',
+	                dataType: 'json',
+	                cache: false,
+	                data: JSON.stringify({ params: params })
+	            }).done(function (data) {
+	                _this2.actions.postCommentSuccess(data);
+	            }).fail(function () {
+	                toastr.error('网络链接有问题   ');
+	            });
+	        }
+	    }]);
+
+	    return CommentActions;
+	})();
+
+	exports.default = _alt2.default.createActions(CommentActions);
+
+/***/ },
 /* 287 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-11-8.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	var _CommentActions = __webpack_require__(286);
+
+	var _CommentActions2 = _interopRequireDefault(_CommentActions);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var CommentStore = (function () {
+	    function CommentStore() {
+	        _classCallCheck(this, CommentStore);
+
+	        this.bindActions(_CommentActions2.default);
+	        this.commentList = [];
+	        this.comment = '';
+	        this.skip = 0;
+	    }
+
+	    _createClass(CommentStore, [{
+	        key: 'onGetCommentSuccess',
+	        value: function onGetCommentSuccess(data) {
+	            if (data.code === 200) {
+	                if (data.raw.length === 0) {
+	                    toastr.warning('没有评论了');
+	                }
+	                this.commentList = data.raw;
+	            } else {
+	                toastr.warning('获取评论失败');
+	            }
+	        }
+	    }, {
+	        key: 'onPostCommentSuccess',
+	        value: function onPostCommentSuccess(data) {
+	            if (data.code === 200) {
+	                toastr.success(data.meta);
+	            } else if (data.code === 400) {
+	                toastr.error(data.meta);
+	            } else {
+	                toastr.warning(data.meta);
+	            }
+	        }
+	    }, {
+	        key: 'onChangeComment',
+	        value: function onChangeComment(event) {
+	            this.comment = event.target.value;
+	        }
+	    }, {
+	        key: 'onChangeSkip',
+	        value: function onChangeSkip(option) {
+	            if (option === 0) {
+	                this.skip = this.skip - 10;
+	            } else {
+	                this.skip = this.skip + 10;
+	            }
+	            if (this.skip <= 0) {
+	                this.skip = 0;
+	            }
+	        }
+	    }]);
+
+	    return CommentStore;
+	})();
+
+	exports.default = _alt2.default.createStore(CommentStore);
+
+/***/ },
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9658,7 +11585,7 @@ webpackJsonp([0],[
 	exports.default = BtnBlock;
 
 /***/ },
-/* 288 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9673,11 +11600,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _StarActions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../actions/StarActions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _StarActions = __webpack_require__(290);
 
 	var _StarActions2 = _interopRequireDefault(_StarActions);
 
-	var _StarStore = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../stores/StarStore\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _StarStore = __webpack_require__(291);
 
 	var _StarStore2 = _interopRequireDefault(_StarStore);
 
@@ -9759,9 +11686,196 @@ webpackJsonp([0],[
 	exports.default = Star;
 
 /***/ },
-/* 289 */,
-/* 290 */,
+/* 290 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-11-15.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var StarActions = (function () {
+	    function StarActions() {
+	        _classCallCheck(this, StarActions);
+
+	        this.generateActions('getStarSuccess', 'unStarSuccess', 'changeStateSuccess');
+	    }
+
+	    _createClass(StarActions, [{
+	        key: 'getStar',
+	        value: function getStar(id, column) {
+	            var _this = this;
+
+	            console.log('heh');
+	            $.ajax({
+	                url: '/api/star',
+	                dataType: 'json',
+	                type: 'post',
+	                cache: false,
+	                contentType: 'application/json;charset=utf-8',
+	                data: JSON.stringify({ star_id: id, column: column })
+	            }).done(function (data) {
+	                _this.actions.getStarSuccess(data);
+	            }).fail(function () {
+	                toastr.error('收藏不成功');
+	            });
+	        }
+	    }, {
+	        key: 'unStar',
+	        value: function unStar(id, column) {
+	            var _this2 = this;
+
+	            $.ajax({
+	                url: '/api/star',
+	                dataType: 'json',
+	                type: 'delete',
+	                cache: false,
+	                contentType: 'application/json;charset=utf-8',
+	                data: JSON.stringify({ star_id: id, column: column })
+	            }).done(function (data) {
+	                _this2.actions.unStarSuccess(data);
+	            }).fail(function () {
+	                toastr.error('取消收藏不成功');
+	            });
+	        }
+	    }, {
+	        key: 'changeState',
+	        value: function changeState(option) {
+	            var _this3 = this;
+
+	            if (this.$Dispatcher_isDispatching) {
+	                console.log('hehe');
+	                window.setTimeout(function () {
+	                    _this3.actions.changeSuccess(option);
+	                });
+	            }
+	        }
+	    }]);
+
+	    return StarActions;
+	})();
+
+	exports.default = _alt2.default.createActions(StarActions);
+
+/***/ },
 /* 291 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-11-15.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	var _StarActions = __webpack_require__(290);
+
+	var _StarActions2 = _interopRequireDefault(_StarActions);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var StarStore = (function () {
+	    function StarStore() {
+	        _classCallCheck(this, StarStore);
+
+	        this.bindActions(_StarActions2.default);
+	        this.stared = false;
+	        this.option = 0;
+	        this.btnClass = 'btn-primary';
+	    }
+
+	    _createClass(StarStore, [{
+	        key: 'onGetStarSuccess',
+	        value: function onGetStarSuccess(data) {
+	            switch (data.code) {
+	                case 200:
+	                    toastr.success('收藏成功');
+	                    this.stared = true;
+	                    this.option = 1;
+	                    this.btnClass = 'btn-danger';
+	                    break;
+	                case 304:
+	                    toastr.warning('你已经收藏过了');
+	                    break;
+	                case 406:
+	                    toastr.warning('你还没登陆');
+	                    break;
+	                case 404:
+	                    toastr.warning('没有这个用户');
+	                    break;
+	                case 505:
+	                    toastr.error('服务器错误');
+	                    break;
+	            }
+	        }
+	    }, {
+	        key: 'unStarSuccess',
+	        value: function unStarSuccess(data) {
+	            switch (data.code) {
+	                case 200:
+	                    toastr.success('取消收藏成功');
+	                    this.stared = false;
+	                    this.option = 0;
+	                    this.btnClass = 'btn-primary';
+	                    break;
+	                case 304:
+	                    toastr.warning('你还没有收藏过');
+	                    break;
+	                case 400:
+	                    toastr.warning('你还没登陆');
+	                    break;
+	                case 404:
+	                    toastr.warning('没有这个用户');
+	                    break;
+	                case 505:
+	                    toastr.error('服务器错误');
+	                    break;
+	            }
+	        }
+	    }, {
+	        key: 'onChangeStateSuccess',
+	        value: function onChangeStateSuccess(option) {
+	            if (option === 0) {
+	                this.stared = true;
+	                this.option = 1;
+	                this.btnClass = 'btn-danger';
+	            } else {
+	                this.stared = false;
+	                this.option = 0;
+	                this.btnClass = 'btn-primary';
+	            }
+	        }
+	    }]);
+
+	    return StarStore;
+	})();
+
+	exports.default = _alt2.default.createStore(StarStore);
+
+/***/ },
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9780,11 +11894,11 @@ webpackJsonp([0],[
 
 	var _underscore = __webpack_require__(228);
 
-	var _ListActions = __webpack_require__(292);
+	var _ListActions = __webpack_require__(293);
 
 	var _ListActions2 = _interopRequireDefault(_ListActions);
 
-	var _ListStore = __webpack_require__(293);
+	var _ListStore = __webpack_require__(294);
 
 	var _ListStore2 = _interopRequireDefault(_ListStore);
 
@@ -9990,7 +12104,7 @@ webpackJsonp([0],[
 	exports.default = List;
 
 /***/ },
-/* 292 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10059,7 +12173,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(ListActions);
 
 /***/ },
-/* 293 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10076,7 +12190,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _ListActions = __webpack_require__(292);
+	var _ListActions = __webpack_require__(293);
 
 	var _ListActions2 = _interopRequireDefault(_ListActions);
 
@@ -10114,7 +12228,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(ListStore);
 
 /***/ },
-/* 294 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10133,7 +12247,7 @@ webpackJsonp([0],[
 
 	var _reactRouter = __webpack_require__(158);
 
-	var _Contribute = __webpack_require__(278);
+	var _Contribute = __webpack_require__(279);
 
 	var _Contribute2 = _interopRequireDefault(_Contribute);
 
@@ -10141,15 +12255,15 @@ webpackJsonp([0],[
 
 	var _NotFound2 = _interopRequireDefault(_NotFound);
 
-	var _NoticeSender = __webpack_require__(295);
+	var _NoticeSender = __webpack_require__(296);
 
 	var _NoticeSender2 = _interopRequireDefault(_NoticeSender);
 
-	var _MemberActions = __webpack_require__(298);
+	var _MemberActions = __webpack_require__(299);
 
 	var _MemberActions2 = _interopRequireDefault(_MemberActions);
 
-	var _MemberStore = __webpack_require__(299);
+	var _MemberStore = __webpack_require__(300);
 
 	var _MemberStore2 = _interopRequireDefault(_MemberStore);
 
@@ -10306,7 +12420,7 @@ webpackJsonp([0],[
 	exports.default = Member;
 
 /***/ },
-/* 295 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10321,11 +12435,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _NoticeSenderActions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../actions/NoticeSenderActions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _NoticeSenderActions = __webpack_require__(297);
 
 	var _NoticeSenderActions2 = _interopRequireDefault(_NoticeSenderActions);
 
-	var _NoticeSenderStore = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../stores/NoticeSenderStore\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _NoticeSenderStore = __webpack_require__(298);
 
 	var _NoticeSenderStore2 = _interopRequireDefault(_NoticeSenderStore);
 
@@ -10450,9 +12564,133 @@ webpackJsonp([0],[
 	exports.default = NoticeSender;
 
 /***/ },
-/* 296 */,
-/* 297 */,
+/* 297 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-12-5.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var NoticeSenderActions = (function () {
+	    function NoticeSenderActions() {
+	        _classCallCheck(this, NoticeSenderActions);
+
+	        this.generateActions('changeContent', 'postNoticeSuccess', 'postNoticeLoad');
+	    }
+
+	    _createClass(NoticeSenderActions, [{
+	        key: 'postNotice',
+	        value: function postNotice(content, receiver) {
+	            var _this = this;
+
+	            var params = {
+	                params: {
+	                    content: content,
+	                    create_time: new Date().getTime(),
+	                    type: 1,
+	                    receiver: receiver
+	                }
+	            };
+
+	            $.ajax({
+	                url: '/api/notice',
+	                type: 'post',
+	                dataType: 'json',
+	                contentType: 'application/json;charset=utf-8',
+	                data: JSON.stringify(params)
+	            }).done(function (data) {
+	                _this.actions.postNoticeSuccess(data);
+	            }).fail(function () {
+	                toastr.warning('发送私信失败');
+	            });
+	        }
+	    }]);
+
+	    return NoticeSenderActions;
+	})();
+
+	exports.default = _alt2.default.createActions(NoticeSenderActions);
+
+/***/ },
 /* 298 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-12-5.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	var _NoticeSenderActions = __webpack_require__(297);
+
+	var _NoticeSenderActions2 = _interopRequireDefault(_NoticeSenderActions);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var NoticeSenderStore = (function () {
+	    function NoticeSenderStore() {
+	        _classCallCheck(this, NoticeSenderStore);
+
+	        this.bindActions(_NoticeSenderActions2.default);
+	        this.content = '';
+	        this.loading = false;
+	    }
+
+	    _createClass(NoticeSenderStore, [{
+	        key: 'onChangeContent',
+	        value: function onChangeContent(event) {
+	            this.content = event.target.value;
+	        }
+	    }, {
+	        key: 'onPostNoticeSuccess',
+	        value: function onPostNoticeSuccess(data) {
+	            this.loading = false;
+	            if (data.code === 500) {
+	                toastr.warning('发送私信失败');
+	            } else if (data.code === 404) {
+	                toastr.warning('用户不存在');
+	            } else if (data.code === 200) {
+	                toastr.success('发送私信成功');
+	            }
+	        }
+	    }, {
+	        key: 'onPostNoticeLoad',
+	        value: function onPostNoticeLoad() {
+	            this.loading = true;
+	        }
+	    }]);
+
+	    return NoticeSenderStore;
+	})();
+
+	exports.default = _alt2.default.createStore(NoticeSenderStore);
+
+/***/ },
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10503,7 +12741,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(MemberActions);
 
 /***/ },
-/* 299 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10520,7 +12758,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _MemberActions = __webpack_require__(298);
+	var _MemberActions = __webpack_require__(299);
 
 	var _MemberActions2 = _interopRequireDefault(_MemberActions);
 
@@ -10575,7 +12813,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(MemberStore);
 
 /***/ },
-/* 300 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10590,7 +12828,7 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ConList = __webpack_require__(301);
+	var _ConList = __webpack_require__(302);
 
 	var _ConList2 = _interopRequireDefault(_ConList);
 
@@ -10636,7 +12874,7 @@ webpackJsonp([0],[
 	exports.default = ConArticle;
 
 /***/ },
-/* 301 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10655,11 +12893,11 @@ webpackJsonp([0],[
 
 	var _underscore = __webpack_require__(228);
 
-	var _ConListActions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../actions/ConListActions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _ConListActions = __webpack_require__(303);
 
 	var _ConListActions2 = _interopRequireDefault(_ConListActions);
 
-	var _ConListStore = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../stores/ConListStore\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _ConListStore = __webpack_require__(304);
 
 	var _ConListStore2 = _interopRequireDefault(_ConListStore);
 
@@ -10841,9 +13079,151 @@ webpackJsonp([0],[
 	exports.default = ConList;
 
 /***/ },
-/* 302 */,
-/* 303 */,
+/* 303 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-11-14.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var ConListActions = (function () {
+	    function ConListActions() {
+	        _classCallCheck(this, ConListActions);
+
+	        this.generateActions('getConListSuccess', 'subSkip', 'plusSkip');
+	    }
+
+	    /**
+	     * 获取列表
+	     * @param option 0 -- member 1 -- profile
+	     * @param tab
+	     * @param param
+	     */
+
+	    _createClass(ConListActions, [{
+	        key: 'getConList',
+	        value: function getConList(option, tab, param, skip) {
+	            var _this = this;
+
+	            var params = {
+	                option: { skip: skip * 4, limit: 4, sort: { create_time: 1 } }
+	            },
+	                url = '/api/' + tab;
+
+	            if (option === '0') {
+	                params.params = { create_user_domain: param };
+	            } else {
+	                params.params = { create_user_id: '' };
+	            }
+
+	            $.ajax({
+	                url: url,
+	                type: 'post',
+	                dataType: 'json',
+	                contentType: 'application/json;charset=utf-8',
+	                cache: false,
+	                data: JSON.stringify(params)
+	            }).done(function (data) {
+	                _this.actions.getConListSuccess(data);
+	            }).fail(function (data) {
+	                toastr.error('网络链接有问题');
+	            });
+	        }
+	    }, {
+	        key: 'changeSkip',
+	        value: function changeSkip(option) {
+	            if (option === 0) {
+	                this.actions.subSkip();
+	            } else if (option === 1) {
+	                this.actions.plusSkip();
+	            }
+	        }
+	    }]);
+
+	    return ConListActions;
+	})();
+
+	exports.default = _alt2.default.createActions(ConListActions);
+
+/***/ },
 /* 304 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-11-14.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	var _ConListActions = __webpack_require__(303);
+
+	var _ConListActions2 = _interopRequireDefault(_ConListActions);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var ConListStore = (function () {
+	    function ConListStore() {
+	        _classCallCheck(this, ConListStore);
+
+	        this.bindActions(_ConListActions2.default);
+	        this.contributes = [];
+	        this.count = 0;
+	        this.skip = 0;
+	    }
+
+	    _createClass(ConListStore, [{
+	        key: 'onGetConListSuccess',
+	        value: function onGetConListSuccess(data) {
+	            if (data.code === 200) {
+	                this.contributes = data.raw._raw;
+	                this.count = data.raw.count;
+	            } else if (data.code === 500) {
+	                toastr.error('服务器错误');
+	            }
+	        }
+	    }, {
+	        key: 'onSubSkip',
+	        value: function onSubSkip() {
+	            this.skip = this.skip - 1;
+	        }
+	    }, {
+	        key: 'onPlusSkip',
+	        value: function onPlusSkip() {
+	            this.skip = this.skip + 1;
+	        }
+	    }]);
+
+	    return ConListStore;
+	})();
+
+	exports.default = _alt2.default.createStore(ConListStore);
+
+/***/ },
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10858,11 +13238,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _MusicActions = __webpack_require__(305);
+	var _MusicActions = __webpack_require__(306);
 
 	var _MusicActions2 = _interopRequireDefault(_MusicActions);
 
-	var _MusicStore = __webpack_require__(306);
+	var _MusicStore = __webpack_require__(307);
 
 	var _MusicStore2 = _interopRequireDefault(_MusicStore);
 
@@ -10874,11 +13254,11 @@ webpackJsonp([0],[
 
 	var _NotFound2 = _interopRequireDefault(_NotFound);
 
-	var _Comment = __webpack_require__(284);
+	var _Comment = __webpack_require__(285);
 
 	var _Comment2 = _interopRequireDefault(_Comment);
 
-	var _Star = __webpack_require__(288);
+	var _Star = __webpack_require__(289);
 
 	var _Star2 = _interopRequireDefault(_Star);
 
@@ -11099,7 +13479,7 @@ webpackJsonp([0],[
 	exports.default = Music;
 
 /***/ },
-/* 305 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11150,7 +13530,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(MusicActions);
 
 /***/ },
-/* 306 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11167,7 +13547,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _MusicActions = __webpack_require__(305);
+	var _MusicActions = __webpack_require__(306);
 
 	var _MusicActions2 = _interopRequireDefault(_MusicActions);
 
@@ -11233,7 +13613,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(MusicStore);
 
 /***/ },
-/* 307 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -11286,7 +13666,7 @@ webpackJsonp([0],[
 	exports.default = MemberCenter;
 
 /***/ },
-/* 308 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11301,11 +13681,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _MemberFollowActions = __webpack_require__(309);
+	var _MemberFollowActions = __webpack_require__(310);
 
 	var _MemberFollowActions2 = _interopRequireDefault(_MemberFollowActions);
 
-	var _MemberFollowStore = __webpack_require__(310);
+	var _MemberFollowStore = __webpack_require__(311);
 
 	var _MemberFollowStore2 = _interopRequireDefault(_MemberFollowStore);
 
@@ -11417,7 +13797,7 @@ webpackJsonp([0],[
 	exports.default = MemberFollow;
 
 /***/ },
-/* 309 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11491,7 +13871,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(MemberFollowActions);
 
 /***/ },
-/* 310 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11508,7 +13888,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _MemberFollowActions = __webpack_require__(309);
+	var _MemberFollowActions = __webpack_require__(310);
 
 	var _MemberFollowActions2 = _interopRequireDefault(_MemberFollowActions);
 
@@ -11554,7 +13934,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(MemberFollowStore);
 
 /***/ },
-/* 311 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11569,11 +13949,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _AnimateActions = __webpack_require__(312);
+	var _AnimateActions = __webpack_require__(313);
 
 	var _AnimateActions2 = _interopRequireDefault(_AnimateActions);
 
-	var _AnimateStore = __webpack_require__(313);
+	var _AnimateStore = __webpack_require__(314);
 
 	var _AnimateStore2 = _interopRequireDefault(_AnimateStore);
 
@@ -11724,7 +14104,7 @@ webpackJsonp([0],[
 	exports.default = Animate;
 
 /***/ },
-/* 312 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11781,7 +14161,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(AnimateActions);
 
 /***/ },
-/* 313 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11798,7 +14178,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _AnimateActions = __webpack_require__(312);
+	var _AnimateActions = __webpack_require__(313);
 
 	var _AnimateActions2 = _interopRequireDefault(_AnimateActions);
 

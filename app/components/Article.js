@@ -46,27 +46,39 @@ class Article extends React.Component {
             );
         });
 
-        let Article,Aside;
+        let Article,Aside,Abbr;
         if(this.state.article) {
+            Abbr = (
+                <div className="mon-abbr">
+                    <div className="mon-abbr-back">
+                        <img src={this.state.abbreviations} alt="loading"/>
+                    </div>
+                    <div className="mon-abbr-content">
+                        <div className="col-md-8 col-sm-12 col-xs-12">
+                            <p className='mon-article-title'>{this.state.title}</p>
+                            <div className='mon-article-detail media'>
+                                <div className="media-left">
+                                    <a href={'/member/'+this.state.createUserDomain}>
+                                        <img src={this.state.createUserAvatar || '/img/default.png'} alt="loading"/>
+                                    </a>
+                                </div>
+                                <div className="media-body">
+                                    <a href={'/member/'+this.state.createUserDomain}>{this.state.createUser}</a>
+                                    <Star star={this.props.params.id} column='article' stared={this.state.stared} />
+                                    {this.state.stars}
+                                    <p className="mon-detail-time">
+                                        {this.state.createTime}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+
             Article = (
                 <div className='raw animated fadeInUp clearfix'>
                     <div className='col-md-8 col-sm-12 col-xs-12 col-md-offset-2 mon-article'>
-                        <p className='mon-article-title'>{this.state.title}</p>
-                        <div className='mon-article-detail media'>
-                            <div className="media-left">
-                                <a href={'/member/'+this.state.createUserDomain}>
-                                    <img src={this.state.createUserAvatar || '/img/default.png'} alt="loading"/>
-                                </a>
-                            </div>
-                            <div className="media-body">
-                                <a href={'/member/'+this.state.createUserDomain}>{this.state.createUser}</a>
-                                <Star star={this.props.params.id} column='article' stared={this.state.stared} />
-                                {this.state.stars}
-                                <p className="mon-detail-time">
-                                    {this.state.createTime}
-                                </p>
-                            </div>
-                        </div>
                         <p className='bg-success mon-article-summary'>{this.state.summary}</p>
                         <div ref='content' className='mon-article-content' dangerouslySetInnerHTML={{__html: this.state.content}}>
                         </div>
@@ -106,10 +118,13 @@ class Article extends React.Component {
             Article =　<Loading/> ;
         }
         return (
-            <div className='container'>
-                {Article}
-                {Aside}
-                <BtnBlock />
+            <div>
+                {Abbr}
+                <div className='container'>
+                    {Article}
+                    {Aside}
+                    <BtnBlock />
+                </div>
             </div>
         );
     }

@@ -42,7 +42,7 @@ class Nav extends React.Component {
             SUBNAV = (
                 <ul className="nav navbar-nav navbar-right mon-subnav">
                     <li className="dropdown">
-                        <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <a href="#" className="mon-user-nav dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <img src={this.state.avatar} width='30' alt="loading"/> <span className="caret"></span>
                             <NoticePoint />
                         </a>
@@ -70,7 +70,7 @@ class Nav extends React.Component {
             );
         }
         return (
-            <nav className='navbar navbar-default mon-nav' id='mon-fixed-nav'>
+            <nav className='navbar navbar-default navbar-fixed-top mon-nav' id='mon-fixed-nav'>
                 <div className='container'>
                     <div className='navbar-header'>
                         <button className='navbar-toggle collapsed' data-toggle='collapse' data-target='#my-nav'>
