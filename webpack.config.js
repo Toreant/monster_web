@@ -8,11 +8,11 @@ var commonsPlugin = webpack.optimize.CommonsChunkPlugin;
 module.exports = {
     entry: {
         bundle: [path.resolve(__dirname, 'app/main.js')],
-        common : ['alt','react','react-router','react-dom','underscore']
+        common: ['alt','react','react-router','react-dom','underscore']
     },
     output: {
-        path: path.resolve(__dirname, 'build'),
-        filename: '[name].test.js'
+        path: path.resolve(__dirname, 'public/js'),
+        filename: '[name].js'
     },
     resolve: {
         extensions: ['', '.js', '.jsx']

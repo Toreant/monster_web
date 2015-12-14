@@ -36,10 +36,6 @@ class Member extends React.Component {
         this.setState(state);
     }
 
-    handleClick() {
-
-    }
-
     render() {
         let domain = this.props.params.domain;
         let Mem = (

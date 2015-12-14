@@ -93,14 +93,10 @@ gulp.task('vendor', function() {
  | build the app
  */
 gulp.task('webpack',function() {
-    return gulp.src(['app/main.js','alt',
-            'react',
-            'react-dom',
-            'react-router',
-            'underscore'])
+    return gulp.src(['app/main.js'])
         .pipe(webpack(require('./webpack.config.js')))
-        //.pipe(uglify({mangle : false}))
-        .pipe(gulp.dest('build/'));
+        .pipe(gulpif(production , uglify({mangle : false})))
+        .pipe(gulp.dest('public/js'));
 });
 
 /*
