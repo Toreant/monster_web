@@ -1,0 +1,41 @@
+/**
+ * Created by apache on 15-12-13.
+ */
+var webpack = require('webpack');
+var path  = require('path');
+var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
+
+module.exports = {
+    entry: {
+        bundle: [path.resolve(__dirname, 'app/*.js'),'app/*'],
+	venderB: ['alt',
+    			'react',
+    			'react-dom',
+    			'react-router',
+    			'underscore']
+    },
+    output: {
+        path: path.resolve(__dirname, 'build'),
+        filename: '[name].test.js',
+    },
+    resolve: {
+        extensions: ['', '.js', '.jsx']
+    },
+    externals: {
+        'react' : 'react',
+        'react-router' : 'react-router'
+    },
+    module: {
+        loaders: [
+      {
+        test: /.jsx?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        query: {
+          presets: ['es2015', 'react']
+        }
+      }
+    ]
+    },
+    plugins: [commonsPlugin]
+};
