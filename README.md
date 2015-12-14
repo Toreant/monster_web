@@ -114,7 +114,7 @@ require('./server');
 
 结果，出现react中的文件出现错误。原来，还需要对react进行编译。　　
 
-- 安装```babel-preset-react```,在```.bashrc```中添加react，修改后的```.bashrc```文件为
+- 安装```babel-preset-react```,在```.babelrc```中添加react，修改后的```.babelrc```文件为
 ```[javascript]
 {
   "presets": ['es2015','react']
