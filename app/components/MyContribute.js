@@ -32,11 +32,11 @@ class MyContribute extends React.Component {
     }
 
     update(column,_id) {
-
+        MyContributeActions.get(column,_id);
     }
 
     render() {
-        let List;
+        let List,UpdateBlock;
         if(this.state.loading) {
             List = <Loading />;
         } else if(this.state.list.length !== 0) {
@@ -95,8 +95,10 @@ class MyContribute extends React.Component {
             );
         }
 
+
+
         return (
-            <div className='animated flipInX'>
+            <div className='animated flipInX mon-contribute'>
                 {List}
             </div>
         );

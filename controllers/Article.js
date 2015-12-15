@@ -44,8 +44,10 @@ class ArticleCtrl {
      * @param next
      */
     getArticle(req,res,next) {
-        let id = req.body.id,
-            user = req.session.user;
+        let id = req.params.id,
+            user = req.session.user,
+            transform =req.params.transform;
+        console.log(transform);
 
         article.getArticleById(id,user,(data) => {
             let result = {
@@ -66,7 +68,7 @@ class ArticleCtrl {
                 result.raw = data;
             }
             res.json(result);
-        });
+        },transform);
     }
 
 
@@ -162,6 +164,38 @@ class ArticleCtrl {
                     break;
             }
             result.code = data;
+            res.json(result);
+        });
+    }
+
+    /**
+     * 更新文章
+     * @param req
+     * @param res
+     * @param next
+     */
+    updateArticle(req,res,next) {
+        let params = req.body.params,
+            where = req.body._id,
+            user = req.session.user;
+
+        let result = {
+            meta : '',
+            code : 0
+        };
+
+        article.updateArticle({_id : where},params,user._id.toString(),(data) => {
+
+            if(data === 500) {
+                result.meta = '服务器错误';
+            } else if(data === 404) {
+                result.meta = '不存在这个用户';
+            } else if(data === 200) {
+                result.meta = '更新成功';
+            }
+
+            result.code = 200;
+
             res.json(result);
         });
     }

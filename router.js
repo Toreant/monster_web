@@ -49,7 +49,11 @@ router.post('/api/article',auth.isAuth,ArticleCtrl.getSaveArticle);
 
 router.post('/api/getArticle',ArticleCtrl.getArticle);
 
+router.get('/api/article/:id/:transform?',ArticleCtrl.getArticle);
+
 router.post('/api/articles',ArticleCtrl.getArticles);
+
+router.put('/api/article',auth.isAuth,ArticleCtrl.updateArticle);
 
 router.delete('/api/article/:id',auth.isAuth,ArticleCtrl.deleteArticle);
 

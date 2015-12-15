@@ -8,7 +8,9 @@ class MyContributeActions {
         this.generateActions(
             'getContributeSuccess',
             'getContributeFail',
-            'deleteSuccess'
+            'deleteSuccess',
+            'getSuccess',
+            'getFail'
         );
     }
 
@@ -50,6 +52,19 @@ class MyContributeActions {
             this.actions.deleteSuccess({data : data,target : target});
         }).fail(() => {
             toastr.warning('删除不成功');
+        })
+    }
+
+    get(column,_id) {
+        $.ajax({
+            url : '/api/'+column+'/'+_id+'/false',
+            type : 'get',
+            cache : false,
+            contentType : 'application/json;charset=utf-8'
+        }).done((data) => {
+            this.actions.getSuccess(data);
+        }).fail(() => {
+            this.actions.getFail();
         })
     }
 }

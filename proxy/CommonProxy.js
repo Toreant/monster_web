@@ -140,8 +140,7 @@ class CommonProxy {
      * @param callback
      */
     gets(params,option,callback) {
-        let column = this.column,
-            Model = this.Model;
+        let Model = this.Model;
 
         async.waterfall([
             /*
@@ -229,6 +228,46 @@ class CommonProxy {
              * result = 【｛article,user｝】 ; 结果
              */
             callback(result);
+        });
+    }
+
+    /**
+     * 更新
+     * @param where
+     * @param params
+     * @param u
+     * @param callback
+     */
+    update(where,params,u,callback) {
+        let Model = this.Model;
+        async.waterfall([
+
+            // 查找用户
+            function(_callback) {
+                User.findById(u,(err,user) => {
+                    if(err) {
+                        return callback(500);
+                    } else if(user === null) {
+                        return callback(406);
+                    } else {
+                        _callback(null,user);
+                    }
+                });
+            },
+
+            // 更新
+            function(user,_callback) {
+                Model.update(where,params,(err,raw) => {
+                    console.log(raw);
+                    if(err) {
+                        _callback(null,500);
+                    } else {
+                        _callback(null,200);
+                    }
+                });
+            }
+        ],(err,result) => {
+            return callback(result);
         });
     }
 }

@@ -6,6 +6,7 @@ import {Router,RouteHandler,Link} from 'react-router';
 import UserActions from '../actions/UserActions';
 import UserStore from '../stores/UserStore';
 import NoticePoint from './NoticePoint';
+import UpdateBlock from './UpdateBlock';
 
 class User extends React.Component {
     constructor(props) {
@@ -99,6 +100,7 @@ class User extends React.Component {
         return (
             <div className='container'>
                 {content}
+                <UpdateBlock />
             </div>
         );
     }

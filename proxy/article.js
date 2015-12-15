@@ -19,8 +19,9 @@ class md {
      * @param id
      * @param u 登陆的用户
      * @param callback
+     * @param transform 是否不转化成html
      */
-    getArticleById(id,u,callback) {
+    getArticleById(id,u,callback,transform = 'true') {
 
         async.waterfall([
 
@@ -34,6 +35,7 @@ class md {
                         return callback(500);
                     }
                     if(docs != undefined && docs !== null) {
+
                         //文章阅读数增１
                         docs.browser_count += 1;
                         docs.save((err) => {
@@ -82,8 +84,10 @@ class md {
             }
         ],function(err,result) {
 
-            // 将markdown转成html实体
-            result.article.content = markdown.toHTML(result.article.content, 'Maruku');
+            if(transform === 'true') {
+                // 将markdown转成html实体
+                result.article.content = markdown.toHTML(result.article.content, 'Maruku');
+            }
             callback(result);
         });
     }
@@ -129,10 +133,12 @@ class md {
      * 更新文章
      * @param where
      * @param params
+     * @param u
      * @param callback
      */
-    updateArticle(where,params,callback) {
+    updateArticle(where,params,u,callback) {
 
+        this.commonProxy.update(where,params,u,callback);
     }
 
     /**

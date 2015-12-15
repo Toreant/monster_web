@@ -8,9 +8,8 @@ class ArticleActions {
 
     getArticle(id) {
         $.ajax({
-            url: '/api/getArticle',
-            type: 'post',
-            data: {id: id},
+            url: '/api/article/'+id,
+            type: 'get',
             cache: false
         }).done(
             (data) => {

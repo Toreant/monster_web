@@ -261,79 +261,79 @@ webpackJsonp([0],[
 
 	var _User2 = _interopRequireDefault(_User);
 
-	var _Set = __webpack_require__(239);
+	var _Set = __webpack_require__(242);
 
 	var _Set2 = _interopRequireDefault(_Set);
 
-	var _Notice = __webpack_require__(245);
+	var _Notice = __webpack_require__(248);
 
 	var _Notice2 = _interopRequireDefault(_Notice);
 
-	var _StarList = __webpack_require__(248);
+	var _StarList = __webpack_require__(251);
 
 	var _StarList2 = _interopRequireDefault(_StarList);
 
-	var _NotFound = __webpack_require__(251);
+	var _NotFound = __webpack_require__(254);
 
 	var _NotFound2 = _interopRequireDefault(_NotFound);
 
-	var _PostAnimate = __webpack_require__(252);
+	var _PostAnimate = __webpack_require__(255);
 
 	var _PostAnimate2 = _interopRequireDefault(_PostAnimate);
 
-	var _PostMusic = __webpack_require__(259);
+	var _PostMusic = __webpack_require__(262);
 
 	var _PostMusic2 = _interopRequireDefault(_PostMusic);
 
-	var _PostArticle = __webpack_require__(262);
+	var _PostArticle = __webpack_require__(265);
 
 	var _PostArticle2 = _interopRequireDefault(_PostArticle);
 
-	var _MyContribute = __webpack_require__(270);
+	var _MyContribute = __webpack_require__(273);
 
 	var _MyContribute2 = _interopRequireDefault(_MyContribute);
 
-	var _ProfileCenter = __webpack_require__(273);
+	var _ProfileCenter = __webpack_require__(276);
 
 	var _ProfileCenter2 = _interopRequireDefault(_ProfileCenter);
 
-	var _Follow = __webpack_require__(276);
+	var _Follow = __webpack_require__(279);
 
 	var _Follow2 = _interopRequireDefault(_Follow);
 
-	var _Contribute = __webpack_require__(282);
+	var _Contribute = __webpack_require__(285);
 
 	var _Contribute2 = _interopRequireDefault(_Contribute);
 
-	var _Article = __webpack_require__(285);
+	var _Article = __webpack_require__(288);
 
 	var _Article2 = _interopRequireDefault(_Article);
 
-	var _List = __webpack_require__(295);
+	var _List = __webpack_require__(298);
 
 	var _List2 = _interopRequireDefault(_List);
 
-	var _Member = __webpack_require__(298);
+	var _Member = __webpack_require__(301);
 
 	var _Member2 = _interopRequireDefault(_Member);
 
-	var _ConArticle = __webpack_require__(304);
+	var _ConArticle = __webpack_require__(307);
 
 	var _ConArticle2 = _interopRequireDefault(_ConArticle);
 
-	var _Music = __webpack_require__(308);
+	var _Music = __webpack_require__(311);
 
 	var _Music2 = _interopRequireDefault(_Music);
 
-	var _MemberCenter = __webpack_require__(311);
+	var _MemberCenter = __webpack_require__(314);
 
 	var _MemberCenter2 = _interopRequireDefault(_MemberCenter);
 
-	var _MemberFollow = __webpack_require__(312);
+	var _MemberFollow = __webpack_require__(315);
 
 	var _MemberFollow2 = _interopRequireDefault(_MemberFollow);
 
-	var _Animate = __webpack_require__(315);
+	var _Animate = __webpack_require__(318);
 
 	var _Animate2 = _interopRequireDefault(_Animate);
 
@@ -2833,6 +2833,10 @@ webpackJsonp([0],[
 
 	var _NoticePoint2 = _interopRequireDefault(_NoticePoint);
 
+	var _UpdateBlock = __webpack_require__(239);
+
+	var _UpdateBlock2 = _interopRequireDefault(_UpdateBlock);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3058,7 +3062,8 @@ webpackJsonp([0],[
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'container' },
-	                content
+	                content,
+	                _react2.default.createElement(_UpdateBlock2.default, null)
 	            );
 	        }
 	    }]);
@@ -3209,15 +3214,340 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _SetActions = __webpack_require__(240);
+	var _UpdateBlockActions = __webpack_require__(240);
+
+	var _UpdateBlockActions2 = _interopRequireDefault(_UpdateBlockActions);
+
+	var _UpdateBlockStore = __webpack_require__(241);
+
+	var _UpdateBlockStore2 = _interopRequireDefault(_UpdateBlockStore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by apache on 15-12-15.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+	var UpdateBlock = (function (_React$Component) {
+	    _inherits(UpdateBlock, _React$Component);
+
+	    function UpdateBlock(props) {
+	        _classCallCheck(this, UpdateBlock);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UpdateBlock).call(this, props));
+
+	        _this.state = _UpdateBlockStore2.default.getState();
+	        _this.onChange = _this.onChange.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(UpdateBlock, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            _UpdateBlockStore2.default.listen(this.onChange);
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            _UpdateBlockStore2.default.unlisten(this.onChange);
+	        }
+	    }, {
+	        key: 'onChange',
+	        value: function onChange(state) {
+	            this.setState(state);
+	        }
+	    }, {
+	        key: 'handleClick',
+	        value: function handleClick() {
+	            var $updateModal = $("#updateModal");
+	            var title = $updateModal.find("input[name='title']").val(),
+	                summary = $updateModal.find("textarea[name='summary']").val(),
+	                tags = $updateModal.find("input[name='tag']").val().replace(/\s+/g, ","),
+	                content = $updateModal.find("textarea[name='content']").val();
+
+	            tags = tags.split(',');
+	            var tag = [];
+	            tags.map(function (data) {
+	                tag.push(data);
+	            });
+
+	            _UpdateBlockActions2.default.update(title, summary, tag, content, $("#_id").val());
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { id: 'updateModal', className: 'modal fade', tabIndex: '-1', role: 'dialog', 'aria-labelledby': 'myModalLabel', 'data-backdrop': 'static' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'modal-dialog' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'modal-content' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'modal-header' },
+	                            _react2.default.createElement(
+	                                'button',
+	                                { type: 'button', className: 'close', 'data-dismiss': 'modal', 'aria-label': 'Close' },
+	                                _react2.default.createElement(
+	                                    'span',
+	                                    { 'aria-hidden': 'true' },
+	                                    '×'
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'h4',
+	                                null,
+	                                '更新'
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'modal-body' },
+	                            _react2.default.createElement(
+	                                'form',
+	                                { role: 'form' },
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2.default.createElement(
+	                                        'p',
+	                                        { className: 'text-info' },
+	                                        '标题'
+	                                    ),
+	                                    _react2.default.createElement('input', { name: 'title', type: 'text', className: 'form-control' })
+	                                ),
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2.default.createElement(
+	                                        'p',
+	                                        { className: 'text-info' },
+	                                        '简介'
+	                                    ),
+	                                    _react2.default.createElement('textarea', { name: 'summary', cols: '30', rows: '4', className: 'form-control' })
+	                                ),
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2.default.createElement(
+	                                        'p',
+	                                        { className: 'text-info' },
+	                                        '标签'
+	                                    ),
+	                                    _react2.default.createElement('input', { name: 'tag', type: 'text', className: 'form-control' })
+	                                ),
+	                                _react2.default.createElement('input', { id: '_id', type: 'hidden', name: '_id' }),
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { className: 'form-group' },
+	                                    _react2.default.createElement(
+	                                        'p',
+	                                        { className: 'text-info' },
+	                                        '主体内容'
+	                                    ),
+	                                    _react2.default.createElement('textarea', { id: 'updateContent', name: 'content', cols: '30', rows: '10', className: 'form-control' })
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'modal-footer' },
+	                            _react2.default.createElement(
+	                                'button',
+	                                { className: 'btn btn-primary pull-right', onClick: this.handleClick.bind(this) },
+	                                '保存更新'
+	                            )
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return UpdateBlock;
+	})(_react2.default.Component);
+
+	exports.default = UpdateBlock;
+
+/***/ },
+/* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-12-15.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var UpdateBlockActions = (function () {
+	    function UpdateBlockActions() {
+	        _classCallCheck(this, UpdateBlockActions);
+
+	        this.generateActions('changeTitle', 'changeSummary', 'changeTags', 'changeContent', 'updateSuccess');
+	    }
+
+	    _createClass(UpdateBlockActions, [{
+	        key: 'update',
+	        value: function update(title, summary, tags, content, _id) {
+	            var _this = this;
+
+	            var params = {
+	                params: {
+	                    title: title,
+	                    summary: summary,
+	                    tags: tags,
+	                    content: content
+	                },
+	                _id: _id
+	            };
+
+	            $.ajax({
+	                url: '/api/article',
+	                type: 'put',
+	                dataType: 'json',
+	                contentType: 'application/json;charset=utf-8',
+	                cache: false,
+	                data: JSON.stringify(params)
+	            }).done(function (data) {
+	                _this.actions.updateSuccess(data);
+	            }).fail(function () {
+	                toastr.warning('更新失败');
+	            });
+	        }
+	    }]);
+
+	    return UpdateBlockActions;
+	})();
+
+	exports.default = _alt2.default.createActions(UpdateBlockActions);
+
+/***/ },
+/* 241 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-12-15.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	var _UpdateBlockActions = __webpack_require__(240);
+
+	var _UpdateBlockActions2 = _interopRequireDefault(_UpdateBlockActions);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var UpdateBlockStore = (function () {
+	    function UpdateBlockStore() {
+	        _classCallCheck(this, UpdateBlockStore);
+
+	        this.bindActions(_UpdateBlockActions2.default);
+	        this.title = '';
+	        this.summary = '';
+	        this.tag = [];
+	        this.tags = '';
+	        this.content = '';
+	    }
+
+	    _createClass(UpdateBlockStore, [{
+	        key: 'onChangeTitle',
+	        value: function onChangeTitle(event) {
+
+	            this.title = event.target.value;
+	            console.log(this.title);
+	        }
+	    }, {
+	        key: 'onChangeSummary',
+	        value: function onChangeSummary(event) {
+	            this.summary = event.target.value;
+	        }
+	    }, {
+	        key: 'onChangeTags',
+	        value: function onChangeTags(event) {
+	            var _this = this;
+
+	            var tags = event.target.value.replace(/\s+/g, ",");
+	            tags = tags.split(',');
+	            this.tag = [];
+	            tags.map(function (data) {
+	                _this.tag.push(data);
+	            });
+	        }
+	    }, {
+	        key: 'onChangeContent',
+	        value: function onChangeContent(event) {
+	            this.content = event.target.value;
+	        }
+	    }, {
+	        key: 'onUpdateSuccess',
+	        value: function onUpdateSuccess(data) {
+	            if (data.code === 200) {
+	                toastr.success(data.meta);
+	            } else if (data.code === 500) {
+	                toastr.warning(data.meta);
+	            }
+	        }
+	    }]);
+
+	    return UpdateBlockStore;
+	})();
+
+	exports.default = _alt2.default.createStore(UpdateBlockStore);
+
+/***/ },
+/* 242 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _SetActions = __webpack_require__(243);
 
 	var _SetActions2 = _interopRequireDefault(_SetActions);
 
-	var _SetStore = __webpack_require__(241);
+	var _SetStore = __webpack_require__(244);
 
 	var _SetStore2 = _interopRequireDefault(_SetStore);
 
-	var _Upload = __webpack_require__(242);
+	var _Upload = __webpack_require__(245);
 
 	var _Upload2 = _interopRequireDefault(_Upload);
 
@@ -3474,7 +3804,7 @@ webpackJsonp([0],[
 	exports.default = Set;
 
 /***/ },
-/* 240 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3557,7 +3887,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(SetActions);
 
 /***/ },
-/* 241 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3574,7 +3904,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _SetActions = __webpack_require__(240);
+	var _SetActions = __webpack_require__(243);
 
 	var _SetActions2 = _interopRequireDefault(_SetActions);
 
@@ -3713,7 +4043,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(SetStore);
 
 /***/ },
-/* 242 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3728,11 +4058,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _UploadActions = __webpack_require__(243);
+	var _UploadActions = __webpack_require__(246);
 
 	var _UploadActions2 = _interopRequireDefault(_UploadActions);
 
-	var _UploadStore = __webpack_require__(244);
+	var _UploadStore = __webpack_require__(247);
 
 	var _UploadStore2 = _interopRequireDefault(_UploadStore);
 
@@ -3873,7 +4203,7 @@ webpackJsonp([0],[
 	exports.default = Upload;
 
 /***/ },
-/* 243 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3988,7 +4318,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(UploadActions);
 
 /***/ },
-/* 244 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4005,7 +4335,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _UploadActions = __webpack_require__(243);
+	var _UploadActions = __webpack_require__(246);
 
 	var _UploadActions2 = _interopRequireDefault(_UploadActions);
 
@@ -4085,7 +4415,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(UploadStore);
 
 /***/ },
-/* 245 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4100,11 +4430,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _NoticeActions = __webpack_require__(246);
+	var _NoticeActions = __webpack_require__(249);
 
 	var _NoticeActions2 = _interopRequireDefault(_NoticeActions);
 
-	var _NoticeStore = __webpack_require__(247);
+	var _NoticeStore = __webpack_require__(250);
 
 	var _NoticeStore2 = _interopRequireDefault(_NoticeStore);
 
@@ -4231,7 +4561,7 @@ webpackJsonp([0],[
 	exports.default = Notice;
 
 /***/ },
-/* 246 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4299,7 +4629,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(NoticeActions);
 
 /***/ },
-/* 247 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4316,7 +4646,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _NoticeActions = __webpack_require__(246);
+	var _NoticeActions = __webpack_require__(249);
 
 	var _NoticeActions2 = _interopRequireDefault(_NoticeActions);
 
@@ -4374,7 +4704,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(NoticeStore);
 
 /***/ },
-/* 248 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4391,11 +4721,11 @@ webpackJsonp([0],[
 
 	var _reactRouter = __webpack_require__(158);
 
-	var _StarListActions = __webpack_require__(249);
+	var _StarListActions = __webpack_require__(252);
 
 	var _StarListActions2 = _interopRequireDefault(_StarListActions);
 
-	var _StarListStore = __webpack_require__(250);
+	var _StarListStore = __webpack_require__(253);
 
 	var _StarListStore2 = _interopRequireDefault(_StarListStore);
 
@@ -4559,7 +4889,7 @@ webpackJsonp([0],[
 	exports.default = StarList;
 
 /***/ },
-/* 249 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4643,7 +4973,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(StarListActions);
 
 /***/ },
-/* 250 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4660,7 +4990,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _StarListActions = __webpack_require__(249);
+	var _StarListActions = __webpack_require__(252);
 
 	var _StarListActions2 = _interopRequireDefault(_StarListActions);
 
@@ -4706,7 +5036,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(StarListStore);
 
 /***/ },
-/* 251 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4765,7 +5095,7 @@ webpackJsonp([0],[
 	exports.default = NotFound;
 
 /***/ },
-/* 252 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4780,19 +5110,19 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _PostAnimateActions = __webpack_require__(253);
+	var _PostAnimateActions = __webpack_require__(256);
 
 	var _PostAnimateActions2 = _interopRequireDefault(_PostAnimateActions);
 
-	var _PostAnimateStore = __webpack_require__(254);
+	var _PostAnimateStore = __webpack_require__(257);
 
 	var _PostAnimateStore2 = _interopRequireDefault(_PostAnimateStore);
 
-	var _Upload = __webpack_require__(242);
+	var _Upload = __webpack_require__(245);
 
 	var _Upload2 = _interopRequireDefault(_Upload);
 
-	var _BigUpload = __webpack_require__(255);
+	var _BigUpload = __webpack_require__(258);
 
 	var _BigUpload2 = _interopRequireDefault(_BigUpload);
 
@@ -4971,7 +5301,7 @@ webpackJsonp([0],[
 	exports.default = PostAnimate;
 
 /***/ },
-/* 253 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5034,7 +5364,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(PostAnimateActions);
 
 /***/ },
-/* 254 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5051,7 +5381,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _PostAnimateActions = __webpack_require__(253);
+	var _PostAnimateActions = __webpack_require__(256);
 
 	var _PostAnimateActions2 = _interopRequireDefault(_PostAnimateActions);
 
@@ -5112,7 +5442,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(PostAnimateStore);
 
 /***/ },
-/* 255 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5127,11 +5457,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _BigUploadActions = __webpack_require__(256);
+	var _BigUploadActions = __webpack_require__(259);
 
 	var _BigUploadActions2 = _interopRequireDefault(_BigUploadActions);
 
-	var _BigUploadStore = __webpack_require__(257);
+	var _BigUploadStore = __webpack_require__(260);
 
 	var _BigUploadStore2 = _interopRequireDefault(_BigUploadStore);
 
@@ -5350,7 +5680,7 @@ webpackJsonp([0],[
 	exports.default = BigUpload;
 
 /***/ },
-/* 256 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5403,7 +5733,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(BgUploadActions);
 
 /***/ },
-/* 257 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5420,11 +5750,11 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _BigUploadActions = __webpack_require__(256);
+	var _BigUploadActions = __webpack_require__(259);
 
 	var _BigUploadActions2 = _interopRequireDefault(_BigUploadActions);
 
-	var _resumable = __webpack_require__(258);
+	var _resumable = __webpack_require__(261);
 
 	var _resumable2 = _interopRequireDefault(_resumable);
 
@@ -5482,7 +5812,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(BigUploadStore);
 
 /***/ },
-/* 258 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6507,7 +6837,7 @@ webpackJsonp([0],[
 	})();
 
 /***/ },
-/* 259 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6522,19 +6852,19 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _PostMusicActions = __webpack_require__(260);
+	var _PostMusicActions = __webpack_require__(263);
 
 	var _PostMusicActions2 = _interopRequireDefault(_PostMusicActions);
 
-	var _PostMusicStore = __webpack_require__(261);
+	var _PostMusicStore = __webpack_require__(264);
 
 	var _PostMusicStore2 = _interopRequireDefault(_PostMusicStore);
 
-	var _Upload = __webpack_require__(242);
+	var _Upload = __webpack_require__(245);
 
 	var _Upload2 = _interopRequireDefault(_Upload);
 
-	var _BigUpload = __webpack_require__(255);
+	var _BigUpload = __webpack_require__(258);
 
 	var _BigUpload2 = _interopRequireDefault(_BigUpload);
 
@@ -6716,7 +7046,7 @@ webpackJsonp([0],[
 	exports.default = PostMusic;
 
 /***/ },
-/* 260 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6781,7 +7111,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(PostMusicActions);
 
 /***/ },
-/* 261 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6798,7 +7128,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _PostMusicActions = __webpack_require__(260);
+	var _PostMusicActions = __webpack_require__(263);
 
 	var _PostMusicActions2 = _interopRequireDefault(_PostMusicActions);
 
@@ -6861,7 +7191,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(PostMusicStore);
 
 /***/ },
-/* 262 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6876,19 +7206,19 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _PostArticleActions = __webpack_require__(263);
+	var _PostArticleActions = __webpack_require__(266);
 
 	var _PostArticleActions2 = _interopRequireDefault(_PostArticleActions);
 
-	var _PostArticleStore = __webpack_require__(264);
+	var _PostArticleStore = __webpack_require__(267);
 
 	var _PostArticleStore2 = _interopRequireDefault(_PostArticleStore);
 
-	var _Upload = __webpack_require__(242);
+	var _Upload = __webpack_require__(245);
 
 	var _Upload2 = _interopRequireDefault(_Upload);
 
-	var _markdown = __webpack_require__(265);
+	var _markdown = __webpack_require__(268);
 
 	var _markdown2 = _interopRequireDefault(_markdown);
 
@@ -7089,7 +7419,7 @@ webpackJsonp([0],[
 	exports.default = PostArticle;
 
 /***/ },
-/* 263 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7156,7 +7486,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(PostArticleActions);
 
 /***/ },
-/* 264 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7173,7 +7503,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _PostArticleActions = __webpack_require__(263);
+	var _PostArticleActions = __webpack_require__(266);
 
 	var _PostArticleActions2 = _interopRequireDefault(_PostArticleActions);
 
@@ -7245,16 +7575,16 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(PostArticleStore);
 
 /***/ },
-/* 265 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// super simple module for the most common nodejs use case.
-	exports.markdown = __webpack_require__(266);
+	exports.markdown = __webpack_require__(269);
 	exports.parse = exports.markdown.toHTML;
 
 
 /***/ },
-/* 266 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Released under MIT license
@@ -7386,7 +7716,7 @@ webpackJsonp([0],[
 
 	// node
 	function mk_block_inspect() {
-	  var util = __webpack_require__(267);
+	  var util = __webpack_require__(270);
 	  return "Markdown.mk_block( " +
 	          util.inspect(this.toString()) +
 	          ", " +
@@ -8985,7 +9315,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 267 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -9513,7 +9843,7 @@ webpackJsonp([0],[
 	}
 	exports.isPrimitive = isPrimitive;
 
-	exports.isBuffer = __webpack_require__(268);
+	exports.isBuffer = __webpack_require__(271);
 
 	function objectToString(o) {
 	  return Object.prototype.toString.call(o);
@@ -9557,7 +9887,7 @@ webpackJsonp([0],[
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(269);
+	exports.inherits = __webpack_require__(272);
 
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -9578,7 +9908,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(4)))
 
 /***/ },
-/* 268 */
+/* 271 */
 /***/ function(module, exports) {
 
 	module.exports = function isBuffer(arg) {
@@ -9589,7 +9919,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 269 */
+/* 272 */
 /***/ function(module, exports) {
 
 	if (typeof Object.create === 'function') {
@@ -9618,7 +9948,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 270 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9633,11 +9963,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _MyContributeActions = __webpack_require__(271);
+	var _MyContributeActions = __webpack_require__(274);
 
 	var _MyContributeActions2 = _interopRequireDefault(_MyContributeActions);
 
-	var _MyContributeStore = __webpack_require__(272);
+	var _MyContributeStore = __webpack_require__(275);
 
 	var _MyContributeStore2 = _interopRequireDefault(_MyContributeStore);
 
@@ -9693,13 +10023,16 @@ webpackJsonp([0],[
 	        }
 	    }, {
 	        key: 'update',
-	        value: function update(column, _id) {}
+	        value: function update(column, _id) {
+	            _MyContributeActions2.default.get(column, _id);
+	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _this2 = this;
 
-	            var List = undefined;
+	            var List = undefined,
+	                UpdateBlock = undefined;
 	            if (this.state.loading) {
 	                List = _react2.default.createElement(_Loading2.default, null);
 	            } else if (this.state.list.length !== 0) {
@@ -9794,7 +10127,7 @@ webpackJsonp([0],[
 
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'animated flipInX' },
+	                { className: 'animated flipInX mon-contribute' },
 	                List
 	            );
 	        }
@@ -9806,7 +10139,7 @@ webpackJsonp([0],[
 	exports.default = MyContribute;
 
 /***/ },
-/* 271 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9831,7 +10164,7 @@ webpackJsonp([0],[
 	    function MyContributeActions() {
 	        _classCallCheck(this, MyContributeActions);
 
-	        this.generateActions('getContributeSuccess', 'getContributeFail', 'deleteSuccess');
+	        this.generateActions('getContributeSuccess', 'getContributeFail', 'deleteSuccess', 'getSuccess', 'getFail');
 	    }
 
 	    _createClass(MyContributeActions, [{
@@ -9881,6 +10214,22 @@ webpackJsonp([0],[
 	                toastr.warning('删除不成功');
 	            });
 	        }
+	    }, {
+	        key: 'get',
+	        value: function get(column, _id) {
+	            var _this3 = this;
+
+	            $.ajax({
+	                url: '/api/' + column + '/' + _id + '/false',
+	                type: 'get',
+	                cache: false,
+	                contentType: 'application/json;charset=utf-8'
+	            }).done(function (data) {
+	                _this3.actions.getSuccess(data);
+	            }).fail(function () {
+	                _this3.actions.getFail();
+	            });
+	        }
 	    }]);
 
 	    return MyContributeActions;
@@ -9889,7 +10238,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(MyContributeActions);
 
 /***/ },
-/* 272 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9906,9 +10255,13 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _MyContributeActions = __webpack_require__(271);
+	var _MyContributeActions = __webpack_require__(274);
 
 	var _MyContributeActions2 = _interopRequireDefault(_MyContributeActions);
+
+	var _markdown = __webpack_require__(268);
+
+	var _markdown2 = _interopRequireDefault(_markdown);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9957,6 +10310,52 @@ webpackJsonp([0],[
 	                toastr.warning(data.meta);
 	            }
 	        }
+	    }, {
+	        key: 'onGetSuccess',
+	        value: function onGetSuccess(data) {
+
+	            if (data.code === 200) {
+	                (function () {
+	                    var target = data.raw.article;
+	                    var $updateModal = $("#updateModal");
+	                    $updateModal.on('show.bs.modal', function (event) {
+	                        var modal = $(this),
+	                            tags = target.tags.toString().replace(/,/g, ' ');
+	                        modal.find("input[name='title']").val(target.title);
+	                        modal.find("textarea[name='summary']").val(target.summary);
+	                        modal.find("input[name='tag']").val(tags);
+	                        modal.find("textarea[name='content']").val(target.content);
+	                        modal.find("input[name='_id']").val(target._id);
+
+	                        var markdown = _markdown2.default.markdown;
+	                        $("#updateContent").markdown({
+	                            autofocus: false,
+	                            savable: false,
+	                            onPreview: function onPreview(e) {
+	                                var previewContent;
+
+	                                if (e.isDirty()) {
+	                                    var originalContent = e.getContent();
+
+	                                    previewContent = markdown.toHTML(originalContent);
+	                                } else {
+	                                    previewContent = "写下你的大作吧！！！";
+	                                }
+	                                return previewContent;
+	                            }
+	                        });
+	                    });
+	                    $updateModal.modal('show');
+	                })();
+	            } else {
+	                toastr.warning('获取数据失败');
+	            }
+	        }
+	    }, {
+	        key: 'onGetFail',
+	        value: function onGetFail() {
+	            toastr.warning('获取数据失败');
+	        }
 	    }]);
 
 	    return MyContributeStore;
@@ -9965,7 +10364,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(MyContributeStore);
 
 /***/ },
-/* 273 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9980,11 +10379,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ProfileCenterActions = __webpack_require__(274);
+	var _ProfileCenterActions = __webpack_require__(277);
 
 	var _ProfileCenterActions2 = _interopRequireDefault(_ProfileCenterActions);
 
-	var _ProfileCenterStore = __webpack_require__(275);
+	var _ProfileCenterStore = __webpack_require__(278);
 
 	var _ProfileCenterStore2 = _interopRequireDefault(_ProfileCenterStore);
 
@@ -10136,7 +10535,7 @@ webpackJsonp([0],[
 	exports.default = ProfileCenter;
 
 /***/ },
-/* 274 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10191,7 +10590,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(ProfileCenterActions);
 
 /***/ },
-/* 275 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10208,7 +10607,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _ProfileCenterActions = __webpack_require__(274);
+	var _ProfileCenterActions = __webpack_require__(277);
 
 	var _ProfileCenterActions2 = _interopRequireDefault(_ProfileCenterActions);
 
@@ -10247,7 +10646,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(ProfileCenterStore);
 
 /***/ },
-/* 276 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10266,15 +10665,15 @@ webpackJsonp([0],[
 
 	var _underscore = __webpack_require__(228);
 
-	var _FollowActions = __webpack_require__(277);
+	var _FollowActions = __webpack_require__(280);
 
 	var _FollowActions2 = _interopRequireDefault(_FollowActions);
 
-	var _FollowStore = __webpack_require__(278);
+	var _FollowStore = __webpack_require__(281);
 
 	var _FollowStore2 = _interopRequireDefault(_FollowStore);
 
-	var _Pagination = __webpack_require__(279);
+	var _Pagination = __webpack_require__(282);
 
 	var _Pagination2 = _interopRequireDefault(_Pagination);
 
@@ -10444,7 +10843,7 @@ webpackJsonp([0],[
 	exports.default = Follow;
 
 /***/ },
-/* 277 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10550,7 +10949,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(FollowActions);
 
 /***/ },
-/* 278 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10567,7 +10966,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _FollowActions = __webpack_require__(277);
+	var _FollowActions = __webpack_require__(280);
 
 	var _FollowActions2 = _interopRequireDefault(_FollowActions);
 
@@ -10651,7 +11050,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(FollowStore);
 
 /***/ },
-/* 279 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10666,11 +11065,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _PaginationActions = __webpack_require__(280);
+	var _PaginationActions = __webpack_require__(283);
 
 	var _PaginationActions2 = _interopRequireDefault(_PaginationActions);
 
-	var _PaginationStore = __webpack_require__(281);
+	var _PaginationStore = __webpack_require__(284);
 
 	var _PaginationStore2 = _interopRequireDefault(_PaginationStore);
 
@@ -10808,7 +11207,7 @@ webpackJsonp([0],[
 	exports.default = Pagination;
 
 /***/ },
-/* 280 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10836,7 +11235,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(PaginationActions);
 
 /***/ },
-/* 281 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10849,7 +11248,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _PaginationActions = __webpack_require__(280);
+	var _PaginationActions = __webpack_require__(283);
 
 	var _PaginationActions2 = _interopRequireDefault(_PaginationActions);
 
@@ -10868,7 +11267,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(PaginationStore);
 
 /***/ },
-/* 282 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10885,11 +11284,11 @@ webpackJsonp([0],[
 
 	var _reactRouter = __webpack_require__(158);
 
-	var _ContributeActions = __webpack_require__(283);
+	var _ContributeActions = __webpack_require__(286);
 
 	var _ContributeActions2 = _interopRequireDefault(_ContributeActions);
 
-	var _ContributeStore = __webpack_require__(284);
+	var _ContributeStore = __webpack_require__(287);
 
 	var _ContributeStore2 = _interopRequireDefault(_ContributeStore);
 
@@ -11000,7 +11399,7 @@ webpackJsonp([0],[
 	exports.default = Contribute;
 
 /***/ },
-/* 283 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11028,7 +11427,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(ContributeActions);
 
 /***/ },
-/* 284 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11041,7 +11440,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _ContributeActions = __webpack_require__(283);
+	var _ContributeActions = __webpack_require__(286);
 
 	var _ContributeActions2 = _interopRequireDefault(_ContributeActions);
 
@@ -11064,7 +11463,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(ContributeStore);
 
 /***/ },
-/* 285 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11083,27 +11482,27 @@ webpackJsonp([0],[
 
 	var _underscore = __webpack_require__(228);
 
-	var _ArticleActions = __webpack_require__(286);
+	var _ArticleActions = __webpack_require__(289);
 
 	var _ArticleActions2 = _interopRequireDefault(_ArticleActions);
 
-	var _ArticleStore = __webpack_require__(287);
+	var _ArticleStore = __webpack_require__(290);
 
 	var _ArticleStore2 = _interopRequireDefault(_ArticleStore);
 
-	var _markdown = __webpack_require__(265);
+	var _markdown = __webpack_require__(268);
 
 	var _markdown2 = _interopRequireDefault(_markdown);
 
-	var _Comment = __webpack_require__(288);
+	var _Comment = __webpack_require__(291);
 
 	var _Comment2 = _interopRequireDefault(_Comment);
 
-	var _BtnBlock = __webpack_require__(291);
+	var _BtnBlock = __webpack_require__(294);
 
 	var _BtnBlock2 = _interopRequireDefault(_BtnBlock);
 
-	var _Star = __webpack_require__(292);
+	var _Star = __webpack_require__(295);
 
 	var _Star2 = _interopRequireDefault(_Star);
 
@@ -11312,7 +11711,7 @@ webpackJsonp([0],[
 	exports.default = Article;
 
 /***/ },
-/* 286 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11344,9 +11743,8 @@ webpackJsonp([0],[
 	            var _this = this;
 
 	            $.ajax({
-	                url: '/api/getArticle',
-	                type: 'post',
-	                data: { id: id },
+	                url: '/api/article/' + id,
+	                type: 'get',
 	                cache: false
 	            }).done(function (data) {
 	                _this.actions.getArticleSuccess(data);
@@ -11362,7 +11760,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(ArticleActions);
 
 /***/ },
-/* 287 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11379,7 +11777,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _ArticleActions = __webpack_require__(286);
+	var _ArticleActions = __webpack_require__(289);
 
 	var _ArticleActions2 = _interopRequireDefault(_ArticleActions);
 
@@ -11439,7 +11837,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(ArticleStore);
 
 /***/ },
-/* 288 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11458,11 +11856,11 @@ webpackJsonp([0],[
 
 	var _reactRouter = __webpack_require__(158);
 
-	var _CommentActions = __webpack_require__(289);
+	var _CommentActions = __webpack_require__(292);
 
 	var _CommentActions2 = _interopRequireDefault(_CommentActions);
 
-	var _CommentStore = __webpack_require__(290);
+	var _CommentStore = __webpack_require__(293);
 
 	var _CommentStore2 = _interopRequireDefault(_CommentStore);
 
@@ -11641,7 +12039,7 @@ webpackJsonp([0],[
 	exports.default = Comment;
 
 /***/ },
-/* 289 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11721,7 +12119,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(CommentActions);
 
 /***/ },
-/* 290 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11738,7 +12136,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _CommentActions = __webpack_require__(289);
+	var _CommentActions = __webpack_require__(292);
 
 	var _CommentActions2 = _interopRequireDefault(_CommentActions);
 
@@ -11804,7 +12202,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(CommentStore);
 
 /***/ },
-/* 291 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11933,7 +12331,7 @@ webpackJsonp([0],[
 	exports.default = BtnBlock;
 
 /***/ },
-/* 292 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11948,11 +12346,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _StarActions = __webpack_require__(293);
+	var _StarActions = __webpack_require__(296);
 
 	var _StarActions2 = _interopRequireDefault(_StarActions);
 
-	var _StarStore = __webpack_require__(294);
+	var _StarStore = __webpack_require__(297);
 
 	var _StarStore2 = _interopRequireDefault(_StarStore);
 
@@ -12036,7 +12434,7 @@ webpackJsonp([0],[
 	exports.default = Star;
 
 /***/ },
-/* 293 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12120,7 +12518,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(StarActions);
 
 /***/ },
-/* 294 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12137,7 +12535,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _StarActions = __webpack_require__(293);
+	var _StarActions = __webpack_require__(296);
 
 	var _StarActions2 = _interopRequireDefault(_StarActions);
 
@@ -12228,7 +12626,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(StarStore);
 
 /***/ },
-/* 295 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12247,11 +12645,11 @@ webpackJsonp([0],[
 
 	var _underscore = __webpack_require__(228);
 
-	var _ListActions = __webpack_require__(296);
+	var _ListActions = __webpack_require__(299);
 
 	var _ListActions2 = _interopRequireDefault(_ListActions);
 
-	var _ListStore = __webpack_require__(297);
+	var _ListStore = __webpack_require__(300);
 
 	var _ListStore2 = _interopRequireDefault(_ListStore);
 
@@ -12457,7 +12855,7 @@ webpackJsonp([0],[
 	exports.default = List;
 
 /***/ },
-/* 296 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12526,7 +12924,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(ListActions);
 
 /***/ },
-/* 297 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12543,7 +12941,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _ListActions = __webpack_require__(296);
+	var _ListActions = __webpack_require__(299);
 
 	var _ListActions2 = _interopRequireDefault(_ListActions);
 
@@ -12581,7 +12979,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(ListStore);
 
 /***/ },
-/* 298 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12600,23 +12998,23 @@ webpackJsonp([0],[
 
 	var _reactRouter = __webpack_require__(158);
 
-	var _Contribute = __webpack_require__(282);
+	var _Contribute = __webpack_require__(285);
 
 	var _Contribute2 = _interopRequireDefault(_Contribute);
 
-	var _NotFound = __webpack_require__(251);
+	var _NotFound = __webpack_require__(254);
 
 	var _NotFound2 = _interopRequireDefault(_NotFound);
 
-	var _NoticeSender = __webpack_require__(299);
+	var _NoticeSender = __webpack_require__(302);
 
 	var _NoticeSender2 = _interopRequireDefault(_NoticeSender);
 
-	var _MemberActions = __webpack_require__(302);
+	var _MemberActions = __webpack_require__(305);
 
 	var _MemberActions2 = _interopRequireDefault(_MemberActions);
 
-	var _MemberStore = __webpack_require__(303);
+	var _MemberStore = __webpack_require__(306);
 
 	var _MemberStore2 = _interopRequireDefault(_MemberStore);
 
@@ -12773,7 +13171,7 @@ webpackJsonp([0],[
 	exports.default = Member;
 
 /***/ },
-/* 299 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12788,11 +13186,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _NoticeSenderActions = __webpack_require__(300);
+	var _NoticeSenderActions = __webpack_require__(303);
 
 	var _NoticeSenderActions2 = _interopRequireDefault(_NoticeSenderActions);
 
-	var _NoticeSenderStore = __webpack_require__(301);
+	var _NoticeSenderStore = __webpack_require__(304);
 
 	var _NoticeSenderStore2 = _interopRequireDefault(_NoticeSenderStore);
 
@@ -12917,7 +13315,7 @@ webpackJsonp([0],[
 	exports.default = NoticeSender;
 
 /***/ },
-/* 300 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12979,7 +13377,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(NoticeSenderActions);
 
 /***/ },
-/* 301 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12996,7 +13394,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _NoticeSenderActions = __webpack_require__(300);
+	var _NoticeSenderActions = __webpack_require__(303);
 
 	var _NoticeSenderActions2 = _interopRequireDefault(_NoticeSenderActions);
 
@@ -13043,7 +13441,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(NoticeSenderStore);
 
 /***/ },
-/* 302 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13094,7 +13492,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(MemberActions);
 
 /***/ },
-/* 303 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13111,7 +13509,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _MemberActions = __webpack_require__(302);
+	var _MemberActions = __webpack_require__(305);
 
 	var _MemberActions2 = _interopRequireDefault(_MemberActions);
 
@@ -13166,7 +13564,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(MemberStore);
 
 /***/ },
-/* 304 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13181,7 +13579,7 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ConList = __webpack_require__(305);
+	var _ConList = __webpack_require__(308);
 
 	var _ConList2 = _interopRequireDefault(_ConList);
 
@@ -13227,7 +13625,7 @@ webpackJsonp([0],[
 	exports.default = ConArticle;
 
 /***/ },
-/* 305 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13246,11 +13644,11 @@ webpackJsonp([0],[
 
 	var _underscore = __webpack_require__(228);
 
-	var _ConListActions = __webpack_require__(306);
+	var _ConListActions = __webpack_require__(309);
 
 	var _ConListActions2 = _interopRequireDefault(_ConListActions);
 
-	var _ConListStore = __webpack_require__(307);
+	var _ConListStore = __webpack_require__(310);
 
 	var _ConListStore2 = _interopRequireDefault(_ConListStore);
 
@@ -13432,7 +13830,7 @@ webpackJsonp([0],[
 	exports.default = ConList;
 
 /***/ },
-/* 306 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13513,7 +13911,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(ConListActions);
 
 /***/ },
-/* 307 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13530,7 +13928,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _ConListActions = __webpack_require__(306);
+	var _ConListActions = __webpack_require__(309);
 
 	var _ConListActions2 = _interopRequireDefault(_ConListActions);
 
@@ -13576,7 +13974,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(ConListStore);
 
 /***/ },
-/* 308 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13591,11 +13989,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _MusicActions = __webpack_require__(309);
+	var _MusicActions = __webpack_require__(312);
 
 	var _MusicActions2 = _interopRequireDefault(_MusicActions);
 
-	var _MusicStore = __webpack_require__(310);
+	var _MusicStore = __webpack_require__(313);
 
 	var _MusicStore2 = _interopRequireDefault(_MusicStore);
 
@@ -13603,15 +14001,15 @@ webpackJsonp([0],[
 
 	var _Loading2 = _interopRequireDefault(_Loading);
 
-	var _NotFound = __webpack_require__(251);
+	var _NotFound = __webpack_require__(254);
 
 	var _NotFound2 = _interopRequireDefault(_NotFound);
 
-	var _Comment = __webpack_require__(288);
+	var _Comment = __webpack_require__(291);
 
 	var _Comment2 = _interopRequireDefault(_Comment);
 
-	var _Star = __webpack_require__(292);
+	var _Star = __webpack_require__(295);
 
 	var _Star2 = _interopRequireDefault(_Star);
 
@@ -13832,7 +14230,7 @@ webpackJsonp([0],[
 	exports.default = Music;
 
 /***/ },
-/* 309 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13883,7 +14281,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(MusicActions);
 
 /***/ },
-/* 310 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13900,7 +14298,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _MusicActions = __webpack_require__(309);
+	var _MusicActions = __webpack_require__(312);
 
 	var _MusicActions2 = _interopRequireDefault(_MusicActions);
 
@@ -13966,7 +14364,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(MusicStore);
 
 /***/ },
-/* 311 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -14019,7 +14417,7 @@ webpackJsonp([0],[
 	exports.default = MemberCenter;
 
 /***/ },
-/* 312 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14034,11 +14432,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _MemberFollowActions = __webpack_require__(313);
+	var _MemberFollowActions = __webpack_require__(316);
 
 	var _MemberFollowActions2 = _interopRequireDefault(_MemberFollowActions);
 
-	var _MemberFollowStore = __webpack_require__(314);
+	var _MemberFollowStore = __webpack_require__(317);
 
 	var _MemberFollowStore2 = _interopRequireDefault(_MemberFollowStore);
 
@@ -14048,7 +14446,7 @@ webpackJsonp([0],[
 
 	var _reactRouter = __webpack_require__(158);
 
-	var _NotFound = __webpack_require__(251);
+	var _NotFound = __webpack_require__(254);
 
 	var _NotFound2 = _interopRequireDefault(_NotFound);
 
@@ -14150,7 +14548,7 @@ webpackJsonp([0],[
 	exports.default = MemberFollow;
 
 /***/ },
-/* 313 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14224,7 +14622,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(MemberFollowActions);
 
 /***/ },
-/* 314 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14241,7 +14639,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _MemberFollowActions = __webpack_require__(313);
+	var _MemberFollowActions = __webpack_require__(316);
 
 	var _MemberFollowActions2 = _interopRequireDefault(_MemberFollowActions);
 
@@ -14287,7 +14685,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(MemberFollowStore);
 
 /***/ },
-/* 315 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14302,11 +14700,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _AnimateActions = __webpack_require__(316);
+	var _AnimateActions = __webpack_require__(319);
 
 	var _AnimateActions2 = _interopRequireDefault(_AnimateActions);
 
-	var _AnimateStore = __webpack_require__(317);
+	var _AnimateStore = __webpack_require__(320);
 
 	var _AnimateStore2 = _interopRequireDefault(_AnimateStore);
 
@@ -14314,7 +14712,7 @@ webpackJsonp([0],[
 
 	var _Loading2 = _interopRequireDefault(_Loading);
 
-	var _NotFound = __webpack_require__(251);
+	var _NotFound = __webpack_require__(254);
 
 	var _NotFound2 = _interopRequireDefault(_NotFound);
 
@@ -14457,7 +14855,7 @@ webpackJsonp([0],[
 	exports.default = Animate;
 
 /***/ },
-/* 316 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14514,7 +14912,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(AnimateActions);
 
 /***/ },
-/* 317 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14531,7 +14929,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _AnimateActions = __webpack_require__(316);
+	var _AnimateActions = __webpack_require__(319);
 
 	var _AnimateActions2 = _interopRequireDefault(_AnimateActions);
 

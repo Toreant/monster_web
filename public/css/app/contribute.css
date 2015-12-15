@@ -58,3 +58,11 @@
 .mon-conlist-item:hover .mon-fixed-btn {
   display: inline-block;
 }
+/* 更新 */
+.mon-update-block {
+  z-index: 2500;
+}
+.mon-contribute {
+  position: relative;
+  z-index: 1050;
+}
