@@ -13,7 +13,6 @@ class StarActions {
     }
 
     getStar(id,column) {
-        console.log('heh');
         $.ajax({
             url : '/api/star',
             dataType : 'json',

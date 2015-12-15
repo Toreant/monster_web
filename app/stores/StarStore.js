@@ -9,15 +9,18 @@ class StarStore {
         this.bindActions(StarActions);
         this.stared = false;
         this.option = 0;
+        this.changed = false;
         this.btnClass = 'btn-primary';
     }
 
     onGetStarSuccess(data) {
+
         switch (data.code) {
             case 200 :
                 toastr.success('收藏成功');
                 this.stared = true;
                 this.option = 1;
+                this.changed = true;
                 this.btnClass = 'btn-danger';
                 break;
             case 304 :
@@ -41,6 +44,7 @@ class StarStore {
                 toastr.success('取消收藏成功');
                 this.stared = false;
                 this.option = 0;
+                this.changed = true;
                 this.btnClass = 'btn-primary';
                 break;
             case 304 :

@@ -11649,7 +11649,6 @@ webpackJsonp([0],[
 	    }, {
 	        key: 'handleClick',
 	        value: function handleClick(option) {
-
 	            var column = this.props.column,
 	                star_id = this.props.star;
 
@@ -11666,9 +11665,12 @@ webpackJsonp([0],[
 	            var stared = '',
 	                option = 0;
 
-	            if (this.props.stared === 'true' || this.state.stared) {
+	            if (!this.state.changed && this.props.stared === 'true' || this.state.stared) {
 	                stared = 'mon-stared';
 	                option = 1;
+	            } else {
+	                option = 0;
+	                stared = '';
 	            }
 
 	            return _react2.default.createElement(
@@ -11719,7 +11721,6 @@ webpackJsonp([0],[
 	        value: function getStar(id, column) {
 	            var _this = this;
 
-	            console.log('heh');
 	            $.ajax({
 	                url: '/api/star',
 	                dataType: 'json',
@@ -11803,17 +11804,20 @@ webpackJsonp([0],[
 	        this.bindActions(_StarActions2.default);
 	        this.stared = false;
 	        this.option = 0;
+	        this.changed = false;
 	        this.btnClass = 'btn-primary';
 	    }
 
 	    _createClass(StarStore, [{
 	        key: 'onGetStarSuccess',
 	        value: function onGetStarSuccess(data) {
+
 	            switch (data.code) {
 	                case 200:
 	                    toastr.success('收藏成功');
 	                    this.stared = true;
 	                    this.option = 1;
+	                    this.changed = true;
 	                    this.btnClass = 'btn-danger';
 	                    break;
 	                case 304:
@@ -11838,6 +11842,7 @@ webpackJsonp([0],[
 	                    toastr.success('取消收藏成功');
 	                    this.stared = false;
 	                    this.option = 0;
+	                    this.changed = true;
 	                    this.btnClass = 'btn-primary';
 	                    break;
 	                case 304:

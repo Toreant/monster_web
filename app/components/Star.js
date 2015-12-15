@@ -25,24 +25,26 @@ class Star extends React.Component {
     }
 
     handleClick(option) {
-
         let column = this.props.column,
             star_id = this.props.star;
 
         // option 0-- 关注　１－－ 取消关注
-        if(option === 0) {
-            StarActions.getStar(star_id,column);
+        if (option === 0) {
+            StarActions.getStar(star_id, column);
         } else {
-            StarActions.unStar(star_id,column);
+            StarActions.unStar(star_id, column);
         }
     }
 
     render() {
         let stared = '',option = 0;
 
-        if(this.props.stared === 'true' || this.state.stared ) {
+        if((!this.state.changed && this.props.stared === 'true') || this.state.stared ) {
             stared = 'mon-stared';
             option = 1;
+        } else {
+            option = 0;
+            stared = '';
         }
 
         return (
