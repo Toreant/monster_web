@@ -72,6 +72,8 @@ class Contribute {
             res.json(result);
         });
     }
+
+    deleteContribute(req,res,next) {}
 }
 
 export default new Contribute();

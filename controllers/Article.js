@@ -17,20 +17,19 @@ class ArticleCtrl {
 
         let params = req.body.params;
         params.create_user_id = req.session.user._id;
-        params.create_user_domain = req.session.user.domain;
 
-        article.saveArticle(params,(data) => {
+        article.saveArticle(params,params.create_user_id,(data) => {
             let result = {
                 meta : '',
                 code : 0
             };
-            if(data === null) {
+            if(data === 500) {
                 result.meta = '保存文章不成功';
                 result.code = 500;
-            } else if(data === 0) {
+            } else if(data === 406) {
                 result.meta = '这个用户不存在';
                 result.code = 400;
-            } else if(data === 1) {
+            } else if(data === 200) {
                 result.meta = '保存文章成功';
                 result.code = 200;
             }
@@ -132,6 +131,38 @@ class ArticleCtrl {
                 }
                 res.json(result);
             },params);
+        });
+    }
+
+    /**
+     * 删除文章
+     */
+    deleteArticle(req,res,next) {
+        let _id = req.params.id,
+            user = req.session.user;
+
+        let result = {
+            meta : '',
+            code : 0
+        };
+
+        article.deleteArticle(_id,user._id.toString(),(data) => {
+            switch(data) {
+                case 200 :
+                    result.meta = '删除成功';
+                    break;
+                case 404 :
+                    result.meta = '这篇文章不存在';
+                    break;
+                case 406 :
+                    result.meta = '用户不存在';
+                    break;
+                case 500 :
+                    result.meta = '服务器错误';
+                    break;
+            }
+            result.code = data;
+            res.json(result);
         });
     }
 }

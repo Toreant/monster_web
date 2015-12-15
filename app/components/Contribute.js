@@ -44,13 +44,13 @@ class Contribute extends React.Component {
         }　else {
             ConNav = (
                 <div className='mon-contribute-nav'>
-                    <Link to={'/profile/article'}>
+                    <Link to={'/profile/contribute/articles'}>
                         文章
                     </Link>
-                    <Link to={'/profile/music'}>
+                    <Link to={'/profile/contribute/musics'}>
                         音乐
                     </Link>
-                    <Link to={'/profile/animate'} >
+                    <Link to={'/profile/contribute/animates'} >
                         动漫
                     </Link>
                 </div>

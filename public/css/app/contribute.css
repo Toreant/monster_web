@@ -44,3 +44,17 @@
   color: #ddd;
   opacity: 0.4;
 }
+/* 功能按钮 */
+.mon-fixed-btn {
+  position: absolute;
+  display: none;
+  top: 10px;
+  right: 10px;
+}
+.mon-fixed-btn > button {
+  float: left;
+  margin-left: 10px;
+}
+.mon-conlist-item:hover .mon-fixed-btn {
+  display: inline-block;
+}

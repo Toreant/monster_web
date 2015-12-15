@@ -51,6 +51,8 @@ router.post('/api/getArticle',ArticleCtrl.getArticle);
 
 router.post('/api/articles',ArticleCtrl.getArticles);
 
+router.delete('/api/article/:id',auth.isAuth,ArticleCtrl.deleteArticle);
+
 //　评论有关
 router.post('/api/comment',CommentCtrl.getComments);
 
@@ -120,6 +122,8 @@ router.post('/api/music',auth.isAuth,MusicCtrl.postMusic);
 router.get('/api/music/:id',MusicCtrl.getMusic);
 
 router.post('/api/musics',MusicCtrl.getMusics);
+
+router.delete('/api/music/:id',auth.isAuth,MusicCtrl.deleteMusic);
 
 // 动漫
 router.post('/api/animate',auth.isAuth,AnimateCtrl.postAnimate);

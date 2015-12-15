@@ -158,6 +158,41 @@ class MusicCtrl {
             });
         }
     }
+
+    /**
+     * 删除
+     * @param req
+     * @param res
+     * @param next
+     */
+    deleteMusic(req,res,next) {
+        let _id = req.params.id,
+            user = req.session.user;
+
+        let result = {
+            meta : '',
+            code : 0
+        };
+
+        Music.deleteArticle(_id,user._id.toString(),(data) => {
+            switch(data) {
+                case 200 :
+                    result.meta = '删除成功';
+                    break;
+                case 404 :
+                    result.meta = '这篇文章不存在';
+                    break;
+                case 406 :
+                    result.meta = '用户不存在';
+                    break;
+                case 500 :
+                    result.meta = '服务器错误';
+                    break;
+            }
+            result.code = data;
+            res.json(result);
+        });
+    }
 }
 
 export default new MusicCtrl();

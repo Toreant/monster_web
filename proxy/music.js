@@ -5,9 +5,14 @@
 import Music from '../models/music';
 import User from '../models/user';
 import async from 'async';
+import CommonProxy from './CommonProxy';
 import _ from 'underscore';
 
 class md {
+
+    constructor() {
+        this.commonProxy = new CommonProxy('music');
+    }
 
     /**
      * 通过id号找到
@@ -45,134 +50,34 @@ class md {
 
     /**
      * 获取音乐列表
-     * @param option
+     * @param option　查询的选项
+     * @param params 查询的条件
      * @param callback
      */
     getMusics(option,params,callback) {
-        async.waterfall([
-            // 获取音乐列表
-            function(_callback) {
-                Music.find(params,null,option,(err,docs) => {
-                    if(err) {
-                        return callback(500);
-                    } else {
-                        _callback(null,docs);
-                    }
-                });
-            },
 
-            // 获取发布音乐的用户
-            function(docs,_callback) {
-                if(docs === undefined || docs === null) {
-                    return callback(null);
-                } else {
-                    let createUserIds = [];
-                    for(let i =0, len = docs.length; i < len; i++) {
-                        createUserIds.push(docs[i].create_user_id);
-                    }
-                    _callback(null,docs,createUserIds);
-                }
-            },
-
-            function(docs,createUserIds,_callback) {
-                User.find({_id : {$in : createUserIds}},(err,users) => {
-                    if(err) {
-                        return callback(500);
-                    } else {
-                        _callback(null,docs,users);
-                    }
-                });
-            },
-
-            // 将音乐和用户结合起来
-            function(docs,users,_callback) {
-                let result = [];
-                for(let i = 0, len = docs.length; i < len; i++) {
-                    let item = {};
-                    item.data = docs[i];
-                    for(let j = 0, num = users.length; j < num; j++) {
-                        if(docs[i].create_user_id == users[j]._id) {
-                            item.user = users[j];
-                            break;
-                        }
-                    }
-                    result.push(item);
-                }
-                _callback(null,{ _raw : result});
-            },
-
-            // 音乐总数
-            function(data,_callback) {
-                Music.count(params,(err,count) => {
-                    if(err) {
-                        return callback(500);
-                    } else {
-                        data.count = count;
-                        _callback(null,data);
-                    }
-                });
-            }
-        ],(err,result) => {
-            return callback(result);
-        });
+        this.commonProxy.gets(params,option,callback);
     }
 
     /**
      * 上传音乐资料
      * @param params
-     * @param where
+     * @param u
      * @param callback
      */
-    saveMusic(params,where,callback) {
+    saveMusic(params,u,callback) {
 
-        async.waterfall([
+        this.commonProxy.create(params,u,callback);
+    }
 
-            //　查找用户是否存在
-            function(_callback) {
-                if(!where._id.match(/^[0-9a-fA-F]{24}$/)) {
-                    return callback(404);
-                }
-                User.findOne(where,(err,user) => {
-                    if(err) {
-                        return callback(500);
-                    } else if(user === undefined || user === null) {
-                        return callback(404);
-                    } else {
-                        _callback(null,user);
-                    }
-                });
-            },
-
-            // 保存音乐资料
-            function(user,_callback) {
-                let music = new Music(params);
-                music.save((err,product) => {
-                    if(err) {
-                        console.log(err);
-                        return callback(500);
-                    } else {
-                        _callback(null,user,product);
-                    }
-                });
-            },
-
-            // 更新用户资料
-            function(user,product,_callback) {
-                if(product) {
-                    user.music.push(product._id);
-                    user.contribute.push(product._id);
-                    user.save((err) => {
-                        if(err) {
-                            return callback(500);
-                        } else {
-                            _callback(null,200);
-                        }
-                    });
-                }
-            }
-        ],(err,result) => {
-            return callback(result);
-        });
+    /**
+     * 删除音乐
+     * @param _id
+     * @param u
+     * @param callback
+     */
+    deleteMusic(_id,u,callback) {
+        this.commonProxy.delete(_id,u,callback);
     }
 }
 

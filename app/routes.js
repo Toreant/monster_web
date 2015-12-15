@@ -16,6 +16,8 @@ import PostAnimate from './components/PostAnimate';
 import PostMusic from './components/PostMusic';
 import PostArticle from './components/PostArticle';
 
+import MyContribute from './components/MyContribute';
+
 import ProfileCenter from './components/ProfileCenter';
 //import Followers from './components/Followers';
 //import Following from './components/Following';
@@ -73,9 +75,7 @@ export default(
 
             <Route path='contribute' handler={Contribute}>
                 <DefaultRoute handler={ConArticle} />
-                <Route path='/profile/article'handler={ConArticle} />
-                <Route path='/profile/music' handler={ConArticle} />
-                <Route path='/profile/animate' handler={ConArticle} />
+                <Route path='/profile/contribute/:column'handler={MyContribute} />
             </Route>
             <Route path='notice' handler={Notice} />
             <Route path='star' handler={StarList} />
