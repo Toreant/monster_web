@@ -40,6 +40,23 @@ class Article extends React.Component {
         this.setState(state);
     }
 
+    /**
+     * 点击Star组件后触发的函数
+     * @param option　１－－关注＋１　０－－取消关注－１
+     */
+    handleClick(option) {
+        if(option === 1) {
+            this.setState({
+                stars : this.state.stars + 1
+            });
+        } else {
+            let stars = this.state.stars -1;
+            this.setState({
+                stars : stars > 0 ? stars : 0
+            });
+        }
+    }
+
     render() {
         let Tags = this.state.tags.map((data,index) => {
             return (
@@ -47,7 +64,9 @@ class Article extends React.Component {
             );
         });
 
-        let Article,Aside,Abbr;
+        let Article,Aside,Abbr,
+            boundClick = this.handleClick.bind(this,1),
+            subClick = this.handleClick.bind(this,0);
         if(this.state.article) {
             Abbr = (
                 <div className="mon-abbr">
@@ -65,7 +84,7 @@ class Article extends React.Component {
                                 </div>
                                 <div className="media-body">
                                     <a href={'/member/'+this.state.createUserDomain}>{this.state.createUser}</a>
-                                    <Star star={this.props.params.id} column='article' stared={this.state.stared} />
+                                    <Star star={this.props.params.id} column='article' stared={this.state.stared} plusClick={boundClick} subClick={subClick}/>
                                     {this.state.stars}
                                     <p className="mon-detail-time">
                                         {this.state.createTime}
@@ -76,6 +95,7 @@ class Article extends React.Component {
                     </div>
                 </div>
             );
+
 
             Article = (
                 <div className='raw animated fadeInUp clearfix'>
@@ -92,8 +112,8 @@ class Article extends React.Component {
             );
 
             Aside = (
-                <div className="raw">
-                    <div className='col-md-8 col-sm-12 col-md-offset-2 col-xs-12'>
+                <div className="raw clearfix">
+                    <div className='col-md-8 col-sm-12 col-md-offset-2 col-xs-12 mon-no-padding'>
                         <div className='panel panel-default'>
                             <div className='panel-body media'>
                                 <div className='media-left'>

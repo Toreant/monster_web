@@ -66,7 +66,7 @@ class ProfileCenter extends React.Component {
             <div className='col-md-9 col-sm-9 animated fadeInUp'>
                 <div className="mon-badge mon-tab">
                     <span className="fa fa-folder-open text-info"></span>
-                    <Link to={'/profile/contribute'} className="mon-muted">
+                    <Link to={'/profile/contribute/articles'} className="mon-muted">
                         个人投稿
                     </Link>
                     <span className="badge">

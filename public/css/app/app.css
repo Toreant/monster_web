@@ -526,9 +526,6 @@ a {
   border-bottom: 1px dashed #d4d4d4;
   border-left: 3px solid #5e5e5e;
 }
-.mon-contribute a {
-  padding-left: 30px !important;
-}
 /* 设置*/
 .mon-account span {
   font-size: 25px;

@@ -86,7 +86,6 @@ class md {
 
             if(transform === 'true') {
                 // 将markdown转成html实体
-                console.log(result.article.content);
                 result.article.content = markdown.toHTML(result.article.content || '> 什么鬼页没有', 'Maruku');
             }
             callback(result);

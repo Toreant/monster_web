@@ -2633,7 +2633,6 @@ webpackJsonp([0],[
 	        value: function sign(email, password, prePwd, userName) {
 	            var _this2 = this;
 
-	            console.log(email + " " + password + " " + prePwd + " " + userName);
 	            if (password !== prePwd) {
 	                this.actions.doPasswordFail();
 	            } else {
@@ -2992,7 +2991,7 @@ webpackJsonp([0],[
 	                                    _reactRouter.Link,
 	                                    { to: '/profile/star' },
 	                                    _react2.default.createElement('span', { className: 'fa fa-star' }),
-	                                    '关注'
+	                                    '收藏'
 	                                )
 	                            ),
 	                            _react2.default.createElement(
@@ -4837,17 +4836,13 @@ webpackJsonp([0],[
 	                                    'span',
 	                                    { className: 'fa fa-clock-o' },
 	                                    new Date(data.create_time).toLocaleDateString()
-	                                ),
-	                                _react2.default.createElement(
-	                                    'span',
-	                                    { className: 'fa fa-user' },
-	                                    data.create_user_name
 	                                )
 	                            ),
 	                            _react2.default.createElement(
 	                                'p',
 	                                { className: 'text-muted' },
-	                                data.summary
+	                                '简介：',
+	                                data.summary || '什么鬼也没有'
 	                            )
 	                        )
 	                    );
@@ -10497,7 +10492,7 @@ webpackJsonp([0],[
 	                    _react2.default.createElement('span', { className: 'fa fa-folder-open text-info' }),
 	                    _react2.default.createElement(
 	                        _reactRouter.Link,
-	                        { to: '/profile/contribute', className: 'mon-muted' },
+	                        { to: '/profile/contribute/articles', className: 'mon-muted' },
 	                        '个人投稿'
 	                    ),
 	                    _react2.default.createElement(
@@ -11566,6 +11561,26 @@ webpackJsonp([0],[
 	        value: function onChange(state) {
 	            this.setState(state);
 	        }
+
+	        /**
+	         * 点击Star组件后触发的函数
+	         * @param option　１－－关注＋１　０－－取消关注－１
+	         */
+
+	    }, {
+	        key: 'handleClick',
+	        value: function handleClick(option) {
+	            if (option === 1) {
+	                this.setState({
+	                    stars: this.state.stars + 1
+	                });
+	            } else {
+	                var stars = this.state.stars - 1;
+	                this.setState({
+	                    stars: stars > 0 ? stars : 0
+	                });
+	            }
+	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
@@ -11579,7 +11594,9 @@ webpackJsonp([0],[
 
 	            var Article = undefined,
 	                Aside = undefined,
-	                Abbr = undefined;
+	                Abbr = undefined,
+	                boundClick = this.handleClick.bind(this, 1),
+	                subClick = this.handleClick.bind(this, 0);
 	            if (this.state.article) {
 	                Abbr = _react2.default.createElement(
 	                    'div',
@@ -11620,7 +11637,7 @@ webpackJsonp([0],[
 	                                        { href: '/member/' + this.state.createUserDomain },
 	                                        this.state.createUser
 	                                    ),
-	                                    _react2.default.createElement(_Star2.default, { star: this.props.params.id, column: 'article', stared: this.state.stared }),
+	                                    _react2.default.createElement(_Star2.default, { star: this.props.params.id, column: 'article', stared: this.state.stared, plusClick: boundClick, subClick: subClick }),
 	                                    this.state.stars,
 	                                    _react2.default.createElement(
 	                                        'p',
@@ -11656,10 +11673,10 @@ webpackJsonp([0],[
 
 	                Aside = _react2.default.createElement(
 	                    'div',
-	                    { className: 'raw' },
+	                    { className: 'raw clearfix' },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'col-md-8 col-sm-12 col-md-offset-2 col-xs-12' },
+	                        { className: 'col-md-8 col-sm-12 col-md-offset-2 col-xs-12 mon-no-padding' },
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'panel panel-default' },
@@ -11930,14 +11947,19 @@ webpackJsonp([0],[
 	    }, {
 	        key: 'handleClick',
 	        value: function handleClick() {
-	            var params = {
-	                content: this.state.comment,
-	                create_time: new Date().getTime(),
-	                type: this.props.type,
-	                con_id: this.props.id
-	            };
+	            var reg = /\s/;
+	            if (this.state.comment === '' || reg.test(this.state.comment)) {
+	                toastr.warning('你还没有写任何东西啊！！！');
+	            } else {
+	                var params = {
+	                    content: this.state.comment,
+	                    create_time: new Date().getTime(),
+	                    type: this.props.type,
+	                    con_id: this.props.id
+	                };
 
-	            _CommentActions2.default.postComment(params);
+	                _CommentActions2.default.postComment(params);
+	            }
 	        }
 	    }, {
 	        key: 'getComment',
@@ -12221,7 +12243,7 @@ webpackJsonp([0],[
 /* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
@@ -12253,12 +12275,24 @@ webpackJsonp([0],[
 	    }
 
 	    _createClass(BtnBlock, [{
-	        key: 'handlerClick',
+	        key: "componentDidMount",
+	        value: function componentDidMount() {
+	            $(window).scroll(function () {
+	                var $window = $(this);
+	                if ($window.scrollTop() < 400) {
+	                    $("#_back").fadeOut();
+	                } else {
+	                    $("#_back").fadeIn();
+	                }
+	            });
+	        }
+	    }, {
+	        key: "handlerClick",
 	        value: function handlerClick() {
 	            $("html,body").animate({ scrollTop: 0 }, 700);
 	        }
 	    }, {
-	        key: 'shareFB',
+	        key: "shareFB",
 	        value: function shareFB() {
 	            window.fbAsyncInit = function () {
 	                FB.init({
@@ -12292,49 +12326,49 @@ webpackJsonp([0],[
 	            })(document, 'script', 'facebook-jssdk');
 	        }
 	    }, {
-	        key: 'render',
+	        key: "render",
 	        value: function render() {
 	            return _react2.default.createElement(
-	                'div',
-	                { className: 'mon-btn-block' },
+	                "div",
+	                { className: "mon-btn-block" },
 	                _react2.default.createElement(
-	                    'a',
-	                    { href: 'javascript:;', className: 'btn btn-default' },
-	                    _react2.default.createElement('span', { className: 'fa fa-weibo' }),
+	                    "a",
+	                    { href: "javascript:;", className: "btn btn-default" },
+	                    _react2.default.createElement("span", { className: "fa fa-weibo" }),
 	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'mon-btn-fix' },
-	                        '微博分享'
+	                        "span",
+	                        { className: "mon-btn-fix" },
+	                        "微博分享"
 	                    )
 	                ),
 	                _react2.default.createElement(
-	                    'a',
-	                    { href: 'javascript:;', className: 'btn btn-default', onClick: this.shareFB.bind(this) },
-	                    _react2.default.createElement('span', { className: 'fa fa-facebook' }),
+	                    "a",
+	                    { href: "javascript:;", className: "btn btn-default", onClick: this.shareFB.bind(this) },
+	                    _react2.default.createElement("span", { className: "fa fa-facebook" }),
 	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'mon-btn-fix' },
-	                        'FA分享'
+	                        "span",
+	                        { className: "mon-btn-fix" },
+	                        "FA分享"
 	                    )
 	                ),
 	                _react2.default.createElement(
-	                    'a',
-	                    { href: 'javascript:;', className: 'btn btn-default' },
-	                    _react2.default.createElement('span', { className: 'fa fa-weixin' }),
+	                    "a",
+	                    { href: "javascript:;", className: "btn btn-default" },
+	                    _react2.default.createElement("span", { className: "fa fa-weixin" }),
 	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'mon-btn-fix' },
-	                        '微信分享'
+	                        "span",
+	                        { className: "mon-btn-fix" },
+	                        "微信分享"
 	                    )
 	                ),
 	                _react2.default.createElement(
-	                    'a',
-	                    { href: 'javascript:;', className: 'btn btn-default', onClick: this.handlerClick.bind(this) },
-	                    _react2.default.createElement('span', { className: 'fa fa-arrow-up' }),
+	                    "a",
+	                    { id: "_back", href: "javascript:;", className: "btn btn-default", onClick: this.handlerClick.bind(this) },
+	                    _react2.default.createElement("span", { className: "fa fa-arrow-up" }),
 	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'mon-btn-fix' },
-	                        '回到顶部'
+	                        "span",
+	                        { className: "mon-btn-fix" },
+	                        "回到顶部"
 	                    )
 	                )
 	            );
@@ -12416,9 +12450,9 @@ webpackJsonp([0],[
 
 	            // option 0-- 关注　１－－ 取消关注
 	            if (option === 0) {
-	                _StarActions2.default.getStar(star_id, column);
+	                _StarActions2.default.getStar(star_id, column, this.props.plusClick);
 	            } else {
-	                _StarActions2.default.unStar(star_id, column);
+	                _StarActions2.default.unStar(star_id, column, this.props.subClick);
 	            }
 	        }
 	    }, {
@@ -12480,7 +12514,7 @@ webpackJsonp([0],[
 
 	    _createClass(StarActions, [{
 	        key: 'getStar',
-	        value: function getStar(id, column) {
+	        value: function getStar(id, column, _callback) {
 	            var _this = this;
 
 	            $.ajax({
@@ -12491,14 +12525,14 @@ webpackJsonp([0],[
 	                contentType: 'application/json;charset=utf-8',
 	                data: JSON.stringify({ star_id: id, column: column })
 	            }).done(function (data) {
-	                _this.actions.getStarSuccess(data);
+	                _this.actions.getStarSuccess({ data: data, _callback: _callback });
 	            }).fail(function () {
 	                toastr.error('收藏不成功');
 	            });
 	        }
 	    }, {
 	        key: 'unStar',
-	        value: function unStar(id, column) {
+	        value: function unStar(id, column, _callback) {
 	            var _this2 = this;
 
 	            $.ajax({
@@ -12509,7 +12543,7 @@ webpackJsonp([0],[
 	                contentType: 'application/json;charset=utf-8',
 	                data: JSON.stringify({ star_id: id, column: column })
 	            }).done(function (data) {
-	                _this2.actions.unStarSuccess(data);
+	                _this2.actions.unStarSuccess({ data: data, _callback: _callback });
 	            }).fail(function () {
 	                toastr.error('取消收藏不成功');
 	            });
@@ -12572,8 +12606,9 @@ webpackJsonp([0],[
 
 	    _createClass(StarStore, [{
 	        key: 'onGetStarSuccess',
-	        value: function onGetStarSuccess(data) {
-
+	        value: function onGetStarSuccess(o) {
+	            var data = o.data,
+	                _callback = o._callback;
 	            switch (data.code) {
 	                case 200:
 	                    toastr.success('收藏成功');
@@ -12581,6 +12616,7 @@ webpackJsonp([0],[
 	                    this.option = 1;
 	                    this.changed = true;
 	                    this.btnClass = 'btn-danger';
+	                    _callback.call(this);
 	                    break;
 	                case 304:
 	                    toastr.warning('你已经收藏过了');
@@ -12598,7 +12634,10 @@ webpackJsonp([0],[
 	        }
 	    }, {
 	        key: 'unStarSuccess',
-	        value: function unStarSuccess(data) {
+	        value: function unStarSuccess(o) {
+	            var data = o.data,
+	                _callback = o._callback;
+
 	            switch (data.code) {
 	                case 200:
 	                    toastr.success('取消收藏成功');
@@ -12606,6 +12645,7 @@ webpackJsonp([0],[
 	                    this.option = 0;
 	                    this.changed = true;
 	                    this.btnClass = 'btn-primary';
+	                    _callback.call(this);
 	                    break;
 	                case 304:
 	                    toastr.warning('你还没有收藏过');

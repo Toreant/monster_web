@@ -30,9 +30,9 @@ class Star extends React.Component {
 
         // option 0-- 关注　１－－ 取消关注
         if (option === 0) {
-            StarActions.getStar(star_id, column);
+            StarActions.getStar(star_id, column,this.props.plusClick);
         } else {
-            StarActions.unStar(star_id, column);
+            StarActions.unStar(star_id, column,this.props.subClick);
         }
     }
 

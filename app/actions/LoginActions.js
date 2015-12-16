@@ -45,7 +45,6 @@ class LoginActions {
      * @param prePwd
      */
     sign(email,password,prePwd,userName) {
-        console.log(email+" "+password+" "+prePwd+" "+userName);
         if(password !== prePwd) {
             this.actions.doPasswordFail();
         } else {

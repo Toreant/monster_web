@@ -13,8 +13,9 @@ class StarStore {
         this.btnClass = 'btn-primary';
     }
 
-    onGetStarSuccess(data) {
-
+    onGetStarSuccess(o) {
+        let data = o.data,
+            _callback = o._callback;
         switch (data.code) {
             case 200 :
                 toastr.success('收藏成功');
@@ -22,6 +23,7 @@ class StarStore {
                 this.option = 1;
                 this.changed = true;
                 this.btnClass = 'btn-danger';
+                _callback.call(this);
                 break;
             case 304 :
                 toastr.warning('你已经收藏过了');
@@ -38,7 +40,10 @@ class StarStore {
         }
     }
 
-    unStarSuccess(data) {
+    unStarSuccess(o) {
+        let data = o.data,
+            _callback = o._callback;
+
         switch (data.code) {
             case 200 :
                 toastr.success('取消收藏成功');
@@ -46,6 +51,7 @@ class StarStore {
                 this.option = 0;
                 this.changed = true;
                 this.btnClass = 'btn-primary';
+                _callback.call(this);
                 break;
             case 304 :
                 toastr.warning('你还没有收藏过');

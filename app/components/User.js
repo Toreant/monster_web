@@ -68,7 +68,7 @@ class User extends React.Component {
                         <ul className='nav mon-ability-list'>
                             <li><Link to='/profile/setting'><span className='fa fa-cog'></span>设置</Link></li>
                             <li><Link to='/profile/center'><span className='fa fa-user'></span>中心</Link></li>
-                            <li><Link to='/profile/star'><span className='fa fa-star'></span>关注</Link></li>
+                            <li><Link to='/profile/star'><span className='fa fa-star'></span>收藏</Link></li>
                             <li>
                                 <a href="javascript:;" data-toggle='collapse' data-target='#my-contribute'>
                                     <span className='fa fa-pencil-square'></span>投稿

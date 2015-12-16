@@ -35,14 +35,19 @@ class Comment extends React.Component {
     }
 
     handleClick() {
-        let params = {
-            content : this.state.comment,
-            create_time : new Date().getTime(),
-            type : this.props.type,
-            con_id : this.props.id
-        };
+        let reg = /\s/;
+        if( this.state.comment === '' || reg.test(this.state.comment) ) {
+            toastr.warning('你还没有写任何东西啊！！！');
+        } else {
+            let params = {
+                content : this.state.comment,
+                create_time : new Date().getTime(),
+                type : this.props.type,
+                con_id : this.props.id
+            };
 
-        CommentActions.postComment(params);
+            CommentActions.postComment(params);
+        }
     }
 
     getComment(option) {

@@ -12,7 +12,7 @@ class StarActions {
         );
     }
 
-    getStar(id,column) {
+    getStar(id,column,_callback) {
         $.ajax({
             url : '/api/star',
             dataType : 'json',
@@ -21,13 +21,13 @@ class StarActions {
             contentType : 'application/json;charset=utf-8',
             data : JSON.stringify({star_id : id,column : column})
         }).done((data) => {
-            this.actions.getStarSuccess(data);
+            this.actions.getStarSuccess({data : data,_callback : _callback});
         }).fail(() => {
             toastr.error('收藏不成功');
         });
     }
 
-    unStar(id,column) {
+    unStar(id,column,_callback) {
 
         $.ajax({
             url : '/api/star',
@@ -37,7 +37,7 @@ class StarActions {
             contentType : 'application/json;charset=utf-8',
             data : JSON.stringify({star_id : id,column : column})
         }).done((data) => {
-            this.actions.unStarSuccess(data);
+            this.actions.unStarSuccess({data : data,_callback : _callback});
         }).fail(() => {
             toastr.error('取消收藏不成功');
         });

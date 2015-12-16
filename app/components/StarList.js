@@ -79,12 +79,9 @@ class StarList extends React.Component {
                             <span className="fa fa-clock-o">
                                 {new Date(data.create_time).toLocaleDateString()}
                             </span>
-                            <span className='fa fa-user'>
-                                {data.create_user_name}
-                            </span>
                             </div>
                             <p className='text-muted'>
-                                {data.summary}
+                                简介：{data.summary || '什么鬼也没有'}
                             </p>
                         </div>
                     </div>
