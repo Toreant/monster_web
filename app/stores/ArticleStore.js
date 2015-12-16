@@ -6,7 +6,8 @@ import ArticleActions from '../actions/ArticleActions';
 class ArticleStore　{
     constructor() {
         this.bindActions(ArticleActions);
-        this.article = false;
+        this.article = false;  // 是否找到
+        this.loading = true;
         this.abbreviations = '';
         this.content;
         this.title = '';
@@ -22,9 +23,12 @@ class ArticleStore　{
     }
 
     onGetArticleSuccess(data) {
+        console.log(data);
+        this.loading = false;
         if(data.code === 200) {
 
             this.article = true;
+
             this.abbreviations = data.raw.article.abbreviations || '/img/abbreviations.png';
             this.content = data.raw.article.content;
             this.title = data.raw.article.title;
@@ -38,7 +42,7 @@ class ArticleStore　{
             this.stars = data.raw.article.stars;
             this.stared = data.raw.stared.toString();
 
-        } else if(data.code === 400) {
+        } else if(data.code === 404) {
             toastr.warning(data.meta);
         } else if(data.code === 500) {
             toastr.error('服务器错误');

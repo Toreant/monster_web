@@ -74,7 +74,6 @@ export default(
             <Route path='center' handler={ProfileCenter} />
 
             <Route path='contribute' handler={Contribute}>
-                <DefaultRoute handler={ConArticle} />
                 <Route path='/profile/contribute/:column'handler={MyContribute} />
             </Route>
             <Route path='notice' handler={Notice} />

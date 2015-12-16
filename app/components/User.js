@@ -58,7 +58,7 @@ class User extends React.Component {
                                     <b>Following</b>
                                 </a>
                             </Link>
-                            <Link to={'/profile/contribute'}>
+                            <Link to={'/profile/contribute/articles'}>
                                 <a className='mon-link'>
                                     <span>{this.state.contribute}</span>
                                     <b>Contribute</b>

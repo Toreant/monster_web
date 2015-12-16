@@ -25,14 +25,12 @@ class ArticleCtrl {
             };
             if(data === 500) {
                 result.meta = '保存文章不成功';
-                result.code = 500;
             } else if(data === 406) {
                 result.meta = '这个用户不存在';
-                result.code = 400;
             } else if(data === 200) {
                 result.meta = '保存文章成功';
-                result.code = 200;
             }
+            result.code = data;
             res.json(result);
         });
     }
@@ -47,7 +45,6 @@ class ArticleCtrl {
         let id = req.params.id,
             user = req.session.user,
             transform =req.params.transform;
-        console.log(transform);
 
         article.getArticleById(id,user,(data) => {
             let result = {
@@ -56,9 +53,9 @@ class ArticleCtrl {
                 raw : null
             };
 
-            if(data === null) {
+            if(data === 404) {
                 result.meta = '找不到这个文章';
-                result.code = 400;
+                result.code = 404;
             } else if(data === 500){
                 result.meta= '服务器错误';
                 result.code = 500;

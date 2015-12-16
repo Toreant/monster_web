@@ -19,6 +19,12 @@ class MyContribute extends React.Component {
         MyContributeActions.getContribute(this.props.params.column,0);
     }
 
+    componentDidUpdate(prevProps) {
+        if(prevProps.params.column !== this.props.params.column) {
+            MyContributeActions.getContribute(this.props.params.column,0);
+        }
+    }
+
     componentWillUnmount() {
         MyContributeStore.unlisten(this.onChange);
     }

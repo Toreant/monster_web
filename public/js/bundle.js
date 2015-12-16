@@ -397,7 +397,6 @@ webpackJsonp([0],[
 	        _react2.default.createElement(
 	            _reactRouter.Route,
 	            { path: 'contribute', handler: _Contribute2.default },
-	            _react2.default.createElement(_reactRouter.DefaultRoute, { handler: _ConArticle2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: '/profile/contribute/:column', handler: _MyContribute2.default })
 	        ),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'notice', handler: _Notice2.default }),
@@ -2946,7 +2945,7 @@ webpackJsonp([0],[
 	                            ),
 	                            _react2.default.createElement(
 	                                _reactRouter.Link,
-	                                { to: '/profile/contribute' },
+	                                { to: '/profile/contribute/articles' },
 	                                _react2.default.createElement(
 	                                    'a',
 	                                    { className: 'mon-link' },
@@ -7561,7 +7560,7 @@ webpackJsonp([0],[
 	        value: function onPostArticleSuccess(data) {
 	            if (data.code === 200) {
 	                toastr.success('发表文章成功');
-	            } else if (data.code === 400) {
+	            } else if (data.code === 406) {
 	                toastr.warning('这个用户不存在');
 	            } else if (data.code === 500) {
 	                toastr.error('发表文章不成功');
@@ -10007,6 +10006,13 @@ webpackJsonp([0],[
 	            _MyContributeActions2.default.getContribute(this.props.params.column, 0);
 	        }
 	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate(prevProps) {
+	            if (prevProps.params.column !== this.props.params.column) {
+	                _MyContributeActions2.default.getContribute(this.props.params.column, 0);
+	            }
+	        }
+	    }, {
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
 	            _MyContributeStore2.default.unlisten(this.onChange);
@@ -11510,6 +11516,10 @@ webpackJsonp([0],[
 
 	var _Loading2 = _interopRequireDefault(_Loading);
 
+	var _NotFound = __webpack_require__(254);
+
+	var _NotFound2 = _interopRequireDefault(_NotFound);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11687,8 +11697,10 @@ webpackJsonp([0],[
 	                        )
 	                    )
 	                );
-	            } else {
+	            } else if (this.state.loading) {
 	                Article = _react2.default.createElement(_Loading2.default, null);
+	            } else {
+	                Article = _react2.default.createElement(_NotFound2.default, null);
 	            }
 	            return _react2.default.createElement(
 	                'div',
@@ -11790,7 +11802,8 @@ webpackJsonp([0],[
 	        _classCallCheck(this, ArticleStore);
 
 	        this.bindActions(_ArticleActions2.default);
-	        this.article = false;
+	        this.article = false; // 是否找到
+	        this.loading = true;
 	        this.abbreviations = '';
 	        this.content;
 	        this.title = '';
@@ -11808,9 +11821,12 @@ webpackJsonp([0],[
 	    _createClass(ArticleStore, [{
 	        key: 'onGetArticleSuccess',
 	        value: function onGetArticleSuccess(data) {
+	            console.log(data);
+	            this.loading = false;
 	            if (data.code === 200) {
 
 	                this.article = true;
+
 	                this.abbreviations = data.raw.article.abbreviations || '/img/abbreviations.png';
 	                this.content = data.raw.article.content;
 	                this.title = data.raw.article.title;
@@ -11823,7 +11839,7 @@ webpackJsonp([0],[
 	                this.createTime = new Date(data.raw.article.create_time).toLocaleDateString("en-US");
 	                this.stars = data.raw.article.stars;
 	                this.stared = data.raw.stared.toString();
-	            } else if (data.code === 400) {
+	            } else if (data.code === 404) {
 	                toastr.warning(data.meta);
 	            } else if (data.code === 500) {
 	                toastr.error('服务器错误');

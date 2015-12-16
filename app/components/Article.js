@@ -11,6 +11,7 @@ import Comment from './Comment';
 import BtnBlock from './BtnBlock';
 import Star from './Star';
 import Loading from './Loading';
+import NotFound from './NotFound';
 
 class Article extends React.Component {
     constructor(props) {
@@ -114,8 +115,10 @@ class Article extends React.Component {
                 </div>
 
             );
-        } else {
+        } else if(this.state.loading) {
             Article =　<Loading/> ;
+        } else {
+            Article = <NotFound />;
         }
         return (
             <div>

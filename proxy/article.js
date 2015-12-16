@@ -29,7 +29,7 @@ class md {
             function(_callback) {
                 Article.findById(id,(err,docs) => {
                     if(!id.match(/^[0-9a-fA-F]{24}$/)) {
-                        return callback(null);
+                        return callback(404);
                     }
                     if(err) {
                         return callback(500);
@@ -42,7 +42,7 @@ class md {
                             _callback(null,docs);
                         });
                     } else {
-                        return callback(null);
+                        return callback(404);
                     }
                 });
             },
@@ -86,7 +86,8 @@ class md {
 
             if(transform === 'true') {
                 // 将markdown转成html实体
-                result.article.content = markdown.toHTML(result.article.content, 'Maruku');
+                console.log(result.article.content);
+                result.article.content = markdown.toHTML(result.article.content || '> 什么鬼页没有', 'Maruku');
             }
             callback(result);
         });

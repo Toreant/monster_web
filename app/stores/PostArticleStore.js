@@ -42,7 +42,7 @@ class PostArticleStore {
     onPostArticleSuccess(data) {
         if(data.code === 200) {
             toastr.success('发表文章成功');
-        } else if(data.code === 400) {
+        } else if(data.code === 406) {
             toastr.warning('这个用户不存在');
         }　else if(data.code === 500) {
             toastr.error('发表文章不成功');
