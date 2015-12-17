@@ -30,7 +30,6 @@ class Article extends React.Component {
         ArticleStore.unlisten(this.onChange);
     }
 
-
     componentDidUpdate(prevProps) {
         if (!isEqual(prevProps.params, this.props.params)) {
             ArticleActions.getArticle(this.props.params.id);
@@ -46,14 +45,26 @@ class Article extends React.Component {
      * @param option　１－－关注＋１　０－－取消关注－１
      */
     handleClick(option) {
-        if(option === 1) {
+        if (option === 1) {
             this.setState({
-                stars : this.state.stars + 1
+                stars: this.state.stars + 1
             });
         } else {
-            let stars = this.state.stars -1;
+            let stars = this.state.stars - 1;
             this.setState({
-                stars : stars > 0 ? stars : 0
+                stars: stars > 0 ? stars : 0
+            });
+        }
+    }
+
+    approveClick(option) {
+        if(option === 0) {
+            this.setState({
+                approve : this.state.approve + 1
+            });
+        } else {
+            this.setState({
+                disapprove : this.state.disapprove + 1
             });
         }
     }
@@ -67,7 +78,9 @@ class Article extends React.Component {
 
         let Article,Aside,Abbr,
             boundClick = this.handleClick.bind(this,1),
-            subClick = this.handleClick.bind(this,0);
+            subClick = this.handleClick.bind(this,0),
+            approveClick = this.approveClick.bind(this,0),
+            disClick = this.approveClick.bind(this,1);
         if(this.state.article) {
             Abbr = (
                 <div className="mon-abbr">
@@ -97,7 +110,6 @@ class Article extends React.Component {
                 </div>
             );
 
-
             Article = (
                 <div className='raw animated fadeInUp clearfix'>
                     <div className='col-md-8 col-sm-12 col-xs-12 col-md-offset-2 mon-article'>
@@ -107,7 +119,11 @@ class Article extends React.Component {
                         <div className='mon-article-tags'>
                             {Tags}
                         </div>
-                        <Approve _id={this.props.params.id} column="article" approve={this.state.approve} disapprove={this.state.disapprove}/>
+                        <Approve ref="approve" _id={this.props.params.id} column="article" approveCallback={approveClick} disCallback={disClick}/>
+                        <div className="mon-approve-count">
+                            <span>{this.state.approve}</span>
+                            <span>{this.state.disapprove}</span>
+                        </div>
                         <Comment id={this.props.params.id} type="article" />
                     </div>
                 </div>

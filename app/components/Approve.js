@@ -14,18 +14,6 @@ class Approve extends React.Component {
 
     componentDidMount() {
         ApproveStore.listen(this.onChange);
-
-        let approve = this.props.approve,
-            disapprove = this.props.disapprove;
-
-        this.setState({
-            approve : approve,
-            disapprove : disapprove
-        });
-
-        ApproveStore.state.approve = approve;
-        ApproveStore.state.disapprove = disapprove;
-
     }
 
     componentWillUnmount() {
@@ -41,7 +29,11 @@ class Approve extends React.Component {
      * @param point
      */
     handleClick(point) {
-        ApproveActions.approve(point,this.props._id,this.props.column);
+        if(point === 0) {
+            ApproveActions.approve(point,this.props._id,this.props.column,this.props.approveCallback);
+        } else {
+            ApproveActions.approve(point,this.props._id,this.props.column,this.props.disCallback);
+        }
     }
 
     render() {
@@ -52,13 +44,11 @@ class Approve extends React.Component {
                         <a href="javascript:;" className="mon-approve-click" onClick={this.handleClick.bind(this,0)}>
                             <span className="fa fa-thumbs-o-up mon-thumb"></span>
                         </a>
-                        <span className="mon-count">{this.state.approve}</span>
                     </div>
                     <div className="mon-approve-item">
                         <a href="javascript:;" className="mon-approve-click-o" onClick={this.handleClick.bind(this,1)}>
                             <span className="fa fa-thumbs-o-down mon-thumb"></span>
                         </a>
-                        <span className="mon-count-o">{this.state.disapprove}</span>
                     </div>
                 </div>
             </div>

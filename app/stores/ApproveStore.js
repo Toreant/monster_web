@@ -7,25 +7,16 @@ import ApproveActions from '../actions/ApproveActions';
 class ApproveStore {
     constructor() {
         this.bindActions(ApproveActions);
-        this.approve = 0;
-        this.disapprove = 0;
     }
 
     onApproveSuccess(raw) {
         let data = raw.data,
-            point = raw.point;
-
-        console.log(this.approve);
+            _callback = raw._callback;
 
         switch (data.code) {
             case 200 :
                 toastr.success(data.meta);
-                if(point === 0) {
-                    console.log('dsadsa');
-                    this.approve = this.approve + 1;
-                } else {
-                    this.disapprove = this.disapprove + 1;
-                }
+                _callback.call(this);
                 break;
             case 404 :
                 toastr.warning('404,就是404');

@@ -241,3 +241,19 @@
   line-height: 1.5;
   color: #999;
 }
+/**/
+.mon-approve-count {
+  text-align: center;
+}
+.mon-approve-count > span {
+  display: inline-block;
+  width: 54px;
+  height: 54px;
+  text-align: center;
+  margin: 10px;
+  font-size: 30px;
+  color: #BD362F;
+}
+.mon-approve-count > span:first-child {
+  color: #9BCD9B;
+}

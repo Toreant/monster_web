@@ -15,8 +15,9 @@ class ApproveActions {
      * @param point　0 --　点赞　1 -- 踩
      * @param _id　　　目标_id
      * @param column　栏目
+     * @param _callback 点击后触发的函数
      */
-    approve(point,_id,column) {
+    approve(point,_id,column,_callback) {
         let params = {
             point : point,
             _id   : _id,
@@ -31,7 +32,7 @@ class ApproveActions {
             contentType : 'application/json;charset=utf-8',
             data : JSON.stringify(params)
         }).done((data) => {
-            this.actions.approveSuccess({data : data , point : point});
+            this.actions.approveSuccess({data : data ,_callback : _callback});
         }).fail(() => {
            toastr.warning('对不起，不成功');
         });

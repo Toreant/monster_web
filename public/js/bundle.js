@@ -11586,6 +11586,19 @@ webpackJsonp([0],[
 	            }
 	        }
 	    }, {
+	        key: 'approveClick',
+	        value: function approveClick(option) {
+	            if (option === 0) {
+	                this.setState({
+	                    approve: this.state.approve + 1
+	                });
+	            } else {
+	                this.setState({
+	                    disapprove: this.state.disapprove + 1
+	                });
+	            }
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var Tags = this.state.tags.map(function (data, index) {
@@ -11600,7 +11613,9 @@ webpackJsonp([0],[
 	                Aside = undefined,
 	                Abbr = undefined,
 	                boundClick = this.handleClick.bind(this, 1),
-	                subClick = this.handleClick.bind(this, 0);
+	                subClick = this.handleClick.bind(this, 0),
+	                approveClick = this.approveClick.bind(this, 0),
+	                disClick = this.approveClick.bind(this, 1);
 	            if (this.state.article) {
 	                Abbr = _react2.default.createElement(
 	                    'div',
@@ -11671,7 +11686,21 @@ webpackJsonp([0],[
 	                            { className: 'mon-article-tags' },
 	                            Tags
 	                        ),
-	                        _react2.default.createElement(_Approve2.default, { _id: this.props.params.id, column: 'article', approve: this.state.approve, disapprove: this.state.disapprove }),
+	                        _react2.default.createElement(_Approve2.default, { ref: 'approve', _id: this.props.params.id, column: 'article', approveCallback: approveClick, disCallback: disClick }),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'mon-approve-count' },
+	                            _react2.default.createElement(
+	                                'span',
+	                                null,
+	                                this.state.approve
+	                            ),
+	                            _react2.default.createElement(
+	                                'span',
+	                                null,
+	                                this.state.disapprove
+	                            )
+	                        ),
 	                        _react2.default.createElement(_Comment2.default, { id: this.props.params.id, type: 'article' })
 	                    )
 	                );
@@ -12741,17 +12770,6 @@ webpackJsonp([0],[
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            _ApproveStore2.default.listen(this.onChange);
-
-	            var approve = this.props.approve,
-	                disapprove = this.props.disapprove;
-
-	            this.setState({
-	                approve: approve,
-	                disapprove: disapprove
-	            });
-
-	            _ApproveStore2.default.state.approve = approve;
-	            _ApproveStore2.default.state.disapprove = disapprove;
 	        }
 	    }, {
 	        key: 'componentWillUnmount',
@@ -12772,7 +12790,11 @@ webpackJsonp([0],[
 	    }, {
 	        key: 'handleClick',
 	        value: function handleClick(point) {
-	            _ApproveActions2.default.approve(point, this.props._id, this.props.column);
+	            if (point === 0) {
+	                _ApproveActions2.default.approve(point, this.props._id, this.props.column, this.props.approveCallback);
+	            } else {
+	                _ApproveActions2.default.approve(point, this.props._id, this.props.column, this.props.disCallback);
+	            }
 	        }
 	    }, {
 	        key: 'render',
@@ -12790,11 +12812,6 @@ webpackJsonp([0],[
 	                            'a',
 	                            { href: 'javascript:;', className: 'mon-approve-click', onClick: this.handleClick.bind(this, 0) },
 	                            _react2.default.createElement('span', { className: 'fa fa-thumbs-o-up mon-thumb' })
-	                        ),
-	                        _react2.default.createElement(
-	                            'span',
-	                            { className: 'mon-count' },
-	                            this.state.approve
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -12804,11 +12821,6 @@ webpackJsonp([0],[
 	                            'a',
 	                            { href: 'javascript:;', className: 'mon-approve-click-o', onClick: this.handleClick.bind(this, 1) },
 	                            _react2.default.createElement('span', { className: 'fa fa-thumbs-o-down mon-thumb' })
-	                        ),
-	                        _react2.default.createElement(
-	                            'span',
-	                            { className: 'mon-count-o' },
-	                            this.state.disapprove
 	                        )
 	                    )
 	                )
@@ -12855,11 +12867,12 @@ webpackJsonp([0],[
 	     * @param point　0 --　点赞　1 -- 踩
 	     * @param _id　　　目标_id
 	     * @param column　栏目
+	     * @param _callback 点击后触发的函数
 	     */
 
 	    _createClass(ApproveActions, [{
 	        key: 'approve',
-	        value: function approve(point, _id, column) {
+	        value: function approve(point, _id, column, _callback) {
 	            var _this = this;
 
 	            var params = {
@@ -12876,7 +12889,7 @@ webpackJsonp([0],[
 	                contentType: 'application/json;charset=utf-8',
 	                data: JSON.stringify(params)
 	            }).done(function (data) {
-	                _this.actions.approveSuccess({ data: data, point: point });
+	                _this.actions.approveSuccess({ data: data, _callback: _callback });
 	            }).fail(function () {
 	                toastr.warning('对不起，不成功');
 	            });
@@ -12919,27 +12932,18 @@ webpackJsonp([0],[
 	        _classCallCheck(this, ApproveStore);
 
 	        this.bindActions(_ApproveActions2.default);
-	        this.approve = 0;
-	        this.disapprove = 0;
 	    }
 
 	    _createClass(ApproveStore, [{
 	        key: 'onApproveSuccess',
 	        value: function onApproveSuccess(raw) {
 	            var data = raw.data,
-	                point = raw.point;
-
-	            console.log(this.approve);
+	                _callback = raw._callback;
 
 	            switch (data.code) {
 	                case 200:
 	                    toastr.success(data.meta);
-	                    if (point === 0) {
-	                        console.log('dsadsa');
-	                        this.approve = this.approve + 1;
-	                    } else {
-	                        this.disapprove = this.disapprove + 1;
-	                    }
+	                    _callback.call(this);
 	                    break;
 	                case 404:
 	                    toastr.warning('404,就是404');
