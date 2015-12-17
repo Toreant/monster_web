@@ -12,6 +12,7 @@ import BtnBlock from './BtnBlock';
 import Star from './Star';
 import Loading from './Loading';
 import NotFound from './NotFound';
+import Approve from './Approve';
 
 class Article extends React.Component {
     constructor(props) {
@@ -106,7 +107,8 @@ class Article extends React.Component {
                         <div className='mon-article-tags'>
                             {Tags}
                         </div>
-                        <Comment id={this.props.params.id} type="article"/>
+                        <Approve _id={this.props.params.id} column="article" approve={this.state.approve} disapprove={this.state.disapprove}/>
+                        <Comment id={this.props.params.id} type="article" />
                     </div>
                 </div>
             );

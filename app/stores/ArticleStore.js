@@ -8,6 +8,8 @@ class ArticleStore　{
         this.bindActions(ArticleActions);
         this.article = false;  // 是否找到
         this.loading = true;
+        this.approve = 0;
+        this.disapprove = 0;
         this.abbreviations = '';
         this.content;
         this.title = '';
@@ -29,6 +31,8 @@ class ArticleStore　{
 
             this.article = true;
 
+            this.approve = data.raw.article.approve;
+            this.disapprove = data.raw.article.disapprove;
             this.abbreviations = data.raw.article.abbreviations || '/img/abbreviations.png';
             this.content = data.raw.article.content;
             this.title = data.raw.article.title;

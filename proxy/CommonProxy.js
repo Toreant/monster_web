@@ -258,7 +258,6 @@ class CommonProxy {
             // 更新
             function(user,_callback) {
                 Model.update(where,params,(err,raw) => {
-                    console.log(raw);
                     if(err) {
                         _callback(null,500);
                     } else {
@@ -268,6 +267,46 @@ class CommonProxy {
             }
         ],(err,result) => {
             return callback(result);
+        });
+    }
+
+    /**
+     * 点赞　踩
+     * @param point 0 -- 点赞　1 -- 踩
+     * @param _id
+     * @param callback
+     */
+    approveContribute(point,_id,callback) {
+        let Model = this.Model,
+            columns = ['article','music','article'];
+
+        // id号不符合或不存在这个栏目
+        if(!_id.match(/^[0-9a-fA-F]{24}$/) || _.indexOf(columns,this.column) === -1) {
+            return callback(404);
+        }
+
+        Model.findById(_id,(err,doc) => {
+            if(err) {
+                return callback(500);
+            } else if(doc === null) {
+                return callback(404);
+            } else {
+                switch(point) {
+                    case 0 :
+                        doc.approve = doc.approve + 1;
+                        break;
+                    case 1 :
+                        doc.disapprove = doc.disapprove + 1;
+                        break;
+                }
+                doc.save((err) => {
+                    if(err) {
+                        return callback(500);
+                    } else {
+                        return callback(200);
+                    }
+                });
+            }
         });
     }
 }

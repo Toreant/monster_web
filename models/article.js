@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 
 var ArticleSchema = new Schema({
     approve : {type : Number, default : 0},  //　赞的个数
+    disapprove : {type : Number,default : 0},  //　踩的个数
     content : {type : String},　// 内容
     title : {type : String},　　// 标题
     summary : {type : String},　// 简介

@@ -309,31 +309,31 @@ webpackJsonp([0],[
 
 	var _Article2 = _interopRequireDefault(_Article);
 
-	var _List = __webpack_require__(298);
+	var _List = __webpack_require__(301);
 
 	var _List2 = _interopRequireDefault(_List);
 
-	var _Member = __webpack_require__(301);
+	var _Member = __webpack_require__(304);
 
 	var _Member2 = _interopRequireDefault(_Member);
 
-	var _ConArticle = __webpack_require__(307);
+	var _ConArticle = __webpack_require__(310);
 
 	var _ConArticle2 = _interopRequireDefault(_ConArticle);
 
-	var _Music = __webpack_require__(311);
+	var _Music = __webpack_require__(314);
 
 	var _Music2 = _interopRequireDefault(_Music);
 
-	var _MemberCenter = __webpack_require__(314);
+	var _MemberCenter = __webpack_require__(317);
 
 	var _MemberCenter2 = _interopRequireDefault(_MemberCenter);
 
-	var _MemberFollow = __webpack_require__(315);
+	var _MemberFollow = __webpack_require__(318);
 
 	var _MemberFollow2 = _interopRequireDefault(_MemberFollow);
 
-	var _Animate = __webpack_require__(318);
+	var _Animate = __webpack_require__(321);
 
 	var _Animate2 = _interopRequireDefault(_Animate);
 
@@ -11515,6 +11515,10 @@ webpackJsonp([0],[
 
 	var _NotFound2 = _interopRequireDefault(_NotFound);
 
+	var _Approve = __webpack_require__(298);
+
+	var _Approve2 = _interopRequireDefault(_Approve);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11667,6 +11671,7 @@ webpackJsonp([0],[
 	                            { className: 'mon-article-tags' },
 	                            Tags
 	                        ),
+	                        _react2.default.createElement(_Approve2.default, { _id: this.props.params.id, column: 'article', approve: this.state.approve, disapprove: this.state.disapprove }),
 	                        _react2.default.createElement(_Comment2.default, { id: this.props.params.id, type: 'article' })
 	                    )
 	                );
@@ -11821,6 +11826,8 @@ webpackJsonp([0],[
 	        this.bindActions(_ArticleActions2.default);
 	        this.article = false; // 是否找到
 	        this.loading = true;
+	        this.approve = 0;
+	        this.disapprove = 0;
 	        this.abbreviations = '';
 	        this.content;
 	        this.title = '';
@@ -11844,6 +11851,8 @@ webpackJsonp([0],[
 
 	                this.article = true;
 
+	                this.approve = data.raw.article.approve;
+	                this.disapprove = data.raw.article.disapprove;
 	                this.abbreviations = data.raw.article.abbreviations || '/img/abbreviations.png';
 	                this.content = data.raw.article.content;
 	                this.title = data.raw.article.title;
@@ -12697,15 +12706,280 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _ApproveActions = __webpack_require__(299);
+
+	var _ApproveActions2 = _interopRequireDefault(_ApproveActions);
+
+	var _ApproveStore = __webpack_require__(300);
+
+	var _ApproveStore2 = _interopRequireDefault(_ApproveStore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by apache on 15-12-17.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+	var Approve = (function (_React$Component) {
+	    _inherits(Approve, _React$Component);
+
+	    function Approve(props) {
+	        _classCallCheck(this, Approve);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Approve).call(this, props));
+
+	        _this.state = _ApproveStore2.default.getState();
+	        _this.onChange = _this.onChange.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(Approve, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            _ApproveStore2.default.listen(this.onChange);
+
+	            var approve = this.props.approve,
+	                disapprove = this.props.disapprove;
+
+	            this.setState({
+	                approve: approve,
+	                disapprove: disapprove
+	            });
+
+	            _ApproveStore2.default.state.approve = approve;
+	            _ApproveStore2.default.state.disapprove = disapprove;
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            _ApproveStore2.default.unlisten(this.onChange);
+	        }
+	    }, {
+	        key: 'onChange',
+	        value: function onChange(state) {
+	            this.setState(state);
+	        }
+
+	        /**
+	         * 点击点赞或踩后的函数
+	         * @param point
+	         */
+
+	    }, {
+	        key: 'handleClick',
+	        value: function handleClick(point) {
+	            _ApproveActions2.default.approve(point, this.props._id, this.props.column);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'mon-approve' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'mon-approve-item' },
+	                    _react2.default.createElement(
+	                        'a',
+	                        { href: 'javascript:;', onClick: this.handleClick.bind(this, 0) },
+	                        _react2.default.createElement('span', { className: 'fa fa-thumbs-o-up mon-thumb' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'mon-count' },
+	                        this.state.approve
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'mon-approve-item' },
+	                    _react2.default.createElement(
+	                        'a',
+	                        { href: 'javascript:;', onClick: this.handleClick.bind(this, 1) },
+	                        _react2.default.createElement('span', { className: 'fa fa-thumbs-o-down mon-thumb' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'mon-count-o' },
+	                        this.state.disapprove
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Approve;
+	})(_react2.default.Component);
+
+	exports.default = Approve;
+
+/***/ },
+/* 299 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-12-17.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var ApproveActions = (function () {
+	    function ApproveActions() {
+	        _classCallCheck(this, ApproveActions);
+
+	        this.generateActions('approveSuccess');
+	    }
+
+	    /**
+	     * 点赞或踩
+	     * @param point　0 --　点赞　1 -- 踩
+	     * @param _id　　　目标_id
+	     * @param column　栏目
+	     */
+
+	    _createClass(ApproveActions, [{
+	        key: 'approve',
+	        value: function approve(point, _id, column) {
+	            var _this = this;
+
+	            var params = {
+	                point: point,
+	                _id: _id,
+	                column: column
+	            };
+
+	            $.ajax({
+	                url: '/api/approve',
+	                dataType: 'json',
+	                type: 'post',
+	                cache: false,
+	                contentType: 'application/json;charset=utf-8',
+	                data: JSON.stringify(params)
+	            }).done(function (data) {
+	                _this.actions.approveSuccess({ data: data, point: point });
+	            }).fail(function () {
+	                toastr.warning('对不起，不成功');
+	            });
+	        }
+	    }]);
+
+	    return ApproveActions;
+	})();
+
+	exports.default = _alt2.default.createActions(ApproveActions);
+
+/***/ },
+/* 300 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * Created by apache on 15-12-17.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _alt = __webpack_require__(204);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	var _ApproveActions = __webpack_require__(299);
+
+	var _ApproveActions2 = _interopRequireDefault(_ApproveActions);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var ApproveStore = (function () {
+	    function ApproveStore() {
+	        _classCallCheck(this, ApproveStore);
+
+	        this.bindActions(_ApproveActions2.default);
+	        this.approve = 0;
+	        this.disapprove = 0;
+	    }
+
+	    _createClass(ApproveStore, [{
+	        key: 'onApproveSuccess',
+	        value: function onApproveSuccess(raw) {
+	            var data = raw.data,
+	                point = raw.point;
+
+	            console.log(this.approve);
+
+	            switch (data.code) {
+	                case 200:
+	                    toastr.success(data.meta);
+	                    if (point === 0) {
+	                        console.log('dsadsa');
+	                        this.approve = this.approve + 1;
+	                    } else {
+	                        this.disapprove = this.disapprove + 1;
+	                    }
+	                    break;
+	                case 404:
+	                    toastr.warning('404,就是404');
+	                    break;
+	                case 406:
+	                    toastr.warning('你还没登陆');
+	                    break;
+	                case 500:
+	                    toastr.error('服务器错误');
+	                    break;
+	            }
+	        }
+	    }]);
+
+	    return ApproveStore;
+	})();
+
+	exports.default = _alt2.default.createStore(ApproveStore);
+
+/***/ },
+/* 301 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactRouter = __webpack_require__(158);
 
 	var _underscore = __webpack_require__(228);
 
-	var _ListActions = __webpack_require__(299);
+	var _ListActions = __webpack_require__(302);
 
 	var _ListActions2 = _interopRequireDefault(_ListActions);
 
-	var _ListStore = __webpack_require__(300);
+	var _ListStore = __webpack_require__(303);
 
 	var _ListStore2 = _interopRequireDefault(_ListStore);
 
@@ -12911,7 +13185,7 @@ webpackJsonp([0],[
 	exports.default = List;
 
 /***/ },
-/* 299 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12980,7 +13254,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(ListActions);
 
 /***/ },
-/* 300 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12997,7 +13271,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _ListActions = __webpack_require__(299);
+	var _ListActions = __webpack_require__(302);
 
 	var _ListActions2 = _interopRequireDefault(_ListActions);
 
@@ -13035,7 +13309,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(ListStore);
 
 /***/ },
-/* 301 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13062,15 +13336,15 @@ webpackJsonp([0],[
 
 	var _NotFound2 = _interopRequireDefault(_NotFound);
 
-	var _NoticeSender = __webpack_require__(302);
+	var _NoticeSender = __webpack_require__(305);
 
 	var _NoticeSender2 = _interopRequireDefault(_NoticeSender);
 
-	var _MemberActions = __webpack_require__(305);
+	var _MemberActions = __webpack_require__(308);
 
 	var _MemberActions2 = _interopRequireDefault(_MemberActions);
 
-	var _MemberStore = __webpack_require__(306);
+	var _MemberStore = __webpack_require__(309);
 
 	var _MemberStore2 = _interopRequireDefault(_MemberStore);
 
@@ -13227,7 +13501,7 @@ webpackJsonp([0],[
 	exports.default = Member;
 
 /***/ },
-/* 302 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13242,11 +13516,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _NoticeSenderActions = __webpack_require__(303);
+	var _NoticeSenderActions = __webpack_require__(306);
 
 	var _NoticeSenderActions2 = _interopRequireDefault(_NoticeSenderActions);
 
-	var _NoticeSenderStore = __webpack_require__(304);
+	var _NoticeSenderStore = __webpack_require__(307);
 
 	var _NoticeSenderStore2 = _interopRequireDefault(_NoticeSenderStore);
 
@@ -13371,7 +13645,7 @@ webpackJsonp([0],[
 	exports.default = NoticeSender;
 
 /***/ },
-/* 303 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13433,7 +13707,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(NoticeSenderActions);
 
 /***/ },
-/* 304 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13450,7 +13724,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _NoticeSenderActions = __webpack_require__(303);
+	var _NoticeSenderActions = __webpack_require__(306);
 
 	var _NoticeSenderActions2 = _interopRequireDefault(_NoticeSenderActions);
 
@@ -13497,7 +13771,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(NoticeSenderStore);
 
 /***/ },
-/* 305 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13548,7 +13822,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(MemberActions);
 
 /***/ },
-/* 306 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13565,7 +13839,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _MemberActions = __webpack_require__(305);
+	var _MemberActions = __webpack_require__(308);
 
 	var _MemberActions2 = _interopRequireDefault(_MemberActions);
 
@@ -13620,7 +13894,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(MemberStore);
 
 /***/ },
-/* 307 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13635,7 +13909,7 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ConList = __webpack_require__(308);
+	var _ConList = __webpack_require__(311);
 
 	var _ConList2 = _interopRequireDefault(_ConList);
 
@@ -13681,7 +13955,7 @@ webpackJsonp([0],[
 	exports.default = ConArticle;
 
 /***/ },
-/* 308 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13700,11 +13974,11 @@ webpackJsonp([0],[
 
 	var _underscore = __webpack_require__(228);
 
-	var _ConListActions = __webpack_require__(309);
+	var _ConListActions = __webpack_require__(312);
 
 	var _ConListActions2 = _interopRequireDefault(_ConListActions);
 
-	var _ConListStore = __webpack_require__(310);
+	var _ConListStore = __webpack_require__(313);
 
 	var _ConListStore2 = _interopRequireDefault(_ConListStore);
 
@@ -13886,7 +14160,7 @@ webpackJsonp([0],[
 	exports.default = ConList;
 
 /***/ },
-/* 309 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13967,7 +14241,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(ConListActions);
 
 /***/ },
-/* 310 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13984,7 +14258,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _ConListActions = __webpack_require__(309);
+	var _ConListActions = __webpack_require__(312);
 
 	var _ConListActions2 = _interopRequireDefault(_ConListActions);
 
@@ -14030,7 +14304,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(ConListStore);
 
 /***/ },
-/* 311 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14045,11 +14319,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _MusicActions = __webpack_require__(312);
+	var _MusicActions = __webpack_require__(315);
 
 	var _MusicActions2 = _interopRequireDefault(_MusicActions);
 
-	var _MusicStore = __webpack_require__(313);
+	var _MusicStore = __webpack_require__(316);
 
 	var _MusicStore2 = _interopRequireDefault(_MusicStore);
 
@@ -14286,7 +14560,7 @@ webpackJsonp([0],[
 	exports.default = Music;
 
 /***/ },
-/* 312 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14337,7 +14611,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(MusicActions);
 
 /***/ },
-/* 313 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14354,7 +14628,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _MusicActions = __webpack_require__(312);
+	var _MusicActions = __webpack_require__(315);
 
 	var _MusicActions2 = _interopRequireDefault(_MusicActions);
 
@@ -14420,7 +14694,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(MusicStore);
 
 /***/ },
-/* 314 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -14473,7 +14747,7 @@ webpackJsonp([0],[
 	exports.default = MemberCenter;
 
 /***/ },
-/* 315 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14488,11 +14762,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _MemberFollowActions = __webpack_require__(316);
+	var _MemberFollowActions = __webpack_require__(319);
 
 	var _MemberFollowActions2 = _interopRequireDefault(_MemberFollowActions);
 
-	var _MemberFollowStore = __webpack_require__(317);
+	var _MemberFollowStore = __webpack_require__(320);
 
 	var _MemberFollowStore2 = _interopRequireDefault(_MemberFollowStore);
 
@@ -14604,7 +14878,7 @@ webpackJsonp([0],[
 	exports.default = MemberFollow;
 
 /***/ },
-/* 316 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14678,7 +14952,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(MemberFollowActions);
 
 /***/ },
-/* 317 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14695,7 +14969,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _MemberFollowActions = __webpack_require__(316);
+	var _MemberFollowActions = __webpack_require__(319);
 
 	var _MemberFollowActions2 = _interopRequireDefault(_MemberFollowActions);
 
@@ -14741,7 +15015,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createStore(MemberFollowStore);
 
 /***/ },
-/* 318 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14756,11 +15030,11 @@ webpackJsonp([0],[
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _AnimateActions = __webpack_require__(319);
+	var _AnimateActions = __webpack_require__(322);
 
 	var _AnimateActions2 = _interopRequireDefault(_AnimateActions);
 
-	var _AnimateStore = __webpack_require__(320);
+	var _AnimateStore = __webpack_require__(323);
 
 	var _AnimateStore2 = _interopRequireDefault(_AnimateStore);
 
@@ -14911,7 +15185,7 @@ webpackJsonp([0],[
 	exports.default = Animate;
 
 /***/ },
-/* 319 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14968,7 +15242,7 @@ webpackJsonp([0],[
 	exports.default = _alt2.default.createActions(AnimateActions);
 
 /***/ },
-/* 320 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14985,7 +15259,7 @@ webpackJsonp([0],[
 
 	var _alt2 = _interopRequireDefault(_alt);
 
-	var _AnimateActions = __webpack_require__(319);
+	var _AnimateActions = __webpack_require__(322);
 
 	var _AnimateActions2 = _interopRequireDefault(_AnimateActions);
 

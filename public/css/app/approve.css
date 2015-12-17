@@ -1,0 +1,35 @@
+.mon-approve {
+  margin: auto;
+  display: inline-block;
+  overflow: hidden;
+}
+.mon-approve-item {
+  display: inline-block;
+  overflow: hidden;
+  float: left;
+  margin: 10px;
+}
+.mon-approve-item > a {
+  display: block;
+  margin: auto;
+  border: 1px solid #c0c0c0;
+  border-radius: 50%;
+  text-align: center;
+}
+.mon-thumb {
+  display: block;
+  margin: auto;
+  font-size: 30px;
+}
+.mon-count {
+  display: block;
+  margin: auto;
+  font-size: 30px;
+  color: #9BCD9B;
+}
+.mon-count-o {
+  display: block;
+  margin: auto;
+  font-size: 30px;
+  color: #BD362F;
+}

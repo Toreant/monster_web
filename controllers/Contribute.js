@@ -1,8 +1,9 @@
 /**
  * Created by apache on 15-11-2.
  */
-import Articel from '../proxy/article';
+import Article from '../proxy/article';
 import Music from '../proxy/music';
+import CommonProxy from '../proxy/CommonProxy';
 import async from 'async';
 
 class Contribute {
@@ -35,7 +36,7 @@ class Contribute {
 
             // 获取文章推荐
             function(_callback) {
-                Articel.getArticles(option,(data) =>{
+                Article.getArticles(option,(data) =>{
                     if(data === 500) {
                         return res.json(wrong);
                     } else {
@@ -58,7 +59,6 @@ class Contribute {
         ],(err,data) => {
             let _raw = [];
             for(let i = 0, num = data.articles._raw.length; i < num; i++) {
-                console.log('dada');
                 data.articles._raw[i].option = 'article';
                 _raw.push(data.articles._raw[i]);
             }
@@ -74,6 +74,44 @@ class Contribute {
     }
 
     deleteContribute(req,res,next) {}
+
+    /**
+     * 点赞　踩
+     * @param req
+     * @param res
+     */
+    approveContribute(req,res) {
+
+        /**
+         * @param point 观点(approve -- 0 ,disapprove -- 1)
+         * @parma _id 内容的id号
+         * @param column 栏目(article,music,animate)
+         */
+        let point = req.body.point,
+            _id = req.body._id,
+            column = req.body.column;
+
+        let result = {
+            meta : '',
+            code : 0
+        };
+
+        new CommonProxy(column).approveContribute(point,_id,(data) => {
+            switch(data) {
+                case 200 :
+                    result.meta = point === 0?'点赞成功':'呵呵，你踩了人家';
+                    break;
+                case 404 :
+                    result.meta = '对象不存在';
+                    break;
+                case 500 :
+                    result.meta = '服务器错误';
+                    break;
+            }
+            result.code = data;
+            res.json(result);
+        });
+    }
 }
 
 export default new Contribute();

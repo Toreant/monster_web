@@ -149,7 +149,9 @@ router.get('/api/notice/:id',auth.isAuth,NoticeCtrl.viewNotice);
 
 router.post('/api/notice',auth.isAuth,NoticeCtrl.postNotice);
 
-// 帮组
+// 帮助
 router.get('/api/weather',Helper.getWeather);
+
+router.post('/api/approve',auth.isAuth,ContributeCtrl.approveContribute);
 
 export default router;
