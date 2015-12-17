@@ -12782,30 +12782,34 @@ webpackJsonp([0],[
 	                { className: 'mon-approve' },
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'mon-approve-item' },
+	                    null,
 	                    _react2.default.createElement(
-	                        'a',
-	                        { href: 'javascript:;', onClick: this.handleClick.bind(this, 0) },
-	                        _react2.default.createElement('span', { className: 'fa fa-thumbs-o-up mon-thumb' })
+	                        'div',
+	                        { className: 'mon-approve-item' },
+	                        _react2.default.createElement(
+	                            'a',
+	                            { href: 'javascript:;', className: 'mon-approve-click', onClick: this.handleClick.bind(this, 0) },
+	                            _react2.default.createElement('span', { className: 'fa fa-thumbs-o-up mon-thumb' })
+	                        ),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'mon-count' },
+	                            this.state.approve
+	                        )
 	                    ),
 	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'mon-count' },
-	                        this.state.approve
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'mon-approve-item' },
-	                    _react2.default.createElement(
-	                        'a',
-	                        { href: 'javascript:;', onClick: this.handleClick.bind(this, 1) },
-	                        _react2.default.createElement('span', { className: 'fa fa-thumbs-o-down mon-thumb' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'mon-count-o' },
-	                        this.state.disapprove
+	                        'div',
+	                        { className: 'mon-approve-item' },
+	                        _react2.default.createElement(
+	                            'a',
+	                            { href: 'javascript:;', className: 'mon-approve-click-o', onClick: this.handleClick.bind(this, 1) },
+	                            _react2.default.createElement('span', { className: 'fa fa-thumbs-o-down mon-thumb' })
+	                        ),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'mon-count-o' },
+	                            this.state.disapprove
+	                        )
 	                    )
 	                )
 	            );
