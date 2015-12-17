@@ -13,7 +13,7 @@
   display: inline-block;
   overflow: hidden;
   float: left;
-  margin: 10px;
+  margin: 10px 15px;
 }
 .mon-approve-item > a {
   display: block;

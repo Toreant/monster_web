@@ -121,8 +121,8 @@ class Article extends React.Component {
                         </div>
                         <Approve ref="approve" _id={this.props.params.id} column="article" approveCallback={approveClick} disCallback={disClick}/>
                         <div className="mon-approve-count">
-                            <span>{this.state.approve}</span>
-                            <span>{this.state.disapprove}</span>
+                            <span>{this.state.approve > 1000 ? '999+': this.state.approve}</span>
+                            <span>{this.state.disapprove > 1000 ? '999+': this.state.disapprove}</span>
                         </div>
                         <Comment id={this.props.params.id} type="article" />
                     </div>

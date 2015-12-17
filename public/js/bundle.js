@@ -11693,12 +11693,12 @@ webpackJsonp([0],[
 	                            _react2.default.createElement(
 	                                'span',
 	                                null,
-	                                this.state.approve
+	                                this.state.approve > 1000 ? '999+' : this.state.approve
 	                            ),
 	                            _react2.default.createElement(
 	                                'span',
 	                                null,
-	                                this.state.disapprove
+	                                this.state.disapprove > 1000 ? '999+' : this.state.disapprove
 	                            )
 	                        ),
 	                        _react2.default.createElement(_Comment2.default, { id: this.props.params.id, type: 'article' })
