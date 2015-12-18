@@ -21,13 +21,11 @@ class BigUpload extends React.Component {
         if(!this.state.r.support) {
             toastr.warning('你的浏览器不支持这个功能，请更新为最新的浏览器');
         } else {
-            // r.assignDrop($('.resumable-drop')[0]);
             this.state.r.assignBrowse($('#file_select')[0]);  //　添加选择的文件的功能键
 
             // 添加文件
             this.state.r.on('fileAdded',(file,event) => {
                 let target = file.file;
-                console.log(target);
                 let $upload = $("#upload"),
                     accept_type = [
                         'audio/mpeg',
@@ -63,7 +61,6 @@ class BigUpload extends React.Component {
 
             // 上传文件期间
             this.state.r.on('fileProgress',function(file) {
-                console.log(file.uniqueIdentifier);
                 $("#progress_bar").css('width',parseInt(file.progress()*100)+'%');
             });
 

@@ -50,8 +50,22 @@ class Music extends React.Component {
         $("#musci_pause").css('display','none');
     }
 
+    handleClick(option) {
+        if(option === 0) {
+            this.setState({
+                star : this.state.star + 1
+            });
+        } else {
+            this.setState({
+                star : this.state.star -1 < 0? 0: this.state.star -1
+            });
+        }
+    }
+
     render() {
-        let Target,User,Tags;
+        let Target,User,Tags,Visitor,Aside,
+            plusClick = this.handleClick.bind(this,0),
+            subClick = this.handleClick.bind(this,1);
         if(this.state.loading && this.state.finded) {
             Target = <Loading />;
         } else if(!this.state.loading && !this.state.finded) {
@@ -66,22 +80,29 @@ class Music extends React.Component {
                 );
             });
 
+            Visitor = this.state.visitor.map((data) => {
+                return (
+                    <Link to={'/member/'+data.domain} className="clearfix">
+                        <img src={data.avatar_url || '/img/dd9901f664234eb44f6b217e7fa04e17.jpg'} alt="loading" width="30"/>
+                    </Link>
+                );
+            });
+
+            Aside = (
+                <aside className="col-md-4 col-sm-4 col-xs-12 mon-visitor-block">
+                    <div>
+                        <p className="mon-comment-title">
+                            最近访客
+                        </p>
+                        <div>
+                            {Visitor}
+                        </div>
+                    </div>
+                </aside>
+            );
+
             Target = (
                 <div className="col-md-8">
-                    <p className="text-primary mon-bg-title">
-                        {this.state.title}
-                    </p>
-                    <div className="mon-music-info">
-                        <Link to={'/member/'+this.state.createUserDomain}>
-                            <img src={this.state.createUserAvatarURL} alt="loading" width="80"/>
-                        </Link>
-                        <Link to={'/member/'+this.state.createUserDomain}>
-                            {this.state.createUserName}
-                        </Link>
-                        <span className="pull-right">
-                            {this.state.createTime}
-                        </span>
-                    </div>
                     <div className="raw clearfix">
                         <div className="mon-music col-md-6">
                             <img src={this.state.abbreviations} alt="loading"/>
@@ -96,53 +117,51 @@ class Music extends React.Component {
                             </div>
                         </div>
                         <div className="col-md-6 mon-music-summary">
-                            <label className="label label-info">
-                                简介
-                            </label>
-                            <p className="bg-info mon-padding">
-                                {this.state.summary}
+                            <p className="text-info">
+                                {this.state.title}
                             </p>
+                            <div>
+                                <Link to={'/member/'+this.state.createUserDomain}>
+                                    <img src={this.state.createUserAvatarURL} alt=""/>
+                                </Link>
+                                <Link to={'/member/'+this.state.createUserDomain}>
+                                    {this.state.createUserName}
+                                </Link>
+                            </div>
+                            <div>
+                                <span>专辑:</span>
+                                <span>{this.state.alubmn}</span>
+                            </div>
+                            <div>
+                                <span className="label label-info">收藏</span>
+                                <Star star={this.props.params.id} column='music' stared={this.state.stared} plusClick={plusClick} subClick={subClick}/>
+                                <span>{this.state.star}</span>
+                            </div>
                         </div>
                     </div>
-                    <div className="raw mon-music-tags">
-                        {Tags}
+                    <div className="raw">
+                        <div className="panel">
+
+                            <div className="panel-body">
+                                <p className="text-muted">
+                                    简介：{this.state.summary}
+                                </p>
+                                <div>
+                                    {Tags}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <Star star={this.props.params.id} column='music' stared={this.state.stared} />
                     <div className="raw">
                         <Comment id={this.props.params.id} type="music"/>
                     </div>
                 </div>
             );
-
-            User = (
-                <div className="col-md-4">
-                    <div className='panel panel-default'>
-                        <div className='panel-body media'>
-                            <div className='media-left'>
-                                <a href={'/member/'+this.state.create_user_domain} className='mon-article-user'>
-                                    <img src={this.state.createUserAvatar || '/img/default.png'} alt="loading"/>
-                                </a>
-                            </div>
-                            <div className='media-body'>
-                                <div className='media-heading'>
-                                    <a href={'/member/'+this.state.create_user_domain} className='mon-user-name'>
-                                        {this.state.create_user_name}
-                                    </a>
-                                </div>
-                                <p>{this.state.create_user_introduce}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
-
-
-
         }
         return (
             <div className="container animated fadeInUp">
                 {Target}
-                {User}
+                {Aside}
             </div>
         );
     }

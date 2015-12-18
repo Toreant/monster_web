@@ -17,20 +17,24 @@ class MusicStore {
         this.star = 0;
         this.tags = [];
         this.createTime;
+        this.alubmn = '';
         this.finded = true;
         this.loading = true;
         this.error = '';
         this.stared = false;
+        this.visitor = [];  // 访客
     }
 
     onGetMusicSuccess(data) {
         if(data.code === 200) {
+            console.log(data.raw);
             this.abbreviations = data.raw.music.abbreviations;
             this.music = data.raw.music.music_url;
             this.title = data.raw.music.title;
             this.star = data.raw.music.star;
             this.tags = data.raw.music.tags;
             this.summary = data.raw.music.summary;
+            this.alubmn = data.raw.music.alubmn;
             this.createUserName = data.raw.user.username;
             this.createUserAvatarURL = data.raw.user.avatar_url;
             this.createUserDomain = data.raw.user.domain;
@@ -38,6 +42,7 @@ class MusicStore {
             this.createTime = new Date(data.raw.music.create_time).toLocaleDateString();
             this.loading = false;
             this.stared = data.raw.stared.toString();
+            this.visitor = data.raw.visitor;
         } else if(data.code === 404) {
             this.finded = false;
             this.loading = false;

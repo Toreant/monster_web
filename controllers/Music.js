@@ -2,7 +2,7 @@
  * Created by apache on 15-11-25.
  */
 import Music from '../proxy/music';
-import User from '../proxy/user';
+import User from '../models/user';
 import async from 'async';
 import _ from 'underscore';
 
@@ -45,7 +45,8 @@ class MusicCtrl {
      * @param next
      */
     getMusic(req,res,next) {
-        let id = req.params.id;
+        let id = req.params.id,
+            visitor = req.session.user;
 
         let result = {
             meta : '',
@@ -57,24 +58,35 @@ class MusicCtrl {
 
             // 获取音乐
             function(_callback) {
-                Music.getMusicById(id,{},(data) => {
-                    _callback(null,data);
+                Music.getMusicById(id,visitor,(music) => {
+                    if(music === null) {
+                        return res.json({
+                            meta : '404找不到哟~~',
+                            code : 404
+                        });
+                    } else if(music === 500) {
+                        return res.json({
+                            meta : '服务器错误',
+                            code : 500
+                        });
+                    } else {
+                        _callback(null,music);
+                    }
                 });
             },
 
             // 获取发布音乐的用户
             function(music,_callback) {
-                if(music === null || music === 500) {
-                    _callback(null,{music : music,user : null});
-                } else {
-                    User.getUserById([music.create_user_id],{},(data) => {
-                        if(data === 500) {
-                            _callback(null,{music : music,user :500});
-                        } else {
-                            _callback(null,{music : music,user : data[0]});
-                        }
-                    });
-                }
+                User.findById(music.create_user_id,'avatar_url username summary domain',(err,user) => {
+                    if(err) {
+                        return res.json({
+                            meta : '服务器错误',
+                            code : 500
+                        });
+                    } else {
+                        _callback(null,{music : music,user :user});
+                    }
+                });
             },
 
             // 判断用户是否收藏了这个音乐
@@ -86,42 +98,56 @@ class MusicCtrl {
                     // 未登陆的当做还没收藏
                     data.stared = false;
                     _callback(null,data);
-                } else if(local_user !== undefined && data.music !== null && data.music !== 500 ){
+                } else {
 
                     // 查找用户
-                    User.getUser({ _id : local_user._id },(user) => {
+                    User.findById(local_user._id,(err,user) => {
 
-                        if(user === 500) {
+                        if(err) {
                             _callback(null,500);
-                        } else if(_.indexOf(user[0].star,data.music._id.toString()) !== -1) {
+                        } else if(user === null) {
+
+                            data.stared = false;
+                            _callback(null,data);
+
+                        }else if(_.indexOf(user[0].star,data.music._id.toString()) !== -1) {
 
                             // 这首歌在用户的收藏列表中
                             data.stared = true;
                             _callback(null, data);
+
                         } else {
                             data.stared = false;
                             _callback(null,data);
                         }
                     });
-                } else {
+                }
+            },
 
-                    // 音乐查找有问题，当做为收藏
-                    data.stared = false;
+            // 查找访客
+            function(data,_callback) {
+                console.log(data.data);
+                if(data.music.visitor.length === 0) {
+                    data.vistor = [];
                     _callback(null,data);
+                } else {
+                    User.find({_id : {$in : data.music.visitor}},'avatar_url username domain',(err,users) => {
+                        if(err) {
+                            return res.json({
+                                meta : '服务器错误',
+                                code : 500
+                            });
+                        } else {
+                            data.visitor = users;
+                            _callback(null,data);
+                        }
+                    });
                 }
             }
         ],(err,data) => {
-            if( data === 500 || data.music === 500 || data.user === 500) {
-                result.meta = '服务器错误';
-                result.code = 500;
-            } else if (data.music === null){
-                result.meta = '找不到这个音乐';
-                result.code = 404;
-            } else {
-                result.meta = '查找成功';
-                result.code = 200;
-                result.raw = data;
-            }
+            result.meta = '查找音乐成功';
+            result.code = 200;
+            result.raw = data;
             res.status(result.code).json(result);
         });
     }

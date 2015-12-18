@@ -16,7 +16,7 @@ import SearchCtrl from './controllers/Search';
 import AnimateCtrl from './controllers/Animate';
 import NoticeCtrl from './controllers/Notice';
 import Helper from './controllers/Helper';
-var resumable = require('./middleware/resumable-node');
+import resumable from './middleware/resumable-node';
 
 var upload = multer({dest : './public/music'});
 

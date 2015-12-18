@@ -547,6 +547,7 @@
                 ret = (error ? 1 : (ret > 0.99999 ? 1 : ret));
                 ret = Math.max($._prevProgress, ret); // We don't want to lose percentages when an upload is paused
                 $._prevProgress = ret;
+                console.log(ret);
                 return (ret);
             };
             $.isUploading = function () {

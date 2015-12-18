@@ -1,10 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import util from 'util';
-import stream from 'stream';
 import crypt from '../middleware/crypt';
-
-let Stream = stream.Stream;
 
 class resumable {
 
@@ -12,14 +9,9 @@ class resumable {
         this.temporaryFolder = '/public/upload/';
         this.maxFileSize = null;
         this.fileParameterName = 'file';
-        //try {
-        //    fs.mkdirSync(this.temporaryFolder);
-        //} catch (e) {
-        //}
     }
 
     cleanIdentifier(identifier) {
-        //return identifier.replace(/^0-9A-Za-z_-/img, '');
         return identifier;
     }
 
@@ -75,7 +67,6 @@ class resumable {
         var totalSize = req.param('resumableTotalSize', 0);
         var identifier = req.param('resumableIdentifier', "");
         var filename = req.param('resumableFilename', "");
-        var targetName = new Date().getTime() + filename;
 
         if (this.validateRequest(chunkNumber, chunkSize, totalSize, identifier, filename) == 'valid') {
             var chunkFilename = this.getChunkFilename(chunkNumber, identifier);
@@ -98,7 +89,6 @@ class resumable {
     post(req, callback) {
 
         var fields = req.body;
-        console.log(fields);
         var files = req.files;
         var chunkNumber = fields['resumableChunkNumber'];
         var chunkSize = fields['resumableChunkSize'];
@@ -188,7 +178,6 @@ class resumable {
         };
         pipeChunk(1);
     }
-
 
     clean(identifier,callback, options) {
         console.log(identifier);

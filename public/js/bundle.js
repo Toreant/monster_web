@@ -5498,13 +5498,11 @@ webpackJsonp([0],[
 	            if (!this.state.r.support) {
 	                toastr.warning('你的浏览器不支持这个功能，请更新为最新的浏览器');
 	            } else {
-	                // r.assignDrop($('.resumable-drop')[0]);
 	                this.state.r.assignBrowse($('#file_select')[0]); //　添加选择的文件的功能键
 
 	                // 添加文件
 	                this.state.r.on('fileAdded', function (file, event) {
 	                    var target = file.file;
-	                    console.log(target);
 	                    var $upload = $("#upload"),
 	                        accept_type = ['audio/mpeg', 'audio/ogg', 'video/mp4'];
 	                    if (_underscore2.default.indexOf(accept_type, target.type) === -1) {
@@ -5536,7 +5534,6 @@ webpackJsonp([0],[
 
 	                // 上传文件期间
 	                this.state.r.on('fileProgress', function (file) {
-	                    console.log(file.uniqueIdentifier);
 	                    $("#progress_bar").css('width', parseInt(file.progress() * 100) + '%');
 	                });
 
@@ -6336,6 +6333,7 @@ webpackJsonp([0],[
 	                ret = error ? 1 : ret > 0.99999 ? 1 : ret;
 	                ret = Math.max($._prevProgress, ret); // We don't want to lose percentages when an upload is paused
 	                $._prevProgress = ret;
+	                console.log(ret);
 	                return ret;
 	            };
 	            $.isUploading = function () {
@@ -14523,11 +14521,28 @@ webpackJsonp([0],[
 	            $("#musci_pause").css('display', 'none');
 	        }
 	    }, {
+	        key: 'handleClick',
+	        value: function handleClick(option) {
+	            if (option === 0) {
+	                this.setState({
+	                    star: this.state.star + 1
+	                });
+	            } else {
+	                this.setState({
+	                    star: this.state.star - 1 < 0 ? 0 : this.state.star - 1
+	                });
+	            }
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var Target = undefined,
 	                User = undefined,
-	                Tags = undefined;
+	                Tags = undefined,
+	                Visitor = undefined,
+	                Aside = undefined,
+	                plusClick = this.handleClick.bind(this, 0),
+	                subClick = this.handleClick.bind(this, 1);
 	            if (this.state.loading && this.state.finded) {
 	                Target = _react2.default.createElement(_Loading2.default, null);
 	            } else if (!this.state.loading && !this.state.finded) {
@@ -14542,33 +14557,36 @@ webpackJsonp([0],[
 	                    );
 	                });
 
+	                Visitor = this.state.visitor.map(function (data) {
+	                    return _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: '/member/' + data.domain, className: 'clearfix' },
+	                        _react2.default.createElement('img', { src: data.avatar_url || '/img/dd9901f664234eb44f6b217e7fa04e17.jpg', alt: 'loading', width: '30' })
+	                    );
+	                });
+
+	                Aside = _react2.default.createElement(
+	                    'aside',
+	                    { className: 'col-md-4 col-sm-4 col-xs-12 mon-visitor-block' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        _react2.default.createElement(
+	                            'p',
+	                            { className: 'mon-comment-title' },
+	                            '最近访客'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            Visitor
+	                        )
+	                    )
+	                );
+
 	                Target = _react2.default.createElement(
 	                    'div',
 	                    { className: 'col-md-8' },
-	                    _react2.default.createElement(
-	                        'p',
-	                        { className: 'text-primary mon-bg-title' },
-	                        this.state.title
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'mon-music-info' },
-	                        _react2.default.createElement(
-	                            _reactRouter.Link,
-	                            { to: '/member/' + this.state.createUserDomain },
-	                            _react2.default.createElement('img', { src: this.state.createUserAvatarURL, alt: 'loading', width: '80' })
-	                        ),
-	                        _react2.default.createElement(
-	                            _reactRouter.Link,
-	                            { to: '/member/' + this.state.createUserDomain },
-	                            this.state.createUserName
-	                        ),
-	                        _react2.default.createElement(
-	                            'span',
-	                            { className: 'pull-right' },
-	                            this.state.createTime
-	                        )
-	                    ),
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'raw clearfix' },
@@ -14596,67 +14614,82 @@ webpackJsonp([0],[
 	                            'div',
 	                            { className: 'col-md-6 mon-music-summary' },
 	                            _react2.default.createElement(
-	                                'label',
-	                                { className: 'label label-info' },
-	                                '简介'
+	                                'p',
+	                                { className: 'text-info' },
+	                                this.state.title
 	                            ),
 	                            _react2.default.createElement(
-	                                'p',
-	                                { className: 'bg-info mon-padding' },
-	                                this.state.summary
+	                                'div',
+	                                null,
+	                                _react2.default.createElement(
+	                                    _reactRouter.Link,
+	                                    { to: '/member/' + this.state.createUserDomain },
+	                                    _react2.default.createElement('img', { src: this.state.createUserAvatarURL, alt: '' })
+	                                ),
+	                                _react2.default.createElement(
+	                                    _reactRouter.Link,
+	                                    { to: '/member/' + this.state.createUserDomain },
+	                                    this.state.createUserName
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'span',
+	                                    null,
+	                                    '专辑:'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'span',
+	                                    null,
+	                                    this.state.alubmn
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'span',
+	                                    { className: 'label label-info' },
+	                                    '收藏'
+	                                ),
+	                                _react2.default.createElement(_Star2.default, { star: this.props.params.id, column: 'music', stared: this.state.stared, plusClick: plusClick, subClick: subClick }),
+	                                _react2.default.createElement(
+	                                    'span',
+	                                    null,
+	                                    this.state.star
+	                                )
 	                            )
 	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'raw mon-music-tags' },
-	                        Tags
+	                        { className: 'raw' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'panel' },
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'panel-body' },
+	                                _react2.default.createElement(
+	                                    'p',
+	                                    { className: 'text-muted' },
+	                                    '简介：',
+	                                    this.state.summary
+	                                ),
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    null,
+	                                    Tags
+	                                )
+	                            )
+	                        )
 	                    ),
-	                    _react2.default.createElement(_Star2.default, { star: this.props.params.id, column: 'music', stared: this.state.stared }),
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'raw' },
 	                        _react2.default.createElement(_Comment2.default, { id: this.props.params.id, type: 'music' })
-	                    )
-	                );
-
-	                User = _react2.default.createElement(
-	                    'div',
-	                    { className: 'col-md-4' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'panel panel-default' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'panel-body media' },
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'media-left' },
-	                                _react2.default.createElement(
-	                                    'a',
-	                                    { href: '/member/' + this.state.create_user_domain, className: 'mon-article-user' },
-	                                    _react2.default.createElement('img', { src: this.state.createUserAvatar || '/img/default.png', alt: 'loading' })
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'media-body' },
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    { className: 'media-heading' },
-	                                    _react2.default.createElement(
-	                                        'a',
-	                                        { href: '/member/' + this.state.create_user_domain, className: 'mon-user-name' },
-	                                        this.state.create_user_name
-	                                    )
-	                                ),
-	                                _react2.default.createElement(
-	                                    'p',
-	                                    null,
-	                                    this.state.create_user_introduce
-	                                )
-	                            )
-	                        )
 	                    )
 	                );
 	            }
@@ -14664,7 +14697,7 @@ webpackJsonp([0],[
 	                'div',
 	                { className: 'container animated fadeInUp' },
 	                Target,
-	                User
+	                Aside
 	            );
 	        }
 	    }]);
@@ -14766,22 +14799,26 @@ webpackJsonp([0],[
 	        this.star = 0;
 	        this.tags = [];
 	        this.createTime;
+	        this.alubmn = '';
 	        this.finded = true;
 	        this.loading = true;
 	        this.error = '';
 	        this.stared = false;
+	        this.visitor = []; // 访客
 	    }
 
 	    _createClass(MusicStore, [{
 	        key: 'onGetMusicSuccess',
 	        value: function onGetMusicSuccess(data) {
 	            if (data.code === 200) {
+	                console.log(data.raw);
 	                this.abbreviations = data.raw.music.abbreviations;
 	                this.music = data.raw.music.music_url;
 	                this.title = data.raw.music.title;
 	                this.star = data.raw.music.star;
 	                this.tags = data.raw.music.tags;
 	                this.summary = data.raw.music.summary;
+	                this.alubmn = data.raw.music.alubmn;
 	                this.createUserName = data.raw.user.username;
 	                this.createUserAvatarURL = data.raw.user.avatar_url;
 	                this.createUserDomain = data.raw.user.domain;
@@ -14789,6 +14826,7 @@ webpackJsonp([0],[
 	                this.createTime = new Date(data.raw.music.create_time).toLocaleDateString();
 	                this.loading = false;
 	                this.stared = data.raw.stared.toString();
+	                this.visitor = data.raw.visitor;
 	            } else if (data.code === 404) {
 	                this.finded = false;
 	                this.loading = false;
