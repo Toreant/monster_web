@@ -29,6 +29,10 @@ class Approve extends React.Component {
      * @param point
      */
     handleClick(point) {
+        if(this.props.approved !== 2) {
+            toastr.warning('你已经点赞过或踩过了');
+            return;
+        }
         if(point === 0) {
             ApproveActions.approve(point,this.props._id,this.props.column,this.props.approveCallback);
         } else {

@@ -2896,7 +2896,7 @@ webpackJsonp([0],[
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'mon-center mon-user-img' },
-	                            _react2.default.createElement('img', { src: this.state.avatar_url, width: '200', alt: 'loading' })
+	                            _react2.default.createElement('img', { src: this.state.avatar_url || '/img/dd9901f664234eb44f6b217e7fa04e17.jpg', width: '200', alt: 'loading' })
 	                        ),
 	                        _react2.default.createElement(
 	                            'div',
@@ -12792,6 +12792,10 @@ webpackJsonp([0],[
 	    }, {
 	        key: 'handleClick',
 	        value: function handleClick(point) {
+	            if (this.props.approved !== 2) {
+	                toastr.warning('你已经点赞过或踩过了');
+	                return;
+	            }
 	            if (point === 0) {
 	                _ApproveActions2.default.approve(point, this.props._id, this.props.column, this.props.approveCallback);
 	            } else {
@@ -13372,6 +13376,10 @@ webpackJsonp([0],[
 
 	var _MemberStore2 = _interopRequireDefault(_MemberStore);
 
+	var _Loading = __webpack_require__(229);
+
+	var _Loading2 = _interopRequireDefault(_Loading);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13419,88 +13427,121 @@ webpackJsonp([0],[
 	            this.setState(state);
 	        }
 	    }, {
+	        key: 'handleClick',
+	        value: function handleClick(option, _id) {
+
+	            // option 0 -- 关注　1 -- 取消关注
+	            _MemberActions2.default.follow(option, _id);
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var domain = this.props.params.domain;
-	            var Mem = _react2.default.createElement(
-	                'div',
-	                { className: 'col-md-3 col-sm-3' },
-	                _react2.default.createElement(
+	            var domain = this.props.params.domain,
+	                FollowBtn = '',
+	                click = undefined,
+	                FollowInfo = undefined,
+	                Mem = undefined;
+
+	            if (this.state.followed) {
+	                FollowInfo = '已关注';
+	                FollowBtn = 'btn-default';
+	                click = this.handleClick.bind(this, 1, this.state._id);
+	            } else {
+	                FollowInfo = '关注';
+	                FollowBtn = 'btn-info';
+	                click = this.handleClick.bind(this, 0, this.state._id);
+	            }
+
+	            if (!this.member) {
+
+	                Mem = _react2.default.createElement(
 	                    'div',
-	                    { className: 'mon-center' },
-	                    _react2.default.createElement('img', { src: this.state.avatar_url, width: '200', alt: 'loading' })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'mon-user-name' },
-	                    this.state.username
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'mon-vcard-stats' },
+	                    { className: 'col-md-3 col-sm-3' },
 	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/member/' + domain + '/followers', className: 'mon-link' },
+	                        'div',
+	                        { className: 'mon-center' },
+	                        _react2.default.createElement('img', { src: this.state.avatar_url || '/img/dd9901f664234eb44f6b217e7fa04e17.jpg', width: '200', alt: 'loading' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'mon-user-name' },
+	                        this.state.username
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'mon-vcard-stats' },
 	                        _react2.default.createElement(
-	                            'span',
-	                            null,
-	                            this.state.followers
+	                            _reactRouter.Link,
+	                            { to: '/member/' + domain + '/followers', className: 'mon-link' },
+	                            _react2.default.createElement(
+	                                'span',
+	                                null,
+	                                this.state.followers
+	                            ),
+	                            _react2.default.createElement(
+	                                'b',
+	                                null,
+	                                'Followers'
+	                            )
 	                        ),
 	                        _react2.default.createElement(
-	                            'b',
-	                            null,
-	                            'Followers'
+	                            _reactRouter.Link,
+	                            { to: '/member/' + domain + '/following', className: 'mon-link' },
+	                            _react2.default.createElement(
+	                                'span',
+	                                null,
+	                                this.state.following
+	                            ),
+	                            _react2.default.createElement(
+	                                'b',
+	                                null,
+	                                'Following'
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            _reactRouter.Link,
+	                            { to: '/member/' + domain + '/star', className: 'mon-link' },
+	                            _react2.default.createElement(
+	                                'span',
+	                                null,
+	                                this.state.star
+	                            ),
+	                            _react2.default.createElement(
+	                                'b',
+	                                null,
+	                                'Star'
+	                            )
 	                        )
 	                    ),
 	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/member/' + domain + '/following', className: 'mon-link' },
+	                        'div',
+	                        { className: 'mon-center mon-member' },
 	                        _react2.default.createElement(
-	                            'span',
-	                            null,
-	                            this.state.following
+	                            'p',
+	                            { className: 'text-muted mon-bg-title' },
+	                            '个人简介'
 	                        ),
 	                        _react2.default.createElement(
-	                            'b',
-	                            null,
-	                            'Following'
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/member/' + domain + '/star', className: 'mon-link' },
-	                        _react2.default.createElement(
-	                            'span',
-	                            null,
-	                            this.state.star
+	                            'p',
+	                            { className: 'text-success bg-info mon-member-intr' },
+	                            this.state.introduce
 	                        ),
 	                        _react2.default.createElement(
-	                            'b',
-	                            null,
-	                            'Star'
+	                            'button',
+	                            { className: 'btn btn-primary', 'data-toggle': 'modal', 'data-target': '#noticeSender' },
+	                            '私信'
+	                        ),
+	                        _react2.default.createElement(
+	                            'button',
+	                            { className: "btn " + FollowBtn, onClick: click },
+	                            FollowInfo
 	                        )
 	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'mon-center mon-member' },
-	                    _react2.default.createElement(
-	                        'p',
-	                        { className: 'text-muted mon-bg-title' },
-	                        '个人简介'
-	                    ),
-	                    _react2.default.createElement(
-	                        'p',
-	                        { className: 'text-success bg-info mon-member-intr' },
-	                        this.state.introduce
-	                    ),
-	                    _react2.default.createElement(
-	                        'button',
-	                        { className: 'btn btn-block btn-primary', 'data-toggle': 'modal', 'data-target': '#noticeSender' },
-	                        '私信'
-	                    )
-	                )
-	            );
+	                );
+	            } else {
+	                Mem = _react2.default.createElement(_Loading2.default, null);
+	            }
+
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'container' },
@@ -13820,7 +13861,7 @@ webpackJsonp([0],[
 	    function MemberActions() {
 	        _classCallCheck(this, MemberActions);
 
-	        this.generateActions('getMemberSuccess');
+	        this.generateActions('getMemberSuccess', 'followSuccess');
 	    }
 
 	    _createClass(MemberActions, [{
@@ -13831,11 +13872,34 @@ webpackJsonp([0],[
 	            $.ajax({
 	                url: '/api/member/' + domain,
 	                type: 'get',
-	                cache: false
+	                cache: false,
+	                contentType: 'application/json;charset=utf-8'
 	            }).done(function (data) {
 	                _this.actions.getMemberSuccess(data);
 	            }).fail(function () {
 	                toastr.error('获取信息失败');
+	            });
+	        }
+	    }, {
+	        key: 'follow',
+	        value: function follow(option, _id) {
+	            var _this2 = this;
+
+	            var type = option === 0 ? 'post' : 'delete';
+	            $.ajax({
+	                url: '/api/follow',
+	                type: type,
+	                dataType: 'json',
+	                contentType: 'application/json;charset=utf-8',
+	                data: JSON.stringify({ _id: _id }),
+	                cache: false,
+	                timeOut: 4000
+	            }).done(function (data) {
+	                _this2.actions.followSuccess(data);
+	            }).fail(function () {
+	                toastr.error('网络错误');
+	            }).error(function () {
+	                toastr.warning('操作超时');
 	            });
 	        }
 	    }]);
@@ -13876,6 +13940,7 @@ webpackJsonp([0],[
 	        _classCallCheck(this, MemberStore);
 
 	        this.bindActions(_MemberActions2.default);
+	        this.member = false;
 	        this._id = '';
 	        this.username = '';
 	        this.avatar_url = '';
@@ -13887,27 +13952,53 @@ webpackJsonp([0],[
 	        this.music = [];
 	        this.introduce = 'heh';
 	        this.star = 0;
+	        this.followed = false;
 	    }
 
 	    _createClass(MemberStore, [{
 	        key: 'onGetMemberSuccess',
 	        value: function onGetMemberSuccess(data) {
+	            console.log(data);
 	            if (data.code === 200) {
-	                this._id = data.raw._id;
-	                this.username = data.raw.username;
-	                this.avatar_url = data.raw.avatar_url;
-	                this.followers = data.raw.followers.length;
-	                this.following = data.raw.following.length;
-	                this.contribute = data.raw.contribute.length;
-	                this.animate = data.raw.animate;
-	                this.music = data.raw.music;
-	                this.article = data.raw.article;
-	                this.introduce = data.raw.introduce;
-	                this.star = data.raw.star.length;
+	                this.member = true;
+	                var user = data.raw._raw;
+	                this._id = user._id;
+	                this.username = user.username;
+	                this.avatar_url = user.avatar_url;
+	                this.followers = user.followers.length;
+	                this.following = user.following.length;
+	                this.contribute = user.contribute.length;
+	                this.animate = user.animate;
+	                this.music = user.music;
+	                this.article = user.article;
+	                this.introduce = user.introduce;
+	                this.star = user.star.length;
+	                this.followed = data.raw.followed;
 	            } else if (data.code === 500) {
 	                toastr.error('服务器错误');
 	            } else if (data.code === 404) {
 	                toastr.warning('找不到这个人');
+	            }
+	        }
+	    }, {
+	        key: 'onFollowSuccess',
+	        value: function onFollowSuccess(data) {
+	            console.log(data);
+	            switch (data.code) {
+	                case 200:
+	                    toastr.success(data.meta);
+	                    this.followed = !this.followed;
+	                    break;
+	                case 304:
+	                case 400:
+	                    toastr.warning(data.meta);
+	                    break;
+	                case 406:
+	                    toastr.warning(data.meta);
+	                    break;
+	                case 500:
+	                    toastr.error(data.meta);
+	                    break;
 	            }
 	        }
 	    }]);

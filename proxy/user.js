@@ -110,16 +110,24 @@ class md {
 
     /**
      * 通过个性域名查找
+     * @param u 本地用户
      * @param domain
      * @param callback
      */
-    getUserByDomain(domain,callback) {
-        User.findOne({domain : domain},'username domain avatar_url introduce contribute article music animate star followers following',(err,docs) => {
+    getUserByDomain(domain,callback,u) {
+        console.log(u);
+        User.findOne({domain : domain},this.query,(err,docs) => {
             if(err) {
-                console.log(err);
                 return callback(500);
             } else {
-                return callback(docs);
+                if(u === null || u === undefined) {
+                    return callback({_raw : docs,followed : false});
+                } else {
+                    User.findById(u.toString(),(err,user) => {
+                        let followed = _.indexOf(user.following,docs._id.toString()) !== -1;
+                        return callback({_raw : docs,followed : followed});
+                    });
+                }
             }
         });
     }

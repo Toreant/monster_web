@@ -1,6 +1,9 @@
 .mon-member {
   margin-top: 30px;
 }
+.mon-member > button {
+  margin: 10px;
+}
 .mon-member-intr {
   line-height: 1.2;
   padding: 20px;

@@ -42,7 +42,7 @@ class User extends React.Component {
                 <div className="row">
                     <div className='col-md-3 col-sm-3'>
                         <div className='mon-center mon-user-img'>
-                            <img src={this.state.avatar_url} width='200' alt="loading"/>
+                            <img src={this.state.avatar_url || '/img/dd9901f664234eb44f6b217e7fa04e17.jpg'} width='200' alt="loading"/>
                         </div>
                         <div className='mon-user-name'>{this.state.username}</div>
                         <div className='mon-vcard-stats'>

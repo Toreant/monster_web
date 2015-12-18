@@ -11,9 +11,8 @@ class UserCtrl {
      * 注册
      * @param req
      * @param res
-     * @param next
      */
-    getSign(req, res, next) {
+    getSign(req, res) {
         let email = req.body.email,
             password = req.body.password,
             name = req.body.name,
@@ -47,9 +46,8 @@ class UserCtrl {
      * 登陆
      * @param req
      * @param res
-     * @param next
      */
-    getLogin(req, res, next) {
+    getLogin(req, res) {
         let email = req.body.email,
             password = req.body.password;
         //加密
@@ -68,9 +66,16 @@ class UserCtrl {
                 result.meta = "登陆成功";
                 result.code = 200;
                 req.session.save((err) => {
-                    req.session.user = data[0];
-                    result.data = req.session.user;
-                    res.json(result);
+                    if(err) {
+                        res.json({
+                            meta : '服务器错误',
+                            code : 500
+                        });
+                    } else {
+                        req.session.user = data[0];
+                        result.data = req.session.user;
+                        res.json(result);
+                    }
                 });
             } else {
                 result.meta = "登陆不成功";
@@ -85,9 +90,8 @@ class UserCtrl {
      * 更新用户资料
      * @param req
      * @param res
-     * @param next
      */
-    getUpdate(req, res, next) {
+    getUpdate(req, res) {
         let params = req.body.params,
             user = req.session.user,
             where = {};
@@ -155,11 +159,11 @@ class UserCtrl {
      * 通过个性域名查找用户
      * @param req
      * @param res
-     * @param next
      */
-    getUserByDomain(req, res, next) {
-        let domain = req.params.domain;
-        console.log(domain);
+    getUserByDomain(req, res) {
+        let domain = req.params.domain,
+            user = req.session.user,
+            _id = user === undefined ? null: user._id;
 
         let result = {
             meta: '',
@@ -167,12 +171,12 @@ class UserCtrl {
             raw: null
         };
 
-        User.getUserByDomain(domain, function (docs) {
-            if (docs !== null) {
+        User.getUserByDomain(domain, function (data) {
+            if (data !== null) {
                 result.meta = '获取用户资料成功';
                 result.code = 200;
-                result.raw = docs;
-            } else if (docs === 500) {
+                result.raw = data;
+            } else if (data === 500) {
                 result.meta = '服务器错误';
                 result.code = 500;
             } else {
@@ -180,16 +184,15 @@ class UserCtrl {
                 result.code = 404;
             }
             res.json(result);
-        })
+        },_id);
     }
 
     /**
      * 获取用户资料
      * @param req
      * @param res
-     * @param next
      */
-    getUserById(req, res, next) {
+    getUserById(req, res) {
         let arrayId = req.body.arrayId,
             option = req.body.option;
         let result = {
@@ -215,9 +218,8 @@ class UserCtrl {
      * 获取关注的用户
      * @param req
      * @param res
-     * @param next
      */
-    getFollowing(req, res, next) {
+    getFollowing(req, res) {
         let where = req.body.where,
             option = req.body.option;
         let result = {
@@ -245,9 +247,8 @@ class UserCtrl {
      * 获取关注我的用户
      * @param req
      * @param res
-     * @param next
      */
-    getFollowers(req, res, next) {
+    getFollowers(req, res) {
         let option = req.body.option,
             where = req.body.where,
             user = req.session.user; //　本地登陆用户
@@ -288,9 +289,8 @@ class UserCtrl {
      * 关注
      * @param req
      * @param res
-     * @param next
      */
-    addFollow(req, res, next) {
+    addFollow(req, res) {
         let auth_id = req.body._id,
             where = req.session.user;
 
@@ -320,9 +320,8 @@ class UserCtrl {
      * 取消关注
      * @param req
      * @param res
-     * @param next
      */
-    unFollowing(req, res, next) {
+    unFollowing(req, res) {
         let auth_id = req.body._id,
             where = req.session.user;
 
@@ -352,9 +351,8 @@ class UserCtrl {
      * 关注，收藏
      * @param req
      * @param res
-     * @param next
      */
-    getStar(req, res, next) {
+    getStar(req, res) {
 
         let user_id = req.session.user._id, // 登陆的用户
             star_id = req.body.star_id,     // 收藏的id
@@ -389,9 +387,8 @@ class UserCtrl {
      * 取消关注
      * @param req
      * @param res
-     * @param next
      */
-    unStar(req, res, next) {
+    unStar(req, res) {
 
         let star_id = req.body.star_id,
             user_id = req.session.user._id,
@@ -425,9 +422,8 @@ class UserCtrl {
      * 获取收藏列表
      * @param req
      * @param res
-     * @param next
      */
-    getStars(req, res, next) {
+    getStars(req, res) {
         let what = req.body.what,
             skip = req.body.skip,
             option = req.body.option,
@@ -462,7 +458,6 @@ class UserCtrl {
      * 获取用户中心资料
      * @param req
      * @param res
-     * @param next
      */
     getProfileCenter(req,res) {
         let user = req.session.user;

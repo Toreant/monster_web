@@ -7,6 +7,7 @@ import MemberActions from '../actions/MemberActions';
 class MemberStore {
     constructor() {
         this.bindActions(MemberActions);
+        this.member = false;
         this._id = '';
         this.username = '';
         this.avatar_url = '';
@@ -18,25 +19,50 @@ class MemberStore {
         this.music = [];
         this.introduce = 'heh';
         this.star = 0;
+        this.followed = false;
     }
 
     onGetMemberSuccess(data) {
+        console.log(data);
         if(data.code === 200) {
-            this._id = data.raw._id;
-            this.username = data.raw.username;
-            this.avatar_url = data.raw.avatar_url;
-            this.followers = data.raw.followers.length;
-            this.following = data.raw.following.length;
-            this.contribute = data.raw.contribute.length;
-            this.animate = data.raw.animate;
-            this.music = data.raw.music;
-            this.article = data.raw.article;
-            this.introduce = data.raw.introduce;
-            this.star = data.raw.star.length;
+            this.member = true;
+            let user = data.raw._raw;
+            this._id = user._id;
+            this.username = user.username;
+            this.avatar_url = user.avatar_url;
+            this.followers = user.followers.length;
+            this.following = user.following.length;
+            this.contribute = user.contribute.length;
+            this.animate = user.animate;
+            this.music = user.music;
+            this.article = user.article;
+            this.introduce = user.introduce;
+            this.star = user.star.length;
+            this.followed = data.raw.followed;
         } else if (data.code === 500) {
             toastr.error('服务器错误');
         }　else if (data.code === 404) {
             toastr.warning('找不到这个人');
+        }
+    }
+
+    onFollowSuccess(data) {
+        console.log(data);
+        switch(data.code) {
+            case 200 :
+                toastr.success(data.meta);
+                this.followed = !this.followed;
+                break;
+            case 304 :
+            case 400 :
+                toastr.warning(data.meta);
+                break;
+            case 406 :
+                toastr.warning(data.meta);
+                break;
+            case 500 :
+                toastr.error(data.meta);
+                break;
         }
     }
 }
