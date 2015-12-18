@@ -47,40 +47,48 @@ class md {
                 });
             },
 
-            // 查看是否登陆的用户收藏了
+            // 查看是否登陆的用户收藏了,点赞或踩了
             function(docs,_callback) {
-                if(docs === 400) {
-                    _callback(null,docs,false);
-                }
+
                 if(u === undefined) {
-                    _callback(null,docs,false);
+                    _callback(null,docs,false,2);
                 } else {
                     User.findById(u._id,(err,user) => {
                         if(err) {
                             return callback(500);
                         }
-                        if(_.indexOf(user.star_article,docs._id.toString()) === -1) {
-                            _callback(null,docs,false);
+                        let _id = docs._id.toString();
+                        let stared = _.indexOf(user.star_article,_id)!== -1,
+                            approved = _.indexOf(user.approve,_id+'_0') !== -1,
+                            disapproved = _.indexOf(user.approve,_id+'_1') !== -1;
+
+                        if(approved) {
+                            _callback(null,docs,stared,0);
+                        } else if(disapproved){
+                            _callback(null,docs,stared,1);
                         } else {
-                            _callback(null,docs,true);
+                            _callback(null,docs,stared,2);
                         }
                     });
                 }
             },
 
             // 查找文章的读者
-            function(docs,stared,_callback) {
-                if(docs === 400) {
-                    _callback(null,400,null,null);
-                } else {
-                    User.findById(docs.create_user_id,'username avatar_url domain introduce',(err,user) => {
-                        if(err) {
-                            return callback(500);
-                        } else {
-                            _callback(null,{article : docs, user : user,stared : stared});
-                        }
-                    });
-                }
+            function(docs,stared,approved,_callback) {
+
+                /**
+                 * docs 文章
+                 * stared 是否已经收藏过
+                 * approved 0 -- 点了赞　　１-- 踩了人家　2 -- 什么也没有做过
+                 */
+                User.findById(docs.create_user_id,'username avatar_url domain introduce',(err,user) => {
+                    if(err) {
+                        return callback(500);
+                    } else {
+                        _callback(null,{article : docs, user : user,stared : stared,approved : approved});
+                    }
+                });
+
             }
         ],function(err,result) {
 

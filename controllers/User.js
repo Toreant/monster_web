@@ -17,13 +17,13 @@ class UserCtrl {
         let email = req.body.email,
             password = req.body.password,
             name = req.body.name,
-            auth_id = _.random(10000000, 99999999);
+            domain = _.random(10000000, 99999999).toString();
 
         let sha = crypto.createHash("sha1");
         sha.update(password);
         password = sha.digest('hex');
 
-        User.saveUser(email, password, name, auth_id, auth_id.toString(), (data, product) => {
+        User.saveUser(email, password, name, domain, (data, product) => {
             let result = {
                 meta: "",
                 code: 0,

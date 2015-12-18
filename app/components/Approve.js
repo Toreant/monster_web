@@ -37,16 +37,29 @@ class Approve extends React.Component {
     }
 
     render() {
+        let approved = '',disapproved = '';
+        switch(this.props.approved) {
+            case 0 :
+                approved = 'mon-approved';
+                disapproved = ' mon-ban-approve';
+                break;
+            case 1 :
+                approved = 'mon-ban-approve';
+                disapproved = ' mon-disapproved';
+                break;
+            case 2 :
+                break;
+        }
         return (
             <div className="mon-approve">
                 <div>
                     <div className="mon-approve-item">
-                        <a href="javascript:;" className="mon-approve-click" onClick={this.handleClick.bind(this,0)}>
+                        <a href="javascript:;" className={"mon-approve-click "+approved} onClick={this.handleClick.bind(this,0)}>
                             <span className="fa fa-thumbs-o-up mon-thumb"></span>
                         </a>
                     </div>
                     <div className="mon-approve-item">
-                        <a href="javascript:;" className="mon-approve-click-o" onClick={this.handleClick.bind(this,1)}>
+                        <a href="javascript:;" className={"mon-approve-click-o "+disapproved} onClick={this.handleClick.bind(this,1)}>
                             <span className="fa fa-thumbs-o-down mon-thumb"></span>
                         </a>
                     </div>

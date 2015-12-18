@@ -41,3 +41,19 @@
   margin: auto;
   font-size: 30px !important;
 }
+.mon-ban-approve {
+  pointer-events: none;
+  cursor: not-allowed !important;
+}
+
+.mon-approved {
+  .mon-ban-approve;
+  background: #9BCD9B;
+  color: #fff;
+}
+
+.mon-disapproved {
+  .mon-ban-approve;
+  background: #BD362F;
+  color: #fff;
+}

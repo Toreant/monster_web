@@ -119,7 +119,7 @@ class Article extends React.Component {
                         <div className='mon-article-tags'>
                             {Tags}
                         </div>
-                        <Approve ref="approve" _id={this.props.params.id} column="article" approveCallback={approveClick} disCallback={disClick}/>
+                        <Approve ref="approve" _id={this.props.params.id} column="article" approved={this.state.approved} approveCallback={approveClick} disCallback={disClick}/>
                         <div className="mon-approve-count">
                             <span>{this.state.approve > 1000 ? '999+': this.state.approve}</span>
                             <span>{this.state.disapprove > 1000 ? '999+': this.state.disapprove}</span>

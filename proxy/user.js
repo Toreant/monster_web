@@ -18,15 +18,14 @@ class md {
      * @param email 邮箱
      * @param password 注册密码
      * @param name 用户名
-     * @param auth_id
+     * @param domain
      * @param callback
      */
-    saveUser(email, password, name,auth_id,domain, callback) {
+    saveUser(email, password, name,domain, callback) {
         let user = new User({
             email: email,
             password: password,
             username: name,
-            auth_id : auth_id,
             domain : domain
         });
         user.save((err, product, numAffected) => {

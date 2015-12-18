@@ -22,6 +22,7 @@ class ArticleStore　{
         this.tags = [];
         this.stars = 0;
         this.stared = 'false';
+        this.approved = 2;
     }
 
     onGetArticleSuccess(data) {
@@ -45,7 +46,7 @@ class ArticleStore　{
             this.createTime = new Date(data.raw.article.create_time).toLocaleDateString("en-US");
             this.stars = data.raw.article.stars;
             this.stared = data.raw.stared.toString();
-
+            this.approved = data.raw.approved;
         } else if(data.code === 404) {
             toastr.warning(data.meta);
         } else if(data.code === 500) {

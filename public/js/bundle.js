@@ -11686,7 +11686,7 @@ webpackJsonp([0],[
 	                            { className: 'mon-article-tags' },
 	                            Tags
 	                        ),
-	                        _react2.default.createElement(_Approve2.default, { ref: 'approve', _id: this.props.params.id, column: 'article', approveCallback: approveClick, disCallback: disClick }),
+	                        _react2.default.createElement(_Approve2.default, { ref: 'approve', _id: this.props.params.id, column: 'article', approved: this.state.approved, approveCallback: approveClick, disCallback: disClick }),
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'mon-approve-count' },
@@ -11869,6 +11869,7 @@ webpackJsonp([0],[
 	        this.tags = [];
 	        this.stars = 0;
 	        this.stared = 'false';
+	        this.approved = 2;
 	    }
 
 	    _createClass(ArticleStore, [{
@@ -11894,6 +11895,7 @@ webpackJsonp([0],[
 	                this.createTime = new Date(data.raw.article.create_time).toLocaleDateString("en-US");
 	                this.stars = data.raw.article.stars;
 	                this.stared = data.raw.stared.toString();
+	                this.approved = data.raw.approved;
 	            } else if (data.code === 404) {
 	                toastr.warning(data.meta);
 	            } else if (data.code === 500) {
@@ -12799,6 +12801,20 @@ webpackJsonp([0],[
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var approved = '',
+	                disapproved = '';
+	            switch (this.props.approved) {
+	                case 0:
+	                    approved = 'mon-approved';
+	                    disapproved = ' mon-ban-approve';
+	                    break;
+	                case 1:
+	                    approved = 'mon-ban-approve';
+	                    disapproved = ' mon-disapproved';
+	                    break;
+	                case 2:
+	                    break;
+	            }
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'mon-approve' },
@@ -12810,7 +12826,7 @@ webpackJsonp([0],[
 	                        { className: 'mon-approve-item' },
 	                        _react2.default.createElement(
 	                            'a',
-	                            { href: 'javascript:;', className: 'mon-approve-click', onClick: this.handleClick.bind(this, 0) },
+	                            { href: 'javascript:;', className: "mon-approve-click " + approved, onClick: this.handleClick.bind(this, 0) },
 	                            _react2.default.createElement('span', { className: 'fa fa-thumbs-o-up mon-thumb' })
 	                        )
 	                    ),
@@ -12819,7 +12835,7 @@ webpackJsonp([0],[
 	                        { className: 'mon-approve-item' },
 	                        _react2.default.createElement(
 	                            'a',
-	                            { href: 'javascript:;', className: 'mon-approve-click-o', onClick: this.handleClick.bind(this, 1) },
+	                            { href: 'javascript:;', className: "mon-approve-click-o " + disapproved, onClick: this.handleClick.bind(this, 1) },
 	                            _react2.default.createElement('span', { className: 'fa fa-thumbs-o-down mon-thumb' })
 	                        )
 	                    )

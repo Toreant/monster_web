@@ -89,14 +89,15 @@ class Contribute {
          */
         let point = req.body.point,
             _id = req.body._id,
-            column = req.body.column;
+            column = req.body.column,
+            user = req.session.user._id;
 
         let result = {
             meta : '',
             code : 0
         };
 
-        new CommonProxy(column).approveContribute(point,_id,(data) => {
+        new CommonProxy(column).approveContribute(user,point,_id,(data) => {
             switch(data) {
                 case 200 :
                     result.meta = point === 0?'点赞成功':'呵呵，你踩了人家';

@@ -272,11 +272,12 @@ class CommonProxy {
 
     /**
      * 点赞　踩
+     * @param user 用户
      * @param point 0 -- 点赞　1 -- 踩
      * @param _id
      * @param callback
      */
-    approveContribute(point,_id,callback) {
+    approveContribute(user,point,_id,callback) {
         let Model = this.Model,
             columns = ['article','music','article'];
 
@@ -285,28 +286,54 @@ class CommonProxy {
             return callback(404);
         }
 
-        Model.findById(_id,(err,doc) => {
-            if(err) {
-                return callback(500);
-            } else if(doc === null) {
-                return callback(404);
-            } else {
-                switch(point) {
-                    case 0 :
-                        doc.approve = doc.approve + 1;
-                        break;
-                    case 1 :
-                        doc.disapprove = doc.disapprove + 1;
-                        break;
-                }
-                doc.save((err) => {
+        async.waterfall([
+
+            //　点赞　或　踩
+            function(_callback) {
+                Model.findById(_id,(err,doc) => {
+                    if(err) {
+                        return callback(500);
+                    } else if(doc === null) {
+                        return callback(404);
+                    } else {
+                        switch(point) {
+                            case 0 :
+                                doc.approve = doc.approve + 1;
+                                break;
+                            case 1 :
+                                doc.disapprove = doc.disapprove + 1;
+                                break;
+                        }
+                        doc.save((err,product) => {
+                            if(err) {
+                                return callback(500);
+                            } else {
+                                _callback(null,product._id);
+                            }
+                        });
+                    }
+                });
+            },
+
+            // 用户更新资料
+            function(product,_callback) {
+                User.findById(user,(err,user) => {
                     if(err) {
                         return callback(500);
                     } else {
-                        return callback(200);
+                        user.approve.push(product+'_'+point);
+                        user.save((err) => {
+                            if(err) {
+                                _callback(null,500);
+                            } else {
+                                _callback(null,200);
+                            }
+                        })
                     }
-                });
+                })
             }
+        ],(err,result) => {
+            return callback(result);
         });
     }
 }
