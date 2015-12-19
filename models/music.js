@@ -20,7 +20,7 @@ var MusicSchema = new Schema({
     lyric : {type : String},　  // 歌词地址
     comment : [String],　　　// 评论的id
     summary : {type : String},  // 简介
-    visitor : [String] // 访客id
+    visitor : [String], // 访客
 });
 
 export default mongoose.model('Music',MusicSchema);

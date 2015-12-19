@@ -32,7 +32,7 @@ class ApproveActions {
             contentType : 'application/json;charset=utf-8',
             data : JSON.stringify(params)
         }).done((data) => {
-            this.actions.approveSuccess({data : data ,_callback : _callback});
+            this.actions.approveSuccess({data : data ,_callback : _callback,point : point});
         }).fail(() => {
            toastr.warning('对不起，不成功');
         });

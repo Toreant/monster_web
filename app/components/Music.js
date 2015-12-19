@@ -53,11 +53,11 @@ class Music extends React.Component {
     handleClick(option) {
         if(option === 0) {
             this.setState({
-                star : this.state.star + 1
+                stars : this.state.stars + 1
             });
         } else {
             this.setState({
-                star : this.state.star -1 < 0? 0: this.state.star -1
+                stars : this.state.stars -1 < 0? 0: this.state.stars -1
             });
         }
     }
@@ -66,6 +66,17 @@ class Music extends React.Component {
         let Target,User,Tags,Visitor,Aside,
             plusClick = this.handleClick.bind(this,0),
             subClick = this.handleClick.bind(this,1);
+
+        if(this.state.visitor !== undefined && this.state.visitor.length !== 0) {
+            Visitor = this.state.visitor.map((data) => {
+                return (
+                    <Link key={data._id} to={'/member/'+data.domain} className="clearfix">
+                        <img src={data.avatar_url || '/img/dd9901f664234eb44f6b217e7fa04e17.jpg'} alt="loading"/>
+                    </Link>
+                );
+            });
+        }
+
         if(this.state.loading && this.state.finded) {
             Target = <Loading />;
         } else if(!this.state.loading && !this.state.finded) {
@@ -80,21 +91,13 @@ class Music extends React.Component {
                 );
             });
 
-            Visitor = this.state.visitor.map((data) => {
-                return (
-                    <Link to={'/member/'+data.domain} className="clearfix">
-                        <img src={data.avatar_url || '/img/dd9901f664234eb44f6b217e7fa04e17.jpg'} alt="loading" width="30"/>
-                    </Link>
-                );
-            });
-
             Aside = (
-                <aside className="col-md-4 col-sm-4 col-xs-12 mon-visitor-block">
+                <aside className="col-md-4 col-sm-4 col-xs-12">
                     <div>
                         <p className="mon-comment-title">
                             最近访客
                         </p>
-                        <div>
+                        <div className="mon-visitor-block clearfix">
                             {Visitor}
                         </div>
                     </div>
@@ -120,7 +123,7 @@ class Music extends React.Component {
                             <p className="text-info">
                                 {this.state.title}
                             </p>
-                            <div>
+                            <div className="mon-music-info">
                                 <Link to={'/member/'+this.state.createUserDomain}>
                                     <img src={this.state.createUserAvatarURL} alt=""/>
                                 </Link>
@@ -128,25 +131,20 @@ class Music extends React.Component {
                                     {this.state.createUserName}
                                 </Link>
                             </div>
-                            <div>
-                                <span>专辑:</span>
-                                <span>{this.state.alubmn}</span>
-                            </div>
-                            <div>
-                                <span className="label label-info">收藏</span>
+                            <div className="mon-music-star" >
+                                <span>收藏：</span>
                                 <Star star={this.props.params.id} column='music' stared={this.state.stared} plusClick={plusClick} subClick={subClick}/>
-                                <span>{this.state.star}</span>
+                                <span>{this.state.stars}</span>
                             </div>
                         </div>
                     </div>
                     <div className="raw">
-                        <div className="panel">
-
+                        <div className="panel mon-music-info panel-default">
                             <div className="panel-body">
                                 <p className="text-muted">
                                     简介：{this.state.summary}
                                 </p>
-                                <div>
+                                <div className="mon-music-tags">
                                     {Tags}
                                 </div>
                             </div>

@@ -14,22 +14,21 @@ class ConListActions {
 
     /**
      * 获取列表
-     * @param option 0 -- member 1 -- profile
      * @param tab
-     * @param param
+     * @param domain
+     * @param skip
      */
-    getConList(option,tab,param,skip) {
+    getConList(tab,domain,skip) {
+
+        console.log(tab);
 
         let params = {
-                option: {skip: skip*4,limit: 4,sort: {create_time: 1}}
+                option: {skip: skip*6,limit: 6,sort: {create_time: 1}},
+                query : 'domain',
+                value : domain
             },
             url = '/api/'+tab;
 
-        if(option === '0') {
-            params.params = {create_user_domain: param};
-        } else {
-            params.params = {create_user_id : ''};
-        }
 
         $.ajax({
             url : url,
@@ -39,6 +38,7 @@ class ConListActions {
             cache: false,
             data: JSON.stringify(params)
         }).done((data) => {
+            console.log(data);
             this.actions.getConListSuccess(data);
         }).fail((data) => {
             toastr.error('网络链接有问题');

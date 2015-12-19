@@ -26,7 +26,7 @@ class Approve extends React.Component {
 
     /**
      * 点击点赞或踩后的函数
-     * @param point
+     * @param point 0 -- 赞　1 --　踩
      */
     handleClick(point) {
         if(this.props.approved !== 2) {

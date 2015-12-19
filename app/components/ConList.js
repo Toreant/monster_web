@@ -19,23 +19,16 @@ class ConList extends React.Component {
         ConListStore.unlisten(this.onChange);
     }
 
-    componentWillUpdate(prevProps) {
-        if(!isEqual(prevProps.params,this.props.params)) {
-            ConListActions.getConList(props.option,props.tab,props.domain);
-        }
-    }
-
     componentDidMount() {
         ConListStore.listen(this.onChange);
         let props = this.props;
-        ConListActions.getConList(props.option,props.tab,props.domain);
+        ConListActions.getConList(props.tab+'s',props.domain,0);
     }
 
     componentDidUpdate(prevProps) {
-        if(!isEqual(prevProps.params,this.props.params)) {
-            if(isMounted(this)) {
-                ConListActions.getConList(props.option,props.tab,props.domain);
-            }
+        if(!isEqual(prevProps,this.props)) {
+            console.log('update');
+            ConListActions.getConList(this.props.tab+'s',this.props.domain,0);
         }
     }
 
@@ -45,7 +38,7 @@ class ConList extends React.Component {
 
     prevPage() {
         let props = this.props;
-        ConListActions.getConList(props.option,props.tab,props.domain,this.state.skip-1);
+        ConListActions.getConList(props.tab+'s',props.domain,this.state.skip-1);
         ConListActions.changeSkip(0);
     }
 
@@ -56,10 +49,7 @@ class ConList extends React.Component {
     }
 
     render() {
-        let option;
-        if(this.props.tab === 'articles') {
-            option = 'article';
-        }
+        let option = this.props.tab;
         let List,SkipPage,
             disabled = '',disabledN = '';
         if(this.state.skip === 0) {

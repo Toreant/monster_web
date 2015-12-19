@@ -10,7 +10,7 @@ import _ from 'underscore';
 
 class md {
     constructor() {
-        this.query = 'username avatar_url introduce domain email following followers star star_article star_music star_animate' +
+        this.query = 'username avatar_url introduce domain email following followers star star_article star_music star_animate ' +
             'article music animate contribute';
     }
     /**
@@ -46,7 +46,6 @@ class md {
     updateUser(where,params,callback) {
         User.update(where,params,{upsert : true},(err,raw,docs) => {
             if(err) {
-                console.log(err);
                 callback(500);
             } else {
                 callback(raw,docs);
@@ -115,7 +114,6 @@ class md {
      * @param callback
      */
     getUserByDomain(domain,callback,u) {
-        console.log(u);
         User.findOne({domain : domain},this.query,(err,docs) => {
             if(err) {
                 return callback(500);

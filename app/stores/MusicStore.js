@@ -14,7 +14,7 @@ class MusicStore {
         this.createUserAvatarURL = '';
         this.createUserIntr = '';
         this.music = '';
-        this.star = 0;
+        this.stars = 0;
         this.tags = [];
         this.createTime;
         this.alubmn = '';
@@ -31,7 +31,7 @@ class MusicStore {
             this.abbreviations = data.raw.music.abbreviations;
             this.music = data.raw.music.music_url;
             this.title = data.raw.music.title;
-            this.star = data.raw.music.star;
+            this.stars = data.raw.music.stars;
             this.tags = data.raw.music.tags;
             this.summary = data.raw.music.summary;
             this.alubmn = data.raw.music.alubmn;

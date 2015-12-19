@@ -20,9 +20,7 @@ class MyContributeActions {
                 skip : skip,
                 limit : 10
             },
-            params : {
-                create_user_id : ''
-            }
+            query : 'profile'
         };
 
         $.ajax({

@@ -5,6 +5,7 @@ import Music from '../proxy/music';
 import User from '../models/user';
 import async from 'async';
 import _ from 'underscore';
+import BasicController from './BasicController';
 
 class MusicCtrl {
 
@@ -12,8 +13,6 @@ class MusicCtrl {
     postMusic(req,res) {
         let params  = req.body.params,
             user_id = req.session.user._id;
-
-        console.log(params);
 
         params.create_user_id = user_id;
 
@@ -42,9 +41,8 @@ class MusicCtrl {
      * 获取音乐
      * @param req
      * @param res
-     * @param next
      */
-    getMusic(req,res,next) {
+    getMusic(req,res) {
         let id = req.params.id,
             visitor = req.session.user;
 
@@ -110,7 +108,7 @@ class MusicCtrl {
                             data.stared = false;
                             _callback(null,data);
 
-                        }else if(_.indexOf(user[0].star,data.music._id.toString()) !== -1) {
+                        }else if(_.indexOf(user.star,data.music._id.toString()) !== -1) {
 
                             // 这首歌在用户的收藏列表中
                             data.stared = true;
@@ -126,12 +124,12 @@ class MusicCtrl {
 
             // 查找访客
             function(data,_callback) {
-                console.log(data.data);
                 if(data.music.visitor.length === 0) {
                     data.vistor = [];
                     _callback(null,data);
                 } else {
-                    User.find({_id : {$in : data.music.visitor}},'avatar_url username domain',(err,users) => {
+                    let visitors = data.music.visitor;
+                    User.find({_id : {$in : visitors}},'avatar_url username domain',(err,users) => {
                         if(err) {
                             return res.json({
                                 meta : '服务器错误',
@@ -157,32 +155,32 @@ class MusicCtrl {
      * 获取音乐列表
      * @param req
      * @param res
-     * @param next
      */
-    getMusics(req,res,next) {
+    getMusics(req,res) {
         let option = req.body.option,
-            params = req.body.params;
-        if(params === undefined) {
-            Music.getMusics(option,params,(data) => {
-                let result = {
-                    meta : '',
-                    code : 0,
-                    raw  : null
-                };
-                if(data === 500) {
-                    result.meta = '服务器错误';
-                    result.code = 500;
-                } else if(data === null) {
-                    result.meta = '没有找到音乐';
-                    result.code = 404;
-                } else {
-                    result.meta = '查找音乐成功';
-                    result.code = 200;
-                    result.raw  = data;
-                }
-                res.json(result);
-            });
-        }
+            value = req.body.value,
+            query = req.body.query,
+            user = req.session.user;
+
+        new BasicController('music').gets(query,value,option,(data) => {
+            if(data === 500) {
+                res.json({
+                    meta : '服务器错误',
+                    code : 500
+                });
+            } else if(data === 406) {
+                res.json({
+                    meta : '你还没登陆',
+                    code : 406
+                });
+            } else if(data !== null) {
+                res.json({
+                    meta : '查找成功',
+                    code : 200,
+                    raw  : data
+                });
+            }
+        },user);
     }
 
     /**
@@ -200,7 +198,7 @@ class MusicCtrl {
             code : 0
         };
 
-        Music.deleteArticle(_id,user._id.toString(),(data) => {
+        Music.deleteMusic(_id,user._id.toString(),(data) => {
             switch(data) {
                 case 200 :
                     result.meta = '删除成功';

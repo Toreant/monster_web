@@ -368,9 +368,7 @@ webpackJsonp([0],[
 	            _reactRouter.Route,
 	            { path: ':domain', hanlder: _Contribute2.default },
 	            _react2.default.createElement(_reactRouter.DefaultRoute, { handler: _ConArticle2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'article', handler: _ConArticle2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'music', handler: _NotFound2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'animate', handler: _NotFound2.default })
+	            _react2.default.createElement(_reactRouter.Route, { path: ':column', handler: _ConArticle2.default })
 	        )
 	    ),
 	    _react2.default.createElement(
@@ -1591,7 +1589,6 @@ webpackJsonp([0],[
 	            var _this = this;
 
 	            var params = {
-	                params: {},
 	                option: {
 	                    skip: 0,
 	                    limit: 10,
@@ -10176,9 +10173,7 @@ webpackJsonp([0],[
 	                    skip: skip,
 	                    limit: 10
 	                },
-	                params: {
-	                    create_user_id: ''
-	                }
+	                query: 'profile'
 	            };
 
 	            $.ajax({
@@ -12784,7 +12779,7 @@ webpackJsonp([0],[
 
 	        /**
 	         * 点击点赞或踩后的函数
-	         * @param point
+	         * @param point 0 -- 赞　1 --　踩
 	         */
 
 	    }, {
@@ -12907,7 +12902,7 @@ webpackJsonp([0],[
 	                contentType: 'application/json;charset=utf-8',
 	                data: JSON.stringify(params)
 	            }).done(function (data) {
-	                _this.actions.approveSuccess({ data: data, _callback: _callback });
+	                _this.actions.approveSuccess({ data: data, _callback: _callback, point: point });
 	            }).fail(function () {
 	                toastr.warning('对不起，不成功');
 	            });
@@ -12956,11 +12951,19 @@ webpackJsonp([0],[
 	        key: 'onApproveSuccess',
 	        value: function onApproveSuccess(raw) {
 	            var data = raw.data,
-	                _callback = raw._callback;
+	                _callback = raw._callback,
+	                point = raw.point;
 
 	            switch (data.code) {
 	                case 200:
 	                    toastr.success(data.meta);
+	                    if (point === 0) {
+	                        $(".mon-approve-click").addClass('mon-approved');
+	                        $(".mon-approve-click-o").addClass('mon-ban-approve');
+	                    } else {
+	                        $(".mon-approve-click-o").addClass('mon-disapproved');
+	                        $(".mon-approve-click").addClass('mon-ban-approve');
+	                    }
 	                    _callback.call(this);
 	                    break;
 	                case 404:
@@ -14050,10 +14053,9 @@ webpackJsonp([0],[
 	        value: function render() {
 	            var Result = undefined;
 	            if (this.props.params.domain !== undefined) {
-	                Result = _react2.default.createElement(_ConList2.default, { option: '0', tab: 'articles', type: '', domain: this.props.params.domain });
-	            } else {
-	                Result = _react2.default.createElement(_ConList2.default, { option: '1', tab: 'articles' });
+	                Result = _react2.default.createElement(_ConList2.default, { tab: this.props.params.column || 'article', domain: this.props.params.domain });
 	            }
+
 	            return _react2.default.createElement(
 	                'div',
 	                null,
@@ -14124,26 +14126,18 @@ webpackJsonp([0],[
 	            _ConListStore2.default.unlisten(this.onChange);
 	        }
 	    }, {
-	        key: 'componentWillUpdate',
-	        value: function componentWillUpdate(prevProps) {
-	            if (!(0, _underscore.isEqual)(prevProps.params, this.props.params)) {
-	                _ConListActions2.default.getConList(props.option, props.tab, props.domain);
-	            }
-	        }
-	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            _ConListStore2.default.listen(this.onChange);
 	            var props = this.props;
-	            _ConListActions2.default.getConList(props.option, props.tab, props.domain);
+	            _ConListActions2.default.getConList(props.tab + 's', props.domain, 0);
 	        }
 	    }, {
 	        key: 'componentDidUpdate',
 	        value: function componentDidUpdate(prevProps) {
-	            if (!(0, _underscore.isEqual)(prevProps.params, this.props.params)) {
-	                if (isMounted(this)) {
-	                    _ConListActions2.default.getConList(props.option, props.tab, props.domain);
-	                }
+	            if (!(0, _underscore.isEqual)(prevProps, this.props)) {
+	                console.log('update');
+	                _ConListActions2.default.getConList(this.props.tab + 's', this.props.domain, 0);
 	            }
 	        }
 	    }, {
@@ -14155,7 +14149,7 @@ webpackJsonp([0],[
 	        key: 'prevPage',
 	        value: function prevPage() {
 	            var props = this.props;
-	            _ConListActions2.default.getConList(props.option, props.tab, props.domain, this.state.skip - 1);
+	            _ConListActions2.default.getConList(props.tab + 's', props.domain, this.state.skip - 1);
 	            _ConListActions2.default.changeSkip(0);
 	        }
 	    }, {
@@ -14168,10 +14162,7 @@ webpackJsonp([0],[
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var option = undefined;
-	            if (this.props.tab === 'articles') {
-	                option = 'article';
-	            }
+	            var option = this.props.tab;
 	            var List = undefined,
 	                SkipPage = undefined,
 	                disabled = '',
@@ -14303,26 +14294,24 @@ webpackJsonp([0],[
 
 	    /**
 	     * 获取列表
-	     * @param option 0 -- member 1 -- profile
 	     * @param tab
-	     * @param param
+	     * @param domain
+	     * @param skip
 	     */
 
 	    _createClass(ConListActions, [{
 	        key: 'getConList',
-	        value: function getConList(option, tab, param, skip) {
+	        value: function getConList(tab, domain, skip) {
 	            var _this = this;
 
+	            console.log(tab);
+
 	            var params = {
-	                option: { skip: skip * 4, limit: 4, sort: { create_time: 1 } }
+	                option: { skip: skip * 6, limit: 6, sort: { create_time: 1 } },
+	                query: 'domain',
+	                value: domain
 	            },
 	                url = '/api/' + tab;
-
-	            if (option === '0') {
-	                params.params = { create_user_domain: param };
-	            } else {
-	                params.params = { create_user_id: '' };
-	            }
 
 	            $.ajax({
 	                url: url,
@@ -14332,6 +14321,7 @@ webpackJsonp([0],[
 	                cache: false,
 	                data: JSON.stringify(params)
 	            }).done(function (data) {
+	                console.log(data);
 	                _this.actions.getConListSuccess(data);
 	            }).fail(function (data) {
 	                toastr.error('网络链接有问题');
@@ -14525,11 +14515,11 @@ webpackJsonp([0],[
 	        value: function handleClick(option) {
 	            if (option === 0) {
 	                this.setState({
-	                    star: this.state.star + 1
+	                    stars: this.state.stars + 1
 	                });
 	            } else {
 	                this.setState({
-	                    star: this.state.star - 1 < 0 ? 0 : this.state.star - 1
+	                    stars: this.state.stars - 1 < 0 ? 0 : this.state.stars - 1
 	                });
 	            }
 	        }
@@ -14543,6 +14533,17 @@ webpackJsonp([0],[
 	                Aside = undefined,
 	                plusClick = this.handleClick.bind(this, 0),
 	                subClick = this.handleClick.bind(this, 1);
+
+	            if (this.state.visitor !== undefined && this.state.visitor.length !== 0) {
+	                Visitor = this.state.visitor.map(function (data) {
+	                    return _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { key: data._id, to: '/member/' + data.domain, className: 'clearfix' },
+	                        _react2.default.createElement('img', { src: data.avatar_url || '/img/dd9901f664234eb44f6b217e7fa04e17.jpg', alt: 'loading' })
+	                    );
+	                });
+	            }
+
 	            if (this.state.loading && this.state.finded) {
 	                Target = _react2.default.createElement(_Loading2.default, null);
 	            } else if (!this.state.loading && !this.state.finded) {
@@ -14557,17 +14558,9 @@ webpackJsonp([0],[
 	                    );
 	                });
 
-	                Visitor = this.state.visitor.map(function (data) {
-	                    return _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/member/' + data.domain, className: 'clearfix' },
-	                        _react2.default.createElement('img', { src: data.avatar_url || '/img/dd9901f664234eb44f6b217e7fa04e17.jpg', alt: 'loading', width: '30' })
-	                    );
-	                });
-
 	                Aside = _react2.default.createElement(
 	                    'aside',
-	                    { className: 'col-md-4 col-sm-4 col-xs-12 mon-visitor-block' },
+	                    { className: 'col-md-4 col-sm-4 col-xs-12' },
 	                    _react2.default.createElement(
 	                        'div',
 	                        null,
@@ -14578,7 +14571,7 @@ webpackJsonp([0],[
 	                        ),
 	                        _react2.default.createElement(
 	                            'div',
-	                            null,
+	                            { className: 'mon-visitor-block clearfix' },
 	                            Visitor
 	                        )
 	                    )
@@ -14620,7 +14613,7 @@ webpackJsonp([0],[
 	                            ),
 	                            _react2.default.createElement(
 	                                'div',
-	                                null,
+	                                { className: 'mon-music-info' },
 	                                _react2.default.createElement(
 	                                    _reactRouter.Link,
 	                                    { to: '/member/' + this.state.createUserDomain },
@@ -14634,31 +14627,17 @@ webpackJsonp([0],[
 	                            ),
 	                            _react2.default.createElement(
 	                                'div',
-	                                null,
+	                                { className: 'mon-music-star' },
 	                                _react2.default.createElement(
 	                                    'span',
 	                                    null,
-	                                    '专辑:'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'span',
-	                                    null,
-	                                    this.state.alubmn
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                'div',
-	                                null,
-	                                _react2.default.createElement(
-	                                    'span',
-	                                    { className: 'label label-info' },
-	                                    '收藏'
+	                                    '收藏：'
 	                                ),
 	                                _react2.default.createElement(_Star2.default, { star: this.props.params.id, column: 'music', stared: this.state.stared, plusClick: plusClick, subClick: subClick }),
 	                                _react2.default.createElement(
 	                                    'span',
 	                                    null,
-	                                    this.state.star
+	                                    this.state.stars
 	                                )
 	                            )
 	                        )
@@ -14668,7 +14647,7 @@ webpackJsonp([0],[
 	                        { className: 'raw' },
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: 'panel' },
+	                            { className: 'panel mon-music-info panel-default' },
 	                            _react2.default.createElement(
 	                                'div',
 	                                { className: 'panel-body' },
@@ -14680,7 +14659,7 @@ webpackJsonp([0],[
 	                                ),
 	                                _react2.default.createElement(
 	                                    'div',
-	                                    null,
+	                                    { className: 'mon-music-tags' },
 	                                    Tags
 	                                )
 	                            )
@@ -14796,7 +14775,7 @@ webpackJsonp([0],[
 	        this.createUserAvatarURL = '';
 	        this.createUserIntr = '';
 	        this.music = '';
-	        this.star = 0;
+	        this.stars = 0;
 	        this.tags = [];
 	        this.createTime;
 	        this.alubmn = '';
@@ -14815,7 +14794,7 @@ webpackJsonp([0],[
 	                this.abbreviations = data.raw.music.abbreviations;
 	                this.music = data.raw.music.music_url;
 	                this.title = data.raw.music.title;
-	                this.star = data.raw.music.star;
+	                this.stars = data.raw.music.stars;
 	                this.tags = data.raw.music.tags;
 	                this.summary = data.raw.music.summary;
 	                this.alubmn = data.raw.music.alubmn;

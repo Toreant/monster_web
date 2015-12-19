@@ -11,11 +11,19 @@ class ApproveStore {
 
     onApproveSuccess(raw) {
         let data = raw.data,
-            _callback = raw._callback;
+            _callback = raw._callback,
+            point = raw.point ;
 
         switch (data.code) {
             case 200 :
                 toastr.success(data.meta);
+                if(point === 0) {
+                    $(".mon-approve-click").addClass('mon-approved');
+                    $(".mon-approve-click-o").addClass('mon-ban-approve');
+                } else {
+                    $(".mon-approve-click-o").addClass('mon-disapproved');
+                    $(".mon-approve-click").addClass('mon-ban-approve');
+                }
                 _callback.call(this);
                 break;
             case 404 :

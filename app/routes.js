@@ -52,9 +52,7 @@ export default(
         <Route path='/member' handler={Member}>
             <Route path=':domain' hanlder={Contribute}>
                 <DefaultRoute handler={ConArticle} />
-                <Route path='article' handler={ConArticle} />
-                <Route path='music' handler={NotFound} />
-                <Route path='animate' handler={NotFound} />
+                <Route path=":column" handler={ConArticle} />
             </Route>
         </Route>
 

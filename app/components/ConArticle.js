@@ -13,13 +13,10 @@ class ConArticle extends React.Component {
         let Result;
         if(this.props.params.domain !== undefined) {
             Result = (
-                <ConList option='0' tab='articles' type='' domain={this.props.params.domain} />
-            );
-        } else {
-            Result = (
-                <ConList option='1' tab='articles' />
+                <ConList tab={this.props.params.column || 'article'} domain={this.props.params.domain} />
             );
         }
+
         return (
             <div>
                 {Result}

@@ -336,6 +336,40 @@ class CommonProxy {
             return callback(result);
         });
     }
+
+    /**
+     * 保存访客
+     * @param visitor
+     * @param _id
+     * @param callback
+     */
+    saveVisitor(visitor,_id,callback) {
+        let Model = this.Model;
+
+        Model.findById(_id,(err,doc) => {
+            if(err) {
+                return callback(500);
+            } else if(doc === null) {
+                return callback(null);
+            } else if(_.indexOf(doc.visitor,visitor) !== -1) {
+                doc.visitor = _.without(doc.visitor,visitor);
+            }
+            if(doc.visitor.length >= 7) {
+                doc.visitor.pop();
+            }
+            if(visitor !== '') {
+                doc.visitor.push(visitor);
+            }
+
+            doc.save((err,product) => {
+                if(err) {
+                    return callback(500);
+                } else {
+                    return callback(product);
+                }
+            })
+        });
+    }
 }
 
 export default CommonProxy;

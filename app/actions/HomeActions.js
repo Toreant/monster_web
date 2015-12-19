@@ -13,7 +13,6 @@ class HomeActions {
 
     getArticles() {
         let params = {
-            params : {},
             option : {
                 skip : 0,
                 limit : 10,
