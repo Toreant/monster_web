@@ -115,8 +115,11 @@ class md {
      */
     getUserByDomain(domain,callback,u) {
         User.findOne({domain : domain},this.query,(err,docs) => {
+
             if(err) {
                 return callback(500);
+            } else if(docs === null) {
+                return callback(404);
             } else {
                 if(u === null || u === undefined) {
                     return callback({_raw : docs,followed : false});
@@ -262,64 +265,72 @@ class md {
      */
     follow(where,auth_id,option,callback) {
         async.waterfall([
+
             /* 查找本地用户 */
             function(_callback) {
+                if(!auth_id.match(/^[0-9a-fA-F]{24}$/)) {
+                    return callback(404);
+                }
                 User.findOne(where,(err,user) => {
+                    if(err) {
+                        return callback(500);
+                    }
                     if(user === null) {
-                        _callback(null,0);
+                        return callback(400);
                     } else{
                         _callback(null,user);
                     }
                 });
             },
+
             /* 查找auth_id是否存在 */
             function(user,_callback) {
-                if(user === 0) {
-                    _callback(null,0);
-                } else {
-                    User.findOne({_id : auth_id},(err,docs) => {
+                User.findOne({_id : auth_id},(err,docs) => {
+                    if(err) {
+                        console.log(err);
+                        return callback(500);
+                    } else if(docs === null) {
+                        return callback(404);
+                    } else {
                         _callback(null,docs,user);
-                    })
-                }
+                    }
+                })
             },
+
             /* 检查这个用户是否已经在关注的列表中 */
             function(docs,user,_callback){
-                if(docs === null) {
-                    _callback(null,3);
-                } else if(docs === 0) {
-                    _callback(0);
+
+                let following = user.following;
+                /* 关注功能 */
+                if(option === 0　&& _.indexOf(following,auth_id) !== -1) {
+                    _callback(null,304);
+                } else if(option === 0) {
+                    user.following.push(auth_id);
+                } else if(option === 1 && _.indexOf(following,auth_id) === -1){
+                    /* 取消关注功能 */
+                    _callback(null,304);
                 } else {
-                    let following = user.following;
-                    /* 关注功能 */
-                    if(option === 0) {
-                        if(_.indexOf(following,auth_id) !== -1) {
-                            _callback(null,2);
-                        } else {
-                            user.following.push(auth_id);
-                            user.save(function(err){
-                                _callback(null,1);
-                            });
-                        }
-                    } else {
-                        /* 取消关注功能 */
-                        if(_.indexOf(following,auth_id) === -1) {
-                            _callback(null,2);
-                        } else {
-                            user.following = _.without(user.following,auth_id);
-                            user.save((err) => {
-                                _callback(null,1);
-                            });
-                        }
-                    }
+                    user.following = _.without(user.following,auth_id);
                 }
+
+                // 保存用户
+                user.save((err) => {
+                    if(err) {
+                        return callback(500);
+                    } else {
+                        _callback(null,200);
+                    }
+                });
+
             }
         ],(err,result) => {
             /**
              * result
-             * 0 本地用户不存在
-             * 1 关注成功
-             * 2 已经关注过（关注功能） 或 不在关注列表中（取消关注功能）
-             * 3 要关注的用户不存在
+             * 200 关注(取消关注)成功
+             * 304 已经关注过（关注功能） 或 不在关注列表中（取消关注功能）
+             * 404 要关注的用户不存在
+             * 410 本地用户不存在
+             * 500 服务器错误
              */
             callback(result);
         });
@@ -531,7 +542,6 @@ class md {
             function(_callback) {
                 User.findOne(user,(err,user) => {
                     if(err) {
-                        console.log(err);
                         return callback(500);
                     } else {
                         switch (option) {

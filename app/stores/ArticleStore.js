@@ -8,6 +8,8 @@ class ArticleStore　{
         this.bindActions(ArticleActions);
         this.article = false;  // 是否找到
         this.loading = true;
+        this.error = false;
+
         this.approve = 0;
         this.disapprove = 0;
         this.abbreviations = '';
@@ -51,6 +53,7 @@ class ArticleStore　{
             toastr.warning(data.meta);
         } else if(data.code === 500) {
             toastr.error('服务器错误');
+            this.error = true;
         }
     }
 }

@@ -58,9 +58,7 @@ class Member extends React.Component {
             click = this.handleClick.bind(this,0,this.state._id);
         }
 
-        if(!this.member) {
-
-
+        if(this.state.member) {
             Mem = (
                 <div className="col-md-3 col-sm-3">
                     <div className='mon-center'>
@@ -95,8 +93,12 @@ class Member extends React.Component {
                     </div>
                 </div>
             );
-        } else {
+        } else if(this.state.loading){
             Mem = <Loading />;
+        } else if(!this.state.member && !this.state.error) {
+            Mem = <NotFound state="404 Not Found"/>;
+        } else if(this.state.error) {
+            Mem = <NotFound state="500 服务器错误"/>;
         }
 
 

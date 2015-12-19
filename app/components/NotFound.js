@@ -13,7 +13,7 @@ class NotFound extends React.Component {
             <div className='container'>
                 <div className="mon-table">
                     <div>
-                        404 NOT FOUND
+                        {this.props.state}
                     </div>
                 </div>
             </div>

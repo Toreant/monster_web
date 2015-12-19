@@ -151,12 +151,11 @@ class Article extends React.Component {
                         </div>
                     </div>
                 </div>
-
             );
         } else if(this.state.loading) {
             Article =　<Loading/> ;
         } else {
-            Article = <NotFound />;
+            Article = <NotFound state="404 Not Found"/>;
         }
         return (
             <div>

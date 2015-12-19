@@ -5073,7 +5073,7 @@ webpackJsonp([0],[
 	                    _react2.default.createElement(
 	                        'div',
 	                        null,
-	                        '404 NOT FOUND'
+	                        this.props.state
 	                    )
 	                )
 	            );
@@ -11744,7 +11744,7 @@ webpackJsonp([0],[
 	            } else if (this.state.loading) {
 	                Article = _react2.default.createElement(_Loading2.default, null);
 	            } else {
-	                Article = _react2.default.createElement(_NotFound2.default, null);
+	                Article = _react2.default.createElement(_NotFound2.default, { state: '404 Not Found' });
 	            }
 	            return _react2.default.createElement(
 	                'div',
@@ -11848,6 +11848,8 @@ webpackJsonp([0],[
 	        this.bindActions(_ArticleActions2.default);
 	        this.article = false; // 是否找到
 	        this.loading = true;
+	        this.error = false;
+
 	        this.approve = 0;
 	        this.disapprove = 0;
 	        this.abbreviations = '';
@@ -11893,6 +11895,7 @@ webpackJsonp([0],[
 	                toastr.warning(data.meta);
 	            } else if (data.code === 500) {
 	                toastr.error('服务器错误');
+	                this.error = true;
 	            }
 	        }
 	    }]);
@@ -13453,8 +13456,7 @@ webpackJsonp([0],[
 	                click = this.handleClick.bind(this, 0, this.state._id);
 	            }
 
-	            if (!this.member) {
-
+	            if (this.state.member) {
 	                Mem = _react2.default.createElement(
 	                    'div',
 	                    { className: 'col-md-3 col-sm-3' },
@@ -13539,8 +13541,12 @@ webpackJsonp([0],[
 	                        )
 	                    )
 	                );
-	            } else {
+	            } else if (this.state.loading) {
 	                Mem = _react2.default.createElement(_Loading2.default, null);
+	            } else if (!this.state.member && !this.state.error) {
+	                Mem = _react2.default.createElement(_NotFound2.default, { state: '404 Not Found' });
+	            } else if (this.state.error) {
+	                Mem = _react2.default.createElement(_NotFound2.default, { state: '500 服务器错误' });
 	            }
 
 	            return _react2.default.createElement(
@@ -13954,12 +13960,14 @@ webpackJsonp([0],[
 	        this.introduce = 'heh';
 	        this.star = 0;
 	        this.followed = false;
+	        this.loading = true;
+	        this.error = false;
 	    }
 
 	    _createClass(MemberStore, [{
 	        key: 'onGetMemberSuccess',
 	        value: function onGetMemberSuccess(data) {
-	            console.log(data);
+	            this.loading = false;
 	            if (data.code === 200) {
 	                this.member = true;
 	                var user = data.raw._raw;
@@ -13977,6 +13985,7 @@ webpackJsonp([0],[
 	                this.followed = data.raw.followed;
 	            } else if (data.code === 500) {
 	                toastr.error('服务器错误');
+	                this.error = true;
 	            } else if (data.code === 404) {
 	                toastr.warning('找不到这个人');
 	            }
@@ -13994,7 +14003,7 @@ webpackJsonp([0],[
 	                case 400:
 	                    toastr.warning(data.meta);
 	                    break;
-	                case 406:
+	                case 404:
 	                    toastr.warning(data.meta);
 	                    break;
 	                case 500:
@@ -14544,10 +14553,10 @@ webpackJsonp([0],[
 	                });
 	            }
 
-	            if (this.state.loading && this.state.finded) {
+	            if (this.state.loading) {
 	                Target = _react2.default.createElement(_Loading2.default, null);
 	            } else if (!this.state.loading && !this.state.finded) {
-	                Target = _react2.default.createElement(_NotFound2.default, { text: this.state.error });
+	                Target = _react2.default.createElement(_NotFound2.default, { state: this.state.error });
 	            } else {
 	                // 标签
 	                Tags = this.state.tags.map(function (data, index) {
@@ -14779,18 +14788,20 @@ webpackJsonp([0],[
 	        this.tags = [];
 	        this.createTime;
 	        this.alubmn = '';
-	        this.finded = true;
-	        this.loading = true;
-	        this.error = '';
 	        this.stared = false;
 	        this.visitor = []; // 访客
+
+	        this.finded = false;
+	        this.loading = true;
+	        this.error = '';
 	    }
 
 	    _createClass(MusicStore, [{
 	        key: 'onGetMusicSuccess',
 	        value: function onGetMusicSuccess(data) {
+	            this.loading = false;
 	            if (data.code === 200) {
-	                console.log(data.raw);
+
 	                this.abbreviations = data.raw.music.abbreviations;
 	                this.music = data.raw.music.music_url;
 	                this.title = data.raw.music.title;
@@ -14803,18 +14814,15 @@ webpackJsonp([0],[
 	                this.createUserDomain = data.raw.user.domain;
 	                this.createUserIntr = data.raw.user.introduce;
 	                this.createTime = new Date(data.raw.music.create_time).toLocaleDateString();
-	                this.loading = false;
 	                this.stared = data.raw.stared.toString();
 	                this.visitor = data.raw.visitor;
+
+	                this.finded = true;
 	            } else if (data.code === 404) {
-	                this.finded = false;
-	                this.loading = false;
-	                this.error = '404找不到';
 	                toastr.warning('找不到这个音乐');
+	                this.error = '404 Not Found';
 	            } else {
-	                this.finded = false;
-	                this.loading = false;
-	                this.error = '500服务器错误';
+	                this.error = '500 服务器错误';
 	                toastr.error('服务器错误');
 	            }
 	        }

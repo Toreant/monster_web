@@ -172,16 +172,16 @@ class UserCtrl {
         };
 
         User.getUserByDomain(domain, function (data) {
-            if (data !== null) {
-                result.meta = '获取用户资料成功';
-                result.code = 200;
-                result.raw = data;
+            if (data === 404) {
+                result.meta = '找不到这个人';
+                result.code = 404;
             } else if (data === 500) {
                 result.meta = '服务器错误';
                 result.code = 500;
             } else {
-                result.meta = '找不到这个人';
-                result.code = 404;
+                result.meta = '获取用户资料成功';
+                result.code = 200;
+                result.raw = data;
             }
             res.json(result);
         },_id);
@@ -299,19 +299,19 @@ class UserCtrl {
             code: 0
         };
         User.follow({_id: where._id}, auth_id, 0, (data) => {
-            if (data === 0) {
+            if (data === 400) {
                 result.meta = '本地用户不存在';
-                result.code = 400;
-            } else if (data === 1) {
+            } else if (data === 200) {
                 result.meta = '关注成功';
-                result.code = 200;
-            } else if (data === 2) {
-                result.meta = '你已经关注过这歌用户';
-                result.code = 304;
-            } else {
-                result.meta = '关注的用户不存在';
-                result.code = 404;
+            } else if (data === 304) {
+                result.meta = '你已经关注过这个用户';
+            } else if(data === 404) {
+                result.meta = '用户不存在';
+            } else if(data === 500) {
+                result.meta = '服务器错误';
             }
+            result.code = data;
+
             res.json(result);
         });
     }
@@ -330,19 +330,18 @@ class UserCtrl {
             code: 0
         };
         User.follow({_id: where._id}, auth_id, 1, (data) => {
-            if (data === 0) {
+            if (data === 400) {
                 result.meta = '本地用户不存在';
-                result.code = 400;
-            } else if (data === 1) {
+            } else if (data === 200) {
                 result.meta = '取消关注成功';
-                result.code = 200;
-            } else if (data === 2) {
+            } else if (data === 304) {
                 result.meta = '这个用户不在关注列表中';
-                result.code = 304;
-            } else {
+            } else if(data === 404){
                 result.meta = '这个用户不存在';
-                result.code = 404;
+            } else if(data === 500) {
+                result.meta = '服务器错误';
             }
+            result.code = data;
             res.json(result);
         });
     }

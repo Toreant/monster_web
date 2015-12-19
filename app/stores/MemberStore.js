@@ -20,10 +20,12 @@ class MemberStore {
         this.introduce = 'heh';
         this.star = 0;
         this.followed = false;
+        this.loading = true;
+        this.error = false;
     }
 
     onGetMemberSuccess(data) {
-        console.log(data);
+        this.loading = false;
         if(data.code === 200) {
             this.member = true;
             let user = data.raw._raw;
@@ -41,6 +43,7 @@ class MemberStore {
             this.followed = data.raw.followed;
         } else if (data.code === 500) {
             toastr.error('服务器错误');
+            this.error = true;
         }　else if (data.code === 404) {
             toastr.warning('找不到这个人');
         }
@@ -57,7 +60,7 @@ class MemberStore {
             case 400 :
                 toastr.warning(data.meta);
                 break;
-            case 406 :
+            case 404 :
                 toastr.warning(data.meta);
                 break;
             case 500 :

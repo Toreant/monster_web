@@ -77,10 +77,10 @@ class Music extends React.Component {
             });
         }
 
-        if(this.state.loading && this.state.finded) {
+        if(this.state.loading) {
             Target = <Loading />;
         } else if(!this.state.loading && !this.state.finded) {
-            Target = <NotFount text={this.state.error} />
+            Target = <NotFount state={this.state.error} />
         } else {
             // 标签
             Tags = this.state.tags.map((data,index) => {

@@ -18,16 +18,18 @@ class MusicStore {
         this.tags = [];
         this.createTime;
         this.alubmn = '';
-        this.finded = true;
-        this.loading = true;
-        this.error = '';
         this.stared = false;
         this.visitor = [];  // 访客
+
+        this.finded = false;
+        this.loading = true;
+        this.error = '';
     }
 
     onGetMusicSuccess(data) {
+        this.loading = false;
         if(data.code === 200) {
-            console.log(data.raw);
+
             this.abbreviations = data.raw.music.abbreviations;
             this.music = data.raw.music.music_url;
             this.title = data.raw.music.title;
@@ -40,18 +42,15 @@ class MusicStore {
             this.createUserDomain = data.raw.user.domain;
             this.createUserIntr = data.raw.user.introduce;
             this.createTime = new Date(data.raw.music.create_time).toLocaleDateString();
-            this.loading = false;
             this.stared = data.raw.stared.toString();
             this.visitor = data.raw.visitor;
+
+            this.finded = true;
         } else if(data.code === 404) {
-            this.finded = false;
-            this.loading = false;
-            this.error = '404找不到';
             toastr.warning('找不到这个音乐');
+            this.error = '404 Not Found';
         } else {
-            this.finded = false;
-            this.loading = false;
-            this.error = '500服务器错误';
+            this.error = '500 服务器错误';
             toastr.error('服务器错误');
         }
     }
