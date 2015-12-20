@@ -11,8 +11,8 @@
 }
 @media screen and (max-width: 450px) {
   .mon-music img {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
   }
 }
 .mon-music-block {
