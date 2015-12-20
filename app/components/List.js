@@ -20,8 +20,6 @@ class List extends React.Component {
     }
 
     componentWillUnmount() {
-        console.log('hehe');
-        $("#lists").removeClass('fadeInUp');
         ListStore.unlisten(this.onChange);
     }
 
@@ -122,13 +120,10 @@ class List extends React.Component {
         return (
             <div id="lists" className='container mon-main'>
                 <div className='row'>
-                    <div className='col-md-8 col-md-offset-2 col-xs-12'>
+                    <div className='col-md-8 col-md-offset-2 col-sm-12 col-xs-12'>
                         <ul className='nav'>
                             {List}
                         </ul>
-                    </div>
-                    <div className='col-md-2'>
-                        {Offset}
                     </div>
                 </div>
                 {Page}

@@ -13047,8 +13047,6 @@ webpackJsonp([0],[
 	    }, {
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
-	            console.log('hehe');
-	            $("#lists").removeClass('fadeInUp');
 	            _ListStore2.default.unlisten(this.onChange);
 	        }
 	    }, {
@@ -13189,17 +13187,12 @@ webpackJsonp([0],[
 	                    { className: 'row' },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'col-md-8 col-md-offset-2 col-xs-12' },
+	                        { className: 'col-md-8 col-md-offset-2 col-sm-12 col-xs-12' },
 	                        _react2.default.createElement(
 	                            'ul',
 	                            { className: 'nav' },
 	                            List
 	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'col-md-2' },
-	                        Offset
 	                    )
 	                ),
 	                Page
