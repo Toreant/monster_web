@@ -113,7 +113,6 @@ class Article extends React.Component {
             Article = (
                 <div className='raw animated fadeInUp clearfix'>
                     <div className='col-md-8 col-sm-12 col-xs-12 col-md-offset-2 mon-article'>
-                        <p className='bg-success mon-article-summary'>{this.state.summary}</p>
                         <div ref='content' className='mon-article-content' dangerouslySetInnerHTML={{__html: this.state.content}}>
                         </div>
                         <div className='mon-article-tags'>

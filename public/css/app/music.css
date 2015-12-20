@@ -9,6 +9,12 @@
   height: 360px;
   overflow: hidden;
 }
+@media screen and (max-width: 450px) {
+  .mon-music img {
+    width: 100px;
+    height: 100px;
+  }
+}
 .mon-music-block {
   position: absolute;
   width: 100%;

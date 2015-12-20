@@ -16,7 +16,6 @@ class HomeStore {
     //HomeActions 中的方法
 
     onGetArticlesSuccess(data) {
-        console.log(data);
         if(data.code === 200) {
             this.articles = data.raw._raw;
             this.a_loading = false;
@@ -26,7 +25,6 @@ class HomeStore {
     }
 
     onGetMusicsSuccess(data) {
-        console.log(data);
         if(data.code === 200) {
             this.musics = data.raw._raw;
             this.m_loading = false;

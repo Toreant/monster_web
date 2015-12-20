@@ -13,7 +13,6 @@ class FollowStore {
     }
 
     onGetFollowSuccess(data) {
-        console.log(data);
         this.loading = true;
         if(data.code === 200) {
             this.follows = data.raw;

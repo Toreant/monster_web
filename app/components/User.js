@@ -46,23 +46,17 @@ class User extends React.Component {
                         </div>
                         <div className='mon-user-name'>{this.state.username}</div>
                         <div className='mon-vcard-stats'>
-                            <Link to={'/profile/followers'}>
-                                <a className='mon-link'>
-                                    <span>{this.state.followers}</span>
-                                    <b>Followers</b>
-                                </a>
+                            <Link to={'/profile/followers'}  className='mon-link'>
+                                <span>{this.state.followers}</span>
+                                <b>Followers</b>
                             </Link>
-                            <Link to={'/profile/following'}>
-                                <a className='mon-link'>
-                                    <span>{this.state.following}</span>
-                                    <b>Following</b>
-                                </a>
+                            <Link to={'/profile/following'} className='mon-link'>
+                                <span>{this.state.following}</span>
+                                <b>Following</b>
                             </Link>
-                            <Link to={'/profile/contribute/articles'}>
-                                <a className='mon-link'>
-                                    <span>{this.state.contribute}</span>
-                                    <b>Contribute</b>
-                                </a>
+                            <Link to={'/profile/contribute/articles'} className='mon-link'>
+                                <span>{this.state.contribute}</span>
+                                <b>Contribute</b>
                             </Link>
                         </div>
                         <ul className='nav mon-ability-list'>

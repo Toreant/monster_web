@@ -140,7 +140,7 @@ class md {
      */
     getFollowing(where,option,callback) {
         async.waterfall([
-            //查找本地用户
+            //查找用户
             function(_callback) {
                 User.findOne(where,(err,user) => {
                     _callback(null,user);
@@ -149,11 +149,17 @@ class md {
             //查找本地用户中的关注数组
             function(user,_callback) {
                 if(user === null) {
-                    _callback(null,0);
+                    return callback(404);
                 } else {
                     let following = user.following;
                     User.find({_id : {$in : following}},'username domain avatar_url introduce',option,(err,docs) => {
-                        _callback(null,docs);
+                        if(err) {
+                            return callback(500);
+                        } else if(docs === null) {
+                            return callback(null);
+                        } else {
+                            _callback(null,docs);
+                        }
                     });
                 }
             },
@@ -178,7 +184,7 @@ class md {
      * 获取关注我的用户
      * @param where
      * @param option
-     * @param user
+     * @param user  本地用户
      * @param callback
      */
     getFollowers(where,option,user,callback) {
@@ -287,7 +293,6 @@ class md {
             function(user,_callback) {
                 User.findOne({_id : auth_id},(err,docs) => {
                     if(err) {
-                        console.log(err);
                         return callback(500);
                     } else if(docs === null) {
                         return callback(404);

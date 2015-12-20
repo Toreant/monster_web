@@ -26,36 +26,20 @@ class Contribute extends React.Component {
 
     render() {
         let domain = this.props.domain;
-        let ConNav;
-        if(this.props.option === '0') {
-            ConNav = (
-                <div className='mon-contribute-nav'>
-                    <Link to={'/member/'+domain+'/article'}>
-                        文章
-                    </Link>
-                    <Link to={'/member/'+domain+'/music'}>
-                        音乐
-                    </Link>
-                    <Link to={'/member/'+domain+'/animate'}>
-                        动漫
-                    </Link>
-                </div>
-            );
-        }　else {
-            ConNav = (
-                <div className='mon-contribute-nav'>
-                    <Link to={'/profile/contribute/articles'}>
-                        文章
-                    </Link>
-                    <Link to={'/profile/contribute/musics'}>
-                        音乐
-                    </Link>
-                    <Link to={'/profile/contribute/animates'} >
-                        动漫
-                    </Link>
-                </div>
-            );
-        }
+        let ConNav = (
+            <div className='mon-contribute-nav'>
+                <Link to={'/member/'+domain+'/contributes/article'}>
+                    文章
+                </Link>
+                <Link to={'/member/'+domain+'/contributes/music'}>
+                    音乐
+                </Link>
+                <Link to={'/member/'+domain+'/contributes/animate'}>
+                    动漫
+                </Link>
+            </div>
+        );
+
         return(
             <div className='col-sm-9 col-md-9 animated fadeInUp'>
                 <div>

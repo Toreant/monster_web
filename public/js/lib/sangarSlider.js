@@ -652,19 +652,19 @@ var sangarBaseClass;
 
                 base.$sangarWrapper.children('.sangar-timer').fadeIn(function(){
                     base.$el.css({"display": "block"});
-                })
+                });
 
                 base.$sangarWrapper.children('.sangar-slider-nav').fadeIn(function(){
                     base.$el.css({"display": "block"});
-                })
+                });
 
                 base.$sangarWrapper.children('.sangar-pagination-wrapper').fadeIn(function(){
                     base.$el.css({"display": "block"});
-                })
+                });
 
                 base.$pagination.show();
             }
-        }
+        };
 
 
         /**

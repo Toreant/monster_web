@@ -92,7 +92,7 @@ class Music extends React.Component {
             });
 
             Aside = (
-                <aside className="col-md-4 col-sm-4 col-xs-12">
+                <aside className="col-md-4 col-sm-12 col-xs-12">
                     <div>
                         <p className="mon-comment-title">
                             最近访客
@@ -105,9 +105,9 @@ class Music extends React.Component {
             );
 
             Target = (
-                <div className="col-md-8">
+                <div className="col-md-8 col-sm-12 col-xs-12">
                     <div className="raw clearfix">
-                        <div className="mon-music col-md-6">
+                        <div className="mon-music col-md-6 col-xs-6">
                             <img src={this.state.abbreviations} alt="loading"/>
                             <div className="mon-music-block">
                                 <audio ref="music" id="music" className="mon-music-url" src={this.state.music}></audio>

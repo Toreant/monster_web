@@ -17,11 +17,11 @@ import passport from 'passport';
 import Github from 'passport-github';
 import Facebook from 'passport-facebook';
 import session from 'express-session';
-import redis from 'redis';
+//import redis from 'redis';
 var mongoDB = require('./models') ;
 
 var app = new express();
-var client = redis.createClient();
+//var client = redis.createClient();
 
 app.set('port',process.env.PORT || 3000);
 app.use(logger('dev'));

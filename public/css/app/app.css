@@ -486,6 +486,12 @@ a {
 .mon-vcard-stats {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
+  width: 100%;
+}
+.mon-vcard-stats > a {
+  width: 33%;
+  padding: 10px;
+  text-align: center;
 }
 .mon-vcard-stats .mon-link {
   display: inline-block;

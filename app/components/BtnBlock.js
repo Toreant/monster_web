@@ -10,14 +10,14 @@ class BtnBlock extends React.Component {
     }
 
     componentDidMount() {
-        $(window).scroll(function() {
-            var $window = $(this);
-            if($window.scrollTop() < 400) {
-                $("#_back").fadeOut();
-            } else {
-                $("#_back").fadeIn();
-            }
-        });
+        //$(window).scroll(function() {
+        //    var $window = $(this);
+        //    if($window.scrollTop() < 400) {
+        //        $("#_back").fadeOut();
+        //    } else {
+        //        $("#_back").fadeIn();
+        //    }
+        //});
     }
 
     handlerClick() {

@@ -49,10 +49,14 @@ export default(
             <Route path=":id" handler={Animate}/>
         </Route>
 
+
+
         <Route path='/member' handler={Member}>
             <Route path=':domain' hanlder={Contribute}>
                 <DefaultRoute handler={ConArticle} />
-                <Route path=":column" handler={ConArticle} />
+                <Route path="contributes">
+                    <Route path=":column" handler={ConArticle} />
+                </Route>
             </Route>
         </Route>
 

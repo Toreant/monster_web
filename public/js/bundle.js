@@ -368,7 +368,11 @@ webpackJsonp([0],[
 	            _reactRouter.Route,
 	            { path: ':domain', hanlder: _Contribute2.default },
 	            _react2.default.createElement(_reactRouter.DefaultRoute, { handler: _ConArticle2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: ':column', handler: _ConArticle2.default })
+	            _react2.default.createElement(
+	                _reactRouter.Route,
+	                { path: 'contributes' },
+	                _react2.default.createElement(_reactRouter.Route, { path: ':column', handler: _ConArticle2.default })
+	            )
 	        )
 	    ),
 	    _react2.default.createElement(
@@ -686,8 +690,8 @@ webpackJsonp([0],[
 	                            _react2.default.createElement('span', { className: 'icon-bar' })
 	                        ),
 	                        _react2.default.createElement(
-	                            'a',
-	                            { href: '/', className: 'navbar-brand icon-name' },
+	                            _reactRouter.Link,
+	                            { to: '/', className: 'navbar-brand icon-name' },
 	                            'Monster'
 	                        )
 	                    ),
@@ -1684,7 +1688,6 @@ webpackJsonp([0],[
 	    _createClass(HomeStore, [{
 	        key: 'onGetArticlesSuccess',
 	        value: function onGetArticlesSuccess(data) {
-	            console.log(data);
 	            if (data.code === 200) {
 	                this.articles = data.raw._raw;
 	                this.a_loading = false;
@@ -1695,7 +1698,6 @@ webpackJsonp([0],[
 	    }, {
 	        key: 'onGetMusicsSuccess',
 	        value: function onGetMusicsSuccess(data) {
-	            console.log(data);
 	            if (data.code === 200) {
 	                this.musics = data.raw._raw;
 	                this.m_loading = false;
@@ -2905,56 +2907,44 @@ webpackJsonp([0],[
 	                            { className: 'mon-vcard-stats' },
 	                            _react2.default.createElement(
 	                                _reactRouter.Link,
-	                                { to: '/profile/followers' },
+	                                { to: '/profile/followers', className: 'mon-link' },
 	                                _react2.default.createElement(
-	                                    'a',
-	                                    { className: 'mon-link' },
-	                                    _react2.default.createElement(
-	                                        'span',
-	                                        null,
-	                                        this.state.followers
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        'b',
-	                                        null,
-	                                        'Followers'
-	                                    )
+	                                    'span',
+	                                    null,
+	                                    this.state.followers
+	                                ),
+	                                _react2.default.createElement(
+	                                    'b',
+	                                    null,
+	                                    'Followers'
 	                                )
 	                            ),
 	                            _react2.default.createElement(
 	                                _reactRouter.Link,
-	                                { to: '/profile/following' },
+	                                { to: '/profile/following', className: 'mon-link' },
 	                                _react2.default.createElement(
-	                                    'a',
-	                                    { className: 'mon-link' },
-	                                    _react2.default.createElement(
-	                                        'span',
-	                                        null,
-	                                        this.state.following
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        'b',
-	                                        null,
-	                                        'Following'
-	                                    )
+	                                    'span',
+	                                    null,
+	                                    this.state.following
+	                                ),
+	                                _react2.default.createElement(
+	                                    'b',
+	                                    null,
+	                                    'Following'
 	                                )
 	                            ),
 	                            _react2.default.createElement(
 	                                _reactRouter.Link,
-	                                { to: '/profile/contribute/articles' },
+	                                { to: '/profile/contribute/articles', className: 'mon-link' },
 	                                _react2.default.createElement(
-	                                    'a',
-	                                    { className: 'mon-link' },
-	                                    _react2.default.createElement(
-	                                        'span',
-	                                        null,
-	                                        this.state.contribute
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        'b',
-	                                        null,
-	                                        'Contribute'
-	                                    )
+	                                    'span',
+	                                    null,
+	                                    this.state.contribute
+	                                ),
+	                                _react2.default.createElement(
+	                                    'b',
+	                                    null,
+	                                    'Contribute'
 	                                )
 	                            )
 	                        ),
@@ -10981,7 +10971,6 @@ webpackJsonp([0],[
 	    _createClass(FollowStore, [{
 	        key: 'onGetFollowSuccess',
 	        value: function onGetFollowSuccess(data) {
-	            console.log(data);
 	            this.loading = true;
 	            if (data.code === 200) {
 	                this.follows = data.raw;
@@ -11328,48 +11317,26 @@ webpackJsonp([0],[
 	        key: 'render',
 	        value: function render() {
 	            var domain = this.props.domain;
-	            var ConNav = undefined;
-	            if (this.props.option === '0') {
-	                ConNav = _react2.default.createElement(
-	                    'div',
-	                    { className: 'mon-contribute-nav' },
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/member/' + domain + '/article' },
-	                        '文章'
-	                    ),
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/member/' + domain + '/music' },
-	                        '音乐'
-	                    ),
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/member/' + domain + '/animate' },
-	                        '动漫'
-	                    )
-	                );
-	            } else {
-	                ConNav = _react2.default.createElement(
-	                    'div',
-	                    { className: 'mon-contribute-nav' },
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/profile/contribute/articles' },
-	                        '文章'
-	                    ),
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/profile/contribute/musics' },
-	                        '音乐'
-	                    ),
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/profile/contribute/animates' },
-	                        '动漫'
-	                    )
-	                );
-	            }
+	            var ConNav = _react2.default.createElement(
+	                'div',
+	                { className: 'mon-contribute-nav' },
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/member/' + domain + '/contributes/article' },
+	                    '文章'
+	                ),
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/member/' + domain + '/contributes/music' },
+	                    '音乐'
+	                ),
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/member/' + domain + '/contributes/animate' },
+	                    '动漫'
+	                )
+	            );
+
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'col-sm-9 col-md-9 animated fadeInUp' },
@@ -11668,11 +11635,6 @@ webpackJsonp([0],[
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'col-md-8 col-sm-12 col-xs-12 col-md-offset-2 mon-article' },
-	                        _react2.default.createElement(
-	                            'p',
-	                            { className: 'bg-success mon-article-summary' },
-	                            this.state.summary
-	                        ),
 	                        _react2.default.createElement('div', { ref: 'content', className: 'mon-article-content', dangerouslySetInnerHTML: { __html: this.state.content } }),
 	                        _react2.default.createElement(
 	                            'div',
@@ -12279,7 +12241,7 @@ webpackJsonp([0],[
 /* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
@@ -12311,24 +12273,24 @@ webpackJsonp([0],[
 	    }
 
 	    _createClass(BtnBlock, [{
-	        key: "componentDidMount",
+	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            $(window).scroll(function () {
-	                var $window = $(this);
-	                if ($window.scrollTop() < 400) {
-	                    $("#_back").fadeOut();
-	                } else {
-	                    $("#_back").fadeIn();
-	                }
-	            });
+	            //$(window).scroll(function() {
+	            //    var $window = $(this);
+	            //    if($window.scrollTop() < 400) {
+	            //        $("#_back").fadeOut();
+	            //    } else {
+	            //        $("#_back").fadeIn();
+	            //    }
+	            //});
 	        }
 	    }, {
-	        key: "handlerClick",
+	        key: 'handlerClick',
 	        value: function handlerClick() {
 	            $("html,body").animate({ scrollTop: 0 }, 700);
 	        }
 	    }, {
-	        key: "shareFB",
+	        key: 'shareFB',
 	        value: function shareFB() {
 	            window.fbAsyncInit = function () {
 	                FB.init({
@@ -12362,49 +12324,49 @@ webpackJsonp([0],[
 	            })(document, 'script', 'facebook-jssdk');
 	        }
 	    }, {
-	        key: "render",
+	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                "div",
-	                { className: "mon-btn-block" },
+	                'div',
+	                { className: 'mon-btn-block' },
 	                _react2.default.createElement(
-	                    "a",
-	                    { href: "javascript:;", className: "btn btn-default" },
-	                    _react2.default.createElement("span", { className: "fa fa-weibo" }),
+	                    'a',
+	                    { href: 'javascript:;', className: 'btn btn-default' },
+	                    _react2.default.createElement('span', { className: 'fa fa-weibo' }),
 	                    _react2.default.createElement(
-	                        "span",
-	                        { className: "mon-btn-fix" },
-	                        "微博分享"
+	                        'span',
+	                        { className: 'mon-btn-fix' },
+	                        '微博分享'
 	                    )
 	                ),
 	                _react2.default.createElement(
-	                    "a",
-	                    { href: "javascript:;", className: "btn btn-default", onClick: this.shareFB.bind(this) },
-	                    _react2.default.createElement("span", { className: "fa fa-facebook" }),
+	                    'a',
+	                    { href: 'javascript:;', className: 'btn btn-default', onClick: this.shareFB.bind(this) },
+	                    _react2.default.createElement('span', { className: 'fa fa-facebook' }),
 	                    _react2.default.createElement(
-	                        "span",
-	                        { className: "mon-btn-fix" },
-	                        "FA分享"
+	                        'span',
+	                        { className: 'mon-btn-fix' },
+	                        'FA分享'
 	                    )
 	                ),
 	                _react2.default.createElement(
-	                    "a",
-	                    { href: "javascript:;", className: "btn btn-default" },
-	                    _react2.default.createElement("span", { className: "fa fa-weixin" }),
+	                    'a',
+	                    { href: 'javascript:;', className: 'btn btn-default' },
+	                    _react2.default.createElement('span', { className: 'fa fa-weixin' }),
 	                    _react2.default.createElement(
-	                        "span",
-	                        { className: "mon-btn-fix" },
-	                        "微信分享"
+	                        'span',
+	                        { className: 'mon-btn-fix' },
+	                        '微信分享'
 	                    )
 	                ),
 	                _react2.default.createElement(
-	                    "a",
-	                    { id: "_back", href: "javascript:;", className: "btn btn-default", onClick: this.handlerClick.bind(this) },
-	                    _react2.default.createElement("span", { className: "fa fa-arrow-up" }),
+	                    'a',
+	                    { id: '_back', href: 'javascript:;', className: 'btn btn-default', onClick: this.handlerClick.bind(this) },
+	                    _react2.default.createElement('span', { className: 'fa fa-arrow-up' }),
 	                    _react2.default.createElement(
-	                        "span",
-	                        { className: "mon-btn-fix" },
-	                        "回到顶部"
+	                        'span',
+	                        { className: 'mon-btn-fix' },
+	                        '回到顶部'
 	                    )
 	                )
 	            );
@@ -14306,8 +14268,6 @@ webpackJsonp([0],[
 	        value: function getConList(tab, domain, skip) {
 	            var _this = this;
 
-	            console.log(tab);
-
 	            var params = {
 	                option: { skip: skip * 6, limit: 6, sort: { create_time: 1 } },
 	                query: 'domain',
@@ -14323,7 +14283,6 @@ webpackJsonp([0],[
 	                cache: false,
 	                data: JSON.stringify(params)
 	            }).done(function (data) {
-	                console.log(data);
 	                _this.actions.getConListSuccess(data);
 	            }).fail(function (data) {
 	                toastr.error('网络链接有问题');
@@ -14562,7 +14521,7 @@ webpackJsonp([0],[
 
 	                Aside = _react2.default.createElement(
 	                    'aside',
-	                    { className: 'col-md-4 col-sm-4 col-xs-12' },
+	                    { className: 'col-md-4 col-sm-12 col-xs-12' },
 	                    _react2.default.createElement(
 	                        'div',
 	                        null,
@@ -14581,13 +14540,13 @@ webpackJsonp([0],[
 
 	                Target = _react2.default.createElement(
 	                    'div',
-	                    { className: 'col-md-8' },
+	                    { className: 'col-md-8 col-sm-12 col-xs-12' },
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'raw clearfix' },
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: 'mon-music col-md-6' },
+	                            { className: 'mon-music col-md-6 col-xs-6' },
 	                            _react2.default.createElement('img', { src: this.state.abbreviations, alt: 'loading' }),
 	                            _react2.default.createElement(
 	                                'div',

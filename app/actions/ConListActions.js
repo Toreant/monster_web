@@ -20,8 +20,6 @@ class ConListActions {
      */
     getConList(tab,domain,skip) {
 
-        console.log(tab);
-
         let params = {
                 option: {skip: skip*6,limit: 6,sort: {create_time: 1}},
                 query : 'domain',
@@ -38,7 +36,6 @@ class ConListActions {
             cache: false,
             data: JSON.stringify(params)
         }).done((data) => {
-            console.log(data);
             this.actions.getConListSuccess(data);
         }).fail((data) => {
             toastr.error('网络链接有问题');
