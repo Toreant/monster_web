@@ -30,11 +30,15 @@
 .mon-item {
   display: inline-block;
   position: relative;
-  width: 200px;
   margin: 20px 10px;
 }
 .mon-item > div {
   max-width: 100%;
+}
+@media screen and (min-width: 1000px) {
+  .mon-item {
+    width: 18%;
+  }
 }
 @media screen and (max-width: 1000px) {
   .mon-item {
@@ -43,7 +47,8 @@
 }
 @media screen and (max-width: 500px) {
   .mon-item {
-    width: 43%;
+    margin: 20px 5px;
+    width: 46%;
   }
 }
 .mon-fragmentation {
@@ -51,7 +56,7 @@
   overflow: hidden;
   color: #fff;
   width: 100%;
-  height: 112px;
+  height: 100px;
 }
 .mon-fragmentation img {
   width: 100%;
@@ -160,4 +165,11 @@
 .mon-error > a:focus {
   text-decoration: none;
   color: #c0c0c0;
+}
+/* 推荐轮播 */
+@media screen and (max-width: 450px) {
+  .mon-carousel > div {
+    margin-left: -15px !important;
+    margin-right: -15px !important;
+  }
 }

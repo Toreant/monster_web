@@ -1509,7 +1509,7 @@ webpackJsonp([0],[
 	                { className: 'container mon-main' },
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'raw clearfix mon-section' },
+	                    { className: 'raw clearfix mon-section mon-carousel' },
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'col-md-8' },
@@ -11524,6 +11524,7 @@ webpackJsonp([0],[
 	        key: 'onChange',
 	        value: function onChange(state) {
 	            this.setState(state);
+	            $(".mon-abbr-back").css('background-image', 'url(' + this.state.abbreviations + ')');
 	        }
 
 	        /**
@@ -11580,11 +11581,7 @@ webpackJsonp([0],[
 	                Abbr = _react2.default.createElement(
 	                    'div',
 	                    { className: 'mon-abbr' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'mon-abbr-back' },
-	                        _react2.default.createElement('img', { src: this.state.abbreviations, alt: 'loading' })
-	                    ),
+	                    _react2.default.createElement('div', { className: 'mon-abbr-back' }),
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'mon-abbr-content' },
@@ -13081,17 +13078,14 @@ webpackJsonp([0],[
 	                    break;
 	            }
 	            var List = this.state.list.map(function (data) {
+	                var abbreviations = data.data.abbreviations || '/img/abbreviations.png';
 	                return _react2.default.createElement(
 	                    'li',
 	                    { key: data.data._id, className: 'animated fadeInUp' },
 	                    _react2.default.createElement(
 	                        _reactRouter.Link,
 	                        { to: column + data.data._id, className: 'mon-top' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'mon-overlay' },
-	                            _react2.default.createElement('img', { className: 'img-response', src: data.data.abbreviations || '/img/abbreviations.png', alt: 'loading' })
-	                        ),
+	                        _react2.default.createElement('div', { className: 'mon-overlay', style: { backgroundImage: 'url(' + abbreviations + ')' } }),
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'mon-title' },

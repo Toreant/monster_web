@@ -117,7 +117,6 @@ a {
 .mon-nav {
   position: relative;
   background-color: #fafafa;
-  z-index: 9000;
 }
 .mon-subnav {
   text-align: center;

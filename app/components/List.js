@@ -81,11 +81,11 @@ class List extends React.Component {
                 break;
         }
         let List = this.state.list.map((data) => {
+            let abbreviations = data.data.abbreviations || '/img/abbreviations.png';
             return (
                 <li key={data.data._id} className="animated fadeInUp">
                     <Link  to={column+data.data._id} className='mon-top'>
-                        <div className='mon-overlay'>
-                            <img className='img-response' src={data.data.abbreviations || '/img/abbreviations.png'} alt="loading"/>
+                        <div className='mon-overlay' style={{backgroundImage: 'url('+abbreviations+')'}}>
                         </div>
                         <div className='mon-title'>
                             <div>

@@ -18,7 +18,7 @@
   top: 0;
   left: 0;
   background-color: #fff;
-  width: 100%;
+  width: 90%;
   z-index: 3000;
   border: 1px dashed #999;
 }
@@ -88,8 +88,8 @@
   margin: 0 auto;
 }
 .mon-preview-img .jcrop-holder img {
-  max-width: 480px;
-  max-height: 240px;
+  max-width: 480px !important;
+  max-height: 240px !important;
 }
 /*　进度条　*/
 .mon-progress-block {

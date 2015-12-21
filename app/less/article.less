@@ -52,10 +52,10 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  &>img {
-    width: 100%;
-    height: 100%;
-  }
+  background-image: url('/img/upload/5ed683406cfdf5b0a29a6efcb478a83b');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .mon-abbr-content {
@@ -116,6 +116,15 @@
   width: 50px;
 }
 
+@media screen and(max-width: 450px) {
+  .mon-article-detail {
+    font-size: 0.9rem;
+    & img {
+      width: 40px;
+    }
+  }
+}
+
 .mon-article-detail img:hover {
   box-shadow: 0 0 5px #FF6347;
 }
@@ -150,7 +159,7 @@
 
 .mon-article-content p {
   font-size: 1rem;
-  line-height: 2;
+  line-height: 1.8;
 }
 
 .mon-article-content img {

@@ -38,6 +38,7 @@ class Article extends React.Component {
 
     onChange(state) {
         this.setState(state);
+        $(".mon-abbr-back").css('background-image','url('+this.state.abbreviations+')');
     }
 
     /**
@@ -85,7 +86,6 @@ class Article extends React.Component {
             Abbr = (
                 <div className="mon-abbr">
                     <div className="mon-abbr-back">
-                        <img src={this.state.abbreviations} alt="loading"/>
                     </div>
                     <div className="mon-abbr-content">
                         <div className="col-md-8 col-sm-12 col-xs-12">

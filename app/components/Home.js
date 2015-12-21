@@ -100,7 +100,7 @@ class Home extends React.Component {
         }
         return (
             <div className="container mon-main">
-                <div className="raw clearfix mon-section">
+                <div className="raw clearfix mon-section mon-carousel">
                     <div className="col-md-8">
                         <Carousel />
                     </div>
