@@ -17,6 +17,7 @@ import passport from 'passport';
 import Github from 'passport-github';
 import Facebook from 'passport-facebook';
 import session from 'express-session';
+var compress = require('compression');
 //import redis from 'redis';
 var mongoDB = require('./models') ;
 
@@ -24,6 +25,7 @@ var app = new express();
 //var client = redis.createClient();
 
 app.set('port',process.env.PORT || 3000);
+app.use(compress());
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
