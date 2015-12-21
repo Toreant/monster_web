@@ -49,19 +49,19 @@ class Home extends React.Component {
                                     <img src={data.data.abbreviations || '/img/abbreviations.png'} alt="loading"/>
                                 </Link>
                             </div>
-                            <div >
-                                <Link to={'/article/'+data.data._id} className="mon-muted">
-                                    {data.data.summary || '什么鬼也没有'}
+                            <div>
+                                <Link to={'/member/'+data.user.domain} className="btn btn-block clearfix">
+                                    <img src={data.user.avatar_url} alt="loading"/>
+                                    <span className="pull-right">
+                                        {data.user.username}
+                                    </span>
                                 </Link>
                             </div>
                         </div>
                         <div className="mon-aside">
-                            <Link to={'/member/'+data.user.domain}>
-                                <img src={data.user.avatar_url} alt="loading"/>
+                            <Link to={'/article/'+data.data._id}>
+                                {data.data.title}
                             </Link>
-                            <span>
-                                {(new Date(data.data.create_time)).toLocaleDateString()}
-                            </span>
                         </div>
                     </div>
 
@@ -81,18 +81,18 @@ class Home extends React.Component {
                                 </Link>
                             </div>
                             <div >
-                                <Link to={'/article/'+data.data._id} className="mon-muted">
-                                    {data.data.summary || '什么鬼也没有'}
+                                <Link to={'/member/'+data.user.domain} className="btn btn-block clearfix">
+                                    <img src={data.user.avatar_url} alt="loading"/>
+                                    <span className="pull-right">
+                                        {data.user.username}
+                                    </span>
                                 </Link>
                             </div>
                         </div>
                         <div className="mon-aside">
-                            <Link to={'/member/'+data.user.domain}>
-                                <img src={data.user.avatar_url} alt="loading"/>
+                            <Link to={'/article/'+data.data._id}>
+                                {data.data.title}
                             </Link>
-                            <span>
-                                {(new Date(data.data.create_time)).toLocaleDateString()}
-                            </span>
                         </div>
                     </div>
                 );

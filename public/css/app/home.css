@@ -13,42 +13,42 @@
   width: 100%;
 }
 .mon-aside {
-  margin-top: 10px;
+  background-color: #f4f4f4;
+  max-height: 58px;
+  overflow: hidden;
+  padding: 10px;
 }
-.mon-aside img {
-  border-radius: 50%;
-  width: 30px;
-  box-shadow: 0 0 10px #ddd;
+.mon-aside > a {
+  font-size: 0.9rem;
+  color: #3d4444;
+  line-height: 1;
 }
-.mon-aside img:hover {
-  box-shadow: 0 0 10px #90EE90;
-}
-.mon-aside span {
-  float: right;
+.mon-aside > a:hover {
+  text-decoration: none;
   color: #999;
 }
 .mon-item {
   display: inline-block;
   position: relative;
-  margin: 20px 10px;
+  padding: 5px;
+  margin-bottom: 20px;
 }
 .mon-item > div {
   max-width: 100%;
 }
 @media screen and (min-width: 1000px) {
   .mon-item {
-    width: 18%;
+    width: 20%;
   }
 }
 @media screen and (max-width: 1000px) {
   .mon-item {
-    width: 30%;
+    width: 33%;
   }
 }
 @media screen and (max-width: 500px) {
   .mon-item {
-    margin: 20px 5px;
-    width: 46%;
+    width: 50%;
   }
 }
 .mon-fragmentation {
@@ -92,7 +92,17 @@
 .mon-fragmentation > div:nth-child(2) a:hover,
 .mon-fragmentation > div:nth-child(2) a:active {
   text-decoration: none;
-  color: #2C2C2C;
+}
+.mon-fragmentation > div:nth-child(2) img {
+  float: left;
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #999;
+}
+.mon-fragmentation > div:nth-child(2) span {
+  font-size: 1rem;
+  vertical-align: middle;
 }
 .mon-fragmentation:hover > div:nth-child(2) {
   -webkit-transform: translate(0, 0);

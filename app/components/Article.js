@@ -82,6 +82,7 @@ class Article extends React.Component {
             subClick = this.handleClick.bind(this,0),
             approveClick = this.approveClick.bind(this,0),
             disClick = this.approveClick.bind(this,1);
+
         if(this.state.article) {
             Abbr = (
                 <div className="mon-abbr">
@@ -92,12 +93,12 @@ class Article extends React.Component {
                             <p className='mon-article-title'>{this.state.title}</p>
                             <div className='mon-article-detail media'>
                                 <div className="media-left">
-                                    <a href={'/member/'+this.state.createUserDomain}>
+                                    <Link to={'/member/'+this.state.createUserDomain}>
                                         <img src={this.state.createUserAvatar || '/img/default.png'} alt="loading"/>
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="media-body">
-                                    <a href={'/member/'+this.state.createUserDomain}>{this.state.createUser}</a>
+                                    <Link to={'/member/'+this.state.createUserDomain}>{this.state.createUser}</Link>
                                     <Star star={this.props.params.id} column='article' stared={this.state.stared} plusClick={boundClick} subClick={subClick}/>
                                     {this.state.stars}
                                     <p className="mon-detail-time">
