@@ -17,6 +17,7 @@ import AnimateCtrl from './controllers/Animate';
 import NoticeCtrl from './controllers/Notice';
 import Helper from './controllers/Helper';
 import resumable from './middleware/resumable-node';
+import Validate from './controllers/Validate';
 
 var upload = multer({dest : './public/music'});
 
@@ -153,5 +154,7 @@ router.post('/api/notice',auth.isAuth,NoticeCtrl.postNotice);
 router.get('/api/weather',Helper.getWeather);
 
 router.post('/api/approve',auth.isAuth,ContributeCtrl.approveContribute);
+
+router.get('/validate',Validate.validateUser);
 
 export default router;

@@ -102,59 +102,19 @@ class Login extends React.Component {
         return (
             <div className='container mon-login mon-main'>
                 <div className='row'>
-                    <div className='col-md-8 col-sm-8 col-xs-12'></div>
-                    <div className='col-md-4 col-sm-4 col-xs-12'>
-                        <form className='login-form' >
-                            <div className='form-legend'>
-                                <span>登陆</span>
-                                <a href="javascript:;" onClick={this.changeForm.bind(this,1)} className='form-change'><span className='fa fa-arrow-circle-o-right'></span>注册</a>
-                            </div>
-                            <div className='form-group'>
-                                <label htmlFor="login_email">邮箱</label>
-                                <input id='login_email' className='form-control ' ref='loginEmail' onChange={LoginActions.changeEmail} type="email" placeholder='邮箱'/>
-                            </div>
-                            <div className='form-group'>
-                                <label htmlFor="login_pwd">密码</label>
-                                <input id='login_pwd' className='form-control ' ref='loginPwd' onChange={LoginActions.changePassword} type="password"  placeholder='密码'/>
-                            </div>
-                            <a href='javascript:;' onClick={this.handleClick.bind(this,0)} className='btn btn-primary btn-block'>登陆</a>
-                            <div className='mon-other-login'>
-                                <p>其他账户登陆</p>
-                                <a href="/auth/github">
-                                    <span className='fa fa-github'></span>
-                                </a>
-                                <a href="">
-                                    <span className='fa fa-weibo'></span>
-                                </a>
-                                <a href="/auth/facebook">
-                                    <span className='fa fa-facebook-square'></span>
-                                </a>
-                            </div>
-                        </form>
-
-                        <form className='sign-form'>
-                            <div className='form-legend'>
-                                <span>注册</span>
-                                <a href="javascript:;" onClick={this.changeForm.bind(this,0)} className='form-change'><span className='fa fa-arrow-circle-o-right'></span>登陆</a>
-                            </div>
-                            <div className='form-group'>
-                                <label htmlFor="sign_email">邮箱</label>
-                                <input id='sign_email' className='form-control' ref='email' onChange={LoginActions.changeEmail} type="email"  placeholder='邮箱'/>
-                            </div>
-                            <div className='form-group'>
-                                <label htmlFor="sign_name">用户名</label>
-                                <input id="sign_name" className='form-control' ref='user' onChange={LoginActions.changeName}  type="text" placeholder="用户名"/>
-                            </div>
-                            <div className='form-group'>
-                                <label htmlFor="sign_pwd">密码</label>
-                                <input id='sign_pwd' className='form-control' max='8' ref='password' onChange={LoginActions.changePassword} type="password"  placeholder='密码'/>
-                            </div>
-                            <div className='form-group'>
-                                <label htmlFor="sign_pre_pwd">确认密码</label>
-                                <input id='sign_pre_pwd' className='form-control' max='8' ref='prePassword' onChange={LoginActions.changePrePassword} type="password"  placeholder='密码'/>
-                            </div>
-                            <a href='javascript:;' onClick={this.handleClick.bind(this,1)} className='btn btn-primary btn-block'>登陆</a>
-                        </form>
+                    <div className='col-md-4 col-sm-4 col-xs-12 col-md-offset-4 col-sm-offset-4 auth'>
+                        <p>
+                            auth登陆
+                        </p>
+                        <a href="/auth/github">
+                            <span className='fa fa-github'></span>
+                        </a>
+                        <a href="">
+                            <span className='fa fa-weibo'></span>
+                        </a>
+                        <a href="/auth/facebook">
+                            <span className='fa fa-facebook-square'></span>
+                        </a>
                     </div>
                 </div>
             </div>

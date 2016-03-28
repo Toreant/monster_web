@@ -52,9 +52,9 @@ class Weather extends React.Component {
                             {this.state.city}
                         </p>
                         <p>
-                            <span>{this.state.weather.tmp.max}℃</span>
-                            <span>～</span>
                             <span>{this.state.weather.tmp.min}℃</span>
+                            <span>～</span>
+                            <span>{this.state.weather.tmp.max}℃</span>
                         </p>
                     </div>
                 </div>

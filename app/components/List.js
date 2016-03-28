@@ -104,7 +104,7 @@ class List extends React.Component {
             disabledN = '';
         if(skip === 1) {
             disabled = 'disabled';
-        } else if(skip >= (this.state.count/6)) {
+        } else if(this.state.count < 6 || skip >= (this.state.count/6)) {
             disabledN = 'disabled';
         }
         let Page = (
