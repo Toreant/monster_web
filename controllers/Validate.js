@@ -4,8 +4,6 @@
 
 import User from '../proxy/user';
 import async from 'async';
-import co from 'co';
-import thunkify from 'thunkify';
 
 class Validate {
 

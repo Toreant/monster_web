@@ -34,52 +34,15 @@ class List extends React.Component {
     }
 
     render() {
-        let Offset,
-            column;
-        switch(this.props.params.column) {
-            case 'articles' :
-                column = '/article/';
-                break;
-            case 'musics' :
-                column = '/music/';
-                break;
-            case 'animates' :
-                column = '/animate/';
-                break;
-        }
-        switch(this.props.params.column) {
-            case 'animates' :
-                Offset = (
-                    <div>
-                        <span className='text-info mon-bg-title'>
-                            动漫区
-                        </span>
-                    </div>
-                );
-                break;
-            case 'articles' :
-                Offset = (
-                    <div>
-                        <span className='text-info mon-bg-title'>
-                            文章区
-                        </span>
-                        <p className='bg-success mon-column-info'>
-                            吐槽，欣赏美文，黄黄的。。。。
-                        </p>
-                    </div>
-                );
-                break;
-            case 'musics' :
-                Offset = (
-                    <div>
-                        <span className='text-info mon-bg-title'>
-                            音乐区
-                        </span>
-                        <p></p>
-                    </div>
-                );
-                break;
-        }
+        let Offset = (
+            <div>
+               <span className='text-info mon-bg-title'>
+                  动漫区
+               </span>
+            </div>
+        ),
+            column = '/article/';
+
         let List = this.state.list.map((data) => {
             let abbreviations = data.data.abbreviations || '/img/abbreviations.png';
             return (
