@@ -12,8 +12,8 @@ import Notice from './components/Notice';
 import StarList from './components/StarList';
 import NotFound from './components/NotFound';
 // 投稿
-import PostAnimate from './components/PostAnimate';
-import PostMusic from './components/PostMusic';
+//import PostAnimate from './components/PostAnimate';
+//import PostMusic from './components/PostMusic';
 import PostArticle from './components/PostArticle';
 
 import MyContribute from './components/MyContribute';
@@ -81,8 +81,6 @@ export default(
             <Route path='notice' handler={Notice} />
             <Route path='star' handler={StarList} />
             <Route path='/post'>
-                <Route path='animate' handler={PostAnimate}/>
-                <Route path='music' handler={PostMusic}/>
                 <Route path='article' handler={PostArticle}/>
             </Route>
             <Route path=":follow" handler={Follow}>

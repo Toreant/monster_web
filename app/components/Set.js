@@ -84,9 +84,7 @@ class Set extends React.Component {
                 break;
             default : account = (
                 <div className='col-sm-10 mon-account'>
-                    <a href="/auth/github"><span className='fa fa-github'></span></a>
-                    <a href="/auth/facebook"><span className='fa fa-facebook'></span></a>
-                    <a href="/auth/weibo"><span className='fa fa-weibo'></span></a>
+                    <a href="javascript:void(0);"><span className='fa fa-github'></span></a>
                 </div>
             );
 

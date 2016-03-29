@@ -123,9 +123,10 @@ gulp.task('styles', function() {
         .pipe(gulp.dest('public/css/app'));
 });
 
+//　清除历史文件
 gulp.task('clean',function() {
-    return gulp.src('app/css/debug',{read : false})
-        .pipe(clean);
+    return gulp.src('public/css/debug',{read : false})
+        .pipe(clean());
 });
 
 /**
@@ -141,9 +142,9 @@ gulp.task('concat',function() {
                 path.extname = '.css';
             }))
             .pipe(rev())
-            .pipe(gulp.dest('public/css/'))
+            .pipe(gulp.dest('public/css/debug'))
             .pipe(rev.manifest())
-            .pipe(gulp.dest('public/css/debug'));
+            .pipe(gulp.dest('public/css/rev'));
 });
 
 // 设置版本号
@@ -162,7 +163,7 @@ gulp.task('mocha',function() {
 
 gulp.task('watch', function() {
     gulp.watch('app/less/**/*.less', ['styles']);
-    gulp.watch('public/css/app/*.css',['concat','rev']);
+    gulp.watch('public/css/app/*.css',['clean','concat','rev']);
     gulp.watch(['app/*.js','app/**/*.js'],['webpack']);
 });
 
