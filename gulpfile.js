@@ -1,13 +1,17 @@
-var gulp = require('gulp');
-var gulpif = require('gulp-if');
-var autoprefixer = require('gulp-autoprefixer');
-var cssmin = require('gulp-cssmin');
-var less = require('gulp-less');
-var concat = require('gulp-concat');
-var plumber = require('gulp-plumber');
-var uglify = require('gulp-uglify');
-var mocha = require('gulp-mocha');
-var webpack = require('gulp-webpack');
+var gulp = require('gulp'),
+    gulpif = require('gulp-if'),
+    autoprefixer = require('gulp-autoprefixer'),
+    cssmin = require('gulp-cssmin'),
+    less = require('gulp-less'),
+    concat = require('gulp-concat'),
+    plumber = require('gulp-plumber'),
+    uglify = require('gulp-uglify'),
+    mocha = require('gulp-mocha'),
+    webpack = require('gulp-webpack'),
+    clean = require('gulp-clean'),
+    rev = require('gulp-rev'),
+    revCollector = require('gulp-rev-collector'),
+    rename = require('gulp-rename');
 
 var production = process.env.NODE_ENV === 'production';
 
@@ -33,7 +37,8 @@ gulp.task('vendor', function() {
         'public/js/lib/jquery.Jcrop.min.js',
         'public/js/lib/jquery.touchSwipe.min.js',
         'public/js/lib/sangarSlider.min.js',
-        'public/js/lib/toastr.min.js'
+        'public/js/lib/toastr.min.js',
+        'public/js/lib/imgLazyload.jquery.js'
     ]).pipe(concat('vendor.js'))
         .pipe(uglify({ mangle: false }))
         .pipe(gulp.dest('public/js'));
@@ -118,15 +123,36 @@ gulp.task('styles', function() {
         .pipe(gulp.dest('public/css/app'));
 });
 
+gulp.task('clean',function() {
+    return gulp.src('app/css/debug',{read : false})
+        .pipe(clean);
+});
+
 /**
  *  合并css文件
  */
 gulp.task('concat',function() {
     return gulp.src('public/css/app/*.css')
             .pipe(plumber())
-            .pipe(concat('main.min.css'))
+            .pipe(concat('main.css'))
             .pipe(cssmin())
-            .pipe(gulp.dest('public/css'));
+            .pipe(rename(function(path) {
+                path.basename += '.min';
+                path.extname = '.css';
+            }))
+            .pipe(rev())
+            .pipe(gulp.dest('public/css/'))
+            .pipe(rev.manifest())
+            .pipe(gulp.dest('public/css/debug'));
+});
+
+// 设置版本号
+gulp.task('rev',function() {
+    return gulp.src(['public/css/debug/*.json','views/index.html'])
+        .pipe(revCollector({
+            replaceReved : true
+        }))
+        .pipe(gulp.dest('views/'));
 });
 
 gulp.task('mocha',function() {
@@ -136,7 +162,7 @@ gulp.task('mocha',function() {
 
 gulp.task('watch', function() {
     gulp.watch('app/less/**/*.less', ['styles']);
-    gulp.watch('public/css/app/*.css',['concat']);
+    gulp.watch('public/css/app/*.css',['concat','rev']);
     gulp.watch(['app/*.js','app/**/*.js'],['webpack']);
 });
 
