@@ -21,9 +21,7 @@ class BigUploadStore {
     }
 
     onChangeFile(event) {
-        console.log(event.target.files);
         let target = this.file = event.target.files[0];
-        console.log(target);
         let $upload = $("#upload"),
             accept_type = [
                 'audio/mpeg',
@@ -44,7 +42,6 @@ class BigUploadStore {
     }
 
     onPostBgFileSuccess(data) {
-        console.log(data);
     }
 }
 

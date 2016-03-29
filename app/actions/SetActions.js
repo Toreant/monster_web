@@ -60,7 +60,6 @@ class SetActions {
         }).fail(() => {
             toastr.warning('获取个人资料失败');
         });
-
     }
 }
 

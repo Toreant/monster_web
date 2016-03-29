@@ -10,6 +10,7 @@ class CommentStore {
         this.commentList = [];
         this.comment = '';
         this.skip = 0;
+        this.token = '';
     }
 
     onGetCommentSuccess(data) {
@@ -26,6 +27,7 @@ class CommentStore {
     onPostCommentSuccess(data) {
         if(data.code === 200) {
             toastr.success(data.meta);
+            this.commentList.unshift(data.data);
         } else if(data.code === 400) {
             toastr.error(data.meta);
         } else {
@@ -45,6 +47,12 @@ class CommentStore {
         }
         if(this.skip <= 0) {
             this.skip = 0;
+        }
+    }
+
+    onGetTokenSuccess(data) {
+        if(data.code === 200) {
+            this.token = data.token;
         }
     }
 }

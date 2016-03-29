@@ -26,9 +26,14 @@ var dependencies = [
  */
 gulp.task('vendor', function() {
     return gulp.src([
-        'bower_components/jquery/dist/jquery.js',
-        'bower_components/bootstrap/dist/js/bootstrap.js',
-        'bower_components/toastr/toastr.js'
+        'public/js/lib/jquery.min.js',
+        'public/js/lib/bootstrap.min.js',
+        'public/js/lib/bootstrap-markdown.js',
+        'public/js/lib/imagesloaded.min.js',
+        'public/js/lib/jquery.Jcrop.min.js',
+        'public/js/lib/jquery.touchSwipe.min.js',
+        'public/js/lib/sangarSlider.min.js',
+        'public/js/lib/toastr.min.js'
     ]).pipe(concat('vendor.js'))
         .pipe(uglify({ mangle: false }))
         .pipe(gulp.dest('public/js'));

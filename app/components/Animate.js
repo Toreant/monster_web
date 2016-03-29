@@ -35,9 +35,7 @@ class Animate extends React.Component {
     }
 
     play() {
-        console.log('play');
         let video = this.refs.video.getDOMNode();
-        console.log(video.duration);
         video.play();
     }
 

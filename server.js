@@ -23,6 +23,8 @@ var mongoDB = require('./models') ;
 
 var app = new express();
 //var client = redis.createClient();
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
 app.set('port',process.env.PORT || 3000);
 app.use(compress());

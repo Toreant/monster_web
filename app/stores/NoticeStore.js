@@ -23,7 +23,6 @@ class NoticeStore {
     }
 
     onGetNoticeSuccess(raw) {
-        console.log(raw);
         let data = raw.data,
             item = raw._id;
         if(data.code === 500) {
@@ -35,9 +34,7 @@ class NoticeStore {
                 $(this).remove();
             });
         }
-        console.log(data);
         if(data.count === 0) {
-            console.log('hdhsdas');
             this.notices = [];
         }
     }

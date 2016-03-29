@@ -16,7 +16,9 @@ class ArticleCtrl {
      */
     getSaveArticle(req,res,next) {
 
-        let params = req.body.params;
+        let params = req.body.params,
+            token = req.body.token;
+
         params.create_user_id = req.session.user._id;
 
         article.saveArticle(params,params.create_user_id,(data) => {

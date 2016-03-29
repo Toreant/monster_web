@@ -20,7 +20,6 @@ class UploadStore {
 
     onChangeFile(event) {
         let target = this.file = event.target.files[0];
-        console.log(target);
         var croper,
             isChange = false;
 

@@ -27,7 +27,6 @@ class ConList extends React.Component {
 
     componentDidUpdate(prevProps) {
         if(!isEqual(prevProps,this.props)) {
-            console.log('update');
             ConListActions.getConList(this.props.tab+'s',this.props.domain,0);
         }
     }

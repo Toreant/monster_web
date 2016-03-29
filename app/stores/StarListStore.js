@@ -13,7 +13,6 @@ class StarListStore {
     }
 
     onGetStarListSuccess(data) {
-        console.log(data);
         if(data.code === 500) {
             toastr.error('服务器错误');
         } else if(data.code === 200) {

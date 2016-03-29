@@ -34,8 +34,6 @@ class Set extends React.Component {
             avatar_url = $("#user_img").attr('src');
         let error = false;
 
-        console.log(intro);
-
         let regEmail = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/,
             regDomain = /^[0-9a-zA-Z-]{1,20}$/;
 

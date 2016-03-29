@@ -18,8 +18,11 @@ import NoticeCtrl from './controllers/Notice';
 import Helper from './controllers/Helper';
 import resumable from './middleware/resumable-node';
 import Validate from './controllers/Validate';
+import Token from './middleware/token';
+import bodyParser from 'body-parser';
 
 var upload = multer({dest : './public/music'});
+var parseForm = bodyParser.urlencoded({ extended: false });
 
 // 用户有关
 router.post('/api/user',UserCtrl.getSign);
@@ -45,8 +48,10 @@ router.post('/api/followers',UserCtrl.getFollowers);
 
 router.delete('/api/follow',auth.isAuth,UserCtrl.unFollowing);
 
+router.get('/api/token',Token.csrfProtection(),Token.getToken);
+
 //　文章有关
-router.post('/api/article',auth.isAuth,ArticleCtrl.getSaveArticle);
+router.post('/api/article',auth.isAuth,Token.validateToken,ArticleCtrl.getSaveArticle);
 
 router.post('/api/getArticle',ArticleCtrl.getArticle);
 
@@ -61,7 +66,7 @@ router.delete('/api/article/:id',auth.isAuth,ArticleCtrl.deleteArticle);
 //　评论有关
 router.post('/api/comment',CommentCtrl.getComments);
 
-router.put('/api/comment',auth.isAuth,CommentCtrl.savaComment);
+router.put('/api/comment',auth.isAuth,Token.validateToken,CommentCtrl.savaComment);
 
 router.delete('/api/comment',auth.isAuth,CommentCtrl.deleteComment);
 
@@ -93,7 +98,7 @@ router.post('/api/signout',auth.isAuth,function(req,res,next){
 });
 
 // 上传
-router.post('/api/upload',auth.isAuth,UploaderCtrl.upload);
+router.post('/api/upload',auth.isAuth,Token.validateToken,UploaderCtrl.upload);
 
 router.post('/api/upload/:column',auth.isAuth,multipart(),function(req,res,next) {
     resumable.post(req, function(status, filename, original_filename, identifier){

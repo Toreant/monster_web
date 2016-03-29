@@ -17,6 +17,7 @@ class Comment extends React.Component {
     componentDidMount() {
         CommentStore.listen(this.onChange);
         CommentActions.getComment(this.props.id,0);
+        CommentActions.getToken();
     }
 
     componentDidUpdate(prevProps) {
@@ -46,18 +47,16 @@ class Comment extends React.Component {
                 con_id : this.props.id
             };
 
-            CommentActions.postComment(params);
+            CommentActions.postComment(params,this.state.token);
         }
     }
 
     getComment(option) {
         if(option === 0) {
             CommentActions.changeSkip(0);
-            console.log(this.state.skip);
             CommentActions.getComment(this.props.id,this.state.skip-10);
         } else {
             CommentActions.changeSkip(1);
-            console.log(this.state.skip);
             CommentActions.getComment(this.props.id,this.state.skip+10);
         }
     }
@@ -105,6 +104,7 @@ class Comment extends React.Component {
                             保存评论
                         </a>
                     </div>
+                    <input type="hidden" name="_token" value={this.state.token}/>
                 </form>
                 <p className='mon-comment-title'>评论列表</p>
                 <ul className='mon-comment-list'>

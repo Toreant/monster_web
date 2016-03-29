@@ -50,7 +50,6 @@ class MemberStore {
     }
 
     onFollowSuccess(data) {
-        console.log(data);
         switch(data.code) {
             case 200 :
                 toastr.success(data.meta);
