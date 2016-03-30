@@ -16,6 +16,7 @@ class PostArticle extends React.Component {
     componentDidMount() {
         PostArticleStore.listen(this.onChange);
         this.refs.title.getDOMNode().focus();
+        PostArticleActions.getToken();
 
         let markdown = md.markdown;
         $("#some-textarea").markdown({
@@ -45,7 +46,9 @@ class PostArticle extends React.Component {
     }
 
     handleClick() {
-        PostArticleActions.postArticle(this.state.title,this.state.summary,this.state.tag,$("#upload_img_value").val(),this.state.content);
+        PostArticleActions.postArticle(this.state.title,this.state.summary,
+            this.state.tag,$("#upload_img_value").val(),this.state.content,
+        this.state.token);
     }
 
     saveArticle() {
@@ -107,6 +110,7 @@ class PostArticle extends React.Component {
                             <img src="/img/cover-night.png" id='upload_img' width='120' alt="loading" />
                         </div>
                     </div>
+                    <input type="hidden" id="_token" value={this.state.token}/>
                     <textarea id='some-textarea' name="content" data-provide="markdown" rows="15" onChange={PostArticleActions.changeContent}></textarea>
                     <a href="javascript:;" className='btn btn-info mon-post-btn' onClick={this.saveArticle.bind(this)}>
                         <span className='fa fa-clock-o'></span>

@@ -9,7 +9,8 @@ class CommentActions {
             'getCommentSuccess',
             'postCommentSuccess',
             'changeComment',
-            'changeSkip'
+            'changeSkip',
+            'getTokenSuccess'
         );
     }
 
@@ -36,18 +37,27 @@ class CommentActions {
         });
     }
 
-    postComment(params) {
+    postComment(params,token) {
         $.ajax({
             url : '/api/comment',
             type : 'put',
             contentType: 'application/json;charset=utf-8',
             dataType : 'json',
             cache : false,
-            data : JSON.stringify({params : params})
+            data : JSON.stringify({params : params,token : token})
         }).done((data) => {
             this.actions.postCommentSuccess(data);
         }).fail(() => {
             toastr.error('网络链接有问题   ');
+        });
+    }
+
+    getToken() {
+        $.ajax({
+            url : '/api/token',
+            type : 'get'
+        }).done((data) => {
+            this.actions.getTokenSuccess(data);
         });
     }
 }

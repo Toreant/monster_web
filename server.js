@@ -23,6 +23,8 @@ var mongoDB = require('./models') ;
 
 var app = new express();
 //var client = redis.createClient();
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
 app.set('port',process.env.PORT || 3000);
 app.use(compress());
@@ -56,7 +58,7 @@ passport.use(new FaceboolStrategy(config.facebook_auth,(accessToken,refreshToken
 app.get("/auth/github", passport.authenticate("github",{ scope : "email"}));
 app.get("/auth/github/callback",
     passport.authenticate("github",{
-        successRedirect: '/',
+        successRedirect: '/validate',
         failureRedirect: '/login'
     })
 );
@@ -64,7 +66,7 @@ app.get("/auth/github/callback",
 app.get('/auth/facebook',passport.authenticate('facebook',{ scope : 'email'}));
 app.get("/auth/facabook/callback",
     passport.authenticate("facebook",{
-        successRedirect: '/',
+        successRedirect: '/validate',
         failureRedirect: '/login'
     })
 );

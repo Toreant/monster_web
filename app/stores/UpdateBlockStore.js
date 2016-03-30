@@ -17,7 +17,6 @@ class UpdateBlockStore {
     onChangeTitle(event) {
 
         this.title = event.target.value;
-        console.log(this.title);
     }
 
     onChangeSummary(event) {

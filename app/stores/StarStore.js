@@ -31,6 +31,9 @@ class StarStore {
             case 406 :
                 toastr.warning('你还没登陆');
                 break;
+            case 403 :
+                toastr.warning(data.meta);
+                break;
             case 404 :
                 toastr.warning('没有这个用户');
                 break;

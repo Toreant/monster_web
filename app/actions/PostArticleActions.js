@@ -11,11 +11,22 @@ class PostArticleActions {
             'changeContent',
             'changeSummary',
             'changeMusic',
-            'postArticleSuccess'
+            'postArticleSuccess',
+            'getTokenSuccess'
         );
     }
 
-    postArticle(title,summary,tags,abbreviations,content) {
+    getToken() {
+        $.ajax({
+            url : '/api/token',
+            type : 'get',
+            cache : false
+        }).done((data) => {
+            this.actions.getTokenSuccess(data);
+        });
+    }
+
+    postArticle(title,summary,tags,abbreviations,content,token) {
         let params = {
             params : {
                 title : title,
@@ -23,11 +34,12 @@ class PostArticleActions {
                 tags : tags,
                 abbreviations : abbreviations,
                 content : content,
-                create_time : new Date().getTime()
-            }
+                create_time : new Date().getTime(),
+                token : $("#_token").val()
+            },
+            token : token
         };
 
-        console.log(params);
 
         $.ajax({
             url : '/api/article',

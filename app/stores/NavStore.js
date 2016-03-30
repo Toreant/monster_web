@@ -59,13 +59,8 @@ class NavStore {
     }
 
     onChangeSearch(event) {
-        console.log('hehe');
         this.search = event.target.value;
         console.log(this.search);
-    }
-
-    onSearchSuccess(data) {
-        console.log(data);
     }
 }
 
