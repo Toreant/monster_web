@@ -6,7 +6,6 @@ import Article from '../models/article';
 import User from '../models/user';
 import _ from 'underscore';
 import CommonProxy from './CommonProxy';
-var hljs = require('highlight.js') // https://highlightjs.org/
 var markdown = require('markdown-it');
 var mark = new markdown();
 class md {
