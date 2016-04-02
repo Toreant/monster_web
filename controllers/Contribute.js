@@ -43,29 +43,29 @@ class Contribute {
                         _callback(null,data);
                     }
                 },{});
-            },
-
-            // 获取音乐
-            function(articles,_callback) {
-                Music.getMusics(option,{},(data) => {
-                    if(data === 500) {
-                        return res.json(wrong);
-                    } else {
-                        _callback(null,{articles : articles,musics : data});
-                    }
-                });
             }
+
+            //// 获取音乐
+            //function(articles,_callback) {
+            //    Music.getMusics(option,{},(data) => {
+            //        if(data === 500) {
+            //            return res.json(wrong);
+            //        } else {
+            //            _callback(null,{articles : articles,musics : data});
+            //        }
+            //    });
+            //}
 
         ],(err,data) => {
             let _raw = [];
-            for(let i = 0, num = data.articles._raw.length; i < num; i++) {
-                data.articles._raw[i].option = 'article';
-                _raw.push(data.articles._raw[i]);
+            for(let i = 0, num = data._raw.length; i < num; i++) {
+                data._raw[i].option = 'article';
+                _raw.push(data._raw[i]);
             }
-            for(let i = 0, num = data.musics._raw.length; i < num; i++) {
-                data.musics._raw[i].option = 'music';
-                _raw.push(data.musics._raw[i]);
-            }
+            //for(let i = 0, num = data.musics._raw.length; i < num; i++) {
+            //    data.musics._raw[i].option = 'music';
+            //    _raw.push(data.musics._raw[i]);
+            //}
             result.meta = '获取推荐成功';
             result.code = 200;
             result.raw = _raw;

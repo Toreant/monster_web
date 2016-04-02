@@ -12,7 +12,7 @@ class App extends React.Component {
             <div className="mon-app">
                 <Nav />
                 <RouteHandler />
-                <Footer/>
+                <Footer />
             </div>
         );
     }

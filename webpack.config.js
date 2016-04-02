@@ -5,11 +5,18 @@ var webpack = require('webpack');
 var path  = require('path');
 var commonsPlugin = webpack.optimize.CommonsChunkPlugin;
 var ignoreFiles = new webpack.IgnorePlugin(/\.\/jquery.min.js$/);
+var node_modules = path.resolve(__dirname, 'node_modules');
+var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js');
 
 module.exports = {
     entry: {
-        bundle: [path.resolve(__dirname, 'app/main.js')],
-        common: ['alt','react','react-router','react-dom','underscore','markdown']
+        bundle: [
+            // 写在入口文件之前
+            //"webpack-dev-server/client?http://0.0.0.0:3000",
+            //"webpack/hot/only-dev-server",
+            path.resolve(__dirname, 'app/main.js')
+        ],
+        common: ['alt','react','react-router','underscore','markdown']
         //amd : ['app/components/NotFound','app/components/Pagination','app/components/Star']
     },
     output: {
@@ -19,9 +26,14 @@ module.exports = {
         chunkFilename: "[name].chunk.js"//给require.ensure用
     },
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['', '.js', '.jsx'],
+        alias: {
+            'react': pathToReact,
+            'react-router': path.resolve(node_modules,'react-router/umd/ReactRouter.min')
+        }
     },
     module: {
+        noParse: [pathToReact],
         loaders: [
             {
                 test: /.jsx?$/,
@@ -38,6 +50,7 @@ module.exports = {
     },
     devtool: false,
     plugins: [
+        //new webpack.HotModuleReplacementPlugin(),
         new commonsPlugin({
             name : 'common',
             filename : 'common.js',

@@ -46,7 +46,7 @@ class Member extends React.Component {
     render() {
         let domain = this.props.params.domain,
             FollowBtn = '',click,FollowInfo,
-            Mem;
+            Mem, contribute = null;
 
         if(this.state.followed) {
             FollowInfo = '已关注';
@@ -93,6 +93,10 @@ class Member extends React.Component {
                     </div>
                 </div>
             );
+
+            contribute = (
+                <Contribute option='0' domain={this.props.params.domain}/>
+            );
         } else if(this.state.loading){
             Mem = <Loading />;
         } else if(!this.state.member && !this.state.error) {
@@ -106,7 +110,7 @@ class Member extends React.Component {
             <div className='container'>
                 <div className="row">
                     {Mem}
-                    <Contribute option='0' domain={this.props.params.domain}/>
+                    {contribute}
                 </div>
                 <NoticeSender receiver={this.state._id}/>
             </div>

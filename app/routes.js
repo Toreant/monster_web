@@ -27,11 +27,10 @@ import Article from './components/Article';
 import List from './components/List';
 import Member from './components/Member';
 import ConArticle from './components/ConArticle';
-import Music from './components/Music';
+//import Music from './components/Music';
 import MemberCenter from './components/MemberCenter';
 import MemberFollow from './components/MemberFollow';
-import Animate from './components/Animate';
-
+//import Animate from './components/Animate';
 export default(
     <Route handler={App}>
         <Route path='/' handler={Home} />
@@ -40,16 +39,6 @@ export default(
         <Route path='/article'>
             <Route path=':id' handler={Article} />
         </Route>
-
-        <Route path="/music">
-            <Route path=":id" handler={Music} />
-        </Route>
-
-        <Route path="/animate">
-            <Route path=":id" handler={Animate}/>
-        </Route>
-
-
 
         <Route path='/member' handler={Member}>
             <Route path=':domain' hanlder={Contribute}>
@@ -95,5 +84,7 @@ export default(
             <Route path=':skip' handler={List} />
         </Route>
         <Route path='*' handler={NotFound} />
+
+
     </Route>
 );

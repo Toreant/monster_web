@@ -12,6 +12,8 @@ obj.csrfProtection = function(req,res,next) {
 };
 
 obj.validateToken = function(req,res,next) {
+    console.log(req.body.token);
+    console.log(req.session.token);
     if(req.body.token !== req.session.token) {
         res.json({
             meta : 'crossDomain send',

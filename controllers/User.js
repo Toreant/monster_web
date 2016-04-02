@@ -62,6 +62,7 @@ class UserCtrl {
                 data: null,
                 err: false
             };
+
             if (data.length > 0) {
                 result.meta = "登陆成功";
                 result.code = 200;
@@ -210,6 +211,35 @@ class UserCtrl {
                 result.meta = '查找不成功';
                 result.code = 400;
             }
+            res.json(result);
+        });
+    }
+
+    /**
+     * 获取多个用户
+     * @param req
+     * @param res
+     * @param next
+     */
+    getUsers(req,res,next) {
+        let skip = req.params.skip || 0;
+        let result = {
+            meta : '',
+            code : 0,
+            raw : null
+        };
+
+        User.getUsers(skip,(data) => {
+            console.log(data);
+            if(data === 500) {
+                result.meta = '服务器错误';
+                result.code = 500;
+            } else {
+                result.meta = '查询成功';
+                result.code = 200;
+                result.raw = data;
+            }
+
             res.json(result);
         });
     }

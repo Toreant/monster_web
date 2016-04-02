@@ -27,6 +27,8 @@ var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
 app.set('port',process.env.PORT || 3000);
+app.set('views', './views');
+app.set('view engine', 'ejs');
 app.use(compress());
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));

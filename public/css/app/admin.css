@@ -1,0 +1,55 @@
+.flex-block {
+  display: -webkit-flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.mon-admin {
+  position: relative;
+  width: 400px;
+  padding: 15px 30px;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+.admin-form > div {
+  position: relative;
+}
+.admin-form label {
+  width: 40px;
+  height: 100%;
+  line-height: 34px;
+  text-align: center;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.admin-form input {
+  margin: 10px 0;
+  padding-left: 40px;
+}
+.mon-eagle {
+  height: 200px;
+  width: 100%;
+  background: url('/img/owl-login.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  margin-top: 25px;
+  top: -100%;
+  left: 0;
+}
+.form-actions {
+  overflow: hidden;
+}

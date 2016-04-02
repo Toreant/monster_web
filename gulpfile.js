@@ -141,11 +141,17 @@ gulp.task('concat',function() {
                 path.basename += '.min';
                 path.extname = '.css';
             }))
-            .pipe(rev())
-            .pipe(gulp.dest('public/css/debug'))
-            .pipe(rev.manifest())
-            .pipe(gulp.dest('public/css/rev'));
+            //.pipe(rev())
+            //.pipe(gulp.dest('public/css/debug'))
+            //.pipe(rev.manifest())
+            .pipe(gulp.dest('public/css'));
 });
+
+//gulp.task('min',function() {
+//    return gulp.src('public/css/assets/responsive.css')
+//        .pipe(cssmin())
+//        .pipe(gulp.dest('public/css/responsive.min.css'));
+//});
 
 // 设置版本号
 gulp.task('rev',function() {
@@ -163,9 +169,9 @@ gulp.task('mocha',function() {
 
 gulp.task('watch', function() {
     gulp.watch('app/less/**/*.less', ['styles']);
-    gulp.watch('public/css/app/*.css',['clean','concat','rev']);
+    gulp.watch('public/css/app/*.css',['concat']);
     gulp.watch(['app/*.js','app/**/*.js'],['webpack']);
 });
 
-gulp.task('default', ['styles', 'vendor', 'webpack', 'watch']);
+gulp.task('default', ['styles','vendor', 'webpack', 'watch']);
 gulp.task('build', ['styles', 'vendor', 'webpack']);

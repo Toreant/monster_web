@@ -33,6 +33,8 @@ router.post('/api/getUser',UserCtrl.getUserByDomain);
 
 router.post('/api/users',UserCtrl.getUserById);
 
+router.get('/api/users/:skip',UserCtrl.getUsers);
+
 router.get('/api/profile',auth.isAuth,UserCtrl.getProfile);
 
 router.get('/api/profile/center',auth.isAuth,UserCtrl.getProfileCenter);
@@ -92,6 +94,7 @@ router.post('/api/login',auth.isNotAuth,UserCtrl.getLogin);
 router.post('/api/signout',auth.isAuth,function(req,res,next){
     if(req.session.destroy()) {
         res.json({meta : '退出登陆成功',code : 200});
+        //res.redirect('/');
     } else {
         res.json({meta : '退出不登陆不成功',code : 400});
     }
@@ -102,8 +105,6 @@ router.post('/api/upload',auth.isAuth,Token.validateToken,UploaderCtrl.upload);
 
 router.post('/api/upload/:column',auth.isAuth,multipart(),function(req,res,next) {
     resumable.post(req, function(status, filename, original_filename, identifier){
-        console.log('POST', status, original_filename, identifier);
-
         res.send(status, {
             // NOTE: Uncomment this funciton to enable cross-domain request.
             //'Access-Control-Allow-Origin': '*'
@@ -161,5 +162,6 @@ router.get('/api/weather',Helper.getWeather);
 router.post('/api/approve',auth.isAuth,ContributeCtrl.approveContribute);
 
 router.get('/validate',Validate.validateUser);
+
 
 export default router;
