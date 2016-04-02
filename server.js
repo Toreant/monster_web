@@ -57,11 +57,11 @@ passport.use(new FaceboolStrategy(config.facebook_auth,(accessToken,refreshToken
     done(null,profile);
 }));
 
-app.get("/auth/github", passport.authenticate("github",{ scope : "email"}));
+app.get("/auth/github", passport.authenticate("github",{scope : "email"}));
 app.get("/auth/github/callback",
     passport.authenticate("github",{
         successRedirect: '/validate',
-        failureRedirect: '/login'
+        failureRedirect: '/login/#login'
     })
 );
 
