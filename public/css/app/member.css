@@ -24,7 +24,7 @@
 }
 /* followers and following */
 .mon-follow-item {
-  overflow: hidden;
+  position: relative;
   border: 1px solid #EEEEE0;
   padding: 10px 30px;
   margin: 10px !important;

@@ -30,7 +30,6 @@ class MemberFollow extends React.Component {
 
     render() {
         let Follows;
-        let follow;
         if(this.state.follows.length > 0 && this.state.loading === false && this.state.error === false) {
             Follows = this.state.follows.map((data) => {
 

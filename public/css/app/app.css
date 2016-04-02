@@ -408,6 +408,8 @@ a {
  * 页脚
  */
 .mon-footer {
+  position: relative;
+  z-index: 100;
   display: block;
   background-color: #515151;
   font-size: 16px;

@@ -6,8 +6,9 @@ import Article from '../models/article';
 import User from '../models/user';
 import _ from 'underscore';
 import CommonProxy from './CommonProxy';
-var markdown = require( "markdown" ).markdown;
-
+var hljs = require('highlight.js') // https://highlightjs.org/
+var markdown = require('markdown-it');
+var mark = new markdown();
 class md {
 
     constructor() {
@@ -94,7 +95,7 @@ class md {
 
             if(transform === 'true') {
                 // 将markdown转成html实体
-                result.article.content = markdown.toHTML(result.article.content || '> 什么鬼页没有', 'Maruku');
+                result.article.content = mark.render(result.article.content || '> 什么鬼页没有', 'Maruku');
             }
             callback(result);
         });

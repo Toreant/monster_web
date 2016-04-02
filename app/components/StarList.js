@@ -33,13 +33,13 @@ class StarList extends React.Component {
     }
 
     prevPage() {
-        let props = this.props;
+        //let props = this.props;
         StarListActions.getStarList(0,null,null,this.state.skip-1);
         StarListActions.changeSkip(0);
     }
 
     nextPage() {
-        let props = this.props;
+        //let props = this.props;
         StarListActions.getStarList(0,null,null,this.state.skip+1);
         StarListActions.changeSkip(1);
     }

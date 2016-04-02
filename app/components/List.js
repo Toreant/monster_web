@@ -34,14 +34,7 @@ class List extends React.Component {
     }
 
     render() {
-        let Offset = (
-            <div>
-               <span className='text-info mon-bg-title'>
-                  动漫区
-               </span>
-            </div>
-        ),
-            column = '/article/';
+        let column = '/article/';
 
         let List = this.state.list.map((data) => {
             let abbreviations = data.data.abbreviations || '/img/abbreviations.png';
