@@ -12,9 +12,12 @@ obj.csrfProtection = function(req,res,next) {
 };
 
 obj.validateToken = function(req,res,next) {
+    console.log(req.headers['x-http-token']);
     console.log(req.body.token);
     console.log(req.session.token);
-    if(req.body.token !== req.session.token) {
+    let bToken = req.body.token,
+        hToken = req.headers['x-http-token'];
+    if(bToken != req.session.token && hToken !== req.session.token) {
         res.json({
             meta : 'crossDomain send',
             code : 403

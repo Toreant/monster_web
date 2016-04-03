@@ -19,7 +19,7 @@ class UploadActions {
         );
     }
 
-    upload(target,preImg) {
+    upload(target,preImg,token) {
         uploadLoad(0);
 
         // 裁剪时的图片大小
@@ -40,6 +40,7 @@ class UploadActions {
             };
         formData.append('file',target);
         formData.append('params',JSON.stringify(params));
+        //formData.append('token',token);
 
         $.ajax({
             url : '/api/upload',
@@ -49,7 +50,10 @@ class UploadActions {
             dataType : 'json',
             processData : false,
             timeout : 10000,
-            data : formData
+            data : formData,
+            headers : {
+                'x-http-token' : token
+            }
         }).success((data) => {
             this.actions.uploadSuccess(data,preImg);
         }).fail(() => {
