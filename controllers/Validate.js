@@ -9,11 +9,17 @@ class Validate {
 
     validateUser(req,res,next) {
         var passport = req.session.passport;
+        console.log(req.originalUrl);
+        console.log(req.url);
         async.waterfall([
             function(_callback) {
                 User.getUserByEmail(passport.user['_json'].email,function(data) {
                     if(data.length > 0) {
                         req.session.user = data[0];
+                        //res.json({
+                        //    meta : '登陆成功',
+                        //    code : '200'
+                        //});
                         res.redirect('/');
                     } else {
                         _callback();
@@ -26,6 +32,10 @@ class Validate {
                 passport.user.id,function(numAffected,product) {
                         if(numAffected > 0) {
                             req.session.user = product;
+                            //res.json({
+                            //    meta : '登陆成功',
+                            //    code : '200'
+                            //});
                             res.redirect('/');
                         }
                     });

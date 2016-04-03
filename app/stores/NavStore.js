@@ -62,6 +62,24 @@ class NavStore {
         this.search = event.target.value;
         console.log(this.search);
     }
+
+    onAuthSuccess(data) {
+        $("#auth-loading").css({
+            'display' : 'none'
+        });
+        if(data.code === 200) {
+            location.href = window.history.forward();
+        } else {
+            toastr.warning('登陆失败');
+        }
+    }
+
+    onAuthFail() {
+        $("#auth-loading").css({
+            'display' : 'none'
+        });
+        toastr.warning('登陆超时');
+    }
 }
 
 export default alt.createStore(NavStore);

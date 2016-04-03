@@ -13,7 +13,9 @@ class NavActions {
             'signOutFail',
             'getProfileLocal',
             'searchSuccess',
-            'changeSearch'
+            'changeSearch',
+            'authSuccess',
+            'authFail'
         );
     }
 
@@ -59,6 +61,23 @@ class NavActions {
         }).fail(() => {
             toastr.warning('网络有问题');
         });
+    }
+
+    auth() {
+
+        $("#auth-loading").css({
+            'display' : 'flex'
+        });
+        $.ajax({
+            url : '/auth/github',
+            type : 'get',
+            contentType : 'application/json;charset=utf-8',
+            timeout : 15000
+        }).done((data) => {
+            this.actions.authSuccess(data);
+        }).fail(() => {
+            this.actions.authFail();
+        })
     }
 }
 
