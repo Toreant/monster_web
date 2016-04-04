@@ -13,9 +13,7 @@ class NavActions {
             'signOutFail',
             'getProfileLocal',
             'searchSuccess',
-            'changeSearch',
-            'authSuccess',
-            'authFail'
+            'changeSearch'
         );
     }
 
@@ -46,38 +44,6 @@ class NavActions {
             dataType : 'json'
         }).done((data) => {this.actions.signOutSuccess(data);})
         .fail((data) => {this.actions.signOutFail();});
-    }
-
-    search(what) {
-        $.ajax({
-            url : '/api/search',
-            dataType : 'json',
-            contentType : 'application/json;charset=utf-8',
-            cache : false,
-            type : 'post',
-            data : JSON.stringify({what : what,option : {skip : 0,limit : 10}})
-        }).done((data) => {
-            this.actions.searchSuccess(data);
-        }).fail(() => {
-            toastr.warning('网络有问题');
-        });
-    }
-
-    auth() {
-
-        $("#auth-loading").css({
-            'display' : 'flex'
-        });
-        $.ajax({
-            url : '/auth/github',
-            type : 'get',
-            contentType : 'application/json;charset=utf-8',
-            timeout : 15000
-        }).done((data) => {
-            this.actions.authSuccess(data);
-        }).fail(() => {
-            this.actions.authFail();
-        })
     }
 }
 

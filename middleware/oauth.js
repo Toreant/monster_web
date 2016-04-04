@@ -2,7 +2,7 @@
  * Created by apache on 16-4-3.
  */
 import passport from 'passport';
-import Github from 'passport-github';
+import Github from 'passport-github2';
 import Facebook from 'passport-facebook';
 import config from '../config';
 import validate from '../controllers/Validate';
@@ -26,7 +26,7 @@ export default function(app) {
     app.get("/auth/github", passport.authenticate("github",{scope : "email"}));
     app.get("/auth/github/callback",
         passport.authenticate("github",{
-            failureRedirect: '/login/#login'
+            failureRedirect: '/login#login'
         }),
         validate.validateUser
     );

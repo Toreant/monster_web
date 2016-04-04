@@ -15,20 +15,6 @@ class Login extends React.Component {
 
     componentDidMount() {
         LoginStore.listen(this.onChange);
-        let hash = window.location.hash ;
-        hash = hash.split('#')[1];
-        let $sinForm = $(".sign-form"),$loginForm = $(".login-form");
-        if(hash === 'login') {
-            $sinForm.css('display','none');
-            $loginForm.css('display','block');
-        } else if (hash === 'sign') {
-            $sinForm.css('display','block');
-            $loginForm.css('display','none');
-        } else {
-            $sinForm.css('display','none');
-            $loginForm.css('display','block');
-            window.location.hash = 'login';
-        }
     }
 
     componentWillUnmount() {
@@ -102,19 +88,13 @@ class Login extends React.Component {
         return (
             <div className='container mon-login mon-main'>
                 <div className='row'>
-                    <div className='col-md-4 col-sm-4 col-xs-12 col-md-offset-4 col-sm-offset-4 auth'>
-                        <p>
-                            auth登陆
-                        </p>
-                        <a href="/auth/github">
-                            <span className='fa fa-github'></span>
-                        </a>
-                        <a href="">
-                            <span className='fa fa-weibo'></span>
-                        </a>
-                        <a href="/auth/facebook">
-                            <span className='fa fa-facebook-square'></span>
-                        </a>
+                    <div className='col-md-4 col-sm-4 col-xs-12 col-md-offset-4 col-sm-offset-4 mon-auth'>
+                        <span className="fa fa-github animated shake"></span>
+                        <div>
+                            <a href="/auth/github" className="btn btn-primary">
+                                登陆
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

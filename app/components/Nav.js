@@ -32,14 +32,6 @@ class Nav extends React.Component {
         NavActions.signOut();
     }
 
-    search() {
-        NavActions.search(this.state.search);
-    }
-
-    oauth() {
-        NavActions.auth();
-    }
-
     render() {
         let SUBNAV ;
         if(this.state.loginState) {
