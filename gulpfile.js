@@ -141,9 +141,9 @@ gulp.task('concat',function() {
                 path.basename += '.min';
                 path.extname = '.css';
             }))
-            //.pipe(rev())
-            //.pipe(gulp.dest('public/css/debug'))
-            //.pipe(rev.manifest())
+            .pipe(rev())
+            .pipe(gulp.dest('public/css/debug'))
+            .pipe(rev.manifest())
             .pipe(gulp.dest('public/css'));
 });
 
@@ -173,5 +173,5 @@ gulp.task('watch', function() {
     gulp.watch(['app/*.js','app/**/*.js'],['webpack']);
 });
 
-gulp.task('default', ['styles','vendor', 'webpack', 'watch']);
+gulp.task('default', ['styles','clean','rev','vendor', 'webpack', 'watch']);
 gulp.task('build', ['styles', 'vendor', 'webpack']);
