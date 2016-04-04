@@ -17,8 +17,12 @@ import AnimateCtrl from './controllers/Animate';
 import NoticeCtrl from './controllers/Notice';
 import Helper from './controllers/Helper';
 import resumable from './middleware/resumable-node';
+import Validate from './controllers/Validate';
+import Token from './middleware/token';
+import bodyParser from 'body-parser';
 
 var upload = multer({dest : './public/music'});
+var parseForm = bodyParser.urlencoded({ extended: false });
 
 // 用户有关
 router.post('/api/user',UserCtrl.getSign);
@@ -28,6 +32,8 @@ router.put('/api/user',auth.isAuth,UserCtrl.getUpdate);
 router.post('/api/getUser',UserCtrl.getUserByDomain);
 
 router.post('/api/users',UserCtrl.getUserById);
+
+router.get('/api/users/:skip',UserCtrl.getUsers);
 
 router.get('/api/profile',auth.isAuth,UserCtrl.getProfile);
 
@@ -44,8 +50,10 @@ router.post('/api/followers',UserCtrl.getFollowers);
 
 router.delete('/api/follow',auth.isAuth,UserCtrl.unFollowing);
 
+router.get('/api/token',Token.csrfProtection(),Token.getToken);
+
 //　文章有关
-router.post('/api/article',auth.isAuth,ArticleCtrl.getSaveArticle);
+router.post('/api/article',auth.isAuth,Token.validateToken,ArticleCtrl.getSaveArticle);
 
 router.post('/api/getArticle',ArticleCtrl.getArticle);
 
@@ -60,7 +68,7 @@ router.delete('/api/article/:id',auth.isAuth,ArticleCtrl.deleteArticle);
 //　评论有关
 router.post('/api/comment',CommentCtrl.getComments);
 
-router.put('/api/comment',auth.isAuth,CommentCtrl.savaComment);
+router.put('/api/comment',auth.isAuth,Token.validateToken,CommentCtrl.savaComment);
 
 router.delete('/api/comment',auth.isAuth,CommentCtrl.deleteComment);
 
@@ -86,18 +94,17 @@ router.post('/api/login',auth.isNotAuth,UserCtrl.getLogin);
 router.post('/api/signout',auth.isAuth,function(req,res,next){
     if(req.session.destroy()) {
         res.json({meta : '退出登陆成功',code : 200});
+        //res.redirect('/');
     } else {
         res.json({meta : '退出不登陆不成功',code : 400});
     }
 });
 
 // 上传
-router.post('/api/upload',auth.isAuth,UploaderCtrl.upload);
+router.post('/api/upload',auth.isAuth,Token.validateToken,UploaderCtrl.upload);
 
 router.post('/api/upload/:column',auth.isAuth,multipart(),function(req,res,next) {
     resumable.post(req, function(status, filename, original_filename, identifier){
-        console.log('POST', status, original_filename, identifier);
-
         res.send(status, {
             // NOTE: Uncomment this funciton to enable cross-domain request.
             //'Access-Control-Allow-Origin': '*'
@@ -153,5 +160,8 @@ router.post('/api/notice',auth.isAuth,NoticeCtrl.postNotice);
 router.get('/api/weather',Helper.getWeather);
 
 router.post('/api/approve',auth.isAuth,ContributeCtrl.approveContribute);
+
+router.get('/validate',Validate.validateUser);
+
 
 export default router;

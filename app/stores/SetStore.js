@@ -59,7 +59,6 @@ class SetStore {
     }
 
     onChangeDomain(event) {
-        console.log('heh');
         this.domain = event.target.value;
     }
 

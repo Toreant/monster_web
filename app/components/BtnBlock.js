@@ -41,7 +41,6 @@ class BtnBlock extends React.Component {
                 })
             }, function(response){
                 // Debug response (optional)
-                console.log(response);
             });
         };
 

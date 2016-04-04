@@ -57,7 +57,6 @@ class LoginStore {
      * 注册成功
      */
     onDoSignSuccess(data) {
-        console.log(data);
         if(data.code === 200) {
             toastr.success("注册成功,3秒后将跳转到首页");
             setTimeout(function(){

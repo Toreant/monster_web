@@ -33,7 +33,7 @@ class Upload extends React.Component {
     }
 
     upload() {
-        UploadActions.upload(this.state.file,this.props.img);
+        UploadActions.upload(this.state.file,this.props.img,$("#_token").val());
     }
 
     render() {

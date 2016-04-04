@@ -39,6 +39,9 @@ class Article extends React.Component {
     onChange(state) {
         this.setState(state);
         $(".mon-abbr-back").css('background-image','url('+this.state.abbreviations+')');
+        //$("#app").lazyload({
+        //    effect : "fadeIn"
+        //}).bind('img');
     }
 
     /**

@@ -42,7 +42,7 @@ class MyContribute extends React.Component {
     }
 
     render() {
-        let List,UpdateBlock;
+        let List;
         if(this.state.loading) {
             List = <Loading />;
         } else if(this.state.list.length !== 0) {

@@ -6,6 +6,7 @@ import User from '../models/user';
 import Article from '../models/article';
 import Music from '../models/music';
 import Animate from '../models/animate';
+import CommonProxy from '../proxy/CommonProxy';
 import _ from 'underscore';
 
 class md {
@@ -36,6 +37,8 @@ class md {
             }
         });
     }
+
+
 
     /**
      * 更新用户资料
@@ -94,7 +97,8 @@ class md {
 
     /**
      * 通过账号id获取用户
-     * @param id
+     * @param arrayId
+     * @param option
      * @param callback
      */
     getUserById(arrayId,option,callback) {
@@ -105,6 +109,16 @@ class md {
                 callback(docs);
             }
         });
+    }
+
+    getUsers(skip,callback) {
+        User.find({},this.query,{skip: skip,limit: 20},(err,docs) => {
+            if(err) {
+                callback(err);
+            } else {
+                callback(docs);
+            }
+        })
     }
 
     /**

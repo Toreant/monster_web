@@ -25,28 +25,13 @@ class Contribute extends React.Component {
     }
 
     render() {
-        let domain = this.props.domain;
-        let ConNav = (
-            <div className='mon-contribute-nav'>
-                <Link to={'/member/'+domain+'/contributes/article'}>
-                    文章
-                </Link>
-                <Link to={'/member/'+domain+'/contributes/music'}>
-                    音乐
-                </Link>
-                <Link to={'/member/'+domain+'/contributes/animate'}>
-                    动漫
-                </Link>
-            </div>
-        );
+        //let domain = this.props.domain;
 
         return(
             <div className='col-sm-9 col-md-9 animated fadeInUp'>
-                <div>
-                    <div className='mon-contribute-block'>
-                        {ConNav}
-                    </div>
-                </div>
+                <p className="bg-success mon-padding mon-bg-title">
+                    他的投稿
+                </p>
                 <RouteHandler />
             </div>
         );

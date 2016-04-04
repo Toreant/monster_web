@@ -13,7 +13,6 @@ class CarouselStore {
     }
 
     onGetRecommendSuccess(data) {
-        console.log(data);
         this.loading = false;
         if(data.code === 200) {
             this.list = data.raw;

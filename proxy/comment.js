@@ -96,7 +96,15 @@ class md {
             if(err) {
                 callback(null);
             } else {
-                callback(numAffected);
+
+                User.findOne({_id : product['create_user_id']},'username avatar_url domain',(err,user) => {
+                    if(err) {
+                        console.log(err);
+                        callback(null);
+                    } else {
+                        callback(numAffected,{ comment : product,user : user});
+                    }
+                });
             }
         });
     }

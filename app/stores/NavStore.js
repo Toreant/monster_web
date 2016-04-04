@@ -57,16 +57,6 @@ class NavStore {
         this.avatar = data._json === undefined ? data.avatar_url : data._json.avatar_url;
         this.domain = data._json === undefined ? data.domain : data._json.username;
     }
-
-    onChangeSearch(event) {
-        console.log('hehe');
-        this.search = event.target.value;
-        console.log(this.search);
-    }
-
-    onSearchSuccess(data) {
-        console.log(data);
-    }
 }
 
 export default alt.createStore(NavStore);

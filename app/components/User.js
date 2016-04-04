@@ -59,7 +59,7 @@ class User extends React.Component {
                                 <b>Contribute</b>
                             </Link>
                         </div>
-                        <ul className='nav mon-ability-list'>
+                            <ul className='nav mon-ability-list'>
                             <li><Link to='/profile/setting'><span className='fa fa-cog'></span>设置</Link></li>
                             <li><Link to='/profile/center'><span className='fa fa-user'></span>中心</Link></li>
                             <li><Link to='/profile/star'><span className='fa fa-star'></span>收藏</Link></li>
@@ -68,8 +68,8 @@ class User extends React.Component {
                                     <span className='fa fa-pencil-square'></span>投稿
                                 </a>
                                 <ul className='nav collapse mon-contribute' id='my-contribute'>
-                                    <li><Link to='/post/animate'><span className='fa fa-video-camera'></span>动漫</Link></li>
-                                    <li><Link to='/post/music'><span className='fa fa-music'></span>音乐</Link></li>
+                                    <li><a href='javascript:void(0);'><span className='fa fa-video-camera'></span>动漫</a></li>
+                                    <li><a href='javascript:void(0);'><span className='fa fa-music'></span>音乐</a></li>
                                     <li><Link to='/post/article'><span className='fa fa-file'></span>文章</Link></li>
                                 </ul>
                             </li>

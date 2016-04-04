@@ -155,12 +155,12 @@ a {
 @keyframes fadeInUp {
   0% {
     opacity: 0;
-    transform: translateY(20px);
+    //transform: translateY(20px);
   }
 
   100% {
     opacity: 1;
-    transform: translateY(0);
+    //transform: translateY(0);
   }
 }
 
@@ -298,6 +298,8 @@ a {
  * 页脚
  */
 .mon-footer {
+  position: relative;
+  z-index: 100;
   display: block;
   background-color: #515151;
   font-size: 16px;
@@ -521,4 +523,20 @@ a {
 
 .mon-post-btn .fa {
   margin-right: 5px;
+}
+
+.mon-auth {
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  &>span {
+    font-size: 30rem;
+  }
+
+  &>div {
+    width: 100%;
+    text-align: center;
+  }
 }

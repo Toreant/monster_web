@@ -5,6 +5,21 @@
  * http://www.gnu.org/licenses/gpl-2.0.html
  */
 
+/**
+ * Small Responsive class
+ */
+.sangar-slideshow-container .sangar-wrapper.sangar-responsive-mobile-small .sangar-caption .sangar-caption-text{
+    /* do small style here */
+}
+
+
+/**
+ * Medium Responsive class
+ */
+.sangar-slideshow-container .sangar-wrapper.sangar-responsive-mobile-medium{
+    /* do medium style here */
+}
+
 .sangar-slideshow-container {
     margin-left: auto;
     margin-right: auto;

@@ -11,6 +11,7 @@ class PostArticleStore {
         this.tag = [];
         this.content = '';
         this.summary = '';
+        this.token = ''
     }
 
     onChangeTitle(event) {
@@ -18,7 +19,6 @@ class PostArticleStore {
     }
 
     onChangeAbbreviations(event) {
-        console.log(event.target.value);
         this.abbreviations = event.target.value;
     }
 
@@ -46,6 +46,12 @@ class PostArticleStore {
             toastr.warning('这个用户不存在');
         }　else if(data.code === 500) {
             toastr.error('发表文章不成功');
+        }
+    }
+
+    onGetTokenSuccess(data) {
+        if(data.code === 200) {
+            this.token = data.token;
         }
     }
 }

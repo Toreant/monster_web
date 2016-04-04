@@ -3,27 +3,25 @@
  */
 import alt from '../alt';
 import BigUploadActions　from '../actions/BigUploadActions';
-import Resumable from '../resumable';
+//import Resumable from '../resumable';
 
 class BigUploadStore {
     constructor() {
         this.bindActions(BigUploadActions);
         this.file = {};
-        this.r = new Resumable({
-            target:'/api/upload/music',
-            chunkSize:1*1024*1024,
-            simultaneousUploads:4,
-            testChunks:false,
-            throttleProgressCallbacks:1,
-            generateUniqueIdentifier : null
-        });
+        //this.r = new Resumable({
+        //    target:'/api/upload/music',
+        //    chunkSize:1*1024*1024,
+        //    simultaneousUploads:4,
+        //    testChunks:false,
+        //    throttleProgressCallbacks:1,
+        //    generateUniqueIdentifier : null
+        //});
         this.error = '';
     }
 
     onChangeFile(event) {
-        console.log(event.target.files);
         let target = this.file = event.target.files[0];
-        console.log(target);
         let $upload = $("#upload"),
             accept_type = [
                 'audio/mpeg',
@@ -44,7 +42,6 @@ class BigUploadStore {
     }
 
     onPostBgFileSuccess(data) {
-        console.log(data);
     }
 }
 

@@ -85,16 +85,18 @@ class CommentCtrl {
         params.create_user_id = req.session.user._id;
         let result = {
             meta: '',
-            code: 0
+            code: 0,
+            data: null
         };
 
-        Comment.saveComment(params, (data) => {
+        Comment.saveComment(params, (data,product) => {
             if (data === null) {
                 result.meta = '评论失败';
                 result.code = 400;
             } else {
                 result.meta = '评论成功';
                 result.code = 200;
+                result.data = product;
             }
 
             res.json(result);

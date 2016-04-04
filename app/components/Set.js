@@ -34,8 +34,6 @@ class Set extends React.Component {
             avatar_url = $("#user_img").attr('src');
         let error = false;
 
-        console.log(intro);
-
         let regEmail = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/,
             regDomain = /^[0-9a-zA-Z-]{1,20}$/;
 
@@ -86,9 +84,7 @@ class Set extends React.Component {
                 break;
             default : account = (
                 <div className='col-sm-10 mon-account'>
-                    <a href="/auth/github"><span className='fa fa-github'></span></a>
-                    <a href="/auth/facebook"><span className='fa fa-facebook'></span></a>
-                    <a href="/auth/weibo"><span className='fa fa-weibo'></span></a>
+                    <a href="javascript:void(0);"><span className='fa fa-github'></span></a>
                 </div>
             );
 

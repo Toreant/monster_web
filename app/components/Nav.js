@@ -32,10 +32,6 @@ class Nav extends React.Component {
         NavActions.signOut();
     }
 
-    search() {
-        NavActions.search(this.state.search);
-    }
-
     render() {
         let SUBNAV ;
         if(this.state.loginState) {
@@ -64,8 +60,11 @@ class Nav extends React.Component {
         } else {
             SUBNAV = (
                 <ul className='nav navbar-nav navbar-right'>
-                    <li><a href="/login#login">登陆</a></li>
-                    <li><a href="/login#sign">注册</a></li>
+                    <li>
+                        <a href="/auth/github">
+                            <span className="fa fa-github" style={{marginRight: '5px'}}></span>github登陆
+                        </a>
+                    </li>
                 </ul>
             );
         }
@@ -86,16 +85,8 @@ class Nav extends React.Component {
                     <div className='collapse navbar-collapse' id='my-nav'>
                         <ul className='nav navbar-nav'>
                             <li><Link to="/">首页</Link></li>
-                            <li><Link to="/animates">动漫</Link></li>
-                            <li><Link to="/musics">音乐</Link></li>
                             <li><Link to="/articles">文章</Link></li>
                         </ul>
-                        <form className='navbar-form navbar-left' role='search'>
-                            <div className='form-group'>
-                                <input type="text" className='form-control' placeholder='输入搜索' onChange={NavActions.changeSearch}/>
-                            </div>
-                            <a className='btn btn-default search-btn' onClick={this.search.bind(this)}>Submit</a>
-                        </form>
                         {SUBNAV}
                     </div>
                 </div>

@@ -7,20 +7,27 @@ class UserActions {
     constructor() {
         this.generateActions(
             'getUserSuccess',
-            'getUserFail'
+            'getUserFail',
+            'getUserLocal'
         );
     }
 
     getUser() {
-        $.ajax({
-            url : '/api/profile',
-            cache : false,
-            type : 'get'
-        }).done((data) => {
-            this.actions.getUserSuccess(data);
-        }).fail(() => {
-            this.actions.getUserFail();
-        });
+
+        if(sessionStorage.profile != null) {
+            this.actions.getUserLocal();
+        } else {
+            $.ajax({
+                url : '/api/profile',
+                cache : false,
+                type : 'get'
+            }).done((data) => {
+                this.actions.getUserSuccess(data);
+            }).fail(() => {
+                this.actions.getUserFail();
+            });
+        }
+
     }
 }
 
