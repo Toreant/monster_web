@@ -6,8 +6,21 @@ import Article from '../models/article';
 import User from '../models/user';
 import _ from 'underscore';
 import CommonProxy from './CommonProxy';
+var hljs = require('highlight.js');
 var markdown = require('markdown-it');
-var mark = new markdown();
+var mark = new markdown({
+    highlight: function (str, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+            try {
+                return '<pre class="hljs"><code>' +
+                    hljs.highlight(lang, str, true).value +
+                    '</code></pre>';
+            } catch (__) {}
+        }
+
+        return '<pre class="hljs"><code>' + mark.utils.escapeHtml(str) + '</code></pre>';
+    }
+});
 class md {
 
     constructor() {
