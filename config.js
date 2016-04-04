@@ -6,7 +6,7 @@ var config = {
     github_auth : {
         clientID: "87a71f5437491883a080",
         clientSecret : 'f5801a4f0e497330edfb5667bad290cba315c851',
-        callbackURL : 'http://localhost:3000/auth/github/callback'
+        callbackURL : 'http://www.torean.top:3000/auth/github/callback'
     },
     facebook_auth : {
         clientID : "1162206170473800",
