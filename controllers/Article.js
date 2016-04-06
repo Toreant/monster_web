@@ -178,6 +178,32 @@ class ArticleCtrl {
             res.json(result);
         });
     }
+
+    /**
+     * 通过标签查找
+     * @param req
+     * @param res
+     */
+    getArticleForTag(req,res) {
+        let tag = req.params.tag,
+            result = {
+                meta : '',
+                code : '',
+                raw  : null
+            };
+
+        article.getArticles({},(data) => {
+            if(data === 500) {
+                result.meta = '服务器错误';
+                result.code = 500;
+            } else {
+                result.meta = '查询成功';
+                result.code = 200;
+                result.raw  = data;
+            }
+            res.json(result);
+        },{tags : {$in : [tag]}});
+    }
 }
 
 export default new ArticleCtrl();

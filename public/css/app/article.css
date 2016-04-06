@@ -179,6 +179,7 @@
 .mon-article-tag:hover {
   opacity: 1;
   cursor: pointer;
+  text-decoration: none;
 }
 .mon-no-padding {
   padding: 0 !important;
