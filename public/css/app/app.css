@@ -3,7 +3,6 @@ a {
 }
 .mon-app {
   min-height: 100vh;
-  margin-top: 60px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -612,4 +611,12 @@ a {
 .mon-auth > div {
   width: 100%;
   text-align: center;
+}
+.fog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.6);
 }
