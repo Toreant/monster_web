@@ -20,7 +20,7 @@ class Validate {
                         //    meta : '登陆成功',
                         //    code : '200'
                         //});
-                        res.redirect('/');
+                        res.redirect('/articles');
                     } else {
                         _callback();
                     }
@@ -36,7 +36,7 @@ class Validate {
                             //    meta : '登陆成功',
                             //    code : '200'
                             //});
-                            res.redirect('/');
+                            res.redirect('/articles');
                         }
                     });
             }
