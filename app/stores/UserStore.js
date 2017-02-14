@@ -19,7 +19,6 @@ class UserStore {
 
     onGetUserSuccess(data) {
         if(data.code === 200) {
-            console.log(data);
             this.auth = true;
             this.username = data.raw.username;
             this.avatar_url = data.raw.avatar_url;
@@ -28,10 +27,24 @@ class UserStore {
             this.contribute = data.raw.contribute.length;
             this.star = data.raw.star.length;
             this.doamin = data.raw.domain;
+            sessionStorage.profile = JSON.stringify(data.raw);
         } else {
             window.location = '/login';
         }
     };
+
+    onGetUserLocal() {
+        let profile = sessionStorage.profile;
+        profile = JSON.parse(profile);
+        this.auth = true;
+        this.username = profile.username;
+        this.avatar_url = profile.avatar_url;
+        this.followers = profile.followers.length;
+        this.following = profile.following.length;
+        this.contribute = profile.contribute.length;
+        this.star = profile.star.length;
+        this.doamin = profile.domain;
+    }
 
     onGetUserFail() {
         toastr.error('服务器错误');

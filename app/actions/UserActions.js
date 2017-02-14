@@ -14,19 +14,15 @@ class UserActions {
 
     getUser() {
 
-        if(sessionStorage.profile != null) {
-            this.actions.getUserLocal();
-        } else {
-            $.ajax({
-                url : '/api/profile',
-                cache : false,
-                type : 'get'
-            }).done((data) => {
-                this.actions.getUserSuccess(data);
-            }).fail(() => {
-                this.actions.getUserFail();
-            });
-        }
+        $.ajax({
+            url : '/api/profile',
+            cache : false,
+            type : 'get'
+        }).done((data) => {
+            this.actions.getUserSuccess(data);
+        }).fail(() => {
+            this.actions.getUserFail();
+        });
 
     }
 }
