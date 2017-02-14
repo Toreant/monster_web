@@ -20,8 +20,8 @@ class CommonList extends React.Component {
                         </div>
                         <div className='mon-title'>
                             <div>
-                                <img src={data.user.avatar_url} alt="loading"/>
-                                <span>{data.user.username}</span>
+                                <img src={data.user && data.user.avatar_url} alt="loading"/>
+                                <span>{data.user && data.user.username}</span>
                                 <span className='pull-right'>{new Date(data.data.create_time).toLocaleDateString()}</span>
                             </div>
                             <h2>{data.data.title}</h2>

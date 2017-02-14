@@ -19,8 +19,11 @@ class Home extends React.Component {
 
     componentDidMount() {
         HomeStore.listen(this.onChange);
-        HomeActions.getArticles();
-        HomeActions.getMusics();
+
+        window.location = '/articles';
+
+        // HomeActions.getArticles();
+        // HomeActions.getMusics();
     }
 
     componentDidUpdate(nextProps,preProps) {

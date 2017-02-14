@@ -19,6 +19,7 @@ class UserStore {
 
     onGetUserSuccess(data) {
         if(data.code === 200) {
+            console.log(data);
             this.auth = true;
             this.username = data.raw.username;
             this.avatar_url = data.raw.avatar_url;

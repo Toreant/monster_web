@@ -68,8 +68,6 @@ class User extends React.Component {
                                     <span className='fa fa-pencil-square'></span>投稿
                                 </a>
                                 <ul className='nav collapse mon-contribute' id='my-contribute'>
-                                    <li><a href='javascript:void(0);'><span className='fa fa-video-camera'></span>动漫</a></li>
-                                    <li><a href='javascript:void(0);'><span className='fa fa-music'></span>音乐</a></li>
                                     <li><Link to='/post/article'><span className='fa fa-file'></span>文章</Link></li>
                                 </ul>
                             </li>

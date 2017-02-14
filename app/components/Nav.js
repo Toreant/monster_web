@@ -43,12 +43,7 @@ class Nav extends React.Component {
                             <NoticePoint />
                         </a>
                         <ul className="dropdown-menu">
-                            <li>
-                                <Link to='/profile' className='mon-user'>
-                                    <span>Signed as </span>
-                                    <span>{this.state.userName}</span>
-                                </Link>
-                            </li>
+                            <li><Link to='/profile'>我的账号</Link></li>
                             <li><Link to='/profile/setting'>设置</Link></li>
                             <li><Link to='/profile/notice'>通知</Link></li>
                             <li role="separator" className="divider"></li>
@@ -78,8 +73,8 @@ class Nav extends React.Component {
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <Link to="/" className='navbar-brand icon-name'>
-                            Monster
+                        <Link to="/" className='navbar-brand brand-img'>
+                            <img src="/img/Gameday.png" alt="Brand"/>
                         </Link>
                     </div>
                     <div className='collapse navbar-collapse' id='my-nav'>
