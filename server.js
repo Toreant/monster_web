@@ -45,6 +45,11 @@ oauth(app);
 
 app.use(apiRouter);
 
+app.get('/', (req, res) => {
+    console.log('redirect');
+    res.redirect('/articles');
+});
+
 app.use(function(req,res) {
     Router.run(routes,req.path,(Handler) => {
         let html = React.renderToString(React.createElement(Handler));
