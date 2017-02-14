@@ -43,35 +43,51 @@ class Uploader {
                     // 进行裁剪
                     gm(tmp_path).size(function(err, value) {
 
-                        // 实际裁剪时的数据
-                        width = value.width * parseInt(params.width) / parseInt(params.raw_width)  ;
-                        height = value.height * parseInt(params.height) / parseInt(params.raw_height)  ;
-                        x = value.width  * parseInt(params.X) / parseInt(params.raw_width) ;
-                        y = value.height * parseInt(params.Y) / parseInt(params.raw_height)  ;
+                        if (!err) {
+                            // 实际裁剪时的数据
+                            width = value.width * parseInt(params.width) / parseInt(params.raw_width)  ;
+                            height = value.height * parseInt(params.height) / parseInt(params.raw_height)  ;
+                            x = value.width  * parseInt(params.X) / parseInt(params.raw_width) ;
+                            y = value.height * parseInt(params.Y) / parseInt(params.raw_height)  ;
 
-                        this.crop(
-                            width, height, x, y
-                        ).write(target_path, (err) => {
+                            this.crop(
+                                width, height, x, y
+                            ).write(target_path, (err) => {
                                 if (err) {
                                     console.log(err);
                                     res.json({meta: '上传文件失败', code: 500});
+                                    return;
                                 } else {
                                     _callback(null, tmp_path, fileName);
                                 }
                             });
+                        } else {
+                            fs.rename(tmp_path, target_path, (err) => {
+                                if (err) {
+                                    _callback(err);
+                                } else {
+                                    _callback(null, '', fileName);
+                                }
+                            });
+                        }
                     })
                 });
             },
 
             // 删除临时文件
             function (tmp_path, fileName, _callback) {
-                fs.unlink(tmp_path, (err) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        _callback(null, fileName);
-                    }
-                });
+
+                if (!!tmp_path) {
+                    fs.unlink(tmp_path, (err) => {
+                        if (err) {
+                            console.log('81', err);
+                        } else {
+                            _callback(null, fileName);
+                        }
+                    });
+                } else {
+                    _callback(null, fileName);
+                }
             }
 
         ], (err, fileName) => {

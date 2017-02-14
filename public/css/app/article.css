@@ -8,14 +8,13 @@
 .mon-page:hover .fa {
   color: #d43f3a;
   -webkit-transition: all linear 0.3s;
-          transition: all linear 0.3s;
+  transition: all linear 0.3s;
 }
 .mon-prev-page {
   width: 60px;
 }
 .mon-prev-page:hover .fa {
   -webkit-transform: translateX(-10px);
-      -ms-transform: translateX(-10px);
           transform: translateX(-10px);
 }
 .mon-next-page {
@@ -23,7 +22,6 @@
 }
 .mon-next-page:hover .fa {
   -webkit-transform: translateX(10px);
-      -ms-transform: translateX(10px);
           transform: translateX(10px);
 }
 /*文章*/
@@ -34,7 +32,6 @@
   position: relative;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
   top: 0;
@@ -58,15 +55,12 @@
 }
 .mon-abbr-content {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: end;
-  -webkit-align-items: flex-end;
       -ms-flex-align: end;
           align-items: flex-end;
   position: relative;
