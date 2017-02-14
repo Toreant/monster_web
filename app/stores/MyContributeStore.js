@@ -19,8 +19,6 @@ class MyContributeStore {
             this.list = data.raw._raw;
         } else if(data.code === 500) {
             this.error = true;
-        } else {
-
         }
     }
 

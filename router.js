@@ -59,6 +59,8 @@ router.post('/api/getArticle',ArticleCtrl.getArticle);
 
 router.get('/api/article/:id/:transform?',ArticleCtrl.getArticle);
 
+router.get('/api/articles/tag/:tag',ArticleCtrl.getArticleForTag);
+
 router.post('/api/articles',ArticleCtrl.getArticles);
 
 router.put('/api/article',auth.isAuth,ArticleCtrl.updateArticle);

@@ -69,7 +69,7 @@ class Nav extends React.Component {
             );
         }
         return (
-            <nav className='navbar navbar-default navbar-fixed-top mon-nav' id='mon-fixed-nav'>
+            <nav className='navbar navbar-default mon-nav' id='mon-fixed-nav'>
                 <div className='container'>
                     <div className='navbar-header'>
                         <button className='navbar-toggle collapsed' data-toggle='collapse' data-target='#my-nav'>

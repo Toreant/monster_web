@@ -30,6 +30,7 @@ import ConArticle from './components/ConArticle';
 //import Music from './components/Music';
 import MemberCenter from './components/MemberCenter';
 import MemberFollow from './components/MemberFollow';
+import TagList from './components/TagList';
 //import Animate from './components/Animate';
 export default(
     <Route handler={App}>
@@ -77,6 +78,10 @@ export default(
                 <Route path=":page" handler={Follow}/>
             </Route>
             <Route path="*" handler={ProfileCenter} />
+        </Route>
+
+        <Route path="/tags" handler={TagList}>
+            <Route path=":tag" handler={TagList} />
         </Route>
 
         <Route path=':column' handler={List}>

@@ -39,9 +39,6 @@ class Article extends React.Component {
     onChange(state) {
         this.setState(state);
         $(".mon-abbr-back").css('background-image','url('+this.state.abbreviations+')');
-        //$("#app").lazyload({
-        //    effect : "fadeIn"
-        //}).bind('img');
     }
 
     /**
@@ -76,7 +73,7 @@ class Article extends React.Component {
     render() {
         let Tags = this.state.tags.map((data,index) => {
             return (
-                <span key={index} className='mon-article-tag'>{data}</span>
+                <Link key={index} to={"/tags/"+data} className='mon-article-tag'>{data}</Link>
             );
         });
 
