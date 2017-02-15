@@ -1,16 +1,13 @@
 /**
  * Created by apache on 16-3-29.
  */
-
-const User = require('../proxy/user');
 const async = require('async');
+const User = require('../proxy/user');
 
 class Validate {
 
     validateUser(req,res,next) {
         var passport = req.session.passport;
-        console.log(req.originalUrl);
-        console.log(req.url);
         async.waterfall([
             function(_callback) {
                 User.getUserByEmail(passport.user['_json'].email,function(data) {

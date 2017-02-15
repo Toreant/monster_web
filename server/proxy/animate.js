@@ -1,10 +1,11 @@
 /**
  * Created by apache on 15-12-1.
  */
-const Animate = require('../models/animate');
-const User = require('../models/user');
 const _ = require('underscore');
 const async = require('async');
+
+const Animate = require('../models/animate');
+const User = require('../models/user');
 
 class md {
 
@@ -51,7 +52,7 @@ class md {
     /**
      * 获取动漫
      * @param id
-     * @param user
+     * @param user_id
      * @param callback
      */
     getAnimate(id,user_id,callback) {

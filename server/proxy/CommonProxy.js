@@ -2,11 +2,13 @@
  * Created by apache on 15-12-15.
  */
 const _ = require('underscore');
+const async = require('async');
+
 const Article = require('../models/article');
 const Music = require('../models/music');
 const Animate = require('../models/animate');
 const User = require('../models/user');
-const async = require('async');
+
 
 class CommonProxy {
 
@@ -25,7 +27,7 @@ class CommonProxy {
     /**
      * 保存数据
      * @param params　数据
-     * @param u       用户id
+     * @param u 用户id
      * @param callback
      */
     create(params,u,callback) {

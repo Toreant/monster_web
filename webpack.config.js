@@ -20,7 +20,7 @@ module.exports = {
         //amd : ['app/components/NotFound','app/components/Pagination','app/components/Star']
     },
     output: {
-        path: path.resolve(__dirname, 'public/js'),
+        path: path.resolve(__dirname, 'server/public/js'),
         filename: '[name].js',
         publicPath: 'app/',
         chunkFilename: "[name].chunk.js"//给require.ensure用
@@ -46,7 +46,7 @@ module.exports = {
         ]
     },
     extenals : {
-        'jquery': 'public/js/lib/jquery.min'
+        'jquery': 'server/public/js/lib/jquery.min'
     },
     devtool: false,
     plugins: [

@@ -1,10 +1,11 @@
 /**
  * Created by apache on 15-12-5.
  */
-const User = require('../models/user');
-const Notice = require('../models/notice');
 const async = require('async');
 const _ = require('underscore');
+
+const User = require('../models/user');
+const Notice = require('../models/notice');
 
 class md {
 

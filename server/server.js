@@ -4,8 +4,6 @@
 const express = require('express');
 const logger = require('morgan');
 const swig = require('swig');
-// const React = require('react');
-// const Router = require('react-router');
 const path = require('path');
 const colors = require('colors');
 const mongoose = require('mongoose');
@@ -17,7 +15,7 @@ const cookieParser = require('cookie-parser');
 const oauth = require('./middleware/oauth');
 const apiRouter = require('./router');
 // const routes = require('./app/routes');
-const config = require('./config');
+const config = require('../config/config');
 require('./models');
 
 let app = new express();
@@ -29,7 +27,7 @@ app.set('trust proxy', 1); // trust first proxy
 
 app.use(cookieParser());
 app.use(compress());
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -47,7 +45,7 @@ app.use(apiRouter);
 app.get('*', (req, res) => {
     // console.log('redirect');
     // res.redirect('/articles');
-    let page = swig.renderFile('./views/index.html');
+    let page = swig.renderFile(path.resolve(__dirname + '/views/index.html'));
     res.send(page);
 });
 

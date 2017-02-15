@@ -3,7 +3,8 @@
  */
 const passport = require('passport');
 const Github = require('passport-github2');
-const config = require('../config').github_auth;
+
+const config = require('../../config/config').github_auth;
 const validate = require('../controllers/Validate');
 
 module.exports = function(app) {

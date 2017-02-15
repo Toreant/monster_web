@@ -2,6 +2,7 @@
  * Created by apache on 15-12-19.
  */
 const async = require('async');
+
 const User = require('../models/user');
 const Article = require('../proxy/article');
 const Music = require('../proxy/music');

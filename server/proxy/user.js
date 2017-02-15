@@ -1,13 +1,14 @@
 /**
  * Created by apache on 15-10-25.
  */
+const _ = require('underscore');
 const async = require('async');
+
 const User = require('../models/user');
 const Article = require('../models/article');
 const Music = require('../models/music');
 const Animate = require('../models/animate');
 const CommonProxy = require('../proxy/CommonProxy');
-const _ = require('underscore');
 
 class md {
     constructor() {

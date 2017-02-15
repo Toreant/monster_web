@@ -1,10 +1,11 @@
 /**
  * Created by apache on 15-11-8.
  */
-const Comment = require('../models/comment');
-const User = require('../models/user');
 const async = require('async');
 const _ = require('underscore');
+
+const Comment = require('../models/comment');
+const User = require('../models/user');
 
 class md {
 
@@ -36,7 +37,6 @@ class md {
                     for(let i=0,len = docs.length; i<len; i++) {
                         ids.push(docs[i].create_user_id);
                     }
-                    console.log(ids);
                     User.find({_id : {$in : ids}},'username avatar_url domain',(err,users) => {
                         if(err) {
                             console.log(err);

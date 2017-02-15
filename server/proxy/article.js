@@ -2,13 +2,14 @@
  * Created by apache on 15-11-2.
  */
 const async = require('async');
+const _ = require('underscore');
+const hljs = require('highlight.js');
+const markdown = require('markdown-it');
+
+const CommonProxy = require('./CommonProxy');
 const Article = require('../models/article');
 const User = require('../models/user');
-const _ = require('underscore');
-const CommonProxy = require('./CommonProxy');
 
-let hljs = require('highlight.js');
-let markdown = require('markdown-it');
 let mark = new markdown({
     highlight: function (str, lang) {
         if (lang && hljs.getLanguage(lang)) {

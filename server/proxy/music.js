@@ -1,12 +1,12 @@
 /**
  * Created by apache on 15-11-25.
  */
+const _ = require('underscore');
+const async = require('async');
 
+const CommonProxy = require('./CommonProxy');
 const Music = require('../models/music');
 const User = require('../models/user');
-const async = require('async');
-const CommonProxy = require('./CommonProxy');
-const _ = require('underscore');
 
 class md {
 

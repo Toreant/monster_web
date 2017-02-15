@@ -2,27 +2,29 @@
  * Created by apache on 15-10-24.
  */
 const express = require('express');
-let router = express.Router();
+const multer = require('multer');
+const multipart = require('connect-multiparty');
+
+// controller
 const UserCtrl = require('./controllers/User');
 const ArticleCtrl = require('./controllers/Article');
 const CommentCtrl = require('./controllers/Comment');
 const UploaderCtrl = require('./controllers/Uploader');
 const MusicCtrl = require('./controllers/Music');
 const ContributeCtrl = require('./controllers/Contribute');
-const multer = require('multer');
-const auth = require('./middleware/auth');
-const multipart = require('connect-multiparty');
 const SearchCtrl = require('./controllers/Search');
 const AnimateCtrl = require('./controllers/Animate');
 const NoticeCtrl = require('./controllers/Notice');
 const Helper = require('./controllers/Helper');
-const resumable = require('./middleware/resumable-node');
 const Validate = require('./controllers/Validate');
-const Token = require('./middleware/token');
-const bodyParser = require('body-parser');
 
+// middleware
+const resumable = require('./middleware/resumable-node');
+const auth = require('./middleware/auth');
+const Token = require('./middleware/token');
+
+let router = express.Router();
 let upload = multer({dest : './public/music'});
-let parseForm = bodyParser.urlencoded({ extended: false });
 
 // 用户有关
 router.post('/api/user',UserCtrl.getSign);

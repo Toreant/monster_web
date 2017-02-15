@@ -2,8 +2,8 @@
  * Created by apache on 15-10-25.
  */
 const mongoose = require('mongoose');
-const config = require('../config');
 const colors = require('colors');
+const config = require('../../config/config');
 
 mongoose.connect(config.db,{server : {pollSize : 20}},(err) => {
     if(err) {

@@ -1,10 +1,11 @@
 /**
  * Created by apache on 15-11-3.
  */
-const article = require('../proxy/article');
-const User = require('../models/user');
 const _ = require('underscore');
 const async = require('async');
+
+const article = require('../proxy/article');
+const User = require('../models/user');
 const BasicContrl = require('./BasicController');
 
 class ArticleCtrl {

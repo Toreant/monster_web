@@ -1,10 +1,11 @@
 /**
  * Created by apache on 15-11-2.
  */
+const async = require('async');
+
 const Article = require('../proxy/article');
 const Music = require('../proxy/music');
 const CommonProxy = require('../proxy/CommonProxy');
-const async = require('async');
 
 class Contribute {
 

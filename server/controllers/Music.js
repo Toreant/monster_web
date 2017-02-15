@@ -1,10 +1,11 @@
 /**
  * Created by apache on 15-11-25.
  */
-const Music = require('../proxy/music');
-const User = require('../models/user');
 const async = require('async');
 const _ = require('underscore');
+
+const Music = require('../proxy/music');
+const User = require('../models/user');
 const BasicController = require('./BasicController');
 
 class MusicCtrl {

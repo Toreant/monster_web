@@ -1,10 +1,11 @@
 /**
  * Created by apache on 15-10-24.
  */
-const User = require('../proxy/user');
 const crypto = require('crypto');
 const async = require('async');
 const _ = require('underscore');
+
+const User = require('../proxy/user');
 
 class UserCtrl {
     /**
