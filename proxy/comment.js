@@ -1,10 +1,10 @@
 /**
  * Created by apache on 15-11-8.
  */
-import Comment from '../models/comment';
-import User from '../models/user';
-import async from 'async';
-import _ from 'underscore';
+const Comment = require('../models/comment');
+const User = require('../models/user');
+const async = require('async');
+const _ = require('underscore');
 
 class md {
 
@@ -126,4 +126,4 @@ class md {
     }
 }
 
-export default new md();
+module.exports = new md();

@@ -1,37 +1,37 @@
 /**
  * Created by apache on 15-10-23.
  */
-import React from 'react';
-import {Router, Route, DefaultRoute, Redirect} from 'react-router';
-import App from './components/App';
-import Home from './components/Home';
-import Login from './components/Login';
-import User from './components/User';
-import Set from './components/Set';
-import Notice from './components/Notice';
-import StarList from './components/StarList';
-import NotFound from './components/NotFound';
+const React = require('react');
+const {Router, Route, DefaultRoute, Redirect} = require('react-router');
+const App = require('./components/App');
+const Home = require('./components/Home');
+const Login = require('./components/Login');
+const User = require('./components/User');
+const Set = require('./components/Set');
+const Notice = require('./components/Notice');
+const StarList = require('./components/StarList');
+const NotFound = require('./components/NotFound');
 // 投稿
-//import PostAnimate from './components/PostAnimate';
-//import PostMusic from './components/PostMusic';
-import PostArticle from './components/PostArticle';
+//const PostAnimate = require('./components/PostAnimate');
+//const PostMusic = require('./components/PostMusic');
+const PostArticle = require('./components/PostArticle');
 
-import MyContribute from './components/MyContribute';
+const MyContribute = require('./components/MyContribute');
 
-import ProfileCenter from './components/ProfileCenter';
-//import Followers from './components/Followers';
-//import Following from './components/Following';
-import Follow from './components/Follow';
-import Contribute from './components/Contribute';
-import Article from './components/Article';
-import List from './components/List';
-import Member from './components/Member';
-import ConArticle from './components/ConArticle';
-//import Music from './components/Music';
-import MemberCenter from './components/MemberCenter';
-import MemberFollow from './components/MemberFollow';
-import TagList from './components/TagList';
-//import Animate from './components/Animate';
+const ProfileCenter = require('./components/ProfileCenter');
+//const Followers = require('./components/Followers');
+//const Following = require('./components/Following');
+const Follow = require('./components/Follow');
+const Contribute = require('./components/Contribute');
+const Article = require('./components/Article');
+const List = require('./components/List');
+const Member = require('./components/Member');
+const ConArticle = require('./components/ConArticle');
+//const Music = require('./components/Music');
+const MemberCenter = require('./components/MemberCenter');
+const MemberFollow = require('./components/MemberFollow');
+const TagList = require('./components/TagList');
+//const Animate = require('./components/Animate');
 export default(
     <Route handler={App}>
         <Route path='/' handler={Home}>

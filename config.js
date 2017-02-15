@@ -1,7 +1,7 @@
 /**
  * Created by apache on 15-10-25.
  */
-var config = {
+const config = {
     db: 'mongodb://127.0.0.1/monster',
     github_auth : {
         clientID: "87a71f5437491883a080",
@@ -15,4 +15,4 @@ var config = {
     }
 };
 
-export default config;
+module.exports = config;

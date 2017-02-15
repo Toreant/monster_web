@@ -1,10 +1,10 @@
 /**
  * Created by apache on 15-10-27.
  */
-import mongoose from 'mongoose';
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
-var MusicSchema = new Schema({
+let MusicSchema = new Schema({
     title : {type : String},  // 标题
     music_url : {type : String},　// 音乐的地址
     music_name : {type : String},　// 音乐的名字
@@ -23,4 +23,4 @@ var MusicSchema = new Schema({
     visitor : [String], // 访客
 });
 
-export default mongoose.model('Music',MusicSchema);
+module.exports = mongoose.model('Music',MusicSchema);

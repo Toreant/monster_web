@@ -1,8 +1,8 @@
 /**
  * Created by apache on 15-12-12.
  */
-import request from 'request';
-import async from 'async';
+const request = require('request');
+const async = require('async');
 
 class Helper {
 
@@ -76,4 +76,4 @@ class Helper {
     }
 }
 
-export default new Helper();
+module.exports = new Helper();

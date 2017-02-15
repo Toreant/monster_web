@@ -1,12 +1,12 @@
 /**
  * Created by apache on 15-12-15.
  */
-import _ from 'underscore';
-import Article from '../models/article';
-import Music from '../models/music';
-import Animate from '../models/animate';
-import User from '../models/user';
-import async from 'async';
+const _ = require('underscore');
+const Article = require('../models/article');
+const Music = require('../models/music');
+const Animate = require('../models/animate');
+const User = require('../models/user');
+const async = require('async');
 
 class CommonProxy {
 
@@ -372,4 +372,4 @@ class CommonProxy {
     }
 }
 
-export default CommonProxy;
+module.exports = CommonProxy;

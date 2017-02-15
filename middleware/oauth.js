@@ -1,12 +1,12 @@
 /**
  * Created by apache on 16-4-3.
  */
-import passport from 'passport';
-import Github from 'passport-github2';
-import config from '../config';
-import validate from '../controllers/Validate';
+const passport = require('passport');
+const Github = require('passport-github2');
+const config = require('../config');
+const validate = require('../controllers/Validate');
 
-export default function(app) {
+module.exports = function(app) {
     app.use(passport.initialize());
     app.use(passport.session());
 

@@ -308,6 +308,7 @@
 }
 .explain-block li {
   line-height: 1.5;
+  margin-bottom: 15px;
 }
 .explain-block::-webkit-scrollbar {
   width: 5px;

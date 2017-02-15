@@ -1,28 +1,28 @@
 /**
  * Created by apache on 15-10-24.
  */
-import express from 'express';
+const express = require('express');
 let router = express.Router();
-import UserCtrl from './controllers/User';
-import ArticleCtrl from './controllers/Article';
-import CommentCtrl from './controllers/Comment';
-import UploaderCtrl from './controllers/Uploader';
-import MusicCtrl from './controllers/Music';
-import ContributeCtrl from './controllers/Contribute';
-import multer from 'multer';
-import auth from './middleware/auth';
-import multipart from 'connect-multiparty';
-import SearchCtrl from './controllers/Search';
-import AnimateCtrl from './controllers/Animate';
-import NoticeCtrl from './controllers/Notice';
-import Helper from './controllers/Helper';
-import resumable from './middleware/resumable-node';
-import Validate from './controllers/Validate';
-import Token from './middleware/token';
-import bodyParser from 'body-parser';
+const UserCtrl = require('./controllers/User');
+const ArticleCtrl = require('./controllers/Article');
+const CommentCtrl = require('./controllers/Comment');
+const UploaderCtrl = require('./controllers/Uploader');
+const MusicCtrl = require('./controllers/Music');
+const ContributeCtrl = require('./controllers/Contribute');
+const multer = require('multer');
+const auth = require('./middleware/auth');
+const multipart = require('connect-multiparty');
+const SearchCtrl = require('./controllers/Search');
+const AnimateCtrl = require('./controllers/Animate');
+const NoticeCtrl = require('./controllers/Notice');
+const Helper = require('./controllers/Helper');
+const resumable = require('./middleware/resumable-node');
+const Validate = require('./controllers/Validate');
+const Token = require('./middleware/token');
+const bodyParser = require('body-parser');
 
-var upload = multer({dest : './public/music'});
-var parseForm = bodyParser.urlencoded({ extended: false });
+let upload = multer({dest : './public/music'});
+let parseForm = bodyParser.urlencoded({ extended: false });
 
 // 用户有关
 router.post('/api/user',UserCtrl.getSign);
@@ -166,4 +166,4 @@ router.post('/api/approve',auth.isAuth,ContributeCtrl.approveContribute);
 router.get('/validate',Validate.validateUser);
 
 
-export default router;
+module.exports = router;

@@ -1,11 +1,11 @@
 /**
  * Created by apache on 15-11-22.
  */
-import multiparty from 'multiparty';
-import fs from 'fs';
-import gm from 'gm';
-import async from 'async';
-import crypt from '../middleware/crypt';
+const multiparty = require('multiparty');
+const fs = require('fs');
+const gm = require('gm');
+const async = require('async');
+const crypt = require('../middleware/crypt');
 
 class Uploader {
 
@@ -40,6 +40,8 @@ class Uploader {
                     var target_path = './public/img/upload/' + fileName,
                         tmp_path = target.path;
 
+                    console.log(fileName, target_path);
+
                     // 进行裁剪
                     gm(tmp_path).size(function(err, value) {
 
@@ -64,7 +66,9 @@ class Uploader {
                         } else {
                             fs.rename(tmp_path, target_path, (err) => {
                                 if (err) {
-                                    _callback(err);
+                                    console.log(err);
+                                    res.json({meta: '上传文件失败', code: 500});
+                                    return;
                                 } else {
                                     _callback(null, '', fileName);
                                 }
@@ -161,4 +165,4 @@ class Uploader {
     }
 }
 
-export default new Uploader();
+module.exports = new Uploader();

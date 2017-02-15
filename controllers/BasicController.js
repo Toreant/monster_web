@@ -1,12 +1,12 @@
 /**
  * Created by apache on 15-12-19.
  */
-import async from 'async';
-import User from '../models/user';
-import Article from '../proxy/article';
-import Music from '../proxy/music';
-import Animate from '../proxy/animate';
-import CommonProxy from '../proxy/CommonProxy';
+const async = require('async');
+const User = require('../models/user');
+const Article = require('../proxy/article');
+const Music = require('../proxy/music');
+const Animate = require('../proxy/animate');
+const CommonProxy = require('../proxy/CommonProxy');
 
 class BasicController {
     constructor(column) {
@@ -55,4 +55,4 @@ class BasicController {
     }
 }
 
-export default BasicController;
+module.exports = BasicController;

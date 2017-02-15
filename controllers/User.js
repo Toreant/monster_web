@@ -1,10 +1,10 @@
 /**
  * Created by apache on 15-10-24.
  */
-import User from '../proxy/user';
-import crypto from 'crypto';
-import async from 'async';
-import _ from 'underscore';
+const User = require('../proxy/user');
+const crypto = require('crypto');
+const async = require('async');
+const _ = require('underscore');
 
 class UserCtrl {
     /**
@@ -533,4 +533,4 @@ class UserCtrl {
     }
 }
 
-export default new UserCtrl();
+module.exports = new UserCtrl();

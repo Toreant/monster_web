@@ -1,10 +1,10 @@
 /**
  * Created by apache on 15-11-2.
  */
-import Article from '../proxy/article';
-import Music from '../proxy/music';
-import CommonProxy from '../proxy/CommonProxy';
-import async from 'async';
+const Article = require('../proxy/article');
+const Music = require('../proxy/music');
+const CommonProxy = require('../proxy/CommonProxy');
+const async = require('async');
 
 class Contribute {
 
@@ -101,4 +101,4 @@ class Contribute {
     }
 }
 
-export default new Contribute();
+module.exports = new Contribute();

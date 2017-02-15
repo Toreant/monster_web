@@ -1,10 +1,10 @@
 /**
  * Created by apache on 15-12-5.
  */
-import User from '../models/user';
-import Notice from '../models/notice';
-import async from 'async';
-import _ from 'underscore';
+const User = require('../models/user');
+const Notice = require('../models/notice');
+const async = require('async');
+const _ = require('underscore');
 
 class md {
 
@@ -207,4 +207,4 @@ class md {
     }
 }
 
-export default new md();
+module.exports = new md();
