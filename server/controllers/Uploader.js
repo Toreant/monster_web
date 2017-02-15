@@ -37,7 +37,7 @@ class Uploader {
                     fileName = (new Date().toString()) + target.originalFilename;
                     fileName = crypt.getMd5String(fileName);
 
-                    var target_path = './public/img/upload/' + fileName,
+                    var target_path = './server/public/img/upload/' + fileName,
                         tmp_path = target.path;
 
                     console.log(fileName, target_path);
