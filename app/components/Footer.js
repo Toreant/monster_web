@@ -19,9 +19,11 @@ class Footer extends React.Component {
                 <div className='container'>
                     <div className='col-md-4 col-sm-4'>
                         <p>友情链接</p>
-                        <a href="http://www.gameday.ren/" target="_blank">比赛日官网</a>
-                        <a href="https://www.espnzhibo.com/" target="_blank">ESPN直播</a>
-                        <a href="https://github.com/Toreant/monster_web/tree/gameday" target="_blank">源代码</a>
+                        <div className="flex-box">
+                            <a href="http://www.gameday.ren/" target="_blank">比赛日官网</a>
+                            <a href="https://www.espnzhibo.com/" target="_blank">ESPN直播</a>
+                            <a href="https://coding.net/u/gameday/p/blog/git" target="_blank">源代码</a>
+                        </div>
                     </div>
                     <div className='col-md-4 col-sm-4'>
                         <p>技术栈</p>
@@ -37,16 +39,20 @@ class Footer extends React.Component {
                             <a href="https://segmentfault.com/" target="_blank">segmentfault</a>
                             <a href="http://www.csdn.net/" target="_blank">csdn</a>
                             <a href="http://sentsin.com/daohang/" target="_blank">前端江湖</a>
+                            <a href="http://www.jikexueyuan.com/" target="_blank">极客学院</a>
+                            <a href="https://ruby-china.org/" target="_blank">Ruby China</a>
                         </div>
                     </div>
                     <div className='col-md-4 col-sm-4'>
                         <p>关注比赛日账号</p>
-                        <a href="https://coding.net/u/gameday/" target="_blank">
-                            <span className='fa fa-github'></span>
-                        </a>
-                        <a href="javascript:;" onClick={this.show.bind(this, 'weixin')}>
-                            <span className="fa fa-weixin"></span>
-                        </a>
+                        <div className="flex-box">
+                            <a href="https://coding.net/u/gameday/" target="_blank">
+                                <span className='fa fa-github'></span>
+                            </a>
+                            <a href="javascript:;" onClick={this.show.bind(this, 'weixin')}>
+                                <span className="fa fa-weixin"></span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </footer>
