@@ -1,7 +1,7 @@
 /**
  * Created by apache on 15-10-25.
  */
-import User from '../models/user';
+const User = require('../models/user');
 class auth {
 
     // 是否登陆
@@ -43,4 +43,4 @@ class auth {
     }
 }
 
-export default new auth();
+module.exports = new auth();

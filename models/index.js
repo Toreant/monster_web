@@ -1,9 +1,9 @@
 /**
  * Created by apache on 15-10-25.
  */
-import mongoose from 'mongoose';
-import config from '../config';
-import colors from 'colors';
+const mongoose = require('mongoose');
+const config = require('../config');
+const colors = require('colors');
 
 mongoose.connect(config.db,{server : {pollSize : 20}},(err) => {
     if(err) {
@@ -13,5 +13,3 @@ mongoose.connect(config.db,{server : {pollSize : 20}},(err) => {
         console.log(colors.green("数据库链接成功"));
     }
 });
-
-import User from './user';

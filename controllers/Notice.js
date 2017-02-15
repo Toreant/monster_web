@@ -1,7 +1,7 @@
 /**
  * Created by apache on 15-12-5.
  */
-import Notice from '../proxy/notice';
+const Notice = require('../proxy/notice');
 
 class NoticeCtrl {
 
@@ -103,4 +103,4 @@ class NoticeCtrl {
     }
 }
 
-export default new NoticeCtrl();
+module.exports = new NoticeCtrl();

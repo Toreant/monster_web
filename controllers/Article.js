@@ -1,11 +1,11 @@
 /**
  * Created by apache on 15-11-3.
  */
-import article from '../proxy/article';
-import User from '../models/user';
-import _ from 'underscore';
-import async from 'async';
-import BasicContrl from './BasicController';
+const article = require('../proxy/article');
+const User = require('../models/user');
+const _ = require('underscore');
+const async = require('async');
+const BasicContrl = require('./BasicController');
 
 class ArticleCtrl {
     /**
@@ -206,4 +206,4 @@ class ArticleCtrl {
     }
 }
 
-export default new ArticleCtrl();
+module.exports = new ArticleCtrl();

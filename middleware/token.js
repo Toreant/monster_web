@@ -1,10 +1,10 @@
 /**
  * Created by apache on 16-3-29.
  */
-var csrf = require('csurf');
-var csrfProtection = csrf();
+const csrf = require('csurf');
+const csrfProtection = csrf();
 
-var obj = {};
+let obj = {};
 
 obj.csrfProtection = function(req,res,next) {
 

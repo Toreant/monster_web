@@ -1,10 +1,10 @@
 /**
  * Created by apache on 15-10-27.
  */
-import mongoose from 'mongoose';
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
-var CommentSchema = new Schema({
+let CommentSchema = new Schema({
     con_id : {type : String},
     type : {type : String},
     create_user_id : {type : String},
@@ -12,4 +12,4 @@ var CommentSchema = new Schema({
     content : {type : String}
 });
 
-export default mongoose.model('Comment',CommentSchema);
+module.exports = mongoose.model('Comment',CommentSchema);

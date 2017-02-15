@@ -289,3 +289,39 @@
 .mon-tip > div > a {
   margin: 0 10px;
 }
+.explain-block {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #fff;
+  z-index: 999;
+  box-shadow: 0 0 10px #ddd;
+  padding: 20px;
+  overflow-y: auto;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+}
+.explain-block li {
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+.explain-block::-webkit-scrollbar {
+  width: 5px;
+}
+.explain-close-btn {
+  display: block;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 20px;
+  color: #333;
+}
+.explain-close-btn:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}

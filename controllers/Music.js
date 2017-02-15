@@ -1,11 +1,11 @@
 /**
  * Created by apache on 15-11-25.
  */
-import Music from '../proxy/music';
-import User from '../models/user';
-import async from 'async';
-import _ from 'underscore';
-import BasicController from './BasicController';
+const Music = require('../proxy/music');
+const User = require('../models/user');
+const async = require('async');
+const _ = require('underscore');
+const BasicController = require('./BasicController');
 
 class MusicCtrl {
 
@@ -219,4 +219,4 @@ class MusicCtrl {
     }
 }
 
-export default new MusicCtrl();
+module.exports = new MusicCtrl();

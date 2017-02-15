@@ -1,19 +1,19 @@
 /**
  * Created by apache on 16-4-3.
  */
-import passport from 'passport';
-import Github from 'passport-github2';
-import config from '../config';
-import validate from '../controllers/Validate';
+const passport = require('passport');
+const Github = require('passport-github2');
+const config = require('../config').github_auth;
+const validate = require('../controllers/Validate');
 
-export default function(app) {
+module.exports = function(app) {
     app.use(passport.initialize());
     app.use(passport.session());
 
 //auth
     var GithubStrategy = Github.Strategy;
 
-    passport.use(new GithubStrategy(config.github_auth,(accessToken, refreshToken, profile, done) => {
+    passport.use(new GithubStrategy(config,(accessToken, refreshToken, profile, done) => {
         done(null, profile);
     }));
 

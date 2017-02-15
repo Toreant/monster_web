@@ -2,10 +2,11 @@
  * Created by apache on 15-12-1.
  */
 
-import async from 'async';
-import User from '../proxy/user';
-import Article from '../proxy/article';
-import Music from '../proxy/music';
+const async = require('async');
+const User = require('../proxy/user');
+const Article = require('../proxy/article');
+const Music = require('../proxy/music');
+
 class Search {
 
     /**
@@ -56,4 +57,4 @@ class Search {
     }
 }
 
-export default new Search();
+module.exports = new Search();

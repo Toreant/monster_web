@@ -2,8 +2,8 @@
  * Created by apache on 16-3-29.
  */
 
-import User from '../proxy/user';
-import async from 'async';
+const User = require('../proxy/user');
+const async = require('async');
 
 class Validate {
 
@@ -45,4 +45,4 @@ class Validate {
     }
 }
 
-export default new Validate();
+module.exports = new Validate();
