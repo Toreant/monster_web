@@ -1,0 +1,124 @@
+.mon-upload-block {
+  display: none;
+}
+.mon-upload-block-o {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  width: 90%;
+  z-index: 3000;
+  border: 1px dashed #999;
+}
+.mon-upload {
+  display: block;
+  padding: 20px;
+}
+.mon-upload-o {
+  display: none;
+}
+.mon-fileloader {
+  visibility: hidden;
+}
+.mon-close {
+  position: absolute;
+  font-size: 26px !important;
+  top: 10px;
+  right: 10px;
+  color: #5e5e5e;
+}
+.mon-close:hover {
+  cursor: pointer;
+  color: #d4d4d4;
+}
+/* 等待 */
+.mon-loader {
+  display: none;
+}
+.mon-loader-o {
+  display: block;
+  text-align: center;
+}
+.mon-loader-o div {
+  background-color: #5e5e5e !important;
+}
+.mon-loader-bg {
+  margin: 50px auto;
+}
+.mon-loader-bg > div {
+  height: 150px !important;
+  width: 30px !important;
+}
+/* 图片预览 */
+.mon-preview-block {
+  display: none;
+}
+.mon-preview-block-o {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 10px;
+}
+.mon-preview-block-o a {
+  margin-right: 20px;
+  font-size: 20px;
+}
+.mon-preview-block-o a span {
+  margin-right: 10px;
+}
+.mon-preview-img {
+  background-color: #d4d4d4;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.mon-preview-img .jcrop-holder {
+  margin: 0 auto;
+}
+.mon-preview-img .jcrop-holder img {
+  max-width: 480px !important;
+  max-height: 240px !important;
+}
+/*　进度条　*/
+.mon-progress-block {
+  vertical-align: middle;
+}
+.mon-progress {
+  display: inline-block;
+  height: 20px;
+  width: 80%;
+  border: 1px solid #d4d4d4;
+  border-radius: 3px;
+  margin-top: 10px;
+}
+.mon-progress-bar {
+  height: 100%;
+  width: 0;
+  background-color: #33acfe;
+}
+.mon-upload-btn {
+  color: #999;
+  font-size: 14px !important;
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+}
+.mon-upload-btn:hover {
+  cursor: pointer;
+}
+.mon-active {
+  color: #ddd;
+}
+.mon-upload-file {
+  font-size: 16px;
+}

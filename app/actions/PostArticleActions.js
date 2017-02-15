@@ -12,7 +12,8 @@ class PostArticleActions {
             'changeSummary',
             'changeMusic',
             'postArticleSuccess',
-            'getTokenSuccess'
+            'getTokenSuccess',
+            'loadEditContentSuccess'
         );
     }
 
@@ -50,6 +51,17 @@ class PostArticleActions {
             data : JSON.stringify(params)
         }).done((data) => {this.actions.postArticleSuccess(data);})
         .fail(() => {toastr.error('发表文章不成功');});
+    }
+
+    loadEditContent(load) {
+        if(load) {
+            setTimeout(() =>{
+                this.actions.loadEditContentSuccess();
+                //clearTimeout(id);
+            },200);
+        } else {
+            return false;
+        }
     }
 }
 export default alt.createActions(PostArticleActions);

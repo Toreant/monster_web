@@ -3,6 +3,7 @@
  */
 import alt from '../alt';
 import CommentActions from '../actions/CommentActions';
+import React from 'react';
 
 class CommentStore {
     constructor() {
@@ -27,7 +28,8 @@ class CommentStore {
     onPostCommentSuccess(data) {
         if(data.code === 200) {
             toastr.success(data.meta);
-            this.commentList.unshift(data.data);
+            //this.commentList.unshift(data.data);
+            this.commentList = React.addons.update(this.commentList,{$unshift : [data.data]});
         } else if(data.code === 400) {
             toastr.error(data.meta);
         } else {

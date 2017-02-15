@@ -29,19 +29,22 @@ var dependencies = [
  |--------------------------------------------------------------------------
  */
 gulp.task('vendor', function() {
+
+    let _rootDir = 'server/public/js/lib/';
+
     return gulp.src([
-        'public/js/lib/jquery.min.js',
-        'public/js/lib/bootstrap.min.js',
-        'public/js/lib/bootstrap-markdown.js',
-        'public/js/lib/imagesloaded.min.js',
-        'public/js/lib/jquery.Jcrop.min.js',
-        'public/js/lib/jquery.touchSwipe.min.js',
-        'public/js/lib/sangarSlider.min.js',
-        'public/js/lib/toastr.min.js',
-        'public/js/lib/imgLazyload.jquery.js'
+        _rootDir + 'jquery.min.js',
+        _rootDir + 'bootstrap.min.js',
+        _rootDir + 'bootstrap-markdown.js',
+        _rootDir + 'imagesloaded.min.js',
+        _rootDir + 'jquery.Jcrop.min.js',
+        _rootDir + 'jquery.touchSwipe.min.js',
+        _rootDir + 'sangarSlider.min.js',
+        _rootDir + 'toastr.min.js',
+        _rootDir + 'imgLazyload.jquery.js'
     ]).pipe(concat('vendor.js'))
         .pipe(uglify({ mangle: false }))
-        .pipe(gulp.dest('public/js'));
+        .pipe(gulp.dest('server/public/js'));
 });
 
 /*
@@ -106,7 +109,7 @@ gulp.task('webpack',function() {
     return gulp.src(['app/main.js'])
         .pipe(webpack(require('./webpack.config.js')))
         .pipe(gulpif(!production , uglify({mangle : false})))
-        .pipe(gulp.dest('public/js'));
+        .pipe(gulp.dest('server/public/js'));
 });
 
 /*
@@ -120,12 +123,12 @@ gulp.task('styles', function() {
         .pipe(less())
         .pipe(autoprefixer())
         .pipe(gulpif(production, cssmin()))
-        .pipe(gulp.dest('public/css/app'));
+        .pipe(gulp.dest('server/public/css/app'));
 });
 
 //　清除历史文件
 gulp.task('clean',function() {
-    return gulp.src('public/css/debug',{read : false})
+    return gulp.src('server/public/css/debug',{read : false})
         .pipe(clean());
 });
 
@@ -133,7 +136,7 @@ gulp.task('clean',function() {
  *  合并css文件
  */
 gulp.task('concat',function() {
-    return gulp.src('public/css/app/*.css')
+    return gulp.src('server/public/css/app/*.css')
             .pipe(plumber())
             .pipe(concat('main.css'))
             .pipe(cssmin())
@@ -141,10 +144,10 @@ gulp.task('concat',function() {
                 path.basename += '.min';
                 path.extname = '.css';
             }))
-            .pipe(rev())
-            .pipe(gulp.dest('public/css/debug'))
-            .pipe(rev.manifest())
-            .pipe(gulp.dest('public/css'));
+            //.pipe(rev())
+            //.pipe(gulp.dest('public/css/debug'))
+            //.pipe(rev.manifest())
+            .pipe(gulp.dest('server/public/css'));
 });
 
 //gulp.task('min',function() {
@@ -155,23 +158,19 @@ gulp.task('concat',function() {
 
 // 设置版本号
 gulp.task('rev',function() {
-    return gulp.src(['public/css/debug/*.json','views/index.html'])
+    return gulp.src(['server/public/css/debug/*.json','views/index.html'])
         .pipe(revCollector({
             replaceReved : true
         }))
-        .pipe(gulp.dest('views/'));
+        .pipe(gulp.dest('server/views/'));
 });
 
-gulp.task('mocha',function() {
-    return gulp.src('tests/*.js')
-                .pipe(mocha({}));
-});
 
 gulp.task('watch', function() {
     gulp.watch('app/less/**/*.less', ['styles']);
-    gulp.watch('public/css/app/*.css',['concat']);
+    gulp.watch('server/public/css/app/*.css',['concat']);
     gulp.watch(['app/*.js','app/**/*.js'],['webpack']);
 });
 
-gulp.task('default', ['styles','clean','rev','vendor', 'webpack', 'watch']);
+gulp.task('default', ['styles','vendor', 'webpack', 'watch']);
 gulp.task('build', ['styles', 'vendor', 'webpack']);

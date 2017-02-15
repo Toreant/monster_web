@@ -2,7 +2,7 @@
  * Created by apache on 15-10-23.
  */
 import React from 'react';
-import {Router,Route,DefaultRoute} from 'react-router';
+import {Router, Route, DefaultRoute, Redirect} from 'react-router';
 import App from './components/App';
 import Home from './components/Home';
 import Login from './components/Login';
@@ -30,10 +30,13 @@ import ConArticle from './components/ConArticle';
 //import Music from './components/Music';
 import MemberCenter from './components/MemberCenter';
 import MemberFollow from './components/MemberFollow';
+import TagList from './components/TagList';
 //import Animate from './components/Animate';
 export default(
     <Route handler={App}>
-        <Route path='/' handler={Home} />
+        <Route path='/' handler={Home}>
+            <Redirect from="/" to="/articles"/>
+        </Route>
         <Route path='/login' handler={Login} />
 
         <Route path='/article'>
@@ -59,13 +62,13 @@ export default(
             </Route>
         </Route>
 
-        <Route path='profile' handler={User}>
+        <Route path='/profile' handler={User}>
             <DefaultRoute handler={ProfileCenter}/>
             <Route path='setting' handler={Set} />
             <Route path='center' handler={ProfileCenter} />
 
             <Route path='contribute' handler={Contribute}>
-                <Route path='/profile/contribute/:column'handler={MyContribute} />
+                <Route path='/profile/contribute/:column' handler={MyContribute} />
             </Route>
             <Route path='notice' handler={Notice} />
             <Route path='star' handler={StarList} />
@@ -79,12 +82,14 @@ export default(
             <Route path="*" handler={ProfileCenter} />
         </Route>
 
-        <Route path=':column' handler={List}>
+        <Route path="/tags" handler={TagList}>
+            <Route path=":tag" handler={TagList} />
+        </Route>
+
+        <Route path='/:column' handler={List}>
             <DefaultRoute handler={List} />
             <Route path=':skip' handler={List} />
         </Route>
         <Route path='*' handler={NotFound} />
-
-
     </Route>
 );

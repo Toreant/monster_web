@@ -1,0 +1,19 @@
+.mon-sanger-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: rgba(10, 10, 10, 0.3);
+  width: 100%;
+  color: #fff;
+  padding-bottom: 20px;
+  font-size: 2.5rem;
+}
+.mon-sanger-content > p {
+  margin: 0;
+  padding: 5px;
+}
+@media screen and (max-width: 500px) {
+  .mon-sanger-content {
+    font-size: 2rem;
+  }
+}

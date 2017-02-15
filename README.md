@@ -1,3 +1,9 @@
+# [v0.5.5](https://github.com/Toreant/monster_web/tree/v0.5.5)  
+
+- 重构代码目录  
+
+- 移除服务端对react路由的处理
+
 # [v0.2.0](https://github.com/Toreant/monster_web/tree/v0.2.0)  
 
 - 新增用户修改以前发布的文章　

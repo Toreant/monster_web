@@ -6,7 +6,7 @@ var path  = require('path');
 var commonsPlugin = webpack.optimize.CommonsChunkPlugin;
 var ignoreFiles = new webpack.IgnorePlugin(/\.\/jquery.min.js$/);
 var node_modules = path.resolve(__dirname, 'node_modules');
-var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js');
+var pathToReact = path.resolve(node_modules, 'react/dist/react-with-addons.min.js');
 
 module.exports = {
     entry: {
@@ -20,7 +20,7 @@ module.exports = {
         //amd : ['app/components/NotFound','app/components/Pagination','app/components/Star']
     },
     output: {
-        path: path.resolve(__dirname, 'public/js'),
+        path: path.resolve(__dirname, 'server/public/js'),
         filename: '[name].js',
         publicPath: 'app/',
         chunkFilename: "[name].chunk.js"//给require.ensure用
@@ -46,7 +46,7 @@ module.exports = {
         ]
     },
     extenals : {
-        'jquery': 'public/js/lib/jquery.min'
+        'jquery': 'server/public/js/lib/jquery.min'
     },
     devtool: false,
     plugins: [

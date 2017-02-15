@@ -4,7 +4,7 @@ a {
 
 .mon-app {
   min-height: 100vh;
-  margin-top: 60px;
+  //margin-top: 60px;
   display: flex;
   flex-direction: column;
   & > div {
@@ -272,6 +272,20 @@ a {
   }
 }
 
+.fadeLeft {
+  animation-name: fadeLeft;
+  backface-visibility: visible !important;
+}
+
+@keyframes fadeLeft {
+  from {
+    transform: translate3d(100%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 .shake {
   animation-name: shake;
 }
@@ -298,8 +312,6 @@ a {
  * 页脚
  */
 .mon-footer {
-  position: relative;
-  z-index: 100;
   display: block;
   background-color: #515151;
   font-size: 16px;
@@ -539,4 +551,27 @@ a {
     width: 100%;
     text-align: center;
   }
+}
+
+.fog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(255,255,255,0.6);
+  display: none;
+}
+
+.flex-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.brand-img {
+  padding: 0 !important;
+}
+
+.brand-img img {
+  height: 100%;
 }
