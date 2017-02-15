@@ -148,7 +148,19 @@ class UserCtrl {
             if (docs.length >= 1) {
                 result.meta = '查找成功';
                 result.code = 200;
-                result.raw = docs[0];
+                result.raw = {
+                    email: docs[0].email,
+                    username: docs[0].username,
+                    domain: docs[0].domain,
+                    avatar_url: docs[0].avatar_url,
+                    account: docs[0].account || 0,
+                    introduce: docs[0].introduce,
+                    contribute: docs[0].contribute.length,
+                    followers: docs[0].followers.length,
+                    following: docs[0].following.length,
+                    star: docs[0].star.length,
+                    github: docs[0].github
+                };
             } else {
                 result.meta = '查找不成功';
                 result.code = 400;

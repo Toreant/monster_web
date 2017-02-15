@@ -85,7 +85,10 @@ router.post('/api/stars',UserCtrl.getStars);
 
 router.post('/api/session',function(req,res,next){
     if((req.session.passport !== undefined || req.session.user !== undefined)) {
-        let data = req.session.passport === undefined? req.session.user:req.session.passport.user;
+        let data = {
+            userName: req.session.user.username,
+            avatar_url: req.session.user.avatar_url
+        };
         res.json({meta : '账户已经登陆',code : 200,raw : data});
     } else {
         res.json({meta : '你还没登陆',code : 400});

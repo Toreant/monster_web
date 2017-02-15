@@ -13,6 +13,7 @@ class SetStore {
         this.email = '';
         this.account;
         this.intro = '';
+        this.github = 'javascript:;';
         /* 输入检测时输出状态 */
         this.domainValidate = '';
         this.nameValidate = '';
@@ -43,15 +44,18 @@ class SetStore {
             this.email = data.raw.email;
             this.account = data.raw.account;
             this.intro = data.raw.introduce;
+            this.github = data.raw.github || 'javascript:;';
         }
     }
 
     onGetProfileLocal(data) {
+        this.avatar_url = data.raw.avatar_url;
         this.username = data.raw.username;
         this.domain = data.raw.domain;
         this.email = data.raw.email;
         this.account = data.raw.account;
         this.intro = data.raw.introduce;
+        this.github = data.raw.github || 'javascript:;';
     }
 
     onProfileFail() {

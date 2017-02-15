@@ -4,14 +4,14 @@
 const passport = require('passport');
 const Github = require('passport-github2');
 
-const config = require('../../config/config').github_auth;
+const config = require('../../config/config').github_auth_dev;
 const validate = require('../controllers/Validate');
 
 module.exports = function(app) {
     app.use(passport.initialize());
     app.use(passport.session());
 
-//auth
+    //auth
     var GithubStrategy = Github.Strategy;
 
     passport.use(new GithubStrategy(config,(accessToken, refreshToken, profile, done) => {

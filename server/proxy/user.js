@@ -13,7 +13,7 @@ const CommonProxy = require('../proxy/CommonProxy');
 class md {
     constructor() {
         this.query = 'username avatar_url introduce domain email following followers star star_article star_music star_animate ' +
-            'article music animate contribute';
+            'article music animate contribute github';
     }
     /**
      * 保存用户和新增用户
@@ -21,14 +21,18 @@ class md {
      * @param password 注册密码
      * @param name 用户名
      * @param domain
+     * @param avatar_url
+     * @param github
      * @param callback
      */
-    saveUser(email, password, name,domain, callback) {
+    saveUser(email, password, name,domain, avatar_url, github, callback) {
         let user = new User({
             email: email,
             password: password,
             username: name,
-            domain : domain
+            domain: domain,
+            avatar_url: avatar_url,
+            github: github
         });
         user.save((err, product, numAffected) => {
             if (err) {

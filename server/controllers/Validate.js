@@ -8,6 +8,7 @@ class Validate {
 
     validateUser(req,res,next) {
         var passport = req.session.passport;
+        // console.log(passport);
         async.waterfall([
             function(_callback) {
                 User.getUserByEmail(passport.user['_json'].email,function(data) {
@@ -18,6 +19,7 @@ class Validate {
                         //    code : '200'
                         //});
                         res.redirect('/');
+                        return;
                     } else {
                         _callback();
                     }
@@ -25,14 +27,10 @@ class Validate {
             },
 
             function(_callback) {
-                User.saveUser(passport.user['_json'].email,'',passport.user.username,
-                passport.user.id,function(numAffected,product) {
+                User.saveUser(passport.user['_json'].email, '', passport.user.username,
+                passport.user.id, passport.user['_json'].avatar_url, passport.user.profileUrl, function(numAffected,product) {
                         if(numAffected > 0) {
                             req.session.user = product;
-                            //res.json({
-                            //    meta : '登陆成功',
-                            //    code : '200'
-                            //});
                             res.redirect('/');
                         }
                     });
