@@ -4,8 +4,8 @@
 const express = require('express');
 const logger = require('morgan');
 const swig = require('swig');
-const React = require('react');
-const Router = require('react-router');
+// const React = require('react');
+// const Router = require('react-router');
 const path = require('path');
 const colors = require('colors');
 const mongoose = require('mongoose');
@@ -16,7 +16,7 @@ const cookieParser = require('cookie-parser');
 
 const oauth = require('./middleware/oauth');
 const apiRouter = require('./router');
-const routes = require('./app/routes');
+// const routes = require('./app/routes');
 const config = require('./config');
 require('./models');
 
@@ -44,21 +44,23 @@ app.use(session({
 oauth(app);
 app.use(apiRouter);
 
-app.get('/', (req, res) => {
-    console.log('redirect');
-    res.redirect('/articles');
+app.get('*', (req, res) => {
+    // console.log('redirect');
+    // res.redirect('/articles');
+    let page = swig.renderFile('./views/index.html');
+    res.send(page);
 });
 
-app.use(function(req,res) {
-    Router.run(routes,req.path,function(Handler) {
-        let html = React.renderToString(React.createElement(Handler));
-        let page = swig.renderFile('./views/index.html',{html : html});
-        res.send(page);
-    });
-});
+// app.use(function(req,res) {
+//     Router.run(routes,req.path,function(Handler) {
+//         let html = React.renderToString(React.createElement(Handler));
+//         let page = swig.renderFile('./views/index.html',{html : html});
+//         res.send(page);
+//     });
+// });
 
 app.listen(app.get('port'),()=>{
     console.log(colors.grey("server listen "+app.get('port')));
 });
 
-export default app;
+module.exports = app;

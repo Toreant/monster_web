@@ -3,7 +3,7 @@
  */
 const passport = require('passport');
 const Github = require('passport-github2');
-const config = require('../config');
+const config = require('../config').github_auth;
 const validate = require('../controllers/Validate');
 
 module.exports = function(app) {
@@ -13,7 +13,7 @@ module.exports = function(app) {
 //auth
     var GithubStrategy = Github.Strategy;
 
-    passport.use(new GithubStrategy(config.github_auth,(accessToken, refreshToken, profile, done) => {
+    passport.use(new GithubStrategy(config,(accessToken, refreshToken, profile, done) => {
         done(null, profile);
     }));
 
