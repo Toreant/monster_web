@@ -66,7 +66,7 @@ class md {
             // 查看是否登陆的用户收藏了,点赞或踩了
             function(docs,_callback) {
 
-                if(u === undefined) {
+                if(!u) {
                     _callback(null,docs,false,2);
                 } else {
                     User.findById(u._id,(err,user) => {
