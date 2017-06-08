@@ -1,7 +1,7 @@
 /**
  * Created by apache on 15-11-25.
  */
-import crypto from 'crypto';
+const crypto = require('crypto');
 
 class crypt {
 
@@ -21,4 +21,4 @@ class crypt {
     }
 }
 
-export default new crypt();
+module.exports = new crypt();

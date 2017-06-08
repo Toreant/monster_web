@@ -6,17 +6,20 @@ import {Link} from 'react-router';
 import {isEqual} from 'underscore';
 import ListActions from '../actions/ListActions';
 import ListStore　from '../stores/ListStore';
+import CommonList from './CommonList';
 
 class List extends React.Component {
     constructor(props) {
         super(props);
         this.state = ListStore.getState();
         this.onChange = this.onChange.bind(this);
+        this.column = '';
     }
 
     componentDidMount() {
         ListStore.listen(this.onChange);
         ListActions.getList(this.props.params.column,this.props.params.skip);
+        this.column = this.props.params.column;
     }
 
     componentWillUnmount() {
@@ -25,7 +28,7 @@ class List extends React.Component {
 
     componentDidUpdate(prevProp) {
         if(!isEqual(prevProp.params,this.props.params)) {
-            ListActions.getList(this.props.params.column,this.props.params.skip);
+            ListActions.getList(this.column,this.props.params.skip);
         }
     }
 
@@ -34,27 +37,7 @@ class List extends React.Component {
     }
 
     render() {
-        let column = '/article/';
 
-        let List = this.state.list.map((data) => {
-            let abbreviations = data.data.abbreviations || '/img/abbreviations.png';
-            return (
-                <li key={data.data._id} className="animated fadeInUp">
-                    <Link  to={column+data.data._id} className='mon-top'>
-                        <div className='mon-overlay' style={{backgroundImage: 'url('+abbreviations+')'}}>
-                        </div>
-                        <div className='mon-title'>
-                            <div>
-                                <img src={data.user.avatar_url} alt="loading"/>
-                                <span>{data.user.username}</span>
-                                <span className='pull-right'>{new Date(data.data.create_time).toLocaleDateString()}</span>
-                            </div>
-                            <h2>{data.data.title}</h2>
-                        </div>
-                    </Link>
-                </li>
-            );
-        });
         let skip = this.props.params.skip===undefined?1:parseInt(this.props.params.skip),
             disabled = '',
             disabledN = '';
@@ -65,10 +48,10 @@ class List extends React.Component {
         }
         let Page = (
             <div className='row mon-skip'>
-                <Link to={'/'+this.props.params.column+'/'+(skip-1)} className={'btn mon-page mon-prev-page '+disabled}>
+                <Link to={'/'+this.column+'/'+(skip-1)} className={'btn mon-page mon-prev-page '+disabled}>
                     <span className='fa fa-arrow-left'></span>
                 </Link>
-                <Link to={'/'+this.props.params.column+'/'+(skip+1)} className={'btn mon-page mon-next-page '+disabledN}>
+                <Link to={'/'+this.column+'/'+(skip+1)} className={'btn mon-page mon-next-page '+disabledN}>
                     <span className='fa fa-arrow-right'></span>
                 </Link>
             </div>
@@ -77,9 +60,7 @@ class List extends React.Component {
             <div id="lists" className='container mon-main'>
                 <div className='row'>
                     <div className='col-md-8 col-md-offset-2 col-sm-12 col-xs-12'>
-                        <ul className='nav'>
-                            {List}
-                        </ul>
+                        <CommonList list={this.state.list} column="/article/" />
                     </div>
                 </div>
                 {Page}

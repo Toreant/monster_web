@@ -1,10 +1,10 @@
 /**
  * Created by apache on 15-12-5.
  */
-import mongoose from 'mongoose';
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
-var NoticeSchema = new Schema({
+let NoticeSchema = new Schema({
     create_user_id : {type : String},
     receiver : {type : String},
     content : {type : String},
@@ -12,4 +12,4 @@ var NoticeSchema = new Schema({
     type : {type : Number} // 0--系统通知　１--用户私信
 });
 
-export default mongoose.model('Notice',NoticeSchema)
+module.exports = mongoose.model('Notice',NoticeSchema);

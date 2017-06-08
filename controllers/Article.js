@@ -1,11 +1,11 @@
 /**
  * Created by apache on 15-11-3.
  */
-import article from '../proxy/article';
-import User from '../models/user';
-import _ from 'underscore';
-import async from 'async';
-import BasicContrl from './BasicController';
+const article = require('../proxy/article');
+const User = require('../models/user');
+const _ = require('underscore');
+const async = require('async');
+const BasicContrl = require('./BasicController');
 
 class ArticleCtrl {
     /**
@@ -86,10 +86,13 @@ class ArticleCtrl {
          */
         let option = req.body.option,
             value = req.body.value,
-            query  = req.body.query,
+            query  = req.body.query || null,
             user = req.session.user;
 
+        // console.log(option, value, query);
+
         new BasicContrl('article').gets(query,value,option,(data) => {
+            // console.log(data);
             if(data === 500) {
                 res.json({
                     meta : '服务器错误',
@@ -178,6 +181,32 @@ class ArticleCtrl {
             res.json(result);
         });
     }
+
+    /**
+     * 通过标签查找
+     * @param req
+     * @param res
+     */
+    getArticleForTag(req,res) {
+        let tag = req.params.tag,
+            result = {
+                meta : '',
+                code : '',
+                raw  : null
+            };
+
+        article.getArticles({},(data) => {
+            if(data === 500) {
+                result.meta = '服务器错误';
+                result.code = 500;
+            } else {
+                result.meta = '查询成功';
+                result.code = 200;
+                result.raw  = data;
+            }
+            res.json(result);
+        },{tags : {$in : [tag]}});
+    }
 }
 
-export default new ArticleCtrl();
+module.exports = new ArticleCtrl();

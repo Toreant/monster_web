@@ -1,12 +1,12 @@
 /**
  * Created by apache on 15-12-19.
  */
-import async from 'async';
-import User from '../models/user';
-import Article from '../proxy/article';
-import Music from '../proxy/music';
-import Animate from '../proxy/animate';
-import CommonProxy from '../proxy/CommonProxy';
+const async = require('async');
+const User = require('../models/user');
+const Article = require('../proxy/article');
+const Music = require('../proxy/music');
+const Animate = require('../proxy/animate');
+const CommonProxy = require('../proxy/CommonProxy');
 
 class BasicController {
     constructor(column) {
@@ -34,6 +34,7 @@ class BasicController {
                 } else if(query === 'domain') {
                     User.findOne({domain : value},'username',(err,user) => {
                        if(err) {
+                           console.log(err);
                            return callback(500);
                        } else if(user === null) {
                            return callback(404);
@@ -47,12 +48,14 @@ class BasicController {
             },
 
             function(params,_callback) {
+                console.log(params);
                 Proxy.gets(params,option,callback);
             }
         ],(err,result) => {
+            console.log(result);
             return callback(result);
         });
     }
 }
 
-export default BasicController;
+module.exports = BasicController;

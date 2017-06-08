@@ -39,9 +39,6 @@ class Article extends React.Component {
     onChange(state) {
         this.setState(state);
         $(".mon-abbr-back").css('background-image','url('+this.state.abbreviations+')');
-        //$("#app").lazyload({
-        //    effect : "fadeIn"
-        //}).bind('img');
     }
 
     /**
@@ -76,7 +73,7 @@ class Article extends React.Component {
     render() {
         let Tags = this.state.tags.map((data,index) => {
             return (
-                <span key={index} className='mon-article-tag'>{data}</span>
+                <Link key={index} to={"/tags/"+data} className='mon-article-tag'>{data}</Link>
             );
         });
 
@@ -121,11 +118,6 @@ class Article extends React.Component {
                         </div>
                         <div className='mon-article-tags'>
                             {Tags}
-                        </div>
-                        <Approve ref="approve" _id={this.props.params.id} column="article" approved={this.state.approved} approveCallback={approveClick} disCallback={disClick}/>
-                        <div className="mon-approve-count">
-                            <span>{this.state.approve > 1000 ? '999+': this.state.approve}</span>
-                            <span>{this.state.disapprove > 1000 ? '999+': this.state.disapprove}</span>
                         </div>
                         <Comment id={this.props.params.id} type="article" />
                     </div>

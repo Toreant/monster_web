@@ -1,11 +1,19 @@
 /**
  * Created by apache on 15-10-25.
  */
-var config = {
-    db: 'mongodb://127.0.0.1/monster',
+
+let status = 'test';
+
+const config = {
+    db: 'mongodb://127.0.0.1:37865/monster',
     github_auth : {
         clientID: "87a71f5437491883a080",
         clientSecret : 'f5801a4f0e497330edfb5667bad290cba315c851',
+        callbackURL : 'http://192.168.0.2:3000/auth/github/callback'
+    },
+    github_auth_dev: {
+        clientID: "41be3d6632e48fe437b3",
+        clientSecret : '519a336ddfc04fe25f6bb715d6b0319a444e03b6',
         callbackURL : 'http://localhost:3000/auth/github/callback'
     },
     facebook_auth : {
@@ -15,4 +23,8 @@ var config = {
     }
 };
 
-export default config;
+if (status === 'live') {
+    config.db = 'mongodb:';
+}
+
+module.exports = config;

@@ -1,10 +1,10 @@
 /**
  * Created by apache on 15-12-1.
  */
-import Animate from '../models/animate';
-import User from '../models/user';
-import _ from 'underscore';
-import async from 'async';
+const Animate = require('../models/animate');
+const User = require('../models/user');
+const _ = require('underscore');
+const async = require('async');
 
 class md {
 
@@ -183,4 +183,4 @@ class md {
     }
 }
 
-export default new md();
+module.exports = new md();

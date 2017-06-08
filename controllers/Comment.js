@@ -1,7 +1,7 @@
 /**
  * Created by apache on 15-11-8.
  */
-import Comment from '../proxy/comment';
+const Comment = require('../proxy/comment');
 
 class CommentCtrl {
 
@@ -104,4 +104,4 @@ class CommentCtrl {
     }
 }
 
-export default new CommentCtrl();
+module.exports = new CommentCtrl();

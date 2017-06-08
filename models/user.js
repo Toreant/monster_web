@@ -1,10 +1,10 @@
 /**
  * Created by apache on 15-10-25.
  */
-import mongoose from 'mongoose';
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
-var UserSchema = new Schema({
+let UserSchema = new Schema({
     email : {type : String},　　// 邮箱
     password : {type : String},　//　密码
     username : {type : String},　//　用户名
@@ -28,4 +28,4 @@ var UserSchema = new Schema({
 UserSchema.index({email: 1}, {unique: true});
 UserSchema.index({domain : 1},{unique : true});
 
-export default mongoose.model('User',UserSchema);
+module.exports = mongoose.model('User',UserSchema);

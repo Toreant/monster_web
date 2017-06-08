@@ -54,5 +54,17 @@ class PostArticleStore {
             this.token = data.token;
         }
     }
+
+    onLoadEditContentSuccess() {
+        let localStorage = window.localStorage,
+            editContent = localStorage.getItem('postArticle');
+        editContent = JSON.parse(editContent);
+        console.log(editContent);
+        this.summary = editContent.summary;
+        this.title = editContent.title;
+        this.abbreviations = editContent.abbreviations;
+        this.tag = editContent.tags;
+        this.content = editContent.content;
+    }
 }
 export default alt.createStore(PostArticleStore);

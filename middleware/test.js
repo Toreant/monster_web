@@ -1,11 +1,10 @@
-import aut from './auth';
+const aut = require('./auth');
 
 class test {
-
-test() {
- console.log('dadas');
+ test() {
+  console.log('dadas');
+ }
 }
-}
 
-export default test;
+module.exports = test;
 

@@ -1,10 +1,10 @@
 /**
  * Created by apache on 15-10-27.
  */
-import mongoose from 'mongoose';
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
-var AnimateSchema = new Schema({
+let AnimateSchema = new Schema({
     title : {type : String},
     avatar_url : {type : String},
     animate_url : {type : String},
@@ -17,4 +17,4 @@ var AnimateSchema = new Schema({
     summary : {type : String}
 });
 
-export default mongoose.model('Animate',AnimateSchema);
+module.exports = mongoose.model('Animate',AnimateSchema);

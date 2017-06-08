@@ -2,11 +2,11 @@
  * Created by apache on 15-11-25.
  */
 
-import Music from '../models/music';
-import User from '../models/user';
-import async from 'async';
-import CommonProxy from './CommonProxy';
-import _ from 'underscore';
+const Music = require('../models/music');
+const User = require('../models/user');
+const async = require('async');
+const CommonProxy = require('./CommonProxy');
+const _ = require('underscore');
 
 class md {
 
@@ -82,4 +82,4 @@ class md {
     }
 }
 
-export default new md();
+module.exports = new md();

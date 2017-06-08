@@ -1,13 +1,28 @@
 /**
  * Created by apache on 15-11-2.
  */
-import async from 'async';
-import Article from '../models/article';
-import User from '../models/user';
-import _ from 'underscore';
-import CommonProxy from './CommonProxy';
-var markdown = require('markdown-it');
-var mark = new markdown();
+const async = require('async');
+const Article = require('../models/article');
+const User = require('../models/user');
+const _ = require('underscore');
+const CommonProxy = require('./CommonProxy');
+
+let hljs = require('highlight.js');
+let markdown = require('markdown-it');
+let mark = new markdown({
+    highlight: function (str, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+            try {
+                return '<pre class="hljs"><code>' +
+                    hljs.highlight(lang, str, true).value +
+                    '</code></pre>';
+            } catch (__) {}
+        }
+
+        return '<pre class="hljs"><code>' + mark.utils.escapeHtml(str) + '</code></pre>';
+    }
+});
+
 class md {
 
     constructor() {
@@ -161,4 +176,4 @@ class md {
     }
 }
 
-export default new md();
+module.exports = new md();

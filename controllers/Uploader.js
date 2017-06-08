@@ -1,11 +1,11 @@
 /**
  * Created by apache on 15-11-22.
  */
-import multiparty from 'multiparty';
-import fs from 'fs';
-import gm from 'gm';
-import async from 'async';
-import crypt from '../middleware/crypt';
+const multiparty = require('multiparty');
+const fs = require('fs');
+const gm = require('gm');
+const async = require('async');
+const crypt = require('../middleware/crypt');
 
 class Uploader {
 
@@ -40,38 +40,58 @@ class Uploader {
                     var target_path = './public/img/upload/' + fileName,
                         tmp_path = target.path;
 
+                    console.log(fileName, target_path);
+
                     // 进行裁剪
                     gm(tmp_path).size(function(err, value) {
 
-                        // 实际裁剪时的数据
-                        width = value.width * parseInt(params.width) / parseInt(params.raw_width)  ;
-                        height = value.height * parseInt(params.height) / parseInt(params.raw_height)  ;
-                        x = value.width  * parseInt(params.X) / parseInt(params.raw_width) ;
-                        y = value.height * parseInt(params.Y) / parseInt(params.raw_height)  ;
+                        if (!err) {
+                            // 实际裁剪时的数据
+                            width = value.width * parseInt(params.width) / parseInt(params.raw_width)  ;
+                            height = value.height * parseInt(params.height) / parseInt(params.raw_height)  ;
+                            x = value.width  * parseInt(params.X) / parseInt(params.raw_width) ;
+                            y = value.height * parseInt(params.Y) / parseInt(params.raw_height)  ;
 
-                        this.crop(
-                            width, height, x, y
-                        ).write(target_path, (err) => {
+                            this.crop(
+                                width, height, x, y
+                            ).write(target_path, (err) => {
                                 if (err) {
                                     console.log(err);
                                     res.json({meta: '上传文件失败', code: 500});
+                                    return;
                                 } else {
                                     _callback(null, tmp_path, fileName);
                                 }
                             });
+                        } else {
+                            fs.rename(tmp_path, target_path, (err) => {
+                                if (err) {
+                                    console.log(err);
+                                    res.json({meta: '上传文件失败', code: 500});
+                                    return;
+                                } else {
+                                    _callback(null, '', fileName);
+                                }
+                            });
+                        }
                     })
                 });
             },
 
             // 删除临时文件
             function (tmp_path, fileName, _callback) {
-                fs.unlink(tmp_path, (err) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        _callback(null, fileName);
-                    }
-                });
+
+                if (!!tmp_path) {
+                    fs.unlink(tmp_path, (err) => {
+                        if (err) {
+                            console.log('81', err);
+                        } else {
+                            _callback(null, fileName);
+                        }
+                    });
+                } else {
+                    _callback(null, fileName);
+                }
             }
 
         ], (err, fileName) => {
@@ -145,4 +165,4 @@ class Uploader {
     }
 }
 
-export default new Uploader();
+module.exports = new Uploader();

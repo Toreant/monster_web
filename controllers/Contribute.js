@@ -1,10 +1,10 @@
 /**
  * Created by apache on 15-11-2.
  */
-import Article from '../proxy/article';
-import Music from '../proxy/music';
-import CommonProxy from '../proxy/CommonProxy';
-import async from 'async';
+const Article = require('../proxy/article');
+const Music = require('../proxy/music');
+const CommonProxy = require('../proxy/CommonProxy');
+const async = require('async');
 
 class Contribute {
 
@@ -36,25 +36,14 @@ class Contribute {
 
             // 获取文章推荐
             function(_callback) {
-                Article.getArticles(option,(data) =>{
+                Article.getArticles({},(data) =>{
                     if(data === 500) {
                         return res.json(wrong);
                     } else {
                         _callback(null,data);
                     }
-                },{});
+                },{sticky : true});
             }
-
-            //// 获取音乐
-            //function(articles,_callback) {
-            //    Music.getMusics(option,{},(data) => {
-            //        if(data === 500) {
-            //            return res.json(wrong);
-            //        } else {
-            //            _callback(null,{articles : articles,musics : data});
-            //        }
-            //    });
-            //}
 
         ],(err,data) => {
             let _raw = [];
@@ -62,10 +51,7 @@ class Contribute {
                 data._raw[i].option = 'article';
                 _raw.push(data._raw[i]);
             }
-            //for(let i = 0, num = data.musics._raw.length; i < num; i++) {
-            //    data.musics._raw[i].option = 'music';
-            //    _raw.push(data.musics._raw[i]);
-            //}
+
             result.meta = '获取推荐成功';
             result.code = 200;
             result.raw = _raw;
@@ -115,4 +101,4 @@ class Contribute {
     }
 }
 
-export default new Contribute();
+module.exports = new Contribute();

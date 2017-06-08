@@ -1,13 +1,13 @@
 /**
  * Created by apache on 15-10-25.
  */
-import async from 'async';
-import User from '../models/user';
-import Article from '../models/article';
-import Music from '../models/music';
-import Animate from '../models/animate';
-import CommonProxy from '../proxy/CommonProxy';
-import _ from 'underscore';
+const async = require('async');
+const User = require('../models/user');
+const Article = require('../models/article');
+const Music = require('../models/music');
+const Animate = require('../models/animate');
+const CommonProxy = require('../proxy/CommonProxy');
+const _ = require('underscore');
 
 class md {
     constructor() {
@@ -624,4 +624,4 @@ class md {
     }
 }
 
-export default new md();
+module.exports = new md();

@@ -1,7 +1,7 @@
 /**
  * Created by apache on 15-12-1.
  */
-import Animate from '../proxy/animate';
+const Animate = require('../proxy/animate');
 
 class AnimateCtrl {
 
@@ -101,4 +101,4 @@ class AnimateCtrl {
     }
 }
 
-export default new AnimateCtrl();
+module.exports = new AnimateCtrl();

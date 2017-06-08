@@ -1,7 +1,7 @@
-import fs from 'fs';
-import path from 'path';
-import util from 'util';
-import crypt from '../middleware/crypt';
+const fs = require('fs');
+const path = require('path');
+const util = require('util');
+const crypt = require('../middleware/crypt');
 
 class resumable {
 
@@ -155,7 +155,7 @@ class resumable {
 
                 if (exists) {
                     // If the chunk with the current number exists,
-                    // then create a ReadStream from the file
+                    // then create a ReadStream = require(the file
                     //
                     var sourceStream = fs.createReadStream(chunkFilename);
                     sourceStream.pipe(writableStream, {
@@ -211,4 +211,4 @@ class resumable {
 
 }
 
-export default new resumable();
+module.exports = new resumable();

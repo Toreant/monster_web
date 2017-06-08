@@ -1,10 +1,10 @@
 /**
  * Created by apache on 15-10-27.
  */
-import mongoose from 'mongoose';
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
-var ArticleSchema = new Schema({
+let ArticleSchema = new Schema({
     approve : {type : Number, default : 0},  //　赞的个数
     disapprove : {type : Number,default : 0},  //　踩的个数
     content : {type : String},　// 内容
@@ -18,4 +18,4 @@ var ArticleSchema = new Schema({
     create_time : {type : Number},              // 创建的时间
 });
 
-export default mongoose.model('Article',ArticleSchema);
+module.exports = mongoose.model('Article',ArticleSchema);
