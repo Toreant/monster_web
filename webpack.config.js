@@ -1,12 +1,12 @@
 /**
  * Created by apache on 15-12-13.
  */
-var webpack = require('webpack');
-var path  = require('path');
-var commonsPlugin = webpack.optimize.CommonsChunkPlugin;
-var ignoreFiles = new webpack.IgnorePlugin(/\.\/jquery.min.js$/);
-var node_modules = path.resolve(__dirname, 'node_modules');
-var pathToReact = path.resolve(node_modules, 'react/dist/react-with-addons.min.js');
+let webpack = require('webpack');
+let path  = require('path');
+let commonsPlugin = webpack.optimize.CommonsChunkPlugin;
+let ignoreFiles = new webpack.IgnorePlugin(/\.\/jquery.min.js$/);
+let node_modules = path.resolve(__dirname, 'node_modules');
+let pathToReact = path.resolve(node_modules, 'react/dist/react-with-addons.min.js');
 
 module.exports = {
     entry: {
