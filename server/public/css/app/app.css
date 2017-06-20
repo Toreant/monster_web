@@ -95,7 +95,6 @@ a {
   font-size: 1.2rem;
   -webkit-transform: translate(0, 30px);
           transform: translate(0, 30px);
-  -webkit-transition: all linear 0.2s;
   transition: all linear 0.2s;
 }
 .mon-padding {
@@ -206,15 +205,13 @@ a {
   0% {
     -webkit-transform: perspective(800px) rotate3d(1, 0, 0, 90deg);
             transform: perspective(800px) rotate3d(1, 0, 0, 90deg);
-    -webkit-transition-timing-function: ease-in;
-            transition-timing-function: ease-in;
+    transition-timing-function: ease-in;
     opacity: 0;
   }
   40% {
     -webkit-transform: perspective(800px) rotate3d(1, 0, 0, -20deg);
             transform: perspective(800px) rotate3d(1, 0, 0, -20deg);
-    -webkit-transition-timing-function: ease-in;
-            transition-timing-function: ease-in;
+    transition-timing-function: ease-in;
   }
   60% {
     -webkit-transform: perspective(800px) rotate3d(1, 0, 0, 10deg);
@@ -234,15 +231,13 @@ a {
   0% {
     -webkit-transform: perspective(800px) rotate3d(1, 0, 0, 90deg);
             transform: perspective(800px) rotate3d(1, 0, 0, 90deg);
-    -webkit-transition-timing-function: ease-in;
-            transition-timing-function: ease-in;
+    transition-timing-function: ease-in;
     opacity: 0;
   }
   40% {
     -webkit-transform: perspective(800px) rotate3d(1, 0, 0, -20deg);
             transform: perspective(800px) rotate3d(1, 0, 0, -20deg);
-    -webkit-transition-timing-function: ease-in;
-            transition-timing-function: ease-in;
+    transition-timing-function: ease-in;
   }
   60% {
     -webkit-transform: perspective(800px) rotate3d(1, 0, 0, 10deg);
@@ -467,7 +462,6 @@ a {
   color: #999;
 }
 .form-change:hover {
-  -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
   -webkit-transform: translateX(10px);
           transform: translateX(10px);

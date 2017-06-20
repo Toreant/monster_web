@@ -15,6 +15,7 @@ const ContributeCtrl = require('./controllers/Contribute');
 const SearchCtrl = require('./controllers/Search');
 const AnimateCtrl = require('./controllers/Animate');
 const NoticeCtrl = require('./controllers/Notice');
+const AuthCtrl = require('./controllers/Auth');
 const Helper = require('./controllers/Helper');
 const Validate = require('./controllers/Validate');
 
@@ -55,7 +56,7 @@ router.delete('/api/follow',auth.isAuth,UserCtrl.unFollowing);
 router.get('/api/token',Token.csrfProtection(),Token.getToken);
 
 //　文章有关
-router.post('/api/article',auth.isAuth,Token.validateToken,ArticleCtrl.getSaveArticle);
+router.post('/api/article',auth.isAuth, auth.authCode(5),Token.validateToken,ArticleCtrl.getSaveArticle);
 
 router.post('/api/getArticle',ArticleCtrl.getArticle);
 
@@ -63,18 +64,19 @@ router.get('/api/article/:id/:transform?',ArticleCtrl.getArticle);
 
 router.get('/api/articles/tag/:tag',ArticleCtrl.getArticleForTag);
 
+router.post('/api/home', ArticleCtrl.getArticles);
 router.post('/api/articles',ArticleCtrl.getArticles);
 
-router.put('/api/article',auth.isAuth,ArticleCtrl.updateArticle);
+router.put('/api/article',auth.isAuth, auth.authCode(5),ArticleCtrl.updateArticle);
 
-router.delete('/api/article/:id',auth.isAuth,ArticleCtrl.deleteArticle);
+router.delete('/api/article/:id',auth.isAuth, auth.authCode(5),ArticleCtrl.deleteArticle);
 
 //　评论有关
 router.post('/api/comment',CommentCtrl.getComments);
 
-router.put('/api/comment',auth.isAuth,Token.validateToken,CommentCtrl.savaComment);
+router.put('/api/comment',auth.isAuth, auth.authCode(3),Token.validateToken,CommentCtrl.savaComment);
 
-router.delete('/api/comment',auth.isAuth,CommentCtrl.deleteComment);
+router.delete('/api/comment',auth.isAuth, auth.authCode(3), CommentCtrl.deleteComment);
 
 // 收藏
 router.post('/api/star',auth.isAuth,UserCtrl.getStar);
@@ -108,7 +110,7 @@ router.post('/api/signout',auth.isAuth,function(req,res,next){
 });
 
 // 上传
-router.post('/api/upload',auth.isAuth,Token.validateToken,UploaderCtrl.upload);
+router.post('/api/upload',auth.isAuth, auth.authCode(5), Token.validateToken,UploaderCtrl.upload);
 
 router.post('/api/upload/:column',auth.isAuth,multipart(),function(req,res,next) {
     resumable.post(req, function(status, filename, original_filename, identifier){
@@ -170,5 +172,6 @@ router.post('/api/approve',auth.isAuth,ContributeCtrl.approveContribute);
 
 router.get('/validate',Validate.validateUser);
 
+router.get('/auth/login', AuthCtrl.authLogin);
 
 module.exports = router;

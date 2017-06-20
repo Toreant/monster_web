@@ -37,6 +37,5 @@
   color: #fff;
   white-space: pre-wrap;
   background-color: #999;
-  -webkit-transition: all linear 0.1s;
   transition: all linear 0.1s;
 }

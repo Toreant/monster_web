@@ -11,7 +11,7 @@ class PostArticleStore {
         this.tag = [];
         this.content = '';
         this.summary = '';
-        this.token = ''
+        this.token = '';
     }
 
     onChangeTitle(event) {
@@ -40,12 +40,19 @@ class PostArticleStore {
     }
 
     onPostArticleSuccess(data) {
-        if(data.code === 200) {
-            toastr.success('发表文章成功');
-        } else if(data.code === 406) {
-            toastr.warning('这个用户不存在');
-        }　else if(data.code === 500) {
-            toastr.error('发表文章不成功');
+        switch(data.code) {
+            case 200:
+                toastr.success('发表文章成功');
+                break;
+            case 403:
+                toastr.warning('你还没有权限发表文章');
+                break;
+            case 406:
+                toastr.warning('这个用户不存在');
+                break;
+            case 500:
+                toastr.error('发表文章不成功');
+                break;
         }
     }
 
@@ -59,7 +66,6 @@ class PostArticleStore {
         let localStorage = window.localStorage,
             editContent = localStorage.getItem('postArticle');
         editContent = JSON.parse(editContent);
-        console.log(editContent);
         this.summary = editContent.summary;
         this.title = editContent.title;
         this.abbreviations = editContent.abbreviations;

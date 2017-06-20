@@ -16,7 +16,7 @@ class Uploader {
      * @param next
      */
     upload(req, res, next) {
-        var form = new multiparty.Form(),
+        let form = new multiparty.Form(),
             fileName,
             width,height,x,y;
 
@@ -37,7 +37,7 @@ class Uploader {
                     fileName = (new Date().toString()) + target.originalFilename;
                     fileName = crypt.getMd5String(fileName);
 
-                    var target_path = './server/public/img/upload/' + fileName,
+                    let target_path = './server/public/img/upload/' + fileName + '.jpg',
                         tmp_path = target.path;
 
                     console.log(fileName, target_path);
@@ -123,7 +123,7 @@ class Uploader {
      * @param next
      */
     uploadMusic(req,res,next) {
-        var form = new multiparty.Form();
+        let form = new multiparty.Form();
         let result = {
             meta : '',
             code : 0,

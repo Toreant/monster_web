@@ -19,6 +19,7 @@ class auth {
                         code : 410
                     });
                 } else {
+                    req.authCode = user.auth_code;
                     return next();
                 }
             });
@@ -40,6 +41,19 @@ class auth {
                 code : 304
             });
         }
+    }
+
+    authCode(code) {
+        return function(req, res, next) {
+            if (req.authCode && req.authCode >= code) {
+                next();
+            } else {
+                res.json({
+                    code: 403,
+                    meta: 'forbidden'
+                });
+            }
+        };
     }
 }
 

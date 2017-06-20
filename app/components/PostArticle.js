@@ -129,7 +129,7 @@ class PostArticle extends React.Component {
                                 请勿使用与内容无关，或分辨率不为16:9的图片作为封面图片。</p>
                         </div>
                         <div className='col-md-3'>
-                            <img src={this.state.abbreviations || "/img/cover-night.png"} id='upload_img' width='120' alt="loading" />
+                            <img src={this.state.abbreviations || "/img/tmp.gif"} id='upload_img' width='120' alt="loading" />
                         </div>
                     </div>
                     <input type="hidden" id="_token" value={this.state.token}/>

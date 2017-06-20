@@ -78,7 +78,6 @@
   background: rgba(10, 10, 10, 0.5);
   -webkit-transform: translate(0, 100%);
           transform: translate(0, 100%);
-  -webkit-transition: all linear 0.3s;
   transition: all linear 0.3s;
 }
 .mon-fragmentation > div:nth-child(2) a {

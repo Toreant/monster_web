@@ -23,7 +23,8 @@ let UserSchema = new Schema({
     music : [String],
     notice : [String], // 未读通知
     approve : [String], // 点赞或踩过的对象
-    github: {type: String}
+    github: {type: String},
+    auth_code: Number, // 权限级别, 5级以上才可以发表文章，3级以上才可以评论，2级以上才可以点赞
 });
 
 UserSchema.index({email: 1}, {unique: true});

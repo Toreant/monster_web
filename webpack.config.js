@@ -14,7 +14,7 @@ module.exports = {
             // 写在入口文件之前
             //"webpack-dev-server/client?http://0.0.0.0:3000",
             //"webpack/hot/only-dev-server",
-            path.resolve(__dirname, 'app/main.js')
+            path.resolve(__dirname, './app/main.js')
         ],
         common: ['alt','react','react-router','underscore','markdown']
         //amd : ['app/components/NotFound','app/components/Pagination','app/components/Star']
