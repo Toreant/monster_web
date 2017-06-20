@@ -56,8 +56,8 @@ class Nav extends React.Component {
             SUBNAV = (
                 <ul className='nav navbar-nav navbar-right'>
                     <li>
-                        <a href="/auth/github">
-                            <span className="fa fa-github" style={{marginRight: '5px'}}></span>github登陆
+                        <a href="javascript:;">
+                            <span className="fa fa-github" style={{marginRight: '5px'}}></span>
                         </a>
                     </li>
                 </ul>
@@ -74,7 +74,7 @@ class Nav extends React.Component {
                             <span className="icon-bar"></span>
                         </button>
                         <Link to="/" className='navbar-brand brand-img'>
-                            <img src="/img/Gameday.png" alt="Brand"/>
+                            <img src="/img/icon.png" alt="Brand"/>
                         </Link>
                     </div>
                     <div className='collapse navbar-collapse' id='my-nav'>

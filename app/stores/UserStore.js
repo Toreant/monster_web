@@ -22,10 +22,10 @@ class UserStore {
             this.auth = true;
             this.username = data.raw.username;
             this.avatar_url = data.raw.avatar_url;
-            this.followers = data.raw.followers.length;
-            this.following = data.raw.following.length;
-            this.contribute = data.raw.contribute.length;
-            this.star = data.raw.star.length;
+            this.followers = data.raw.followers || 0;
+            this.following = data.raw.following || 0;
+            this.contribute = data.raw.contribute || 0;
+            this.star = data.raw.star || 0;
             this.doamin = data.raw.domain;
             sessionStorage.profile = JSON.stringify(data.raw);
         } else {

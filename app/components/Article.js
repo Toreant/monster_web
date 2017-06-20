@@ -6,7 +6,7 @@ import {Link} from 'react-router';
 import {isEqual} from 'underscore';
 import ArticleActions from '../actions/ArticleActions';
 import ArticleStore from '../stores/ArticleStore';
-import md from 'markdown';
+//import md from 'markdown';
 import Comment from './Comment';
 import BtnBlock from './BtnBlock';
 import Star from './Star';

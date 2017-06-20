@@ -66,25 +66,25 @@ class Set extends React.Component {
         switch(this.state.account) {
             case 1: account = (
                 <div className='col-sm-10 mon-account'>
-                    <span className='fa fa-github'></span>
+                    <a href={this.state.github}><span className='fa fa-github'></span></a>
                 </div>
             );
                 break;
             case 2: account = (
                 <div className='col-sm-10 mon-account'>
-                    <span className='fa fa-facebook'></span>
+                    <a className='fa fa-facebook'></a>
                 </div>
             );
                 break;
             case 3: account = (
                 <div className='col-sm-10 mon-account'>
-                    <span className='fa fa-weibo'></span>
+                    <a className='fa fa-weibo'></a>
                 </div>
             );
                 break;
             default : account = (
                 <div className='col-sm-10 mon-account'>
-                    <a href="javascript:void(0);"><span className='fa fa-github'></span></a>
+                    <a href={this.state.github}><span className='fa fa-github'></span></a>
                 </div>
             );
 

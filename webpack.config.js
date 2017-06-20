@@ -14,13 +14,13 @@ module.exports = {
             // 写在入口文件之前
             //"webpack-dev-server/client?http://0.0.0.0:3000",
             //"webpack/hot/only-dev-server",
-            path.resolve(__dirname, 'app/main.js')
+            path.resolve(__dirname, './app/main.js')
         ],
         common: ['alt','react','react-router','underscore','markdown']
         //amd : ['app/components/NotFound','app/components/Pagination','app/components/Star']
     },
     output: {
-        path: path.resolve(__dirname, 'public/js'),
+        path: path.resolve(__dirname, 'server/public/js'),
         filename: '[name].js',
         publicPath: 'app/',
         chunkFilename: "[name].chunk.js"//给require.ensure用
@@ -46,7 +46,7 @@ module.exports = {
         ]
     },
     extenals : {
-        'jquery': 'public/js/lib/jquery.min'
+        'jquery': 'server/public/js/lib/jquery.min'
     },
     devtool: false,
     plugins: [

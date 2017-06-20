@@ -1,27 +1,23 @@
 /**
- * Created by apache on 16-4-1.
+ * Created by yuhuajie on 2017/2/16.
  */
-var should = require('should');
-var requestAgent = require('supertest');
-var express = require('express');
-var app = express();
-var request = requestAgent(app);
+const expect = require('chai').expect;
+const request = require('superagent');
 
-describe('articles',function() {
-    describe('#getUsers',function() {
-        it('it should be response json',function() {
-            request
-                .post('/api/users')
-                .type('application/json;charset=utf-8')
-                .send(JSON.stringify({
-                    option : {},
-                    token : '',
-                    arrayId : []
-                }))
-                .expect(400,{})
-                .end(function(err) {
-                    done(err);
-                })
+describe('user', function() {
+    describe('#getUserById', function() {
+        it('code should be 200', function(done) {
+            request('http://localhost:3000/api/member/13035829?_=1487232165644').end(function(err, res) {
+                expect(res.body.code).to.be.equal(200);
+                done();
+            });
+        });
+
+        it('code should be 404', function(done) {
+            request('http://localhost:3000/api/member/13035820?_=1487232165644').end(function(err, res) {
+                expect(res.body.code).to.be.equal(404);
+                done();
+            });
         });
     });
 });

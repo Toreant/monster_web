@@ -16,8 +16,7 @@ class NavStore {
     onChangeState(data) {
         this.loginState = true;
         this.userName = data.username ;
-        this.avatar = data._json === undefined ? data.avatar_url : data._json.avatar_url;
-        this.domain = data._json === undefined ? data.domain : data._json.username;
+        this.avatar = data.avatar_url;
     }
 
     onCheckLoginSuccess(data) {

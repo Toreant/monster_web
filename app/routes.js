@@ -34,9 +34,11 @@ import TagList from './components/TagList';
 //import Animate from './components/Animate';
 export default(
     <Route handler={App}>
+
         <Route path='/' handler={Home}>
             <Redirect from="/" to="/articles"/>
         </Route>
+
         <Route path='/login' handler={Login} />
 
         <Route path='/article'>
