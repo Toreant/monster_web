@@ -1,0 +1,8 @@
+{
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "name": "blog",
+  "script": "bin/app.js",
+  "node-args": "--nouse-idle-notification --gc_global --max-old-space-size=2048 --max-new-space-size=1024"
+}
