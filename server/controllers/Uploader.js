@@ -105,7 +105,7 @@ class Uploader {
             if (req.file !== null) {
                 result.meta = '上传成功';
                 result.code = 200;
-                result.raw = fileName;
+                result.raw = fileName + '.jpg';
             } else {
                 result.meta = '上传不成功';
                 result.code = 500;
