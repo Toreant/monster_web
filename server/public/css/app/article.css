@@ -65,7 +65,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  background: linear-gradient(top, rgba(0, 0, 0, 0), #0a0a0a);
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0), #0a0a0a);
   color: #fff;
 }
 .mon-article {
