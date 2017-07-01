@@ -99,7 +99,7 @@ class Uploader {
             let result = {
                 meta: '',
                 code: 0,
-                raw: fileName
+                raw: fileName + '.jpg'
             };
 
             if (req.file !== null) {
