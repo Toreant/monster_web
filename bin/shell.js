@@ -4,4 +4,4 @@
 const fs = require('fs');
 const path = require('path');
 
-fs.appendFile(path.resolve(__dirname, '../logs/shell.txt'), `[shell]${new Date().toLocaleString()}`);
+fs.appendFile(path.resolve(__dirname, '../logs/shell.txt'), `[shell]${new Date().toLocaleString()}\n`);
